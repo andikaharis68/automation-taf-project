@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>DoLogin</name>
+   <name>Collection_Expense_Advance</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>2e9e531b-f681-4c52-b3a4-050ad055ea83</testCaseGuid>
+   <testCaseGuid>45b37cd5-790e-400a-a9cf-fb832f2dd0d9</testCaseGuid>
 </TestCaseEntity>

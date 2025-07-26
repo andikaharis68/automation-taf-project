@@ -14,11 +14,15 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.LoginPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map testData = BaseHelper.getTestDataByScenario("Collection", GlobalVariable.TEST_DATA_LOCATION + 'Web_Taf_Test_Data.xlsx', "Collection_P_001_Send_Asset_To_Pool_Request")
+LoginPage login = new LoginPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/TestSteps/Login/DoLogin'), testData)
+'Login'
+login.login("", "")
+
+'Select Role'
+login.selectRoles("", "", "")

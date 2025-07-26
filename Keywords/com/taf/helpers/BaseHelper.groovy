@@ -42,7 +42,7 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
 class BaseHelper {
-	public TestObject getTestObject(String objName, String value, String property="xpath") {
+	public TestObject createTestObject(String objName, String property, String value) {
 		/*
 		 * property: xpath, id, text etc
 		 * value : based on what property used, if u use xpath => "//*[text() = 'Login']", if u use id just write only id
@@ -62,25 +62,25 @@ class BaseHelper {
 
 		String name = prop.getName().toLowerCase()
 		String value = prop.getValue()
-		
+
 		return (name == "xpath") ? value : "//*[contains(@${name}, '${value}')]"
 
-//		24 Jul 2025 : ini sengaja dikomen soalnya pake return yg atas belum pernah dicoba, kalo aman nanti ini di hapus aja ya!!
-//		switch (name) {
-//			case "xpath":
-//				return value // already a valid xpath
-//			case "id":
-//				return "//*[contains(@id, '${value}')]"
-//			case "class":
-//				return "//*[contains(@class, '${value}')]"
-//			case "text":
-//				return "//*[contains(text(), '${value}')]"
-//			case "name":
-//				return "//*[contains(@name, '${value}')]"
-//			default:
-//			// fallback to generic contains
-//				return "//*[contains(@${name}, '${value}')]"
-//		}
+		//		24 Jul 2025 : ini sengaja dikomen soalnya pake return yg atas belum pernah dicoba, kalo aman nanti ini di hapus aja ya!!
+		//		switch (name) {
+		//			case "xpath":
+		//				return value // already a valid xpath
+		//			case "id":
+		//				return "//*[contains(@id, '${value}')]"
+		//			case "class":
+		//				return "//*[contains(@class, '${value}')]"
+		//			case "text":
+		//				return "//*[contains(text(), '${value}')]"
+		//			case "name":
+		//				return "//*[contains(@name, '${value}')]"
+		//			default:
+		//			// fallback to generic contains
+		//				return "//*[contains(@${name}, '${value}')]"
+		//		}
 	}
 
 	public List<WebElement> getListElementByTestObject(TestObject to) {
@@ -94,7 +94,7 @@ class BaseHelper {
 			xpath = prop.getValue()
 		} else {
 			// If not using xpath, convert other properties into xpath
-			xpath = getXpath(to) 	
+			xpath = getXpath(to)
 		}
 
 		// Return list of WebElements matching the XPath
@@ -107,7 +107,7 @@ class BaseHelper {
 	}
 
 
-	public void verifyLanding(TestObject to, String screenName) {
+	static void verifyLanding(TestObject to, String screenName) {
 		if (WebUI.waitForElementPresent(to, 5)) {
 			KeywordUtil.markPassed("Success : Landing to $screenName")
 		}else {

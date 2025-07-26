@@ -1,4 +1,4 @@
-package com.taf.pageobjects.login
+package com.taf.pageobjects
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,35 +21,24 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginScreen extends BaseHelper{
+public class LoginPage extends BaseHelper {
+	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
+	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
+	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
 	
-	private TestObject lblTitleLogin
-	private TestObject btnLogin
-	private TestObject txfUsername
-	private TestObject txfPassword
-
-
-	public LoginScreen() {
-		lblTitleLogin	= getTestObject("lblTitleLogin", "login_logo", "class") //contoh kalo mau pake props class
-		txfUsername		= getTestObject("txfUsername", "user-name", "id") //contoh kalo mau pake props id
-		txfPassword		= getTestObject("txfPassword", "//*[contains(@id, 'password')]", "xpath") //contoh kalo mau pake props xpath
-		btnLogin		= getTestObject("btnLogin", "login-button", "id")
-	}
-
-	public void clickLogin() {
+	public void login(String username, String password) {
+		verifyLanding(btnLogin, "Login Screen")
+		WebUI.setText(txfUsername, username)
+		WebUI.setText(txfPassword, password)
 		WebUI.click(btnLogin)
 	}
-
-	public void verifyLandingScreen() {
-		verifyLanding(lblTitleLogin, "Login Screen")
+	
+	private void selectRoles(String office, String position, String Role) {
+		TestObject txtOffice = createTestObject("txtOffice", "", "")
+		TestObject txtPosition = createTestObject("txtPosition", "", "")
+		TestObject txtRole = createTestObject("txtRole", "", "")
+		TestObject btnSelect = createTestObject("btnSelect", "", "")
+		verifyLanding(txtOffice, "Select Role")
+		WebUI.click(btnSelect)
 	}
-
-	public void inputUsername(String username) {
-		WebUI.setText(txfUsername, username)
-	}
-
-	public void inputPassword(String password) {
-		WebUI.setText(txfPassword, password)
-	}
-
 }

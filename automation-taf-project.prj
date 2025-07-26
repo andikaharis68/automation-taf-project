@@ -9,9 +9,9 @@
    <freeLicense>true</freeLicense>
    <migratedVersion>5.9.0</migratedVersion>
    <modifiedEdition>FREE</modifiedEdition>
-   <modifiedVersion>10.2.4</modifiedVersion>
+   <modifiedVersion>10.1.1</modifiedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>D:\Project\automation-taf-project\automation-taf-project.prj</projectFileLocation>
+   <projectFileLocation>/Users/mitech/Documents/Andika/Project/automation-taf-project/automation-taf-project.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
