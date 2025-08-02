@@ -21,33 +21,31 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentRequestPage extends BaseHelper{
-
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
+public class AssetDocumentRecievePage extends BaseHelper{
+	
+	
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject icnRecieve			= createTestObject("icnRecieve", "xpath", "")
+	private TestObject txtLicensePlate		= createTestObject("txtLicensePlate", "xpath", "")
+	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
-
-
-	public void calculatePayment(String date) {
-
-		WebUI.setText(txtDate, date)
-		WebUI.click(btnCalculatePayment)
+	
+	public void searchAsset(String branch, String agreementNo) {
+		
+		WebUI.selectOptionByLabel(drpBranchAgreement, branch, false)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.click(icnRecieve)
+		
 	}
-
-	public void approve(String reasonDescription, String approver, String notes) {
-
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
-		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
-		WebUI.setText(txtNotes, notes)
-	}
-
-	public void clickSubmit() {
-
+	
+	public void inputAssetData(String plate, String form) {
+		
+		WebUI.setText(txtLicensePlate, plate)
+		WebUI.setText(txtRecieveForm, form)
 		WebUI.click(btnSubmit)
-		WebUI.verifyElementPresent(lblNotification, 5)
+		
 	}
 }

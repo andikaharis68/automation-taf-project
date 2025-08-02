@@ -21,33 +21,23 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentRequestPage extends BaseHelper{
-
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
-
-
-	public void calculatePayment(String date) {
-
-		WebUI.setText(txtDate, date)
-		WebUI.click(btnCalculatePayment)
-	}
-
-	public void approve(String reasonDescription, String approver, String notes) {
-
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
-		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
-		WebUI.setText(txtNotes, notes)
-	}
-
-	public void clickSubmit() {
-
+public class AssetDocumentReleaseExecutionListPage extends BaseHelper{
+	
+	private TestObject txtAgreementNo
+	private TestObject btnSearch
+	private TestObject btnActionPen
+	private TestObject txtReleaseDate
+	private TestObject txtReleaseTo
+	private TestObject btnSubmit
+	
+	public void releaseDoc(String agreementNo, String releaseDate, String relaase) {
+		
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.click(btnActionPen)
+		WebUI.setText(txtReleaseDate, releaseDate)
+		WebUI.setText(txtReleaseTo, relaase)
 		WebUI.click(btnSubmit)
-		WebUI.verifyElementPresent(lblNotification, 5)
+		
 	}
 }

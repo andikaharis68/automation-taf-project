@@ -21,33 +21,27 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentRequestPage extends BaseHelper{
-
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
-
-
-	public void calculatePayment(String date) {
-
-		WebUI.setText(txtDate, date)
-		WebUI.click(btnCalculatePayment)
+public class AssetDocumentInquiryPage extends BaseHelper{
+	
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject list					= createTestObject("list", "xpath", "")
+	private TestObject icnView				= createTestObject("icnView", "xpath", "")
+	
+	//detail
+	private TestObject docDetail			= createTestObject("docDetail", "xpath", "")
+	
+	public void inquiryDocuemnt(String agreementNo) {
+		
+		WebUI.selectOptionByLabel(drpBranchAgreement, agreementNo, false)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.verifyElementVisible(list)
+		WebUI.click(icnView)
+		WebUI.verifyElementVisible(docDetail)
+		
 	}
-
-	public void approve(String reasonDescription, String approver, String notes) {
-
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
-		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
-		WebUI.setText(txtNotes, notes)
-	}
-
-	public void clickSubmit() {
-
-		WebUI.click(btnSubmit)
-		WebUI.verifyElementPresent(lblNotification, 5)
-	}
+	
+	
 }

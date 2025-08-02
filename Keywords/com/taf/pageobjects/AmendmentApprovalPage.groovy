@@ -48,13 +48,13 @@ public class AmendmentApprovalPage extends BaseHelper{
 		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
 		WebUI.click(btnProcess)
 	}
-	
+
 	public void searchAmendmentbyCustName2(String amendmentType, String customerName) {
-		
+
 		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
 		WebUI.setText(txtCustomerName, customerName)
 		WebUI.click(btnSearch)
-		
+
 		WebUI.verifyElementVisible(list)
 		//click button based on list
 		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
