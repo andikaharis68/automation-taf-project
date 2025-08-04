@@ -21,24 +21,33 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
+public class PrepaymentRequestPage extends BaseHelper{
 
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
+	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
+	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
+	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
+	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
+	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
+
+
+	public void calculatePayment(String date) {
+
+		WebUI.setText(txtDate, date)
+		WebUI.click(btnCalculatePayment)
 	}
 
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
+	public void approve(String reasonDescription, String approver, String notes) {
+
+		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
+		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
+		WebUI.setText(txtNotes, notes)
+	}
+
+	public void clickSubmit() {
+
+		WebUI.click(btnSubmit)
+		WebUI.verifyElementPresent(lblNotification, 5)
 	}
 }
