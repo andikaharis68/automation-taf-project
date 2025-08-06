@@ -20,9 +20,15 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 LoginPage login = new LoginPage()
+//
+//'Login'
+//login.login("", "")
+//
+//'Select Role'
+//login.selectRoles("", "", "")
 
-'Login'
-login.login("", "")
+WebUI.openBrowser("https://www.bankmandiri.co.id/")
 
-'Select Role'
-login.selectRoles("", "", "")
+WebUI.delay(5)
+
+login.testScreenshot()
