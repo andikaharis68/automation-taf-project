@@ -172,4 +172,12 @@ class BaseHelper {
 			KeywordUtil.markFailed("Actual : $actual, is not equals with Expected : $expected")
 		}
 	}
+	
+	static void verifyPopUpSuccess(TestObject to, String actionTitle) {
+		if(WebUI.waitForElementPresent(to, 5)) {
+			KeywordUtil.markPassed("Success: $actionTitle Success!")
+		}else {
+			KeywordUtil.markFailed("Failed: $actionTitle Failed/Object lblSuccess Not Found!")
+		}
+	}
 }
