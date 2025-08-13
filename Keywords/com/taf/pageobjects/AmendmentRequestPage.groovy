@@ -21,24 +21,25 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
+public class AmendmentRequestPage extends BaseHelper{
 
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+
+
+	public void searchAmendment(String amendmentType, String customerName) {
+
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtCustomerName, customerName)
+		WebUI.click(btnSearch)
+
+
+		clickPenAction(customerName)
 	}
 
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
+	private void clickPenAction(customerName) {
+
+		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
 	}
 }

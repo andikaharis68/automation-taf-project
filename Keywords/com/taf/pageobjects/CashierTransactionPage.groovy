@@ -21,24 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
+public class CashierTransactionPage extends BaseHelper{
 
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
+	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "")
+	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "")
+	private TestObject txtDate			= createTestObject("txtDate", "xpath", "")
+	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "xpath", "")
+
+	public void inputChasier(String WOP, String accName, String date) {
+
+		WebUI.selectOptionByLabel(drpWOP, WOP, false)
+		WebUI.selectOptionByLabel(drpAccountName, accName, false)
+		WebUI.setText(txtDate, date)
 	}
 
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
+	public void clickPaymentSingle() {
+
+		WebUI.click(btnPaymentSingle)
 	}
 }

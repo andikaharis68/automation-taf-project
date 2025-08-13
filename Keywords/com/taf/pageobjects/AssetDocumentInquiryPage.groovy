@@ -21,24 +21,27 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
-
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
+public class AssetDocumentInquiryPage extends BaseHelper{
+	
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject list					= createTestObject("list", "xpath", "")
+	private TestObject icnView				= createTestObject("icnView", "xpath", "")
+	
+	//detail
+	private TestObject docDetail			= createTestObject("docDetail", "xpath", "")
+	
+	public void inquiryDocuemnt(String agreementNo) {
+		
+		WebUI.selectOptionByLabel(drpBranchAgreement, agreementNo, false)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.verifyElementVisible(list)
+		WebUI.click(icnView)
+		WebUI.verifyElementVisible(docDetail)
+		
 	}
-
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
-	}
+	
+	
 }

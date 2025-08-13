@@ -21,24 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
-
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
+public class DocumentCheckOutPage extends BaseHelper{
+	
+	private TestObject txtAgreementNo
+	private TestObject drpDocumentType
+	private TestObject btnSearch
+	private TestObject btnPenAction
+	private TestObject btnSubmit
+	
+	public void checkOutDoc(String agreementNo, String docType) {
+		
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
+		WebUI.click(btnSearch)
+		WebUI.click(btnPenAction)
+		WebUI.click(btnSubmit)
+		
 	}
-
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
-	}
+	
 }

@@ -21,24 +21,23 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
-
-	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
-		WebUI.setText(txfUsername, username)
-		WebUI.setText(txfPassword, password)
-		WebUI.click(btnLogin)
-	}
-
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
+public class ReschedullingApprovalPage extends BaseHelper{
+	
+	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
+	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
+	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
+	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
+	
+	public void approval(String reason, String approver, String note) {
+		
+		WebUI.click(sectionApprovalAction)
+		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
+		WebUI.selectOptionByLabel(drpApprover, approver, false)
+		WebUI.setText(txtNotes, note)
+		WebUI.click(btnSubmit)
+		WebUI.verifyElementVisible(lblNotification)
+		
 	}
 }
