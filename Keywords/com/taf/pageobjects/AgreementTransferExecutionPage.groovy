@@ -22,9 +22,9 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class AgreementTransferExecutionPage extends BaseHelper{
-	
+
 	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
-	
+
 	public void submit() {
 		WebUI.click(btnSubmit)
 	}

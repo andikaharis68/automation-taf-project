@@ -22,22 +22,21 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class AssetDocumentReleaseExecutionListPage extends BaseHelper{
-	
+
 	private TestObject txtAgreementNo
 	private TestObject btnSearch
 	private TestObject btnActionPen
 	private TestObject txtReleaseDate
 	private TestObject txtReleaseTo
 	private TestObject btnSubmit
-	
+
 	public void releaseDoc(String agreementNo, String releaseDate, String relaase) {
-		
+
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 		WebUI.click(btnActionPen)
 		WebUI.setText(txtReleaseDate, releaseDate)
 		WebUI.setText(txtReleaseTo, relaase)
 		WebUI.click(btnSubmit)
-		
 	}
 }

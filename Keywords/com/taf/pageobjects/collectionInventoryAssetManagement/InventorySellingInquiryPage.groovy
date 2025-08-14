@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialAssetInventoryInquiryPage extends BaseHelper {
+public class InventorySellingInquiryPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -40,7 +40,7 @@ public class RemedialAssetInventoryInquiryPage extends BaseHelper {
 	private TestObject txtResult = createTestObject("txtResult", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Remedial Asset Inventory Inquiry Page")
+		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
 	}
 
 	public void doSearch(String agreementNo) {

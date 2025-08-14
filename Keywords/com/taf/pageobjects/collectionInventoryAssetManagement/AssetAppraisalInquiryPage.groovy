@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class InventorySellingInquiryPage extends BaseHelper {
+public class AssetAppraisalInquiryPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -32,8 +32,8 @@ public class InventorySellingInquiryPage extends BaseHelper {
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblInventoryStatus = createTestObject("lblInventoryStatus", "", "")
-	private TestObject txtInventoryStatus = createTestObject("txtInventoryStatus", "", "")
+	private TestObject lblAppraisalStatus = createTestObject("lblAppraisalStatus", "", "")
+	private TestObject txtAppraisalStatus = createTestObject("txtAppraisalStatus", "", "")
 
 	//detail
 	private TestObject lblResult = createTestObject("lblResult", "", "")
@@ -49,7 +49,7 @@ public class InventorySellingInquiryPage extends BaseHelper {
 	}
 
 	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtInventoryStatus)
+		String actualStatus = WebUI.getText(txtAppraisalStatus)
 		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
 			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
 		}else {

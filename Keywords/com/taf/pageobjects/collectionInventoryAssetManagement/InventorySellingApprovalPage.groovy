@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -67,5 +67,4 @@ public class InventorySellingApprovalPage extends BaseHelper {
 		WebUI.click(btnSubmit)
 		verifyPopUpSuccess(lblSuccess, "Inventory Selling Approval")
 	}
-	
 }
