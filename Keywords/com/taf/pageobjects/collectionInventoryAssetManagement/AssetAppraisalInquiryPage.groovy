@@ -1,4 +1,4 @@
-package com.taf.pageobjects.collectionandremedialasset
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -21,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialAssetInventoryApprovalPage extends BaseHelper{
+public class AssetAppraisalInquiryPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -31,23 +32,15 @@ public class RemedialAssetInventoryApprovalPage extends BaseHelper{
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblProcess = createTestObject("lblProcess", "", "")
-	private TestObject btnProcess = createTestObject("btnProcess", "", "")
+	private TestObject lblAppraisalStatus = createTestObject("lblAppraisalStatus", "", "")
+	private TestObject txtAppraisalStatus = createTestObject("txtAppraisalStatus", "", "")
 
 	//detail
-	private TestObject drpAction = createTestObject("drpAction", "", "")
-	private TestObject txtAction = createTestObject("txtAction", "", "")
-	private TestObject txfNotes = createTestObject("txfNotes", "", "")
-	private TestObject drpAreaDeptHead = createTestObject("drpAreaDeptHead", "", "")
-	private TestObject txtAreaDeptHead = createTestObject("txtAreaDeptHead", "", "")
-
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-
-	//Popup
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject lblResult = createTestObject("lblResult", "", "")
+	private TestObject txtResult = createTestObject("txtResult", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Remedial Asset Inventory Approval Page")
+		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -55,24 +48,27 @@ public class RemedialAssetInventoryApprovalPage extends BaseHelper{
 		WebUI.click(btnSearch)
 	}
 
-	public void clickProcess() {
-		WebUI.click(btnProcess)
+	public void verifyStatusRequest(String expectedStatus) {
+		String actualStatus = WebUI.getText(txtAppraisalStatus)
+		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
+			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
+		}else {
+			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
+		}
 	}
 
-	public void inputApprovalAction(String action, String notes, String deptHead, Boolean isFinal) {
-		//action
-		txtAction = createTestObject("txtAction", "text", "$action")
-		WebUI.click(drpAction)
-		WebUI.click(txtAction)
-		//notes
-		WebUI.setText(txfNotes, notes)
-		if (isFinal == false) {
-			//fh area dept head
-			WebUI.click(drpAreaDeptHead)
-			WebUI.click(txtAreaDeptHead)
-		}
+	public void clickAgreementNo(String agreementNo) {
+		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
+		WebUI.click(txtAgreementNoTable)
+	}
 
-		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Remedial Asset Inventory Approval")
+	public void verifyDetailStatus(String expectedStatus) {
+		String actualStatus = WebUI.getText(txtResult)
+		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
+			//Request atau Approve atau ApproveFinal
+			KeywordUtil.markPassed("Success : The Detail Status is ($expectedStatus)")
+		}else {
+			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.taf.pageobjects.collectionandremedialasset
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,11 +22,10 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class SendAssetToPoolPage extends BaseHelper {
+public class ConfirmAssetToPoolPage extends BaseHelper{
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "", "")
-	private TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "", "")
+	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
 
@@ -36,11 +35,9 @@ public class SendAssetToPoolPage extends BaseHelper {
 	private TestObject btnPencil = createTestObject("btnPencil", "", "")
 
 	//Detail
-	private TestObject drpPool = createTestObject("drpPool", "", "")
-	private TestObject txtPool = createTestObject("txtPool", "", "")
-	private TestObject txfSendBy = createTestObject("txfSendBy", "", "")
-	private TestObject drpSendDate = createTestObject("drpSendDate", "", "")
-	private TestObject txtSendDate = createTestObject("txtSendDate", "", "")
+	private TestObject txfReceiveBy = createTestObject("txfReceiveBy", "", "")
+	private TestObject drpReceiveDate = createTestObject("drpReceiveDate", "", "")
+	private TestObject txtReceiveDate = createTestObject("txtReceiveDate", "", "")
 	private TestObject txfNotes = createTestObject("txfNotes", "", "")
 	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
 
@@ -48,34 +45,27 @@ public class SendAssetToPoolPage extends BaseHelper {
 	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Send Asset To Pool Page")
+		verifyLanding(lblTitle, "Confirm Asset To Pool Page")
 	}
 
-	public void doSearch(String agreementNo, String collectionGroup) {
-		TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "text", collectionGroup)
-
-		WebUI.click(drpCollectionGroup)
-		WebUI.click(txtCollectionGroup)
+	public void doSearch(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 	}
 
 	public void clickButtonPencil() {
-		WebUI.click(btnSearch)
+		WebUI.click(btnPencil)
 	}
 
-	public void inputSendAsset(String pool, String sendBy, String date, String notes) {
-		WebUI.click(drpPool)
-		WebUI.click(txtPool)
+	public void inputReceiveAsset(String receiveBy, String receiveDate, String notes) {
+		WebUI.setText(txfReceiveBy, receiveBy)
 
-		WebUI.setText(txfSendBy, sendBy)
-
-		WebUI.click(drpSendDate)
-		WebUI.click(txtSendDate)
+		WebUI.click(drpReceiveDate)
+		WebUI.click(txtReceiveDate)
 
 		WebUI.setText(txfNotes, notes)
 		WebUI.click(btnSubmit)
 
-		verifyPopUpSuccess(lblSuccess, "Send Asset To Pool")
+		verifyPopUpSuccess(lblSuccess, "Confirm Asset To Pool")
 	}
 }

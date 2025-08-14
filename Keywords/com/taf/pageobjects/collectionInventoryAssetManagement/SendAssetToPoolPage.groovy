@@ -1,4 +1,4 @@
-package com.taf.pageobjects.collectionandremedialasset
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,53 +22,60 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class InventorySellingInquiryPage extends BaseHelper {
+public class SendAssetToPoolPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
+	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "", "")
+	private TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
 
-	//table
+	//Table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblInventoryStatus = createTestObject("lblInventoryStatus", "", "")
-	private TestObject txtInventoryStatus = createTestObject("txtInventoryStatus", "", "")
+	private TestObject btnPencil = createTestObject("btnPencil", "", "")
 
-	//detail
-	private TestObject lblResult = createTestObject("lblResult", "", "")
-	private TestObject txtResult = createTestObject("txtResult", "", "")
+	//Detail
+	private TestObject drpPool = createTestObject("drpPool", "", "")
+	private TestObject txtPool = createTestObject("txtPool", "", "")
+	private TestObject txfSendBy = createTestObject("txfSendBy", "", "")
+	private TestObject drpSendDate = createTestObject("drpSendDate", "", "")
+	private TestObject txtSendDate = createTestObject("txtSendDate", "", "")
+	private TestObject txfNotes = createTestObject("txfNotes", "", "")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+
+	//Popup
+	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
+		verifyLanding(lblTitle, "Send Asset To Pool Page")
 	}
 
-	public void doSearch(String agreementNo) {
+	public void doSearch(String agreementNo, String collectionGroup) {
+		TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "text", collectionGroup)
+
+		WebUI.click(drpCollectionGroup)
+		WebUI.click(txtCollectionGroup)
 		WebUI.setText(txfAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 	}
 
-	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtInventoryStatus)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
-		}
+	public void clickButtonPencil() {
+		WebUI.click(btnSearch)
 	}
 
-	public void clickAgreementNo(String agreementNo) {
-		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
-		WebUI.click(txtAgreementNoTable)
-	}
+	public void inputSendAsset(String pool, String sendBy, String date, String notes) {
+		WebUI.click(drpPool)
+		WebUI.click(txtPool)
 
-	public void verifyDetailStatus(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtResult)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			//Request atau Approve atau ApproveFinal
-			KeywordUtil.markPassed("Success : The Detail Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
-		}
+		WebUI.setText(txfSendBy, sendBy)
+
+		WebUI.click(drpSendDate)
+		WebUI.click(txtSendDate)
+
+		WebUI.setText(txfNotes, notes)
+		WebUI.click(btnSubmit)
+
+		verifyPopUpSuccess(lblSuccess, "Send Asset To Pool")
 	}
 }

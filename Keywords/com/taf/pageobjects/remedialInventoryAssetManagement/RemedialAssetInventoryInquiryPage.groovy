@@ -1,4 +1,4 @@
-package com.taf.pageobjects.collectionandremedialasset
+package com.taf.pageobjects.remedialInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetAppraisalInquiryPage extends BaseHelper {
+public class RemedialAssetInventoryInquiryPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -32,15 +32,15 @@ public class AssetAppraisalInquiryPage extends BaseHelper {
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblAppraisalStatus = createTestObject("lblAppraisalStatus", "", "")
-	private TestObject txtAppraisalStatus = createTestObject("txtAppraisalStatus", "", "")
+	private TestObject lblInventoryStatus = createTestObject("lblInventoryStatus", "", "")
+	private TestObject txtInventoryStatus = createTestObject("txtInventoryStatus", "", "")
 
 	//detail
 	private TestObject lblResult = createTestObject("lblResult", "", "")
 	private TestObject txtResult = createTestObject("txtResult", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
+		verifyLanding(lblTitle, "Remedial Asset Inventory Inquiry Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -49,7 +49,7 @@ public class AssetAppraisalInquiryPage extends BaseHelper {
 	}
 
 	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtAppraisalStatus)
+		String actualStatus = WebUI.getText(txtInventoryStatus)
 		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
 			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
 		}else {

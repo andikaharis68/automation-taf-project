@@ -1,4 +1,4 @@
-package com.taf.pageobjects.collectionandremedialasset
+package com.taf.pageobjects.remedialInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class CollectionAssetInventoryApprovalPage extends BaseHelper {
+public class RemedialAssetInventoryApprovalPage extends BaseHelper{
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -47,7 +47,7 @@ public class CollectionAssetInventoryApprovalPage extends BaseHelper {
 	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Collection Asset Inventory Approval Page")
+		verifyLanding(lblTitle, "Remedial Asset Inventory Approval Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -73,6 +73,6 @@ public class CollectionAssetInventoryApprovalPage extends BaseHelper {
 		}
 
 		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Collection Asset Inventory Approval")
+		verifyPopUpSuccess(lblSuccess, "Remedial Asset Inventory Approval")
 	}
 }
