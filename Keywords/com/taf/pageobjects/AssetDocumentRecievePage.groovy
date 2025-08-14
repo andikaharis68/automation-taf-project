@@ -22,8 +22,8 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class AssetDocumentRecievePage extends BaseHelper{
-	
-	
+
+
 	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
 	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
 	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
@@ -31,21 +31,19 @@ public class AssetDocumentRecievePage extends BaseHelper{
 	private TestObject txtLicensePlate		= createTestObject("txtLicensePlate", "xpath", "")
 	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	
+
 	public void searchAsset(String branch, String agreementNo) {
-		
+
 		WebUI.selectOptionByLabel(drpBranchAgreement, branch, false)
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 		WebUI.click(icnRecieve)
-		
 	}
-	
+
 	public void inputAssetData(String plate, String form) {
-		
+
 		WebUI.setText(txtLicensePlate, plate)
 		WebUI.setText(txtRecieveForm, form)
 		WebUI.click(btnSubmit)
-		
 	}
 }

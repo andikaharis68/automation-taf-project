@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetAppraisalRequestPage extends BaseHelper{
+public class InventorySellingRequestPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -33,85 +33,74 @@ public class AssetAppraisalRequestPage extends BaseHelper{
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
 	private TestObject btnPencil = createTestObject("btnPencil", "", "")
 	
-	//Detail
-	private TestObject btnLookUpMarketPrice = createTestObject("btnLookUpMarketPrice", "", "")
-	private TestObject btnLookUpDeductionItem = createTestObject("btnLookUpDeductionItem", "", "")
-	private TestObject txfMinSellingAmount = createTestObject("txfMinSellingAmount", "", "")
-	private TestObject btnCalculate = createTestObject("btnCalculate", "", "")
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+	//Detail - List of Bidder
+	private TestObject txfBidderName = createTestObject("txfBidderName", "", "")
+	private TestObject txfBidderAmount = createTestObject("txfBidderAmount", "", "")
+	private TestObject drpBidderDate = createTestObject("drpBidderDate", "", "")
+	private TestObject txtBidderDate = createTestObject("txtBidderDate", "", "")
+	private TestObject txfNik = createTestObject("txfNik", "", "")
+	private TestObject txfNpwp = createTestObject("txfNpwp", "", "")
+	private TestObject drpBidderType = createTestObject("drpBidderType", "", "")
+	private TestObject txtBidderType = createTestObject("txtBidderType", "", "")
+	private TestObject txfEmail = createTestObject("txfEmail", "", "")
+	private TestObject radWinner = createTestObject("radWinner", "", "")
+	private TestObject btnAdd = createTestObject("btnAdd", "", "")
 	
-	//Approval Request
+	//Detail - Auction Detail
+	private TestObject txfPpn = createTestObject("txfPpn", "", "")
+	private TestObject btnCalculate = createTestObject("btnCalculate", "", "")
+	
+	//Detail - Approval Request
 	private TestObject drpReasonDesc = createTestObject("drpReasonDesc", "", "")
 	private TestObject txtReasonDesc = createTestObject("txtReasonDesc", "", "")
 	private TestObject txfApprovalNotes = createTestObject("txfApprovalNotes", "", "")
 	private TestObject drpApprovedBy = createTestObject("drpApprovedBy", "", "")
 	private TestObject txtApprovedBy = createTestObject("txtApprovedBy", "", "")
-	
-	//Overlay Look Up Market Price
-	private TestObject drpOfficeName = createTestObject("drpOfficeName", "", "")
-	private TestObject txtOfficeName = createTestObject("txtOfficeName", "", "")
-	private TestObject drpAssetName = createTestObject("drpAssetName", "", "")
-	private TestObject txtAssetName = createTestObject("txtAssetName", "", "")
-	private TestObject drpYear = createTestObject("drpYear", "", "")
-	private TestObject txtYear = createTestObject("txtYear", "", "")
-	private TestObject btnSearchOverlay = createTestObject("btnSearchOverlay", "", "")
-	private TestObject btnSelect = createTestObject("btnSelect", "", "")
-	
-	//Overlay Deduction Item
-	private TestObject txfDeductionItem = createTestObject("txfDeductionItem", "", "")
-	
+
+	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
 	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 	
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Asset Appraisal Request Page")
+		verifyLanding(lblTitle, "Inventory Selling Request Page")
 	}
 
 	public void doSearch(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 	}
-	
+
 	public void clickButtonPencil() {
 		WebUI.click(btnSearch)
 	}
 	
-	public void inputMarketPrice(String officeName, String assetName, String year) {
-		txtOfficeName = createTestObject("txtOfficeName", "text", "$officeName")
-		txtAssetName = createTestObject("txtAssetName", "text", "$assetName")
-		txtYear = createTestObject("txtYear", "text", "$year")
+	public void inputListOfBidder(String bidderName, String bidderAmount, String bidderDate, String nik, String npwp, String bidderType, String email) {
+		txtBidderDate = createTestObject("txtBidderDate", "text", "$bidderDate")
+		txtBidderType = createTestObject("txtBidderType", "text", "$bidderType")
 		
-		WebUI.click(btnLookUpMarketPrice)
-		WebUI.click(drpOfficeName)
-		WebUI.click(txtOfficeName)
-		
-		WebUI.click(drpAssetName)
-		WebUI.click(txtAssetName)
-		
-		WebUI.click(drpYear)
-		WebUI.click(txtYear)
-		
-		WebUI.click(btnSearchOverlay)
-		WebUI.click(btnSelect)
+		WebUI.setText(txfBidderName, bidderName)
+		WebUI.setText(txfBidderAmount, bidderAmount)
+		//bider date
+		WebUI.click(drpBidderDate)
+		WebUI.click(txtBidderDate)
+		WebUI.setText(txfNik, nik)
+		//bidder type
+		WebUI.click(drpBidderType)
+		WebUI.click(txtBidderType)//COMPANY or PERSONAL
+		WebUI.setText(txfEmail, email)
 	}
 	
-	public void inputDeductionItem(String deductionItem) {
-		WebUI.click(btnLookUpDeductionItem)
-		WebUI.setText(txfDeductionItem, deductionItem)
-		WebUI.click(btnSearchOverlay)
-		WebUI.click(btnSelect)
-	}
-	
-	public void inputMinSellingAmount(String minSellingAmount) {
-		WebUI.setText(txfMinSellingAmount, minSellingAmount)
-	}
-	
-	public void clickCalculate() {
+	public void inputAuctionDetail(String ppn) {
+		WebUI.setText(txfPpn, ppn)
 		WebUI.click(btnCalculate)
 	}
 	
+	public void clickAdd() {
+		WebUI.click(btnAdd)
+	}
+	
 	public void inputApprovalRequest(String reason, String approvalNotes, String approvedBy) {
-		txtReasonDesc = createTestObject("txtReasonDesc", "text", reason)
-		txtApprovedBy = createTestObject("txtApprovedBy", "text", approvedBy)
+		TestObject txtReasonDesc = createTestObject("txtReasonDesc", "text", reason)
+		TestObject txtApprovedBy = createTestObject("txtApprovedBy", "text", approvedBy)
 
 		WebUI.click(drpReasonDesc)
 		WebUI.click(txtReasonDesc)
@@ -120,7 +109,7 @@ public class AssetAppraisalRequestPage extends BaseHelper{
 		WebUI.click(txtApprovedBy)
 		
 		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Asset Appraisal Request")
+		verifyPopUpSuccess(lblSuccess, "Inventory Selling Request")
 	}
-	 
+
 }

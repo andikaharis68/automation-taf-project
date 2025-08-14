@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialInventorySellingReceivePage extends BaseHelper {
+public class InventorySellingReceivePage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -48,7 +48,7 @@ public class RemedialInventorySellingReceivePage extends BaseHelper {
 	private TestObject lblSuccess = createTestObject("", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Remedial Inventory Selling Receive Page")
+		verifyLanding(lblTitle, "Inventory Selling Receive Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -79,6 +79,6 @@ public class RemedialInventorySellingReceivePage extends BaseHelper {
 		WebUI.click(txtDate)
 
 		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Remedial Inventory Selling Receive")
+		verifyPopUpSuccess(lblSuccess, "Inventory Selling Receive")
 	}
 }

@@ -22,21 +22,19 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class AssetReplacementApprovalPage extends BaseHelper{
-	
+
 	private TestObject drpAction		= createTestObject("drpAction", "xpath", "")
 	private TestObject chkFinal			= createTestObject("chkFinal", "xpath", "")
 	private TestObject txtNotes			= createTestObject("txtNotes", "xpath", "")
 	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification	= createTestObject("lblNotification", "xpath", "")
-	
+
 	public approval(String action, String note) {
-		
+
 		WebUI.selectOptionByLabel(drpAction, action, false)
 		WebUI.check(chkFinal)
 		WebUI.setText(txtNotes, note)
 		WebUI.click(btnSubmit)
-		WebUI.verifyElementVisible(lblNotification)	
+		WebUI.verifyElementVisible(lblNotification)
 	}
-	
-	
 }

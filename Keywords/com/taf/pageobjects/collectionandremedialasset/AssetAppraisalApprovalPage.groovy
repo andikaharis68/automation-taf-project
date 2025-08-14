@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -14,7 +14,6 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -22,25 +21,33 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetAppraisalInquiryPage extends BaseHelper {
+public class AssetAppraisalApprovalPage extends BaseHelper{
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
-
+	
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblAppraisalStatus = createTestObject("lblAppraisalStatus", "", "")
-	private TestObject txtAppraisalStatus = createTestObject("txtAppraisalStatus", "", "")
-
+	private TestObject lblProcess = createTestObject("lblProcess", "", "")
+	private TestObject btnProcess = createTestObject("btnProcess", "", "")
+	
 	//detail
-	private TestObject lblResult = createTestObject("lblResult", "", "")
-	private TestObject txtResult = createTestObject("txtResult", "", "")
+	private TestObject drpAction = createTestObject("drpAction", "", "")
+	private TestObject txtAction = createTestObject("txtAction", "", "")
+	private TestObject txfNotes = createTestObject("txfNotes", "", "")
+	private TestObject drpInventorytHead = createTestObject("drpInventorytHead", "", "")
+	private TestObject txtInventorytHead = createTestObject("txtInventorytHead", "", "")
 
+	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+
+	//Popup
+	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
+		verifyLanding(lblTitle, "Asset Appraisal Approval Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -48,27 +55,24 @@ public class AssetAppraisalInquiryPage extends BaseHelper {
 		WebUI.click(btnSearch)
 	}
 
-	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtAppraisalStatus)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
-		}
+	public void clickProcess() {
+		WebUI.click(btnProcess)
 	}
-
-	public void clickAgreementNo(String agreementNo) {
-		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
-		WebUI.click(txtAgreementNoTable)
-	}
-
-	public void verifyDetailStatus(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtResult)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			//Request atau Approve atau ApproveFinal
-			KeywordUtil.markPassed("Success : The Detail Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
+	
+	public void inputApprovalAction(String action, String notes, String deptHead, Boolean isFinal) {
+		//action
+		txtAction = createTestObject("txtAction", "text", "$action")//Approve or Reject
+		WebUI.click(drpAction)
+		WebUI.click(txtAction)
+		//notes
+		WebUI.setText(txfNotes, notes)
+		if (isFinal == false) {
+			//inven head
+			WebUI.click(drpInventorytHead)
+			WebUI.click(txtInventorytHead)
 		}
+
+		WebUI.click(btnSubmit)
+		verifyPopUpSuccess(lblSuccess, "Asset Appraisal Approval")
 	}
 }

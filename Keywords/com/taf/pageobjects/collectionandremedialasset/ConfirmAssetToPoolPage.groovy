@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,25 +22,30 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialAssetInventoryInquiryPage extends BaseHelper {
+public class ConfirmAssetToPoolPage extends BaseHelper{
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
 
-	//table
+	//Table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblInventoryStatus = createTestObject("lblInventoryStatus", "", "")
-	private TestObject txtInventoryStatus = createTestObject("txtInventoryStatus", "", "")
+	private TestObject btnPencil = createTestObject("btnPencil", "", "")
 
-	//detail
-	private TestObject lblResult = createTestObject("lblResult", "", "")
-	private TestObject txtResult = createTestObject("txtResult", "", "")
+	//Detail
+	private TestObject txfReceiveBy = createTestObject("txfReceiveBy", "", "")
+	private TestObject drpReceiveDate = createTestObject("drpReceiveDate", "", "")
+	private TestObject txtReceiveDate = createTestObject("txtReceiveDate", "", "")
+	private TestObject txfNotes = createTestObject("txfNotes", "", "")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+
+	//Popup
+	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Remedial Asset Inventory Inquiry Page")
+		verifyLanding(lblTitle, "Confirm Asset To Pool Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -48,27 +53,19 @@ public class RemedialAssetInventoryInquiryPage extends BaseHelper {
 		WebUI.click(btnSearch)
 	}
 
-	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtInventoryStatus)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
-		}
+	public void clickButtonPencil() {
+		WebUI.click(btnPencil)
 	}
 
-	public void clickAgreementNo(String agreementNo) {
-		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
-		WebUI.click(txtAgreementNoTable)
-	}
+	public void inputReceiveAsset(String receiveBy, String receiveDate, String notes) {
+		WebUI.setText(txfReceiveBy, receiveBy)
 
-	public void verifyDetailStatus(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtResult)
-		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
-			//Request atau Approve atau ApproveFinal
-			KeywordUtil.markPassed("Success : The Detail Status is ($expectedStatus)")
-		}else {
-			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
-		}
+		WebUI.click(drpReceiveDate)
+		WebUI.click(txtReceiveDate)
+
+		WebUI.setText(txfNotes, notes)
+		WebUI.click(btnSubmit)
+
+		verifyPopUpSuccess(lblSuccess, "Confirm Asset To Pool")
 	}
 }

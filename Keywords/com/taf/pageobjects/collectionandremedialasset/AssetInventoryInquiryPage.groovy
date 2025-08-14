@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -21,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class InventorySellingApprovalPage extends BaseHelper {
+public class AssetInventoryInquiryPage extends BaseHelper{
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
 	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
@@ -31,21 +32,15 @@ public class InventorySellingApprovalPage extends BaseHelper {
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblProcess = createTestObject("lblProcess", "", "")
-	private TestObject btnProcess = createTestObject("btnProcess", "", "")
+	private TestObject lblInventoryStatus = createTestObject("lblInventoryStatus", "", "")
+	private TestObject txtInventoryStatus = createTestObject("txtInventoryStatus", "", "")
 
 	//detail
-	private TestObject drpAction = createTestObject("drpAction", "", "")
-	private TestObject txtAction = createTestObject("txtAction", "", "")
-	private TestObject txfNotes = createTestObject("txfNotes", "", "")
-
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-
-	//Popup
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject lblResult = createTestObject("lblResult", "", "")
+	private TestObject txtResult = createTestObject("txtResult", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Inventory Selling Approval Page")
+		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
 	}
 
 	public void doSearch(String agreementNo) {
@@ -53,19 +48,27 @@ public class InventorySellingApprovalPage extends BaseHelper {
 		WebUI.click(btnSearch)
 	}
 
-	public void clickProcess() {
-		WebUI.click(btnProcess)
+	public void verifyStatusRequest(String expectedStatus) {
+		String actualStatus = WebUI.getText(txtInventoryStatus)
+		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
+			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
+		}else {
+			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
+		}
 	}
 
-	public void inputApprovalAction(String action, String notes) {
-		//action
-		txtAction = createTestObject("txtAction", "text", "$action")//Approve or Reject
-		WebUI.click(drpAction)
-		WebUI.click(txtAction)
-		//notes
-		WebUI.setText(txfNotes, notes)
-		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Inventory Selling Approval")
+	public void clickAgreementNo(String agreementNo) {
+		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
+		WebUI.click(txtAgreementNoTable)
 	}
-	
+
+	public void verifyDetailStatus(String expectedStatus) {
+		String actualStatus = WebUI.getText(txtResult)
+		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
+			//Request atau Approve atau ApproveFinal
+			KeywordUtil.markPassed("Success : The Detail Status is ($expectedStatus)")
+		}else {
+			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
+		}
+	}
 }

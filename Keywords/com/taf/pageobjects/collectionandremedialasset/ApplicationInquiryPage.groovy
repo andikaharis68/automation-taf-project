@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionandremedialasset
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -31,11 +31,11 @@ public class ApplicationInquiryPage extends BaseHelper {
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	
+
 	//detail
 	private TestObject lblAmortization = createTestObject("lblAmortization", "", "")
 	private TestObject btnCollection = createTestObject("btnCollection", "", "")
-	
+
 	//detail - inventory info
 	private TestObject txtOSPrinciple = createTestObject("txtOSPrinciple", "", "")
 	private TestObject txtInterestDue = createTestObject("txtInterestDue", "", "")
@@ -43,7 +43,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtInventoryAmount = createTestObject("txtInventoryAmount", "", "")
 	private TestObject txtInventoryRecoveryAmount = createTestObject("txtInventoryRecoveryAmount", "", "")
 	private TestObject txtInventoryDate = createTestObject("txtInventoryDate", "", "")
-	
+
 	//detail - inventory selling receive info
 	private TestObject txtReceiveNo = createTestObject("txtReceiveNo", "", "")
 	private TestObject txtAssetName = createTestObject("txtAssetName", "", "")
@@ -51,7 +51,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtBankAccount = createTestObject("txtBankAccount", "", "")
 	private TestObject txtPostDate = createTestObject("txtPostDate", "", "")
 	private TestObject txtValueDate = createTestObject("txtValueDate", "", "")
-	
+
 	//detail - asset info
 	private TestObject txtAssetDesc = createTestObject("txtAssetDesc", "", "")
 	private TestObject txtEngineNo = createTestObject("txtEngineNo", "", "")
@@ -59,7 +59,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtLicensePlat = createTestObject("txtLicensePlat", "", "")
 	private TestObject txtChassisNo = createTestObject("txtChassisNo", "", "")
 	private TestObject txtLocStatus = createTestObject("txtLocStatus", "", "")
-	
+
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
 	}
@@ -73,11 +73,11 @@ public class ApplicationInquiryPage extends BaseHelper {
 		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
 		WebUI.click(txtAgreementNoTable)
 	}
-	
+
 	public void clickAmortization() {
 		WebUI.click(lblAmortization)
 	}
-	
+
 	public void verifyDetailInventoryInfo(String osPrinciple, interestDue, repossessionFee, inventoryAmount, inventoryRecoveryAmount, inventoryDate) {
 		//ini lumayan banyak jadi nanti verify data sesuai yg diinputkan pada scenario2 sebelumnya
 		//TBD : perlu nanya apa aja yg di verif, sementara ini dulu
@@ -89,7 +89,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 			txtInventoryRecoveryAmount,
 			txtInventoryDate
 		]
-		
+
 		List<String> expectedList = [
 			osPrinciple,
 			interestDue,
@@ -98,14 +98,14 @@ public class ApplicationInquiryPage extends BaseHelper {
 			inventoryRecoveryAmount,
 			inventoryDate
 		]
-		
+
 		for (int i = 0; i < actualList.size(); i++) {
 			String actual = WebUI.getText(actualList[i])
 			String expected = expectedList[i]
 			validateIsEquals(actual, expected)
 		}
 	}
-	
+
 	public void verifyDetailSellingReceiveInfo(String receiveNo, assetName, sellingAmount, bankAccount, postDate, valueDate) {
 		List<TestObject> actualList = [
 			txtReceiveNo,
@@ -115,7 +115,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 			txtPostDate,
 			txtValueDate
 		]
-		
+
 		List<String> expectedList = [
 			receiveNo,
 			assetName,
@@ -124,14 +124,14 @@ public class ApplicationInquiryPage extends BaseHelper {
 			postDate,
 			valueDate
 		]
-		
+
 		for (int i = 0; i < actualList.size(); i++) {
 			String actual = WebUI.getText(actualList[i])
 			String expected = expectedList[i]
 			validateIsEquals(actual, expected)
 		}
 	}
-	
+
 	public void verifyDetailAssetInfo(String assetDesc, engineNo, pool, licenseplat, chassisNo, locStatus) {
 		List<TestObject> actualList = [
 			txtAssetDesc,
@@ -141,7 +141,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 			txtChassisNo,
 			txtLocStatus
 		]
-		
+
 		List<String> expectedList = [
 			assetDesc,
 			engineNo,
@@ -150,12 +150,11 @@ public class ApplicationInquiryPage extends BaseHelper {
 			chassisNo,
 			locStatus
 		]
-		
+
 		for (int i = 0; i < actualList.size(); i++) {
 			String actual = WebUI.getText(actualList[i])
 			String expected = expectedList[i]
 			validateIsEquals(actual, expected)
 		}
 	}
-	
 }
