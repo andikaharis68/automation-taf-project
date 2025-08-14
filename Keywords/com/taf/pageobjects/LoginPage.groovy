@@ -5,13 +5,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
-import org.openqa.selenium.devtools.DevTools
-import org.openqa.selenium.devtools.v85.page.Page
-
-import java.util.Base64
-
-import javax.imageio.ImageIO
-
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -27,10 +20,6 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
-
-import ru.yandex.qatools.ashot.AShot
-import ru.yandex.qatools.ashot.Screenshot
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
 public class LoginPage extends BaseHelper {
 	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
@@ -51,16 +40,6 @@ public class LoginPage extends BaseHelper {
 		TestObject btnSelect = createTestObject("btnSelect", "", "")
 		verifyLanding(txtOffice, "Select Role")
 		WebUI.click(btnSelect)
-	}
-	
-	public void testScreenshot() {
-		def driver = DriverFactory.getWebDriver()
-		def screenshot = new AShot()
-		    .shootingStrategy(ShootingStrategies.viewportPasting(1000))
-		    .takeScreenshot(driver)
-		def outputPath = System.getProperty("user.dir") + "/full_page_screenshot.png"
-		ImageIO.write(screenshot.getImage(), "PNG", new File(outputPath))
-		println "✅ Screenshot tersimpan di: " + outputPath
 	}
 	
 }

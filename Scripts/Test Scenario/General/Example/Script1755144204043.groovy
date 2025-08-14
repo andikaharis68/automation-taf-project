@@ -14,21 +14,6 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.LoginPage
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-LoginPage login = new LoginPage()
-//
-//'Login'
-//login.login("", "")
-//
-//'Select Role'
-//login.selectRoles("", "", "")
-
-WebUI.openBrowser("https://www.bankmandiri.co.id/")
-
-WebUI.delay(5)
-
-login.testScreenshot()
