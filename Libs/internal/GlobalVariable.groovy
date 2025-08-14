@@ -39,6 +39,7 @@ public class GlobalVariable {
         try {
             def selectedVariables = TestCaseMain.getGlobalVariables("default")
 			selectedVariables += TestCaseMain.getGlobalVariables(RunConfiguration.getExecutionProfile())
+            selectedVariables += TestCaseMain.getParsedValues(RunConfiguration.getOverridingParameters(), selectedVariables)
     
             WEB_URL = selectedVariables['WEB_URL']
             IS_CLOSE_BROWSER = selectedVariables['IS_CLOSE_BROWSER']

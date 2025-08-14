@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Collection_Expense_Advance</name>
+   <name>Example</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>45b37cd5-790e-400a-a9cf-fb832f2dd0d9</testCaseGuid>
+   <testCaseGuid>86f88ac5-5108-4565-895d-a4c1bd142b65</testCaseGuid>
 </TestCaseEntity>
