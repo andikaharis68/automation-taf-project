@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>NavigateTo_CustomerMain_Data</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>49a7103b-de2d-4057-a6bd-c44cf28be359</testCaseGuid>
+</TestCaseEntity>
