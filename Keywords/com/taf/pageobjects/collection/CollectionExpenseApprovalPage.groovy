@@ -29,7 +29,7 @@ public class CollectionExpenseApprovalPage extends BaseHelper {
 	//Approval Action
 	private TestObject drbAction = createTestObject("drbAction", "", "")
 	private TestObject txfApprovalActionNote = createTestObject("txfApprovalActionNote", "", "")
-	
+
 	public void inputAgreementNo(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
 	}
@@ -37,7 +37,7 @@ public class CollectionExpenseApprovalPage extends BaseHelper {
 	public void clickButtonSearch() {
 		WebUI.click(btnSearch)
 	}
-	
+
 	public void clickButtonIconProcess() {
 		WebUI.click(btnIconProcess)
 	}

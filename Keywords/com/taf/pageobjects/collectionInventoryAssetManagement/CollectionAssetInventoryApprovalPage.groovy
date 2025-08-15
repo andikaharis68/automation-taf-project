@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -14,7 +14,6 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -22,60 +21,58 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class SendAssetToPoolPage extends BaseHelper {
+public class CollectionAssetInventoryApprovalPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "", "")
-	private TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "", "")
+	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
 
-	//Table
+	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject btnPencil = createTestObject("btnPencil", "", "")
+	private TestObject lblProcess = createTestObject("lblProcess", "", "")
+	private TestObject btnProcess = createTestObject("btnProcess", "", "")
 
-	//Detail
-	private TestObject drpPool = createTestObject("drpPool", "", "")
-	private TestObject txtPool = createTestObject("txtPool", "", "")
-	private TestObject txfSendBy = createTestObject("txfSendBy", "", "")
-	private TestObject drpSendDate = createTestObject("drpSendDate", "", "")
-	private TestObject txtSendDate = createTestObject("txtSendDate", "", "")
+	//detail
+	private TestObject drpAction = createTestObject("drpAction", "", "")
+	private TestObject txtAction = createTestObject("txtAction", "", "")
 	private TestObject txfNotes = createTestObject("txfNotes", "", "")
+	private TestObject drpAreaDeptHead = createTestObject("drpAreaDeptHead", "", "")
+	private TestObject txtAreaDeptHead = createTestObject("txtAreaDeptHead", "", "")
+
 	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
 
 	//Popup
 	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Send Asset To Pool Page")
+		verifyLanding(lblTitle, "Collection Asset Inventory Approval Page")
 	}
 
-	public void doSearch(String agreementNo, String collectionGroup) {
-		TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "text", collectionGroup)
-
-		WebUI.click(drpCollectionGroup)
-		WebUI.click(txtCollectionGroup)
+	public void doSearch(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
 	}
 
-	public void clickButtonPencil() {
-		WebUI.click(btnSearch)
+	public void clickProcess() {
+		WebUI.click(btnProcess)
 	}
 
-	public void inputSendAsset(String pool, String sendBy, String date, String notes) {
-		WebUI.click(drpPool)
-		WebUI.click(txtPool)
-
-		WebUI.setText(txfSendBy, sendBy)
-
-		WebUI.click(drpSendDate)
-		WebUI.click(txtSendDate)
-
+	public void inputApprovalAction(String action, String notes, String deptHead, Boolean isFinal) {
+		//action
+		txtAction = createTestObject("txtAction", "text", "$action")
+		WebUI.click(drpAction)
+		WebUI.click(txtAction)
+		//notes
 		WebUI.setText(txfNotes, notes)
-		WebUI.click(btnSubmit)
+		if (isFinal == false) {
+			//fh area dept head
+			WebUI.click(drpAreaDeptHead)
+			WebUI.click(txtAreaDeptHead)
+		}
 
-		verifyPopUpSuccess(lblSuccess, "Send Asset To Pool")
+		WebUI.click(btnSubmit)
+		verifyPopUpSuccess(lblSuccess, "Collection Asset Inventory Approval")
 	}
 }

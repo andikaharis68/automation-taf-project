@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.collectionInventoryAssetManagement
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -21,75 +22,60 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialAssetInventoryRequestPage extends BaseHelper{
+public class SendAssetToPoolPage extends BaseHelper {
 	//header
 	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
+	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "", "")
+	private TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
 	private TestObject btnSearch = createTestObject("btnSearch", "", "")
 
 	//Table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
 	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblExecute = createTestObject("lblExecute", "", "")
 	private TestObject btnPencil = createTestObject("btnPencil", "", "")
 
 	//Detail
-	//Asset Inventory Info
-	private TestObject drpInventoryDate = createTestObject("drpInventoryDate", "", "")
-	private TestObject txtInventoryDate = createTestObject("txtInventoryDate", "", "")
-	private TestObject txfInventoryNotes = createTestObject("txfInventoryNotes", "", "")
-
-	//Approval Request
-	private TestObject drpReasonDesc = createTestObject("drpReasonDesc", "", "")
-	private TestObject txtReasonDesc = createTestObject("txtReasonDesc", "", "")
-	private TestObject txfApprovalNotes = createTestObject("txfApprovalNotes", "", "")
-	private TestObject drpApprovedBy = createTestObject("drpApprovedBy", "", "")
-	private TestObject txtApprovedBy = createTestObject("txtApprovedBy", "", "")
-
+	private TestObject drpPool = createTestObject("drpPool", "", "")
+	private TestObject txtPool = createTestObject("txtPool", "", "")
+	private TestObject txfSendBy = createTestObject("txfSendBy", "", "")
+	private TestObject drpSendDate = createTestObject("drpSendDate", "", "")
+	private TestObject txtSendDate = createTestObject("txtSendDate", "", "")
+	private TestObject txfNotes = createTestObject("txfNotes", "", "")
 	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+
+	//Popup
 	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
 
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Remedial Asset Inventory Request Page")
+		verifyLanding(lblTitle, "Send Asset To Pool Page")
 	}
 
-	public void clickSearch() {
-		WebUI.click(btnSearch)
-	}
+	public void doSearch(String agreementNo, String collectionGroup) {
+		TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "text", collectionGroup)
 
-	public void doSearch(String agreementNo) {
+		WebUI.click(drpCollectionGroup)
+		WebUI.click(txtCollectionGroup)
 		WebUI.setText(txfAgreementNo, agreementNo)
-		clickSearch()
-	}
-
-	public void getAgreementNo() {
-		WebUI.getText(txtAgreementNoTable)
+		WebUI.click(btnSearch)
 	}
 
 	public void clickButtonPencil() {
 		WebUI.click(btnSearch)
 	}
 
-	public void inputAssetInventoryInfo(String inventoryDate, String inventorynotes) {
-		txtInventoryDate = createTestObject("txtInventoryDate", "text", "$inventoryDate")
+	public void inputSendAsset(String pool, String sendBy, String date, String notes) {
+		WebUI.click(drpPool)
+		WebUI.click(txtPool)
 
-		WebUI.click(drpInventoryDate)
-		WebUI.click(txtInventoryDate)
-		WebUI.setText(txfInventoryNotes, inventorynotes)
-	}
+		WebUI.setText(txfSendBy, sendBy)
 
-	public void inputApprovalRequest(String reason, String approvalNotes, String approvedBy) {
-		txtReasonDesc = createTestObject("txtReasonDesc", "text", reason)
-		txtApprovedBy = createTestObject("txtApprovedBy", "text", approvedBy)
+		WebUI.click(drpSendDate)
+		WebUI.click(txtSendDate)
 
-		WebUI.click(drpReasonDesc)
-		WebUI.click(txtReasonDesc)
-		WebUI.setText(txfApprovalNotes, approvalNotes)
-		WebUI.click(drpApprovedBy)
-		WebUI.click(txtApprovedBy)
-
+		WebUI.setText(txfNotes, notes)
 		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Remedial Inventory Selling Request")
+
+		verifyPopUpSuccess(lblSuccess, "Send Asset To Pool")
 	}
 }
