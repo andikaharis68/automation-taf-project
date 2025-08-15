@@ -20,6 +20,11 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.testobject.ConditionType
+import com.kms.katalon.core.testobject.SelectorMethod
+
 import internal.GlobalVariable
 
 import org.openqa.selenium.WebElement
@@ -172,12 +177,90 @@ class BaseHelper {
 			KeywordUtil.markFailed("Actual : $actual, is not equals with Expected : $expected")
 		}
 	}
-	
+
 	static void verifyPopUpSuccess(TestObject to, String actionTitle) {
 		if(WebUI.waitForElementPresent(to, 5)) {
 			KeywordUtil.markPassed("Success: $actionTitle Success!")
 		}else {
 			KeywordUtil.markFailed("Failed: $actionTitle Failed/Object lblSuccess Not Found!")
 		}
+	}
+
+	static Map<String, String> getTestDataByScenarioAndAddressType(
+			String sheetName,
+			String filePath,
+			String scenarioID,
+			String addressTypeName) {
+
+		FileInputStream fis
+		Workbook workbook
+		try {
+			fis = new FileInputStream(filePath)
+			workbook = new XSSFWorkbook(fis)
+			Sheet sheet = workbook.getSheet(sheetName)
+
+			if (sheet == null) {
+				KeywordUtil.markFailed("Sheet '${sheetName}' not found ${filePath}")
+				return null
+			}
+
+			int headerRowIdx = 0
+			Row header = sheet.getRow(headerRowIdx)
+
+			int scenarioColIdx   = indexOfColumn(header, "ScenarioId")
+			int addressTypeColIdx = indexOfColumn(header, "AddressTypeName")
+
+			if (scenarioColIdx == -1)   {
+				KeywordUtil.markFailed("Kolom 'ScenarioId' tidak ditemukan"); return null
+			}
+			if (addressTypeColIdx == -1){
+				KeywordUtil.markFailed("Kolom 'AddressTypeName' tidak ditemukan"); return null
+			}
+
+			DataFormatter fmt = new DataFormatter()
+			Map<String, String> dataMap = [:]
+
+			for (int r = 1; r <= sheet.getLastRowNum(); r++) {
+				Row row = sheet.getRow(r)
+				if (row == null) continue
+
+					String scenVal = fmt.formatCellValue(row.getCell(scenarioColIdx)).trim()
+				String addrVal = fmt.formatCellValue(row.getCell(addressTypeColIdx)).trim()
+
+				if (scenVal.equalsIgnoreCase(scenarioID) && addrVal.equalsIgnoreCase(addressTypeName)) {
+					for (int c = 0; c < header.getLastCellNum(); c++) {
+						String key = header.getCell(c)?.getStringCellValue()
+						String val = fmt.formatCellValue(row.getCell(c))
+						if (key != null) dataMap[key] = val
+					}
+					KeywordUtil.markPassed("Data ditemukan untuk ScenarioId='${scenarioID}' dan AddressTypeName='${addressTypeName}'")
+					break
+				}
+			}
+
+			if (dataMap.isEmpty()) {
+				KeywordUtil.markFailed("Tidak ada data untuk ScenarioId='${scenarioID}' dan AddressTypeName='${addressTypeName}'")
+				return null
+			}
+
+			KeywordUtil.logInfo("Scenario & AddressType Data: ${dataMap}")
+			GlobalVariable.TEST_DATA = dataMap
+			return dataMap
+		} finally {
+			try {
+				workbook?.close()
+			} catch (ignored) {}
+			try {
+				fis?.close()
+			} catch (ignored) {}
+		}
+	}
+
+	private static int indexOfColumn(Row header, String targetName) {
+		for (int i = 0; i < header.getLastCellNum(); i++) {
+			String name = header.getCell(i)?.getStringCellValue()?.trim()
+			if (name != null && name.equalsIgnoreCase(targetName)) return i
+		}
+		return -1
 	}
 }

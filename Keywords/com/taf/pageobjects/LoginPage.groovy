@@ -12,7 +12,9 @@ import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
+import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -22,24 +24,38 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class LoginPage extends BaseHelper {
-	private TestObject btnLogin = createTestObject("txfUsername", "id", "user-name")
-	private TestObject txfUsername = createTestObject("txfPassword", "xpath", "//*[contains(@id, 'password')]")
-	private TestObject txfPassword = createTestObject("btnLogin", "id", "login-button")
+
+	private TestObject txfUsername	= createTestObject("txfUsername", "xpath", "//input[@id='txtUsername']")
+	private TestObject txfPassword	= createTestObject("txfPassword", "xpath", "//input[@id='txtPassword']")
+	private TestObject btnLogin		= createTestObject("btnLogin", "xpath", "//input[@id='lbLogin']")
+	private TestObject txtOffice 	= createTestObject("txtOffice", "", "")
+	private TestObject txtPosition	= createTestObject("txtPosition", "", "")
+	private TestObject txtRole 		= createTestObject("txtRole", "", "")
+	private TestObject btnSelect 	= createTestObject("btnSelect", "", "")
+
 
 	public void login(String username, String password) {
-		verifyLanding(btnLogin, "Login Screen")
+		verifyLanding(btnLogin, "Login")
 		WebUI.setText(txfUsername, username)
 		WebUI.setText(txfPassword, password)
 		WebUI.click(btnLogin)
 	}
 
-	private void selectRoles(String office, String position, String Role) {
-		TestObject txtOffice = createTestObject("txtOffice", "", "")
-		TestObject txtPosition = createTestObject("txtPosition", "", "")
-		TestObject txtRole = createTestObject("txtRole", "", "")
-		TestObject btnSelect = createTestObject("btnSelect", "", "")
-		verifyLanding(txtOffice, "Select Role")
-		WebUI.click(btnSelect)
+	private void selectRoles(String office, String position, String role) {
+		TestObject dynamicSelectButton
+		String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		String upper = 'abcdefghijklmnopqrstuvwxyz'
+
+		String xpath = """
+        //tr[
+            contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
+            and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
+            and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
+        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
+    """
+		dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
+		WebUI.waitForElementClickable(dynamicSelectButton, 5)
+		WebUI.click(dynamicSelectButton)
 	}
 	
 }

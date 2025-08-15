@@ -12,16 +12,16 @@
    <rerunImmediately>true</rerunImmediately>
    <testSuiteGuid>6ed1d377-c002-4ef9-a235-03d8c1f43863</testSuiteGuid>
    <testCaseLink>
-      <guid>e59cc5a3-9c09-43cf-a1c2-ab67c0c455f4</guid>
+      <guid>7d64543f-34fa-417b-8764-d522fb4be1f4</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
-      <testCaseId>Test Cases/Test Scenario/LOS Customer/Add_Personal_Customer</testCaseId>
+      <isRun>false</isRun>
+      <testCaseId>Test Cases/Test Scenario/LOS Customer/Add_Company_Customer</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>fe9baa43-210a-4e75-8d16-e83e57069742</guid>
+      <guid>3da5b4a0-817e-4478-bf5e-870272933029</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Customer/Customer_Inquiry</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
