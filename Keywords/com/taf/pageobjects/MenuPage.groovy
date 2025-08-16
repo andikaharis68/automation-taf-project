@@ -166,6 +166,7 @@ public class MenuPage extends BaseHelper {
 
 	private void navigateToCreditSimulation() {
 		WebUI.switchToDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
 		WebUI.click(drpMenu)
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.click(btnCreditProcess)

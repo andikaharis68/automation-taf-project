@@ -27,10 +27,10 @@ public class CreditSimulation extends BaseHelper {
 	private TestObject iframeMainpage 						= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	
 	//header
-	private TestObject lblTitle								= createTestObject("lblTitle", "", "")
+	private TestObject lblTitle								= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject btnAdd								= createTestObject("btnAdd", "id", "lb_Toolbar_Add")
-	private TestObject btnNext								= createTestObject("btnNext", "", "")
-	private TestObject btnGenerate							= createTestObject("btnGenerate", "", "")
+	private TestObject btnNext								= createTestObject("btnNext", "id", "lb_Toolbar_Next")
+	private TestObject btnGenerate							= createTestObject("btnGenerate", "id", "lb_Toolbar_Generate")
 
 	//main information
 	private TestObject txfCustomerName						= createTestObject("txfCustomerName", "id", "txtCustName")
@@ -94,8 +94,17 @@ public class CreditSimulation extends BaseHelper {
 	private TestObject btnCalculateInstallment				= createTestObject("btnCalculateInstallment", "id", "lbCalculateFinancialData")
 
 
+	public void switchToIframeMain() {
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+	
 	public void verifyLandingScreen() {
-		verifyLanding(lblTitle, "Credit Simulation")
+		verifyLanding(icoLookUpProductOffering, "Credit Simulation")
+	}
+	
+	public void clickAdd() {
+		WebUI.verifyElementPresent(btnAdd, 10)
+		WebUI.click(btnAdd)
 	}
 
 	public void inputMainInformation(String customerName, String customerType, String offeringCode, String maritalStatus, String numOfAsset) {
@@ -105,10 +114,13 @@ public class CreditSimulation extends BaseHelper {
 		WebUI.click(txtCustomerType)
 
 		WebUI.click(icoLookUpProductOffering)
+		WebUI.delay(1)
 		WebUI.setText(txfProductOfferingCode, offeringCode)
+		WebUI.delay(1)
 		WebUI.click(btnSearch)
 		WebUI.click(btnSelect)
 		
+		WebUI.waitForElementVisible(drpMaritalStatus, 20)
 		WebUI.selectOptionByLabel(drpMaritalStatus, maritalStatus, false)
 		WebUI.setText(txfNumOfAsset, numOfAsset)
 	}
@@ -175,14 +187,6 @@ public class CreditSimulation extends BaseHelper {
 
 	public void clickGenerate() {
 		WebUI.click(btnGenerate)
-	}
-	
-	public void clickAdd() {
-		WebUI.click(btnAdd)
-	}
-	
-	public void switchToIframeMain() {
-		WebUI.switchToFrame(iframeMainpage, 1)
 	}
 
 	public void switchToDefaultContent() {
