@@ -23,9 +23,10 @@ import internal.GlobalVariable
 
 public class MenuPage extends BaseHelper {
 
+	private TestObject drpModul						= createTestObject("drpModul", "id", "ddlSubSystem")
 	private TestObject drpMenu						= createTestObject("drpMenu", "xpath", "//img[@id='imgMenu']")
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
-	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "xpath", "")
+	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
 	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "")
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "xpath", "")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
@@ -52,8 +53,6 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
-
-
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
@@ -163,5 +162,15 @@ public class MenuPage extends BaseHelper {
 	}
 	private void clickInternalSystem() {
 		WebUI.click(btnInternalSystem)
+	}
+
+	private void navigateToCreditSimulation() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.selectOptionByLabel(drpModul, "LOAN ORIGINATION", false)
+		WebUI.click(btnCreditSimulation)
+		WebUI.switchToDefaultContent()
 	}
 }

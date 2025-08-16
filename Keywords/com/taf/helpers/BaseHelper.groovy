@@ -53,8 +53,14 @@ class BaseHelper {
 		 * value : based on what property used, if u use xpath => "//*[text() = 'Login']", if u use id just write only id
 		 */
 		TestObject to = new TestObject(objName)
-		to.addProperty(property, ConditionType.CONTAINS, value)
-		//		to.selectorMethod = SelectorMethod.BASIC
+		if (property == "text") {
+			value = "//*[text() = '$value']"
+			to.addProperty("xpath", ConditionType.CONTAINS, value)
+		}else {
+			
+			to.addProperty(property, ConditionType.CONTAINS, value)
+		}
+		
 		return to
 	}
 
@@ -262,5 +268,14 @@ class BaseHelper {
 			if (name != null && name.equalsIgnoreCase(targetName)) return i
 		}
 		return -1
+	}
+	
+	static void openBrowser() {
+		WebUI.openBrowser(GlobalVariable.WEB_URL)
+		WebUI.maximizeWindow()
+	}
+	
+	static void closeBrowser() {
+		WebUI.closeBrowser()
 	}
 }
