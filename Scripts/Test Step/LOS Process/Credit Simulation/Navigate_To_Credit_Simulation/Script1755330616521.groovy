@@ -14,18 +14,10 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-dataRow += BaseHelper.getTestDataByScenario("", GlobalVariable.TEST_DATA_LOCATION + "/" + ".xlsx", scenarioId)
-//dataRow += BaseHelper.getTestDataByScenario("Address", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", scenarioId)
-BaseHelper.openBrowser()
+MenuPage menu = new MenuPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_To_Credit_Simulation'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_Credit_Simulation'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_To_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: select menu to navigate credit simulation'
+menu.navigateToCreditSimulation()

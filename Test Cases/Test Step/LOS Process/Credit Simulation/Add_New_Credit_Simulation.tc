@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_New_Credit_Simulation</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>af0cf876-02c5-4418-a4e2-cb7a357bb59a</testCaseGuid>
+</TestCaseEntity>

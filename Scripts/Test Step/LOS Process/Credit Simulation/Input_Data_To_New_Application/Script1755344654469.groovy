@@ -14,18 +14,31 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-dataRow += BaseHelper.getTestDataByScenario("", GlobalVariable.TEST_DATA_LOCATION + "/" + ".xlsx", scenarioId)
-//dataRow += BaseHelper.getTestDataByScenario("Address", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", scenarioId)
-BaseHelper.openBrowser()
+CreditSimulationToNewApplication credsim = new CreditSimulationToNewApplication()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_To_Credit_Simulation'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_Credit_Simulation'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_To_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1 : input main data'
+credsim.inputMainData(PhoneNumber, NpwpNumber)
+
+'Step 2 : input address info'
+credsim.inputAddressInfo(JobAddress, ResidenceAddress)
+
+'Step 3 : input other info'
+credsim.inputOtherInfo(Notes)
+
+'Step 4 : upload document customer'
+credsim.uploadDocumentCustomer()
+
+'Step 5 : upload document spouse'
+credsim.uploadDocumentSpouse()
+
+'Step 6 : upload document stnk'
+credsim.uploadDocumentSTNK()
+
+'Step 7 : click button save'
+credsim.clickSave()
+
+'Step 8 : input button submit'
+credsim.clickSubmit()
