@@ -20,6 +20,10 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 CreditSimulation credsim = new CreditSimulation()
+credsim.switchToIframeMain()
+
+'Step 0: click button add'
+credsim.clickAdd()
 
 'Step 1: input section main information'
 credsim.inputMainInformation(CustomerName, CustomerType, ProductOfferingCode, MaritalStatus, NumOfAsset)

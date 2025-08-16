@@ -21,8 +21,8 @@ import org.openqa.selenium.Keys as Keys
 
 String scenarioId = "1"
 Map dataRow = [:]
-dataRow += BaseHelper.getTestDataByScenario("", GlobalVariable.TEST_DATA_LOCATION + "/" + ".xlsx", scenarioId)
-//dataRow += BaseHelper.getTestDataByScenario("Address", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + "Credit_Simulation_TestData.xlsx", scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("CreditSimulation", GlobalVariable.TEST_DATA_LOCATION + "/" + "Credit_Simulation_TestData.xlsx", scenarioId)
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
