@@ -31,20 +31,6 @@ class ExecutionListener {
 	def beforeTestCase(TestCaseContext testCaseContext) {
 		String testCaseName = testCaseContext.getTestCaseId().tokenize('/').last()
 		GlobalVariable.TEST_CASE_NAME = testCaseName
-		
-		Map<String, Object> prefs = new HashMap<>()
-		prefs.put("credentials_enable_service", false)
-		prefs.put("profile.password_manager_enabled", false)
-		
-		ChromeOptions options = new ChromeOptions()
-		options.setExperimentalOption("prefs", prefs)
-		options.addArguments('--incognito')
-		
-		ChromeDriver driver = new ChromeDriver(options)
-		DriverFactory.changeWebDriver(driver)
-		
-		WebUI.openBrowser(GlobalVariable.WEB_URL)
-		WebUI.maximizeWindow()
 	}
 	
 	@AfterTestCase

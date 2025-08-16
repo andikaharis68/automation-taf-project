@@ -62,8 +62,9 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void selectIdType(String idType) {
 		TestObject drpSelected = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$idType']")
-		WebUI.click(drpIDType)
-		WebUI.click(drpSelected)
+//		WebUI.click(drpIDType)
+//		WebUI.click(drpSelected)
+		WebUI.selectOptionByLabel(drpIDType, idType, false)
 	}
 
 	private void inputIdNumber(String idNumber) {
