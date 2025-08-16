@@ -14,14 +14,38 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.customers.AddCompanyCustomerPage
+import com.taf.customers.CustomerInformationPage
+import com.taf.pageobjects.MenuPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-AddCompanyCustomerPage addCompanyCustomerPage = new AddCompanyCustomerPage()
+MenuPage menu = new MenuPage()
+CustomerInformationPage custInfo = new CustomerInformationPage()
 
+'Step 1. Click dropdown menu'
+menu.clickDropdownMenu()
 
-'Step 1: Click button Customer Model'
-addCompanyCustomerPage.selectCustomerModel()
+'Step 2: Switch to Iframe Menu'
+menu.switchToIframeMenu()
 
+'Step 3: Click button customer'
+menu.clickCustomer()
+
+'Step 4: Swith to default content'
+menu.switchDefaultContent()
+
+'Step 5: Switch to Iframe Menu'
+menu.switchToIframeMenu()
+
+'Step 6: Click submenu customer'
+menu.clickSubMenuCustomer()
+
+'Step 7: Swith to default content'
+menu.switchDefaultContent()
+
+'Step 8: Switch to Iframe Main'
+custInfo.switchToIframeMain()
+
+'Step 9: Verify Landing in Customer Information page'
+custInfo.verifyLandingInCustInfoPage()
