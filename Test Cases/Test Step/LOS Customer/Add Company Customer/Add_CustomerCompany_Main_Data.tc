@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Add_Customer_Main_Data</name>
+   <name>Add_CustomerCompany_Main_Data</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
