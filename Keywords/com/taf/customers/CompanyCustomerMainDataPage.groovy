@@ -55,18 +55,19 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		WebUI.click(iconLookUpIndustry)
 
 		//		set industry type from parameter
-		def txtFieldFromLooupIndustry = createTestObject("txtFieldFromLooupIndustry", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+		def txtFieldFromLookupIndustry = createTestObject("txtFieldFromLooupIndustry", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
 		WebUI.delay(0.5)
-		WebUI.setText(txtFieldFromLooupIndustry, industryType)
+		WebUI.setText(txtFieldFromLookupIndustry, industryType)
 
 		// click search after text filled
 		def btnSearchLookUp = createTestObject("btnSearchLookUp", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
 		WebUI.delay(0.5)
-		WebUI.click(iconLookUpIndustry)
+		WebUI.click(btnSearchLookUp)
+		
 		//click select in first found
 		def selectFirstFoundIndustryType = createTestObject("selectFirstFoundIndustryType", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
 		WebUI.delay(0.5)
-		WebUI.click(iconLookUpIndustry)
+		WebUI.click(selectFirstFoundIndustryType)
 	}
 
 	void inputNumberOfEmployees(String numberOfEmployees) {
@@ -109,7 +110,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	}
 
 	void inputCustomerSidNo(String sidNo) {
-		def txfCustomerSidNo = createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']]")
+		def txfCustomerSidNo = createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']")
 		WebUI.delay(0.5)
 		WebUI.setText(txfCustomerSidNo, sidNo)
 	}
@@ -120,19 +121,19 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		WebUI.delay(0.5)
 		WebUI.click(iconLookUpCustomerGroup)
 
-		def txtFieldFromCustomerGroup = createTestObject("txtFieldFromCustomerGroup", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+		// set text from test data
+		def txtFieldFromCustomerGroup = createTestObject("txtFieldFromCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 		WebUI.delay(0.5)
-		WebUI.setText(txtFieldFromLooupIndustry, customerGroup)
+		WebUI.setText(txtFieldFromCustomerGroup, customerGroup)
+		
+		//need hardcode the customer type for Company
+		def optionCustomerType = createTestObject("optionCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
+		WebUI.selectOptionByLabel(optionCustomerType, "Company", false)
 
-		// click search after text customer filled
-		def searchCustomerGroup = createTestObject("searchCustomerGroup", "xpath", "//*@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+		// click search customer group
+		def searchCustomerGroup = createTestObject("searchCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
 		WebUI.delay(0.5)
 		WebUI.click(searchCustomerGroup)
-
-		// click search after again
-		def searchCustomerGroupAgain = createTestObject("searchCustomerGroupAgain", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
-		WebUI.delay(0.5)
-		WebUI.click(searchCustomerGroupAgain)
 
 		// click select in first found
 		def selectFirstFoundCustomerGroup = createTestObject("selectFirstFoundCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
