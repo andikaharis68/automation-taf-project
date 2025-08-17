@@ -40,6 +40,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnReturnHandlingTask		= createTestObject("btnReturnHandlingTask", "xpath", "")
 	private TestObject btnUpdateLifeInsurance		= createTestObject("btnUpdateLifeInsurance", "xpath", "")
 	private TestObject btnESign						= createTestObject("btnESign", "xpath", "")
+	private TestObject btnCDECompletion				= createTestObject("btnCDECompletion", "text", "Centralized Data Entry Completion")
 
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")
 	private TestObject btnCustomer					= createTestObject("btnCustomer", "xpath", "//a[@id='rModuleList_lbModuleList_1']")
@@ -52,6 +53,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnCreditProcessInquiry		= createTestObject("btnCreditProcessInquiry", "xpath", "") // ada di favourite
 	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
+	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")	
+	
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 
 	private void verifyLandingMenuPage() {
@@ -174,4 +177,16 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCreditSimulation)
 		WebUI.switchToDefaultContent()
 	}
+	
+	private void navigateToCentralizedDataEntryCompletion() {
+		WebUI.switchToDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		WebUI.click(drpMenu)
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
+		WebUI.click(btnProspect)
+		WebUI.click(btnCDECompletion)
+		WebUI.switchToDefaultContent()
+	}
+	
 }

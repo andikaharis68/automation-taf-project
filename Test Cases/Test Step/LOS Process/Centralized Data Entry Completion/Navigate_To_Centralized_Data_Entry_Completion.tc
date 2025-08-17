@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_Centralized_Data_Entry_Completion</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>9181a6fb-f864-4471-8112-dc99736f95f0</testCaseGuid>
+</TestCaseEntity>
