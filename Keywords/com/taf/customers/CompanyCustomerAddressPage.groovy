@@ -21,8 +21,4 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
 public class CompanyCustomerAddressPage extends BaseHelper {
-	
-	
-
-
 }

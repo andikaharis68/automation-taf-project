@@ -21,27 +21,27 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
 public class CompanyCustomerMainDataPage extends BaseHelper {
-	private TestObject btnSaveCustMainData 				= createTestObject("btnSaveCustMainData", "xpath", "//*[@id='lb_Form_SaveCont_CustMainData']")
+	private TestObject btnSaveCustMainData 					= createTestObject("btnSaveCustMainData", "xpath", "//*[@id='lb_Form_SaveCont_CustMainData']")
 	private TestObject selectFirstFoundCustomerGroup 		= createTestObject("selectFirstFoundCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
 	private TestObject searchCustomerGroup				    = createTestObject("searchCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
 	private TestObject optionCustomerType 					= createTestObject("optionCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
 	private TestObject txtFieldFromCustomerGroup 			= createTestObject("txtFieldFromCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-	private TestObject iconLookUpCustomerGroup 			= createTestObject("iconLookUpCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_imb']")
+	private TestObject iconLookUpCustomerGroup 				= createTestObject("iconLookUpCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_imb']")
 	private TestObject txfCustomerSidNo 					= createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']")
-	private TestObject cbIsVIP 							= createTestObject("cbIsVIP", "xpath", "//*[@id='cbIsVip']")
+	private TestObject cbIsVIP 								= createTestObject("cbIsVIP", "xpath", "//*[@id='cbIsVip']")
 	private TestObject txfPremiumNote 						= createTestObject("txfPremiumNote", "xpath", "//*[@id='txtPremiumNote']")
 	private TestObject cbIsPremium							= createTestObject("cbIsPremium", "xpath", "//*[@id='cbIsPremium']")
 	private TestObject txfEstablishmentDate 				= createTestObject("txfEstablishmentDate", "xpath", "//*[@id='ucDPEstablishmentDate_txtDatePicker']")
 	private TestObject txfNumberOfEmployees 				= createTestObject("txfNumberOfEmployees", "xpath", "//*[@id='ucinNumOfEmp_txtInput']")
 	private TestObject selectFirstFoundIndustryType 		= createTestObject("selectFirstFoundIndustryType", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
-	private TestObject btnSearchLookUp 					= createTestObject("btnSearchLookUp", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
+	private TestObject btnSearchLookUp 						= createTestObject("btnSearchLookUp", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
 	private TestObject txtFieldFromLookupIndustry 			= createTestObject("txtFieldFromLooupIndustry", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
 	private TestObject iconLookUpIndustry					= createTestObject("iconLookUpIndustry", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_imb']")
-	private TestObject checkBoxIsNewApplication     = createTestObject("checkBoxIsNewApplication", "xpath", "//*[@id='cbNextToNAP']")
-	private TestObject cbIsAffialite 				= createTestObject("cbIsAffialite", "xpath", "//*[@id='cb_Cust_IsAffiliateWithMf']")
-	private TestObject btnEditCustomer 				= createTestObject("btnEditCustomer", "xpath", "//*[@id='gvCustomerCompany_imbEdit_0']")
-	private TestObject btnMainTab 					= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
-	private TestObject iframeCustForm	 			= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
+	private TestObject checkBoxIsNewApplication     		= createTestObject("checkBoxIsNewApplication", "xpath", "//*[@id='cbNextToNAP']")
+	private TestObject cbIsAffialite 						= createTestObject("cbIsAffialite", "xpath", "//*[@id='cb_Cust_IsAffiliateWithMf']")
+	private TestObject btnEditCustomer 						= createTestObject("btnEditCustomer", "xpath", "//*[@id='gvCustomerCompany_imbEdit_0']")
+	private TestObject btnMainTab 							= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
+	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
 
 
 	void clickMainDataTabOrEditPage(){
