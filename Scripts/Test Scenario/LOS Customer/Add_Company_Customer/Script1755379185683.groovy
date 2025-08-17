@@ -28,5 +28,6 @@ scenarioData += BaseHelper.getTestDataByScenario("MainData",GlobalVariable.TEST_
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/NavigateTo_CustomerMain_Data'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_Main_Data'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerInformation'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerMainData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 

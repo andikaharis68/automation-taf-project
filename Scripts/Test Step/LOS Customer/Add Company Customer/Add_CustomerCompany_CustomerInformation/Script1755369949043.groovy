@@ -24,7 +24,6 @@ import org.openqa.selenium.Keys as Keys
 
 def addCompanyCustomerPage = new AddCompanyCustomerPage()
 def customerInfoPage = new CustomerInformationPage()
-def companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
 
 KeywordUtil.logInfo("scenarioData : ${CustomerModel}, ${CompanyName}, ${CompanyType}")
 
@@ -50,41 +49,6 @@ addCompanyCustomerPage.inputCustomerNitku(NITKU)
 'Step 7: click next'
 addCompanyCustomerPage.clickNextButton()
 
-'Step 8: click main data tab'
-companyCustomerMainDataPage.clickMainDataTabOrEditPage()
-
-'Step 9: check box the is new application'
-companyCustomerMainDataPage.clickIsNewApplication(NextToNewApplication == "1")
-
-'Step 10: need to switch iframe customer form'
-companyCustomerMainDataPage.switchToIframeCustForm()
-
-'Step 11: checkbox the is affiliate'
-companyCustomerMainDataPage.clickCheckBoxIsAffiliate(AffiliationWithMultifinance == "1")
-
-'Step 11: checkbox the is premium customer'
-companyCustomerMainDataPage.clickCheckBoxIsPremium(IsPremium == "1", PremiumNote)
-
-'Step 12: checkbox the is VIP customer'
-companyCustomerMainDataPage.clickCheckBoxIsVIP(IsVIP == "1")
-
-'Step 13: checkbox the is VIP customer'
-companyCustomerMainDataPage.inputNumberOfEmployees(NumberofEmployee)
-
-'Step 14: input customer sidNo'
-companyCustomerMainDataPage.inputCustomerSidNo(SIDNo)
-
-'Step 15: input establishment date'
-companyCustomerMainDataPage.inputEstablishmentDate(EstablishmentDate)
-
-'Step 16: input industry name from lookup industry'
-companyCustomerMainDataPage.inputIndustryNameFromLookup(IndustryTypeName)
-
-'Step 16: input customer group for first found in lookup'
-companyCustomerMainDataPage.inputCustomerGroupThenSelectedFirstFound(CustomerGroup)
-
-'Step 17: save content after main data is filled'
-companyCustomerMainDataPage.saveContentAfterMainDataIsFilled()
 
 
 

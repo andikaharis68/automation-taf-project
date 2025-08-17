@@ -21,12 +21,28 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
 public class CompanyCustomerMainDataPage extends BaseHelper {
-	private TestObject checkBoxIsNewApplication 	= createTestObject("checkBoxIsNewApplication", "xpath", "//*[@id='cbNextToNAP']")
-	private TestObject cbIsAffialite 				= createTestObject("cbIsAffialite", "xpath", "//*[@id='cb_Cust_IsAffiliateWithMf']") 
+	private TestObject btnSaveCustMainData 				= createTestObject("btnSaveCustMainData", "xpath", "//*[@id='lb_Form_SaveCont_CustMainData']")
+	private TestObject selectFirstFoundCustomerGroup 		= createTestObject("selectFirstFoundCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
+	private TestObject searchCustomerGroup				    = createTestObject("searchCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
+	private TestObject optionCustomerType 					= createTestObject("optionCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
+	private TestObject txtFieldFromCustomerGroup 			= createTestObject("txtFieldFromCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+	private TestObject iconLookUpCustomerGroup 			= createTestObject("iconLookUpCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_imb']")
+	private TestObject txfCustomerSidNo 					= createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']")
+	private TestObject cbIsVIP 							= createTestObject("cbIsVIP", "xpath", "//*[@id='cbIsVip']")
+	private TestObject txfPremiumNote 						= createTestObject("txfPremiumNote", "xpath", "//*[@id='txtPremiumNote']")
+	private TestObject cbIsPremium							= createTestObject("cbIsPremium", "xpath", "//*[@id='cbIsPremium']")
+	private TestObject txfEstablishmentDate 				= createTestObject("txfEstablishmentDate", "xpath", "//*[@id='ucDPEstablishmentDate_txtDatePicker']")
+	private TestObject txfNumberOfEmployees 				= createTestObject("txfNumberOfEmployees", "xpath", "//*[@id='ucinNumOfEmp_txtInput']")
+	private TestObject selectFirstFoundIndustryType 		= createTestObject("selectFirstFoundIndustryType", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
+	private TestObject btnSearchLookUp 					= createTestObject("btnSearchLookUp", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
+	private TestObject txtFieldFromLookupIndustry 			= createTestObject("txtFieldFromLooupIndustry", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+	private TestObject iconLookUpIndustry					= createTestObject("iconLookUpIndustry", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_imb']")
+	private TestObject checkBoxIsNewApplication     = createTestObject("checkBoxIsNewApplication", "xpath", "//*[@id='cbNextToNAP']")
+	private TestObject cbIsAffialite 				= createTestObject("cbIsAffialite", "xpath", "//*[@id='cb_Cust_IsAffiliateWithMf']")
 	private TestObject btnEditCustomer 				= createTestObject("btnEditCustomer", "xpath", "//*[@id='gvCustomerCompany_imbEdit_0']")
 	private TestObject btnMainTab 					= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
 	private TestObject iframeCustForm	 			= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
-	 
+
 
 	void clickMainDataTabOrEditPage(){
 		if(WebUI.verifyElementPresent(btnEditCustomer, 10, FailureHandling.OPTIONAL)) {
@@ -36,7 +52,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 			WebUI.click(btnMainTab)
 		}
 	}
-	
+
 	void switchToIframeCustForm() {
 		WebUI.switchToFrame(iframeCustForm, 2, FailureHandling.STOP_ON_FAILURE)
 	}
@@ -50,45 +66,37 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 
 	void inputIndustryNameFromLookup(String industryType) {
 		//		click icon search
-		def iconLookUpIndustry = createTestObject("iconLookUpIndustry", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_imb']")
 		WebUI.delay(0.5)
 		WebUI.click(iconLookUpIndustry)
 
 		//		set industry type from parameter
-		def txtFieldFromLookupIndustry = createTestObject("txtFieldFromLooupIndustry", "xpath", " //*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
 		WebUI.delay(0.5)
 		WebUI.setText(txtFieldFromLookupIndustry, industryType)
 
 		// click search after text filled
-		def btnSearchLookUp = createTestObject("btnSearchLookUp", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
 		WebUI.delay(0.5)
 		WebUI.click(btnSearchLookUp)
-		
+
 		//click select in first found
-		def selectFirstFoundIndustryType = createTestObject("selectFirstFoundIndustryType", "xpath", "//*[@id='ucLookupIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
 		WebUI.delay(0.5)
 		WebUI.click(selectFirstFoundIndustryType)
 	}
 
 	void inputNumberOfEmployees(String numberOfEmployees) {
-		def txfNumberOfEmployees = createTestObject("txfNumberOfEmployees", "xpath", "//*[@id='ucinNumOfEmp_txtInput']")
 		WebUI.delay(0.5)
 		WebUI.setText(txfNumberOfEmployees, numberOfEmployees)
 	}
 
 	void inputEstablishmentDate(String establishmentDate) {
-		def txfEstablishmentDate = createTestObject("txfEstablishmentDate", "xpath", "//*[@id='ucDPEstablishmentDate_txtDatePicker']")
 		WebUI.delay(0.5)
 		WebUI.setText(txfEstablishmentDate, establishmentDate)
 	}
 
 	void clickCheckBoxIsPremium(boolean isPremium, String premiunNote) {
 		if(isPremium) {
-			def cbIsPremium = createTestObject("cbIsPremium", "xpath", "//*[@id='cbIsPremium']")
 			WebUI.delay(0.5)
 			WebUI.check(cbIsPremium)
 
-			def txfPremiumNote = createTestObject("txfPremiumNote", "xpath", "//*[@id='txtPremiumNote']")
 			WebUI.delay(0.5)
 			WebUI.setText(txfPremiumNote, premiunNote)
 		}
@@ -103,47 +111,39 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 
 	void clickCheckBoxIsVIP(boolean isVIP) {
 		if(isVIP) {
-			def cbIsVIP = createTestObject("cbIsVIP", "xpath", "//*[@id='cbIsVip']")
 			WebUI.delay(0.5)
 			WebUI.check(cbIsVIP)
 		}
 	}
 
 	void inputCustomerSidNo(String sidNo) {
-		def txfCustomerSidNo = createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']")
 		WebUI.delay(0.5)
 		WebUI.setText(txfCustomerSidNo, sidNo)
 	}
 
 	void inputCustomerGroupThenSelectedFirstFound(String customerGroup) {
 		//		click icon search
-		def iconLookUpCustomerGroup = createTestObject("iconLookUpCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_imb']")
 		WebUI.delay(0.5)
 		WebUI.click(iconLookUpCustomerGroup)
 
 		// set text from test data
-		def txtFieldFromCustomerGroup = createTestObject("txtFieldFromCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 		WebUI.delay(0.5)
 		WebUI.setText(txtFieldFromCustomerGroup, customerGroup)
-		
-		//need hardcode the customer type for Company
-		def optionCustomerType = createTestObject("optionCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
+
+		//need hard code the customer type for Company
 		WebUI.selectOptionByLabel(optionCustomerType, "Company", false)
 
 		// click search customer group
-		def searchCustomerGroup = createTestObject("searchCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
 		WebUI.delay(0.5)
 		WebUI.click(searchCustomerGroup)
 
 		// click select in first found
-		def selectFirstFoundCustomerGroup = createTestObject("selectFirstFoundCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
 		WebUI.delay(0.5)
 		WebUI.click(selectFirstFoundCustomerGroup)
 	}
 
 	void saveContentAfterMainDataIsFilled() {
 		WebUI.delay(0.5)
-		def btnSaveCustMainData = createTestObject("btnSaveCustMainData", "xpath", "//*[@id='lb_Form_SaveCont_CustMainData']")
 		WebUI.click(btnSaveCustMainData)
 	}
 }
