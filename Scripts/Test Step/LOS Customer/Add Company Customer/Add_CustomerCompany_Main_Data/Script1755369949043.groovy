@@ -16,13 +16,15 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.customers.AddCompanyCustomerPage
+import com.taf.customers.CompanyCustomerMainDataPage
 import com.taf.customers.CustomerInformationPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 def addCompanyCustomerPage = new AddCompanyCustomerPage()
-def customerInfoPage = new CustomerInformationPage();
+def customerInfoPage = new CustomerInformationPage()
+def companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
 
 KeywordUtil.logInfo("scenarioData : ${CustomerModel}, ${CompanyName}, ${CompanyType}")
 
@@ -47,6 +49,34 @@ addCompanyCustomerPage.inputCustomerNitku(NITKU)
 
 'Step 7: click next'
 addCompanyCustomerPage.clickNextButton()
+
+'Step 8: click main data tab'
+companyCustomerMainDataPage.clickMainDataTabOrEditPage()
+
+companyCustomerMainDataPage.clickIsNewApplication(NextToNewApplication == "1")
+
+companyCustomerMainDataPage.switchToIframeCustForm()
+
+companyCustomerMainDataPage.clickCheckBoxIsAffiliate(AffiliationWithMultifinance == "1")
+
+companyCustomerMainDataPage.clickCheckBoxIsPremium(IsPremium == "1", PremiumNote)
+
+companyCustomerMainDataPage.clickCheckBoxIsVIP(IsVIP == "1")
+
+companyCustomerMainDataPage.inputNumberOfEmployees(NumberofEmployee)
+
+companyCustomerMainDataPage.inputCustomerSidNo(SIDNo)
+
+companyCustomerMainDataPage.inputCustomerGroupThenSelectedFirstFound(CustomerGroup)
+
+companyCustomerMainDataPage.inputEstablishmentDate(EstablishmentDate)
+
+companyCustomerMainDataPage.inputIndustryNameFromLookup(IndustryTypeName)
+
+
+
+
+
 
 
 

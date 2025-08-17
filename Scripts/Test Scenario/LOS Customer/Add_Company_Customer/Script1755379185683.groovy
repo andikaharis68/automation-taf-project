@@ -23,6 +23,8 @@ String scenarioId = "1"
 Map scenarioData = [:]
 scenarioData += BaseHelper.getTestDataByScenario("Credentials", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 scenarioData += BaseHelper.getTestDataByScenario("CustMainData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+scenarioData += BaseHelper.getTestDataByScenario("MainData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/NavigateTo_CustomerMain_Data'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
