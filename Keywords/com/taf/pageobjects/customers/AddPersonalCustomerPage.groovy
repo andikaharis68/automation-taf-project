@@ -1,4 +1,4 @@
-package com.taf.customers
+package com.taf.pageobjects.customers
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -40,6 +40,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "//*[@id='lb_Toolbar_Cancel']")
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	private TestObject lblNewCustomer		= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
+	private TestObject btnEdit				= createTestObject("btnEdit", "xpath", "//*[@id='gvCustomerPersonal_imbEdit_0']")
 
 
 
@@ -62,8 +63,6 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void selectIdType(String idType) {
 		TestObject drpSelected = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$idType']")
-//		WebUI.click(drpIDType)
-//		WebUI.click(drpSelected)
 		WebUI.selectOptionByLabel(drpIDType, idType, false)
 	}
 
@@ -82,7 +81,6 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void hideDatePicker(TestObject to) {
 		WebUI.sendKeys(to, '\uE004') // Unicode dari Keys.TAB
-	
 	}
 	private void inputPOB(String pob) {
 		WebUI.setText(txfPOB, pob)
@@ -114,9 +112,13 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	private void clickNextButton() {
 		WebUI.click(btnNext)
 	}
-	private clickNewCustomer() {
-		if(WebUI.verifyElementPresent(lblNewCustomer, 5)) {
+	private void clickBtnEditOrNewApp() {
+		if(WebUI.verifyElementPresent(lblNewCustomer, 2)) {
 			WebUI.click(lblNewCustomer)
+		} else if(WebUI.verifyElementPresent(btnEdit, 2)) {
+			WebUI.click(lblNewCustomer) 
+		} else {
+			KeywordUtil.logInfo("skipped")
 		}
-	}
+	} 
 }

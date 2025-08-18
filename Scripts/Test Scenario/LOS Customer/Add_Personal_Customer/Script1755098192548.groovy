@@ -30,7 +30,6 @@ dataRow += BaseHelper.getTestDataByScenario("Credentials", GlobalVariable.TEST_D
 dataRow += BaseHelper.getTestDataByScenario("CustMainData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("MainData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
 
-
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/NavigateTo_CustomerMain_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_Customer_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
@@ -49,7 +48,6 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal 
 dataRow += BaseHelper.getTestDataByScenario("EmergencyContact", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("FinancialData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("OtherAttribute", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
-
 
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_EmergencyContact'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

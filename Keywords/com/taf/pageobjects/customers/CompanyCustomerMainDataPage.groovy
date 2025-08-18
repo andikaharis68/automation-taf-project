@@ -1,4 +1,4 @@
-package com.taf.customers
+package com.taf.pageobjects.customers
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -44,7 +44,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
 
 
-	void clickMainDataTabOrEditPage(){
+	private void clickMainDataTabOrEditPage(){
 		if(WebUI.verifyElementPresent(btnEditCustomer, 10, FailureHandling.OPTIONAL)) {
 			WebUI.click(btnEditCustomer)
 			WebUI.click(btnMainTab)
@@ -53,18 +53,18 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		}
 	}
 
-	void switchToIframeCustForm() {
+	private void switchToIframeCustForm() {
 		WebUI.switchToFrame(iframeCustForm, 2, FailureHandling.STOP_ON_FAILURE)
 	}
 
-	void clickIsNewApplication(boolean isNewApplication) {
+	private void clickIsNewApplication(boolean isNewApplication) {
 		if(isNewApplication) {
 			WebUI.delay(0.5)
 			WebUI.click(checkBoxIsNewApplication)
 		}
 	}
 
-	void inputIndustryNameFromLookup(String industryType) {
+	private void inputIndustryNameFromLookup(String industryType) {
 		//		click icon search
 		WebUI.delay(0.5)
 		WebUI.click(iconLookUpIndustry)
@@ -82,17 +82,17 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		WebUI.click(selectFirstFoundIndustryType)
 	}
 
-	void inputNumberOfEmployees(String numberOfEmployees) {
+	private void inputNumberOfEmployees(String numberOfEmployees) {
 		WebUI.delay(0.5)
 		WebUI.setText(txfNumberOfEmployees, numberOfEmployees)
 	}
 
-	void inputEstablishmentDate(String establishmentDate) {
+	private void inputEstablishmentDate(String establishmentDate) {
 		WebUI.delay(0.5)
 		WebUI.setText(txfEstablishmentDate, establishmentDate)
 	}
 
-	void clickCheckBoxIsPremium(boolean isPremium, String premiunNote) {
+	private void clickCheckBoxIsPremium(boolean isPremium, String premiunNote) {
 		if(isPremium) {
 			WebUI.delay(0.5)
 			WebUI.check(cbIsPremium)
@@ -102,14 +102,14 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		}
 	}
 
-	void clickCheckBoxIsAffiliate(boolean isAffiliate) {
+	private void clickCheckBoxIsAffiliate(boolean isAffiliate) {
 		if(isAffiliate) {
 			WebUI.delay(0.5)
 			WebUI.check(cbIsAffialite)
 		}
 	}
 
-	void clickCheckBoxIsVIP(boolean isVIP) {
+	private void clickCheckBoxIsVIP(boolean isVIP) {
 		if(isVIP) {
 			WebUI.delay(0.5)
 			WebUI.check(cbIsVIP)
@@ -121,7 +121,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		WebUI.setText(txfCustomerSidNo, sidNo)
 	}
 
-	void inputCustomerGroupThenSelectedFirstFound(String customerGroup) {
+	private void inputCustomerGroupThenSelectedFirstFound(String customerGroup) {
 		//		click icon search
 		WebUI.delay(0.5)
 		WebUI.click(iconLookUpCustomerGroup)
@@ -142,7 +142,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 		WebUI.click(selectFirstFoundCustomerGroup)
 	}
 
-	void saveContentAfterMainDataIsFilled() {
+	private void saveContentAfterMainDataIsFilled() {
 		WebUI.delay(0.5)
 		WebUI.click(btnSaveCustMainData)
 	}

@@ -101,13 +101,11 @@ mainData.inputEmail2(Email2)
 'Step 25: Click Save and Continue'
 mainData.clickSaveAndContinue()
 
-//'Step 26: Switch to default content'
+'Step 26: Switch to default content'
 //mainData.switchToDefaultContent()
 
 'Step 27: Verify Pop Up Success'
-//mainData.verifyNotifSuccess()
-
-//Mobile.delay(15)
+mainData.verifyNotifSuccess()
 
 'Step 29: Switch to iframe address'
 //mainData.switchToIframeMainData()

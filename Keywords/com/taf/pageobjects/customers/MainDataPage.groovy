@@ -1,4 +1,4 @@
-package com.taf.customers
+package com.taf.pageobjects.customers
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -82,7 +82,6 @@ public class MainDataPage extends BaseHelper {
 	private TestObject btnOvlyResetCountry				= createTestObject("btnOvlyResetCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_ucS_lbReset']")
 	private TestObject btnSelectCountry					= createTestObject("btnSelectCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_gvL_hpSelect_0']")
 	private TestObject iframeMainData					= createTestObject("iframeMainData", "xpath", "//*[@id='custForm']")
-	private TestObject lblNotif							= createTestObject("lblNotif", "xpath", "//*[@id='messageContent']")
 
 	private void verifyLandingInMainData() {
 		verifyLanding(drpSalutation, "Main Data")
@@ -262,6 +261,7 @@ public class MainDataPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void verifyNotifSuccess() {
+		TestObject lblNotif = createTestObject("lblNotif", "xpath", "//*[text()='Save Success']")
 		BaseHelper.verifyPopUpSuccess(lblNotif, "Save Success")
 	}
 }

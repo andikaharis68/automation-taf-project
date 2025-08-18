@@ -1,4 +1,4 @@
-package com.taf.customers
+package com.taf.pageobjects.customers
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -25,22 +25,14 @@ import internal.GlobalVariable
 public class AddCompanyCustomerPage extends BaseHelper {
 
 	private TestObject txfCustomerName				= createTestObject("txfCustomerName", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_CustName']")
-
 	private TestObject drpIDCompanyType				= createTestObject("drpIDCompanyType", "xpath", "//*[@id='ucCustMainInfo_ucRefMrCoyType_ddlReference']")
-
 	private TestObject txtfCustomerNPWP 			= createTestObject("txtfCustomerNPWP", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_Npwp']")
-
 	private TestObject txtfCustomerNitku 			= createTestObject("txtfCustomerNitku", "xpath", "//*[@id='ucCustMainInfo_txt_CustCoy_Nitku']")
-
 	private TestObject btnNext						= createTestObject("btnNext", "xpath", "//*[@id='lb_Toolbar_Next']")
 
 	private void selectCustomerModel(String customerModel) {
 		KeywordUtil.logInfo("CustomerModel: ${customerModel}")
-		def radCustomerModel = createTestObject(
-				"radCustomerModel",
-				"xpath",
-				"//label[normalize-space(text())='${customerModel}']"
-				)
+		TestObject radCustomerModel = createTestObject("radCustomerModel","xpath","//label[normalize-space(text())='${customerModel}']")
 		if(radCustomerModel) {
 			WebUI.click(radCustomerModel)
 		} else {
