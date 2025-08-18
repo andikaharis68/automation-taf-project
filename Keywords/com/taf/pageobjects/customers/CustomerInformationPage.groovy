@@ -14,8 +14,10 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
@@ -33,12 +35,16 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private TestObject btnAddPersonalCustomer	= createTestObject("btnAddPersonalCustomer", "xpath", "//a[@id='lb_Toolbar_AddPersonal']")
 	private TestObject btnAddCompanyCustomer	= createTestObject("btnAddCompanyCustomer", "xpath", "//a[@id='lb_Toolbar_AddCompany']")
+	
+	private TestObject btnPenEditCustomer		= createTestObject("btnPenEditCustomer", "id", "gvCustomer_imbEdit_0")
+	private TestObject lblCustomerNo			= createTestObject("lblCustomerNo", "id", "gvCustomer_lbl_Cust_CustNo_0")
 
 	private TestObject iframeMainpage 			= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
 
 	private void verifyLandingInCustInfoPage() {
 		verifyLanding(txfCustomerNo, "Customer Information")
+		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerName(String name) {
@@ -78,5 +84,19 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private void switchToDefaultContent() {
 		WebUI.switchToDefaultContent()
+	}
+	
+	private void clickEdit() {
+		WebUI.click(btnPenEditCustomer)
+	}
+	
+	private void verifyTableCustomer(String expectedNo) {
+		def actual = WebUI.getText(lblCustomerNo)
+		boolean compare = actual.equals(expectedNo)
+		if(compare) {
+			WebUI.takeScreenshot()
+		}else {
+			KeywordUtil.markFailedAndStop("Customer Number Different")
+		}
 	}
 }

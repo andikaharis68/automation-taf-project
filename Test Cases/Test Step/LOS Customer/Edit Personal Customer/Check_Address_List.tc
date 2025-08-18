@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Check_Address_List</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>0e8d4aa5-e874-41a5-95e0-c01488e63ffc</testCaseGuid>
+</TestCaseEntity>

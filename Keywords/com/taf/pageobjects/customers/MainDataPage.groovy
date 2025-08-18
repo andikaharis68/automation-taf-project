@@ -90,7 +90,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		WebUI.selectOptionByLabel(drpSalutation, salutation, false)
+		safetySelectEdit(drpSalutation, salutation)
 		WebUI.delay(2)
 	}
 
@@ -101,7 +101,7 @@ public class MainDataPage extends BaseHelper {
 		}
 	}
 	private void inputFullName(String name) {
-		if(txfFullName) {
+		if(name) {
 			WebUI.setText(txfFullName, name)
 			WebUI.delay(2)
 		}
@@ -109,8 +109,9 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectMaritalStatus(String status) {
 		WebUI.scrollToElement(drpMaritalStatus, 2)
-		WebUI.selectOptionByLabel(drpMaritalStatus, status, false)
-		WebUI.delay(2)
+		safetySelectEdit(drpMaritalStatus, status)
+//		WebUI.selectOptionByLabel(drpMaritalStatus, status, false)
+//		WebUI.delay(2)
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
@@ -126,7 +127,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkPremiumStatus(String isPremium) {
-		if(isPremium?.trim() == 'Y') {
+		if(isPremium?.trim() == 'Y' && isPremium) {
 			WebUI.check(chxIsPremium)
 			WebUI.delay(2)
 		}
@@ -134,8 +135,9 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectNationality(String nationality) {
 		WebUI.scrollToElement(drpNationality, 2)
-		WebUI.selectOptionByLabel(drpNationality, nationality, false)
-		WebUI.delay(2)
+		safetySelectEdit(drpNationality, nationality)
+//		WebUI.selectOptionByLabel(drpNationality, nationality, false)
+//		WebUI.delay(2)
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
@@ -174,14 +176,16 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectEducation(String education) {
 		WebUI.scrollToElement(drpEducation, 2)
-		WebUI.selectOptionByLabel(drpEducation, education, false)
-		WebUI.delay(2)
+		safetySelectEdit(drpEducation, education)
+//		WebUI.selectOptionByLabel(drpEducation, education, false)
+//		WebUI.delay(2)
 	}
 
 	private void selectReligion(String religion) {
 		WebUI.scrollToElement(drpReligion, 2)
-		WebUI.selectOptionByLabel(drpReligion, religion, false)
-		WebUI.delay(2)
+		safetySelectEdit(drpReligion, religion)
+//		WebUI.selectOptionByLabel(drpReligion, religion, false)
+//		WebUI.delay(2)
 	}
 
 
@@ -197,7 +201,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkIsVIP(String isVIP) {
-		if(isVIP?.trim() == 'Y') {
+		if(isVIP?.trim() == 'Y' && isVIP) {
 			WebUI.click(chxIsVIP)
 			WebUI.delay(2)
 		}
@@ -218,13 +222,13 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkAffiliationWithMultifinance(String affiliation) {
-		if(affiliation?.trim() == 'Y') {
+		if(affiliation?.trim() == 'Y' && affiliation) {
 			WebUI.click(chxAffiliationwithMultifinance)
 			WebUI.delay(2)
 		}
 	}
 	private void checkRIP(String rip) {
-		if(rip?.trim() == 'Y') {
+		if(rip?.trim() == 'Y' && rip) {
 			WebUI.click(chxRIP)
 			WebUI.delay(2)
 		}
@@ -258,11 +262,12 @@ public class MainDataPage extends BaseHelper {
 	}
 	private void clickSaveAndContinue() {
 		WebUI.scrollToElement(btnSaveContinue, 5)
+		WebUI.takeScreenshot()
 		WebUI.click(btnSaveContinue)
 		WebUI.delay(2)
 	}
 	private void switchToIframeCustForm() {
-		WebUI.delay(2)
+		WebUI.delay(3)
 		WebUI.verifyElementPresent(iframeCustForm, 5)
 		WebUI.switchToFrame(iframeCustForm, 1)
 	}
@@ -287,8 +292,8 @@ public class MainDataPage extends BaseHelper {
 			KeywordUtil.logInfo("skipped")
 		}
 	}
-	
-	private void switchToIframeMainPage() { 
+
+	private void switchToIframeMainPage() {
 		switchToDefaultContent()
 		TestObject iframeMainPage = createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 		WebUI.verifyElementPresent(iframeMainPage, 5)

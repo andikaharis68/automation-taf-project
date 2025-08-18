@@ -38,6 +38,7 @@ public class LoginPage extends BaseHelper {
 		verifyLanding(btnLogin, "Login")
 		WebUI.setText(txfUsername, username)
 		WebUI.setText(txfPassword, password)
+		WebUI.takeFullPageScreenshot()
 		WebUI.click(btnLogin)
 	}
 

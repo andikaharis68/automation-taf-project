@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Edit_JobAddress</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>87106c1d-725d-4bd6-8d7e-305baf5b50a2</testCaseGuid>
+</TestCaseEntity>

@@ -67,6 +67,7 @@ public class AddressPage extends BaseHelper {
 	private void verifyLandingInAddressSection() {
 		WebUI.delay(2)
 		verifyLanding(btnAdd, "Address Section")
+		WebUI.takeScreenshot()
 	}
 
 	private void selectAddressType(String addressType) {
@@ -74,8 +75,9 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputAddress(String address) {
-		WebUI.setText(txfAddress, address)
-		WebUI.delay(3)
+		safetyInputEdit(txfAddress, address)
+//		WebUI.setText(txfAddress, address)
+//		WebUI.delay(3)			
 	}
 
 	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
@@ -89,34 +91,38 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRT(String rt) {
-		WebUI.setText(txfRT, rt)
-		WebUI.delay(3)
+		safetyInputEdit(txfRT, rt, 1.5)
+//		WebUI.setText(txfRT, rt)
+//		WebUI.delay(3)
 	}
 
 	private void inputRW(String rw) {
-		WebUI.setText(txfRW, rw)
-		WebUI.delay(3)
+		safetyInputEdit(txfRW, rw, 1.5)
+//		WebUI.setText(txfRW, rw)
+//		WebUI.delay(3)
 	}
 	private void searchAddress(String city) {
-		WebUI.delay(2)
-		KeywordUtil.logInfo("1")
-		WebUI.click(btnSearchZIPCode)
-		KeywordUtil.logInfo("2")
-		WebUI.delay(5)
-		WebUI.sendKeys(txfOvlyZIPCode, city)
-		KeywordUtil.logInfo("3")
-		WebUI.delay(3)
-		WebUI.click(btnOvlySearch)
-		KeywordUtil.logInfo("4")
-		WebUI.delay(10)
-		WebUI.click(btnOvlySelect) //select first address
-		KeywordUtil.logInfo("5")
-		WebUI.delay(10)
-		handleAlertIfPresent()
+		if(city) {
+			WebUI.delay(2)
+			KeywordUtil.logInfo("1")
+			WebUI.click(btnSearchZIPCode)
+			KeywordUtil.logInfo("2")
+			WebUI.delay(5)
+			WebUI.sendKeys(txfOvlyZIPCode, city)
+			KeywordUtil.logInfo("3")
+			WebUI.delay(3)
+			WebUI.click(btnOvlySearch)
+			KeywordUtil.logInfo("4")
+			WebUI.delay(10)
+			WebUI.click(btnOvlySelect) //select first address
+			KeywordUtil.logInfo("5")
+			WebUI.delay(10)
+			handleAlertIfPresent()
+		}
 	}
 
 	private void checkCustomerHaveFixedline(String customerHaveFixedline) {
-		if(customerHaveFixedline?.trim() == 'Y') {
+		if(customerHaveFixedline?.trim() == 'Y' && customerHaveFixedline) {
 			WebUI.check(chxCustomerHaveFixedLine)
 			WebUI.delay(2)
 		}
@@ -145,6 +151,7 @@ public class AddressPage extends BaseHelper {
 	}
 	private void clickSaveAddress() {
 		WebUI.scrollToElement(btnSave, 2)
+		WebUI.takeScreenshot()
 		WebUI.click(btnSave)
 	}
 	private void clickCancel() {
@@ -171,7 +178,8 @@ public class AddressPage extends BaseHelper {
 		}
 	}
 	private void inputCompanyName(String companyName) {
-		WebUI.setText(txfCompanyName, companyName)
+		safetyInputEdit(txfCompanyName, companyName)
+//		WebUI.setText(txfCompanyName, companyName)
 	}
 	private void switchToIframeAddress() {
 		WebUI.delay(10)
@@ -226,5 +234,17 @@ public class AddressPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("Alert not found")
 		}
+	}
+	
+	private boolean checkAddressList(String addressType) {
+		TestObject addressList = createTestObject("addressList", "xpath", "//span[text() = '$addressType']")
+		return WebUI.verifyElementPresent(addressList, 5, FailureHandling.OPTIONAL)
+	}
+	
+	private void clickEditAddress(String addressType) {
+		TestObject btnEdit = createTestObject("btnEdit", "xpath", "//span[text() = '$addressType']/following::td[6]")
+		WebUI.click(btnEdit)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
 	}
 }

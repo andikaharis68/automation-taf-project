@@ -368,11 +368,30 @@ class BaseHelper {
 		WebUI.waitForElementPresent(to, 10)
 		WebUI.click(to)
 		WebUI.delay(delay)
-		WebUI.waitForElementNotVisible(loadingBar, 30)
+		WebUI.waitForElementNotVisible(loadingBar, 10)
 	}
 	
 	static void safetySelect(TestObject to, String text, double delay = 1) {
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
+	}
+	
+	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
+		if(text) {
+			WebUI.delay(delay)
+			WebUI.clearText(to)
+			WebUI.delay(delay)
+			for (char c : text.toCharArray()) {
+				WebUI.sendKeys(to, String.valueOf(c))
+				WebUI.delay(delay)
+			}
+		}
+	}
+	
+	static void safetySelectEdit(TestObject to, String text, double delay = 1) {
+		if(text) {
+			WebUI.selectOptionByLabel(to, text, false)
+			WebUI.delay(delay)
+		}
 	}
 }
