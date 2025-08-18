@@ -90,7 +90,8 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		safetySelect(drpSalutation, salutation)
+		safetySelectEdit(drpSalutation, salutation)
+		WebUI.delay(2)
 	}
 
 	private void inputPrefixName(String name) {
@@ -106,7 +107,7 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectMaritalStatus(String status) {
 		WebUI.scrollToElement(drpMaritalStatus, 2)
-		safetySelect(drpMaritalStatus, status)
+		safetySelectEdit(drpMaritalStatus, status)
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
@@ -122,7 +123,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkPremiumStatus(String isPremium) {
-		if(isPremium?.trim() == 'Y') {
+		if(isPremium?.trim() == 'Y' && isPremium) {
 			WebUI.check(chxIsPremium)
 			WebUI.delay(2)
 		}
@@ -130,7 +131,7 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectNationality(String nationality) {
 		WebUI.scrollToElement(drpNationality, 2)
-		safetySelect(drpNationality, nationality)
+		safetySelectEdit(drpNationality, nationality)
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
@@ -169,23 +170,23 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectEducation(String education) {
 		WebUI.scrollToElement(drpEducation, 2)
-		safetySelect(drpEducation, education)
+		safetySelectEdit(drpEducation, education)
 	}
 
 	private void selectReligion(String religion) {
 		WebUI.scrollToElement(drpReligion, 2)
-		safetySelect(drpReligion, religion)
+		safetySelectEdit(drpReligion, religion)
 	}
 
 
 	private void selectCountry(String country) {
 		if(country) {
 			safetyClick(btnSearchCountry)
-			
+
 			safetyInput(txfCountryName, country)
-			
+
 			safetyClick(btnOvlySearchCountry)
-			
+
 			safetyClick(btnSelectCountry)
 		}
 	}
@@ -251,6 +252,7 @@ public class MainDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void switchToIframeCustForm() {
+		WebUI.delay(3)
 		WebUI.verifyElementPresent(iframeCustForm, 5)
 		WebUI.switchToFrame(iframeCustForm, 1)
 	}
@@ -283,5 +285,3 @@ public class MainDataPage extends BaseHelper {
 		WebUI.switchToFrame(iframeMainPage, 1)
 	}
 }
-
-
