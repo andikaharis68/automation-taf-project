@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>Input_Data_Entry</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>93de442d-a3e7-4bb0-a770-3d709d145ae1</testCaseGuid>
+   <testCaseGuid>3c6ed46c-b575-4414-9f6d-966fa5b1a7e1</testCaseGuid>
 </TestCaseEntity>

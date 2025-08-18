@@ -14,6 +14,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.CreditSimulationToNewApplication
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
@@ -28,17 +30,26 @@ credsim.inputAddressInfo(JobAddress, ResidenceAddress)
 'Step 3 : input other info'
 credsim.inputOtherInfo(Notes)
 
+'Step 3 : click button save'
+credsim.clickSave()
+
 'Step 4 : upload document customer'
-credsim.uploadDocumentCustomer()
+credsim.waitSectionUploadFile(30)
+
+'Step 4 : upload document customer'
+credsim.uploadDocumentCustomer(RemarkCustomer)
 
 'Step 5 : upload document spouse'
-credsim.uploadDocumentSpouse()
+credsim.uploadDocumentSpouse(RemarkSpouse)
 
 'Step 6 : upload document stnk'
-credsim.uploadDocumentSTNK()
+credsim.uploadDocumentSTNK(RemarkStnk)
 
-'Step 7 : click button save'
-credsim.clickSave()
+'Step 7 : switch iframe'
+credsim.switchToMainPage()
 
 'Step 8 : input button submit'
 credsim.clickSubmit()
+
+'Step 9 : switch iframe to default'
+credsim.switchToDefaultContent()
