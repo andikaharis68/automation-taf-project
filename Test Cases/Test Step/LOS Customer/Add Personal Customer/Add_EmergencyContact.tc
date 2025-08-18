@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_EmergencyContact</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d92d81f0-dc89-4318-be06-2fdcd5a1d796</testCaseGuid>
+</TestCaseEntity>

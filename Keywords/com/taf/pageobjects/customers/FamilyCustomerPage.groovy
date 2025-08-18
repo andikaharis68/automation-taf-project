@@ -1,0 +1,146 @@
+package com.taf.pageobjects.customers
+
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import org.openqa.selenium.Keys
+
+import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.checkpoint.Checkpoint
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.model.FailureHandling
+import com.kms.katalon.core.testcase.TestCase
+import com.kms.katalon.core.testdata.TestData
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.helpers.BaseHelper
+
+import internal.GlobalVariable
+
+public class FamilyCustomerPage extends BaseHelper {
+	private TestObject btnAdd				= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Family']")
+	private TestObject btnSaveAndContinue	= createTestObject("btnSaveAndContinue", "xpath", "//*[@id='lb_Form_SaveCont_Family']")
+
+	private TestObject lblSection 			= createTestObject("lblSection", "xpath", "//*[@id='dFamData']/table/tbody/tr[5]/td[1]")
+	private TestObject radCustomerModel		= createTestObject("radCustomerModel", "xpath", "//*[@id='rblCustModel_0']")
+	private TestObject txfFamilyName		= createTestObject("txfFamilyName", "xpath", "//input[@id='txtFamilyName']")
+	private TestObject drpIDType			= createTestObject("drpIDType", "xpath", "//*[@id='ucMrIdType_ddlReference']")
+	private TestObject txfIDNumber			= createTestObject("txfIDNumber", "xpath", "//*[@id='txtFamIdNo']")
+	private TestObject txfIDExpiredDate		= createTestObject("txfIDExpiredDate", "xpath", "//*[@id='ucIdExpiredDt_txtDatePicker']")
+	private TestObject radGender			= createTestObject("radGender", "xpath", "//*[@id='rblCustGender_0']")
+	private TestObject txfPOB				= createTestObject("txfPOB", "xpath", "//input[@id='txtBirthPlace']")
+	private TestObject txfDOB				= createTestObject("txfDOB", "xpath", "//*[@id='ucBirthDate_txtDatePicker']")
+	private TestObject txfNPWP				= createTestObject("txfNPWP", "xpath", "//*[@id='txtNpwp']")
+	private TestObject txfMotherMaidenName	= createTestObject("txfMotherMaidenName", "xpath", "//*[@id='txtMotherMaidenName']")
+	private TestObject drpCustRelationship	= createTestObject("drpCustRelationship", "xpath", "//*[@id='ucMrCustRelationship_ddlReference']")
+
+	private TestObject btnNext				= createTestObject("btnNext", "xpath", "//*[@id='lb_Form_Next_Family']")
+	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "//*[@id='lb_Toolbar_Cancel']")
+	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+	private TestObject lblNewCustomer		= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
+
+	private TestObject btnSelectFamily		= createTestObject("btnSelectFamily", "xpath", "//*[@id='lb_Form_Select_Fam']")
+	private TestObject radSelectFamily		= createTestObject("radSelectFamily", "xpath", "//*[@id=\"rbSelect'2655245'\"]")
+
+
+	private void verifyLandingFamilyPage() {
+		verifyLanding(btnAdd, "Family Page")
+	}
+
+	private void clickAdd() {
+		WebUI.click(btnAdd)
+	}
+
+	private void inputFamilyName(String name) {
+		WebUI.setText(txfFamilyName, name)
+	}
+
+
+	private void selectCustomerModel(String model) {
+		radCustomerModel = createTestObject("radCustomerModel", "xpath", "//*[starts-with(@id, 'rblCustModel_') and normalize-space(text())='$model']")
+		if(model != "Professional") {
+			WebUI.click(radCustomerModel)
+		}
+	}
+
+
+	private void selectIdType(String idType) {
+		TestObject drpSelected = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$idType']")
+		WebUI.click(drpIDType)
+		WebUI.click(drpSelected)
+	}
+
+	private void inputIdNumber(String idNumber) {
+		WebUI.setText(txfIDNumber, idNumber)
+	}
+
+	private void inputIdExpiredDate(String idExpiredDate) {
+		WebUI.delay(10)
+		WebUI.click(txfIDExpiredDate)
+		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
+		WebUI.delay(10)
+		hideDatePicker(txfIDExpiredDate)
+	}
+	private void selectGender(String gender) {
+		radGender = createTestObject("radGender", "xpath", "//*[normalize-space(text())='$gender']")
+		WebUI.click(radGender)
+	}
+
+	private void hideDatePicker(TestObject to) {
+		WebUI.sendKeys(to, '\uE004') // Unicode dari Keys.TAB
+	}
+
+	private void inputPOB(String pob) {
+		WebUI.setText(txfPOB, pob)
+	}
+
+	private void inputDOB(String dob) {
+		WebUI.sendKeys(txfDOB, dob)
+		hideDatePicker(txfDOB)
+	}
+
+	private void inputNPWP(String npwp) {
+		if(WebUI.getText(txfNPWP) != "") {
+			WebUI.setText(txfNPWP, npwp)
+		} else {
+			KeywordUtil.logInfo("NPWP auto filled")
+		}
+	}
+
+	private void inputMotherMaidenName(String motherMaidenName) {
+		WebUI.setText(txfMotherMaidenName, motherMaidenName)
+	}
+	private void switchToIframeMain() {
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+
+	private void switchToDefaultContent() {
+		WebUI.switchToDefaultContent()
+	}
+	private void clickNextButton() {
+		WebUI.click(btnNext)
+	}
+
+	private void selectCustomerRelationship(String relationship) {
+		WebUI.click(drpCustRelationship)
+		WebUI.selectOptionByLabel(drpCustRelationship, relationship, true)
+	}
+	private void clickSaveContinue() {
+		WebUI.click(btnSaveAndContinue)
+	}
+	private void clickNext() {
+		WebUI.click(btnNext)
+	}
+	private void clickSelectFamily() {
+		Mobile.delay(5)
+		WebUI.click(radSelectFamily)
+		WebUI.click(btnSelectFamily)
+	}
+}

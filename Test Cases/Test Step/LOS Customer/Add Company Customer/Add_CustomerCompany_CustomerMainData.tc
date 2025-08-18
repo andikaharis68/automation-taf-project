@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_CustomerCompany_CustomerMainData</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>25d8b86f-42bb-48ad-9607-d9936f162cf4</testCaseGuid>
+</TestCaseEntity>
