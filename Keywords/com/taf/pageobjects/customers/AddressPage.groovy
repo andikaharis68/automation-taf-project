@@ -31,7 +31,7 @@ public class AddressPage extends BaseHelper {
 	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[@id='ucAddr_txtRT']")
 	private TestObject txfRW					= createTestObject("txfRW", "xpath", "//*[@id='ucAddr_txtRW']")
 	private TestObject txfZIPCode				= createTestObject("txfZIPCode", "xpath", "//*[@id='ucAddr_ucLookupZipCode_uclZipCode_txt']")
-	private TestObject btnSearchZIPCode			= createTestObject("btnSearchZIPCode", "xpath", "//*[@id='ucAddr_ucLookupZipCode_uclZipCode_imb']")
+	private TestObject btnSearchZIPCode			= createTestObject("btnSearchZIPCode", "xpath", "//*[@id='ucAddr_ucLookupZipCode_uclZipCode_imb']") 
 	private TestObject txfSubdistrict			= createTestObject("txfSubdistrict", "xpath", "//*[@id='ucAddr_txtKelurahan']")
 	private TestObject txfDistrict				= createTestObject("txfDistrict", "xpath", "//*[@id='ucAddr_txtKecamatan']")
 	private TestObject txfCity					= createTestObject("txfCity", "xpath", "//*[@id='ucAddr_txtCity']")
@@ -65,13 +65,12 @@ public class AddressPage extends BaseHelper {
 
 
 	private void verifyLandingInAddressSection() {
+		WebUI.delay(2)
 		verifyLanding(btnAdd, "Address Section")
 	}
 
 	private void selectAddressType(String addressType) {
-		TestObject drpAddressSelected  = createTestObject("drpAddressSelected", "xpath", "//*[normalize-space(text())='$addressType']")
-		WebUI.click(drpAddressType)
-		WebUI.click(drpAddressSelected)
+		WebUI.selectOptionByLabel(drpAddressType, addressType, false)
 	}
 
 	private void inputAddress(String address) {
@@ -81,13 +80,10 @@ public class AddressPage extends BaseHelper {
 
 	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
 		def testDataMultiple = BaseHelper.getTestDataMultipleByScenario(sheetName, filePath, scenarioId)
-
 		def testData = testDataMultiple?.find { it.AddressTypeName == addressType }
-
 		if (!testData) {
 			KeywordUtil.markFailed("AddressType '${addressType}' not found")
 		}
-
 		KeywordUtil.logInfo("testData: $testData")
 		return testData
 	}
@@ -102,34 +98,45 @@ public class AddressPage extends BaseHelper {
 		WebUI.delay(3)
 	}
 	private void searchAddress(String city) {
+		WebUI.delay(2)
+		KeywordUtil.logInfo("1")
 		WebUI.click(btnSearchZIPCode)
-		WebUI.setText(txfOvlyCity, city)
-		Mobile.delay(3)
+		KeywordUtil.logInfo("2")
+		WebUI.delay(5)
+		WebUI.sendKeys(txfOvlyZIPCode, city)
+		KeywordUtil.logInfo("3")
+		WebUI.delay(3)
 		WebUI.click(btnOvlySearch)
-		Mobile.delay(2)
+		KeywordUtil.logInfo("4")
+		WebUI.delay(10)
 		WebUI.click(btnOvlySelect) //select first address
+		KeywordUtil.logInfo("5")
+		WebUI.delay(10)
 		handleAlertIfPresent()
 	}
 
 	private void checkCustomerHaveFixedline(String customerHaveFixedline) {
-		if(customerHaveFixedline) {
-			WebUI.click(chxCustomerHaveFixedLine)
+		if(customerHaveFixedline?.trim() == 'Y') {
+			WebUI.check(chxCustomerHaveFixedLine)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectBuildingLocation(String buildingLocation) {
-		TestObject drpBuildingSelected  = createTestObject("drpBuildingSelected", "xpath", "//*[normalize-space(text())='$buildingLocation']")
-		WebUI.click(drpBuildingLoc)
-		WebUI.click(drpBuildingSelected)
+		if(buildingLocation) {
+			WebUI.selectOptionByLabel(drpBuildingLoc, buildingLocation, false)
+		}
 	}
 
 	private void selectBuildingOwnerShip(String ownership) {
-		TestObject drpOwnershipSelected  = createTestObject("drpOwnershipSelected", "xpath", "//*[normalize-space(text())='$ownership']")
-		WebUI.click(drpBuildingOwnership)
-		WebUI.click(drpOwnershipSelected)
+		if(ownership) {
+			WebUI.selectOptionByLabel(drpBuildingOwnership, ownership, false)
+		}
 	}
 	private void clickAddAddress() {
 		WebUI.click(btnAdd)
+		WebUI.delay(2)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickSaveContinue() {
@@ -144,21 +151,30 @@ public class AddressPage extends BaseHelper {
 		WebUI.click(btnCancel)
 	}
 	private void inputBuildingPriceEstimates(String priceEstimates) {
-		WebUI.setText(txfBuildingPriceEstimate, priceEstimates)
+		if(priceEstimates) {
+			WebUI.setText(txfBuildingPriceEstimate, priceEstimates)
+		}
 	}
 	private void inputBuildingStayLength(String buildingLength) {
-		WebUI.setText(txfBuildingStayLength, buildingLength)
+		if(buildingLength) {
+			WebUI.setText(txfBuildingStayLength, buildingLength)
+		}
 	}
 	private void inputDirectionDesc(String desc) {
-		WebUI.setText(txfDirectionDesc, desc)
+		if(desc) {
+			WebUI.setText(txfDirectionDesc, desc)
+		}
 	}
 	private void inputNotes(String notes) {
-		WebUI.setText(txfNotes, notes)
+		if(notes) {
+			WebUI.setText(txfNotes, notes)
+		}
 	}
 	private void inputCompanyName(String companyName) {
 		WebUI.setText(txfCompanyName, companyName)
 	}
 	private void switchToIframeAddress() {
+		WebUI.delay(10)
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
 	}
@@ -176,8 +192,12 @@ public class AddressPage extends BaseHelper {
 			}
 
 			WebUI.setText(countryField, parts[0])
+			WebUI.delay(2)
 			WebUI.setText(areaField, parts[1])
+			WebUI.delay(2)
 			WebUI.setText(numberField, parts[2])
+			WebUI.delay(2)
+			
 		}
 	}
 	private void inputFax(String fax) {
@@ -191,7 +211,9 @@ public class AddressPage extends BaseHelper {
 				KeywordUtil.markWarning("Invalid phone format: ${fax}. Expected format is XXX-XXX")
 			}
 			WebUI.setText(countryField, parts[0])
+			WebUI.delay(2)
 			WebUI.setText(areaField, parts[1])
+			WebUI.delay(2)
 		}
 	}
 

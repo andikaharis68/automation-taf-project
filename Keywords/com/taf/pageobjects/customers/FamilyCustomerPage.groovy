@@ -56,29 +56,32 @@ public class FamilyCustomerPage extends BaseHelper {
 
 	private void clickAdd() {
 		WebUI.click(btnAdd)
+		WebUI.takeScreenshot()
 	}
 
 	private void inputFamilyName(String name) {
 		WebUI.setText(txfFamilyName, name)
+		WebUI.delay(2)
 	}
 
-
 	private void selectCustomerModel(String model) {
-		radCustomerModel = createTestObject("radCustomerModel", "xpath", "//*[starts-with(@id, 'rblCustModel_') and normalize-space(text())='$model']")
-		if(model != "Professional") {
-			WebUI.click(radCustomerModel)
+		if (model?.trim()) {
+			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
+			if (!WebUI.verifyElementChecked(radCustomerModel, 1)) {
+				WebUI.click(radCustomerModel)
+				WebUI.delay(2)
+			}
 		}
 	}
 
-
 	private void selectIdType(String idType) {
-		TestObject drpSelected = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$idType']")
-		WebUI.click(drpIDType)
-		WebUI.click(drpSelected)
+		WebUI.selectOptionByLabel(drpIDType, idType, false)
+		WebUI.delay(2)
 	}
 
 	private void inputIdNumber(String idNumber) {
 		WebUI.setText(txfIDNumber, idNumber)
+		WebUI.delay(2)
 	}
 
 	private void inputIdExpiredDate(String idExpiredDate) {
@@ -89,8 +92,13 @@ public class FamilyCustomerPage extends BaseHelper {
 		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
-		radGender = createTestObject("radGender", "xpath", "//*[normalize-space(text())='$gender']")
-		WebUI.click(radGender)
+		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
+		if (gender?.trim()) {
+			if (!WebUI.verifyElementChecked(radGender, 1, FailureHandling.OPTIONAL)) {
+				WebUI.click(radGender)
+				WebUI.delay(2)
+			}
+		}
 	}
 
 	private void hideDatePicker(TestObject to) {
@@ -99,23 +107,30 @@ public class FamilyCustomerPage extends BaseHelper {
 
 	private void inputPOB(String pob) {
 		WebUI.setText(txfPOB, pob)
+		WebUI.delay(2)
 	}
 
 	private void inputDOB(String dob) {
 		WebUI.sendKeys(txfDOB, dob)
 		hideDatePicker(txfDOB)
+		WebUI.delay(2)
 	}
 
 	private void inputNPWP(String npwp) {
-		if(WebUI.getText(txfNPWP) != "") {
-			WebUI.setText(txfNPWP, npwp)
-		} else {
+		String currentText = WebUI.getText(txfNPWP).trim()
+		if (!currentText) {
 			KeywordUtil.logInfo("NPWP auto filled")
+		} else {
+			WebUI.setText(txfNPWP, npwp)
+			WebUI.delay(2)
+			
 		}
 	}
 
+
 	private void inputMotherMaidenName(String motherMaidenName) {
 		WebUI.setText(txfMotherMaidenName, motherMaidenName)
+		WebUI.delay(2)
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -129,18 +144,22 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 
 	private void selectCustomerRelationship(String relationship) {
-		WebUI.click(drpCustRelationship)
-		WebUI.selectOptionByLabel(drpCustRelationship, relationship, true)
+		WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
+		WebUI.delay(2)
 	}
 	private void clickSaveContinue() {
 		WebUI.click(btnSaveAndContinue)
+		WebUI.takeScreenshot()
 	}
 	private void clickNext() {
+		WebUI.takeScreenshot()
 		WebUI.click(btnNext)
 	}
 	private void clickSelectFamily() {
-		Mobile.delay(5)
+		WebUI.delay(5)
 		WebUI.click(radSelectFamily)
 		WebUI.click(btnSelectFamily)
+		WebUI.delay(2)
+		
 	}
 }

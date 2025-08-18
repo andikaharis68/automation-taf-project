@@ -52,11 +52,13 @@ public class EmergencyContactPage extends BaseHelper {
 	private void verifyLandingEmergencyContactPage() {
 		handleAlertIfPresent()
 		verifyLanding(btnAdd, "Emergency Contact")
+		WebUI.delay(2)
 	}
 
 	private void inputName(String name) {
 		if(name) {
 			WebUI.setText(txfName, name)
+			WebUI.delay(2)
 		}
 	}
 
@@ -74,8 +76,8 @@ public class EmergencyContactPage extends BaseHelper {
 
 	private void selectCustomerRelationship(String relationship) {
 		if(relationship) {
-			WebUI.click(drpCustRelationship)
 			WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
+			WebUI.delay(2)
 		}
 	}
 
@@ -83,12 +85,14 @@ public class EmergencyContactPage extends BaseHelper {
 		if(email) {
 			TestObject txfEmail	= createTestObject("txfEmail", "xpath", "//*[@id='ucEmergencyContactInfo_ucEMail${index}_txtEmail']")
 			WebUI.setText(txfEmail, email)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputAddress(String address) {
 		if(address) {
 			WebUI.setText(txfAddress, address)
+			WebUI.delay(2)
 		}
 	}
 
@@ -149,10 +153,8 @@ public class EmergencyContactPage extends BaseHelper {
 		if(phone) {
 			TestObject countryField	= createTestObject("countryField", "xpath", "//*[@id='ucEmergencyContactInfo_txt_CustEmergencyCntct_MobilePhn${index}']")
 			WebUI.setText(countryField, phone)
-			 
+			WebUI.delay(2)	 
 		}
-		
-		 
 	}
 	private void handleAlertIfPresent() {
 		if(WebUI.waitForAlert(5)) {

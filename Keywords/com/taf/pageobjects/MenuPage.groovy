@@ -62,6 +62,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickDropdownMenu() {
+		WebUI.verifyElementPresent(drpMenu, 10)
 		WebUI.click(drpMenu)
 	}
 

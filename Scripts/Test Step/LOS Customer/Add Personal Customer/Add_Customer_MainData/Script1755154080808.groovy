@@ -71,10 +71,13 @@ addPersonal.inputMotherMaidenName(MotherMaidenName)
 'Step 15: Click next button'
 addPersonal.clickNextButton()
 
-'Step 16: Switch to iframe main data'
-mainData.switchToIframeMainData()
+'Step 16: Click edit or new app'
+mainData.clickBtnEditOrNewApp()
 
-'Step 17: Verify landing in main data page'
+'Step 17: Switch to frame custform'
+mainData.switchToIframeCustForm()
+
+'Step 18: Verify landing in main data page'
 mainData.verifyLandingInMainData()
 
 
