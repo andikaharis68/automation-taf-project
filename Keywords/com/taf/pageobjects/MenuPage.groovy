@@ -27,6 +27,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject drpMenu						= createTestObject("drpMenu", "xpath", "//img[@id='imgMenu']")
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
 	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
+	private TestObject btnCentralizeDataEntry 		= createTestObject("btnCentralizeDataEntry", "text", "Centralized Data Entry")
 	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "")
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "xpath", "")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
@@ -59,7 +60,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickDropdownMenu() {
-		WebUI.click(drpMenu)
+		BaseHelper.safetyClick(drpMenu)
 	}
 
 	private void clickDropdownFavourite() {
@@ -69,15 +70,13 @@ public class MenuPage extends BaseHelper {
 	private void clickCustomer() {
 		WebUI.click(btnCustomer)
 	}
-	private void clickCreditSimulation() {
-		WebUI.click(btnCreditSimulation)
-	}
 
 	private void switchDefaultContent() {
 		WebUI.switchToDefaultContent()
 	}
 
 	private void switchToIframeMenu() {
+		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMenu, 1)
 	}
 
@@ -160,18 +159,47 @@ public class MenuPage extends BaseHelper {
 	private void clickTAFReports() {
 		WebUI.click(btnTAFReports)
 	}
+	
 	private void clickInternalSystem() {
 		WebUI.click(btnInternalSystem)
+	}
+	
+	private void selectMenuLoanOrganitation() {
+		BaseHelper.safetySelect(drpModul, "LOAN ORIGINATION")
+	}
+	
+	private void selectMenuMarketing() {
+		BaseHelper.safetySelect(drpModul, "MARKETING")
+		WebUI.takeScreenshotAsCheckpoint("Testing Description Screenshot")
+	}
+
+	private void clickCreditSimulation() {
+		BaseHelper.safetyClick(btnCreditSimulation)
+	}
+		
+	private void clickCentralizedDataEntry() {
+		BaseHelper.safetyClick(btnCentralizeDataEntry)
 	}
 
 	private void navigateToCreditSimulation() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(drpMenu, 10)
 		WebUI.click(drpMenu)
+		WebUI.takeScreenshot()
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.click(btnCreditProcess)
 		WebUI.selectOptionByLabel(drpModul, "LOAN ORIGINATION", false)
 		WebUI.click(btnCreditSimulation)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToCentralizeDataEntry() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
+		WebUI.click(btnCentralizeDataEntry)
 		WebUI.switchToDefaultContent()
 	}
 }
