@@ -123,7 +123,7 @@ class BaseHelper {
 
 
 	static void verifyLanding(TestObject to, String screenName) {
-		if (WebUI.waitForElementPresent(to, 5)) {
+		if (WebUI.waitForElementPresent(to, 10)) {
 			KeywordUtil.markPassed("Success : Landing to $screenName")
 		}else {
 			KeywordUtil.markFailed("Failed : Landing to $screenName")

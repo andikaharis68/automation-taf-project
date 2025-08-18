@@ -70,12 +70,18 @@ public class OtherAttributePage extends BaseHelper {
 	
 	private void verifyLandingInOtherAttribute() {
 		verifyLanding(btnSearchDebitorGroup, "Other Attribute")
+		WebUI.takeScreenshot()
 	}
 	
 	private void selectDebitorGroup(String label) {
 		WebUI.click(btnSearchDebitorGroup)
+		WebUI.delay(2)
+		
 		WebUI.setText(txfOvlyBICode, '%')
+		WebUI.delay(2)
+		
 		WebUI.click(btnOvlySearchBICode)
+		WebUI.delay(2)
 		clickSelectByLabel(label)
 	}
 	
@@ -83,7 +89,10 @@ public class OtherAttributePage extends BaseHelper {
 		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']") 
 		txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 		WebUI.click(btnSearchCounterpartCategory)
+		WebUI.delay(2)
+		
 		WebUI.setText(txfOvlyBICode, '%')
+		WebUI.delay(2)
 		WebUI.click(btnOvlySearchBICode)
 		clickSelectByLabel(label)
 	}

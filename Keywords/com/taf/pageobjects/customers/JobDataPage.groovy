@@ -26,7 +26,7 @@ public class JobDataPage extends BaseHelper {
 
 	private TestObject btnSaveAndContinue			= createTestObject("btnSaveAndContinue", "xpath", "//*[@id='lb_Form_SaveCont_Job']")
 
-	private TestObject txfProfessionName			= createTestObject("txfProfessionName", "xpath", "//*[@id='ucProfession_uclProf_txt']") 
+	private TestObject txfProfessionName			= createTestObject("txfProfessionName", "xpath", "//*[@id='ucProfession_uclProf_txt']")
 	private TestObject btnSearchProfessionName		= createTestObject("btnSearchProfessionName", "xpath", "//*[@id='ucProfession_uclProf_imb']")
 	private TestObject txfProfessionNo				= createTestObject("txfProfessionNo", "xpath", "//*[@id='txtProfNo']")
 	private TestObject drpJobPosition				= createTestObject("drpJobPosition", "xpath", "//*[@id='ucMrJobPosition_ddlReference']")
@@ -52,140 +52,160 @@ public class JobDataPage extends BaseHelper {
 	private TestObject txfOtherEstablishDate		= createTestObject("txfOtherEstablishDate", "xpath", "//*[@id='ucOthBizEstablishmentDt_txtYear']")
 	private TestObject drpOtherEstablishDate		= createTestObject("drpOtherEstablishDate", "xpath", "//*[@id='ucOthBizEstablishmentDt_ddlMonth']")
 
-	private TestObject txfOvlyProfessionName 		= createTestObject("txfOvlyProfessionName", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']") 
+	private TestObject txfOvlyProfessionName 		= createTestObject("txfOvlyProfessionName", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 	private TestObject txfOvlyCategory				= createTestObject("txfOvlyCategory", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1']")
-	private TestObject btnOvlySearchProfesi			= createTestObject("btnOvlySearchProfesi", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_lbSearch']") 
+	private TestObject btnOvlySearchProfesi			= createTestObject("btnOvlySearchProfesi", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelectProfesi			= createTestObject("btnOvlySelectProfesi", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_gvL']/tbody/tr[2]/td[3]")
 	private TestObject txfOvlyIndustryType			= createTestObject("txfOvlyIndustryType", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
 	private TestObject btnOvlySearchIndustry		= createTestObject("btnOvlySearchIndustry", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelectIndustry		= createTestObject("btnOvlySelectIndustry", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
 
 
-	
+
 	private void verifyLandingInJobDataPage() {
 		verifyLanding(txfProfessionName, "Job Data")
+		WebUI.delay(2)
 	}
 	private void clickSaveContinue() {
 		WebUI.click(btnSaveAndContinue)
+		WebUI.takeScreenshot()
 	}
 
 	private void selectProfessionName(String professionName) {
 		WebUI.click(btnSearchProfessionName)
+		WebUI.delay(2)
 		WebUI.setText(txfOvlyProfessionName, professionName)
 		WebUI.click(btnOvlySearchProfesi)
 		WebUI.click(btnOvlySelectProfesi)
+		WebUI.delay(2)
+		
 	}
 	private void inputProfessionNo(String professionNo) {
 		WebUI.setText(txfProfessionNo, professionNo)
+		WebUI.delay(2)
 	}
 	private void selectJobPosition(String jobPosition) {
-		TestObject drpSelected  = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$jobPosition']")
-		WebUI.click(drpJobPosition)
-		WebUI.click(drpSelected)
+		WebUI.selectOptionByLabel(drpJobPosition, jobPosition, false)
+		WebUI.delay(2)
 	}
 	private void selectJobStatus(String jobStatus) {
 		if(jobStatus) {
-			WebUI.click(drpJobStatus)
 			WebUI.selectOptionByLabel(drpJobStatus, jobStatus, false)
+			WebUI.delay(2)
 		}
-		
 	}
 	private void inputCompanyName(String companyName) {
 		if(!companyName) {
 			WebUI.setText(txfCompanyName, companyName)
+			WebUI.delay(2)
 		}
 	}
 
 	private void chxInternalEmployee(String isInternalEmployee) {
-		if(isInternalEmployee == "1") {
+		if(isInternalEmployee?.trim() == "Y") {
 			WebUI.click(chxIsInternalEmployee)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectIndustryTypeName(String industryType) {
 		if(industryType) {
 			WebUI.click(btnSearchIndustryType)
+			WebUI.delay(2)
+			
 			WebUI.setText(txfOvlyIndustryType, industryType)
+			WebUI.delay(2)
+			
 			WebUI.click(btnOvlySearchIndustry)
+			WebUI.delay(2)
+			
 			WebUI.click(btnOvlySelectIndustry)
+			WebUI.delay(2)
+			
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
 		if(companyScale) {
-			TestObject drpSelected  = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$companyScale']")
-			WebUI.click(drpCompanyScale)
-			WebUI.click(drpSelected)
+			WebUI.selectOptionByLabel(drpCompanyScale, companyScale, false)
+			WebUI.delay(2)
 		}
 	}
 	private void inputNumberOfEmployee(String numberOfEmployee) {
 		if(numberOfEmployee) {
 			WebUI.setText(txfNumberOfEmployee, numberOfEmployee)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectEmploymentEstablishDate(String month, String year) {
 		if(month && year) {
-			TestObject drpSelected  = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$month']")
-			 //month
-			 WebUI.click(drpEmploymentEstablishDate)
-			 WebUI.click(drpSelected)
-			 //year
-			 WebUI.setText(txfEmploymentEstablishDate, year)
+			//month
+			WebUI.selectOptionByLabel(drpEmploymentEstablishDate, month, false)
+			WebUI.delay(2)
+			//year
+			WebUI.setText(txfEmploymentEstablishDate, year)
+			WebUI.delay(2)
 		}
-		
 	}
 
 	private void checkIsWellKnowCompany(String isWellCompany) {
 		if(isWellCompany == '1') {
 			WebUI.click(chxIsWellCompany)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputPrevCompanyName(String prevCompanyName) {
 		if(prevCompanyName) {
 			WebUI.setText(txfPrevCompanyName, prevCompanyName)
+			WebUI.delay(2)
 		}
 	}
 	private void selectPrevCompanyDate(String month, String year) {
 		if(month && year) {
 			//month
-			WebUI.click(drpPrevEmploymentDate)
 			WebUI.selectOptionByLabel(drpPrevEmploymentDate, month, false)
+			WebUI.delay(2)
 			//year
 			WebUI.setText(txfPrevEmploymentDate, year)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputOtherBussinessName(String bussinessName) {
 		if(bussinessName) {
 			WebUI.setText(txfOtherBussinessName, bussinessName)
+			WebUI.delay(2)
 		}
 	}
 	private void inputOtherBussinessType(String bussinessType) {
 		if(bussinessType) {
 			WebUI.setText(txfOtherBussinessType, bussinessType)
+			WebUI.delay(2)
 		}
 	}
 	private void inputOtherJobPosition(String jobPosition) {
 		if(jobPosition) {
 			WebUI.setText(txfOtherJobPosition, jobPosition)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
 		if(month && year) {
-			 //month
-			 WebUI.click(drpOtherEstablishDate)
-			 WebUI.selectOptionByLabel(drpOtherEstablishDate, drpOtherEstablishDate, false)
-			 //year
-			 WebUI.setText(txfOtherEstablishDate, year)
+			//month
+			WebUI.selectOptionByLabel(drpOtherEstablishDate, drpOtherEstablishDate, false)
+			WebUI.delay(2)
+			//year
+			WebUI.setText(txfOtherEstablishDate, year)
+			WebUI.delay(2)
 		}
-		
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {
 			TestObject chxSelected = createTestObject("chxSelected", "xpath", "//label[normalize-space(text())='$investmentType']/preceding-sibling::input[@type='radio']")
 			WebUI.click(chxSelected)
+			WebUI.delay(2)
 		}
 	}
 }

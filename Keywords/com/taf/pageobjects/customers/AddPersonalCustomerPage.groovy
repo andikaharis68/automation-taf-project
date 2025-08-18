@@ -24,13 +24,10 @@ import internal.GlobalVariable
 
 public class AddPersonalCustomerPage extends BaseHelper {
 
-	private TestObject lblSection 			= createTestObject("lblSection", "xpath", "//*[@id='ucSubsection_subSectionID']")
-	private TestObject radCustomerModel		= createTestObject("radCustomerModel", "xpath", "//*[@id='rblCustModel_0']")
 	private TestObject txfCustomerName		= createTestObject("txfCustomerName", "xpath", "//input[@id='txtCustName']")
 	private TestObject drpIDType			= createTestObject("drpIDType", "xpath", "//*[@id='ucId_ucRefCustIdType_ddlReference']")
 	private TestObject txfIDNumber			= createTestObject("txfIDNumber", "xpath", "//input[@id='ucId_txtCustIdNo']")
 	private TestObject txfIDExpiredDate		= createTestObject("txfIDExpiredDate", "xpath", "//input[@id='ucIdExpiredDt_txtDatePicker']")
-	private TestObject radGender			= createTestObject("radGender", "xpath", "//*[@id='rblCustGender_0']")
 	private TestObject txfPOB				= createTestObject("txfPOB", "xpath", "//input[@id='txtBirthPlace']")
 	private TestObject txfDOB				= createTestObject("txfDOB", "xpath", "//*[@id='ucBirthDate_txtDatePicker']")
 	private TestObject txfNPWP				= createTestObject("txfNPWP", "xpath", "//*[@id='txtNpwp']")
@@ -39,44 +36,63 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	private TestObject btnNext				= createTestObject("btnNext", "xpath", "//*[@id='lb_Toolbar_Next']")
 	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "//*[@id='lb_Toolbar_Cancel']")
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
-	private TestObject lblNewCustomer		= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
-	private TestObject btnEdit				= createTestObject("btnEdit", "xpath", "//*[@id='gvCustomerPersonal_imbEdit_0']")
-
 
 
 	private void verifyLandingAddPersonalPage() {
+		Mobile.delay(10)
 		verifyLanding(txfCustomerName, "Add Personal Customer")
+		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerName(String name) {
 		WebUI.setText(txfCustomerName, name)
+		WebUI.delay(2)
 	}
 
 
 	private void selectCustomerModel(String model) {
-		radCustomerModel = createTestObject("radCustomerModel", "xpath", "//*[starts-with(@id, 'rblCustModel_') and normalize-space(text())='$model']")
-		if(model != "Professional") {
-			WebUI.click(radCustomerModel)
+		if (model?.trim()) {
+			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
+			if (!WebUI.verifyElementChecked(radCustomerModel, 1, FailureHandling.OPTIONAL)) {
+				WebUI.click(radCustomerModel)
+				WebUI.delay(2)
+			}
 		}
 	}
 
-
 	private void selectIdType(String idType) {
-		TestObject drpSelected = createTestObject("drpSelected", "xpath", "//*[normalize-space(text())='$idType']")
 		WebUI.selectOptionByLabel(drpIDType, idType, false)
+		WebUI.delay(2)
 	}
 
 	private void inputIdNumber(String idNumber) {
+		handleAlertIfPresent()
 		WebUI.setText(txfIDNumber, idNumber)
+		WebUI.delay(2)
+	}
+
+	private void handleAlertIfPresent() {
+		if(WebUI.waitForAlert(5)) {
+			WebUI.acceptAlert()
+		} else {
+			KeywordUtil.logInfo("Alert not found")
+		}
 	}
 
 	private void inputIdExpiredDate(String idExpiredDate) {
-		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
+		WebUI.delay(5)
+		WebUI.setText(txfIDExpiredDate, idExpiredDate)
+		WebUI.delay(5)
 		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
-		radGender = createTestObject("radGender", "xpath", "//*[normalize-space(text())='$gender']")
-		WebUI.click(radGender)
+		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
+		if (gender?.trim()) {
+			if (!WebUI.verifyElementChecked(radGender, 1, FailureHandling.OPTIONAL)) {
+				WebUI.click(radGender)
+				WebUI.delay(2)
+			}
+		}
 	}
 
 	private void hideDatePicker(TestObject to) {
@@ -84,23 +100,28 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 	private void inputPOB(String pob) {
 		WebUI.setText(txfPOB, pob)
+		WebUI.delay(2)
 	}
 
 	private void inputDOB(String dob) {
 		WebUI.sendKeys(txfDOB, dob)
 		hideDatePicker(txfDOB)
+		WebUI.delay(2)
 	}
 
 	private void inputNPWP(String npwp) {
-		if(WebUI.getText(txfNPWP) != "") {
-			WebUI.setText(txfNPWP, npwp)
-		} else {
+		String currentText = WebUI.getText(txfNPWP).trim()
+		if (!currentText) {
 			KeywordUtil.logInfo("NPWP auto filled")
+		} else {
+			WebUI.setText(txfNPWP, npwp)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputMotherMaidenName(String motherMaidenName) {
 		WebUI.setText(txfMotherMaidenName, motherMaidenName)
+		WebUI.delay(2)
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -111,14 +132,6 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 	private void clickNextButton() {
 		WebUI.click(btnNext)
+		WebUI.takeScreenshot()
 	}
-	private void clickBtnEditOrNewApp() {
-		if(WebUI.verifyElementPresent(lblNewCustomer, 2)) {
-			WebUI.click(lblNewCustomer)
-		} else if(WebUI.verifyElementPresent(btnEdit, 2)) {
-			WebUI.click(lblNewCustomer) 
-		} else {
-			KeywordUtil.logInfo("skipped")
-		}
-	} 
 }

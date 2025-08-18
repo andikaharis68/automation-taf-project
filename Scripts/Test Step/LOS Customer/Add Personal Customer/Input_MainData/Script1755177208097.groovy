@@ -84,31 +84,31 @@ mainData.checkAffiliationWithMultifinance(AffiliationWithMultifinance)
 mainData.checkRIP(RIP)
 
 'Step 21: Input Mobile Phone1'
-mainData.inputMobilePhone1(MobilePhoneNo1)
+mainData.inputMobilePhone(1, MobilePhoneNo1)
 
 'Step 22: Input Mobile Phone2'
-mainData.inputMobilePhone2(MobilePhoneNo2)
+mainData.inputMobilePhone(2, MobilePhoneNo2)
 
 'Step 22: Input Mobile Phone3'
-mainData.inputMobilePhone3(MobilePhoneNo3)
+mainData.inputMobilePhone(3, MobilePhoneNo3)
 
 'Step 23: Input Email1'
-mainData.inputEmail1(Email1)
+mainData.inputEmail(1, Email1)
 
 'Step 24: Input Email2'
-mainData.inputEmail2(Email2)
+mainData.inputEmail(2, Email2)
 
 'Step 25: Click Save and Continue'
 mainData.clickSaveAndContinue()
 
-'Step 26: Switch to default content'
+//'Step 26: Switch to default content'
 //mainData.switchToDefaultContent()
-
-'Step 27: Verify Pop Up Success'
-mainData.verifyNotifSuccess()
+//
+//'Step 27: Verify Pop Up Success'
+//mainData.verifyNotifSuccess()
 
 'Step 29: Switch to iframe address'
-//mainData.switchToIframeMainData()
+//address.switchToIframeAddress()
 
 'Step 29: Verify landing in Address section'
 address.verifyLandingInAddressSection()

@@ -42,7 +42,7 @@ address.inputRT(AddressData.RT)
 address.inputRW(AddressData.RW)
 
 'Step 7: Select ZIP Code'
-address.searchAddress(AddressData.City)
+address.searchAddress(AddressData.ZIPCODE)
 
 'Step 8: Check Customer Have Fixed Line'
 address.checkCustomerHaveFixedline(AddressData.CustomerDoesNotHaveFixedline)

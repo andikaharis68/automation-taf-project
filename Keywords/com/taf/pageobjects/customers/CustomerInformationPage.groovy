@@ -37,36 +37,27 @@ public class CustomerInformationPage extends BaseHelper {
 	private TestObject iframeMainpage 			= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
 
-
-
 	private void verifyLandingInCustInfoPage() {
 		verifyLanding(txfCustomerNo, "Customer Information")
 	}
 
 	private void inputCustomerName(String name) {
-		WebUI.click(txfCustomerName)
 		WebUI.setText(txfCustomerName, name)
 	}
 
 	private void selectCustomerType(String customerType) {
-		TestObject txtCustomerType = createTestObject("txtCustomerType", "xpath", "//div[normalize-space(text()='$customerType']")
-		WebUI.click(drpCustomerType)
-		WebUI.click(txtCustomerType)
+		WebUI.selectOptionByLabel(drpCustomerType, customerType, false)
 	}
 
 	private void inputAddress(String address) {
-		WebUI.click(txfAddress)
 		WebUI.setText(txfAddress, address)
 	}
 
 	private void inputCustomerNo(String customerNo) {
-		WebUI.click(txfCustomerNo)
 		WebUI.setText(txfCustomerNo, customerNo)
 	}
 	private void selectCustomerRating(String customerRating) {
-		TestObject txtCustomerRating = createTestObject("txtCustomerRating", "xpath", "//div[normalize-space(text()='$customerRating']")
-		WebUI.click(drpCustomerRating)
-		WebUI.click(txtCustomerRating)
+		WebUI.selectOptionByLabel(drpCustomerRating, customerRating, false)
 	}
 	private void clickSearch() {
 		WebUI.click(btnSearch)

@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -58,9 +59,6 @@ public class MainDataPage extends BaseHelper {
 	private TestObject chxRIP							= createTestObject("chxRIP", "xpath", "//*[@id='cbIsRIP']")
 
 	//contact information section
-	private TestObject txfMobilePhone1					= createTestObject("txfMobilePhone1", "xpath", "//*[@id='txtMblPhn1']")
-	private TestObject txfMobilePhone2					= createTestObject("txfMobilePhone2", "xpath", "//*[@id='txtMblPhn2']")
-	private TestObject txfMobilePhone3					= createTestObject("txfMobilePhone3", "xpath", "//*[@id='txtMblPhn3']")
 	private TestObject txfEmail1						= createTestObject("txfEmail1", "xpath", "//*[@id='txtEmail1']")
 	private TestObject txfEmail2						= createTestObject("txfEmail2", "xpath", "//*[@id='txtEmail2']")
 
@@ -81,71 +79,80 @@ public class MainDataPage extends BaseHelper {
 	private TestObject btnOvlySearchCountry				= createTestObject("btnOvlySearchCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlyResetCountry				= createTestObject("btnOvlyResetCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_ucS_lbReset']")
 	private TestObject btnSelectCountry					= createTestObject("btnSelectCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_gvL_hpSelect_0']")
-	private TestObject iframeMainData					= createTestObject("iframeMainData", "xpath", "//*[@id='custForm']")
+	private TestObject iframeCustForm					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
+
+	private TestObject lblNewCustomer					= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
+	private TestObject btnEdit							= createTestObject("btnEdit", "xpath", "//*[@id='gvCustomerPersonal_imbEdit_0']")
 
 	private void verifyLandingInMainData() {
 		verifyLanding(drpSalutation, "Main Data")
+		WebUI.takeScreenshot()
 	}
 
 	private void selectSalutation(String salutation) {
-		TestObject drpSalutationSelected  = createTestObject("drpSalutationSelected", "xpath", "//*[normalize-space(text())='$salutation']")
-		WebUI.click(drpSalutation)
-		WebUI.click(drpSalutationSelected)
+		WebUI.selectOptionByLabel(drpSalutation, salutation, false)
+		WebUI.delay(2)
 	}
 
 	private void inputPrefixName(String name) {
 		if(name) {
 			WebUI.setText(txfPrefixName, name)
+			WebUI.delay(2)
 		}
 	}
 	private void inputFullName(String name) {
 		if(txfFullName) {
 			WebUI.setText(txfFullName, name)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectMaritalStatus(String status) {
 		WebUI.scrollToElement(drpMaritalStatus, 2)
-		TestObject drpStatusSelected  = createTestObject("drpStatusSelected", "xpath", "//*[normalize-space(text())='$status']")
-		WebUI.click(drpMaritalStatus)
-		WebUI.click(drpStatusSelected)
+		WebUI.selectOptionByLabel(drpMaritalStatus, status, false)
+		WebUI.delay(2)
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
 			WebUI.setText(txfSuffixName, name)
+			WebUI.delay(2)
 		}
 	}
 	private void inputNickName(String name) {
 		if(name) {
 			WebUI.setText(txfNickName, name)
+			WebUI.delay(2)
 		}
 	}
 
 	private void checkPremiumStatus(String isPremium) {
-		if(isPremium) {
-			WebUI.click(chxIsPremium)
+		if(isPremium?.trim() == 'Y') {
+			WebUI.check(chxIsPremium)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectNationality(String nationality) {
-		TestObject drpNationalSelected  = createTestObject("drpNationalSelected", "xpath", "//*[normalize-space(text())='$nationality']")
 		WebUI.scrollToElement(drpNationality, 2)
-		WebUI.click(drpNationality)
-		WebUI.click(drpNationalSelected)
+		WebUI.selectOptionByLabel(drpNationality, nationality, false)
+		WebUI.delay(2)
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
 			WebUI.scrollToElement(btnSearchCustomerGroup, 2)
 			WebUI.click(btnSearchCustomerGroup)
+			WebUI.delay(2)
 			WebUI.setText(txfOvlyCustomerName, name)
 			WebUI.click(btnOvlySelect)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputNumberOfDependents(String numberOfDependents) {
 		if(numberOfDependents) {
-			WebUI.scrollToElement(txfNumOfDependent, 0)
+			WebUI.scrollToElement(txfNumOfDependent, 1)
 			WebUI.setText(txfNumOfDependent, numberOfDependents)
+			WebUI.delay(2)
 		}
 	}
 
@@ -153,6 +160,7 @@ public class MainDataPage extends BaseHelper {
 		if(numberOfResidence) {
 			WebUI.scrollToElement(txfNumOfResidence, 1)
 			WebUI.setText(txfNumOfResidence, numberOfResidence)
+			WebUI.delay(2)
 		}
 	}
 
@@ -160,101 +168,103 @@ public class MainDataPage extends BaseHelper {
 		if(familyCardNum) {
 			WebUI.scrollToElement(txfFamilyCard, 2)
 			WebUI.setText(txfFamilyCard, familyCardNum)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectEducation(String education) {
-		TestObject drpEduSelected  = createTestObject("drpEduSelected", "xpath", "//*[normalize-space(text())='$education']")
 		WebUI.scrollToElement(drpEducation, 2)
-		WebUI.click(drpEducation)
-		WebUI.click(drpEduSelected)
+		WebUI.selectOptionByLabel(drpEducation, education, false)
+		WebUI.delay(2)
 	}
 
 	private void selectReligion(String religion) {
-		TestObject drpReligionSelected  = createTestObject("drpRegSelected", "xpath", "//*[normalize-space(text())='$religion']")
 		WebUI.scrollToElement(drpReligion, 2)
-		WebUI.click(drpReligion)
-		WebUI.click(drpReligionSelected)
+		WebUI.selectOptionByLabel(drpReligion, religion, false)
+		WebUI.delay(2)
 	}
 
 
 	private void selectCountry(String country) {
 		if(country) {
 			WebUI.click(btnSearchCountry)
+			WebUI.delay(2)
 			WebUI.setText(txfCountryName, country)
 			WebUI.click(btnOvlySearchCountry)
+			WebUI.delay(2)
 			WebUI.click(btnSelectCountry)
 		}
 	}
 
 	private void checkIsVIP(String isVIP) {
-		if(isVIP) {
+		if(isVIP?.trim() == 'Y') {
 			WebUI.click(chxIsVIP)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputPremiumNote(String premiumNote) {
 		if(premiumNote) {
 			WebUI.setText(txfPremiumNote, premiumNote)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputSIDNo(String sidNo) {
 		if(sidNo) {
 			WebUI.setText(txfSIDNo, sidNo)
+			WebUI.delay(2)
 		}
 	}
 
 	private void checkAffiliationWithMultifinance(String affiliation) {
-		if(affiliation) {
+		if(affiliation?.trim() == 'Y') {
 			WebUI.click(chxAffiliationwithMultifinance)
+			WebUI.delay(2)
 		}
 	}
 	private void checkRIP(String rip) {
-		if(rip) {
+		if(rip?.trim() == 'Y') {
 			WebUI.click(chxRIP)
+			WebUI.delay(2)
 		}
 	}
 
-	private void inputMobilePhone1(String phone) {
-		if(phone) {
-			WebUI.scrollToElement(txfMobilePhone1, 1)
-			WebUI.setText(txfMobilePhone1, phone)
-		}
+	private TestObject getMobilePhoneField(int index) {
+		TestObject dynamicObject = createTestObject("dynamicObject", "xpath", "//*[@id='txtMblPhn${index}']")
+		return dynamicObject
 	}
-	private void inputMobilePhone2(String phone) {
-		if(phone) {
-			WebUI.scrollToElement(txfMobilePhone2, 1)
-			WebUI.setText(txfMobilePhone2, phone)
-		}
+
+	private TestObject getEmailField(int index) {
+		TestObject dynamicObject = createTestObject("dynamicObject", "xpath", "//*[@id='txtEmail${index}']")
+		return dynamicObject
 	}
-	private void inputMobilePhone3(String phone) {
-		if(phone) {
-			WebUI.scrollToElement(txfMobilePhone3, 1)
-			WebUI.setText(txfMobilePhone3, phone)
-		}
-	}
-	private void inputEmail1(String email) {
-		if(email) {
-			WebUI.scrollToElement(txfEmail1, 1)
-			WebUI.setText(txfEmail1, email)
+	private void inputMobilePhone(int index, String phone) {
+		if (phone?.trim()) {
+			TestObject phoneField = getMobilePhoneField(index)
+			WebUI.scrollToElement(phoneField, 1)
+			WebUI.setText(phoneField, phone)
+			WebUI.delay(2)
 		}
 	}
 
-	private void inputEmail2(String email) {
-		if(email) {
-			WebUI.scrollToElement(txfEmail2, 1)
-			WebUI.setText(txfEmail2, email)
+	private void inputEmail(int index, String email) {
+		if(email?.trim()) {
+			TestObject emailField = getEmailField(index)
+			WebUI.scrollToElement(emailField, 1)
+			WebUI.setText(emailField, email)
+			WebUI.delay(2)
 		}
 	}
-
 	private void clickSaveAndContinue() {
 		WebUI.scrollToElement(btnSaveContinue, 5)
 		WebUI.click(btnSaveContinue)
+		WebUI.delay(2)
 	}
-	private void switchToIframeMainData() {
-		WebUI.verifyElementPresent(iframeMainData, 5)
-		WebUI.switchToFrame(iframeMainData, 1)
+	private void switchToIframeCustForm() {
+		WebUI.delay(2)
+		WebUI.verifyElementPresent(iframeCustForm, 5)
+		WebUI.switchToFrame(iframeCustForm, 1)
 	}
 
 	private void switchToDefaultContent() {
@@ -263,6 +273,26 @@ public class MainDataPage extends BaseHelper {
 	private void verifyNotifSuccess() {
 		TestObject lblNotif = createTestObject("lblNotif", "xpath", "//*[text()='Save Success']")
 		BaseHelper.verifyPopUpSuccess(lblNotif, "Save Success")
+		Mobile.delay(5)
+	}
+	private void clickBtnEditOrNewApp() {
+		Mobile.delay(5)
+		if(WebUI.verifyElementPresent(lblNewCustomer, 2)) {
+			switchToIframeMainPage()
+			WebUI.click(lblNewCustomer)
+		} else if(WebUI.verifyElementPresent(btnEdit, 2)) {
+			switchToIframeMainPage()
+			WebUI.click(btnEdit)
+		} else {
+			KeywordUtil.logInfo("skipped")
+		}
+	}
+	
+	private void switchToIframeMainPage() { 
+		switchToDefaultContent()
+		TestObject iframeMainPage = createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
+		WebUI.verifyElementPresent(iframeMainPage, 5)
+		WebUI.switchToFrame(iframeMainPage, 1)
 	}
 }
 

@@ -57,6 +57,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void clickSaveContinue() {
 		WebUI.click(btnSaveContinue)
+		WebUI.delay(2)
 	}
 
 	private void verifyLandinginFinancialPage() {
@@ -66,36 +67,42 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputGrossMonthlyIncome(String income) {
 		if(income) {
 			WebUI.setText(txfGrossMonthlyIncome, income)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputGrossProfit(String grossProfit) {
 		if(grossProfit) {
 			WebUI.setText(txfGrossProfit, grossProfit)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputOtherIncome(String otherIncome) {
 		if(otherIncome) {
 			WebUI.setText(txfOtherIncome, otherIncome)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputSourceOfIncome(String sourceIncome) {
 		if(sourceIncome) {
 			WebUI.setText(txfSourceOfOtherIncome, sourceIncome)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputLivingCost(String cost) {
 		if(cost) {
 			WebUI.setText(txfLivingCost, cost)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputOtherMonthlyInstallment(String installment) {
 		if(installment) {
 			WebUI.setText(txfOtherMonthlyInstallment, installment)
+			WebUI.delay(2)
 		}
 	}
 	private void clickCalculateIncome() {
@@ -107,31 +114,35 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void selectBankName(String bankName) {
 		if(bankName) {
-			WebUI.click(drpBankName)
 			WebUI.selectOptionByLabel(drpBankName, bankName, false)
+			WebUI.delay(2)
 		}
 	}
 	private void inputBranchName(String name) {
 		if(name) {
 			WebUI.setText(txfBankBranch, name)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputBICodeBank(String code) {
 		if(code) {
 			WebUI.setText(txfBICode, code)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputAccName(String name) {
 		if(name) {
 			WebUI.setText(txfAccName, name)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputAccountNo(String accNo) {
 		if(accNo) {
 			WebUI.setText(txfAccNo, accNo)
+			WebUI.delay(2)
 		}
 	}
 
@@ -148,35 +159,40 @@ public class FinancialDataPage extends BaseHelper {
 	private void clickAddStatement() {
 		handleAlertIfPresent()
 		WebUI.click(btnAddBankStatement)
+		WebUI.delay(2)
 	}
 
 	private void selectBankNameStatement(String bankName) {
 		if(bankName) {
-			WebUI.click(drpBankNameStatement)
 			WebUI.selectOptionByLabel(drpBankNameStatement, bankName, false)
+			WebUI.delay(2)
 		}
 	}
 	private void inputBankBranchStatement(String branchStatement) {
 		if(branchStatement) {
 			WebUI.setText(txfBankBranchStatement, branchStatement)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputBICodeStatement(String code) {
 		if(code) {
 			WebUI.setText(txfBICodeStatement, code)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputAccNameStatement(String accNameStatement) {
 		if(accNameStatement) {
 			WebUI.setText(txfAccNameStatement, accNameStatement)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputAccNoStatement(String accNoStatement) {
 		if(accNoStatement) {
 			WebUI.setText(txfAccNoStatement, accNoStatement)
+			WebUI.delay(2)
 		}
 	}
 
@@ -187,14 +203,15 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementBeginingBalance(String balance) {
 		if(balance) {
 			WebUI.setText(txfCreditBeginningBalance, balance)
+			WebUI.delay(2)
 		}
 	}
 
 	private void selectStatementMonth(String month, Integer index) {
 		if(month) {
 			TestObject drpMonth = createTestObject("", "xpath", "//*[@id='gvBankStatementAddEdit_ddlMonth_${index}']")
-			WebUI.click(drpMonth)
 			WebUI.selectOptionByLabel(drpMonth, month, false)
+			WebUI.delay(2)
 		}
 	}
 
@@ -202,12 +219,14 @@ public class FinancialDataPage extends BaseHelper {
 		if(year) {
 			TestObject txfYear = createTestObject("txfYear", "xpath", "//*[@id='gvBankStatementAddEdit_txtYear_${index}']")
 			WebUI.setText(txfYear, year)
+			WebUI.delay(2)
 		}
 	}
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
 			WebUI.setText(drpDebit, debit)
+			WebUI.delay(2)
 		}
 	}
 
@@ -215,6 +234,7 @@ public class FinancialDataPage extends BaseHelper {
 		if(credit) {
 			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
 			WebUI.setText(drpCredit, credit)
+			WebUI.delay(2)
 		}
 	}
 	private void handleAlertIfPresent() {
