@@ -186,6 +186,63 @@ class BaseHelper {
 		}
 	}
 
+	static Sheet openSheetNameByFilePath(String sheetName, String filePath) {
+		FileInputStream fis = new FileInputStream(filePath)
+		Workbook workbook = new XSSFWorkbook(fis)
+		return workbook.getSheet(sheetName)
+	}
+
+	static List<Map<String, String>> getTestDataMultipleByScenario(String sheetName, String filePath, String scenarioID) {
+
+		Sheet openedSheet = openSheetNameByFilePath(sheetName, filePath);
+
+		List<Map<String,String>> scenarioDataMultiple = new ArrayList<>();
+
+		int headerRow = 0
+		int scenarioColumn = -1
+
+		// Get Header Row
+		Row header = openedSheet.getRow(headerRow)
+		for (int i = 0; i < header.getLastCellNum(); i++) {
+			if (header.getCell(i).getStringCellValue() == "ScenarioId") {
+				scenarioColumn = i
+				break
+			}
+		}
+
+		if (scenarioColumn == -1) {
+			KeywordUtil.markFailed("Column 'ScenarioId' not found")
+			return null
+		}
+
+		// Loop through rows
+		for (int i = 1; i <= openedSheet.getLastRowNum(); i++) {
+			Row row = openedSheet.getRow(i)
+			if (row.getCell(scenarioColumn)?.getStringCellValue() == scenarioID) {
+				Map<String, String> dataMap = [:]
+				KeywordUtil.markPassed("Scenario Found: ${scenarioID}")
+				for (int j = 0; j < header.getLastCellNum(); j++) {
+					String key = header.getCell(j).getStringCellValue()
+					String value = row.getCell(j)?.getStringCellValue()
+					dataMap[key] = value
+				}
+				KeywordUtil.logInfo("Scenario Data: ${dataMap} for scenarioId : ${scenarioID}")
+				scenarioDataMultiple.add(dataMap)
+			}
+		}
+
+		if (scenarioDataMultiple.isEmpty()) {
+			KeywordUtil.markFailed("No Data Found for Scenario ID: ${scenarioID}")
+			return null
+		}
+
+
+		GlobalVariable.MULTIPLE_TEST_DATA = scenarioDataMultiple
+		return scenarioDataMultiple
+	}
+
+
+
 	static Map<String, String> getTestDataByScenarioAndAddressType(
 			String sheetName,
 			String filePath,

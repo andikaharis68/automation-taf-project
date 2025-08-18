@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_OtherAttribute</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d52617dd-e7e6-4177-ab94-87ea66b8a6c4</testCaseGuid>
+</TestCaseEntity>

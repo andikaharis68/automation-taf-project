@@ -36,10 +36,6 @@ public class AddressPage extends BaseHelper {
 	private TestObject txfDistrict				= createTestObject("txfDistrict", "xpath", "//*[@id='ucAddr_txtKecamatan']")
 	private TestObject txfCity					= createTestObject("txfCity", "xpath", "//*[@id='ucAddr_txtCity']")
 	private TestObject chxCustomerHaveFixedLine	= createTestObject("chxCustomerHaveFixedLine", "xpath", "//*[@id='ucAddr_cbIsPhn1NoMandatory']")
-	private TestObject txfPhone1				= createTestObject("txfPhone1", "xpath", "//*[@id='ucAddr_txtPhoneExt1']")
-	private TestObject txfPhone2				= createTestObject("txfPhone2", "xpath", "//*[@id='ucAddr_txtPhoneExt2']")
-	private TestObject txfPhone3				= createTestObject("txfPhone3", "xpath", "//*[@id='ucAddr_txtPhoneExt3']")
-	private TestObject txfFax 					= createTestObject("txfFax", "xpath", "//*[@id='ucAddr_txtFax']")
 
 	private TestObject drpBuildingLoc			= createTestObject("drpBuildingLoc", "xpath", "//*[@id='ucCustAddrInfo_ucAddrLocation_ddlReference']")
 	private TestObject drpBuildingOwnership		= createTestObject("drpBuildingOwnership", "xpath", "//*[@id='ucCustAddrInfo_ucOwnershipStat_ddlReference']")
@@ -59,11 +55,12 @@ public class AddressPage extends BaseHelper {
 	private TestObject btnOvlySelect			= createTestObject("btnOvlySelect", "xpath", "//*[@id='ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0']")
 
 	private TestObject btnSaveContinue			= createTestObject("btnSaveContinue", "xpath", "//*[@id='lb_Form_SaveCont_CustAddress']")
-	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[@id='lbl_Toolbar_Save']")
-	private TestObject btnCancel				= createTestObject("btnCancel", "xpath", "//*[@id='lb_Toolbar_Cancel']")
+	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[@id='lb_Form_Save_AddCust']")
+	private TestObject btnCancel				= createTestObject("btnCancel", "xpath", "//*[@id='lb_Form_Cancel_AddCust']")
 	private TestObject iframeAddress			= createTestObject("iframeAddress", "xpath", "//*[@id='custForm']")
-	private TestObject btnCopyAddress			= createTestObject("btnCopyAddress", "xpath", "")
+	private TestObject btnCopyAddress			= createTestObject("btnCopyAddress", "xpath", "//*[@id='lb_Form_CopyAddr']")
 	private TestObject btnSaveAddress			= createTestObject("btnSaveAddress", "xpath", "//*[@id='lb_Form_Save_AddCust']")
+	private TestObject drpCopyAddressFrom		= createTestObject("drpCopyAddressFrom", "xpath", "")
 
 
 
@@ -77,49 +74,46 @@ public class AddressPage extends BaseHelper {
 		WebUI.click(drpAddressSelected)
 	}
 
-	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
-		Map dataRow = BaseHelper.getTestDataByScenarioAndAddressType(sheetName, filePath, scenarioId, addressType)
-		KeywordUtil.logInfo("data " + dataRow)
+	private void inputAddress(String address) {
+		WebUI.setText(txfAddress, address)
+		WebUI.delay(3)
 	}
+
+	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
+		def testDataMultiple = BaseHelper.getTestDataMultipleByScenario(sheetName, filePath, scenarioId)
+
+		def testData = testDataMultiple?.find { it.AddressTypeName == addressType }
+
+		if (!testData) {
+			KeywordUtil.markFailed("AddressType '${addressType}' not found")
+		}
+
+		KeywordUtil.logInfo("testData: $testData")
+		return testData
+	}
+
 	private void inputRT(String rt) {
 		WebUI.setText(txfRT, rt)
+		WebUI.delay(3)
 	}
 
 	private void inputRW(String rw) {
 		WebUI.setText(txfRW, rw)
+		WebUI.delay(3)
 	}
 	private void searchAddress(String city) {
 		WebUI.click(btnSearchZIPCode)
 		WebUI.setText(txfOvlyCity, city)
+		Mobile.delay(3)
 		WebUI.click(btnOvlySearch)
+		Mobile.delay(2)
 		WebUI.click(btnOvlySelect) //select first address
+		handleAlertIfPresent()
 	}
 
 	private void checkCustomerHaveFixedline(String customerHaveFixedline) {
-		if(customerHaveFixedline != "") {
+		if(customerHaveFixedline) {
 			WebUI.click(chxCustomerHaveFixedLine)
-		}
-	}
-
-	private void inputPhoneNumber1(String phoneNumber) {
-		if(phoneNumber != "") {
-			WebUI.setText(txfPhone1, phoneNumber)
-		}
-	}
-
-	private void inputPhoneNumber2(String phoneNumber) {
-		if(phoneNumber != "") {
-			WebUI.setText(txfPhone2, phoneNumber)
-		}
-	}
-	private void inputPhoneNumber3(String phoneNumber) {
-		if(phoneNumber != "") {
-			WebUI.setText(txfPhone3, phoneNumber)
-		}
-	}
-	private void inputFax(String fax) {
-		if(fax != "") {
-			WebUI.setText(txfFax, fax)
 		}
 	}
 
@@ -139,9 +133,11 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void clickSaveContinue() {
+		WebUI.scrollToElement(btnSaveContinue, 2)
 		WebUI.click(btnSaveContinue)
 	}
 	private void clickSaveAddress() {
+		WebUI.scrollToElement(btnSave, 2)
 		WebUI.click(btnSave)
 	}
 	private void clickCancel() {
@@ -165,5 +161,48 @@ public class AddressPage extends BaseHelper {
 	private void switchToIframeAddress() {
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
+	}
+	private void inputPhoneNumbers(String phoneNumber, int index) {
+		if(phoneNumber) {
+			TestObject countryField, areaField, numberField
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}']")
+			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}']")
+
+			KeywordUtil.logInfo("phone " + phoneNumber)
+			String[] parts = phoneNumber.split("-")
+			if (parts.size() != 3) {
+				KeywordUtil.markWarning("Invalid phone format: ${phoneNumber}. Expected format is XXX-XXX-XXX")
+			}
+
+			WebUI.setText(countryField, parts[0])
+			WebUI.setText(areaField, parts[1])
+			WebUI.setText(numberField, parts[2])
+		}
+	}
+	private void inputFax(String fax) {
+		if(fax) {
+			TestObject countryField, areaField
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtFaxArea']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtFax']")
+
+			String[] parts = fax.split("-")
+			if (parts.size() != 3) {
+				KeywordUtil.markWarning("Invalid phone format: ${fax}. Expected format is XXX-XXX")
+			}
+			WebUI.setText(countryField, parts[0])
+			WebUI.setText(areaField, parts[1])
+		}
+	}
+
+	private void clickCopyAddress() {
+		WebUI.click(btnCopyAddress)
+	}
+	private void handleAlertIfPresent() {
+		if(WebUI.waitForAlert(5)) {
+			WebUI.acceptAlert()
+		} else {
+			KeywordUtil.logInfo("Alert not found")
+		}
 	}
 }
