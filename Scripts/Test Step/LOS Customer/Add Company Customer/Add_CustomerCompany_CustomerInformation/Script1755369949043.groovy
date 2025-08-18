@@ -22,14 +22,15 @@ import com.taf.customers.CustomerInformationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-def addCompanyCustomerPage = new AddCompanyCustomerPage()
-def customerInfoPage = new CustomerInformationPage()
+AddCompanyCustomerPage addCompanyCustomerPage = new AddCompanyCustomerPage()
+CustomerInformationPage customerInfoPage = new CustomerInformationPage()
+CompanyCustomerMainDataPage companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
+
 
 KeywordUtil.logInfo("scenarioData : ${CustomerModel}, ${CompanyName}, ${CompanyType}")
 
-
 'Step 1 : click button customer'
-customerInfoPage.addCompanyCustomer();
+customerInfoPage.addCompanyCustomer()
 
 'Step 2 : select customer model'
 addCompanyCustomerPage.selectCustomerModel(CustomerModel)
@@ -48,6 +49,8 @@ addCompanyCustomerPage.inputCustomerNitku(NITKU)
 
 'Step 7: click next'
 addCompanyCustomerPage.clickNextButton()
+
+'Step 8: Verify Landing customer main data'
 
 
 
