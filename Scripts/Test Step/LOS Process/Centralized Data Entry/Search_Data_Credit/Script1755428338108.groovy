@@ -14,18 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-dataRow += BaseHelper.getTestDataByScenario("CreditSimulation", GlobalVariable.TEST_DATA_LOCATION + "/" + "Credit_Simulation_TestData.xlsx", scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + "Credit_Simulation_TestData.xlsx", dataRow["CredentialId"])
-BaseHelper.openBrowser()
+CentralizeDataEntry cde = new CentralizeDataEntry()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_To_Credit_Simulation'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_Credit_Simulation'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Input_Data_To_New_Application'), dataRow, FailureHandling.STOP_ON_FAILURE)
+'Step 1: switch iframe'
+cde.switchToMainPage()
+
+'Step 2: search by customer name'
+cde.searchCustomerName(CustomerName)
+
+'Step 3: select from prospect list'
+cde.selectProspect()

@@ -23,9 +23,9 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class CreditSimulation extends BaseHelper {
-	//iFrame 
+	//iFrame
 	private TestObject iframeMainpage 						= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
-	
+
 	//header
 	private TestObject lblTitle								= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject btnAdd								= createTestObject("btnAdd", "id", "lb_Toolbar_Add")
@@ -56,12 +56,12 @@ public class CreditSimulation extends BaseHelper {
 	private TestObject drpPaymentPremiumMethod				= createTestObject("drpPaymentPremiumMethod", "id", "ddlPaymentMethod")
 
 	//Asset Data
+	private TestObject btnAddAsset							= createTestObject("btnAddAsset", "id", "lb_Form_Add")
 	private TestObject icoLookUpSupplierBranchName			= createTestObject("icoLookUpSupplierBranchName", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_imb")
 	private TestObject icoLookUpAssetName					= createTestObject("icoLookUpAssetName", "id", "ucLookupAssetMaster_uclMaster_imb")
 	private TestObject txfAssetPrice						= createTestObject("txfAssetPrice", "id", "ucAssetPrice_txtInput")
 	private TestObject txfDownPayment						= createTestObject("txfDownPayment", "id", "ucDownPaymentPrcnt_txtInput")
 	private TestObject drpAssetUsage 						= createTestObject("drpAssetUsage", "id", "ucAssetUsage_ddlReference")
-	private TestObject btnAddAsset							= createTestObject("btnAddAsset", "id", "lb_Form_Add")
 	private TestObject btnSaveAsset							= createTestObject("btnSaveAsset", "id", "lb_Form_Save_AddEdit")
 	private TestObject txtDpType
 	//Asset Data - Supplier branch name
@@ -97,45 +97,55 @@ public class CreditSimulation extends BaseHelper {
 	public void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
 	}
-	
+
 	public void verifyLandingScreen() {
 		verifyLanding(icoLookUpProductOffering, "Credit Simulation")
 	}
-	
+
 	public void clickAdd() {
+		WebUI.takeScreenshot()
 		WebUI.verifyElementPresent(btnAdd, 10)
-		WebUI.click(btnAdd)
+		BaseHelper.safetyClick(btnAdd)
 	}
+
+	public void clickAddAsset() {
+		WebUI.verifyElementPresent(btnAddAsset, 10)
+		BaseHelper.safetyClick(btnAddAsset)
+	}
+
 
 	public void inputMainInformation(String customerName, String customerType, String offeringCode, String maritalStatus, String numOfAsset) {
 		verifyLandingScreen()
+		WebUI.takeScreenshot()
 		txtCustomerType	= createTestObject("txtCustomerType", "xpath", "//*[text() = '$customerType']")
-		WebUI.setText(txfCustomerName, customerName)
-		WebUI.click(txtCustomerType)
+		BaseHelper.safetyInput(txfCustomerName, customerName)
+		BaseHelper.safetyClick(txtCustomerType)
 
-		WebUI.click(icoLookUpProductOffering)
+		BaseHelper.safetyClick(icoLookUpProductOffering)
 		WebUI.delay(1)
-		WebUI.setText(txfProductOfferingCode, offeringCode)
+		BaseHelper.safetyInput(txfProductOfferingCode, offeringCode)
 		WebUI.delay(1)
-		WebUI.click(btnSearch)
-		WebUI.click(btnSelect)
-		
+		BaseHelper.safetyClick(btnSearch)
+		BaseHelper.safetyClick(btnSelect)
+
 		WebUI.waitForElementVisible(drpMaritalStatus, 20)
-		WebUI.selectOptionByLabel(drpMaritalStatus, maritalStatus, false)
-		WebUI.setText(txfNumOfAsset, numOfAsset)
+		BaseHelper.safetySelect(drpMaritalStatus, maritalStatus)
+		//		WebUI.selectOptionByLabel(drpMaritalStatus, maritalStatus, false)
+		BaseHelper.clearAndSetText(txfNumOfAsset, numOfAsset)
 	}
 
 	public void inputApplicationData(String tenor, String installmentScheme, String paymentFrequency) {
-		WebUI.setText(txftenor, tenor)
-		WebUI.selectOptionByLabel(drpInstallmentScheme, installmentScheme, false)
-		WebUI.selectOptionByLabel(drpPaymentFrequency, paymentFrequency, false)
+		BaseHelper.safetyInput(txftenor, tenor)
+		BaseHelper.safetySelect(drpInstallmentScheme, installmentScheme)
+		BaseHelper.safetySelect(drpPaymentFrequency, paymentFrequency)
 	}
 
 	public void inputLifeInsuranceData(String branchName, String premiumPaymentMethod) {
-		WebUI.click(chkCoverLifeInsurance)
-		WebUI.selectOptionByLabel(drpLifeInscoBranchName, branchName, false)
-		WebUI.click(chkCustomer)
-		WebUI.selectOptionByLabel(drpPaymentPremiumMethod, premiumPaymentMethod, false)
+		BaseHelper.safetyClick(chkCoverLifeInsurance)
+		BaseHelper.safetySelect(drpLifeInscoBranchName, branchName)
+		BaseHelper.safetyClick(chkCustomer)
+		BaseHelper.safetySelect(drpPaymentPremiumMethod, premiumPaymentMethod)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickNext() {
@@ -145,48 +155,53 @@ public class CreditSimulation extends BaseHelper {
 	public void inputAssetData(String suppBranchName, assetName, assetPrice, dpType, downPayment, assetUsage) {
 		txtDpType	= createTestObject("txtCustomerType", "xpath", "//*[text() = '$dpType']")
 		//supp branch name
-		WebUI.click(icoLookUpSupplierBranchName)
-		WebUI.setText(txfSuppBranchName, suppBranchName)
-		WebUI.click(btnSearchSuppBranch)
-		WebUI.click(btnSelectSuppBranch)
+		BaseHelper.safetyClick(icoLookUpSupplierBranchName)
+		BaseHelper.safetyInput(txfSuppBranchName, suppBranchName)
+		BaseHelper.safetyClick(btnSearchSuppBranch)
+		BaseHelper.safetyClick(btnSelectSuppBranch)
 
 		//asset name
-		WebUI.click(icoLookUpAssetName)
-		WebUI.setText(txfAssetName, assetName)
-		WebUI.click(btnSeacrhAssetName)
-		WebUI.click(btnSelectAssetName)
+		BaseHelper.safetyClick(icoLookUpAssetName)
+		BaseHelper.safetyInput(txfAssetName, assetName)
+		BaseHelper.safetyClick(btnSeacrhAssetName)
+		BaseHelper.safetyClick(btnSelectAssetName)
 
-		WebUI.setText(txfAssetPrice, assetPrice)
-		
-		WebUI.click(txtDpType)
-		WebUI.setText(txfDownPayment, downPayment)
-		WebUI.selectOptionByLabel(drpAssetUsage, assetUsage, false)
+		BaseHelper.clearAndSetText(txfAssetPrice, assetPrice)
 
-		WebUI.click(btnSaveAsset)
+		BaseHelper.safetyClick(txtDpType)
+		BaseHelper.clearAndSetText(txfDownPayment, downPayment)
+		BaseHelper.safetySelect(drpAssetUsage, assetUsage)
+
+		BaseHelper.safetyClick(btnSaveAsset)
 	}
 
 	public void inputInsuranceDataInitialization(String schemeName) {
-		WebUI.click(btnPencilInsuranceData)
-		WebUI.selectOptionByLabel(drpSchemeName, schemeName, false)
-		WebUI.click(btnNextInsuranceDataInitialization)
+		BaseHelper.safetyClick(btnPencilInsuranceData)
+		BaseHelper.safetySelect(drpSchemeName, schemeName)
+		BaseHelper.safetyClick(btnNextInsuranceDataInitialization)
 	}
 
 	public void inputInsuranceRateToCustomer(String coverageType1, coverageType2) {
-		WebUI.selectOptionByLabel(drpMainCoverageType1, coverageType1, false)
-		WebUI.selectOptionByLabel(drpMainCoverageType2, coverageType2, false)
+		BaseHelper.safetySelect(drpMainCoverageType1, coverageType1)
+		WebUI.delay(3)
+		BaseHelper.safetySelect(drpMainCoverageType2, coverageType2)
 
-		WebUI.click(btnCalculateInsuranceRate)
-		WebUI.click(btnSaveInsuranceDataInitialization)
+		BaseHelper.safetyClick(btnCalculateInsuranceRate)
+		BaseHelper.safetyClick(btnSaveInsuranceDataInitialization)
+		WebUI.takeScreenshot()
 	}
 
 	public void calculateFeeAndFinancialData() {
-		WebUI.click(btnCalculateFee)
-		WebUI.click(btnCalculateOnFeesSection) // sebelah kanan btncalculateFee
-		WebUI.click(btnCalculateInstallment)
+		BaseHelper.safetyClick(btnCalculateFee)
+		BaseHelper.safetyClick(btnCalculateOnFeesSection) // sebelah kanan btncalculateFee
+		BaseHelper.safetyClick(btnCalculateInstallment)
 	}
 
 	public void clickGenerate() {
+		WebUI.waitForElementPresent(btnGenerate, 20)
 		WebUI.click(btnGenerate)
+		WebUI.delay(3)
+		WebUI.takeScreenshot()
 	}
 
 	public void switchToDefaultContent() {

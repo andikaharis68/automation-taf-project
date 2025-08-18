@@ -37,8 +37,14 @@ credsim.inputLifeInsuranceData(LifeInscoBranchName, PremiumPaymentMethod)
 'Step 4: klik next'
 credsim.clickNext()
 
+'Step 4: klik add asset data'
+credsim.clickAddAsset()
+
 'Step 5: input section asset data'
 credsim.inputAssetData(SupplierBranchName, AssetName, AssetPrice, DpType, DownPayment, AssetUsage)
+
+'Step 5: klik next'
+credsim.clickNext()
 
 'Step 6: input section insurance data initialization'
 credsim.inputInsuranceDataInitialization(SchemeName)
