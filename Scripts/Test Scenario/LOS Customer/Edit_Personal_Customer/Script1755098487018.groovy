@@ -14,6 +14,48 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.helpers.BaseHelper
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+
+BaseHelper.openBrowser()
+Map ScenarioData = ['ScenarioId' : '1']
+
+Map dataRow = [:]
+dataRow += ScenarioData
+dataRow += BaseHelper.getTestDataByScenario("Credentials", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("CustInformation",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("MainData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.delay(10)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/NavigateTo_CustomerInformation_Page'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Search_CustomerInformation_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Input_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+
+dataRow += ['LegalAdressExist' : false,
+			'ResidenceAddressExist' : false,
+			'JobAddressExist' : false]
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Check_Address_List'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+
+if(dataRow['LegalAdressExist']) {
+	println('masuk legal ada')
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_LegalAddress'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+if(dataRow['ResidenceAddressExist']) {
+	println('masuk residence ada')
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_ResidenceAddress'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+if(dataRow['JobAddressExist']) {
+	println('masuk job ada')
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobAddress'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+
+
+//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

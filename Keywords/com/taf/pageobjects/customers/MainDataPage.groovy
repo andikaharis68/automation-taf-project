@@ -90,7 +90,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		safetySelect(drpSalutation, salutation)
+		safetySelectEdit(drpSalutation, salutation)
 	}
 
 	private void inputPrefixName(String name) {
@@ -106,7 +106,7 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectMaritalStatus(String status) {
 		WebUI.scrollToElement(drpMaritalStatus, 2)
-		safetySelect(drpMaritalStatus, status)
+		safetySelectEdit(drpMaritalStatus, status)
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
@@ -122,7 +122,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkPremiumStatus(String isPremium) {
-		if(isPremium?.trim() == 'Y') {
+		if(isPremium?.trim() == 'Y' && isPremium) {
 			WebUI.check(chxIsPremium)
 			WebUI.delay(2)
 		}
@@ -130,7 +130,8 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectNationality(String nationality) {
 		WebUI.scrollToElement(drpNationality, 2)
-		safetySelect(drpNationality, nationality)
+		safetySelectEdit(drpNationality, nationality)
+
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
@@ -169,12 +170,11 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectEducation(String education) {
 		WebUI.scrollToElement(drpEducation, 2)
-		safetySelect(drpEducation, education)
+		safetySelectEdit(drpEducation, education)
 	}
 
 	private void selectReligion(String religion) {
-		WebUI.scrollToElement(drpReligion, 2)
-		safetySelect(drpReligion, religion)
+		safetySelectEdit(drpReligion, religion)
 	}
 
 
@@ -193,7 +193,6 @@ public class MainDataPage extends BaseHelper {
 	private void checkIsVIP(String isVIP) {
 		if(isVIP?.trim() == 'Y') {
 			safetyClick(chxIsVIP)
-		}
 	}
 
 	private void inputPremiumNote(String premiumNote) {
@@ -217,8 +216,9 @@ public class MainDataPage extends BaseHelper {
 		if(rip?.trim() == 'Y') {
 			safetyClick(chxRIP)
 			WebUI.takeScreenshot()
-		}
-	}
+	  }
+  }
+	
 
 	private TestObject getMobilePhoneField(int index) {
 		TestObject dynamicObject = createTestObject("dynamicObject", "xpath", "//*[@id='txtMblPhn${index}']")
@@ -250,7 +250,9 @@ public class MainDataPage extends BaseHelper {
 		safetyClick(btnSaveContinue)
 		WebUI.takeScreenshot()
 	}
+	
 	private void switchToIframeCustForm() {
+		WebUI.delay(3)
 		WebUI.verifyElementPresent(iframeCustForm, 5)
 		WebUI.switchToFrame(iframeCustForm, 1)
 	}
