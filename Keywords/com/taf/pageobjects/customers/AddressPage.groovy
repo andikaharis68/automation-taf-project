@@ -90,8 +90,7 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRT(String rt) {
-		safetyInput(txfRT, rt)
-		WebUI.delay(3)
+		safetyInputEdit(txfRT, rt, 1.5)
 	}
 
 	private void searchAddress(String zipCode) {
@@ -108,12 +107,13 @@ public class AddressPage extends BaseHelper {
 		WebUI.delay(2)
 		handleAlertIfPresent()
 		WebUI.takeScreenshot()
-		safetyInputEdit(txfRT, rt, 1.5)
+		
 	}
 
 	private void inputRW(String rw) {
 		safetyInputEdit(txfRW, rw, 1.5)
 	}
+
 	private void checkAddress(String zipCode) {
 		int maxRetry = 3
 		int attempt = 0

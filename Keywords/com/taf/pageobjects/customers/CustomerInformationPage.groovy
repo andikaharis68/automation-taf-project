@@ -86,6 +86,7 @@ public class CustomerInformationPage extends BaseHelper {
 	private void switchToDefaultContent() {
 		WebUI.switchToDefaultContent()
 	}
+
 	private void searchCustomerName(String fullname) {
 		safetyInput(txfCustomerNo, fullname)
 		WebUI.delay(2)
@@ -97,7 +98,6 @@ public class CustomerInformationPage extends BaseHelper {
 	}
 	
 
-	
 	private void clickEdit() {
 		WebUI.click(btnPenEditCustomer)
 	}

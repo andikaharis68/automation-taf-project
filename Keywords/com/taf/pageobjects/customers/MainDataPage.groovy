@@ -91,7 +91,6 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectSalutation(String salutation) {
 		safetySelectEdit(drpSalutation, salutation)
-		WebUI.delay(2)
 	}
 
 	private void inputPrefixName(String name) {
@@ -221,6 +220,7 @@ public class MainDataPage extends BaseHelper {
 		}
 	}
 
+
 	private TestObject getMobilePhoneField(int index) {
 		TestObject dynamicObject = createTestObject("dynamicObject", "xpath", "//*[@id='txtMblPhn${index}']")
 		return dynamicObject
@@ -251,6 +251,7 @@ public class MainDataPage extends BaseHelper {
 		safetyClick(btnSaveContinue)
 		WebUI.takeScreenshot()
 	}
+
 	private void switchToIframeCustForm() {
 		WebUI.delay(3)
 		WebUI.verifyElementPresent(iframeCustForm, 5)
