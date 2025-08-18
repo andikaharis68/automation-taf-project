@@ -20,8 +20,6 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.SelectorMethod
 
@@ -37,8 +35,6 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 
 import com.kms.katalon.core.testobject.RequestObject
 import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.testobject.SelectorMethod
-import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObjectProperty
 
 import com.kms.katalon.core.util.KeywordUtil

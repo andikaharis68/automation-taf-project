@@ -11,3 +11,13 @@ Reports
 .prj
 
 .project
+
+.setings/
+
+.idea/
+
+lib/
+Libs
+gradle/
+gradlew.bat
+gradlew
