@@ -82,8 +82,7 @@ public class MainDataPage extends BaseHelper {
 	private TestObject btnOvlyResetCountry				= createTestObject("btnOvlyResetCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_ucS_lbReset']")
 	private TestObject btnSelectCountry					= createTestObject("btnSelectCountry", "xpath", "//*[@id='ucCountry_uclCountry_umd_ctl00_gvL_hpSelect_0']")
 	private TestObject iframeMainData					= createTestObject("iframeMainData", "xpath", "//*[@id='custForm']")
-	private TestObject lblNotif							= createTestObject("lblNotif", "xpath", "//*[@id='messageContent']") 
-
+	private TestObject lblNotif							= createTestObject("lblNotif", "xpath", "//*[@id='messageContent']")
 
 	private void verifyLandingInMainData() {
 		verifyLanding(drpSalutation, "Main Data")
@@ -96,12 +95,12 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void inputPrefixName(String name) {
-		if(name != "") {
+		if(name) {
 			WebUI.setText(txfPrefixName, name)
 		}
 	}
 	private void inputFullName(String name) {
-		if(txfFullName == "") {
+		if(txfFullName) {
 			WebUI.setText(txfFullName, name)
 		}
 	}
@@ -113,18 +112,18 @@ public class MainDataPage extends BaseHelper {
 		WebUI.click(drpStatusSelected)
 	}
 	private void inputSuffixName(String name) {
-		if(name != "") {
+		if(name) {
 			WebUI.setText(txfSuffixName, name)
 		}
 	}
 	private void inputNickName(String name) {
-		if(name != "") {
+		if(name) {
 			WebUI.setText(txfNickName, name)
 		}
 	}
 
 	private void checkPremiumStatus(String isPremium) {
-		if(isPremium!= "") {
+		if(isPremium) {
 			WebUI.click(chxIsPremium)
 		}
 	}
@@ -136,7 +135,7 @@ public class MainDataPage extends BaseHelper {
 		WebUI.click(drpNationalSelected)
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
-		if(customerGroup != "") {
+		if(customerGroup) {
 			WebUI.scrollToElement(btnSearchCustomerGroup, 2)
 			WebUI.click(btnSearchCustomerGroup)
 			WebUI.setText(txfOvlyCustomerName, name)
@@ -145,21 +144,21 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void inputNumberOfDependents(String numberOfDependents) {
-		if(numberOfDependents != "") {
+		if(numberOfDependents) {
 			WebUI.scrollToElement(txfNumOfDependent, 0)
 			WebUI.setText(txfNumOfDependent, numberOfDependents)
 		}
 	}
 
 	private void inputNumberOfResidence(String numberOfResidence) {
-		if(numberOfResidence != "") {
+		if(numberOfResidence) {
 			WebUI.scrollToElement(txfNumOfResidence, 1)
 			WebUI.setText(txfNumOfResidence, numberOfResidence)
 		}
 	}
 
 	private void inputFamilyCardNum(String familyCardNum) {
-		if(familyCardNum != "") {
+		if(familyCardNum) {
 			WebUI.scrollToElement(txfFamilyCard, 2)
 			WebUI.setText(txfFamilyCard, familyCardNum)
 		}
@@ -181,7 +180,7 @@ public class MainDataPage extends BaseHelper {
 
 
 	private void selectCountry(String country) {
-		if(country != "") {
+		if(country) {
 			WebUI.click(btnSearchCountry)
 			WebUI.setText(txfCountryName, country)
 			WebUI.click(btnOvlySearchCountry)
@@ -190,61 +189,61 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void checkIsVIP(String isVIP) {
-		if(isVIP != "") {
+		if(isVIP) {
 			WebUI.click(chxIsVIP)
 		}
 	}
 
 	private void inputPremiumNote(String premiumNote) {
-		if(premiumNote != "") {
+		if(premiumNote) {
 			WebUI.setText(txfPremiumNote, premiumNote)
 		}
 	}
 
 	private void inputSIDNo(String sidNo) {
-		if(sidNo != "") {
+		if(sidNo) {
 			WebUI.setText(txfSIDNo, sidNo)
 		}
 	}
 
 	private void checkAffiliationWithMultifinance(String affiliation) {
-		if(affiliation != "") {
+		if(affiliation) {
 			WebUI.click(chxAffiliationwithMultifinance)
 		}
 	}
 	private void checkRIP(String rip) {
-		if(rip != "") {
+		if(rip) {
 			WebUI.click(chxRIP)
 		}
 	}
 
 	private void inputMobilePhone1(String phone) {
-		if(phone != "") {
+		if(phone) {
 			WebUI.scrollToElement(txfMobilePhone1, 1)
 			WebUI.setText(txfMobilePhone1, phone)
 		}
 	}
 	private void inputMobilePhone2(String phone) {
-		if(phone != "") {
+		if(phone) {
 			WebUI.scrollToElement(txfMobilePhone2, 1)
 			WebUI.setText(txfMobilePhone2, phone)
 		}
 	}
 	private void inputMobilePhone3(String phone) {
-		if(phone != "") {
+		if(phone) {
 			WebUI.scrollToElement(txfMobilePhone3, 1)
 			WebUI.setText(txfMobilePhone3, phone)
 		}
 	}
 	private void inputEmail1(String email) {
-		if(email != "") {
+		if(email) {
 			WebUI.scrollToElement(txfEmail1, 1)
 			WebUI.setText(txfEmail1, email)
 		}
 	}
 
 	private void inputEmail2(String email) {
-		if(email != "") {
+		if(email) {
 			WebUI.scrollToElement(txfEmail2, 1)
 			WebUI.setText(txfEmail2, email)
 		}

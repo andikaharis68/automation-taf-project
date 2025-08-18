@@ -34,6 +34,11 @@ public class GlobalVariable {
      */
     public static Object TEST_CASE_NAME
      
+    /**
+     * <p></p>
+     */
+    public static Object MULTIPLE_TEST_DATA
+     
 
     static {
         try {
@@ -45,6 +50,7 @@ public class GlobalVariable {
             TEST_DATA_LOCATION = selectedVariables['TEST_DATA_LOCATION']
             TEST_DATA = selectedVariables['TEST_DATA']
             TEST_CASE_NAME = selectedVariables['TEST_CASE_NAME']
+            MULTIPLE_TEST_DATA = selectedVariables['MULTIPLE_TEST_DATA']
             
         } catch (Exception e) {
             TestCaseMain.logGlobalVariableError(e)

@@ -73,24 +73,24 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void inputIdExpiredDate(String idExpiredDate) {
 		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
-		hideDatePicker()
+		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
 		radGender = createTestObject("radGender", "xpath", "//*[normalize-space(text())='$gender']")
 		WebUI.click(radGender)
 	}
 
-	private void hideDatePicker() {
-		WebUI.click(lblSection)
+	private void hideDatePicker(TestObject to) {
+		WebUI.sendKeys(to, '\uE004') // Unicode dari Keys.TAB
+	
 	}
-
 	private void inputPOB(String pob) {
 		WebUI.setText(txfPOB, pob)
 	}
 
 	private void inputDOB(String dob) {
 		WebUI.sendKeys(txfDOB, dob)
-		hideDatePicker()
+		hideDatePicker(txfDOB)
 	}
 
 	private void inputNPWP(String npwp) {
