@@ -26,10 +26,18 @@ import com.kms.katalon.core.testobject.SelectorMethod
 import internal.GlobalVariable
 
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.edge.EdgeDriver
+import org.openqa.selenium.edge.EdgeOptions
 import org.openqa.selenium.WebDriver
+
+import static org.openqa.selenium.PageLoadStrategy.NONE
+
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.openqa.selenium.By
+import org.openqa.selenium.Keys
+import org.openqa.selenium.PageLoadStrategy
 
 import com.kms.katalon.core.webui.driver.DriverFactory
 
@@ -324,11 +332,47 @@ class BaseHelper {
 	}
 	
 	static void openBrowser() {
+//		EdgeOptions options = new EdgeOptions()
+//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
+//		WebDriver driver = new EdgeDriver(options)
+//		
 		WebUI.openBrowser(GlobalVariable.WEB_URL)
 		WebUI.maximizeWindow()
 	}
 	
 	static void closeBrowser() {
 		WebUI.closeBrowser()
+	}
+	
+	static void clearAndSetText(TestObject to, String text, double delay = 0.1) {
+		WebUI.waitForElementVisible(to, 10)
+		WebUI.click(to)
+		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, "a"))
+		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
+		WebUI.setText(to, text)
+	}
+	
+	static void safetyInput(TestObject to, String text, double delay = 0.1) {
+		WebUI.delay(delay)
+		WebUI.clearText(to)
+		WebUI.delay(delay)
+		for (char c : text.toCharArray()) {
+			WebUI.sendKeys(to, String.valueOf(c))
+			WebUI.delay(delay)
+		}
+	}
+	
+	static void safetyClick(TestObject to, double delay = 1) {
+		TestObject loadingBar = new TestObject("loadingBar")
+		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
+		WebUI.waitForElementPresent(to, 10)
+		WebUI.click(to)
+		WebUI.delay(delay)
+		WebUI.waitForElementNotVisible(loadingBar, 30)
+	}
+	
+	static void safetySelect(TestObject to, String text, double delay = 1) {
+		WebUI.selectOptionByLabel(to, text, false)
+		WebUI.delay(delay)
 	}
 }
