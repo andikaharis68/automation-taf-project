@@ -31,3 +31,6 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerInformation'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerMainData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 
+scenarioData += BaseHelper.getTestDataByScenario("Address",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalAddressCompany'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CompanyAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_ManagementShareholder</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>57e1fe67-92ef-4967-bb59-bfeab48774c6</testCaseGuid>
+</TestCaseEntity>

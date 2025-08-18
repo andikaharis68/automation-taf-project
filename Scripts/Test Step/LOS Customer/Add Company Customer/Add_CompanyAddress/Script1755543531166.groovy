@@ -27,7 +27,7 @@ AddressPage address = new AddressPage()
 address.clickAddAddress()
 
 'Step 2: Select Address Type = Legal Address'
-AddressType = "Legal Address"
+AddressType = "Company Address"
 address.selectAddressType(AddressType)
 
 'Step 3: Get Address Detail from excel'
@@ -78,12 +78,11 @@ address.inputDirectionDesc(AddressData.DirectionDescription)
 'Step 18: Input notes'
 address.inputNotes(AddressData.Notes)
 
-'Step 19: Input Company Name'
-address.inputCompanyName(AddressData.CompanyName)
-
-'Step 20: Click Save'
+'Step 19: Click Save'
 address.clickSaveAddress()
 
+'Step 20: Click Save and continue'
+address.clickSaveContinue()
 
 
 

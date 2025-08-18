@@ -64,6 +64,7 @@ public class MenuPage extends BaseHelper {
 	private void clickDropdownMenu() {
 		WebUI.verifyElementPresent(drpMenu, 10)
 		WebUI.click(drpMenu)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -72,6 +73,7 @@ public class MenuPage extends BaseHelper {
 
 	private void clickCustomer() {
 		WebUI.click(btnCustomer)
+		WebUI.takeScreenshot()
 	}
 	private void clickCreditSimulation() {
 		WebUI.click(btnCreditSimulation)
@@ -159,6 +161,7 @@ public class MenuPage extends BaseHelper {
 	}
 	private void clickSubMenuCustomer() {
 		WebUI.click(btnSubMenuCustomer)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickTAFReports() {

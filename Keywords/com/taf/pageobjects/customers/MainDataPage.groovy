@@ -90,37 +90,33 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		WebUI.selectOptionByLabel(drpSalutation, salutation, false)
-		WebUI.delay(2)
+		safetySelect(drpSalutation, salutation)
 	}
 
 	private void inputPrefixName(String name) {
 		if(name) {
-			WebUI.setText(txfPrefixName, name)
-			WebUI.delay(2)
+			safetyInput(txfPrefixName, name)
 		}
 	}
 	private void inputFullName(String name) {
 		if(txfFullName) {
-			WebUI.setText(txfFullName, name)
-			WebUI.delay(2)
+			safetyInput(txfFullName, name)
 		}
 	}
 
 	private void selectMaritalStatus(String status) {
 		WebUI.scrollToElement(drpMaritalStatus, 2)
-		WebUI.selectOptionByLabel(drpMaritalStatus, status, false)
-		WebUI.delay(2)
+		safetySelect(drpMaritalStatus, status)
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
-			WebUI.setText(txfSuffixName, name)
+			safetyInput(txfSuffixName, name)
 			WebUI.delay(2)
 		}
 	}
 	private void inputNickName(String name) {
 		if(name) {
-			WebUI.setText(txfNickName, name)
+			safetyInput(txfNickName, name)
 			WebUI.delay(2)
 		}
 	}
@@ -134,16 +130,15 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectNationality(String nationality) {
 		WebUI.scrollToElement(drpNationality, 2)
-		WebUI.selectOptionByLabel(drpNationality, nationality, false)
-		WebUI.delay(2)
+		safetySelect(drpNationality, nationality)
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
 			WebUI.scrollToElement(btnSearchCustomerGroup, 2)
-			WebUI.click(btnSearchCustomerGroup)
+			safetyClick(btnSearchCustomerGroup)
 			WebUI.delay(2)
-			WebUI.setText(txfOvlyCustomerName, name)
-			WebUI.click(btnOvlySelect)
+			safetyInput(txfOvlyCustomerName, name)
+			safetyClick(btnOvlySelect)
 			WebUI.delay(2)
 		}
 	}
@@ -151,7 +146,7 @@ public class MainDataPage extends BaseHelper {
 	private void inputNumberOfDependents(String numberOfDependents) {
 		if(numberOfDependents) {
 			WebUI.scrollToElement(txfNumOfDependent, 1)
-			WebUI.setText(txfNumOfDependent, numberOfDependents)
+			safetyInput(txfNumOfDependent, numberOfDependents)
 			WebUI.delay(2)
 		}
 	}
@@ -159,7 +154,7 @@ public class MainDataPage extends BaseHelper {
 	private void inputNumberOfResidence(String numberOfResidence) {
 		if(numberOfResidence) {
 			WebUI.scrollToElement(txfNumOfResidence, 1)
-			WebUI.setText(txfNumOfResidence, numberOfResidence)
+			safetyInput(txfNumOfResidence, numberOfResidence)
 			WebUI.delay(2)
 		}
 	}
@@ -167,66 +162,61 @@ public class MainDataPage extends BaseHelper {
 	private void inputFamilyCardNum(String familyCardNum) {
 		if(familyCardNum) {
 			WebUI.scrollToElement(txfFamilyCard, 2)
-			WebUI.setText(txfFamilyCard, familyCardNum)
+			safetyInput(txfFamilyCard, familyCardNum)
 			WebUI.delay(2)
 		}
 	}
 
 	private void selectEducation(String education) {
 		WebUI.scrollToElement(drpEducation, 2)
-		WebUI.selectOptionByLabel(drpEducation, education, false)
-		WebUI.delay(2)
+		safetySelect(drpEducation, education)
 	}
 
 	private void selectReligion(String religion) {
 		WebUI.scrollToElement(drpReligion, 2)
-		WebUI.selectOptionByLabel(drpReligion, religion, false)
-		WebUI.delay(2)
+		safetySelect(drpReligion, religion)
 	}
 
 
 	private void selectCountry(String country) {
 		if(country) {
-			WebUI.click(btnSearchCountry)
-			WebUI.delay(2)
-			WebUI.setText(txfCountryName, country)
-			WebUI.click(btnOvlySearchCountry)
-			WebUI.delay(2)
-			WebUI.click(btnSelectCountry)
+			safetyClick(btnSearchCountry)
+			
+			safetyInput(txfCountryName, country)
+			
+			safetyClick(btnOvlySearchCountry)
+			
+			safetyClick(btnSelectCountry)
 		}
 	}
 
 	private void checkIsVIP(String isVIP) {
 		if(isVIP?.trim() == 'Y') {
-			WebUI.click(chxIsVIP)
-			WebUI.delay(2)
+			safetyClick(chxIsVIP)
 		}
 	}
 
 	private void inputPremiumNote(String premiumNote) {
 		if(premiumNote) {
-			WebUI.setText(txfPremiumNote, premiumNote)
-			WebUI.delay(2)
+			safetyInput(txfPremiumNote, premiumNote)
 		}
 	}
 
 	private void inputSIDNo(String sidNo) {
 		if(sidNo) {
-			WebUI.setText(txfSIDNo, sidNo)
-			WebUI.delay(2)
+			safetyInput(txfSIDNo, sidNo)
 		}
 	}
 
 	private void checkAffiliationWithMultifinance(String affiliation) {
 		if(affiliation?.trim() == 'Y') {
-			WebUI.click(chxAffiliationwithMultifinance)
-			WebUI.delay(2)
+			safetyClick(chxAffiliationwithMultifinance)
 		}
 	}
 	private void checkRIP(String rip) {
 		if(rip?.trim() == 'Y') {
-			WebUI.click(chxRIP)
-			WebUI.delay(2)
+			safetyClick(chxRIP)
+			WebUI.takeScreenshot()
 		}
 	}
 
@@ -243,8 +233,7 @@ public class MainDataPage extends BaseHelper {
 		if (phone?.trim()) {
 			TestObject phoneField = getMobilePhoneField(index)
 			WebUI.scrollToElement(phoneField, 1)
-			WebUI.setText(phoneField, phone)
-			WebUI.delay(2)
+			safetyInput(phoneField, phone)
 		}
 	}
 
@@ -252,17 +241,16 @@ public class MainDataPage extends BaseHelper {
 		if(email?.trim()) {
 			TestObject emailField = getEmailField(index)
 			WebUI.scrollToElement(emailField, 1)
-			WebUI.setText(emailField, email)
-			WebUI.delay(2)
+			safetyInput(emailField, email)
+			WebUI.takeScreenshot()
 		}
 	}
 	private void clickSaveAndContinue() {
 		WebUI.scrollToElement(btnSaveContinue, 5)
-		WebUI.click(btnSaveContinue)
-		WebUI.delay(2)
+		safetyClick(btnSaveContinue)
+		WebUI.takeScreenshot()
 	}
 	private void switchToIframeCustForm() {
-		WebUI.delay(2)
 		WebUI.verifyElementPresent(iframeCustForm, 5)
 		WebUI.switchToFrame(iframeCustForm, 1)
 	}
@@ -277,18 +265,18 @@ public class MainDataPage extends BaseHelper {
 	}
 	private void clickBtnEditOrNewApp() {
 		Mobile.delay(5)
-		if(WebUI.verifyElementPresent(lblNewCustomer, 2)) {
+		if(WebUI.verifyElementPresent(lblNewCustomer, 2, FailureHandling.OPTIONAL)) {
 			switchToIframeMainPage()
-			WebUI.click(lblNewCustomer)
-		} else if(WebUI.verifyElementPresent(btnEdit, 2)) {
+			safetyClick(lblNewCustomer)
+		} else if(WebUI.verifyElementPresent(btnEdit, 2, FailureHandling.OPTIONAL)) {
 			switchToIframeMainPage()
-			WebUI.click(btnEdit)
+			safetyClick(btnEdit)
 		} else {
 			KeywordUtil.logInfo("skipped")
 		}
 	}
-	
-	private void switchToIframeMainPage() { 
+
+	private void switchToIframeMainPage() {
 		switchToDefaultContent()
 		TestObject iframeMainPage = createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 		WebUI.verifyElementPresent(iframeMainPage, 5)

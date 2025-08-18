@@ -63,76 +63,73 @@ public class JobDataPage extends BaseHelper {
 
 
 	private void verifyLandingInJobDataPage() {
+		WebUI.takeScreenshot()
 		verifyLanding(txfProfessionName, "Job Data")
-		WebUI.delay(2)
 	}
 	private void clickSaveContinue() {
-		WebUI.click(btnSaveAndContinue)
+		handleAlertIfPresent()
+		safetyClick(btnSaveAndContinue)
+		handleAlertIfPresent()
 		WebUI.takeScreenshot()
 	}
 
 	private void selectProfessionName(String professionName) {
-		WebUI.click(btnSearchProfessionName)
-		WebUI.delay(2)
-		WebUI.setText(txfOvlyProfessionName, professionName)
-		WebUI.click(btnOvlySearchProfesi)
-		WebUI.click(btnOvlySelectProfesi)
-		WebUI.delay(2)
-		
+		safetyClick(btnSearchProfessionName)
+		safetyInput(txfOvlyProfessionName, professionName)
+		safetyClick(btnOvlySearchProfesi)
+		safetyClick(btnOvlySelectProfesi)
 	}
 	private void inputProfessionNo(String professionNo) {
-		WebUI.setText(txfProfessionNo, professionNo)
-		WebUI.delay(2)
+		safetyInput(txfProfessionNo, professionNo)
 	}
 	private void selectJobPosition(String jobPosition) {
-		WebUI.selectOptionByLabel(drpJobPosition, jobPosition, false)
+		safetySelect(drpJobPosition, jobPosition)
 		WebUI.delay(2)
 	}
 	private void selectJobStatus(String jobStatus) {
 		if(jobStatus) {
-			WebUI.selectOptionByLabel(drpJobStatus, jobStatus, false)
+			safetySelect(drpJobStatus, jobStatus)
 			WebUI.delay(2)
 		}
 	}
 	private void inputCompanyName(String companyName) {
 		if(!companyName) {
-			WebUI.setText(txfCompanyName, companyName)
+			safetyInput(txfCompanyName, companyName)
 			WebUI.delay(2)
+			WebUI.takeScreenshot()
 		}
 	}
 
 	private void chxInternalEmployee(String isInternalEmployee) {
 		if(isInternalEmployee?.trim() == "Y") {
-			WebUI.click(chxIsInternalEmployee)
+			safetyClick(chxIsInternalEmployee)
 			WebUI.delay(2)
 		}
 	}
 
 	private void selectIndustryTypeName(String industryType) {
 		if(industryType) {
-			WebUI.click(btnSearchIndustryType)
+			safetyClick(btnSearchIndustryType)
 			WebUI.delay(2)
-			
-			WebUI.setText(txfOvlyIndustryType, industryType)
+
+			safetyInput(txfOvlyIndustryType, industryType)
 			WebUI.delay(2)
-			
-			WebUI.click(btnOvlySearchIndustry)
+
+			safetyClick(btnOvlySearchIndustry)
 			WebUI.delay(2)
-			
-			WebUI.click(btnOvlySelectIndustry)
+
+			safetyClick(btnOvlySelectIndustry)
 			WebUI.delay(2)
-			
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
 		if(companyScale) {
-			WebUI.selectOptionByLabel(drpCompanyScale, companyScale, false)
-			WebUI.delay(2)
+			safetySelect(drpCompanyScale, companyScale)
 		}
 	}
 	private void inputNumberOfEmployee(String numberOfEmployee) {
 		if(numberOfEmployee) {
-			WebUI.setText(txfNumberOfEmployee, numberOfEmployee)
+			safetyInput(txfNumberOfEmployee, numberOfEmployee)
 			WebUI.delay(2)
 		}
 	}
@@ -140,72 +137,73 @@ public class JobDataPage extends BaseHelper {
 	private void selectEmploymentEstablishDate(String month, String year) {
 		if(month && year) {
 			//month
-			WebUI.selectOptionByLabel(drpEmploymentEstablishDate, month, false)
+			safetySelect(drpEmploymentEstablishDate, month)
 			WebUI.delay(2)
 			//year
-			WebUI.setText(txfEmploymentEstablishDate, year)
+			safetyInput(txfEmploymentEstablishDate, year)
 			WebUI.delay(2)
+			WebUI.takeScreenshot()
 		}
 	}
 
 	private void checkIsWellKnowCompany(String isWellCompany) {
 		if(isWellCompany == '1') {
-			WebUI.click(chxIsWellCompany)
+			safetyClick(chxIsWellCompany)
 			WebUI.delay(2)
 		}
 	}
 
 	private void inputPrevCompanyName(String prevCompanyName) {
 		if(prevCompanyName) {
-			WebUI.setText(txfPrevCompanyName, prevCompanyName)
+			safetyInput(txfPrevCompanyName, prevCompanyName)
 			WebUI.delay(2)
 		}
 	}
 	private void selectPrevCompanyDate(String month, String year) {
 		if(month && year) {
 			//month
-			WebUI.selectOptionByLabel(drpPrevEmploymentDate, month, false)
+			safetySelect(drpPrevEmploymentDate, month)
 			WebUI.delay(2)
 			//year
-			WebUI.setText(txfPrevEmploymentDate, year)
+			safetyInput(txfPrevEmploymentDate, year)
 			WebUI.delay(2)
 		}
 	}
 
 	private void inputOtherBussinessName(String bussinessName) {
 		if(bussinessName) {
-			WebUI.setText(txfOtherBussinessName, bussinessName)
+			safetyInput(txfOtherBussinessName, bussinessName)
 			WebUI.delay(2)
 		}
 	}
 	private void inputOtherBussinessType(String bussinessType) {
 		if(bussinessType) {
-			WebUI.setText(txfOtherBussinessType, bussinessType)
+			safetyInput(txfOtherBussinessType, bussinessType)
 			WebUI.delay(2)
 		}
 	}
 	private void inputOtherJobPosition(String jobPosition) {
 		if(jobPosition) {
-			WebUI.setText(txfOtherJobPosition, jobPosition)
+			safetyInput(txfOtherJobPosition, jobPosition)
 			WebUI.delay(2)
+			WebUI.takeScreenshot()
 		}
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
 		if(month && year) {
 			//month
-			WebUI.selectOptionByLabel(drpOtherEstablishDate, drpOtherEstablishDate, false)
+			safetySelect(drpOtherEstablishDate, month)
 			WebUI.delay(2)
 			//year
-			WebUI.setText(txfOtherEstablishDate, year)
+			safetyInput(txfOtherEstablishDate, year)
 			WebUI.delay(2)
 		}
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {
 			TestObject chxSelected = createTestObject("chxSelected", "xpath", "//label[normalize-space(text())='$investmentType']/preceding-sibling::input[@type='radio']")
-			WebUI.click(chxSelected)
-			WebUI.delay(2)
+			safetyClick(chxSelected)
 		}
 	}
 }

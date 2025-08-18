@@ -39,13 +39,12 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 
 	private void verifyLandingAddPersonalPage() {
-		Mobile.delay(10)
 		verifyLanding(txfCustomerName, "Add Personal Customer")
 		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerName(String name) {
-		WebUI.setText(txfCustomerName, name)
+		safetyInput(txfCustomerName, name)
 		WebUI.delay(2)
 	}
 
@@ -54,74 +53,58 @@ public class AddPersonalCustomerPage extends BaseHelper {
 		if (model?.trim()) {
 			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
 			if (!WebUI.verifyElementChecked(radCustomerModel, 1, FailureHandling.OPTIONAL)) {
-				WebUI.click(radCustomerModel)
-				WebUI.delay(2)
+				safetyClick(radCustomerModel)
 			}
 		}
 	}
 
 	private void selectIdType(String idType) {
-		WebUI.selectOptionByLabel(drpIDType, idType, false)
-		WebUI.delay(2)
+		safetySelect(drpIDType, idType)
 	}
 
 	private void inputIdNumber(String idNumber) {
 		handleAlertIfPresent()
-		WebUI.setText(txfIDNumber, idNumber)
-		WebUI.delay(2)
+		safetyInput(txfIDNumber, idNumber)
 	}
 
-	private void handleAlertIfPresent() {
-		if(WebUI.waitForAlert(5)) {
-			WebUI.acceptAlert()
-		} else {
-			KeywordUtil.logInfo("Alert not found")
-		}
-	}
 
 	private void inputIdExpiredDate(String idExpiredDate) {
-		WebUI.delay(5)
-		WebUI.setText(txfIDExpiredDate, idExpiredDate)
-		WebUI.delay(5)
+		safetyInput(txfIDExpiredDate, idExpiredDate, 3.0)
 		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
 		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
 		if (gender?.trim()) {
 			if (!WebUI.verifyElementChecked(radGender, 1, FailureHandling.OPTIONAL)) {
-				WebUI.click(radGender)
+				safetyClick(radGender)
 				WebUI.delay(2)
 			}
 		}
 	}
 
 	private void hideDatePicker(TestObject to) {
-		WebUI.sendKeys(to, '\uE004') // Unicode dari Keys.TAB
+		safetyInput(to, '\uE004') // Unicode dari Keys.TAB
 	}
 	private void inputPOB(String pob) {
-		WebUI.setText(txfPOB, pob)
-		WebUI.delay(2)
+		safetyInput(txfPOB, pob)
 	}
 
 	private void inputDOB(String dob) {
-		WebUI.sendKeys(txfDOB, dob)
+		safetyInput(txfDOB, dob)
 		hideDatePicker(txfDOB)
-		WebUI.delay(2)
 	}
 
 	private void inputNPWP(String npwp) {
 		String currentText = WebUI.getText(txfNPWP).trim()
-		if (!currentText) {
+		if (currentText) {
 			KeywordUtil.logInfo("NPWP auto filled")
 		} else {
-			WebUI.setText(txfNPWP, npwp)
-			WebUI.delay(2)
+			safetyInput(txfNPWP, npwp)
 		}
 	}
 
 	private void inputMotherMaidenName(String motherMaidenName) {
-		WebUI.setText(txfMotherMaidenName, motherMaidenName)
-		WebUI.delay(2)
+		safetyInput(txfMotherMaidenName, motherMaidenName)
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -131,7 +114,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void clickNextButton() {
-		WebUI.click(btnNext)
+		safetyClick(btnNext)
 		WebUI.takeScreenshot()
 	}
 }

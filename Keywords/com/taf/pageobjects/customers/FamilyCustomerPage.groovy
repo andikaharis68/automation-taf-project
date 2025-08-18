@@ -51,67 +51,62 @@ public class FamilyCustomerPage extends BaseHelper {
 
 
 	private void verifyLandingFamilyPage() {
+		WebUI.takeScreenshot()
 		verifyLanding(btnAdd, "Family Page")
 	}
 
 	private void clickAdd() {
-		WebUI.click(btnAdd)
+		safetyClick(btnAdd)
 		WebUI.takeScreenshot()
 	}
 
 	private void inputFamilyName(String name) {
-		WebUI.setText(txfFamilyName, name)
-		WebUI.delay(2)
+		safetyInput(txfFamilyName, name)
 	}
 
 	private void selectCustomerModel(String model) {
 		if (model?.trim()) {
 			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
 			if (!WebUI.verifyElementChecked(radCustomerModel, 1)) {
-				WebUI.click(radCustomerModel)
-				WebUI.delay(2)
+				safetyClick(radCustomerModel)
 			}
 		}
 	}
 
 	private void selectIdType(String idType) {
-		WebUI.selectOptionByLabel(drpIDType, idType, false)
-		WebUI.delay(2)
+		safetySelect(drpIDType, idType)
 	}
 
 	private void inputIdNumber(String idNumber) {
-		WebUI.setText(txfIDNumber, idNumber)
-		WebUI.delay(2)
+		safetyInput(txfIDNumber, idNumber)
 	}
 
 	private void inputIdExpiredDate(String idExpiredDate) {
-		WebUI.delay(10)
-		WebUI.click(txfIDExpiredDate)
-		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
-		WebUI.delay(10)
+		safetyClick(txfIDExpiredDate)
+		safetyInput(txfIDExpiredDate, idExpiredDate)
+		
 		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
-		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
+		TestObject radGender = createTestObject("radGender","xpath","//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
 		if (gender?.trim()) {
 			if (!WebUI.verifyElementChecked(radGender, 1, FailureHandling.OPTIONAL)) {
-				WebUI.click(radGender)
-				WebUI.delay(2)
+				safetyClick(radGender)
 			}
 		}
 	}
 
 	private void hideDatePicker(TestObject to) {
-		WebUI.sendKeys(to, '\uE004') // Unicode dari Keys.TAB
+		safetyInput(to, '\uE004') // Unicode dari Keys.TAB
 	}
 
 	private void inputPOB(String pob) {
-		WebUI.setText(txfPOB, pob)
+		safetyInput(txfPOB, pob)
 		WebUI.delay(2)
 	}
 
 	private void inputDOB(String dob) {
-		WebUI.sendKeys(txfDOB, dob)
+		safetyInput(txfDOB, dob)
 		hideDatePicker(txfDOB)
 		WebUI.delay(2)
 	}
@@ -121,15 +116,14 @@ public class FamilyCustomerPage extends BaseHelper {
 		if (!currentText) {
 			KeywordUtil.logInfo("NPWP auto filled")
 		} else {
-			WebUI.setText(txfNPWP, npwp)
+			safetyInput(txfNPWP, npwp)
 			WebUI.delay(2)
-			
 		}
 	}
 
 
 	private void inputMotherMaidenName(String motherMaidenName) {
-		WebUI.setText(txfMotherMaidenName, motherMaidenName)
+		safetyInput(txfMotherMaidenName, motherMaidenName)
 		WebUI.delay(2)
 	}
 	private void switchToIframeMain() {
@@ -140,26 +134,26 @@ public class FamilyCustomerPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void clickNextButton() {
-		WebUI.click(btnNext)
+		safetyClick(btnNext)
 	}
 
 	private void selectCustomerRelationship(String relationship) {
-		WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
+		safetySelect(drpCustRelationship, relationship)
 		WebUI.delay(2)
 	}
 	private void clickSaveContinue() {
-		WebUI.click(btnSaveAndContinue)
+		safetyClick(btnSaveAndContinue)
 		WebUI.takeScreenshot()
 	}
 	private void clickNext() {
 		WebUI.takeScreenshot()
-		WebUI.click(btnNext)
+		safetyClick(btnNext)
 	}
 	private void clickSelectFamily() {
+		WebUI.takeScreenshot()
 		WebUI.delay(5)
-		WebUI.click(radSelectFamily)
-		WebUI.click(btnSelectFamily)
+		safetyClick(radSelectFamily)
+		safetyClick(btnSelectFamily)
 		WebUI.delay(2)
-		
 	}
 }
