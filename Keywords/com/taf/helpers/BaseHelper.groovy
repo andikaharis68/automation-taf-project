@@ -344,15 +344,6 @@ class BaseHelper {
 		return -1
 	}
 
-	static void openBrowser() {
-		//		EdgeOptions options = new EdgeOptions()
-		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
-		//		WebDriver driver = new EdgeDriver(options)
-		//
-		WebUI.openBrowser(GlobalVariable.WEB_URL)
-		WebUI.maximizeWindow()
-	}
-
 	static void closeBrowser() {
 		WebUI.closeBrowser()
 	}
