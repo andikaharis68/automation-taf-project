@@ -64,7 +64,14 @@ public class OtherAttributePage extends BaseHelper {
 	private TestObject chxCDENotes						= createTestObject("chxCDENotes", "xpath", "")
 	private TestObject btnSave							= createTestObject("btnSave", "xpath", "//*[@id='lb_Form_Save_OtherAttribute']")
 
-	private TestObject btnSaveData						= createTestObject("btnSaveData", "xpath", "//*[@id='lbl_Toolbar_Save']") //
+	private TestObject iframeMainpage 					= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+	private TestObject btnSaveData						= createTestObject("btnSaveData", "xpath", "//*[@id='lbl_Toolbar_Save']")
+	 
+
+	public void switchToIframeMain() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
 
 	private void clickSaveAttributeData() {
 		WebUI.takeScreenshot()
