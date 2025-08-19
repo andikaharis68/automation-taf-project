@@ -76,8 +76,11 @@ public class OtherAttributePage extends BaseHelper {
 	private void clickSaveAttributeData() {
 		WebUI.takeScreenshot()
 		safetyClick(btnSave)
-		safetyClick(btnSaveData)
 		WebUI.takeScreenshot()
+	}
+	
+	private void clickSaveData() {
+		safetyClick(btnSaveData)
 	}
 
 	private void verifyLandingInOtherAttribute() {
