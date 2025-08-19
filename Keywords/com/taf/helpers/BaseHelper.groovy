@@ -61,10 +61,10 @@ class BaseHelper {
 			value = "//*[text() = '$value']"
 			to.addProperty("xpath", ConditionType.CONTAINS, value)
 		}else {
-			
+
 			to.addProperty(property, ConditionType.CONTAINS, value)
 		}
-		
+
 		return to
 	}
 
@@ -330,7 +330,7 @@ class BaseHelper {
 		}
 		return -1
 	}
-	
+
 	static void openBrowser() {
 //		EdgeOptions options = new EdgeOptions()
 //		options.setPageLoadStrategy(PageLoadStrategy.NONE)
@@ -339,9 +339,16 @@ class BaseHelper {
 		WebUI.openBrowser(GlobalVariable.WEB_URL)
 		WebUI.maximizeWindow()
 	}
-	
+
 	static void closeBrowser() {
 		WebUI.closeBrowser()
+	}
+	static void handleAlertIfPresent() {
+		if(WebUI.waitForAlert(8)) {
+			WebUI.acceptAlert()
+		} else {
+			KeywordUtil.logInfo("Alert not found")
+		}
 	}
 	
 	static void clearAndSetText(TestObject to, String text, double delay = 0.1) {

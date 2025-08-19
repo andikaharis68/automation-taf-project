@@ -57,7 +57,7 @@ contact.inputRT(RT)
 contact.inputRW(RW)
 
 'Step 12: Select Address'
-contact.searchAddress(City)
+contact.searchAddress(ZIPCODE)
 
 'Step 13: Input phone number1 '
 contact.inputPhoneNumbers(Phone1, 1)

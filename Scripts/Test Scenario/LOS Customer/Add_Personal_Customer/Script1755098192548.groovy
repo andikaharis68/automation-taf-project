@@ -54,6 +54,8 @@ dataRow += BaseHelper.getTestDataByScenario("OtherAttribute", GlobalVariable.TES
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_EmergencyContact'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_FinancialData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_OtherAttribute'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Verify_AddCustomer_Success'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+
 
 
 

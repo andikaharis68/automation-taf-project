@@ -63,7 +63,8 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickDropdownMenu() {
-		BaseHelper.safetyClick(drpMenu)
+		safetyClick(drpMenu)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -72,6 +73,7 @@ public class MenuPage extends BaseHelper {
 
 	private void clickCustomer() {
 		WebUI.click(btnCustomer)
+		WebUI.takeScreenshot()
 	}
 
 	private void switchDefaultContent() {
@@ -157,6 +159,7 @@ public class MenuPage extends BaseHelper {
 	}
 	private void clickSubMenuCustomer() {
 		WebUI.click(btnSubMenuCustomer)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickTAFReports() {

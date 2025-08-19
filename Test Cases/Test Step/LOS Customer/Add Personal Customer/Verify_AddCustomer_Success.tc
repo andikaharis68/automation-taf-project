@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Verify_AddCustomer_Success</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>8a8f5ec0-aec4-45ea-97eb-9e45cf9b7cbd</testCaseGuid>
+</TestCaseEntity>
