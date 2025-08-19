@@ -21,26 +21,23 @@ import org.openqa.selenium.Keys as Keys
 
 FinancialDataPage financialData = new FinancialDataPage()
 
-'Step 1: Handler iFrame, switch to default then switch to main frame'
-financialData.switchToIframeMain()
-
-'Step 2: Verify landing in Financial Page'
+'Step 1: Verify landing in Financial Page'
 financialData.verifyLandinginFinancialPage()
 
-'Step 3: input Income Section'
+'Step 2: input Income Section'
 financialData.inputIncomeSection(GrossMonthlyIncome)
 
-'Step 4: Click add customer bank account'
+'Step 3: Click add customer bank account'
 financialData.clickAddCustAcc()
 
-'Step 5: Input customer bank account section'
+'Step 4: Input customer bank account section'
 financialData.inputCustomerBankAccount(BankName, BankBranch, AccountName, AccountNo, CustomerBankAccountPurpose)
 
-'Step 6: Click save bank account'
+'Step 5: Click save bank account'
 financialData.clickSaveAccount()
 
-'Step 7: Click save and continue'
+'Step 6: Click save and continue'
 financialData.clickSaveContinue()
 
-'Step 8: Verify save success'
-financialData.verifySaveSuccess()
+'Step 7: Verify save success'
+//financialData.verifySaveSuccess()

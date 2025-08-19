@@ -42,7 +42,6 @@ public class ContactInformation extends BaseHelper{
 
 	public void switchToIframeCustForm() {
 		WebUI.switchToDefaultContent()
-		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeCustForm, 1)
 	}
 

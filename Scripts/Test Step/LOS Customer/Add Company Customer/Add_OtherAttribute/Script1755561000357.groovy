@@ -21,10 +21,7 @@ import org.openqa.selenium.Keys as Keys
 
 OtherAttributePage attr = new OtherAttributePage()
 
-'Step 1: Handler iFrame, switch to default then switch to main frame'
-attr.switchToIframeMain()
-
-'Step 2: Verify landing in other attribute'
+'Step 1: Verify landing in other attribute'
 attr.verifyLandingInOtherAttribute()
 
 'Step 2: Select Debitor grup'
@@ -37,4 +34,4 @@ attr.selectCounterpartCategory(CounterpartCategory)
 attr.selectSustainableFinancial(SustainableFinancialBusiness)
 
 'Step 5: click Save and Submit'
-attr.clickSave()
+attr.clickSaveAndSubmit()

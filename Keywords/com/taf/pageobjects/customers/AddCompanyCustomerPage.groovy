@@ -45,8 +45,10 @@ public class AddCompanyCustomerPage extends BaseHelper {
 		safetyInput(txfCustomerName, customerName)
 	}
 
-	private void inputCustomerNPWP(String customerNPWP) {
-		safetyInput(txtfCustomerNPWP, customerNPWP)
+	private void inputCustomerNPWP() {
+		String randomNPWP = generateRandomNPWP()
+		KeywordUtil.logInfo("NPWP : $randomNPWP")
+		safetyInput(txtfCustomerNPWP, randomNPWP)
 	}
 
 	private void inputCustomerNitku(String customerNitku) {
