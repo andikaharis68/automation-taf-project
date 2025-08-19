@@ -1,4 +1,6 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+
+
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -14,21 +16,49 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.ManagementOrShareholderPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+ManagementOrShareholderPage management = new ManagementOrShareholderPage()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Click Add personal'
+management.clickAddPersonal()
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Get Data Management Type'
+Map ManagementData = management.getManagementData(ScenarioId, "Personal", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", "ManagementShareholder")
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 3: Search Customer name'
+management.searchCustomerName(ManagementData.FullName)
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 4:Select Job Position'
+management.selectJobPosition(ManagementData.JobPosition)
+
+'Step 5: Click Save'
+management.clickSavePersonal()
+
+'Step 6: Click add company'
+management.clickAddCompany()
+
+'Step 7: input nitku'
+management.inputNITku(ManagementData.NITKU)
+
+'Step 8: Input share percentage'
+management.inputSharePercentage(ManagementData.share)
+
+'Step 9 : Check is Active'
+management.checkIsActive(ManagementData.IsActive)
+
+'Step 10: Check is Owner'
+management.checkIsOwner(ManagementData.IsOwner)
+
+'Step 11: Click Continue'
+management.clickContinue()
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@ import com.taf.customers.CustomerInformationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-def companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
+CompanyCustomerMainDataPage companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
 
 'Step 1: click main data tab'
 companyCustomerMainDataPage.clickMainDataTabOrEditPage()

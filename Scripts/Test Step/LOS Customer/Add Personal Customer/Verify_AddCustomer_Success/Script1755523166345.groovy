@@ -14,21 +14,21 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.CustomerInformationPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+CustomerInformationPage custInfo = new CustomerInformationPage()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Search Customer name'
+custInfo.inputCustomerName(FullName)
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Select Customer type'
+custInfo.selectCustomerType("Personal")
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 3: Click button search'
+custInfo.clickSearch()
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 4: Verify Customer list'
+custInfo.clickCustomerHyperlink(FullName)

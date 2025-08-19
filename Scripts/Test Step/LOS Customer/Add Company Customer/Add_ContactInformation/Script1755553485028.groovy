@@ -14,21 +14,27 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.ContactInformation
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+ContactInformation contactInfo = new ContactInformation()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Handler iFrame, switch to default then switch to custom form frame'
+contactInfo.switchToIframeCustForm()
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Verify landing on tab contact information'
+contactInfo.verifyLandingScreen()
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 3: Input on contact main data'
+contactInfo.inputContactData(Name, JobPosition)
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 4: Input on contact information section'
+contactInfo.inputContactInformation(MobilePhone1, Phone1, Email1)
+
+'Step 5: Click save and continue'
+contactInfo.clickSaveAndContinue()
+
+'Step 5: Verify save success'
+contactInfo.verifySaveSuccess()

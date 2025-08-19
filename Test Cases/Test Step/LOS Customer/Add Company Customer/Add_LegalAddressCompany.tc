@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add_LegalAddressCompany</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>aedd4563-83f2-40f9-b2d2-0678662d6f2e</testCaseGuid>
+</TestCaseEntity>

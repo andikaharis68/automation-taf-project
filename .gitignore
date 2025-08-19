@@ -12,7 +12,7 @@ Reports
 
 .project
 
-.setings/
+.settings/
 
 .idea/
 
@@ -21,3 +21,4 @@ Libs/
 gradle/
 gradlew.bat
 gradlew
+Data Files/*.xlsx

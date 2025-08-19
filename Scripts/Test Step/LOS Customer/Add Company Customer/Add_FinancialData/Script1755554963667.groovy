@@ -14,21 +14,33 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.FinancialDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+FinancialDataPage financialData = new FinancialDataPage()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Handler iFrame, switch to default then switch to main frame'
+financialData.switchToIframeMain()
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Verify landing in Financial Page'
+financialData.verifyLandinginFinancialPage()
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 3: input Income Section'
+financialData.inputIncomeSection(GrossMonthlyIncome)
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 4: Click add customer bank account'
+financialData.clickAddCustAcc()
+
+'Step 5: Input customer bank account section'
+financialData.inputCustomerBankAccount(BankName, BankBranch, AccountName, AccountNo, CustomerBankAccountPurpose)
+
+'Step 6: Click save bank account'
+financialData.clickSaveAccount()
+
+'Step 7: Click save and continue'
+financialData.clickSaveContinue()
+
+'Step 8: Verify save success'
+financialData.verifySaveSuccess()

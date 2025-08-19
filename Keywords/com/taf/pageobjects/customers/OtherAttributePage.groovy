@@ -29,17 +29,17 @@ public class OtherAttributePage extends BaseHelper {
 	private TestObject drpBussinessScale				= createTestObject("drpBussinessScale", "xpath", "//*[@id='CDebtBizScl_ddlReference']")
 	private TestObject btnSearchCounterpartCategory		= createTestObject("btnSearchCounterpartCategory", "xpath", "//*[@id='UCCounterpart_ucCounterpart_imb']")
 	private TestObject btnSearchSustainableFinancial	= createTestObject("btnSearchSustainableFinancial", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_imb']")
-	
-	//overlay debitur 
-	private TestObject txfOvlyBICode 					= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']") 
+
+	//overlay debitur
+	private TestObject txfOvlyBICode 					= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 	private TestObject txfOvlyBICodeDesc				= createTestObject("txfOvlyBICodeDesc", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1']")
-	private TestObject btnOvlySearchBICode				= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_ucS_lbSearch']") 
+	private TestObject btnOvlySearchBICode				= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelectBICode				= createTestObject("btnOvlySelectBICode", "xpath", "//*[@id='UCDebtGrp_ucBebtGroup_umd_ctl00_gvL_hpSelect_0']")
-	
+
 	private TestObject txfOvlyDebitorSLIK				= createTestObject("txfOvlyDebitorSLIK", "xpath", "//*[@id='rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_ucS_7_rptFixedSearch_7_txtSearchValue_0']")
 	private TestObject btnOvlySelectSLIK				= createTestObject("btnOvlySelectSLIK", "xpath", "//*[@id='rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_gvL_7_hpSelect_0']")
 	private TestObject txfOvlyAffiliate					= createTestObject("txfOvlyAffiliate", "xpath", "//*[@id='rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_ucS_10_rptFixedSearch_10_txtSearchValue_0']")
-	
+
 
 	private TestObject txfEAccountFlag					= createTestObject("txfEAccountFlag", "xpath", "//*[@id='rptOtherAttribute_txtAttrContent_0']")
 	private TestObject txfEAccountJoinDate				= createTestObject("txfEAccountJoinDate", "xpath", "//*[@id='rptOtherAttribute_txtAttrContent_1']")
@@ -63,93 +63,100 @@ public class OtherAttributePage extends BaseHelper {
 	private TestObject txfRatingDate					= createTestObject("txfRatingDate", "xpath", "//*[@id='rptOtherAttribute_txtAttrContent_19']")
 	private TestObject chxCDENotes						= createTestObject("chxCDENotes", "xpath", "")
 	private TestObject btnSave							= createTestObject("btnSave", "xpath", "//*[@id='lb_Form_Save_OtherAttribute']")
-	
-	private void clickSave() {
-		WebUI.click(btnSave)
+
+	private TestObject iframeMainpage 					= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+	private TestObject btnSaveData						= createTestObject("btnSaveData", "xpath", "//*[@id='lbl_Toolbar_Save']")
+	 
+
+	public void switchToIframeMain() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+
+	private void clickSaveAttributeData() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSave)
+		WebUI.takeScreenshot()
 	}
 	
+	private void clickSaveData() {
+		safetyClick(btnSaveData)
+	}
+
 	private void verifyLandingInOtherAttribute() {
 		verifyLanding(btnSearchDebitorGroup, "Other Attribute")
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void selectDebitorGroup(String label) {
-		if(label) {
-			WebUI.click(btnSearchDebitorGroup)
-			WebUI.delay(2)
-			
-			WebUI.setText(txfOvlyBICode, '%')
-			WebUI.delay(2)
-			
-			WebUI.click(btnOvlySearchBICode)
-			WebUI.delay(2)
-			clickSelectByLabel(label)
-		}
+		safetyClick(btnSearchDebitorGroup)
+
+		safetyInput(txfOvlyBICode, '%')
+		
+		safetyClick(btnOvlySearchBICode)
+		
+		clickSelectByLabel(label)
 	}
-	
+
 	private void selectCounterpartCategory(String label) {
-		if(label) {
-			btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']")
-			 txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-			 WebUI.click(btnSearchCounterpartCategory)
-			 WebUI.delay(2)
-			 
-			 WebUI.setText(txfOvlyBICode, '%')
-			 WebUI.delay(2)
-			 WebUI.click(btnOvlySearchBICode)
-			 clickSelectByLabel(label)
-		}
+		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']")
+		txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+		safetyClick(btnSearchCounterpartCategory)
+		WebUI.delay(2)
+
+		safetyInput(txfOvlyBICode, '%')
+		safetyClick(btnOvlySearchBICode)
+		
+		clickSelectByLabel(label)
 	}
-	
+
 	private void selectSustainableFinancial(String label) {
-		if(label) {
-			 btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
-			 txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-			 WebUI.click(btnSearchSustainableFinancial)
-			 WebUI.setText(txfOvlyBICode, '%')
-			 WebUI.click(btnOvlySearchBICode)
-			 clickSelectByLabel(label)
-		}
+		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
+		txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+		safetyClick(btnSearchSustainableFinancial)
+		safetyInput(txfOvlyBICode, '%')
+		safetyClick(btnOvlySearchBICode)
+		clickSelectByLabel(label)
 	}
-	
-	
+
+
 	private void clickSelectByLabel(String labelText) {
 		TestObject btnSelect = createTestObject("btnSelect", "xpath", "//td[normalize-space(text())='$labelText']/following-sibling::td//a[contains(@id,'hpSelect')]")
-		WebUI.click(btnSelect)
+		safetyClick(btnSelect)
 	}
-	
+
 	private void inputEAccountFlag(String flag) {
 		if(flag) {
-			WebUI.setText(txfEAccountFlag, flag)
+			safetyInput(txfEAccountFlag, flag)
 		}
 	}
-	
+
 	private void inputEAccountJoinDate(String date) {
 		if(date) {
-			WebUI.setText(txfEAccountJoinDate, date)
+			safetyInput(txfEAccountJoinDate, date)
 		}
 	}
-	
+
 	private void inputCustomerRating(String rating) {
 		if(rating) {
-			WebUI.setText(txfCustRating, rating)
+			safetyInput(txfCustRating, rating)
 		}
 	}
 	private void inputGoodBadStatus(String status) {
 		if(status) {
-			WebUI.setText(txfGoodBadStatus, status)
+			safetyInput(txfGoodBadStatus, status)
 		}
 	}
-	
+
 	private void inputSuspectTerrorism(String terorism) {
 		if(terorism) {
-			WebUI.setText(txfTerorism, terorism)
+			safetyInput(txfTerorism, terorism)
 		}
 	}
-	
+
 	private void inputSimNo(String simNo) {
 		if(simNo) {
-			WebUI.setText(txfSimNo, simNo)
+			safetyInput(txfSimNo, simNo)
 		}
 	}
 	private void checkIsSplitTreasure(String isSplit) {
@@ -157,30 +164,28 @@ public class OtherAttributePage extends BaseHelper {
 			WebUI.check(chxIsSplitTreasure)
 		}
 	}
-	
+
 	private void selectDebitorGroupSlik(String group) {
 		if(group) {
-			WebUI.click(btnSearchDebitorGroupSlik)
-			WebUI.setText(txfOvlyDebitorSLIK, "%")
-			WebUI.click(btnOvlySelectSLIK) //select first 
+			safetyClick(btnSearchDebitorGroupSlik)
+			safetyInput(txfOvlyDebitorSLIK, "%")
+			safetyClick(btnOvlySelectSLIK) //select first
 		}
 	}
-	
+
 	private void checkViolateBMPK(String bmpk ) {
 		if(bmpk && bmpk == "1") {
 			WebUI.check(chxViolateBMPK)
 		}
 	}
-	
+
 	private void checkExceedBMPK(String bmpk) {
 		if(bmpk && bmpk == "1") {
 			WebUI.check(chxExceedBMPK)
 		}
 	}
-	
+
 	private void selectAffiliateWithMultifinanceSLIK(String affiliate) {
-		
-			
 	}
 	private void checkSameAddress(String sameAddress) {
 		if (sameAddress) {
@@ -188,7 +193,7 @@ public class OtherAttributePage extends BaseHelper {
 			clickYesNo(labelText)
 		}
 	}
-	
+
 	private void checkSameJob(String sameJob) {
 		if (sameJob) {
 			String labelText = sameJob == "Y" ? "Yes" : "No"
@@ -213,27 +218,27 @@ public class OtherAttributePage extends BaseHelper {
 			clickYesNo(labelText)
 		}
 	}
-	
+
 	private void checkCustomerDataConsent(String dataConsent) {
 		if(dataConsent) {
 			String labelText = dataConsent == "Y" ? "Yes" : "No"
 			clickYesNo(labelText)
 		}
 	}
-	
-	
+
+
 	private void inputRatingDebitor(String rating) {
 		if(rating) {
-			WebUI.setText(txfRatingDebitor, rating)
+			safetyInput(txfRatingDebitor, rating)
 		}
 	}
-	
+
 	private void inputRatingDate(String date) {
 		if(date) {
-			WebUI.setText(txfRatingDate, date)
+			safetyInput(txfRatingDate, date)
 		}
 	}
-	
+
 	private void checkCDENotes(String notes) {
 		if (notes) {
 			String labelText = notes == "Y" ? "Yes" : "No"
@@ -242,12 +247,12 @@ public class OtherAttributePage extends BaseHelper {
 	}
 	private void inputATMNo(String atmNo) {
 		if(atmNo) {
-			WebUI.setText(txfNoATM, atmNo)
+			safetyInput(txfNoATM, atmNo)
 		}
-	}	
-	
+	}
+
 	private void clickYesNo(String labelText) {
 		TestObject radYesNo = createTestObject("radYesNo", "xpath", "//label[normalize-space(text())='" + labelText + "']/preceding-sibling::input[@type='radio']")
-		WebUI.click(radYesNo)
+		safetyClick(radYesNo)
 	}
 }

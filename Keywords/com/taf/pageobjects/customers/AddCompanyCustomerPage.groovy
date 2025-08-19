@@ -29,39 +29,43 @@ public class AddCompanyCustomerPage extends BaseHelper {
 	private TestObject txtfCustomerNPWP 			= createTestObject("txtfCustomerNPWP", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_Npwp']")
 	private TestObject txtfCustomerNitku 			= createTestObject("txtfCustomerNitku", "xpath", "//*[@id='ucCustMainInfo_txt_CustCoy_Nitku']")
 	private TestObject btnNext						= createTestObject("btnNext", "xpath", "//*[@id='lb_Toolbar_Next']")
+	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "xpath", "//*[@id='lb_Form_NewCust']")
 
-	private void selectCustomerModel(String customerModel) {
-		KeywordUtil.logInfo("CustomerModel: ${customerModel}")
-		TestObject radCustomerModel = createTestObject("radCustomerModel","xpath","//label[normalize-space(text())='${customerModel}']")
-		if(radCustomerModel) {
-			WebUI.click(radCustomerModel)
-		} else {
-			KeywordUtil.logInfo("not found the test object")
+
+	private void selectCustomerModel(String model) {
+		if (model?.trim()) {
+			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
+			if (!WebUI.verifyElementChecked(radCustomerModel, 1, FailureHandling.OPTIONAL)) {
+				safetyClick(radCustomerModel)
+			}
 		}
 	}
 
 	private void inputCustomerName(String customerName) {
-		WebUI.delay(0.5)
-		WebUI.setText(txfCustomerName, customerName)
+		safetyInput(txfCustomerName, customerName)
 	}
 
 	private void inputCustomerNPWP(String customerNPWP) {
-		WebUI.delay(0.5)
-		WebUI.setText(txtfCustomerNPWP, customerNPWP)
+		safetyInput(txtfCustomerNPWP, customerNPWP)
 	}
 
 	private void inputCustomerNitku(String customerNitku) {
-		WebUI.delay(0.5)
-		WebUI.setText(txtfCustomerNitku, customerNitku)
+		safetyInput(txtfCustomerNitku, customerNitku)
 	}
 
 	private void selectCompanyType(String companyType) {
-		WebUI.delay(0.5)
-		WebUI.selectOptionByLabel(drpIDCompanyType, companyType, false)
+		safetySelect(drpIDCompanyType, companyType)
 	}
 
 	private void clickNextButton() {
-		WebUI.delay(0.5)
-		WebUI.click(btnNext)
+		safetyClick(btnNext)
+	}
+	private void clickNewApplicationIfPresent() {
+		if(WebUI.verifyElementPresent(btnNewApplication, 2, FailureHandling.OPTIONAL)) {
+			safetyClick(btnNewApplication)
+		} else {
+			KeywordUtil.logInfo("button new application not present")
+		}
+		
 	}
 }

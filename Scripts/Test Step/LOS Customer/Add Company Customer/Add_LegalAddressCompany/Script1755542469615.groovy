@@ -78,10 +78,7 @@ address.inputDirectionDesc(AddressData.DirectionDescription)
 'Step 18: Input notes'
 address.inputNotes(AddressData.Notes)
 
-'Step 19: Input Company Name'
-address.inputCompanyName(AddressData.CompanyName)
-
-'Step 20: Click Save'
+'Step 19: Click Save'
 address.clickSaveAddress()
 
 

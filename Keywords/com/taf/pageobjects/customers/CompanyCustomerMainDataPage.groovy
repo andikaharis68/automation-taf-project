@@ -21,11 +21,14 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
 public class CompanyCustomerMainDataPage extends BaseHelper {
+	
 	private TestObject btnSaveCustMainData 					= createTestObject("btnSaveCustMainData", "xpath", "//*[@id='lb_Form_SaveCont_CustMainData']")
-	private TestObject selectFirstFoundCustomerGroup 		= createTestObject("selectFirstFoundCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
-	private TestObject searchCustomerGroup				    = createTestObject("searchCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']")
-	private TestObject optionCustomerType 					= createTestObject("optionCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
-	private TestObject txtFieldFromCustomerGroup 			= createTestObject("txtFieldFromCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+	
+	private TestObject btnOvlySelectCustGroup 				= createTestObject("btnOvlySelectCustGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_gvL_hpSelect_0']")
+	private TestObject btnOvlySearchCustGroup				= createTestObject("btnOvlySearchCustGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_lbSearch']") //
+	private TestObject drpOvlyCustomerType 					= createTestObject("drpOvlyCustomerType", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1']")
+	private TestObject txfOvlyCustomerGroup 				= createTestObject("txfOvlyCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+
 	private TestObject iconLookUpCustomerGroup 				= createTestObject("iconLookUpCustomerGroup", "xpath", "//*[@id='ucLookupCustGroupId_uclCust_imb']")
 	private TestObject txfCustomerSidNo 					= createTestObject("txfCustomerSidNo", "xpath", "//*[@id='txt_Cust_SidNo']")
 	private TestObject cbIsVIP 								= createTestObject("cbIsVIP", "xpath", "//*[@id='cbIsVip']")
@@ -43,107 +46,93 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	private TestObject btnMainTab 							= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
 	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
 
-
-	private void clickMainDataTabOrEditPage(){
-		if(WebUI.verifyElementPresent(btnEditCustomer, 10, FailureHandling.OPTIONAL)) {
-			WebUI.click(btnEditCustomer)
-			WebUI.click(btnMainTab)
-		} else if(WebUI.verifyElementPresent(btnMainTab, 10, FailureHandling.OPTIONAL)) {
-			WebUI.click(btnMainTab)
-		}
+	
+	private void verifyLandingInMainPage() {
+		verifyLanding(cbIsVIP, "Company Customer Main Data")
 	}
 
 	private void switchToIframeCustForm() {
 		WebUI.switchToFrame(iframeCustForm, 2, FailureHandling.STOP_ON_FAILURE)
 	}
 
-	private void clickIsNewApplication(boolean isNewApplication) {
-		if(isNewApplication) {
-			WebUI.delay(0.5)
-			WebUI.click(checkBoxIsNewApplication)
+	private void clickIsNewApplication(String isNewApplication) {
+		if(isNewApplication?.trim() == 'Y') {
+			safetyClick(checkBoxIsNewApplication)
 		}
 	}
 
 	private void inputIndustryNameFromLookup(String industryType) {
-		//		click icon search
-		WebUI.delay(0.5)
-		WebUI.click(iconLookUpIndustry)
-
-		//		set industry type from parameter
-		WebUI.delay(0.5)
-		WebUI.setText(txtFieldFromLookupIndustry, industryType)
-
-		// click search after text filled
-		WebUI.delay(0.5)
-		WebUI.click(btnSearchLookUp)
-
-		//click select in first found
-		WebUI.delay(0.5)
-		WebUI.click(selectFirstFoundIndustryType)
-	}
-
-	private void inputNumberOfEmployees(String numberOfEmployees) {
-		WebUI.delay(0.5)
-		WebUI.setText(txfNumberOfEmployees, numberOfEmployees)
-	}
-
-	private void inputEstablishmentDate(String establishmentDate) {
-		WebUI.delay(0.5)
-		WebUI.setText(txfEstablishmentDate, establishmentDate)
-	}
-
-	private void clickCheckBoxIsPremium(boolean isPremium, String premiunNote) {
-		if(isPremium) {
-			WebUI.delay(0.5)
-			WebUI.check(cbIsPremium)
-
-			WebUI.delay(0.5)
-			WebUI.setText(txfPremiumNote, premiunNote)
+		if(industryType) {
+			safetyClick(iconLookUpIndustry)
+	
+			//		set industry type from parameter
+			safetyInput(txtFieldFromLookupIndustry, industryType)
+	
+			// click search after text filled
+			safetyClick(btnSearchLookUp)
+	
+			//click select in first found
+			safetyClick(selectFirstFoundIndustryType)
 		}
 	}
 
-	private void clickCheckBoxIsAffiliate(boolean isAffiliate) {
-		if(isAffiliate) {
-			WebUI.delay(0.5)
+	private void inputNumberOfEmployees(String numberOfEmployees) {
+		if(numberOfEmployees) {
+			safetyInput(txfNumberOfEmployees, numberOfEmployees)
+		}
+	}
+
+	private void inputEstablishmentDate(String establishmentDate) {
+		if(establishmentDate) {
+			safetyInput(txfEstablishmentDate, establishmentDate)
+		}
+	}
+
+	private void clickCheckBoxIsPremium(String isPremium, String premiumNote) {
+		if(isPremium?.trim() == 'Y') {
+			WebUI.check(cbIsPremium)
+			safetyInput(txfPremiumNote, premiumNote)
+		}
+	}
+
+	private void clickCheckBoxIsAffiliate(String isAffiliate) {
+		if(isAffiliate?.trim() == 'Y') {
 			WebUI.check(cbIsAffialite)
 		}
 	}
 
-	private void clickCheckBoxIsVIP(boolean isVIP) {
-		if(isVIP) {
-			WebUI.delay(0.5)
+	private void clickCheckBoxIsVIP(String isVIP) {
+		if(isVIP.trim() == 'Y') {
 			WebUI.check(cbIsVIP)
 		}
 	}
 
 	void inputCustomerSidNo(String sidNo) {
-		WebUI.delay(0.5)
-		WebUI.setText(txfCustomerSidNo, sidNo)
+		if(sidNo) {
+			safetyInput(txfCustomerSidNo, sidNo)
+		}
 	}
 
 	private void inputCustomerGroupThenSelectedFirstFound(String customerGroup) {
-		//		click icon search
-		WebUI.delay(0.5)
-		WebUI.click(iconLookUpCustomerGroup)
-
-		// set text from test data
-		WebUI.delay(0.5)
-		WebUI.setText(txtFieldFromCustomerGroup, customerGroup)
-
-		//need hard code the customer type for Company
-		WebUI.selectOptionByLabel(optionCustomerType, "Company", false)
-
-		// click search customer group
-		WebUI.delay(0.5)
-		WebUI.click(searchCustomerGroup)
-
-		// click select in first found
-		WebUI.delay(0.5)
-		WebUI.click(selectFirstFoundCustomerGroup)
+		if(customerGroup) {
+			//		click icon search
+			safetyClick(iconLookUpCustomerGroup)
+	
+			// set text from test data
+			safetyInput(txfOvlyCustomerGroup, customerGroup)
+	
+			//need hard code the customer type for Company
+			safetySelect(drpOvlyCustomerType, "Company", false)
+	
+			// click search customer group
+			safetyClick(btnOvlySearchCustGroup)
+	
+			// click select in first found
+			safetyClick(btnOvlySelectCustGroup)
+		}
 	}
 
 	private void saveContentAfterMainDataIsFilled() {
-		WebUI.delay(0.5)
-		WebUI.click(btnSaveCustMainData)
+		safetyClick(btnSaveCustMainData)
 	}
 }

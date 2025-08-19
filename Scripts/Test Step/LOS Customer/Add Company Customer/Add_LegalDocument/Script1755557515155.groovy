@@ -14,21 +14,24 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.LegalDocument
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+LegalDocument legalDoc = new LegalDocument()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Handler iFrame, switch to default then switch to main frame'
+legalDoc.switchToIframeMain()
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Verify landing in Legal Document Page'
+legalDoc.verifyLandingScreen()
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 3: Input legal documents, included click add on each adding documents'
+legalDoc.inputLegalDocument(LegalDocType, DocumentNo, DateIssued, ExpiredDate, Notes, NotaryName, NotaryLocation)
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 4: Save and continue'
+legalDoc.clickSaveAndContinue()
+
+'Step 5: Verify save success'
+legalDoc.verifySaveSuccess()

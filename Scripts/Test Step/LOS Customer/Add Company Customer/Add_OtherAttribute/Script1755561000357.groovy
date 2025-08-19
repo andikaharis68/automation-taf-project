@@ -14,21 +14,27 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizeDataEntry
+import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizeDataEntry cde = new CentralizeDataEntry()
+OtherAttributePage attr = new OtherAttributePage()
 
-'Step 1: switch iframe'
-cde.switchToMainPage()
+'Step 1: Handler iFrame, switch to default then switch to main frame'
+attr.switchToIframeMain()
 
-'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+'Step 2: Verify landing in other attribute'
+attr.verifyLandingInOtherAttribute()
 
-'Step 3: click button matching customer'
-cde.clickButtonMatchingCustomer()
+'Step 2: Select Debitor grup'
+attr.selectDebitorGroup(DebitorGroup)
 
-'Step 4: verify success message'
-cde.verifySuccessMessage()
+'Step 3: Select Counterpart group'
+attr.selectCounterpartCategory(CounterpartCategory)
+
+'Step 4: Select Sustainable financial bussiness'
+attr.selectSustainableFinancial(SustainableFinancialBusiness)
+
+'Step 5: click Save and Submit'
+attr.clickSave()

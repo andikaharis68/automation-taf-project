@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.Keys
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -50,14 +52,27 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject txfAccNoStatement			= createTestObject("txfAccNoStatement", "xpath", "//*[@id='ucBankStatement_txtAccNo']")
 	private TestObject btnSaveStatement				= createTestObject("btnSaveStatement", "xpath", "//*[@id='lb_Form_Save_BankStatement']")
 	private TestObject btnCalculateStatement		= createTestObject("btnCalculateStatement", "xpath", "//*[@id='lb_Form_Calculate_BankStatementAddEdit']")
-	//*[@id="gvBankStatementAddEdit_ddlMonth_1"]
 	private TestObject txfCreditBeginningBalance	= createTestObject("txfCreditBeginningBalance", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDCreditAmt_0_txtInput_0']")
 
+	//iframe
+	private TestObject iframeMainpage 				= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
+	private TestObject lblSuccess					= createTestObject("lblSuccess", "xpath", "//*[contains(@text(), 'Save Success')]")
+	private TestObject lblAlert						= createTestObject("lblAlert", "xpath", "//*[contains(@text(), 'Your request is being processed']")
+	private TestObject btnOK						= createTestObject("btnOK", "xpath", "//*[text()= 'OK']")
 
 	private void clickSaveContinue() {
-		WebUI.click(btnSaveContinue)
-		WebUI.delay(2)
+		safetyClick(btnSaveContinue)
+		WebUI.takeScreenshot()
+		handlePopUperror(lblAlert, btnOK)
+	}
+
+	static void handlePopUperror(TestObject to, TestObject btnOk) {
+		if(WebUI.verifyElementPresent(to, 10, FailureHandling.OPTIONAL)) {
+			WebUI.click(btnOk)
+		} else {
+			KeywordUtil.logInfo("Alert not found")
+		}
 	}
 
 	private void verifyLandinginFinancialPage() {
@@ -65,195 +80,200 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void inputGrossMonthlyIncome(String income) {
-		safetyInputEdit(txfGrossMonthlyIncome, income)
-//		if(income) {
-//			WebUI.setText(txfGrossMonthlyIncome, income)
-//			WebUI.delay(2)
-//		}
+		if(income) {
+			clearText(txfGrossMonthlyIncome)
+			safetyInput(txfGrossMonthlyIncome, income)
+		}
+	}
+	private void clearText(TestObject to) {
+		safetyClick(to)
+		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, "a"))
+		WebUI.sendKeys(to,Keys.chord(Keys.BACK_SPACE))
 	}
 
 	private void inputGrossProfit(String grossProfit) {
-		safetyInputEdit(txfGrossProfit, grossProfit)
-//		if(grossProfit) {
-//			WebUI.setText(txfGrossProfit, grossProfit)
-//			WebUI.delay(2)
-//		}
+		if(grossProfit) {
+			clearText(txfGrossProfit)
+			safetyInput(txfGrossProfit, grossProfit)
+		}
 	}
 
 	private void inputOtherIncome(String otherIncome) {
-		safetyInputEdit(txfOtherIncome, otherIncome)
-//		if(otherIncome) {
-//			WebUI.setText(txfOtherIncome, otherIncome)
-//			WebUI.delay(2)
-//		}
+		if(otherIncome) {
+			clearText(txfOtherIncome)
+			safetyInput(txfOtherIncome, otherIncome)
+		}
 	}
 
 	private void inputSourceOfIncome(String sourceIncome) {
-		safetyInputEdit(txfSourceOfOtherIncome, sourceIncome)
-//		if(sourceIncome) {
-//			WebUI.setText(txfSourceOfOtherIncome, sourceIncome)
-//			WebUI.delay(2)
-//		}
+		if(sourceIncome) {
+			safetyInput(txfSourceOfOtherIncome, sourceIncome)
+		}
 	}
 
 	private void inputLivingCost(String cost) {
-		safetyInputEdit(txfLivingCost, cost)
-//		if(cost) {
-//			WebUI.setText(txfLivingCost, cost)
-//			WebUI.delay(2)
-//		}
+		if(cost) {
+			clearText(txfLivingCost)
+			safetyInput(txfLivingCost, cost)
+		}
 	}
 
 	private void inputOtherMonthlyInstallment(String installment) {
-		safetyInputEdit(txfOtherMonthlyInstallment, installment)
-//		if(installment) {
-//			WebUI.setText(txfOtherMonthlyInstallment, installment)
-//			WebUI.delay(2)
-//		}
+		if(installment) {
+			clearText(txfOtherMonthlyInstallment)
+			safetyInput(txfOtherMonthlyInstallment, installment)
+		}
 	}
 	private void clickCalculateIncome() {
-		WebUI.click(btnCalculateIncome)
+		safetyClick(btnCalculateIncome)
+		handleAlertIfPresent()
+		WebUI.takeScreenshot()
 	}
 	private void clickAddCustAcc() {
-		WebUI.click(btnAddBankAcc)
+		safetyClick(btnAddBankAcc)
+		handleAlertIfPresent()
+		WebUI.takeScreenshot()
 	}
 
 	private void selectBankName(String bankName) {
-		safetySelectEdit(drpBankName, bankName)
-//		if(bankName) {
-//			WebUI.selectOptionByLabel(drpBankName, bankName, false)
-//			WebUI.delay(2)
-//		}
+		if(bankName) {
+			safetySelect(drpBankName, bankName)
+		}
 	}
 	private void inputBranchName(String name) {
-		safetyInputEdit(txfBankBranch, name)
-//		if(name) {
-//			WebUI.setText(txfBankBranch, name)
-//			WebUI.delay(2)
-//		}
+		if(name) {
+			safetyInput(txfBankBranch, name)
+		}
 	}
 
 	private void inputBICodeBank(String code) {
-		safetyInputEdit(txfBICode, code)
-//		if(code) {
-//			WebUI.setText(txfBICode, code)
-//			WebUI.delay(2)
-//		}
+		if(code) {
+			safetyInput(txfBICode, code)
+		}
 	}
 
 	private void inputAccName(String name) {
-		safetyInputEdit(txfAccName, name)
-//		if(name) {
-//			WebUI.setText(txfAccName, name)
-//			WebUI.delay(2)
-//		}
+		if(name) {
+			safetyInput(txfAccName, name)
+		}
 	}
 
 	private void inputAccountNo(String accNo) {
-		safetyInputEdit(txfAccNo, accNo)
-//		if(accNo) {
-//			WebUI.setText(txfAccNo, accNo)
-//			WebUI.delay(2)
-//		}
+		if(accNo) {
+			safetyInput(txfAccNo, accNo)
+			WebUI.delay(2)
+		}
 	}
 
 	private void selectBankAccPurpose(String purpose) {
-		safetySelectEdit(drpBankAccPurpose, purpose)
-//		if(purpose) {
-//			WebUI.click(drpBankAccPurpose)
-//			WebUI.selectOptionByLabel(drpBankAccPurpose, purpose, trues)
-//		}
+		if(purpose) {
+			safetyClick(drpBankAccPurpose)
+			safetySelect(drpBankAccPurpose, purpose)
+		}
 	}
 
 	private void clickSaveAccount() {
-		WebUI.click(btnSaveBankAcc)
+		safetyClick(btnSaveBankAcc)
+		handleAlertIfPresent()
+		WebUI.takeScreenshot()
 	}
 	private void clickAddStatement() {
 		handleAlertIfPresent()
-		WebUI.click(btnAddBankStatement)
-		WebUI.delay(2)
+		safetyClick(btnAddBankStatement)
+		handleAlertIfPresent()
+		WebUI.takeScreenshot()
 	}
 
 	private void selectBankNameStatement(String bankName) {
 		if(bankName) {
-			WebUI.selectOptionByLabel(drpBankNameStatement, bankName, false)
-			WebUI.delay(2)
+			safetySelect(drpBankNameStatement, bankName)
 		}
 	}
 	private void inputBankBranchStatement(String branchStatement) {
 		if(branchStatement) {
-			WebUI.setText(txfBankBranchStatement, branchStatement)
-			WebUI.delay(2)
+			safetyInput(txfBankBranchStatement, branchStatement)
 		}
 	}
 
 	private void inputBICodeStatement(String code) {
 		if(code) {
-			WebUI.setText(txfBICodeStatement, code)
-			WebUI.delay(2)
+			safetyInput(txfBICodeStatement, code)
 		}
 	}
 
 	private void inputAccNameStatement(String accNameStatement) {
 		if(accNameStatement) {
-			WebUI.setText(txfAccNameStatement, accNameStatement)
-			WebUI.delay(2)
+			safetyInput(txfAccNameStatement, accNameStatement)
 		}
 	}
 
 	private void inputAccNoStatement(String accNoStatement) {
 		if(accNoStatement) {
-			WebUI.setText(txfAccNoStatement, accNoStatement)
-			WebUI.delay(2)
+			safetyInput(txfAccNoStatement, accNoStatement)
 		}
 	}
 
 	private void clickCalculateStatement() {
-		WebUI.click(btnCalculateStatement)
+		safetyClick(btnCalculateStatement)
+		handleAlertIfPresent()
 	}
 
 	private void inputStatementBeginingBalance(String balance) {
 		if(balance) {
-			WebUI.setText(txfCreditBeginningBalance, balance)
-			WebUI.delay(2)
+			clearText(txfCreditBeginningBalance)
+			safetyInput(txfCreditBeginningBalance, balance)
 		}
 	}
 
 	private void selectStatementMonth(String month, Integer index) {
 		if(month) {
 			TestObject drpMonth = createTestObject("", "xpath", "//*[@id='gvBankStatementAddEdit_ddlMonth_${index}']")
-			WebUI.selectOptionByLabel(drpMonth, month, false)
-			WebUI.delay(2)
+			safetySelect(drpMonth, month)
 		}
 	}
 
 	private void inputStatementYear(String year, Integer index) {
 		if(year) {
 			TestObject txfYear = createTestObject("txfYear", "xpath", "//*[@id='gvBankStatementAddEdit_txtYear_${index}']")
-			WebUI.setText(txfYear, year)
+			safetyInput(txfYear, year)
 			WebUI.delay(2)
 		}
 	}
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
-			WebUI.setText(drpDebit, debit)
-			WebUI.delay(2)
+			clearText(drpDebit)
+			safetyInput(drpDebit, debit)
 		}
 	}
 
 	private void inputStatementCredit(String credit, Integer index) {
 		if(credit) {
 			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
-			WebUI.setText(drpCredit, credit)
-			WebUI.delay(2)
+			clearText(drpCredit)
+			safetyInput(drpCredit, credit)
 		}
 	}
-	private void handleAlertIfPresent() {
-		if(WebUI.waitForAlert(5)) {
-			WebUI.acceptAlert()
-		} else {
-			KeywordUtil.logInfo("Alert not found")
-		}
+	private void inputIncomeSection(String monthlyIncome) {
+		WebUI.takeScreenshot()
+		inputGrossMonthlyIncome(monthlyIncome)
+		clickCalculateIncome()
+	}
+
+	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
+		selectBankName(bankName)
+		inputBranchName(branchName)
+		inputAccName(accountName)
+		inputAccountNo(accountNo)
+		selectBankAccPurpose(purpose)
+	}
+
+	public void switchToIframeMain() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+
+	public void verifySaveSuccess() {
+		verifyPopUpSuccess(lblSuccess, "Financial Data")
 	}
 }
