@@ -29,3 +29,6 @@ cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
 
 'Step 3: click button matching customer'
 cde.clickButtonMatchingCustomer()
+
+'Step 4: verify success message'
+cde.verifySuccessMessage()
