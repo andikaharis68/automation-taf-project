@@ -26,7 +26,38 @@ ManagementOrShareholderPage management = new ManagementOrShareholderPage()
 'Step 1: Click Add personal'
 management.clickAddPersonal()
 
-'Step 2: Search Full name'
+'Step 2: Get Data Management Type'
+Map ManagementData = management.getManagementData(ScenarioId, "Personal", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", "ManagementShareholder")
+
+'Step 3: Search Customer name'
+management.searchCustomerName(ManagementData.FullName)
+
+'Step 4:Select Job Position'
+management.selectJobPosition(ManagementData.JobPosition)
+
+'Step 5: Click Save'
+management.clickSavePersonal()
+
+'Step 6: Click add company'
+management.clickAddCompany()
+
+'Step 7: input nitku'
+management.inputNITku(ManagementData.NITKU)
+
+'Step 8: Input share percentage'
+management.inputSharePercentage(ManagementData.share)
+
+'Step 9 : Check is Active'
+management.checkIsActive(ManagementData.IsActive)
+
+'Step 10: Check is Owner'
+management.checkIsOwner(ManagementData.IsOwner)
+
+'Step 11: Click Continue'
+management.clickContinue()
+
+
+
 
 
 

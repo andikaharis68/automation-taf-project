@@ -30,8 +30,5 @@ custInfo.selectCustomerType("Personal")
 'Step 3: Click button search'
 custInfo.clickSearch()
 
-'Step 2: Verify Customer list'
-
-'Step 3: click hyperlink customer name'
-
-'Step 4: Verify navigate to customer view'
+'Step 4: Verify Customer list'
+custInfo.clickCustomerHyperlink(FullName)

@@ -266,14 +266,11 @@ public class MainDataPage extends BaseHelper {
 		BaseHelper.verifyPopUpSuccess(lblNotif, "Save Success")
 		Mobile.delay(5)
 	}
-	private void clickBtnEditOrNewApp() {
+	private void clickNewCustomerIfPresent() {
 		Mobile.delay(5)
 		if(WebUI.verifyElementPresent(lblNewCustomer, 2, FailureHandling.OPTIONAL)) {
 			switchToIframeMainPage()
 			safetyClick(lblNewCustomer)
-		} else if(WebUI.verifyElementPresent(btnEdit, 2, FailureHandling.OPTIONAL)) {
-			switchToIframeMainPage()
-			safetyClick(btnEdit)
 		} else {
 			KeywordUtil.logInfo("skipped")
 		}

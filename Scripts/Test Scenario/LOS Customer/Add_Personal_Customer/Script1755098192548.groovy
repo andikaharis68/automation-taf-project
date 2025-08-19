@@ -32,7 +32,6 @@ dataRow += BaseHelper.getTestDataByScenario("CustMainData",GlobalVariable.TEST_D
 dataRow += BaseHelper.getTestDataByScenario("MainData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", dataRow['ScenarioId'])
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/NavigateTo_CustomerMain_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Add_Customer_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/Input_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

@@ -67,9 +67,7 @@ public class JobDataPage extends BaseHelper {
 		verifyLanding(txfProfessionName, "Job Data")
 	}
 	private void clickSaveContinue() {
-		handleAlertIfPresent()
 		safetyClick(btnSaveAndContinue)
-		handleAlertIfPresent()
 		WebUI.takeScreenshot()
 	}
 
@@ -146,7 +144,7 @@ public class JobDataPage extends BaseHelper {
 		}
 		safetyInputEdit(txfPrevCompanyName, prevCompanyName)
 	}
-	
+
 	private void selectPrevCompanyDate(String month, String year) {
 		if(month && year) {
 			//month
@@ -173,7 +171,6 @@ public class JobDataPage extends BaseHelper {
 		safetySelectEdit(drpOtherEstablishDate, month)
 		WebUI.delay(2)
 		safetyInputEdit(txfOtherEstablishDate, year, 0.5)
-		
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {

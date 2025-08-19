@@ -332,10 +332,10 @@ class BaseHelper {
 	}
 
 	static void openBrowser() {
-//		EdgeOptions options = new EdgeOptions()
-//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
-//		WebDriver driver = new EdgeDriver(options)
-//		
+		//		EdgeOptions options = new EdgeOptions()
+		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
+		//		WebDriver driver = new EdgeDriver(options)
+		//
 		WebUI.openBrowser(GlobalVariable.WEB_URL)
 		WebUI.maximizeWindow()
 	}
@@ -350,7 +350,7 @@ class BaseHelper {
 			KeywordUtil.logInfo("Alert not found")
 		}
 	}
-	
+
 	static void clearAndSetText(TestObject to, String text, double delay = 0.1) {
 		WebUI.waitForElementVisible(to, 10)
 		WebUI.click(to)
@@ -358,7 +358,7 @@ class BaseHelper {
 		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
 		WebUI.setText(to, text)
 	}
-	
+
 	static void safetyInput(TestObject to, String text, double delay = 0.1) {
 		WebUI.delay(delay)
 		WebUI.clearText(to)
@@ -368,7 +368,7 @@ class BaseHelper {
 			WebUI.delay(delay)
 		}
 	}
-	
+
 	static void safetyClick(TestObject to, double delay = 1) {
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
@@ -377,12 +377,12 @@ class BaseHelper {
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10)
 	}
-	
+
 	static void safetySelect(TestObject to, String text, double delay = 1) {
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
 	}
-	
+
 	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
 		if(text) {
 			WebUI.delay(delay)
@@ -394,11 +394,19 @@ class BaseHelper {
 			}
 		}
 	}
-	
+
 	static void safetySelectEdit(TestObject to, String text, double delay = 1) {
 		if(text) {
 			WebUI.selectOptionByLabel(to, text, false)
 			WebUI.delay(delay)
 		}
+	}
+	
+	static void clickEnter(TestObject to) {
+		WebUI.sendKeys(to, Keys.chord(Keys.ENTER))
+	}
+	static void clickTABKeyboard(TestObject to) {
+		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
+		
 	}
 }

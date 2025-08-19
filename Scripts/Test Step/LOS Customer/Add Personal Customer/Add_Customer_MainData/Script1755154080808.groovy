@@ -72,7 +72,7 @@ addPersonal.inputMotherMaidenName(MotherMaidenName)
 addPersonal.clickNextButton()
 
 'Step 16: Click edit or new app'
-mainData.clickBtnEditOrNewApp()
+mainData.clickNewCustomerIfPresent()
 
 'Step 17: Switch to frame custform'
 mainData.switchToIframeCustForm()

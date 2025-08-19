@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.Keys
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -69,8 +71,9 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 
 	private void inputIdExpiredDate(String idExpiredDate) {
-		safetyInput(txfIDExpiredDate, idExpiredDate, 3.0)
-		hideDatePicker(txfIDExpiredDate)
+		WebUI.click(txfIDExpiredDate)
+		safetyInput(txfIDExpiredDate, idExpiredDate, 1.0)
+		clickEnter(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
 		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
@@ -82,16 +85,13 @@ public class AddPersonalCustomerPage extends BaseHelper {
 		}
 	}
 
-	private void hideDatePicker(TestObject to) {
-		safetyInput(to, '\uE004') // Unicode dari Keys.TAB
-	}
 	private void inputPOB(String pob) {
 		safetyInput(txfPOB, pob)
 	}
 
 	private void inputDOB(String dob) {
 		safetyInput(txfDOB, dob)
-		hideDatePicker(txfDOB)
+		clickEnter(txfDOB)
 	}
 
 	private void inputNPWP(String npwp) {

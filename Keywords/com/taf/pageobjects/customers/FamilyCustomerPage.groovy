@@ -84,7 +84,8 @@ public class FamilyCustomerPage extends BaseHelper {
 	private void inputIdExpiredDate(String idExpiredDate) {
 		safetyClick(txfIDExpiredDate)
 		safetyInput(txfIDExpiredDate, idExpiredDate)
-		hideDatePicker(txfIDExpiredDate)
+		WebUI.delay(2)
+		clickTABKeyboard(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
 		TestObject radGender = createTestObject("radGender","xpath","//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
@@ -95,18 +96,16 @@ public class FamilyCustomerPage extends BaseHelper {
 		}
 	}
 
-	private void hideDatePicker(TestObject to) {
-		safetyInput(to, '\uE004') // Unicode dari Keys.TAB
-	}
 
 	private void inputPOB(String pob) {
 		safetyInput(txfPOB, pob)
-		hideDatePicker(txfPOB)
+		clickTABKeyboard(txfPOB)
+		WebUI.delay(2)
 	}
 
 	private void inputDOB(String dob) {
 		safetyInput(txfDOB, dob)
-		hideDatePicker(txfDOB)
+		clickTABKeyboard(txfDOB)
 		WebUI.delay(2)
 	}
 
