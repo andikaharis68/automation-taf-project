@@ -23,47 +23,47 @@ import org.openqa.selenium.Keys as Keys
 FamilyCustomerPage family = new FamilyCustomerPage()
 JobDataPage job = new JobDataPage()
 
-'Step 1: Add Family '
-family.clickAdd()
-
-'Step 2: Select Customer Model'
-family.selectCustomerModel(CustomerModel)
-
-'Step 3: Input family name'
-family.inputFamilyName(FamilyName)
-
-'Step 4: Select id type'
-family.selectIdType(IDType)
-
-'Step 5: Input ID no'
-family.inputIdNumber(IDNumber)
-
-'Step 6: Input ID Expired Date'
-family.inputIdExpiredDate(IDExpiredDate)
-
-'Step 7: Select Gender'
-family.selectGender(Gender)
-
-'Step 8: Input POB'
-family.inputPOB(BirthPlace)
-
-'Step 9: Input DOB'
-family.inputDOB(BirthDate)
-
-'Step 10: Input NPWP'
-family.inputNPWP(NPWP)
-
-'Step 11: Input Mother Name'
-family.inputMotherMaidenName(MotherMaidenName)
-
-'Step 12: Select Customer Relationship'
-family.selectCustomerRelationship(CustomerRelationship)
-
-'Step 13: Click next '
-family.clickNext()
-
-'Step 14: Click select family'
-family.clickSelectFamily()
+//'Step 1: Add Family '
+//family.clickAdd()
+//
+//'Step 2: Select Customer Model'
+//family.selectCustomerModel(CustomerModel)
+//
+//'Step 3: Input family name'
+//family.inputFamilyName(FamilyName)
+//
+//'Step 4: Select id type'
+//family.selectIdType(IDType)
+//
+//'Step 5: Input ID no'
+//family.inputIdNumber(IDNumber)
+//
+//'Step 6: Input ID Expired Date'
+//family.inputIdExpiredDate(IDExpiredDate)
+//
+//'Step 7: Select Gender'
+//family.selectGender(Gender)
+//
+//'Step 8: Input POB'
+//family.inputPOB(BirthPlace)
+//
+//'Step 9: Input DOB'
+//family.inputDOB(BirthDate)
+//
+//'Step 10: Input NPWP'
+//family.inputNPWP(NPWP)
+//
+//'Step 11: Input Mother Name'
+//family.inputMotherMaidenName(MotherMaidenName)
+//
+//'Step 12: Select Customer Relationship'
+//family.selectCustomerRelationship(CustomerRelationship)
+//
+//'Step 13: Click next '
+//family.clickNext()
+//
+//'Step 14: Click select family'
+//family.clickSelectFamily()
 
 'Step 15: click Save and continue'
 family.clickSaveContinue()

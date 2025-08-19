@@ -387,10 +387,10 @@ class BaseHelper {
 	}
 
 	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
-		handlePopupAlert()
 		if(text) {
 			WebUI.delay(delay)
 			WebUI.clearText(to)
+			handlePopupAlert()
 			WebUI.delay(delay)
 			for (char c : text.toCharArray()) {
 				WebUI.sendKeys(to, String.valueOf(c))
@@ -411,6 +411,8 @@ class BaseHelper {
 	
 	static void safetySelectEdit(TestObject to, String text, double delay = 1) {
 		if(text) {
+			WebUI.click(to)
+			handlePopupAlert()
 			WebUI.selectOptionByLabel(to, text, false)
 			WebUI.delay(delay)
 		}

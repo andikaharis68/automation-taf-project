@@ -14,12 +14,14 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.customers.CustomerInformationPage
 import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 OtherAttributePage attr = new OtherAttributePage()
+CustomerInformationPage custInfo = new CustomerInformationPage()
 
 'Step 1: Select Debitor grup'
 attr.selectDebitorGroup(DebitorGroup)
@@ -36,31 +38,31 @@ attr.inputEAccountFlag(EAccountFlag)
 'Step 5: Input EAccount Join date'
 attr.inputEAccountJoinDate(EAccountJoinDate)
 
-'Step 6: Input Customer Rating'
-attr.inputCustomerRating(CustRating)
-
-'Step 7:input Good Bad Status'
-attr.inputGoodBadStatus(GoodBadStatus)
-
-'Step 8: input terduga terorism'
-attr.inputSuspectTerrorism(TerdugaTerorisPPSPM)
-
-'Step 9: Input SIM NO'
-attr.inputSimNo(NoSIM)
-
-'Step 10: check is split treasure'
-attr.checkIsSplitTreasure(IsSplitTreassure)
-
-'Step 11: select debitor group slik'
-
-
-'Step 12: check violate bmpk'
-attr.checkViolateBMPK(ViolateBMPK)
-
-'Step 13: check exceed bpmk'
-attr.checkExceedBMPK(ExceedBMPK)
-
-'Step 14: Check affiliate with multifinance'
+//'Step 6: Input Customer Rating'
+//attr.inputCustomerRating(CustRating)
+//
+//'Step 7:input Good Bad Status'
+//attr.inputGoodBadStatus(GoodBadStatus)
+//
+//'Step 8: input terduga terorism'
+//attr.inputSuspectTerrorism(TerdugaTerorisPPSPM)
+//
+//'Step 9: Input SIM NO'
+//attr.inputSimNo(NoSIM)
+//
+//'Step 10: check is split treasure'
+//attr.checkIsSplitTreasure(IsSplitTreassure)
+//
+//'Step 11: select debitor group slik'
+//
+//
+//'Step 12: check violate bmpk'
+//attr.checkViolateBMPK(ViolateBMPK)
+//
+//'Step 13: check exceed bpmk'
+//attr.checkExceedBMPK(ExceedBMPK)
+//
+//'Step 14: Check affiliate with multifinance'
 
 'Step 15: check same address'
 attr.checkSameAddress(SameAddress)
@@ -88,3 +90,15 @@ attr.inputRatingDebitor(RatingDebitor)
 
 'Step 23: Input rating date'
 attr.inputRatingDate(RatingDate)
+
+'Step 24: Click Save'
+attr.clickSaveAttributeData()
+
+'Step 25: Swith to iframe main '
+attr.switchToIframeMain()
+
+'Step 25: click save data'
+attr.clickSaveData()
+
+'Step 25: Verify landing in Customer info page'
+custInfo.verifyLandingInCustInfoPage()

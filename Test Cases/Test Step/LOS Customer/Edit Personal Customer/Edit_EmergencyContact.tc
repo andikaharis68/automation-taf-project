@@ -4,5 +4,6 @@
    <name>Edit_EmergencyContact</name>
    <tag></tag>
    <comment></comment>
+   <recordOption>OTHER</recordOption>
    <testCaseGuid>1809d966-8fb8-45d1-80f0-d69d993baeb8</testCaseGuid>
 </TestCaseEntity>

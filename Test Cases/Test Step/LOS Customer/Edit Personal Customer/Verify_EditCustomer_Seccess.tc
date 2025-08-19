@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_OtherAttribute</name>
+   <name>Verify_EditCustomer_Seccess</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>8871224c-4787-40f0-b6db-7dcc820f0874</testCaseGuid>
+   <testCaseGuid>f9dad04c-4038-4deb-82e1-99a0e9ddffb5</testCaseGuid>
 </TestCaseEntity>

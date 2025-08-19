@@ -65,7 +65,6 @@ public class MenuPage extends BaseHelper {
 
 	private void clickDropdownMenu() {
 		safetyClick(drpMenu)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {

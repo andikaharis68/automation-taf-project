@@ -27,6 +27,9 @@ AddressPage address = new AddressPage()
 mainData.switchToIframeMainPage()
 mainData.switchToIframeCustForm()
 
+'Step 1: verify landing'
+mainData.verifyLandingInMainData()
+
 'Step 1: Select Salutation'
 mainData.selectSalutation(Salutation)
 
@@ -105,14 +108,5 @@ mainData.inputEmail(2, Email2)
 'Step 25: Click Save and Continue'
 mainData.clickSaveAndContinue()
 
-//'Step 26: Switch to default content'
-//mainData.switchToDefaultContent()
-//
-//'Step 27: Verify Pop Up Success'
-//mainData.verifyNotifSuccess()
-
-//'Step 29: Switch to iframe address'
-//address.switchToIframeAddress()
-
-'Step 29: Verify landing in Address section'
+'Step 26: Verify landing in Address section'
 address.verifyLandingInAddressSection()

@@ -24,9 +24,10 @@ EmergencyContactPage contact = new EmergencyContactPage()
 FinancialDataPage financial = new FinancialDataPage()
 
 'Step 1: Click Edit Button'
+contact.selectEdited(Name)
 
 'Step 2: Input name'
-contact.inputName(Name)
+contact.inputName(NewName)
 
 'Step 3: Select Customer Relationship'
 contact.selectCustomerRelationship(CustRelationship)
@@ -56,7 +57,7 @@ contact.inputRT(RT)
 contact.inputRW(RW)
 
 'Step 12: Select Address'
-contact.searchAddress(City)
+contact.searchAddress(ZIPCODE)
 
 'Step 13: Input phone number1 '
 contact.inputPhoneNumbers(Phone1, 1)
