@@ -103,7 +103,24 @@ public class JobDataPage extends BaseHelper {
 	private void chxInternalEmployee(String isInternalEmployee) {
 		if(isInternalEmployee?.trim() == "Y") {
 			safetyClick(chxIsInternalEmployee)
-			WebUI.delay(2)
+		}
+	}
+	private void inputProfessionNo(String professionNo) {
+		safetyInputEdit(txfProfessionNo, professionNo)
+	}
+	private void selectJobPosition(String jobPosition) {
+		safetySelectEdit(drpJobPosition, jobPosition)
+	}
+	private void selectJobStatus(String jobStatus) {
+		safetySelectEdit(drpJobStatus, jobStatus)
+	}
+	private void inputCompanyName(String companyName) {
+		safetyInputEdit(txfCompanyName, companyName)
+	}
+
+	private void chxInternalEmployee(String isInternalEmployee) {
+		if(isInternalEmployee?.trim() == "Y" && isInternalEmployee) {
+			WebUI.click(chxIsInternalEmployee)
 		}
 	}
 
@@ -123,9 +140,7 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
-		if(companyScale) {
-			safetySelect(drpCompanyScale, companyScale)
-		}
+		safetySelectEdit(drpCompanyScale, companyScale)
 	}
 	private void inputNumberOfEmployee(String numberOfEmployee) {
 		if(numberOfEmployee) {
@@ -145,11 +160,22 @@ public class JobDataPage extends BaseHelper {
 			WebUI.takeScreenshot()
 		}
 	}
+	private void inputNumberOfEmployee(String numberOfEmployee) {
+		safetyInputEdit(txfNumberOfEmployee, numberOfEmployee)
+	}
+
+	private void selectEmploymentEstablishDate(String month, String year) {
+		safetySelectEdit(drpEmploymentEstablishDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfEmploymentEstablishDate, year, 0.5)
+	}
 
 	private void checkIsWellKnowCompany(String isWellCompany) {
 		if(isWellCompany == '1') {
 			safetyClick(chxIsWellCompany)
 			WebUI.delay(2)
+		}else if(isWellCompany) {
+			safetyClick(chxIsWellCompany)
 		}
 	}
 
@@ -158,7 +184,9 @@ public class JobDataPage extends BaseHelper {
 			safetyInput(txfPrevCompanyName, prevCompanyName)
 			WebUI.delay(2)
 		}
+		safetyInputEdit(txfPrevCompanyName, prevCompanyName)
 	}
+	
 	private void selectPrevCompanyDate(String month, String year) {
 		if(month && year) {
 			//month
@@ -191,14 +219,29 @@ public class JobDataPage extends BaseHelper {
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
-		if(month && year) {
-			//month
-			safetySelect(drpOtherEstablishDate, month)
-			WebUI.delay(2)
-			//year
-			safetyInput(txfOtherEstablishDate, year)
-			WebUI.delay(2)
-		}
+		WebUI.delay(2)
+		safetySelectEdit(drpPrevEmploymentDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfPrevEmploymentDate, year, 0.5)
+		
+	}
+
+	private void inputOtherBussinessName(String bussinessName) {
+		safetyInputEdit(txfOtherBussinessName, bussinessName)
+	}
+	private void inputOtherBussinessType(String bussinessType) {
+		safetyInputEdit(txfOtherBussinessType, bussinessType)
+	}
+	private void inputOtherJobPosition(String jobPosition) {
+		safetyInputEdit(txfOtherJobPosition, jobPosition)
+	}
+
+	private void selectOtherCompanyEstablishDate(String month, String year) {
+		WebUI.delay(2)
+		safetySelectEdit(drpOtherEstablishDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfOtherEstablishDate, year, 0.5)
+		
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {
