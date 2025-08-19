@@ -87,8 +87,9 @@ public class FamilyCustomerPage extends BaseHelper {
 	private void inputIdExpiredDate(String idExpiredDate) {
 		WebUI.delay(10)
 		WebUI.click(txfIDExpiredDate)
-		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
-		WebUI.delay(10)
+		safetyInput(txfIDExpiredDate, idExpiredDate)
+//		WebUI.sendKeys(txfIDExpiredDate, idExpiredDate)
+//		WebUI.delay(10)
 		hideDatePicker(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
@@ -106,8 +107,10 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 
 	private void inputPOB(String pob) {
-		WebUI.setText(txfPOB, pob)
+		safetyInput(txfPOB, pob)
+//		WebUI.setText(txfPOB, pob)
 		WebUI.delay(2)
+		hideDatePicker(txfPOB)
 	}
 
 	private void inputDOB(String dob) {

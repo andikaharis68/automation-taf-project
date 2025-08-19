@@ -72,37 +72,42 @@ public class JobDataPage extends BaseHelper {
 	}
 
 	private void selectProfessionName(String professionName) {
-		WebUI.click(btnSearchProfessionName)
-		WebUI.delay(2)
-		WebUI.setText(txfOvlyProfessionName, professionName)
-		WebUI.click(btnOvlySearchProfesi)
-		WebUI.click(btnOvlySelectProfesi)
-		WebUI.delay(2)
-		
+		if(professionName) {
+			WebUI.click(btnSearchProfessionName)
+			WebUI.delay(2)
+			WebUI.setText(txfOvlyProfessionName, professionName)
+			WebUI.click(btnOvlySearchProfesi)
+			WebUI.click(btnOvlySelectProfesi)
+			WebUI.delay(2)
+		}
 	}
 	private void inputProfessionNo(String professionNo) {
-		WebUI.setText(txfProfessionNo, professionNo)
-		WebUI.delay(2)
+		safetyInputEdit(txfProfessionNo, professionNo)
+//		WebUI.setText(txfProfessionNo, professionNo)
+//		WebUI.delay(2)
 	}
 	private void selectJobPosition(String jobPosition) {
-		WebUI.selectOptionByLabel(drpJobPosition, jobPosition, false)
-		WebUI.delay(2)
+		safetySelectEdit(drpJobPosition, jobPosition)
+//		WebUI.selectOptionByLabel(drpJobPosition, jobPosition, false)
+//		WebUI.delay(2)
 	}
 	private void selectJobStatus(String jobStatus) {
-		if(jobStatus) {
-			WebUI.selectOptionByLabel(drpJobStatus, jobStatus, false)
-			WebUI.delay(2)
-		}
+		safetySelectEdit(drpJobStatus, jobStatus)
+//		if(jobStatus) {
+//			WebUI.selectOptionByLabel(drpJobStatus, jobStatus, false)
+//			WebUI.delay(2)
+//		}
 	}
 	private void inputCompanyName(String companyName) {
-		if(!companyName) {
-			WebUI.setText(txfCompanyName, companyName)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfCompanyName, companyName)
+//		if(!companyName) {
+//			WebUI.setText(txfCompanyName, companyName)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void chxInternalEmployee(String isInternalEmployee) {
-		if(isInternalEmployee?.trim() == "Y") {
+		if(isInternalEmployee?.trim() == "Y" && isInternalEmployee) {
 			WebUI.click(chxIsInternalEmployee)
 			WebUI.delay(2)
 		}
@@ -125,81 +130,104 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
-		if(companyScale) {
-			WebUI.selectOptionByLabel(drpCompanyScale, companyScale, false)
-			WebUI.delay(2)
-		}
+		safetySelectEdit(drpCompanyScale, companyScale)
+//		if(companyScale) {
+//			WebUI.selectOptionByLabel(drpCompanyScale, companyScale, false)
+//			WebUI.delay(2)
+//		}
 	}
 	private void inputNumberOfEmployee(String numberOfEmployee) {
-		if(numberOfEmployee) {
-			WebUI.setText(txfNumberOfEmployee, numberOfEmployee)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfNumberOfEmployee, numberOfEmployee)
+//		if(numberOfEmployee) {
+//			WebUI.setText(txfNumberOfEmployee, numberOfEmployee)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void selectEmploymentEstablishDate(String month, String year) {
-		if(month && year) {
-			//month
-			WebUI.selectOptionByLabel(drpEmploymentEstablishDate, month, false)
-			WebUI.delay(2)
-			//year
-			WebUI.setText(txfEmploymentEstablishDate, year)
-			WebUI.delay(2)
-		}
+		safetySelectEdit(drpEmploymentEstablishDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfEmploymentEstablishDate, year, 0.5)
+		
+//		if(month && year) {
+//			//month
+//			WebUI.selectOptionByLabel(drpEmploymentEstablishDate, month, false)
+//			WebUI.delay(2)
+//			//year
+//			WebUI.setText(txfEmploymentEstablishDate, year)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void checkIsWellKnowCompany(String isWellCompany) {
 		if(isWellCompany == '1') {
 			WebUI.click(chxIsWellCompany)
 			WebUI.delay(2)
+		}else if(isWellCompany) {
+			safetyClick(chxIsWellCompany)
 		}
 	}
 
 	private void inputPrevCompanyName(String prevCompanyName) {
-		if(prevCompanyName) {
-			WebUI.setText(txfPrevCompanyName, prevCompanyName)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfPrevCompanyName, prevCompanyName)
+//		if(prevCompanyName) {
+//			WebUI.setText(txfPrevCompanyName, prevCompanyName)
+//			WebUI.delay(2)
+//		}
 	}
+	
 	private void selectPrevCompanyDate(String month, String year) {
-		if(month && year) {
-			//month
-			WebUI.selectOptionByLabel(drpPrevEmploymentDate, month, false)
-			WebUI.delay(2)
-			//year
-			WebUI.setText(txfPrevEmploymentDate, year)
-			WebUI.delay(2)
-		}
+		WebUI.delay(2)
+		safetySelectEdit(drpPrevEmploymentDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfPrevEmploymentDate, year, 0.5)
+		
+//		if(month && year) {
+//			//month
+//			WebUI.selectOptionByLabel(drpPrevEmploymentDate, month, false)
+//			WebUI.delay(2)
+//			//year
+//			WebUI.setText(txfPrevEmploymentDate, year)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputOtherBussinessName(String bussinessName) {
-		if(bussinessName) {
-			WebUI.setText(txfOtherBussinessName, bussinessName)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfOtherBussinessName, bussinessName)
+//		if(bussinessName) {
+//			WebUI.setText(txfOtherBussinessName, bussinessName)
+//			WebUI.delay(2)
+//		}
 	}
 	private void inputOtherBussinessType(String bussinessType) {
-		if(bussinessType) {
-			WebUI.setText(txfOtherBussinessType, bussinessType)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfOtherBussinessType, bussinessType)
+//		if(bussinessType) {
+//			WebUI.setText(txfOtherBussinessType, bussinessType)
+//			WebUI.delay(2)
+//		}
 	}
 	private void inputOtherJobPosition(String jobPosition) {
-		if(jobPosition) {
-			WebUI.setText(txfOtherJobPosition, jobPosition)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfOtherJobPosition, jobPosition)
+//		if(jobPosition) {
+//			WebUI.setText(txfOtherJobPosition, jobPosition)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
-		if(month && year) {
-			//month
-			WebUI.selectOptionByLabel(drpOtherEstablishDate, drpOtherEstablishDate, false)
-			WebUI.delay(2)
-			//year
-			WebUI.setText(txfOtherEstablishDate, year)
-			WebUI.delay(2)
-		}
+		WebUI.delay(2)
+		safetySelectEdit(drpOtherEstablishDate, month)
+		WebUI.delay(2)
+		safetyInputEdit(txfOtherEstablishDate, year, 0.5)
+		
+//		if(month && year) {
+//			//month
+//			WebUI.selectOptionByLabel(drpOtherEstablishDate, drpOtherEstablishDate, false)
+//			WebUI.delay(2)
+//			//year
+//			WebUI.setText(txfOtherEstablishDate, year)
+//			WebUI.delay(2)
+//		}
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {
