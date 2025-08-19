@@ -24,10 +24,25 @@ Map scenarioData = [:]
 scenarioData += BaseHelper.getTestDataByScenario("Credentials", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 scenarioData += BaseHelper.getTestDataByScenario("CustMainData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 scenarioData += BaseHelper.getTestDataByScenario("MainData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
-
+BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Personal Customer/NavigateTo_CustomerMain_Data'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerInformation'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CustomerCompany_CustomerMainData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 
+scenarioData += BaseHelper.getTestDataByScenario("Address",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalAddressCompany'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CompanyAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
+scenarioData += BaseHelper.getTestDataByScenario("ContactInformation",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_ContactInformation'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
+scenarioData += BaseHelper.getTestDataByScenario("FinancialData",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_FinancialData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
+scenarioData += BaseHelper.getTestDataByScenario("LegalDocument",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalDocument'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
+scenarioData += BaseHelper.getTestDataByScenario("OtherAttribute",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_OtherAttribute'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)

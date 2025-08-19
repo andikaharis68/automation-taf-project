@@ -63,7 +63,15 @@ public class OtherAttributePage extends BaseHelper {
 	private TestObject txfRatingDate					= createTestObject("txfRatingDate", "xpath", "//*[@id='rptOtherAttribute_txtAttrContent_19']")
 	private TestObject chxCDENotes						= createTestObject("chxCDENotes", "xpath", "")
 	private TestObject btnSave							= createTestObject("btnSave", "xpath", "//*[@id='lb_Form_Save_OtherAttribute']")
-	
+
+	//iframe
+	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+
+	public void switchToIframeMain() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+
 	private void clickSave() {
 		WebUI.click(btnSave)
 	}

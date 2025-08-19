@@ -53,6 +53,10 @@ public class FinancialDataPage extends BaseHelper {
 	//*[@id="gvBankStatementAddEdit_ddlMonth_1"]
 	private TestObject txfCreditBeginningBalance	= createTestObject("txfCreditBeginningBalance", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDCreditAmt_0_txtInput_0']")
 
+	//iframe
+	private TestObject iframeMainpage 				= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+
+	private TestObject lblSuccess					= createTestObject("lblSuccess", "xpath", "//*[contains(text(), 'Save Success')]")
 
 
 	private void clickSaveContinue() {
@@ -155,6 +159,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void clickSaveAccount() {
 		WebUI.click(btnSaveBankAcc)
+		WebUI.takeScreenshot()
 	}
 	private void clickAddStatement() {
 		handleAlertIfPresent()
@@ -243,5 +248,28 @@ public class FinancialDataPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("Alert not found")
 		}
+	}
+
+	private void inputIncomeSection(String monthlyIncome) {
+		WebUI.takeScreenshot()
+		inputGrossMonthlyIncome(monthlyIncome)
+		clickCalculateIncome()
+	}
+
+	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
+		selectBankName(bankName)
+		inputBranchName(branchName)
+		inputAccName(accountName)
+		inputAccountNo(accountNo)
+		selectBankAccPurpose(purpose)
+	}
+
+	public void switchToIframeMain() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
+	}
+
+	public void verifySaveSuccess() {
+		verifyPopUpSuccess(lblSuccess, "Financial Data")
 	}
 }
