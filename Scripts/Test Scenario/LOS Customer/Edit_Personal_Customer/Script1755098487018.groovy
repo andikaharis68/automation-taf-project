@@ -32,8 +32,9 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), d
 WebUI.delay(10)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/NavigateTo_CustomerInformation_Page'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Search_CustomerInformation_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Input_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_MainData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
+//step to verify that address exist on list to edit
 dataRow += ['LegalAdressExist' : false,
 			'ResidenceAddressExist' : false,
 			'JobAddressExist' : false]
@@ -55,6 +56,12 @@ if(dataRow['JobAddressExist']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobAddress'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 }
 
+
+dataRow += BaseHelper.getTestDataByScenario("Family", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("JobData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Add_FamilyCustomer'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 
 //WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
