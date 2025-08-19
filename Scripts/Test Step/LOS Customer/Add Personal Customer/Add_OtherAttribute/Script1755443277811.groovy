@@ -14,12 +14,14 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.customers.CustomerInformationPage
 import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 OtherAttributePage attr = new OtherAttributePage()
+CustomerInformationPage custInfo = new CustomerInformationPage()
 
 'Step 1: Select Debitor grup'
 attr.selectDebitorGroup(DebitorGroup)
@@ -88,3 +90,11 @@ attr.inputRatingDebitor(RatingDebitor)
 
 'Step 23: Input rating date'
 attr.inputRatingDate(RatingDate)
+
+'Step 24: Click Save'
+attr.clickSaveAttributeData()
+
+'Step 25: Verify landing in Customer info page'
+custInfo.verifyLandingInCustInfoPage()
+
+

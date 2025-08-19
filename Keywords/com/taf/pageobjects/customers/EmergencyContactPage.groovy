@@ -44,6 +44,8 @@ public class EmergencyContactPage extends BaseHelper {
 	private TestObject txfCity				= createTestObject("txfCity", "xpath", "//*[@id='ucEmergencyAddr_txtCity']")
 
 	private TestObject txfOvlyCity			= createTestObject("txfOvlyCity", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2']")
+	private TestObject txfOvlyZipCode		= createTestObject("txfOvlyZipCode", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+	 
 	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlyReset			= createTestObject("btnOvlyReset", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbReset']")
 	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0']")
@@ -53,66 +55,83 @@ public class EmergencyContactPage extends BaseHelper {
 		handleAlertIfPresent()
 		verifyLanding(btnAdd, "Emergency Contact")
 		WebUI.delay(2)
+		WebUI.takeScreenshot()
 	}
 
 	private void inputName(String name) {
 		if(name) {
-			WebUI.setText(txfName, name)
-			WebUI.delay(2)
+			safetyInput(txfName, name)
 		}
 	}
 
 	private void clickAddContact() {
-		WebUI.click(btnAdd)
+		safetyClick(btnAdd)
 	}
 
 	private void clickSaveAndContinue() {
-		WebUI.click(btnSaveAndContinue)
+		safetyClick(btnSaveAndContinue)
 	}
-	
+
 	private void clickSaveContact() {
-		WebUI.click(btnSave)
+		safetyClick(btnSave)
 	}
 
 	private void selectCustomerRelationship(String relationship) {
 		if(relationship) {
-			WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
-			WebUI.delay(2)
+			safetySelect(drpCustRelationship, relationship)
 		}
 	}
 
 	private void inputEmails(String email, Integer index) {
 		if(email) {
 			TestObject txfEmail	= createTestObject("txfEmail", "xpath", "//*[@id='ucEmergencyContactInfo_ucEMail${index}_txtEmail']")
-			WebUI.setText(txfEmail, email)
-			WebUI.delay(2)
+			safetyInput(txfEmail, email)
 		}
 	}
 
 	private void inputAddress(String address) {
 		if(address) {
-			WebUI.setText(txfAddress, address)
-			WebUI.delay(2)
+			safetyInput(txfAddress, address)
 		}
 	}
 
 	private void inputRT(String RT) {
 		if(RT) {
-			WebUI.setText(txfRT, RT)
+			safetyInput(txfRT, RT)
 		}
 	}
 	private void inputRW(String RW) {
 		if(RW) {
-			WebUI.setText(txfRW, RW)
+			safetyInput(txfRW, RW)
+			
 		}
 	}
 
-	private void searchAddress(String city) {
-		WebUI.click(btnSearchZIPCode)
-		WebUI.setText(txfOvlyCity, city)
-		WebUI.click(btnOvlySearch)
-		Mobile.delay(2)
-		WebUI.click(btnOvlySelect) //select first address
+	private void searchAddress(String zipCode) {
+		safetyClick(btnSearchZIPCode)
+		safetyInput(txfOvlyZipCode, zipCode)		
+		safetyClick(btnOvlySearch)
+		safetyClick(btnOvlySelect)
+	}
+	
+	private void checkAddress(String zipCode) {
+		int maxRetry = 3
+		int attempt = 0
+		boolean isZipCodeBlank = true
+		
+		while (isZipCodeBlank && attempt < maxRetry) {
+			searchAddress(zipCode)   // trigger proses (hit ke DB / API)
+			WebUI.delay(2)      // kasih waktu 2 detik nunggu respon update
+		
+			def zipCodeValue = WebUI.getAttribute(txfOvlyZipCode, 'value')
+			isZipCodeBlank = (zipCodeValue == null || zipCodeValue.trim().isEmpty())
+		
+			attempt++
+		}
+		
+		if (isZipCodeBlank) {
+			KeywordUtil.markFailedAndStop("City field masih kosong setelah ${maxRetry} percobaan.")
+		}
 	}
 
 	private void inputPhoneNumbers(String phoneNumber, int index) {
@@ -128,9 +147,10 @@ public class EmergencyContactPage extends BaseHelper {
 				KeywordUtil.markWarning("Invalid phone format: ${phoneNumber}. Expected format is XXX-XXX-XXX")
 			}
 
-			WebUI.setText(countryField, parts[0])
-			WebUI.setText(areaField, parts[1])
-			WebUI.setText(numberField, parts[2])
+			safetyInput(countryField, parts[0])
+			safetyInput(areaField, parts[1])
+			safetyInput(numberField, parts[2])
+			
 		}
 	}
 
@@ -144,23 +164,17 @@ public class EmergencyContactPage extends BaseHelper {
 			if (parts.size() != 3) {
 				KeywordUtil.markWarning("Invalid phone format: ${fax}. Expected format is XXX-XXX")
 			}
-			WebUI.setText(countryField, parts[0])
-			WebUI.setText(areaField, parts[1])
+			safetyInput(countryField, parts[0])
+			safetyInput(areaField, parts[1])
 		}
 	}
-	
+
 	private void inputMobilePhone(String phone, int index) {
 		if(phone) {
 			TestObject countryField	= createTestObject("countryField", "xpath", "//*[@id='ucEmergencyContactInfo_txt_CustEmergencyCntct_MobilePhn${index}']")
-			WebUI.setText(countryField, phone)
-			WebUI.delay(2)	 
+			safetyInput(countryField, phone)
+			WebUI.delay(2)
 		}
 	}
-	private void handleAlertIfPresent() {
-		if(WebUI.waitForAlert(5)) {
-			WebUI.acceptAlert()
-		} else {
-			KeywordUtil.logInfo("Alert not found")
-		}
-	}
+	
 }

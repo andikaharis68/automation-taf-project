@@ -43,40 +43,41 @@ public class CustomerInformationPage extends BaseHelper {
 
 
 	private void verifyLandingInCustInfoPage() {
+		WebUI.takeScreenshot()
 		verifyLanding(txfCustomerNo, "Customer Information")
 		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerName(String name) {
-		WebUI.setText(txfCustomerName, name)
+		safetyInput(txfCustomerName, name)
 	}
 
 	private void selectCustomerType(String customerType) {
-		WebUI.selectOptionByLabel(drpCustomerType, customerType, false)
+		safetySelect(drpCustomerType, customerType)
 	}
 
 	private void inputAddress(String address) {
-		WebUI.setText(txfAddress, address)
+		safetyInput(txfAddress, address)
 	}
 
 	private void inputCustomerNo(String customerNo) {
-		WebUI.setText(txfCustomerNo, customerNo)
+		safetyInput(txfCustomerNo, customerNo)
 	}
 	private void selectCustomerRating(String customerRating) {
-		WebUI.selectOptionByLabel(drpCustomerRating, customerRating, false)
+		safetySelect(drpCustomerRating, customerRating)
 	}
 	private void clickSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
 	}
 
 	private void clickReset() {
-		WebUI.click(btnReset)
+		safetyClick(btnReset)
 	}
 	private void addPersonalCustomer() {
-		WebUI.click(btnAddPersonalCustomer)
+		safetyClick(btnAddPersonalCustomer)
 	}
 	private void addCompanyCustomer() {
-		WebUI.click(btnAddCompanyCustomer)
+		safetyClick(btnAddCompanyCustomer)
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -85,7 +86,18 @@ public class CustomerInformationPage extends BaseHelper {
 	private void switchToDefaultContent() {
 		WebUI.switchToDefaultContent()
 	}
+
+	private void searchCustomerName(String fullname) {
+		safetyInput(txfCustomerNo, fullname)
+		WebUI.delay(2)
+		WebUI.takeScreenshot()
+	}
+
 	
+	private void verifyCustomerList(String fullName, String address) {
+	}
+	
+
 	private void clickEdit() {
 		WebUI.click(btnPenEditCustomer)
 	}

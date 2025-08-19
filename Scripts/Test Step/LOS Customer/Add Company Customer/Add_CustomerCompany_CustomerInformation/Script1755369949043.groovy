@@ -26,7 +26,6 @@ AddCompanyCustomerPage addCompanyCustomerPage = new AddCompanyCustomerPage()
 CustomerInformationPage customerInfoPage = new CustomerInformationPage()
 CompanyCustomerMainDataPage companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
 
-
 KeywordUtil.logInfo("scenarioData : ${CustomerModel}, ${CompanyName}, ${CompanyType}")
 
 'Step 1 : click button customer'
@@ -50,7 +49,12 @@ addCompanyCustomerPage.inputCustomerNitku(NITKU)
 'Step 7: click next'
 addCompanyCustomerPage.clickNextButton()
 
-'Step 8: Verify Landing customer main data'
+'Step 8: Click new application if present'
+addCompanyCustomerPage.clickNewApplicationIfPresent()
+
+'Step 9: Verify landing in main data page'
+companyCustomerMainDataPage.verifyLandingInMainPage()
+
 
 
 
