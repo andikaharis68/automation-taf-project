@@ -56,6 +56,9 @@ if(dataRow['JobAddressExist']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobAddress'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 }
 
+dataRow += BaseHelper.getTestDataByScenario("EmergencyContact", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("FinancialData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("OtherAttribute", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
 
 dataRow += BaseHelper.getTestDataByScenario("Family", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("JobData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", dataRow['ScenarioId'])
@@ -63,6 +66,9 @@ dataRow += BaseHelper.getTestDataByScenario("JobData", GlobalVariable.TEST_DATA_
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Add_FamilyCustomer'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_EmergencyContact'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_FinancialData'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_OtherAttribute'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

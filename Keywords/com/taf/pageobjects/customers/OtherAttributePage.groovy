@@ -74,36 +74,42 @@ public class OtherAttributePage extends BaseHelper {
 	}
 	
 	private void selectDebitorGroup(String label) {
-		WebUI.click(btnSearchDebitorGroup)
-		WebUI.delay(2)
-		
-		WebUI.setText(txfOvlyBICode, '%')
-		WebUI.delay(2)
-		
-		WebUI.click(btnOvlySearchBICode)
-		WebUI.delay(2)
-		clickSelectByLabel(label)
+		if(label) {
+			WebUI.click(btnSearchDebitorGroup)
+			WebUI.delay(2)
+			
+			WebUI.setText(txfOvlyBICode, '%')
+			WebUI.delay(2)
+			
+			WebUI.click(btnOvlySearchBICode)
+			WebUI.delay(2)
+			clickSelectByLabel(label)
+		}
 	}
 	
 	private void selectCounterpartCategory(String label) {
-		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']") 
-		txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-		WebUI.click(btnSearchCounterpartCategory)
-		WebUI.delay(2)
-		
-		WebUI.setText(txfOvlyBICode, '%')
-		WebUI.delay(2)
-		WebUI.click(btnOvlySearchBICode)
-		clickSelectByLabel(label)
+		if(label) {
+			btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']")
+			 txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+			 WebUI.click(btnSearchCounterpartCategory)
+			 WebUI.delay(2)
+			 
+			 WebUI.setText(txfOvlyBICode, '%')
+			 WebUI.delay(2)
+			 WebUI.click(btnOvlySearchBICode)
+			 clickSelectByLabel(label)
+		}
 	}
 	
 	private void selectSustainableFinancial(String label) {
-		 btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
-		 txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-		WebUI.click(btnSearchSustainableFinancial)
-		WebUI.setText(txfOvlyBICode, '%')
-		WebUI.click(btnOvlySearchBICode)
-		clickSelectByLabel(label)
+		if(label) {
+			 btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
+			 txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+			 WebUI.click(btnSearchSustainableFinancial)
+			 WebUI.setText(txfOvlyBICode, '%')
+			 WebUI.click(btnOvlySearchBICode)
+			 clickSelectByLabel(label)
+		}
 	}
 	
 	

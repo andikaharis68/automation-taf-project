@@ -65,45 +65,51 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void inputGrossMonthlyIncome(String income) {
-		if(income) {
-			WebUI.setText(txfGrossMonthlyIncome, income)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfGrossMonthlyIncome, income)
+//		if(income) {
+//			WebUI.setText(txfGrossMonthlyIncome, income)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputGrossProfit(String grossProfit) {
-		if(grossProfit) {
-			WebUI.setText(txfGrossProfit, grossProfit)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfGrossProfit, grossProfit)
+//		if(grossProfit) {
+//			WebUI.setText(txfGrossProfit, grossProfit)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputOtherIncome(String otherIncome) {
-		if(otherIncome) {
-			WebUI.setText(txfOtherIncome, otherIncome)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfOtherIncome, otherIncome)
+//		if(otherIncome) {
+//			WebUI.setText(txfOtherIncome, otherIncome)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputSourceOfIncome(String sourceIncome) {
-		if(sourceIncome) {
-			WebUI.setText(txfSourceOfOtherIncome, sourceIncome)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfSourceOfOtherIncome, sourceIncome)
+//		if(sourceIncome) {
+//			WebUI.setText(txfSourceOfOtherIncome, sourceIncome)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputLivingCost(String cost) {
-		if(cost) {
-			WebUI.setText(txfLivingCost, cost)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfLivingCost, cost)
+//		if(cost) {
+//			WebUI.setText(txfLivingCost, cost)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputOtherMonthlyInstallment(String installment) {
-		if(installment) {
-			WebUI.setText(txfOtherMonthlyInstallment, installment)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfOtherMonthlyInstallment, installment)
+//		if(installment) {
+//			WebUI.setText(txfOtherMonthlyInstallment, installment)
+//			WebUI.delay(2)
+//		}
 	}
 	private void clickCalculateIncome() {
 		WebUI.click(btnCalculateIncome)
@@ -113,44 +119,50 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void selectBankName(String bankName) {
-		if(bankName) {
-			WebUI.selectOptionByLabel(drpBankName, bankName, false)
-			WebUI.delay(2)
-		}
+		safetySelectEdit(drpBankName, bankName)
+//		if(bankName) {
+//			WebUI.selectOptionByLabel(drpBankName, bankName, false)
+//			WebUI.delay(2)
+//		}
 	}
 	private void inputBranchName(String name) {
-		if(name) {
-			WebUI.setText(txfBankBranch, name)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfBankBranch, name)
+//		if(name) {
+//			WebUI.setText(txfBankBranch, name)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputBICodeBank(String code) {
-		if(code) {
-			WebUI.setText(txfBICode, code)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfBICode, code)
+//		if(code) {
+//			WebUI.setText(txfBICode, code)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputAccName(String name) {
-		if(name) {
-			WebUI.setText(txfAccName, name)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfAccName, name)
+//		if(name) {
+//			WebUI.setText(txfAccName, name)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputAccountNo(String accNo) {
-		if(accNo) {
-			WebUI.setText(txfAccNo, accNo)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfAccNo, accNo)
+//		if(accNo) {
+//			WebUI.setText(txfAccNo, accNo)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void selectBankAccPurpose(String purpose) {
-		if(purpose) {
-			WebUI.click(drpBankAccPurpose)
-			WebUI.selectOptionByLabel(drpBankAccPurpose, purpose, trues)
-		}
+		safetySelectEdit(drpBankAccPurpose, purpose)
+//		if(purpose) {
+//			WebUI.click(drpBankAccPurpose)
+//			WebUI.selectOptionByLabel(drpBankAccPurpose, purpose, trues)
+//		}
 	}
 
 	private void clickSaveAccount() {

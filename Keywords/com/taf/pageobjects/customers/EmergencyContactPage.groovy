@@ -56,10 +56,11 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void inputName(String name) {
-		if(name) {
-			WebUI.setText(txfName, name)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfName, name)
+//		if(name) {
+//			WebUI.setText(txfName, name)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void clickAddContact() {
@@ -75,10 +76,12 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void selectCustomerRelationship(String relationship) {
-		if(relationship) {
-			WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
-			WebUI.delay(2)
-		}
+		safetySelectEdit(drpCustRelationship, relationship)
+	
+//		if(relationship) {
+//			WebUI.selectOptionByLabel(drpCustRelationship, relationship, false)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputEmails(String email, Integer index) {
@@ -90,29 +93,34 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void inputAddress(String address) {
-		if(address) {
-			WebUI.setText(txfAddress, address)
-			WebUI.delay(2)
-		}
+		safetyInputEdit(txfAddress, address)
+//		if(address) {
+//			WebUI.setText(txfAddress, address)
+//			WebUI.delay(2)
+//		}
 	}
 
 	private void inputRT(String RT) {
-		if(RT) {
-			WebUI.setText(txfRT, RT)
-		}
+		safetyInputEdit(txfRT, RT)
+//		if(RT) {
+//			WebUI.setText(txfRT, RT)
+//		}
 	}
 	private void inputRW(String RW) {
-		if(RW) {
-			WebUI.setText(txfRW, RW)
-		}
+		safetyInputEdit(txfRW, RW)
+//		if(RW) {
+//			WebUI.setText(txfRW, RW)
+//		}
 	}
 
 	private void searchAddress(String city) {
-		WebUI.click(btnSearchZIPCode)
-		WebUI.setText(txfOvlyCity, city)
-		WebUI.click(btnOvlySearch)
-		Mobile.delay(2)
-		WebUI.click(btnOvlySelect) //select first address
+		if(city) {
+			WebUI.click(btnSearchZIPCode)
+			WebUI.setText(txfOvlyCity, city)
+			WebUI.click(btnOvlySearch)
+			Mobile.delay(2)
+			WebUI.click(btnOvlySelect) //select first address
+		}
 	}
 
 	private void inputPhoneNumbers(String phoneNumber, int index) {
