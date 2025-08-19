@@ -66,6 +66,7 @@ public class OtherAttributePage extends BaseHelper {
 
 	private TestObject iframeMainpage 					= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	private TestObject btnSaveData						= createTestObject("btnSaveData", "xpath", "//*[@id='lbl_Toolbar_Save']")
+	private TestObject btnSaveAndSubmit					= createTestObject("btnSaveAndSubmit", "id", "lb_Form_SaveSubmit_OtherAttribute")
 	 
 
 	public void switchToIframeMain() {
@@ -260,5 +261,12 @@ public class OtherAttributePage extends BaseHelper {
 	private void clickYesNo(String labelText) {
 		TestObject radYesNo = createTestObject("radYesNo", "xpath", "//label[normalize-space(text())='" + labelText + "']/preceding-sibling::input[@type='radio']")
 		safetyClick(radYesNo)
+	}
+	
+	private void clickSaveAndSubmit() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSaveAndSubmit)
+		WebUI.delay(5)//cek dulu sampe submit
+		WebUI.takeScreenshot()
 	}
 }

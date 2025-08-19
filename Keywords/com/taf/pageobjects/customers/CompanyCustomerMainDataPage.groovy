@@ -48,7 +48,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 
 	
 	private void verifyLandingInMainPage() {
-		verifyLanding(cbIsVIP, "Company Customer Main Data")
+		verifyLanding(iconLookUpCustomerGroup, "Company Customer Main Data")
 	}
 
 	private void switchToIframeCustForm() {
@@ -78,6 +78,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 
 	private void inputNumberOfEmployees(String numberOfEmployees) {
 		if(numberOfEmployees) {
+			manualClearText(txfNumberOfEmployees)
 			safetyInput(txfNumberOfEmployees, numberOfEmployees)
 		}
 	}
@@ -122,7 +123,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 			safetyInput(txfOvlyCustomerGroup, customerGroup)
 	
 			//need hard code the customer type for Company
-			safetySelect(drpOvlyCustomerType, "Company", false)
+			safetySelect(drpOvlyCustomerType, "Company")
 	
 			// click search customer group
 			safetyClick(btnOvlySearchCustGroup)

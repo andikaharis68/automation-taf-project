@@ -77,6 +77,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void verifyLandinginFinancialPage() {
 		verifyLanding(txfGrossMonthlyIncome, "Financial Data")
+		WebUI.takeScreenshot()
 	}
 
 	private void inputGrossMonthlyIncome(String income) {
@@ -255,9 +256,9 @@ public class FinancialDataPage extends BaseHelper {
 		}
 	}
 	private void inputIncomeSection(String monthlyIncome) {
-		WebUI.takeScreenshot()
 		inputGrossMonthlyIncome(monthlyIncome)
 		clickCalculateIncome()
+		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
