@@ -18,6 +18,7 @@ import com.taf.pageobjects.losCreditProcess.CreditSimulationToNewApplication
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+import com.taf.pageobjects.MenuPage
 
 CreditSimulationToNewApplication credsim = new CreditSimulationToNewApplication()
 
@@ -50,6 +51,3 @@ credsim.switchToMainPage()
 
 'Step 8 : input button submit'
 credsim.clickSubmit()
-
-'Step 9 : switch iframe to default'
-credsim.switchToDefaultContent()
