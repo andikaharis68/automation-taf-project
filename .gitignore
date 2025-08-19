@@ -17,7 +17,7 @@ Reports
 .idea/
 
 lib/
-Libs
+Libs/
 gradle/
 gradlew.bat
 gradlew
