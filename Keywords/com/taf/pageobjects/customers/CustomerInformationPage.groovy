@@ -35,7 +35,7 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private TestObject btnAddPersonalCustomer	= createTestObject("btnAddPersonalCustomer", "xpath", "//a[@id='lb_Toolbar_AddPersonal']")
 	private TestObject btnAddCompanyCustomer	= createTestObject("btnAddCompanyCustomer", "xpath", "//a[@id='lb_Toolbar_AddCompany']")
-	
+
 	private TestObject btnPenEditCustomer		= createTestObject("btnPenEditCustomer", "id", "gvCustomer_imbEdit_0")
 	private TestObject lblCustomerNo			= createTestObject("lblCustomerNo", "id", "gvCustomer_lbl_Cust_CustNo_0")
 
@@ -93,15 +93,11 @@ public class CustomerInformationPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 
-	
-	private void verifyCustomerList(String fullName, String address) {
-	}
-	
 
 	private void clickEdit() {
 		WebUI.click(btnPenEditCustomer)
 	}
-	
+
 	private void verifyTableCustomer(String expectedNo) {
 		def actual = WebUI.getText(lblCustomerNo)
 		boolean compare = actual.equals(expectedNo)
@@ -109,6 +105,17 @@ public class CustomerInformationPage extends BaseHelper {
 			WebUI.takeScreenshot()
 		}else {
 			KeywordUtil.markFailedAndStop("Customer Number Different")
+		}
+	}
+	private void clickCustomerHyperlink(String fullname) {
+		WebUI.takeScreenshot()
+		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[text()= '$fullname']")
+		if(WebUI.verifyElementPresent(txtFullName, 5)) {
+			KeywordUtil.markPassed("customer $fullname is exist")
+			safetyClick(txtFullName)
+			WebUI.takeScreenshot()
+		} else {
+			KeywordUtil.markFailed("customer $fullname is not found")
 		}
 	}
 }

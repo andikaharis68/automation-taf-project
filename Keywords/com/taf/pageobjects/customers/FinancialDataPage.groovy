@@ -57,13 +57,22 @@ public class FinancialDataPage extends BaseHelper {
 	//iframe
 	private TestObject iframeMainpage 				= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
-	private TestObject lblSuccess					= createTestObject("lblSuccess", "xpath", "//*[contains(text(), 'Save Success')]")
-
+	private TestObject lblSuccess					= createTestObject("lblSuccess", "xpath", "//*[contains(@text(), 'Save Success')]")
+	private TestObject lblAlert						= createTestObject("lblAlert", "xpath", "//*[contains(@text(), 'Your request is being processed']")
+	private TestObject btnOK						= createTestObject("btnOK", "xpath", "//*[text()= 'OK']")
 
 	private void clickSaveContinue() {
-		handleAlertIfPresent()
 		safetyClick(btnSaveContinue)
-		handleAlertIfPresent()
+		WebUI.takeScreenshot()
+		handlePopUperror(lblAlert, btnOK)
+	}
+
+	static void handlePopUperror(TestObject to, TestObject btnOk) {
+		if(WebUI.verifyElementPresent(to, 10, FailureHandling.OPTIONAL)) {
+			WebUI.click(btnOk)
+		} else {
+			KeywordUtil.logInfo("Alert not found")
+		}
 	}
 
 	private void verifyLandinginFinancialPage() {
@@ -78,8 +87,8 @@ public class FinancialDataPage extends BaseHelper {
 	}
 	private void clearText(TestObject to) {
 		safetyClick(to)
-		safetyInput(to, "\u0001") //ctrl A
-		safetyInput(to, "\u0008") 
+		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, "a"))
+		WebUI.sendKeys(to,Keys.chord(Keys.BACK_SPACE))
 	}
 
 	private void inputGrossProfit(String grossProfit) {
@@ -93,7 +102,6 @@ public class FinancialDataPage extends BaseHelper {
 		if(otherIncome) {
 			clearText(txfOtherIncome)
 			safetyInput(txfOtherIncome, otherIncome)
-			
 		}
 	}
 
@@ -212,6 +220,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void inputStatementBeginingBalance(String balance) {
 		if(balance) {
+			clearText(txfCreditBeginningBalance)
 			safetyInput(txfCreditBeginningBalance, balance)
 		}
 	}
@@ -233,6 +242,7 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
+			clearText(drpDebit)
 			safetyInput(drpDebit, debit)
 		}
 	}
@@ -240,6 +250,7 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementCredit(String credit, Integer index) {
 		if(credit) {
 			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
+			clearText(drpCredit)
 			safetyInput(drpCredit, credit)
 		}
 	}

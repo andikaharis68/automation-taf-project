@@ -34,7 +34,9 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company C
 scenarioData += BaseHelper.getTestDataByScenario("Address",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalAddressCompany'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_CompanyAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-<<<<<<< HEAD
+
+scenarioData += BaseHelper.getTestDataByScenario("ManagementShareholder",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_ManagementShareholder'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 
 scenarioData += BaseHelper.getTestDataByScenario("ContactInformation",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_ContactInformation'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
@@ -47,5 +49,3 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company C
 
 scenarioData += BaseHelper.getTestDataByScenario("OtherAttribute",GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", scenarioId)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_OtherAttribute'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-=======
->>>>>>> origin/master

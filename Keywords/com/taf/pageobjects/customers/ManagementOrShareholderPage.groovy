@@ -54,9 +54,9 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	private TestObject txfNITku				= createTestObject("txfNITku", "xpath", "//*[@id='ucCustMainDataCoy_txt_CustCoy_Nitku']")
 	private TestObject cbIsActive			= createTestObject("cbIsActive", "xpath", "//*[@id='cbIsActive']")
 	private TestObject cbIsOwner			= createTestObject("cbIsOwner", "xpath", "//*[@id='cbIsOwner']")
-
-
-
+	private TestObject btnSavePersonal		= createTestObject("btnSavePersonal", "xpath", "//*[@id='lb_Form_Save_AddPersonalManShareListing']")
+	private TestObject btnSaveCompany		= createTestObject("btnSaveCompany", "xpath", "//*[@id='lb_Form_Next_AddCoyManShareListing']")
+	
 
 	private void verifyLandinginManagementPage() {
 		verifyLanding(btnAddCompany, "Management or shareholder")
@@ -172,6 +172,28 @@ public class ManagementOrShareholderPage extends BaseHelper {
 			WebUI.check(cbIsOwner)
 			WebUI.delay(2)
 		}
+	}
+	
+	private Map getManagementData(String scenarioId, String type, String filePath, String sheetName) {
+		def testDataMultiple = BaseHelper.getTestDataMultipleByScenario(sheetName, filePath, scenarioId)
+		def testData = testDataMultiple?.find { it.AddressTypeName == type }
+		if (!testData) {
+			KeywordUtil.markFailed("AddressType '${type}' not found")
+		}
+		KeywordUtil.logInfo("testData: $testData")
+		return testData
+	}
+	
+	private void clickSaveCompany() {
+		safetyClick(btnSaveCompany)
+	}
+	
+	private void clickSavePersonal() {
+		safetyClick(btnSavePersonal)
+	}
+	
+	private void clickContinue() {
+		safetyClick(btnContinue)
 	}
 }
 

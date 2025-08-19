@@ -94,6 +94,12 @@ attr.inputRatingDate(RatingDate)
 'Step 24: Click Save'
 attr.clickSaveAttributeData()
 
+'Step 25: Swith to iframe main '
+attr.switchToIframeMain()
+
+'Step 25: click save data'
+attr.clickSaveData()
+
 'Step 25: Verify landing in Customer info page'
 custInfo.verifyLandingInCustInfoPage()
 
