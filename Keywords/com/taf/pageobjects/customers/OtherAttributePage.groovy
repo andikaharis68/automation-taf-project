@@ -90,34 +90,40 @@ public class OtherAttributePage extends BaseHelper {
 	}
 
 	private void selectDebitorGroup(String label) {
-		safetyClick(btnSearchDebitorGroup)
-
-		safetyInput(txfOvlyBICode, '%')
-		
-		safetyClick(btnOvlySearchBICode)
-		
-		clickSelectByLabel(label)
+		if(label) {
+			safetyClick(btnSearchDebitorGroup)
+			
+			safetyInput(txfOvlyBICode, '%')
+					
+			safetyClick(btnOvlySearchBICode)
+					
+			clickSelectByLabel(label)
+		}
 	}
 
 	private void selectCounterpartCategory(String label) {
-		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']")
-		txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-		safetyClick(btnSearchCounterpartCategory)
-		WebUI.delay(2)
-
-		safetyInput(txfOvlyBICode, '%')
-		safetyClick(btnOvlySearchBICode)
-		
-		clickSelectByLabel(label)
+		if(label) {
+			btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch']")
+			txfOvlyBICode = createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+			safetyClick(btnSearchCounterpartCategory)
+			WebUI.delay(2)
+	 
+			safetyInput(txfOvlyBICode, '%')
+			safetyClick(btnOvlySearchBICode)
+			 
+			clickSelectByLabel(label)
+		}
 	}
 
 	private void selectSustainableFinancial(String label) {
-		btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
-		txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
-		safetyClick(btnSearchSustainableFinancial)
-		safetyInput(txfOvlyBICode, '%')
-		safetyClick(btnOvlySearchBICode)
-		clickSelectByLabel(label)
+		if(label) {
+			btnOvlySearchBICode	= createTestObject("btnOvlySearchBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch']")
+			txfOvlyBICode 			= createTestObject("txfOvlyBICode", "xpath", "//*[@id='UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+			safetyClick(btnSearchSustainableFinancial)
+			safetyInput(txfOvlyBICode, '%')
+			safetyClick(btnOvlySearchBICode)
+			clickSelectByLabel(label)
+		}
 	}
 
 

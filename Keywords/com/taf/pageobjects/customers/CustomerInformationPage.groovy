@@ -43,7 +43,6 @@ public class CustomerInformationPage extends BaseHelper {
 
 
 	private void verifyLandingInCustInfoPage() {
-		WebUI.takeScreenshot()
 		verifyLanding(txfCustomerNo, "Customer Information")
 		WebUI.takeScreenshot()
 	}
@@ -117,5 +116,13 @@ public class CustomerInformationPage extends BaseHelper {
 		} else {
 			KeywordUtil.markFailed("customer $fullname is not found")
 		}
+	}
+	
+	private void clickCustomerHyperlinkEdit() {
+		TestObject hyperlink = createTestObject("hyperlink", "xpath", "//*[@id='gvCustomer_lbl_Cust_CustName_0']")
+		safetyClick(hyperlink)
+		WebUI.delay(8)
+		WebUI.switchToWindowIndex(1)
+		WebUI.takeScreenshot()
 	}
 }

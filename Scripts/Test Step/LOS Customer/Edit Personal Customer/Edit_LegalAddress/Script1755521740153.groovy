@@ -26,7 +26,7 @@ AddressType = "Legal Address"
 address.clickEditAddress(AddressType)
 
 'Step 2: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_EditCustomer_TestData.xlsx", "Address")
+Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", "Address")
 
 'Step 3: Input Address'
 address.inputAddress(AddressData.Address)

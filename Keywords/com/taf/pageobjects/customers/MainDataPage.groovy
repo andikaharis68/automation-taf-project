@@ -99,7 +99,7 @@ public class MainDataPage extends BaseHelper {
 		}
 	}
 	private void inputFullName(String name) {
-		if(txfFullName) {
+		if(name) {
 			safetyInput(txfFullName, name)
 		}
 	}

@@ -94,20 +94,21 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void searchAddress(String zipCode) {
-		safetyClick(btnSearchZIPCode)
-		WebUI.delay(2)
-		safetyInput(txfOvlyZIPCode, zipCode)
-
-		WebUI.delay(2)
-		safetyClick(btnOvlySearch)
-
-		WebUI.delay(2)
-		safetyClick(btnOvlySelect) //select first address
-
-		WebUI.delay(2)
-		handleAlertIfPresent()
-		WebUI.takeScreenshot()
-		
+		if(zipCode) {
+			safetyClick(btnSearchZIPCode)
+			WebUI.delay(2)
+			safetyInput(txfOvlyZIPCode, zipCode)
+	
+			WebUI.delay(2)
+			safetyClick(btnOvlySearch)
+	
+			WebUI.delay(2)
+			safetyClick(btnOvlySelect) //select first address
+	
+			WebUI.delay(2)
+			handleAlertIfPresent()
+			WebUI.takeScreenshot()
+		}
 	}
 
 	private void inputRW(String rw) {
