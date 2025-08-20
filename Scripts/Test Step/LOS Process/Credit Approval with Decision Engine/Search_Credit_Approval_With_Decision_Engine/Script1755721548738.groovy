@@ -14,18 +14,20 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.CreditApprovalWithDecisionEnginePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
+MenuPage menu = new MenuPage()
+CreditApprovalWithDecisionEnginePage creditApproval = new CreditApprovalWithDecisionEnginePage()
 
-'Step 1: switch to iframe'
-cdeCompletion.switchToIframeMain()
+'Step 1: Switch to Iframe Main Page'
+menu.switchToIframeMain()
 
-'Step 2: search centralized data complition by customer name'
-cdeCompletion.searchCentralizedDataCompletion(CustomerName)
+'Step 2: verify landing in credit approval with decision engine'
+creditApproval.verifyLandingScreen()
 
-'Step 3: switch to default frame'
-cdeCompletion.switchToDefaultContent()
+'Step 3: search approval by application no, then process'
+creditApproval.searchApprovalByApplicationNo(ApplicationNo)

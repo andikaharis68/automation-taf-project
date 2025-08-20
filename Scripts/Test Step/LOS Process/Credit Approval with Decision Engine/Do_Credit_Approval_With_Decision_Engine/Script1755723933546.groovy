@@ -14,18 +14,24 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
+import com.taf.pageobjects.losCreditProcess.CreditApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
+CreditApprovalPage creditApproval = new CreditApprovalPage()
 
-'Step 1: switch to iframe'
-cdeCompletion.switchToIframeMain()
+'Step 1: verify landing in credit approval page'
+creditApproval.verifyLandingScreen()
 
-'Step 2: search centralized data complition by customer name'
-cdeCompletion.searchCentralizedDataCompletion(CustomerName)
+'Step 2: input approval request section'
+creditApproval.inputApprovalRequestSection(CustomerIncome, SpouseIncome, AdditionalIncome)
 
-'Step 3: switch to default frame'
-cdeCompletion.switchToDefaultContent()
+'Step 3: input approval recommendation section'
+creditApproval.inputApprovalRecommendationSection(LatarBelakangDebitur, FaktorMendukung, FaktorTidakMendukung, Syarat, CaCalculation)
+
+'Step 4: input approval action'
+creditApproval.inputApprovalAction(Action, Notes)
+
+'Step 5: click submit'
+creditApproval.clickSubmit()

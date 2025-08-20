@@ -14,6 +14,19 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.helpers.BaseHelper
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String scenarioId = "1"
+Map dataRow = [:]
+//ini nanti ganti nama test data nya ya dengan yg udah fixed
+dataRow += BaseHelper.getTestDataByScenario("CentralizedDataEntryCompletion", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", dataRow["CredentialId"])
+BaseHelper.openBrowser()
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
