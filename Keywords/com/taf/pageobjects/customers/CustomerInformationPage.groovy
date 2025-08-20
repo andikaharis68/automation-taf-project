@@ -53,6 +53,7 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private void selectCustomerType(String customerType) {
 		safetySelect(drpCustomerType, customerType)
+		WebUI.takeScreenshot()
 	}
 
 	private void inputAddress(String address) {
@@ -67,6 +68,7 @@ public class CustomerInformationPage extends BaseHelper {
 	}
 	private void clickSearch() {
 		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickReset() {

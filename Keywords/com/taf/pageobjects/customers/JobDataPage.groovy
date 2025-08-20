@@ -84,6 +84,7 @@ public class JobDataPage extends BaseHelper {
 			safetySelect(drpJobStatus, jobStatus)
 			WebUI.delay(2)
 		}
+		WebUI.takeScreenshot()
 	}
 	private void chxInternalEmployee(String isInternalEmployee) {
 		if(isInternalEmployee?.trim() == "Y" && isInternalEmployee) {
@@ -115,6 +116,7 @@ public class JobDataPage extends BaseHelper {
 			safetyClick(btnOvlySelectIndustry)
 			WebUI.delay(2)
 		}
+		WebUI.takeScreenshot()
 	}
 	private void selectCompanyScale(String companyScale) {
 		safetySelectEdit(drpCompanyScale, companyScale)
@@ -137,6 +139,7 @@ public class JobDataPage extends BaseHelper {
 		}else if(isWellCompany) {
 			safetyClick(chxIsWellCompany)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputPrevCompanyName(String prevCompanyName) {
@@ -171,6 +174,7 @@ public class JobDataPage extends BaseHelper {
 		safetySelectEdit(drpOtherEstablishDate, month)
 		WebUI.delay(2)
 		safetyInputEdit(txfOtherEstablishDate, year, 0.5)
+		WebUI.takeScreenshot()
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {

@@ -105,6 +105,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void inputMotherMaidenName(String motherMaidenName) {
 		safetyInput(txfMotherMaidenName, motherMaidenName)
+		WebUI.takeScreenshot()
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
