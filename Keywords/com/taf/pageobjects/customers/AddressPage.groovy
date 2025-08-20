@@ -25,7 +25,7 @@ import internal.GlobalVariable
 public class AddressPage extends BaseHelper {
 
 
-	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr']")
+	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add']")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[contains(@id,'Type_ddlReference')]")
 	private TestObject txfAddress				= createTestObject("txfAddress", "xpath", "//*[contains(@id, 'txtOfficeAddr')]")
 	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[contains(@id,'txtRT')]")
@@ -94,20 +94,21 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void searchAddress(String zipCode) {
-		safetyClick(btnSearchZIPCode)
-		WebUI.delay(2)
-		safetyInput(txfOvlyZIPCode, zipCode)
-
-		WebUI.delay(2)
-		safetyClick(btnOvlySearch)
-
-		WebUI.delay(2)
-		safetyClick(btnOvlySelect) //select first address
-
-		WebUI.delay(2)
-		handleAlertIfPresent()
-		WebUI.takeScreenshot()
-		
+		if(zipCode) {
+			safetyClick(btnSearchZIPCode)
+			WebUI.delay(2)
+			safetyInput(txfOvlyZIPCode, zipCode)
+	
+			WebUI.delay(2)
+			safetyClick(btnOvlySearch)
+	
+			WebUI.delay(2)
+			safetyClick(btnOvlySelect) //select first address
+	
+			WebUI.delay(2)
+			handleAlertIfPresent()
+			WebUI.takeScreenshot()
+		}
 	}
 
 	private void inputRW(String rw) {
@@ -201,9 +202,12 @@ public class AddressPage extends BaseHelper {
 	private void inputPhoneNumbers(String phoneNumber, int index) {
 		if(phoneNumber) {
 			TestObject countryField, areaField, numberField
-			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}']")
-			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}']")
-			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}']")
+//			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}']")
+//			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}']")
+//			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}']")
+			countryField	= createTestObject("countryField", "id", "UCAddress_txtPhnArea${index}")
+			areaField		= createTestObject("areaField", "id", "UCAddress_txtPhn${index}")
+			numberField		= createTestObject("numberField", "id", "UCAddress_txtPhoneExt${index}")
 
 			KeywordUtil.logInfo("phone " + phoneNumber)
 			String[] parts = phoneNumber.split("-")
@@ -219,8 +223,8 @@ public class AddressPage extends BaseHelper {
 	private void inputFax(String fax) {
 		if(fax) {
 			TestObject countryField, areaField
-			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtFaxArea']")
-			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtFax']")
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='UCAddress_txtFaxArea']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='UCAddress_txtFax']")
 
 			String[] parts = fax.split("-")
 			if (parts.size() != 3) {

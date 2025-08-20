@@ -14,24 +14,56 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.customers.FinancialDataPage
 import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+FinancialDataPage financial = new FinancialDataPage()
 OtherAttributePage attr = new OtherAttributePage()
 
-'Step 1: Verify landing in other attribute'
+'Step 1: Input Gross Monthly Income'
+financial.inputGrossMonthlyIncome(GrossMonthlyIncome)
+
+'Step 2: Input Gross Profit'
+financial.inputGrossProfit(GrossProfit)
+
+'Step 3: Input Other Income'
+financial.inputOtherIncome(OtherIncome)
+
+'Step 4: Input Source of Income'
+financial.inputSourceOfIncome(SourceOfOtherIncome)
+
+'Step 5: Input Living Cost'
+financial.inputLivingCost(LivingCost)
+
+'Step 6: Input Other Monthly Installment'
+financial.inputOtherMonthlyInstallment(OtherMonthlyInstallment)
+
+'Step 7: Click Calculate Income'
+financial.clickCalculateIncome()
+
+'Step 8: Click Add Bank Account'
+financial.clickAddCustAcc()
+
+'Step 9: Input bank name'
+financial.selectBankName(BankName)
+
+'Step 10: Input Bank Branch Name'
+financial.inputBranchName(BankBranch)
+
+'Step 11: Input Bank BI Code'
+financial.inputBICodeBank(BankBranchBICode)
+
+'Step 12: Input Acc Name'
+financial.inputAccName(AccountName)
+
+'Step 13: Input Acc No'
+financial.inputAccountNo(AccountNo)
+
+'Step 14: Click Save and continue'
+financial.clickSaveContinue()
+
+'Step 15: Verify Landing in other attribute page'
 attr.verifyLandingInOtherAttribute()
-
-'Step 2: Select Debitor grup'
-attr.selectDebitorGroup(DebitorGroup)
-
-'Step 3: Select Counterpart group'
-attr.selectCounterpartCategory(CounterpartCategory)
-
-'Step 4: Select Sustainable financial bussiness'
-attr.selectSustainableFinancial(SustainableFinancialBusiness)
-
-'Step 5: click Save and Submit'
-attr.clickSaveAndSubmit()

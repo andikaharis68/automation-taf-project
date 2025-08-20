@@ -38,7 +38,7 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	private TestObject txfNPWPPersonal		= createTestObject("txfNPWPPersonal", "xpath", "//*[@id='ucCustMainDataPersonal_txt_Cust_Npwp']")
 	private TestObject txfNPWPCompany		= createTestObject("txfNPWPPersonal", "xpath", "//*[@id='ucCustMainDataCoy_txt_Cust_Npwp']]")
 	private TestObject drpJobPosition		= createTestObject("drpJobPosition", "xpath", "//*[@id='UCRefPersonalJobPosition_ddlReference']")
-	private TestObject txfSharePercentage	= createTestObject("txfSharePercentage", "xpath", "//*[@id='ucINSharePercentagePersonal_txtInput']")
+	private TestObject txfSharePercentage	= createTestObject("txfSharePercentage", "xpath", "//*[@id='ucINSharePercentagePersonal_txtInput' or @id='ucINSharePercentageCoy_txtInput']")
 	private TestObject btnNextPersonal		= createTestObject("btnNextPersonal", "xpath", "//*[@id='lb_Form_Next_AddPersonalManShareListing']")
 	private TestObject btnNextCompany		= createTestObject("btnNextCompany", "xpath", "//*[@id='lb_Form_Next_AddCoyManShareListing']")
 
@@ -49,13 +49,19 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	private TestObject txfOvlyCustomerName	= createTestObject("txfOvlyCustomerName", "xpath", "//*[@id='ucCustMainDataPersonal_ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
 	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[@id='ucCustMainDataPersonal_ucLookupCust_uclCust_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[@id='ucCustMainDataPersonal_ucLookupCust_uclCust_umd_ctl00_gvL_hpSelect_0']")
+	
+	//overlay company name
+	private TestObject txfOvlyCustomerNameCompany	= createTestObject("txfOvlyCustomerNameCompany", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject btnOvlySearchCompany	= createTestObject("btnOvlySearchCompany", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_ucS_lbSearch")
+	private TestObject btnOvlySelectCompany	= createTestObject("btnOvlySelectCompany", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_gvL_hpSelect_0")
+	
 
 	private TestObject drpCompanyType		= createTestObject("drpCompanyType", "xpath", "//*[@id='ucCustMainDataCoy_UCRefCoyType_ddlReference']")
 	private TestObject txfNITku				= createTestObject("txfNITku", "xpath", "//*[@id='ucCustMainDataCoy_txt_CustCoy_Nitku']")
 	private TestObject cbIsActive			= createTestObject("cbIsActive", "xpath", "//*[@id='cbIsActive']")
 	private TestObject cbIsOwner			= createTestObject("cbIsOwner", "xpath", "//*[@id='cbIsOwner']")
 	private TestObject btnSavePersonal		= createTestObject("btnSavePersonal", "xpath", "//*[@id='lb_Form_Save_AddPersonalManShareListing']")
-	private TestObject btnSaveCompany		= createTestObject("btnSaveCompany", "xpath", "//*[@id='lb_Form_Next_AddCoyManShareListing']")
+	private TestObject btnSaveCompany		= createTestObject("btnSaveCompany", "xpath", "//*[@id='lb_Form_Save_AddCoyManShareListing']")
 	
 
 	private void verifyLandinginManagementPage() {
@@ -78,11 +84,20 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	}
 
 	private void searchCustomerName(String name) {
-		safetyClick(btnSearchNameCompany)
+		safetyClick(btnSearchNamePersonal)
 		safetyInput(txfOvlyCustomerName, name)
 		safetyClick(btnOvlySearch) //select first
 		WebUI.takeScreenshot()
 		safetyClick(btnOvlySelect)
+	}
+	
+	private void searchCustomerNameCompany(String companyName) {
+		safetyClick(btnSearchNameCompany)
+		safetyInput(txfOvlyCustomerNameCompany, companyName)
+		safetyClick(btnOvlySearchCompany) //select first
+		WebUI.takeScreenshot()
+		safetyClick(btnOvlySelectCompany)
+		
 	}
 
 	private void selectIdType(String idType) {
@@ -142,6 +157,7 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	}
 
 	private void inputSharePercentage(String percentage) {
+		manualClearText(txfSharePercentage)
 		safetyInput(txfSharePercentage, percentage)
 	}
 	private void selectCustomerModel(String model) {

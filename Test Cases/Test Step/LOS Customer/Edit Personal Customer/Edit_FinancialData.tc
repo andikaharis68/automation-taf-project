@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_Personal_Customer</name>
+   <name>Edit_FinancialData</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>63ca9d9c-688c-4cd2-8051-43ca76200582</testCaseGuid>
+   <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
 </TestCaseEntity>

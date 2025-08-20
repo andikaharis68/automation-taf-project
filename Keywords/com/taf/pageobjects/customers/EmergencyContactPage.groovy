@@ -108,10 +108,12 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void searchAddress(String zipCode) {
-		safetyClick(btnSearchZIPCode)
-		safetyInput(txfOvlyZipCode, zipCode)		
-		safetyClick(btnOvlySearch)
-		safetyClick(btnOvlySelect)
+		if(zipCode) {
+			safetyClick(btnSearchZIPCode)
+			safetyInput(txfOvlyZipCode, zipCode)
+			safetyClick(btnOvlySearch)
+			safetyClick(btnOvlySelect)
+		}
 	}
 	
 	private void checkAddress(String zipCode) {
@@ -174,6 +176,19 @@ public class EmergencyContactPage extends BaseHelper {
 			TestObject countryField	= createTestObject("countryField", "xpath", "//*[@id='ucEmergencyContactInfo_txt_CustEmergencyCntct_MobilePhn${index}']")
 			safetyInput(countryField, phone)
 			WebUI.delay(2)
+		}
+	}
+	
+	private void selectEdited(String name) {
+		TestObject nameSelected = createTestObject("nameSelected", "xpath", "//span[text() = '$name']")
+		TestObject editButton = createTestObject("editButton", "xpath", "//span[text() = '$name']/following::td[6]")
+//		TestObject deleteButton = createTestObject("deleteButton", "xpath", "//span[text() = '$name']/following::td[7]")
+		
+		def familyExist = WebUI.verifyElementPresent(nameSelected, 3, FailureHandling.OPTIONAL)
+		if(familyExist) {
+			safetyClick(editButton)
+		}else {
+			clickAddContact()
 		}
 	}
 	
