@@ -94,6 +94,7 @@ public class FamilyCustomerPage extends BaseHelper {
 				safetyClick(radGender)
 			}
 		}
+		WebUI.takeScreenshot()
 	}
 
 
@@ -138,6 +139,7 @@ public class FamilyCustomerPage extends BaseHelper {
 	private void selectCustomerRelationship(String relationship) {
 		safetySelect(drpCustRelationship, relationship)
 		WebUI.delay(2)
+		WebUI.takeScreenshot()
 	}
 	private void clickSaveContinue() {
 		safetyClick(btnSaveAndContinue)

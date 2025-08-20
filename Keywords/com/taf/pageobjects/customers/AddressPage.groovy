@@ -161,9 +161,10 @@ public class AddressPage extends BaseHelper {
 		safetyClick(btnSaveContinue)
 	}
 	private void clickSaveAddress() {
-		WebUI.takeScreenshot()
 		WebUI.scrollToElement(btnSave, 2)
 		safetyClick(btnSave)
+		WebUI.takeScreenshot()
+		
 	}
 	private void clickCancel() {
 		safetyClick(btnCancel)
@@ -177,6 +178,7 @@ public class AddressPage extends BaseHelper {
 		if(buildingLength) {
 			safetyInput(txfBuildingStayLength, buildingLength)
 		}
+		WebUI.takeScreenshot()
 	}
 	private void inputDirectionDesc(String desc) {
 		if(desc) {
@@ -192,6 +194,7 @@ public class AddressPage extends BaseHelper {
 	}
 	private void inputCompanyName(String companyName) {
 		safetyInputEdit(txfCompanyName, companyName)
+		WebUI.takeScreenshot()
 	}
 	private void switchToIframeAddress() {
 		WebUI.delay(10)
@@ -230,8 +233,8 @@ public class AddressPage extends BaseHelper {
 			WebUI.delay(2)
 			safetyInput(areaField, parts[1])
 			WebUI.delay(2)
-			WebUI.takeScreenshot()
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void clickCopyAddress() {

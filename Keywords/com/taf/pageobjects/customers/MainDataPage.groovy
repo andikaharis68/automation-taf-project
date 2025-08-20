@@ -194,6 +194,7 @@ public class MainDataPage extends BaseHelper {
 		if(isVIP?.trim() == 'Y') {
 			safetyClick(chxIsVIP)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputPremiumNote(String premiumNote) {
@@ -216,8 +217,9 @@ public class MainDataPage extends BaseHelper {
 	private void checkRIP(String rip) {
 		if(rip?.trim() == 'Y') {
 			safetyClick(chxRIP)
-			WebUI.takeScreenshot()
 		}
+		WebUI.takeScreenshot()
+		
 	}
 
 
@@ -236,6 +238,7 @@ public class MainDataPage extends BaseHelper {
 			WebUI.scrollToElement(phoneField, 1)
 			safetyInput(phoneField, phone)
 		}
+		
 	}
 
 	private void inputEmail(int index, String email) {
@@ -243,8 +246,8 @@ public class MainDataPage extends BaseHelper {
 			TestObject emailField = getEmailField(index)
 			WebUI.scrollToElement(emailField, 1)
 			safetyInput(emailField, email)
-			WebUI.takeScreenshot()
 		}
+		WebUI.takeScreenshot()
 	}
 	private void clickSaveAndContinue() {
 		WebUI.scrollToElement(btnSaveContinue, 5)
