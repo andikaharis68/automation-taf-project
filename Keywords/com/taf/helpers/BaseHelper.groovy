@@ -143,6 +143,14 @@ class BaseHelper {
 		}
 	}
 
+	static Map getTestDataMultipleSheet(List<String> sheetNames, String filePath, String scenarioId) {
+		Map scenarioData = [:]
+		sheetNames.each { sheetName -> 
+			scenarioData += BaseHelper.getTestDataByScenario(sheetName, filePath, scenarioId)
+		}
+		return scenarioData
+	}
+
 
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
