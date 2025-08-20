@@ -14,21 +14,59 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.customers.LegalDocument
+import com.taf.pageobjects.customers.FamilyCustomerPage
+import com.taf.pageobjects.customers.JobDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-LegalDocument legalDoc = new LegalDocument()
+FamilyCustomerPage family = new FamilyCustomerPage()
+JobDataPage job = new JobDataPage()
 
-'Step 1: Verify landing in Legal Document Page'
-legalDoc.verifyLandingScreen()
+//'Step 1: Add Family '
+//family.clickAdd()
+//
+//'Step 2: Select Customer Model'
+//family.selectCustomerModel(CustomerModel)
+//
+//'Step 3: Input family name'
+//family.inputFamilyName(FamilyName)
+//
+//'Step 4: Select id type'
+//family.selectIdType(IDType)
+//
+//'Step 5: Input ID no'
+//family.inputIdNumber(IDNumber)
+//
+//'Step 6: Input ID Expired Date'
+//family.inputIdExpiredDate(IDExpiredDate)
+//
+//'Step 7: Select Gender'
+//family.selectGender(Gender)
+//
+//'Step 8: Input POB'
+//family.inputPOB(BirthPlace)
+//
+//'Step 9: Input DOB'
+//family.inputDOB(BirthDate)
+//
+//'Step 10: Input NPWP'
+//family.inputNPWP(NPWP)
+//
+//'Step 11: Input Mother Name'
+//family.inputMotherMaidenName(MotherMaidenName)
+//
+//'Step 12: Select Customer Relationship'
+//family.selectCustomerRelationship(CustomerRelationship)
+//
+//'Step 13: Click next '
+//family.clickNext()
+//
+//'Step 14: Click select family'
+//family.clickSelectFamily()
 
-'Step 2: Input legal documents, included click add on each adding documents'
-legalDoc.inputLegalDocument(LegalDocType, DocumentNo, DateIssued, ExpiredDate, Notes, NotaryName, NotaryLocation)
+'Step 15: click Save and continue'
+family.clickSaveContinue()
 
-'Step 3: Save and continue'
-legalDoc.clickSaveAndContinue()
-
-'Step 4: Verify save success'
-legalDoc.verifySaveSuccess()
+'Step 16: Verify landing in job data page'
+job.verifyLandingInJobDataPage()

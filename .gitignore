@@ -12,13 +12,13 @@ Reports
 
 .project
 
-.setings/
+.settings/
 
 .idea/
 
 lib/
-Libs
+Libs/
 gradle/
 gradlew.bat
 gradlew
-Data Files/
+Data Files/*.xlsx

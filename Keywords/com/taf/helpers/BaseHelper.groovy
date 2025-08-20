@@ -33,6 +33,9 @@ import org.openqa.selenium.WebDriver
 
 import static org.openqa.selenium.PageLoadStrategy.NONE
 
+import java.awt.Robot
+import java.awt.event.KeyEvent
+
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.openqa.selenium.By
@@ -121,6 +124,16 @@ class BaseHelper {
 		return driver.findElements(By.xpath(xpath))
 	}
 
+	static void openBrowser() {
+		//		EdgeOptions options = new EdgeOptions()
+		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
+		//		WebDriver driver = new EdgeDriver(options)
+		//		DriverFactory.changeWebDriver(driver)
+		//		driver.get(GlobalVariable.WEB_URL)
+
+		WebUI.openBrowser(GlobalVariable.WEB_URL)
+		WebUI.maximizeWindow()
+	}
 
 	static void verifyLanding(TestObject to, String screenName) {
 		if (WebUI.waitForElementPresent(to, 10)) {
@@ -331,15 +344,6 @@ class BaseHelper {
 		return -1
 	}
 
-	static void openBrowser() {
-		//		EdgeOptions options = new EdgeOptions()
-		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
-		//		WebDriver driver = new EdgeDriver(options)
-		//
-		WebUI.openBrowser(GlobalVariable.WEB_URL)
-		WebUI.maximizeWindow()
-	}
-
 	static void closeBrowser() {
 		WebUI.closeBrowser()
 	}
@@ -360,25 +364,24 @@ class BaseHelper {
 	}
 
 	static void safetyInput(TestObject to, String text, double delay = 0.1) {
+		handlePopupAlert()
 		WebUI.delay(delay)
 		WebUI.clearText(to)
-		WebUI.delay(delay)
-		for (char c : text.toCharArray()) {
-			WebUI.sendKeys(to, String.valueOf(c))
-			WebUI.delay(delay)
-		}
+		WebUI.setText(to, text)
 	}
 
 	static void safetyClick(TestObject to, double delay = 1) {
+		handlePopupAlert()
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
-		WebUI.waitForElementPresent(to, 10)
+		WebUI.waitForElementPresent(to, 10, FailureHandling.OPTIONAL)
 		WebUI.click(to)
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10)
 	}
 
 	static void safetySelect(TestObject to, String text, double delay = 1) {
+		handlePopupAlert()
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
 	}
@@ -387,6 +390,7 @@ class BaseHelper {
 		if(text) {
 			WebUI.delay(delay)
 			WebUI.clearText(to)
+			handlePopupAlert()
 			WebUI.delay(delay)
 			for (char c : text.toCharArray()) {
 				WebUI.sendKeys(to, String.valueOf(c))
@@ -395,18 +399,47 @@ class BaseHelper {
 		}
 	}
 
+	static void handlePopupAlert(int timeoutInSeconds = 1) {
+		try {
+			WebUI.waitForAlert(timeoutInSeconds)
+			WebUI.acceptAlert()
+			KeywordUtil.logInfo("✅ popup alert ditemukan dan sudah di-accept.")
+		} catch (Exception e) {
+			print 'alert tidak muncul'
+		}
+	}
+
 	static void safetySelectEdit(TestObject to, String text, double delay = 1) {
 		if(text) {
+			WebUI.click(to)
+			handlePopupAlert()
 			WebUI.selectOptionByLabel(to, text, false)
 			WebUI.delay(delay)
 		}
 	}
-	
+
 	static void clickEnter(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ENTER))
 	}
 	static void clickTABKeyboard(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
-		
 	}
+	
+	static String generateRandomNPWP() {
+		Random rand = new Random()
+		
+		String firstDigit = (1 + rand.nextInt(9)).toString()
+		String otherDigits = (1..15).collect { rand.nextInt(10) }.join()
+		
+		return firstDigit + otherDigits
+	}
+	
+	static void manualClearText(TestObject to, double delay = 0.5) {
+		safetyClick(to)
+		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, 'a'))
+		WebUI.delay(delay)
+		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
+		WebUI.delay(delay)
+	}
+	
 }

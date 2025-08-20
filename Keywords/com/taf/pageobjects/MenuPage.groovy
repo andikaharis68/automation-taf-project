@@ -54,8 +54,9 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnCreditProcessInquiry		= createTestObject("btnCreditProcessInquiry", "xpath", "") // ada di favourite
 	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
-	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")	
+	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
 	
+	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 
 	private void verifyLandingMenuPage() {
@@ -64,7 +65,6 @@ public class MenuPage extends BaseHelper {
 
 	private void clickDropdownMenu() {
 		safetyClick(drpMenu)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -165,15 +165,15 @@ public class MenuPage extends BaseHelper {
 	private void clickTAFReports() {
 		WebUI.click(btnTAFReports)
 	}
-	
+
 	private void clickInternalSystem() {
 		WebUI.click(btnInternalSystem)
 	}
-	
+
 	private void selectMenuLoanOrganitation() {
 		BaseHelper.safetySelect(drpModul, "LOAN ORIGINATION")
 	}
-	
+
 	private void selectMenuMarketing() {
 		BaseHelper.safetySelect(drpModul, "MARKETING")
 		WebUI.takeScreenshotAsCheckpoint("Testing Description Screenshot")
@@ -182,7 +182,7 @@ public class MenuPage extends BaseHelper {
 	private void clickCreditSimulation() {
 		BaseHelper.safetyClick(btnCreditSimulation)
 	}
-		
+
 	private void clickCentralizedDataEntry() {
 		BaseHelper.safetyClick(btnCentralizeDataEntry)
 	}
@@ -197,7 +197,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCreditSimulation)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToCentralizedDataEntryCompletion() {
 		WebUI.switchToDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 10)
@@ -209,4 +209,10 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	
+	public void verifySuccessMessage() {
+		WebUI.switchToDefaultContent()
+		WebUI.waitForElementPresent(lblSuccessMessage, 20)
+		WebUI.delay(2)
+		WebUI.takeScreenshot()
+	}
 }

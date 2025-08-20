@@ -72,10 +72,12 @@ public class JobDataPage extends BaseHelper {
 	}
 
 	private void selectProfessionName(String professionName) {
-		safetyClick(btnSearchProfessionName)
-		safetyInput(txfOvlyProfessionName, professionName)
-		safetyClick(btnOvlySearchProfesi)
-		safetyClick(btnOvlySelectProfesi)
+		if(professionName) {
+			safetyClick(btnSearchProfessionName)
+			safetyInput(txfOvlyProfessionName, professionName)
+			safetyClick(btnOvlySearchProfesi)
+			safetyClick(btnOvlySelectProfesi)
+		}
 	}
 	private void selectJobStatus(String jobStatus) {
 		if(jobStatus) {
@@ -85,7 +87,7 @@ public class JobDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void chxInternalEmployee(String isInternalEmployee) {
-		if(isInternalEmployee?.trim() == "Y") {
+		if(isInternalEmployee?.trim() == "Y" && isInternalEmployee) {
 			safetyClick(chxIsInternalEmployee)
 		}
 	}
@@ -149,14 +151,12 @@ public class JobDataPage extends BaseHelper {
 	}
 
 	private void selectPrevCompanyDate(String month, String year) {
-		if(month && year) {
-			//month
-			safetySelect(drpPrevEmploymentDate, month)
-			WebUI.delay(2)
-			//year
-			safetyInput(txfPrevEmploymentDate, year)
-			WebUI.delay(2)
-		}
+		//month
+		safetySelectEdit(drpPrevEmploymentDate, month)
+		WebUI.delay(2)
+		//year
+		safetyInputEdit(txfPrevEmploymentDate, year)
+		WebUI.delay(2)
 	}
 
 	private void inputOtherBussinessName(String bussinessName) {

@@ -31,7 +31,7 @@ AddressType = "Company Address"
 address.selectAddressType(AddressType)
 
 'Step 3: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", "Address")
+Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", "Address")
 
 'Step 4: Input Address'
 address.inputAddress(AddressData.Address)

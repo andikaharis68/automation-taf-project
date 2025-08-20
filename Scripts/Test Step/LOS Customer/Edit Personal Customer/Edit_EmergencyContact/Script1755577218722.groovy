@@ -1,6 +1,4 @@
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-
-
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -16,58 +14,62 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.customers.ManagementOrShareholderPage
+import com.taf.pageobjects.customers.EmergencyContactPage
+import com.taf.pageobjects.customers.FinancialDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-ManagementOrShareholderPage management = new ManagementOrShareholderPage()
+EmergencyContactPage contact = new EmergencyContactPage()
+FinancialDataPage financial = new FinancialDataPage()
 
-'Step 1: Click Add personal'
-management.clickAddPersonal()
+'Step 1: Click Edit Button'
+contact.selectEdited(Name)
 
-'Step 2: Get Data Management Type'
-//Map ManagementData = management.getManagementData(ScenarioId, "Personal", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", "ManagementShareholder")
+'Step 2: Input name'
+contact.inputName(NewName)
 
-'Step 3: Search Customer name'
-management.searchCustomerName(FullName)
+'Step 3: Select Customer Relationship'
+contact.selectCustomerRelationship(CustRelationship)
 
-'Step 4: Select Job Position'
-management.selectJobPosition(JobPosition)
+'Step 4: Input phone number1 '
+contact.inputMobilePhone(MobilePhone1, 1)
 
-'Step 5: Input share percentage personal'
-management.inputSharePercentage(SharePersonal)
+'Step 5: Input phone number2'
+contact.inputMobilePhone(MobilePhone2, 2)
 
-'Step 6: Click Save'
-management.clickSavePersonal()
+'Step 6: Input phone number3'
+contact.inputMobilePhone(MobilePhone3, 3)
 
-'Step 7: Click add company'
-management.clickAddCompany()
+'Step 7: Input email1'
+contact.inputEmails(Email1, 1)
 
-'Step 8: Input CompanyName'
-management.searchCustomerNameCompany(CompanyName)
+'Step 8: Input email2'
+contact.inputEmails(Email2, 2)
 
-'Step 9: input nitku'
-management.inputNITku(NITKU)
+'Step 9: Input address'
+contact.inputAddress(Address)
 
-'Step 10: Input share percentage'
-management.inputSharePercentage(ShareCompany)
+'Step 10: Input RT'
+contact.inputRT(RT)
 
-'Step 11: Check is Active'
-management.checkIsActive(IsActive)
+'Step 11: Input RT'
+contact.inputRW(RW)
 
-'Step 12: Check is Owner'
-management.checkIsOwner(IsOwner)
+'Step 12: Select Address'
+contact.searchAddress(ZIPCODE)
 
-'Step 13: Click Save Company'
-management.clickSaveCompany()
+'Step 13: Input phone number1 '
+contact.inputPhoneNumbers(Phone1, 1)
 
-'Step 14: Click Continue'
-management.clickContinue()
+'Step 14: Input phone number2'
+contact.inputPhoneNumbers(Phone2, 2)
 
+'Step 15: Input fax'
+contact.inputFax(Fax)
 
+'Step 16: Click save contact'
+contact.clickSaveContact()
 
-
-
-
-
+'Step 17: Verify Landing in Financial Data'
+financial.verifyLandinginFinancialPage()
