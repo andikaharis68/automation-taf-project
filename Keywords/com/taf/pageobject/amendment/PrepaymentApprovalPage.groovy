@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,28 +21,20 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentRequestPage extends BaseHelper{
+public class PrepaymentApprovalPage extends BaseHelper{
 
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
+	private TestObject drpApprovalAction	= createTestObject("drpApprovalAction", "xpath", "")
+	private TestObject chkBox				= createTestObject("chkBox", "xpath", "")
 	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
 
 
-	public void calculatePayment(String date) {
+	public void inputAprrove(String approveAction, String note) {
 
-		WebUI.setText(txtDate, date)
-		WebUI.click(btnCalculatePayment)
-	}
-
-	public void approve(String reasonDescription, String approver, String notes) {
-
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
-		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
-		WebUI.setText(txtNotes, notes)
+		WebUI.selectOptionByValue(drpApprovalAction, approveAction, false)
+		WebUI.check(chkBox)
+		WebUI.setText(txtNotes, note)
 	}
 
 	public void clickSubmit() {

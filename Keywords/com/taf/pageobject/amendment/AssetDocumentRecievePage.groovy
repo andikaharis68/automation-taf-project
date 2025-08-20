@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,25 +21,29 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AmendmentRequestPage extends BaseHelper{
-
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+public class AssetDocumentRecievePage extends BaseHelper{
 
 
-	public void searchAmendment(String amendmentType, String customerName) {
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject icnRecieve			= createTestObject("icnRecieve", "xpath", "")
+	private TestObject txtLicensePlate		= createTestObject("txtLicensePlate", "xpath", "")
+	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
 
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtCustomerName, customerName)
+	public void searchAsset(String branch, String agreementNo) {
+
+		WebUI.selectOptionByLabel(drpBranchAgreement, branch, false)
+		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
-
-
-		clickPenAction(customerName)
+		WebUI.click(icnRecieve)
 	}
 
-	private void clickPenAction(customerName) {
+	public void inputAssetData(String plate, String form) {
 
-		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
+		WebUI.setText(txtLicensePlate, plate)
+		WebUI.setText(txtRecieveForm, form)
+		WebUI.click(btnSubmit)
 	}
 }

@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,29 +21,24 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetDocumentRecievePage extends BaseHelper{
-
+public class AssetDocumentInquiryPage extends BaseHelper{
 
 	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
 	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
 	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnRecieve			= createTestObject("icnRecieve", "xpath", "")
-	private TestObject txtLicensePlate		= createTestObject("txtLicensePlate", "xpath", "")
-	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+	private TestObject list					= createTestObject("list", "xpath", "")
+	private TestObject icnView				= createTestObject("icnView", "xpath", "")
 
-	public void searchAsset(String branch, String agreementNo) {
+	//detail
+	private TestObject docDetail			= createTestObject("docDetail", "xpath", "")
 
-		WebUI.selectOptionByLabel(drpBranchAgreement, branch, false)
+	public void inquiryDocuemnt(String agreementNo) {
+
+		WebUI.selectOptionByLabel(drpBranchAgreement, agreementNo, false)
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
-		WebUI.click(icnRecieve)
-	}
-
-	public void inputAssetData(String plate, String form) {
-
-		WebUI.setText(txtLicensePlate, plate)
-		WebUI.setText(txtRecieveForm, form)
-		WebUI.click(btnSubmit)
+		WebUI.verifyElementVisible(list)
+		WebUI.click(icnView)
+		WebUI.verifyElementVisible(docDetail)
 	}
 }

@@ -39,25 +39,25 @@ public class AddressPage extends BaseHelper {
 
 	private TestObject drpBuildingLoc			= createTestObject("drpBuildingLoc", "xpath", "//*[contains(@id,'ucAddrLocation_ddlReference')]")
 	private TestObject drpBuildingOwnership		= createTestObject("drpBuildingOwnership", "xpath", "//*[contains(@id,'ucOwnershipStat_ddlReference')]")
-	private TestObject txfBuildingPriceEstimate	= createTestObject("txfBuildingPriceEstimate", "xpath", "//*[contains(@id,'ucHousePrice_txtInput')]") 
-	private TestObject txfBuildingStayLength	= createTestObject("txfBuildingStayLength", "xpath", "//*[contains(@id,'txtStayLength_txtInput')]") 
-	private TestObject txfDirectionDesc			= createTestObject("txfDirectionDesc", "xpath", "//*[contains(@id,'txtDirectionDesc')]") 
-	private TestObject txfNotes					= createTestObject("txfNotes", "xpath", "//*[contains(@id,'txtNotes')]") 
-	
+	private TestObject txfBuildingPriceEstimate	= createTestObject("txfBuildingPriceEstimate", "xpath", "//*[contains(@id,'ucHousePrice_txtInput')]")
+	private TestObject txfBuildingStayLength	= createTestObject("txfBuildingStayLength", "xpath", "//*[contains(@id,'txtStayLength_txtInput')]")
+	private TestObject txfDirectionDesc			= createTestObject("txfDirectionDesc", "xpath", "//*[contains(@id,'txtDirectionDesc')]")
+	private TestObject txfNotes					= createTestObject("txfNotes", "xpath", "//*[contains(@id,'txtNotes')]")
+
 	private TestObject txfCompanyName			= createTestObject("txfCompanyName", "xpath", "//*[@id='txtCoyName']")
 
 	//overlay
 	private TestObject txfOvlySubdistrict		= createTestObject("txfOvlySubdistrict", "xpath", "//*[contains(@id,'rptFixedSearch_txtSearchValue_0')]")
 	private TestObject txfOvlyDistrict			= createTestObject("txfOvlySubdistrict", "xpath", "//*[contains(@id,'rptFixedSearch_txtSearchValue_1')]")
 	private TestObject txfOvlyCity				= createTestObject("txfOvlyCity", "xpath", "//*[contains(@id,'rptFixedSearch_txtSearchValue_2')]")
-	private TestObject txfOvlyZIPCode			= createTestObject("txfOvlyZIPCode", "xpath", "//*[contains(@id,'rptFixedSearch_txtSearchValue_3')]") 
+	private TestObject txfOvlyZIPCode			= createTestObject("txfOvlyZIPCode", "xpath", "//*[contains(@id,'rptFixedSearch_txtSearchValue_3')]")
 	private TestObject btnOvlySearch			= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id,'ctl00_ucS_lbSearch')]")
 	private TestObject btnOvlyReset				= createTestObject("btnOvlyReset", "xpath", "//*[contains(@id,'ctl00_ucS_lbReset')]")
-	private TestObject btnOvlySelect			= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id,'ctl00_gvL_hpSelect_0')]") 
+	private TestObject btnOvlySelect			= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id,'ctl00_gvL_hpSelect_0')]")
 
-	private TestObject btnSaveContinue			= createTestObject("btnSaveContinue", "xpath", "//*[@id='lb_Form_SaveCont_CustAddress']") 
-	
-	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]") 
+	private TestObject btnSaveContinue			= createTestObject("btnSaveContinue", "xpath", "//*[@id='lb_Form_SaveCont_CustAddress']")
+
+	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]")
 	private TestObject btnCancel				= createTestObject("btnCancel", "xpath", "//*[contains(@id,'lb_Form_Cancel_AddCust')]")
 	private TestObject iframeAddress			= createTestObject("iframeAddress", "xpath", "//*[contains(@id,'custForm')]")
 	private TestObject btnCopyAddress			= createTestObject("btnCopyAddress", "xpath", "//*[contains(@id,'lb_Form_CopyAddr')]")
@@ -98,13 +98,13 @@ public class AddressPage extends BaseHelper {
 			safetyClick(btnSearchZIPCode)
 			WebUI.delay(2)
 			safetyInput(txfOvlyZIPCode, zipCode)
-	
+
 			WebUI.delay(2)
 			safetyClick(btnOvlySearch)
-	
+
 			WebUI.delay(2)
 			safetyClick(btnOvlySelect) //select first address
-	
+
 			WebUI.delay(2)
 			handleAlertIfPresent()
 			WebUI.takeScreenshot()
@@ -182,7 +182,7 @@ public class AddressPage extends BaseHelper {
 	private void inputDirectionDesc(String desc) {
 		if(desc) {
 			safetyInput(txfDirectionDesc, desc)
-			WebUI.takeScreenshot()
+			//			WebUI.takeScreenshot()
 		}
 	}
 	private void inputNotes(String notes) {
@@ -231,19 +231,19 @@ public class AddressPage extends BaseHelper {
 			WebUI.delay(2)
 			safetyInput(areaField, parts[1])
 			WebUI.delay(2)
-			WebUI.takeScreenshot()
+			//			WebUI.takeScreenshot()
 		}
 	}
 
 	private void clickCopyAddress() {
 		safetyClick(btnCopyAddress)
 	}
-	
+
 	private boolean checkAddressList(String addressType) {
 		TestObject addressList = createTestObject("addressList", "xpath", "//span[text() = '$addressType']")
 		return WebUI.verifyElementPresent(addressList, 5, FailureHandling.OPTIONAL)
 	}
-	
+
 	private void clickEditAddress(String addressType) {
 		TestObject btnEdit = createTestObject("btnEdit", "xpath", "//span[text() = '$addressType']/following::td[6]")
 		WebUI.click(btnEdit)

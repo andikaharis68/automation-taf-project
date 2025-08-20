@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,22 +21,31 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AgreementTransferApprovalPage extends BaseHelper{
+public class ChangeDueDateRequestPage extends BaseHelper{
 
-	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
+	private TestObject txtEfectiveDate			= createTestObject("txtEfectiveDate", "xpath", "")
+	private TestObject txtNewDueDate			= createTestObject("txtNewDueDate", "xpath", "")
+	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "")
+	private TestObject tableCicilan				= createTestObject("tableCicilan", "xpath", "")
+	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
+	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
 	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
-	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 
+	public void calculate(String efectiveDate, String dueDate) {
 
-	public void approval(String action, String note, String person) {
+		WebUI.setText(txtEfectiveDate, efectiveDate)
+		WebUI.setText(txtNewDueDate, dueDate)
+		WebUI.click(btnCalculate)
+		WebUI.verifyElementVisible(tableCicilan)
+	}
 
-		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpAction, action, false)
+	public void approval(String reason, String approver, String note) {
+
+		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
+		WebUI.selectOptionByLabel(drpApprover, approver, false)
 		WebUI.setText(txtNotes, note)
-		WebUI.selectOptionByLabel(drpNextPerson, person, false)
 		WebUI.click(btnSubmit)
 		WebUI.verifyElementVisible(lblNotification)
 	}

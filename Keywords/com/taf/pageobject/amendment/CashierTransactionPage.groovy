@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,22 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class DocumentCheckInPage extends BaseHelper{
-	
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
-	private TestObject drpDocumentType	= createTestObject("drpDocumentType", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnCheckIn		= createTestObject("icnCheckIn", "xpath", "")
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
-	
-	public void checkInDoc(String agreementNo, String docType) {
-		
-		WebUI.setText(txtAgreementNo, agreementNo)
-		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
-		WebUI.click(btnSearch)
-		WebUI.click(icnCheckIn)
-		WebUI.click(btnSubmit)
-		
+public class CashierTransactionPage extends BaseHelper{
+
+	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "")
+	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "")
+	private TestObject txtDate			= createTestObject("txtDate", "xpath", "")
+	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "xpath", "")
+
+	public void inputChasier(String WOP, String accName, String date) {
+
+		WebUI.selectOptionByLabel(drpWOP, WOP, false)
+		WebUI.selectOptionByLabel(drpAccountName, accName, false)
+		WebUI.setText(txtDate, date)
 	}
-	
+
+	public void clickPaymentSingle() {
+
+		WebUI.click(btnPaymentSingle)
+	}
 }

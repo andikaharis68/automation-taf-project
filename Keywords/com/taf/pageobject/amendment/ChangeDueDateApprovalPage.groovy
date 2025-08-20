@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,36 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PaymentRecievePage extends BaseHelper{
+public class ChangeDueDateApprovalPage extends BaseHelper{
 
-	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject txtReferenceNo		= createTestObject("txtReferenceNo", "xpath", "")
-	private TestObject txtAmount			= createTestObject("txtAmount", "xpath", "")
-	private TestObject btnPenAction			= createTestObject("btnPenAction", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
+	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
+	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
+	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 
+	public void approval(String action, String note, String person) {
 
-	public void searchAgreement(String agreementNo) {
-
-		WebUI.setText(txtAgreementNumber, agreementNo)
-		WebUI.click(btnSearch)
-	}
-
-	public void inputDataRecieve(String recieveForm, String note, String reffNo, String amount) {
-
-		WebUI.setText(txtRecieveForm, recieveForm)
+		WebUI.click(sectionApprovalAction)
+		WebUI.selectOptionByLabel(drpAction, action, false)
 		WebUI.setText(txtNotes, note)
-		WebUI.setText(txtReferenceNo, reffNo)
-		WebUI.setText(txtAmount, amount)
-
-		WebUI.click(btnPenAction)
-	}
-
-	public void clickSubmit() {
-
+		WebUI.selectOptionByLabel(drpNextPerson, person, false)
 		WebUI.click(btnSubmit)
+		WebUI.verifyElementVisible(lblNotification)
 	}
 }

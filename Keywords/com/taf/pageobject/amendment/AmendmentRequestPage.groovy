@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,11 +21,25 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentExecutionPage extends BaseHelper{
-	
-	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
-	
-	public void clickSubmit() {
-		WebUI.click(btnSubmit)
+public class AmendmentRequestPage extends BaseHelper{
+
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+
+
+	public void searchAmendment(String amendmentType, String customerName) {
+
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtCustomerName, customerName)
+		WebUI.click(btnSearch)
+
+
+		clickPenAction(customerName)
+	}
+
+	private void clickPenAction(customerName) {
+
+		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
 	}
 }
