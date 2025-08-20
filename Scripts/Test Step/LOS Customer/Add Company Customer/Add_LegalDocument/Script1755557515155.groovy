@@ -21,17 +21,14 @@ import org.openqa.selenium.Keys as Keys
 
 LegalDocument legalDoc = new LegalDocument()
 
-'Step 1: Handler iFrame, switch to default then switch to main frame'
-legalDoc.switchToIframeMain()
-
-'Step 2: Verify landing in Legal Document Page'
+'Step 1: Verify landing in Legal Document Page'
 legalDoc.verifyLandingScreen()
 
-'Step 3: Input legal documents, included click add on each adding documents'
+'Step 2: Input legal documents, included click add on each adding documents'
 legalDoc.inputLegalDocument(LegalDocType, DocumentNo, DateIssued, ExpiredDate, Notes, NotaryName, NotaryLocation)
 
-'Step 4: Save and continue'
+'Step 3: Save and continue'
 legalDoc.clickSaveAndContinue()
 
-'Step 5: Verify save success'
+'Step 4: Verify save success'
 legalDoc.verifySaveSuccess()

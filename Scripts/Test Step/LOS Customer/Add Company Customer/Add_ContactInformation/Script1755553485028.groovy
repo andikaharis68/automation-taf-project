@@ -21,19 +21,16 @@ import org.openqa.selenium.Keys as Keys
 
 ContactInformation contactInfo = new ContactInformation()
 
-'Step 1: Handler iFrame, switch to default then switch to custom form frame'
-contactInfo.switchToIframeCustForm()
-
-'Step 2: Verify landing on tab contact information'
+'Step 1: Verify landing on tab contact information'
 contactInfo.verifyLandingScreen()
 
-'Step 3: Input on contact main data'
+'Step 2: Input on contact main data'
 contactInfo.inputContactData(Name, JobPosition)
 
-'Step 4: Input on contact information section'
+'Step 3: Input on contact information section'
 contactInfo.inputContactInformation(MobilePhone1, Phone1, Email1)
 
-'Step 5: Click save and continue'
+'Step 4: Click save and continue'
 contactInfo.clickSaveAndContinue()
 
 'Step 5: Verify save success'

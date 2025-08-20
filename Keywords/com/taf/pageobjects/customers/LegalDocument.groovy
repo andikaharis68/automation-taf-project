@@ -23,9 +23,9 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class LegalDocument extends BaseHelper {
-	private TestObject btnSaveAndContinue 	= createTestObject("btnSaveAndContinue", "id", "lb_Form_SaveCont_EmergencyContact")
+	private TestObject btnSaveAndContinue 	= createTestObject("btnSaveAndContinue", "id", "lb_Form_SaveCont_LegalDocument")
 	private TestObject lblSuccess			= createTestObject("lblSuccess", "xpath", "//*[contains(text(), 'Save Success')]")
-	private TestObject btnAdd 	= createTestObject("btnAdd", "id", "lb_Form_SaveCont_EmergencyContact")
+	private TestObject btnAdd 				= createTestObject("btnAdd", "id", "lb_Form_Add_LegalDocument")
 
 	//table
 	private TestObject drpLegalDocType 	= createTestObject("drpLegalDocType", "id", "gvLegalDocument_ddlLegalDocType_0")
@@ -46,7 +46,7 @@ public class LegalDocument extends BaseHelper {
 	}
 
 	public void verifyLandingScreen() {
-		verifyLanding(drpLegalDocType, "Legal Document")
+		verifyLanding(btnAdd, "Legal Document")
 		WebUI.takeScreenshot()
 	}
 	
@@ -65,20 +65,22 @@ public class LegalDocument extends BaseHelper {
 		
 		KeywordUtil.logInfo("Size of item: " + splittedLegalDoc.size())
 		for (int i=0; i<splittedLegalDoc.size(); i++) {
-			KeywordUtil.logInfo("Input legal document ke: " + splittedLegalDoc[i+1])
+			KeywordUtil.logInfo("Input legal document ke: ${i+1}")
 			clickAdd()
-			drpLegalDocType 	= createTestObject("drpLegalDocType", "id", "gvLegalDocument_ddlLegalDocType_${splittedLegalDoc[i]}")
-			txfDocumentNo 		= createTestObject("txfDocumentNo", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNo_${splittedLegalDoc[i]}")
-			txfDateIssue 		= createTestObject("txfDateIssue", "id", "gvLegalDocument_ucDPLegalDocDocDt_${splittedLegalDoc[i]}_txtDatePicker_${splittedLegalDoc[i]}")
-			txfDateExpired 		= createTestObject("txfDateExpired", "id", "gvLegalDocument_ucDPLegalDocDocExpired${splittedLegalDoc[i]}_txtDatePicker_${splittedLegalDoc[i]}")
-			txfNotes 			= createTestObject("txfNotes", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNote_${splittedLegalDoc[i]}")
-			txfNotaryName 		= createTestObject("txfNotaryName", "id", "gvLegalDocument_txt_CustCoyLegalDoc_NotaryName_${splittedLegalDoc[i]}")
-			txfNotaryLocation 	= createTestObject("txfNotaryLocation", "id", "gvLegalDocument_txt_CustCoyLegalDoc_NotaryLocation_${splittedLegalDoc[i]}")
+			drpLegalDocType 	= createTestObject("drpLegalDocType", "id", "gvLegalDocument_ddlLegalDocType_${i}")
+			txfDocumentNo 		= createTestObject("txfDocumentNo", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNo_${i}")
+			txfDateIssue 		= createTestObject("txfDateIssue", "id", "gvLegalDocument_ucDPLegalDocDocDt_${i}_txtDatePicker_${i}")
+			txfDateExpired 		= createTestObject("txfDateExpired", "id", "gvLegalDocument_ucDPLegalDocDocExpiredDt_${i}_txtDatePicker_${i}")
+			txfNotes 			= createTestObject("txfNotes", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNote_${i}")
+			txfNotaryName 		= createTestObject("txfNotaryName", "id", "gvLegalDocument_txt_CustCoyLegalDoc_NotaryName_${i}")
+			txfNotaryLocation 	= createTestObject("txfNotaryLocation", "id", "gvLegalDocument_txt_CustCoyLegalDoc_NotaryLocation_${i}")
 			
 			safetySelectEdit(drpLegalDocType, splittedLegalDoc[i])
 			safetyInputEdit(txfDocumentNo, splittedDocNo[i])
 			safetyInputEdit(txfDateIssue, splittedDateIssued[i])
+			clickTABKeyboard(txfDateIssue)
 			safetyInputEdit(txfDateExpired, splittedExpDate[i])
+			clickTABKeyboard(txfDateExpired)
 			safetyInputEdit(txfNotes, splittedNotes[i])
 			safetyInputEdit(txfNotaryName, splittedNotaryName[i])
 			safetyInputEdit(txfNotaryLocation, splittedNotaryLoc[i])

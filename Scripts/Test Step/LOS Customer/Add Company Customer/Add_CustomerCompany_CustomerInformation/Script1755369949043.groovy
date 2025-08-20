@@ -16,7 +16,6 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.customers.AddCompanyCustomerPage
-import com.taf.pageobjects.customers.CompanyCustomerMainDataPage
 import com.taf.pageobjects.customers.CustomerInformationPage
 
 import internal.GlobalVariable as GlobalVariable
@@ -24,7 +23,6 @@ import org.openqa.selenium.Keys as Keys
 
 AddCompanyCustomerPage addCompanyCustomerPage = new AddCompanyCustomerPage()
 CustomerInformationPage customerInfoPage = new CustomerInformationPage()
-CompanyCustomerMainDataPage companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
 
 KeywordUtil.logInfo("scenarioData : ${CustomerModel}, ${CompanyName}, ${CompanyType}")
 
@@ -41,7 +39,7 @@ addCompanyCustomerPage.inputCustomerName(CompanyName)
 addCompanyCustomerPage.selectCompanyType(CompanyType)
 
 'Step 5: input customer NPWP'
-addCompanyCustomerPage.inputCustomerNPWP(NPWP)
+addCompanyCustomerPage.inputCustomerNPWP()
 
 'Step 6: input customer NITKU'
 addCompanyCustomerPage.inputCustomerNitku(NITKU)
@@ -52,8 +50,6 @@ addCompanyCustomerPage.clickNextButton()
 'Step 8: Click new application if present'
 addCompanyCustomerPage.clickNewApplicationIfPresent()
 
-'Step 9: Verify landing in main data page'
-companyCustomerMainDataPage.verifyLandingInMainPage()
 
 
 

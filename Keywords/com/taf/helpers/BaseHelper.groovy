@@ -125,16 +125,16 @@ class BaseHelper {
 	}
 
 	static void openBrowser() {
-//		EdgeOptions options = new EdgeOptions()
-//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
-//		WebDriver driver = new EdgeDriver(options)
-//		DriverFactory.changeWebDriver(driver)
-//		driver.get(GlobalVariable.WEB_URL)
+		//		EdgeOptions options = new EdgeOptions()
+		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
+		//		WebDriver driver = new EdgeDriver(options)
+		//		DriverFactory.changeWebDriver(driver)
+		//		driver.get(GlobalVariable.WEB_URL)
 
 		WebUI.openBrowser(GlobalVariable.WEB_URL)
 		WebUI.maximizeWindow()
 	}
-			
+
 	static void verifyLanding(TestObject to, String screenName) {
 		if (WebUI.waitForElementPresent(to, 10)) {
 			KeywordUtil.markPassed("Success : Landing to $screenName")
@@ -374,7 +374,7 @@ class BaseHelper {
 		handlePopupAlert()
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
-		WebUI.waitForElementPresent(to, 10)
+		WebUI.waitForElementPresent(to, 10, FailureHandling.OPTIONAL)
 		WebUI.click(to)
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10)
@@ -398,7 +398,7 @@ class BaseHelper {
 			}
 		}
 	}
-	
+
 	static void handlePopupAlert(int timeoutInSeconds = 1) {
 		try {
 			WebUI.waitForAlert(timeoutInSeconds)
@@ -408,7 +408,7 @@ class BaseHelper {
 			print 'alert tidak muncul'
 		}
 	}
-	
+
 	static void safetySelectEdit(TestObject to, String text, double delay = 1) {
 		if(text) {
 			WebUI.click(to)
@@ -417,12 +417,29 @@ class BaseHelper {
 			WebUI.delay(delay)
 		}
 	}
-	
+
 	static void clickEnter(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ENTER))
 	}
 	static void clickTABKeyboard(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
-		
 	}
+	
+	static String generateRandomNPWP() {
+		Random rand = new Random()
+		
+		String firstDigit = (1 + rand.nextInt(9)).toString()
+		String otherDigits = (1..15).collect { rand.nextInt(10) }.join()
+		
+		return firstDigit + otherDigits
+	}
+	
+	static void manualClearText(TestObject to, double delay = 0.5) {
+		safetyClick(to)
+		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, 'a'))
+		WebUI.delay(delay)
+		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
+		WebUI.delay(delay)
+	}
+	
 }

@@ -77,6 +77,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void verifyLandinginFinancialPage() {
 		verifyLanding(txfGrossMonthlyIncome, "Financial Data")
+		WebUI.takeScreenshot()
 	}
 
 	private void inputGrossMonthlyIncome(String income) {
@@ -123,6 +124,7 @@ public class FinancialDataPage extends BaseHelper {
 			clearText(txfOtherMonthlyInstallment)
 			safetyInput(txfOtherMonthlyInstallment, installment)
 		}
+		WebUI.takeScreenshot()
 	}
 	private void clickCalculateIncome() {
 		safetyClick(btnCalculateIncome)
@@ -163,6 +165,7 @@ public class FinancialDataPage extends BaseHelper {
 			safetyInput(txfAccNo, accNo)
 			WebUI.delay(2)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void selectBankAccPurpose(String purpose) {
@@ -238,6 +241,7 @@ public class FinancialDataPage extends BaseHelper {
 			safetyInput(txfYear, year)
 			WebUI.delay(2)
 		}
+		WebUI.takeScreenshot()
 	}
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
@@ -245,6 +249,7 @@ public class FinancialDataPage extends BaseHelper {
 			clearText(drpDebit)
 			safetyInput(drpDebit, debit)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputStatementCredit(String credit, Integer index) {
@@ -253,11 +258,13 @@ public class FinancialDataPage extends BaseHelper {
 			clearText(drpCredit)
 			safetyInput(drpCredit, credit)
 		}
+		WebUI.takeScreenshot()
+		
 	}
 	private void inputIncomeSection(String monthlyIncome) {
-		WebUI.takeScreenshot()
 		inputGrossMonthlyIncome(monthlyIncome)
 		clickCalculateIncome()
+		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {

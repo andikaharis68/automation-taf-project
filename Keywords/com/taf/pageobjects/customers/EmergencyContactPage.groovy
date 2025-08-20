@@ -88,6 +88,7 @@ public class EmergencyContactPage extends BaseHelper {
 			TestObject txfEmail	= createTestObject("txfEmail", "xpath", "//*[@id='ucEmergencyContactInfo_ucEMail${index}_txtEmail']")
 			safetyInput(txfEmail, email)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputAddress(String address) {
@@ -115,6 +116,7 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyClick(btnOvlySearch)
 			safetyClick(btnOvlySelect)
 		}
+		WebUI.takeScreenshot()
 	}
 	
 	private void checkAddress(String zipCode) {
@@ -170,6 +172,7 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyInput(countryField, parts[0])
 			safetyInput(areaField, parts[1])
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputMobilePhone(String phone, int index) {
