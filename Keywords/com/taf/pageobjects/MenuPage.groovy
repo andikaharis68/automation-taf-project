@@ -32,16 +32,19 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
-	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "xpath", "")
+	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "text", "Purchase Order Agreement")
 	private TestObject btnRequestHandling			= createTestObject("btnRequestHandling", "xpath", "")
 	private TestObject btnDocumentSigner			= createTestObject("btnDocumentSigner", "xpath", "")
 	private TestObject btnDocumentPrinting			= createTestObject("btnDocumentPrinting", "xpath", "")
-	private TestObject btnApplicationInquiry		= createTestObject("btnApplicationInquiry", "xpath", "")
+	private TestObject btnExpandApplicationInquiry	= createTestObject("btnApplicationInquiry", "xpath", "//span[text() = 'Application Inquiry']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnApplicationInquiry		= createTestObject("btnApplicationInquiry", "xpath", "//a[text() = 'Application Inquiry']")
 	private TestObject btnAdditionalProcess			= createTestObject("btnAdditionalProcess", "xpath", "")
 	private TestObject btnReturnHandlingTask		= createTestObject("btnReturnHandlingTask", "xpath", "")
 	private TestObject btnUpdateLifeInsurance		= createTestObject("btnUpdateLifeInsurance", "xpath", "")
 	private TestObject btnESign						= createTestObject("btnESign", "xpath", "")
 	private TestObject btnCDECompletion				= createTestObject("btnCDECompletion", "text", "Centralized Data Entry Completion")
+	private TestObject btnCreditApproval			= createTestObject("btnCreditApproval", "text", "Credit Approval with Decision Engine")
+	
 
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")
 	private TestObject btnCustomer					= createTestObject("btnCustomer", "xpath", "//a[@id='rModuleList_lbModuleList_1']")
@@ -57,7 +60,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
 	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
 	private TestObject btnDeliveryOrder				= createTestObject("btnDeliveryOrder", "xpath", "//a[text() = 'Delivery Order']")
-	
+
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 
@@ -209,14 +212,14 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
 		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void navigateToSurveyTask() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -227,7 +230,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnSurveyTaskAssignment)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToDeliveryOrder() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -238,7 +241,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnDeliveryOrder)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToNewApplication() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -247,5 +250,42 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnNewApplication)
 		WebUI.takeScreenshot()
 		WebUI.delay(2)
+	}
+
+	private void navigateToPurchaseOrder() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		WebUI.takeScreenshot()
+		safetyClick(btnPurchaseOrder)
+		switchDefaultContent()
+	}
+
+	private void navigateToCreditApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		WebUI.takeScreenshot()
+		safetyClick(btnCreditApproval)
+		switchDefaultContent()
+	}
+
+	private void navigateToApplicationInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		safetyClick(btnExpandApplicationInquiry)
+		WebUI.takeScreenshot()
+		safetyClick(btnApplicationInquiry)
+		switchDefaultContent()
 	}
 }

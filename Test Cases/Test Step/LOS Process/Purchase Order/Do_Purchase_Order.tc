@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Do_Purchase_Order</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f50801b7-733e-4de0-8bbe-1f7248f6fe0a</testCaseGuid>
+</TestCaseEntity>

@@ -14,6 +14,24 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.PurchaseOrderPage
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+
+PurchaseOrderPage purchase = new PurchaseOrderPage()
+MenuPage menu = new MenuPage()
+
+'Step 1: click button pencil on supplier listing'
+purchase.clickEditOnSupplierListing()
+
+'Step 2: click save'
+purchase.clickSave()
+
+'Step 3: click submit'
+purchase.clickSubmit()
+
+'Step 4: verify popup success'
+menu.verifySuccessMessage()
 
