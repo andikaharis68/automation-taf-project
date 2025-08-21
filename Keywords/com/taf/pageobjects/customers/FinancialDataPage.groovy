@@ -258,7 +258,6 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputIncomeSection(String monthlyIncome) {
 		inputGrossMonthlyIncome(monthlyIncome)
 		clickCalculateIncome()
-		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {

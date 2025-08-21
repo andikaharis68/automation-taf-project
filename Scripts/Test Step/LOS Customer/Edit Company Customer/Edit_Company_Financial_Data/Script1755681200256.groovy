@@ -14,6 +14,35 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.customers.FinancialDataPage
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+FinancialDataPage financialData = new FinancialDataPage()
+
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+menu.switchIframeCustForm()
+
+if(IsEditFinancialData == "Y") {
+
+	'Step 3: Click add customer bank account'
+	financialData.clickAddCustAcc()
+	
+	'Step 4: Input customer bank account section'
+	financialData.inputCustomerBankAccount(BankName, BankBranch, AccountName, AccountNo, CustomerBankAccountPurpose)
+	
+	'Step 5: Click save bank account'
+	financialData.clickSaveAccount()
+	
+}
+
+'Step 6: Click save and continue'
+financialData.clickSaveContinue()
+
+'Step 7: Verify save success'
+menu.verifySuccessMessage()

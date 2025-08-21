@@ -87,7 +87,6 @@ public class ManagementOrShareholderPage extends BaseHelper {
 		safetyClick(btnSearchNamePersonal)
 		safetyInput(txfOvlyCustomerName, name)
 		safetyClick(btnOvlySearch) //select first
-		WebUI.takeScreenshot()
 		safetyClick(btnOvlySelect)
 	}
 	
@@ -201,6 +200,7 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	}
 	
 	private void clickSaveCompany() {
+		WebUI.takeScreenshot()
 		safetyClick(btnSaveCompany)
 	}
 	

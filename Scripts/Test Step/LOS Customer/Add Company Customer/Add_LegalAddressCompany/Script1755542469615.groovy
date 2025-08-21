@@ -27,56 +27,52 @@ AddressPage address = new AddressPage()
 address.clickAddAddress()
 
 'Step 2: Select Address Type = Legal Address'
-AddressType = "Legal Address"
-address.selectAddressType(AddressType)
-
-'Step 3: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_CompanyCustomer_TestData.xlsx", "Address")
+address.selectAddressType("Legal Address")
 
 'Step 4: Input Address'
-address.inputAddress(AddressData.Address)
+address.inputAddress(LegalAddress)
 
 'Step 5: Input RT'
-address.inputRT(AddressData.RT)
+address.inputRT(LegalRT)
 
 'Step 6: Input RW'
-address.inputRW(AddressData.RW)
+address.inputRW(LegalRW)
 
 'Step 7: Select ZIP Code'
-address.searchAddress(AddressData.ZIPCODE)
+address.searchAddress(LegalZipCode)
 
 'Step 8: Check Customer Have Fixed Line'
-address.checkCustomerHaveFixedline(AddressData.CustomerDoesNotHaveFixedline)
+address.checkCustomerHaveFixedline(LegalCustomerDoesNotHaveFixedline)
 
 'Step 9: Input Phone 1'
-address.inputPhoneNumbers(AddressData.Phone1, 1)
+address.inputPhoneNumbers(LegalPhone1, 1)
 
 'Step 10: Input Phone 2'
-address.inputPhoneNumbers(AddressData.Phone2, 2)
+address.inputPhoneNumbers(LegalPhone2, 2)
 
 'Step 11: Input Phone 3'
-address.inputPhoneNumbers(AddressData.Phone3, 3)
+address.inputPhoneNumbers(LegalPhone3, 3)
 
 'Step 12: Input Fax'
-address.inputFax(AddressData.Fax)
+address.inputFax(LegalFax)
 
 'Step 13: Select Building Class Location'
-address.selectBuildingLocation(AddressData.BuildingLocationClass)
+address.selectBuildingLocation(LegalBuildingLocationClass)
 
 'Step 14: Select Building Ownership'
-address.selectBuildingOwnerShip(AddressData.BuildingOwnership)
+address.selectBuildingOwnerShip(LegalBuildingOwnership)
 
 'Step 15: Input Building price estimates'
-address.inputBuildingPriceEstimates(AddressData.BuildingPriceEstimates)
+address.inputBuildingPriceEstimates(LegalBuildingPriceEstimates)
 
 'Step 16: Input Building stay length'
-address.inputBuildingStayLength(AddressData.BuildingStayLength)
+address.inputBuildingStayLength(LegalBuildingStayLength)
 
 'Step 17: Input Direction description'
-address.inputDirectionDesc(AddressData.DirectionDescription)
+address.inputDirectionDesc(LegalDirectionDescription)
 
 'Step 18: Input notes'
-address.inputNotes(AddressData.Notes)
+address.inputNotes(LegalNotes)
 
 'Step 19: Click Save'
 address.clickSaveAddress()

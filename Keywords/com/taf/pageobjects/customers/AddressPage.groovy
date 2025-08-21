@@ -60,6 +60,7 @@ public class AddressPage extends BaseHelper {
 	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]") 
 	private TestObject btnCancel				= createTestObject("btnCancel", "xpath", "//*[contains(@id,'lb_Form_Cancel_AddCust')]")
 	private TestObject iframeAddress			= createTestObject("iframeAddress", "xpath", "//*[contains(@id,'custForm')]")
+	private TestObject iframeMainPage			= createTestObject("iframeMainPage", "xpath", "//*[contains(@id,'mainPage')]")
 	private TestObject btnCopyAddress			= createTestObject("btnCopyAddress", "xpath", "//*[contains(@id,'lb_Form_CopyAddr')]")
 	private TestObject btnSaveAddress			= createTestObject("btnSaveAddress", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]")
 	private TestObject drpCopyAddressFrom		= createTestObject("drpCopyAddressFrom", "xpath", "")
@@ -71,12 +72,28 @@ public class AddressPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 
+	private void switchToDefault() {
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void switchIframeMain() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	
+	private void switchIframeForm() {
+		WebUI.switchToFrame(iframeAddress, 2)
+	}
+
 	private void selectAddressType(String addressType) {
-		safetySelect(drpAddressType, addressType)
+		if(addressType) {			
+			safetySelect(drpAddressType, addressType)
+		}
 	}
 
 	private void inputAddress(String address) {
-		safetyInputEdit(txfAddress, address)
+		if(address) {			
+			safetyInputEdit(txfAddress, address)
+		}
 	}
 
 	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
@@ -90,7 +107,9 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRT(String rt) {
-		safetyInputEdit(txfRT, rt, 1.5)
+		if(rt) {			
+			safetyInputEdit(txfRT, rt, 1.5)
+		}
 	}
 
 	private void searchAddress(String zipCode) {
@@ -112,7 +131,9 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRW(String rw) {
-		safetyInputEdit(txfRW, rw, 1.5)
+		if(rw) {			
+			safetyInputEdit(txfRW, rw, 1.5)
+		}
 	}
 
 	private void checkAddress(String zipCode) {
@@ -155,7 +176,6 @@ public class AddressPage extends BaseHelper {
 	}
 	private void clickAddAddress() {
 		safetyClick(btnAdd)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickSaveContinue() {
@@ -182,23 +202,23 @@ public class AddressPage extends BaseHelper {
 	private void inputDirectionDesc(String desc) {
 		if(desc) {
 			safetyInput(txfDirectionDesc, desc)
-			WebUI.takeScreenshot()
 		}
 	}
 	private void inputNotes(String notes) {
 		if(notes) {
 			safetyInput(txfNotes, notes)
-			WebUI.takeScreenshot()
 		}
 	}
 	private void inputCompanyName(String companyName) {
 		safetyInputEdit(txfCompanyName, companyName)
 	}
+	
 	private void switchToIframeAddress() {
 		WebUI.delay(10)
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
 	}
+	
 	private void inputPhoneNumbers(String phoneNumber, int index) {
 		if(phoneNumber) {
 			TestObject countryField, areaField, numberField
