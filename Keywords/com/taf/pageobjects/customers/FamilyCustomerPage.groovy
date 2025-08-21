@@ -47,7 +47,7 @@ public class FamilyCustomerPage extends BaseHelper {
 	private TestObject lblNewCustomer		= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
 
 	private TestObject btnSelectFamily		= createTestObject("btnSelectFamily", "xpath", "//*[@id='lb_Form_Select_Fam']")
-	private TestObject radSelectFamily		= createTestObject("radSelectFamily", "xpath", "//*[@id=\"rbSelect'2655245'\"]")
+	private TestObject radSelectFamily		= createTestObject("radSelectFamily", "xpath", "//*[contains(@id, 'rbSelect')]")
 
 
 	private void verifyLandingFamilyPage() {
@@ -94,7 +94,7 @@ public class FamilyCustomerPage extends BaseHelper {
 				safetyClick(radGender)
 			}
 		}
-		WebUI.takeScreenshot()
+		
 	}
 
 
@@ -143,16 +143,14 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 	private void clickSaveContinue() {
 		safetyClick(btnSaveAndContinue)
-		WebUI.takeScreenshot()
 	}
 	private void clickNext() {
-		WebUI.takeScreenshot()
 		safetyClick(btnNext)
 	}
 	private void clickSelectFamily() {
-		WebUI.takeScreenshot()
 		WebUI.delay(5)
 		safetyClick(radSelectFamily)
+		WebUI.takeScreenshot()
 		safetyClick(btnSelectFamily)
 		WebUI.delay(2)
 	}

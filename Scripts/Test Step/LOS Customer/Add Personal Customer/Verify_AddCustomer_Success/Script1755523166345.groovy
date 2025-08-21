@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 CustomerInformationPage custInfo = new CustomerInformationPage()
 
 'Step 1: Search Customer name'
-custInfo.inputCustomerName(FullName)
+custInfo.inputCustomerName(CustomerName)
 
 'Step 2: Select Customer type'
 custInfo.selectCustomerType("Personal")
@@ -31,4 +31,4 @@ custInfo.selectCustomerType("Personal")
 custInfo.clickSearch()
 
 'Step 4: Verify Customer list'
-custInfo.clickCustomerHyperlink(FullName)
+custInfo.clickCustomerHyperlink(CustomerName)

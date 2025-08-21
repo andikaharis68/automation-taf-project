@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>SaveAndContinue_ToFinancialData</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>85939113-f4f5-435f-8126-ea418ab421d3</testCaseGuid>
+</TestCaseEntity>

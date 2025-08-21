@@ -28,8 +28,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
 	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
 	private TestObject btnCentralizeDataEntry 		= createTestObject("btnCentralizeDataEntry", "text", "Centralized Data Entry")
-	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "")
-	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "xpath", "")
+	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "text", "New Application Data Entry")
+	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
 	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "xpath", "")
@@ -159,7 +159,6 @@ public class MenuPage extends BaseHelper {
 	}
 	private void clickSubMenuCustomer() {
 		WebUI.click(btnSubMenuCustomer)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickTAFReports() {
@@ -214,5 +213,15 @@ public class MenuPage extends BaseHelper {
 		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
+	}
+	
+	private void navigateToNewApplication() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnNewApplication)
+		WebUI.takeScreenshot()
+		WebUI.delay(2)
 	}
 }

@@ -138,6 +138,7 @@ public class MainDataPage extends BaseHelper {
 			safetyClick(btnSearchCustomerGroup)
 			WebUI.delay(2)
 			safetyInput(txfOvlyCustomerName, name)
+			WebUI.takeScreenshot()
 			safetyClick(btnOvlySelect)
 			WebUI.delay(2)
 		}
@@ -185,8 +186,10 @@ public class MainDataPage extends BaseHelper {
 			safetyInput(txfCountryName, country)
 
 			safetyClick(btnOvlySearchCountry)
+			WebUI.takeScreenshot()
 
 			safetyClick(btnSelectCountry)
+			
 		}
 	}
 
@@ -194,7 +197,6 @@ public class MainDataPage extends BaseHelper {
 		if(isVIP?.trim() == 'Y') {
 			safetyClick(chxIsVIP)
 		}
-		WebUI.takeScreenshot()
 	}
 
 	private void inputPremiumNote(String premiumNote) {
@@ -218,8 +220,6 @@ public class MainDataPage extends BaseHelper {
 		if(rip?.trim() == 'Y') {
 			safetyClick(chxRIP)
 		}
-		WebUI.takeScreenshot()
-		
 	}
 
 
@@ -238,7 +238,6 @@ public class MainDataPage extends BaseHelper {
 			WebUI.scrollToElement(phoneField, 1)
 			safetyInput(phoneField, phone)
 		}
-		
 	}
 
 	private void inputEmail(int index, String email) {
@@ -247,12 +246,11 @@ public class MainDataPage extends BaseHelper {
 			WebUI.scrollToElement(emailField, 1)
 			safetyInput(emailField, email)
 		}
-		WebUI.takeScreenshot()
 	}
 	private void clickSaveAndContinue() {
+		WebUI.takeScreenshot()
 		WebUI.scrollToElement(btnSaveContinue, 5)
 		safetyClick(btnSaveContinue)
-		WebUI.takeScreenshot()
 	}
 
 	private void switchToIframeCustForm() {
