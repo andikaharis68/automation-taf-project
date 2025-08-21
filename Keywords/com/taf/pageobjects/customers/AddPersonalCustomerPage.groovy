@@ -116,6 +116,5 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 	private void clickNextButton() {
 		safetyClick(btnNext)
-		WebUI.takeScreenshot()
 	}
 }

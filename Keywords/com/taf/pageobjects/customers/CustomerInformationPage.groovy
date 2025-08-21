@@ -53,7 +53,6 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private void selectCustomerType(String customerType) {
 		safetySelect(drpCustomerType, customerType)
-		WebUI.takeScreenshot()
 	}
 
 	private void inputAddress(String address) {
@@ -109,12 +108,10 @@ public class CustomerInformationPage extends BaseHelper {
 		}
 	}
 	private void clickCustomerHyperlink(String fullname) {
-		WebUI.takeScreenshot()
 		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[text()= '$fullname']")
 		if(WebUI.verifyElementPresent(txtFullName, 5)) {
 			KeywordUtil.markPassed("customer $fullname is exist")
 			safetyClick(txtFullName)
-			WebUI.takeScreenshot()
 		} else {
 			KeywordUtil.markFailed("customer $fullname is not found")
 		}

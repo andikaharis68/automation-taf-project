@@ -14,19 +14,27 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.GuarantorPage
+import com.taf.pageobjects.losCreditProcess.MainInformationPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("CentralizedDataEntryCompletion", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", scenarioId)
-BaseHelper.openBrowser()
+MainInformationPage mainInfo = new MainInformationPage()
+GuarantorPage guarantor = new GuarantorPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Navigate_To_Centralized_Data_Entry_Completion'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Search_Centralized_Data_Entry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Input_Centralized_Data_Entry_Completion'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: Input previous no '
+mainInfo.inputPreviousAppNo(PreviousAppNo) 
+
+'Step 2: Click Next'
+mainInfo.clickNext()
+
+'Step 3: Verify Customer Name'
+mainInfo.verifyCustomername(CustomerName)
+
+'Step 4: Click Save and continue'
+mainInfo.clickSaveContinue()
+
+'Step 5: verify Landing in guarantor'
+guarantor.verifyLandingInGuarantorPage()
+

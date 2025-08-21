@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class ReschedulingRequestPage extends BaseHelper{
-	
+
 	private TestObject sectionRescheduleReq		= createTestObject("sectionRescheduleReq", "xpath", "")
 	private TestObject sectionNewFinancial		= createTestObject("sectionNewFinancial", "xpath", "")
 	private TestObject txtEfectiveDate			= createTestObject("txtEfectiveDate", "xpath", "")
@@ -39,36 +39,33 @@ public class ReschedulingRequestPage extends BaseHelper{
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 	private TestObject lblDocAgreement			= createTestObject("lblDocAgreement", "xpath", "")
-	
-	
+
+
 	public void reschedule(String efectiveDate, String dueDate, String tenor, String payFreq, String scheme) {
-		
+
 		WebUI.click(sectionRescheduleReq)
 		WebUI.click(sectionNewFinancial)
-		
+
 		WebUI.setText(txtEfectiveDate, efectiveDate)
 		WebUI.selectOptionByLabel(drpDueDate, dueDate, false)
 		WebUI.setText(txtTenor, tenor)
 		WebUI.selectOptionByLabel(drpPayFrequency, payFreq, false)
 		WebUI.selectOptionByLabel(drpInstallmentScheme, scheme, false)
-		
+
 		WebUI.click(btnNext)
 		WebUI.click(btnCalculate)
 		//scroll bottom
 	}
-	
+
 	public void approval(String reason, String approver, String note) {
-		
+
 		WebUI.click(sectionApprovalReq)
 		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
 		WebUI.selectOptionByLabel(drpApprover, approver, false)
 		WebUI.setText(txtNotes, note)
 		WebUI.click(btnSubmit)
-		
+
 		WebUI.verifyElementVisible(lblNotification)
 		WebUI.verifyElementNotVisible(lblDocAgreement)
-		
 	}
-	
-	
 }
