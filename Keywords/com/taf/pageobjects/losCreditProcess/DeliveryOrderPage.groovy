@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -23,65 +23,66 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class DeliveryOrderPage extends BaseHelper{
-	
-	private TestObject txfApplicationNo		= createTestObject("txfApplicationNo", "id", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "id", "")
-	
+
+	private TestObject txfApplicationNo		= createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
+	private TestObject btnSearch			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+
 	//section delivery information
-	private TestObject txfNoMesin			= createTestObject("txfNoMesin", "id", "")
-	private TestObject txfNoRangka			= createTestObject("txfNoRangka", "id", "")
-	
+	private TestObject txfNoMesin			= createTestObject("txfNoMesin", "id", "txtSerialNo1")
+	private TestObject txfNoRangka			= createTestObject("txfNoRangka", "id", "txtSerialNo2")
+
 	//section asset attribute
-	private TestObject txfMadeIn			= createTestObject("txfMadeIn", "id", "")
-	private TestObject txfCylinder			= createTestObject("txfCylinder", "id", "")
-	private TestObject txfTransmition		= createTestObject("txfTransmition", "id", "")
-	private TestObject txfColor				= createTestObject("txfColor", "id", "")
-	private TestObject txfRegion			= createTestObject("txfRegion", "id", "")
-	
+	private TestObject txfMadeIn			= createTestObject("txfMadeIn", "id", "rptAssetAttr_txtAttrName_0")
+	private TestObject txfCylinder			= createTestObject("txfCylinder", "id", "rptAssetAttr_txtAttrName_1")
+	private TestObject txfTransmition		= createTestObject("txfTransmition", "id", "rptAssetAttr_txtAttrName_2")
+	private TestObject txfColor				= createTestObject("txfColor", "id", "rptAssetAttr_txtAttrName_3")
+	private TestObject txfRegion			= createTestObject("txfRegion", "id", "rptAssetAttr_txtAttrName_4")
+
 	//section asset owner
-	private TestObject txfAssetTaxDate		= createTestObject("txfAssetTaxDate", "id", "")
-	
+	private TestObject txfAssetTaxDate		= createTestObject("txfAssetTaxDate", "id", "ucDPAssetTaxDt_txtDatePicker")
+
 	//section main document letter
-	private TestObject txfRegisLetterDate	= createTestObject("txfRegisLetterDate", "id", "")
-	
+	private TestObject txfRegisLetterDate	= createTestObject("txfRegisLetterDate", "id", "ucDPSpMainDocDt_txtDatePicker")
+
 	//section asset document
 	private TestObject txfFaktur			= createTestObject("txfFaktur", "id", "")
-	
-	private TestObject btnSave				= createTestObject("btnSave", "id", "")
-	
+
+	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Toolbar_Save")
+
 	private TestObject btnNext				= createTestObject("btnNext", "id", "")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "")
-	
-	
+
+
 	private void searchTransaction(String appNo) {
 		safetyInput(txfApplicationNo, appNo)
 		safetyClick(btnSearch)
 	}
-	
+
 	private void editTransaction(String appNo) {
-		TestObject rowExist = createTestObject("rowExist", "xpath", "")
+		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$appNo']")
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
-		
+
 		if(rowExist) {
-			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "")
+			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[5]//input")
 			WebUI.takeScreenshot()
 			safetyClick(btnPenEdit)
 		}else {
 			KeywordUtil.markFailedAndStop("reff no not exist $appNo")
 		}
 	}
-	
-	
+
+
 	private void editAsset(String index) {
-		//section list ofasset
-		TestObject btnEdit = createTestObject("btnEdit", "xpath", "")
+		TestObject btnEdit = createTestObject("btnEdit", "xpath", "//input[@id = 'gvAssetList_ibDelOrd_$index']")
+		safetyClick(btnEdit)
+			
 	}
-	
+
 	private void inputDeliveryInformation(String noMesin, String noRangka) {
 		safetyInput(txfNoMesin, noMesin)
 		safetyInput(txfNoRangka, noRangka)
 	}
-	
+
 	private void inputAssetAttribute(String made, String cilinder, String transmition, String color, String region) {
 		safetyInput(txfMadeIn, made)
 		safetyInput(txfCylinder, cilinder)
@@ -90,31 +91,31 @@ public class DeliveryOrderPage extends BaseHelper{
 		safetyInputEdit(txfRegion, region)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void inputAssetOwner(String taxDate) {
 		safetyInput(txfAssetTaxDate, taxDate)
 	}
-	
+
 	private void inputDocumentLetter(String date) {
 		safetyInput(txfRegisLetterDate, date)
 		WebUI.takeScreenshot()
 	}
-	
-	
+
+
 	private void clickAllCheckBox(String faktur) {
 		//klik semua checkbox yang mandatory nya yes
-		
+
 		safetyInput(txfFaktur, faktur)
 	}
-	
+
 	private void clickSave() {
 		safetyClick(btnSave)
 	}
-	
+
 	private void clickNext() {
 		safetyClick(btnNext)
 	}
-	
+
 	private void clickSubmit() {
 		safetyClick(btnSubmit)
 	}
