@@ -25,7 +25,7 @@ import internal.GlobalVariable
 public class AddressPage extends BaseHelper {
 
 
-	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add']")
+	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr']")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[contains(@id,'Type_ddlReference')]")
 	private TestObject txfAddress				= createTestObject("txfAddress", "xpath", "//*[contains(@id, 'txtOfficeAddr')]")
 	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[contains(@id,'txtRT')]")
@@ -67,6 +67,7 @@ public class AddressPage extends BaseHelper {
 
 
 	private void verifyLandingInAddressSection() {
+		WebUI.delay(2)
 		verifyLanding(btnAdd, "Address Section")
 		WebUI.takeScreenshot()
 	}
@@ -101,13 +102,12 @@ public class AddressPage extends BaseHelper {
 
 			WebUI.delay(2)
 			safetyClick(btnOvlySearch)
-
+			WebUI.takeScreenshot()
 			WebUI.delay(2)
 			safetyClick(btnOvlySelect) //select first address
 
 			WebUI.delay(2)
 			handleAlertIfPresent()
-			WebUI.takeScreenshot()
 		}
 	}
 
@@ -138,7 +138,6 @@ public class AddressPage extends BaseHelper {
 		if(customerHaveFixedline?.trim() == 'Y' && customerHaveFixedline) {
 			WebUI.check(chxCustomerHaveFixedLine)
 			WebUI.delay(2)
-			WebUI.takeScreenshot()
 		}
 	}
 
@@ -165,7 +164,6 @@ public class AddressPage extends BaseHelper {
 		WebUI.scrollToElement(btnSave, 2)
 		safetyClick(btnSave)
 		WebUI.takeScreenshot()
-		
 	}
 	private void clickCancel() {
 		safetyClick(btnCancel)
@@ -179,18 +177,15 @@ public class AddressPage extends BaseHelper {
 		if(buildingLength) {
 			safetyInput(txfBuildingStayLength, buildingLength)
 		}
-		WebUI.takeScreenshot()
 	}
 	private void inputDirectionDesc(String desc) {
 		if(desc) {
 			safetyInput(txfDirectionDesc, desc)
-			//			WebUI.takeScreenshot()
 		}
 	}
 	private void inputNotes(String notes) {
 		if(notes) {
 			safetyInput(txfNotes, notes)
-			WebUI.takeScreenshot()
 		}
 	}
 	private void inputCompanyName(String companyName) {
@@ -198,19 +193,16 @@ public class AddressPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void switchToIframeAddress() {
-		WebUI.delay(10)
+		WebUI.switchToDefaultContent()
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
 	}
 	private void inputPhoneNumbers(String phoneNumber, int index) {
 		if(phoneNumber) {
 			TestObject countryField, areaField, numberField
-//			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}']")
-//			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}']")
-//			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}']")
-			countryField	= createTestObject("countryField", "id", "UCAddress_txtPhnArea${index}")
-			areaField		= createTestObject("areaField", "id", "UCAddress_txtPhn${index}")
-			numberField		= createTestObject("numberField", "id", "UCAddress_txtPhoneExt${index}")
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}' or @id='UCAddress_txtPhnArea${index}]")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}' or @id='UCAddress_txtPhn${index}]")
+			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}'or @id='UCAddress_txtPhoneExt${index}]")
 
 			KeywordUtil.logInfo("phone " + phoneNumber)
 			String[] parts = phoneNumber.split("-")
@@ -226,8 +218,8 @@ public class AddressPage extends BaseHelper {
 	private void inputFax(String fax) {
 		if(fax) {
 			TestObject countryField, areaField
-			countryField	= createTestObject("countryField", "xpath", "//*[@id='UCAddress_txtFaxArea']")
-			areaField		= createTestObject("areaField", "xpath", "//*[@id='UCAddress_txtFax']")
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='UCAddress_txtFaxArea' or @id='ucAddr_txtFaxArea']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='UCAddress_txtFax' or @id='ucAddr_txtFax']")
 
 			String[] parts = fax.split("-")
 			if (parts.size() != 3) {
@@ -239,11 +231,11 @@ public class AddressPage extends BaseHelper {
 			WebUI.delay(2)
 			//			WebUI.takeScreenshot()
 		}
-		WebUI.takeScreenshot()
 	}
 
 	private void clickCopyAddress() {
 		safetyClick(btnCopyAddress)
+		WebUI.takeScreenshot()
 	}
 
 	private boolean checkAddressList(String addressType) {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>ClickCalculate_andSaveContinue</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>fc42a7a8-ac68-4aad-bd87-5ce9b382d45d</testCaseGuid>
+</TestCaseEntity>

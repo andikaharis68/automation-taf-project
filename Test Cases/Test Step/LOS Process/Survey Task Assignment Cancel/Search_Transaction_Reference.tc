@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Transaction_Reference</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>a9e4664c-ebfc-4945-9d6f-e2d81c81062b</testCaseGuid>
+</TestCaseEntity>
