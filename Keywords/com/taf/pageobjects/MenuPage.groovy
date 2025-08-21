@@ -46,7 +46,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")
 	private TestObject btnCustomer					= createTestObject("btnCustomer", "xpath", "//a[@id='rModuleList_lbModuleList_1']")
 	private TestObject btnSupplier					= createTestObject("btnSupplier", "xpath", "//a[@id='rModuleList_lbModuleList_2']")
-	private TestObject btnSurvey					= createTestObject("btnSurvey", "xpath", "//a[@id='rModuleList_lbModuleList_3']")
+	private TestObject btnSurvey					= createTestObject("btnSurvey", "xpath", "//a[text() = 'Survey']")
 	private TestObject btnMOU						= createTestObject("btnMOU", "xpath", "//a[@id='rModuleList_lbModuleList_4']")
 	private TestObject btnLoanOriginationReports	= createTestObject("btnLoanOriginationReports", "xpath", "//a[@id='rModuleList_lbModuleList_5']")
 	private TestObject btnTAFReports				= createTestObject("btnTAFReports", "xpath", "//a[@id='rModuleList_lbModuleList_6']")
@@ -55,6 +55,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
+	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
+	private TestObject btnDeliveryOrder				= createTestObject("btnDeliveryOrder", "xpath", "//a[text() = 'Delivery Order']")
 	
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
@@ -214,5 +216,27 @@ public class MenuPage extends BaseHelper {
 		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
+	}
+	
+	private void navigateToSurveyTask() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnSurvey)
+		WebUI.click(btnSurveyTaskAssignment)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToDeliveryOrder() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.click(btnDeliveryOrder)
+		WebUI.switchToDefaultContent()
 	}
 }

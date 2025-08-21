@@ -24,6 +24,7 @@ import internal.GlobalVariable
 
 public class DeliveryOrderPage extends BaseHelper{
 
+	private TestObject lblTitle				= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject txfApplicationNo		= createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
 	private TestObject btnSearch			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
@@ -45,17 +46,24 @@ public class DeliveryOrderPage extends BaseHelper{
 	private TestObject txfRegisLetterDate	= createTestObject("txfRegisLetterDate", "id", "ucDPSpMainDocDt_txtDatePicker")
 
 	//section asset document
-	private TestObject txfFaktur			= createTestObject("txfFaktur", "id", "")
+	private TestObject txfFaktur			= createTestObject("txfFaktur", "id", "gvAssetDoc_txtDocNo_1")
 
 	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Toolbar_Save")
 
-	private TestObject btnNext				= createTestObject("btnNext", "id", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "")
+	private TestObject btnNext				= createTestObject("btnNext", "id", "lb_Toolbar_Next")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
+	private TestObject iframeMain			= createTestObject("iframeMain", "id", "mainPage")
 
 
+	private void verifyLandingPage() {
+		WebUI.switchToFrame(iframeMain, 3)
+		verifyLanding(lblTitle, "delivery order")
+		WebUI.takeScreenshot()
+	}
+	
 	private void searchTransaction(String appNo) {
 		safetyInput(txfApplicationNo, appNo)
-		safetyClick(btnSearch)
+		WebUI.click(btnSearch)
 	}
 
 	private void editTransaction(String appNo) {
@@ -65,7 +73,7 @@ public class DeliveryOrderPage extends BaseHelper{
 		if(rowExist) {
 			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[5]//input")
 			WebUI.takeScreenshot()
-			safetyClick(btnPenEdit)
+			WebUI.click(btnPenEdit)
 		}else {
 			KeywordUtil.markFailedAndStop("reff no not exist $appNo")
 		}
@@ -73,9 +81,10 @@ public class DeliveryOrderPage extends BaseHelper{
 
 
 	private void editAsset(String index) {
+		WebUI.takeScreenshot()
 		TestObject btnEdit = createTestObject("btnEdit", "xpath", "//input[@id = 'gvAssetList_ibDelOrd_$index']")
-		safetyClick(btnEdit)
-			
+		WebUI.delay(2)
+		WebUI.click(btnEdit)
 	}
 
 	private void inputDeliveryInformation(String noMesin, String noRangka) {
@@ -93,23 +102,37 @@ public class DeliveryOrderPage extends BaseHelper{
 	}
 
 	private void inputAssetOwner(String taxDate) {
+		WebUI.scrollToElement(txfRegisLetterDate, 3)
 		safetyInput(txfAssetTaxDate, taxDate)
+		clickTABKeyboard(txfAssetTaxDate)
 	}
 
 	private void inputDocumentLetter(String date) {
+		WebUI.delay(2)
 		safetyInput(txfRegisLetterDate, date)
-		WebUI.takeScreenshot()
+		clickTABKeyboard(txfRegisLetterDate)
 	}
 
 
 	private void clickAllCheckBox(String faktur) {
-		//klik semua checkbox yang mandatory nya yes
-
-		safetyInput(txfFaktur, faktur)
+		def countMandatory = getListElementByTestObject("//span[contains(@id, 'gvAssetDoc_lblIsMandatory_')]") //mencari total mandatory
+		def looping = countMandatory.size()
+		looping.times { i -> 
+			TestObject chkMandatory = createTestObject("chkMandatory", "xpath", "//span[@id = 'gvAssetDoc_lblIsMandatory_$i' and text() = 'Yes']/following::input[1]")
+			def isMandatory = WebUI.verifyElementPresent(chkMandatory, 1, FailureHandling.OPTIONAL)
+			if(isMandatory) {
+				WebUI.click(chkMandatory)
+				WebUI.delay(2)
+			}
+		}
+		
+		WebUI.setText(txfFaktur, faktur)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickSave() {
-		safetyClick(btnSave)
+		WebUI.click(btnSave)
+		WebUI.delay(3)
 	}
 
 	private void clickNext() {

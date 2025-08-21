@@ -14,22 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.SurveyTaskAssignment
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-BaseHelper.openBrowser()
+SurveyTaskAssignment survey = new SurveyTaskAssignment()
 
-dataRow = [	'Username' : 'DWI0081',
-			'Password' : 'password',
-			'Office' : 'SURVEY AREA 1',
-			'Position' : 'BASE MASTER',
-			'Role' : 'BASE MASTER']
+'step 1: verify landing page'
+survey.verifyLandingSurveyPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Navigate_To_Survey_Task'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Search_Transaction_Reference'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Cancel_Survey_Task_Assignment'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'step 2: search transaction'
+survey.searchTransactionByReferenceNumber("0007APP20250500005")
+
+'step 3: select transaction to edit'
+survey.editTransaction("0007APP20250500005")

@@ -14,22 +14,12 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-BaseHelper.openBrowser()
+MenuPage menu = new MenuPage()
 
-dataRow = [	'Username' : 'DWI0081',
-			'Password' : 'password',
-			'Office' : 'SURVEY AREA 1',
-			'Position' : 'BASE MASTER',
-			'Role' : 'BASE MASTER']
-
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Navigate_To_Survey_Task'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Search_Transaction_Reference'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Cancel_Survey_Task_Assignment'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: select menu to navigate survey task management'
+menu.navigateToSurveyTask()

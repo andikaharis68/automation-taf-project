@@ -29,10 +29,14 @@ public class SurveyTaskAssignment extends BaseHelper{
 	private TestObject txfReffNo	= createTestObject("txfReffNo", "id", "ucSearch_txtTrxRefNo_ltlSrvyTaskRefNoSch")
 	private TestObject btnSearch	= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
+	private TestObject lblTitle		= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject iframeMain	= createTestObject("iframeMain", "id", "mainPage")
 
 
 	private void verifyLandingSurveyPage() {
+		WebUI.switchToFrame(iframeMain, 3)
+		verifyLanding(lblTitle, 'Survey Task Assignment')
+		WebUI.takeScreenshot()
 	}
 
 	private void searchTransactionByReferenceNumber(String reffNo) {
@@ -54,9 +58,16 @@ public class SurveyTaskAssignment extends BaseHelper{
 	}
 
 	private void cancelAllTask() {
-		def btnCancel = getListElementByTestObject("//input[@title = 'Cancel']") //digunakan untuk mendapatkan semua btn cancel
-
-		btnCancel.forEach{x -> safetyClick(x)}
-		//lalu looping click button nya
+		WebUI.delay(2)
+		def cancel = getListElementByTestObject("//input[@title = 'Cancel']") //digunakan untuk mendapatkan semua btn cancel
+		def countCancel = cancel.size() 
+		TestObject btnCancel = createTestObject("btnCancel", "xpath", "(//input[@title = 'Cancel'])[1]")
+		countCancel.times { 
+			WebUI.click(btnCancel)
+			WebUI.delay(2)
+			WebUI.acceptAlert()
+			WebUI.delay(2)
+			WebUI.takeScreenshot()
+		}
 	}
 }

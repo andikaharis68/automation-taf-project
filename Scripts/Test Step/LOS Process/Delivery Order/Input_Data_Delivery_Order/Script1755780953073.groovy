@@ -14,22 +14,31 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.DeliveryOrderPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-BaseHelper.openBrowser()
+DeliveryOrderPage data =  new DeliveryOrderPage()
 
-dataRow = [	'Username' : 'DWI0081',
-			'Password' : 'password',
-			'Office' : 'SURVEY AREA 1',
-			'Position' : 'BASE MASTER',
-			'Role' : 'BASE MASTER']
+'Step 1: take screenshot before'
+WebUI.takeScreenshot()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Navigate_To_Survey_Task'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Search_Transaction_Reference'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Cancel_Survey_Task_Assignment'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 2: input delivery information'
+data.inputDeliveryInformation("661288", "K1235")
+
+'Step 3: input asset attributes'
+data.inputAssetAttribute("German", "6", "AUtomatic", "Blue", "")
+
+'Step 4: input asset owner'
+data.inputAssetOwner("09/08/2026")
+
+'Step 5: input main document letter'
+data.inputDocumentLetter("11/10/2025")
+
+'Step 6: check all checkbox mandatory'
+data.clickAllCheckBox("KAI243")
+
+'Step 7: click save'
+data.clickSave()
+
