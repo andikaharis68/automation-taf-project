@@ -58,11 +58,12 @@ public class CentralizeDataEntry extends BaseHelper {
 	public void inputCustomerMainData(String customerName, String birthPlace, String birthDate, String idNumber) {
 		WebUI.takeScreenshot()
 		WebUI.waitForElementPresent(txfCustomerName, 10)
-		BaseHelper.safetyInput(txfCustomerName, customerName)
-		BaseHelper.safetyInput(txfBirthPlace, birthPlace)
-		BaseHelper.safetyInput(txfBirthDate, birthDate)
+		safetyInput(txfCustomerName, customerName)
+		safetyInput(txfBirthPlace, birthPlace)
+		safetyInput(txfBirthDate, birthDate)
+		KeywordUtil.logInfo("1")
 		WebUI.sendKeys(txfBirthDate, Keys.chord(Keys.ENTER))
-		BaseHelper.safetyInput(txfIdNo, idNumber)
+		safetyInput(txfIdNo, idNumber)
 		WebUI.sendKeys(txfBirthDate, Keys.chord(Keys.ENTER))
 	}
 

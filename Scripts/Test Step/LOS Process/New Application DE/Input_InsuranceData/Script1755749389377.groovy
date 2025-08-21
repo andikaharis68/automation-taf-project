@@ -3,6 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -14,19 +16,38 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.InsuranceDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("CentralizedDataEntryCompletion", GlobalVariable.TEST_DATA_LOCATION + "/" + "Centralized_Data_Entry_Completion_TestData.xlsx", scenarioId)
-BaseHelper.openBrowser()
+InsuranceDataPage insuranceData = new InsuranceDataPage()
+MenuPage
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Navigate_To_Centralized_Data_Entry_Completion'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Search_Centralized_Data_Entry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Centralized Data Entry Completion/Input_Centralized_Data_Entry_Completion'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: Click Edit'
+insuranceData.clickEdit()
+
+'Step 2: Select Scheme Name'
+insuranceData.selectSchemeName(SchemeName)
+
+'Step 3: Select Rate Type'
+insuranceData.selectRateType(RateType)
+
+'Step 4: Click next'
+insuranceData.clickNext()
+
+'Step 5: Select Main coverage type'
+insuranceData.selectMainCoverageType(MainCoverageType)
+
+'Step 6: Click Calculate'
+insuranceData.clickCalculate()
+
+'Step 7: Click save'
+insuranceData.clickSave()
+
+'Step 8: Click next'
+insuranceData.clickNext()
+
+'Step 9: click save and continue'
+insuranceData.clickSaveAndContinue()
