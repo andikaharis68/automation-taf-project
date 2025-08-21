@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,23 +21,26 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class ReschedullingApprovalPage extends BaseHelper{
+public class SurveyTaskAssignmentPage extends BaseHelper{
 	
-	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
+	private TestObject txtTransactionReffNo	= createTestObject("txtTransactionReffNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject btnPenAction			= createTestObject("btnPenAction", "xpath", "")
+	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "")
+	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
 	
-	public void approval(String reason, String approver, String note) {
+	public void searchTransaction(String reffNo) {
 		
-		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
-		WebUI.selectOptionByLabel(drpApprover, approver, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.click(btnSubmit)
+		WebUI.setText(txtTransactionReffNo, reffNo)
+		WebUI.click(btnSearch)
+		WebUI.click(btnPenAction)
+		//looping for click all cancel button
+		WebUI.click(btnCancel)
+		//handel pop up
 		WebUI.verifyElementVisible(lblNotification)
 		
 	}
+	
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,33 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentRequestPage extends BaseHelper{
+public class CashierTransactionPage extends BaseHelper{
 
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
+	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "")
+	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "")
+	private TestObject txtDate			= createTestObject("txtDate", "xpath", "")
+	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "xpath", "")
 
+	public void inputChasier(String WOP, String accName, String date) {
 
-	public void calculatePayment(String date) {
-
+		WebUI.selectOptionByLabel(drpWOP, WOP, false)
+		WebUI.selectOptionByLabel(drpAccountName, accName, false)
 		WebUI.setText(txtDate, date)
-		WebUI.click(btnCalculatePayment)
 	}
 
-	public void approve(String reasonDescription, String approver, String notes) {
+	public void clickPaymentSingle() {
 
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
-		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
-		WebUI.setText(txtNotes, notes)
-	}
-
-	public void clickSubmit() {
-
-		WebUI.click(btnSubmit)
-		WebUI.verifyElementPresent(lblNotification, 5)
+		WebUI.click(btnPaymentSingle)
 	}
 }

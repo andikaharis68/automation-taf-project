@@ -116,7 +116,7 @@ public class CustomerInformationPage extends BaseHelper {
 			KeywordUtil.markFailed("customer $fullname is not found")
 		}
 	}
-	
+
 	private void clickCustomerHyperlinkEdit() {
 		TestObject hyperlink = createTestObject("hyperlink", "xpath", "//*[@id='gvCustomer_lbl_Cust_CustName_0']")
 		safetyClick(hyperlink)

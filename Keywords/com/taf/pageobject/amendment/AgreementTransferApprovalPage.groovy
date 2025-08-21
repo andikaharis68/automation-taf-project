@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class ChangeDueDateApprovalPage extends BaseHelper{
+public class AgreementTransferApprovalPage extends BaseHelper{
 
 	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
 	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
@@ -29,6 +29,7 @@ public class ChangeDueDateApprovalPage extends BaseHelper{
 	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
+
 
 	public void approval(String action, String note, String person) {
 

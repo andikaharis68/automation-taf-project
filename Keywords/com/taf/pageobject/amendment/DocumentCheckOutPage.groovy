@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,19 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AmendmentInquiryPage extends BaseHelper{
-
-	private TestObject drpAmendmentType		= createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject lblStatus			= createTestObject("lblStatus", "xpath", "")
-
-	public searchAgreement(String amendmentType, String agreementNo) {
-
-		WebUI.selectOptionByValue(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtAgreementNumber, agreementNo)
+public class DocumentCheckOutPage extends BaseHelper{
+	
+	private TestObject txtAgreementNo
+	private TestObject drpDocumentType
+	private TestObject btnSearch
+	private TestObject btnPenAction
+	private TestObject btnSubmit
+	
+	public void checkOutDoc(String agreementNo, String docType) {
+		
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
 		WebUI.click(btnSearch)
-
-		//verify status or table
+		WebUI.click(btnPenAction)
+		WebUI.click(btnSubmit)
+		
 	}
+	
 }

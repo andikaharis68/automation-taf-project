@@ -65,6 +65,7 @@ public class FinancialDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnSaveContinue)
 		handlePopupAlert(3)
+		handlePopUperror(lblAlert, btnOK)
 	}
 
 	static void handlePopUperror(TestObject to, TestObject btnOk) {

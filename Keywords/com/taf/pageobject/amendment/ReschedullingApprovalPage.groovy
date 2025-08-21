@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,32 +21,23 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class ChangeDueDateRequestPage extends BaseHelper{
-
-	private TestObject txtEfectiveDate			= createTestObject("txtEfectiveDate", "xpath", "")
-	private TestObject txtNewDueDate			= createTestObject("txtNewDueDate", "xpath", "")
-	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "")
-	private TestObject tableCicilan				= createTestObject("tableCicilan", "xpath", "")
+public class ReschedullingApprovalPage extends BaseHelper{
+	
+	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
 	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
 	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
 	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
-
-	public void calculate(String efectiveDate, String dueDate) {
-
-		WebUI.setText(txtEfectiveDate, efectiveDate)
-		WebUI.setText(txtNewDueDate, dueDate)
-		WebUI.click(btnCalculate)
-		WebUI.verifyElementVisible(tableCicilan)
-	}
-
+	
 	public void approval(String reason, String approver, String note) {
-
+		
+		WebUI.click(sectionApprovalAction)
 		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
 		WebUI.selectOptionByLabel(drpApprover, approver, false)
 		WebUI.setText(txtNotes, note)
 		WebUI.click(btnSubmit)
 		WebUI.verifyElementVisible(lblNotification)
+		
 	}
 }

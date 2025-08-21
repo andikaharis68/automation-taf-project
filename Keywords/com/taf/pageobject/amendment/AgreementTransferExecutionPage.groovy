@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,22 +21,11 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetDocumentReleaseExecutionListPage extends BaseHelper{
+public class AgreementTransferExecutionPage extends BaseHelper{
 
-	private TestObject txtAgreementNo
-	private TestObject btnSearch
-	private TestObject btnActionPen
-	private TestObject txtReleaseDate
-	private TestObject txtReleaseTo
-	private TestObject btnSubmit
+	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
 
-	public void releaseDoc(String agreementNo, String releaseDate, String relaase) {
-
-		WebUI.setText(txtAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
-		WebUI.click(btnActionPen)
-		WebUI.setText(txtReleaseDate, releaseDate)
-		WebUI.setText(txtReleaseTo, relaase)
+	public void submit() {
 		WebUI.click(btnSubmit)
 	}
 }

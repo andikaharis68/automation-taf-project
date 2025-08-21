@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,34 +21,25 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetDocumentReleaseApprovalTaskPage extends BaseHelper{
-	
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
+public class AmendmentExecutionPage extends BaseHelper{
+
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnProcess		= createTestObject("icnProcess", "xpath", "")
-	private TestObject sectionApproval	= createTestObject("sectionApproval", "xpath", "")
-	private TestObject drpAction		= createTestObject("drpAction", "xpath", "")
-	private TestObject chkFinal			= createTestObject("chkFinal", "xpath", "")
-	private TestObject txtNotes			= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
-	
-	
-	public void searchAgreement(String agreementNo) {
-		
-		WebUI.setText(txtAgreementNo, agreementNo)
+
+
+	public void searchAmendment(String amendmentType, String customerName) {
+
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtCustomerName, customerName)
 		WebUI.click(btnSearch)
-		WebUI.click(icnProcess)
-		
+
+
+		clickPenAction(customerName)
 	}
-	
-	public void approval(String action, String note) {
-		
-		WebUI.click(sectionApproval)
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.check(chkFinal)
-		WebUI.setText(txtNotes, note)
-		WebUI.click(btnSubmit)
-		
+
+	private void clickPenAction(customerName) {
+
+		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
 	}
-	
 }

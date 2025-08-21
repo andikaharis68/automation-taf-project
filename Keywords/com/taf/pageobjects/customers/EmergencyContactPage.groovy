@@ -74,6 +74,7 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void clickSaveContact() {
+		WebUI.takeScreenshot()
 		safetyClick(btnSave)
 	}
 
@@ -191,6 +192,7 @@ public class EmergencyContactPage extends BaseHelper {
 		def familyExist = WebUI.verifyElementPresent(nameSelected, 3, FailureHandling.OPTIONAL)
 		if(familyExist) {
 			safetyClick(editButton)
+			WebUI.takeScreenshot()
 		}else {
 			clickAddContact()
 		}

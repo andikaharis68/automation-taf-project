@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,11 +21,36 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PrepaymentExecutionPage extends BaseHelper{
-	
-	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
-	
+public class PaymentRecievePage extends BaseHelper{
+
+	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
+	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
+	private TestObject txtReferenceNo		= createTestObject("txtReferenceNo", "xpath", "")
+	private TestObject txtAmount			= createTestObject("txtAmount", "xpath", "")
+	private TestObject btnPenAction			= createTestObject("btnPenAction", "xpath", "")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+
+
+	public void searchAgreement(String agreementNo) {
+
+		WebUI.setText(txtAgreementNumber, agreementNo)
+		WebUI.click(btnSearch)
+	}
+
+	public void inputDataRecieve(String recieveForm, String note, String reffNo, String amount) {
+
+		WebUI.setText(txtRecieveForm, recieveForm)
+		WebUI.setText(txtNotes, note)
+		WebUI.setText(txtReferenceNo, reffNo)
+		WebUI.setText(txtAmount, amount)
+
+		WebUI.click(btnPenAction)
+	}
+
 	public void clickSubmit() {
+
 		WebUI.click(btnSubmit)
 	}
 }

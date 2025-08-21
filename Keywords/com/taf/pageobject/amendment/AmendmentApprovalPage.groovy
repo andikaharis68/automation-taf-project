@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,25 +21,43 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AmendmentExecutionPage extends BaseHelper{
+public class AmendmentApprovalPage extends BaseHelper{
 
 	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
 	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
 
+	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject list				= createTestObject("list", "xpath", "")
 
-	public void searchAmendment(String amendmentType, String customerName) {
+
+	public void searchAmendmentbyCustName(String amendmentType, String customerName) {
+
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtCustomerName, customerName)
+		WebUI.click(btnSearch)
+	}
+
+	public void searchAmendmentbyAgreementNo(String amendmentType, String agreementNo) {
+
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.verifyElementVisible(list)
+		//click button based on list
+		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
+		WebUI.click(btnProcess)
+	}
+
+	public void searchAmendmentbyCustName2(String amendmentType, String customerName) {
 
 		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
 		WebUI.setText(txtCustomerName, customerName)
 		WebUI.click(btnSearch)
 
-
-		clickPenAction(customerName)
-	}
-
-	private void clickPenAction(customerName) {
-
-		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
+		WebUI.verifyElementVisible(list)
+		//click button based on list
+		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
+		WebUI.click(btnProcess)
 	}
 }

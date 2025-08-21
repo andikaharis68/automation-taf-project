@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,22 +21,19 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class CashierTransactionPage extends BaseHelper{
+public class AmendmentInquiryPage extends BaseHelper{
 
-	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "")
-	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "")
-	private TestObject txtDate			= createTestObject("txtDate", "xpath", "")
-	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "xpath", "")
+	private TestObject drpAmendmentType		= createTestObject("drpAmendmentType", "xpath", "")
+	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject lblStatus			= createTestObject("lblStatus", "xpath", "")
 
-	public void inputChasier(String WOP, String accName, String date) {
+	public searchAgreement(String amendmentType, String agreementNo) {
 
-		WebUI.selectOptionByLabel(drpWOP, WOP, false)
-		WebUI.selectOptionByLabel(drpAccountName, accName, false)
-		WebUI.setText(txtDate, date)
-	}
+		WebUI.selectOptionByValue(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtAgreementNumber, agreementNo)
+		WebUI.click(btnSearch)
 
-	public void clickPaymentSingle() {
-
-		WebUI.click(btnPaymentSingle)
+		//verify status or table
 	}
 }

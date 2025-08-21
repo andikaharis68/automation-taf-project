@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,23 +21,25 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AgreementTransferApprovalPage extends BaseHelper{
+public class AmendmentRequestPage extends BaseHelper{
 
-	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
-	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
 
 
-	public void approval(String action, String note, String person) {
+	public void searchAmendment(String amendmentType, String customerName) {
 
-		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.selectOptionByLabel(drpNextPerson, person, false)
-		WebUI.click(btnSubmit)
-		WebUI.verifyElementVisible(lblNotification)
+		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
+		WebUI.setText(txtCustomerName, customerName)
+		WebUI.click(btnSearch)
+
+
+		clickPenAction(customerName)
+	}
+
+	private void clickPenAction(customerName) {
+
+		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
 	}
 }

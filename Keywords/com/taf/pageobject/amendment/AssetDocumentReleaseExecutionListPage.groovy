@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,20 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetReplacementApprovalPage extends BaseHelper{
+public class AssetDocumentReleaseExecutionListPage extends BaseHelper{
 
-	private TestObject drpAction		= createTestObject("drpAction", "xpath", "")
-	private TestObject chkFinal			= createTestObject("chkFinal", "xpath", "")
-	private TestObject txtNotes			= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification	= createTestObject("lblNotification", "xpath", "")
+	private TestObject txtAgreementNo
+	private TestObject btnSearch
+	private TestObject btnActionPen
+	private TestObject txtReleaseDate
+	private TestObject txtReleaseTo
+	private TestObject btnSubmit
 
-	public approval(String action, String note) {
+	public void releaseDoc(String agreementNo, String releaseDate, String relaase) {
 
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.check(chkFinal)
-		WebUI.setText(txtNotes, note)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.click(btnSearch)
+		WebUI.click(btnActionPen)
+		WebUI.setText(txtReleaseDate, releaseDate)
+		WebUI.setText(txtReleaseTo, relaase)
 		WebUI.click(btnSubmit)
-		WebUI.verifyElementVisible(lblNotification)
 	}
 }

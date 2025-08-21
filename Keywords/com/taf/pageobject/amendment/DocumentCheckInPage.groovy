@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,26 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class SurveyTaskAssignmentPage extends BaseHelper{
+public class DocumentCheckInPage extends BaseHelper{
 	
-	private TestObject txtTransactionReffNo	= createTestObject("txtTransactionReffNo", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject btnPenAction			= createTestObject("btnPenAction", "xpath", "")
-	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
+	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject drpDocumentType	= createTestObject("drpDocumentType", "xpath", "")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+	private TestObject icnCheckIn		= createTestObject("icnCheckIn", "xpath", "")
+	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
 	
-	public void searchTransaction(String reffNo) {
+	public void checkInDoc(String agreementNo, String docType) {
 		
-		WebUI.setText(txtTransactionReffNo, reffNo)
+		WebUI.setText(txtAgreementNo, agreementNo)
+		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
 		WebUI.click(btnSearch)
-		WebUI.click(btnPenAction)
-		//looping for click all cancel button
-		WebUI.click(btnCancel)
-		//handel pop up
-		WebUI.verifyElementVisible(lblNotification)
+		WebUI.click(icnCheckIn)
+		WebUI.click(btnSubmit)
 		
 	}
-	
-	
 	
 }

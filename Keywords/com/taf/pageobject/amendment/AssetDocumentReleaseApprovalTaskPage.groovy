@@ -1,4 +1,4 @@
-package com.taf.pageobjects
+package com.taf.pageobject.amendment
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,20 +21,32 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class DocumentCheckInPage extends BaseHelper{
+public class AssetDocumentReleaseApprovalTaskPage extends BaseHelper{
 	
 	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
-	private TestObject drpDocumentType	= createTestObject("drpDocumentType", "xpath", "")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnCheckIn		= createTestObject("icnCheckIn", "xpath", "")
+	private TestObject icnProcess		= createTestObject("icnProcess", "xpath", "")
+	private TestObject sectionApproval	= createTestObject("sectionApproval", "xpath", "")
+	private TestObject drpAction		= createTestObject("drpAction", "xpath", "")
+	private TestObject chkFinal			= createTestObject("chkFinal", "xpath", "")
+	private TestObject txtNotes			= createTestObject("txtNotes", "xpath", "")
 	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
 	
-	public void checkInDoc(String agreementNo, String docType) {
+	
+	public void searchAgreement(String agreementNo) {
 		
 		WebUI.setText(txtAgreementNo, agreementNo)
-		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
 		WebUI.click(btnSearch)
-		WebUI.click(icnCheckIn)
+		WebUI.click(icnProcess)
+		
+	}
+	
+	public void approval(String action, String note) {
+		
+		WebUI.click(sectionApproval)
+		WebUI.selectOptionByLabel(drpAction, action, false)
+		WebUI.check(chkFinal)
+		WebUI.setText(txtNotes, note)
 		WebUI.click(btnSubmit)
 		
 	}

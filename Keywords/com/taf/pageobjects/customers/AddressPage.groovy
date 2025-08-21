@@ -102,9 +102,7 @@ public class AddressPage extends BaseHelper {
 
 			WebUI.delay(2)
 			safetyClick(btnOvlySearch)
-
 			WebUI.takeScreenshot()
-
 			WebUI.delay(2)
 			safetyClick(btnOvlySelect) //select first address
 
@@ -231,6 +229,7 @@ public class AddressPage extends BaseHelper {
 			WebUI.delay(2)
 			safetyInput(areaField, parts[1])
 			WebUI.delay(2)
+			//			WebUI.takeScreenshot()
 		}
 	}
 
