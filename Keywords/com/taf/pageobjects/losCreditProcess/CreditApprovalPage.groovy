@@ -30,20 +30,20 @@ public class CreditApprovalPage extends BaseHelper{
 	private TestObject txfAdditionalIncome 		= createTestObject("txfAdditionalIncome", "id", "ucAdditionalIncome_txtInput")
 	private TestObject btnCalculate 			= createTestObject("btnCalculate", "id", "lb_Form_CalcInstRatio")
 	//approval recommendation
-	private TestObject txfLatarBelakang 		= createTestObject("txfLatarBelakang", "id", "rptApvRcmndtn_txtRcmndtnValue_0") 
-	private TestObject txfFaktorMendukung 		= createTestObject("txfFaktorMendukung", "id", "rptApvRcmndtn_txtRcmndtnValue_1") 
-	private TestObject txfFaktorTidakMendukung 	= createTestObject("txfFaktorTidakMendukung", "id", "rptApvRcmndtn_txtRcmndtnValue_2") 
-	private TestObject txfSyarat 				= createTestObject("txfSyarat", "id", "rptApvRcmndtn_txtRcmndtnValue_3") 
+	private TestObject txfLatarBelakang 		= createTestObject("txfLatarBelakang", "id", "rptApvRcmndtn_txtRcmndtnValue_0")
+	private TestObject txfFaktorMendukung 		= createTestObject("txfFaktorMendukung", "id", "rptApvRcmndtn_txtRcmndtnValue_1")
+	private TestObject txfFaktorTidakMendukung 	= createTestObject("txfFaktorTidakMendukung", "id", "rptApvRcmndtn_txtRcmndtnValue_2")
+	private TestObject txfSyarat 				= createTestObject("txfSyarat", "id", "rptApvRcmndtn_txtRcmndtnValue_3")
 	private TestObject txfCaCalculation 		= createTestObject("txfCaCalculation", "id", "rptApvRcmndtn_txtRcmndtnValue_4")
-	//approval action 
-	private TestObject drpAction 				= createTestObject("drpAction", "id", "ddlAction") 
-	private TestObject txfNotes 				= createTestObject("txfNotes", "id", "txtNotes") 
-	
+	//approval action
+	private TestObject drpAction 				= createTestObject("drpAction", "id", "ddlAction")
+	private TestObject txfNotes 				= createTestObject("txfNotes", "id", "txtNotes")
+
 	public void verifyLandingScreen() {
 		verifyLanding(txfCustomerIncome, "Credit Approval")
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
 		safetyInput(txfCustomerIncome, customerIncome)
 		safetyInput(txfSpouseIncome, spouseIncome)
@@ -51,7 +51,7 @@ public class CreditApprovalPage extends BaseHelper{
 		safetyClick(btnCalculate)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void inputApprovalRecommendationSection(String latarBelakang, String faktorMendukung, String faktorTidakMendukung, String syarat, String caCalculation) {
 		safetyInput(txfLatarBelakang, latarBelakang)
 		safetyInput(txfFaktorMendukung, faktorMendukung)
@@ -59,15 +59,14 @@ public class CreditApprovalPage extends BaseHelper{
 		safetyInput(txfSyarat, syarat)
 		safetyInput(txfCaCalculation, caCalculation)
 	}
-	
+
 	public void inputApprovalAction(String action, String notes) {
 		safetySelect(drpAction, action)
 		safetyInput(txfNotes, notes)
 	}
-	
+
 	public void clickSubmit() {
 		WebUI.takeScreenshot()
-		safetyClick(btnSubmit)	
+		safetyClick(btnSubmit)
 	}
-	
 }
