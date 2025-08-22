@@ -24,6 +24,7 @@ import internal.GlobalVariable
 
 public class DocumentSignerPage extends BaseHelper{
 
+	private TestObject lblTitle					= createTestObject("lblTitle", "id", "")
 	private TestObject txfAgreementNo			= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
 	private TestObject txfApplicationtNo		= createTestObject("txfApplicationtNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
 	private TestObject btnSearch				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
@@ -57,15 +58,21 @@ public class DocumentSignerPage extends BaseHelper{
 	private TestObject btnSelectApprover1		= createTestObject("btnSelectApprover1", "id", "uclCoyApprover1_uclCustCoyShareHolder_umd_ctl00_gvL_hpSelect_0") //hanya select yg atas
 
 
-
-	private void searchTransactionByAgreementNumber(String appNo) {
+	
+	private void verifyDocSignerLandingPage() {
+		WebUI.switchToFrame(iframeMainPage, 3)
+		verifyLanding(lblTitle, 'Document Signer')
+		WebUI.takeScreenshot()
+	}
+	
+	private void searchTransactionByApplicationNumber(String appNo) {
 		safetyInput(txfApplicationtNo, appNo)
 		safetyClick(btnSearch)
 		WebUI.takeScreenshot()
 	}
 
 
-	private void editTransaction(String appNo) {
+	private void entryDocument(String appNo) {
 		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$appNo']")
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
 
@@ -78,7 +85,7 @@ public class DocumentSignerPage extends BaseHelper{
 		}
 	}
 
-	private selectCompany(String input) {
+	private selectCompanySigner(String input) {
 
 		safetyClick(btnLookUpOfficer2)
 
@@ -109,5 +116,11 @@ public class DocumentSignerPage extends BaseHelper{
 		safetyClick(btnSearchApprover1)
 		WebUI.takeScreenshot()
 		safetyClick(btnSelectApprover1)
+	}
+	
+	private clickSubmitSigner() {
+		WebUI.delay(2)
+		WebUI.click(btnSubmit)
+		WebUI.takeScreenshot()
 	}
 }

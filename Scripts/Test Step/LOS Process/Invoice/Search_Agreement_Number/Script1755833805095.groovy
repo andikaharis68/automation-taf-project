@@ -14,21 +14,19 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.InvoicePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-BaseHelper.openBrowser()
+InvoicePage invoice = new InvoicePage()
 
-dataRow = [	'Username' : 'DWI0081',
-			'Password' : 'password',
-			'Office' : 'KELAPA GADING',
-			'Position' : 'TELE ACQUISITION',
-			'Role' : 'Sales Admin']
+'Step 1: verify landing page'
+invoice.verifyLandingInvoicePage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Signer/Navigate_To_Document_Signer'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Signer/Search_Document'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Signer/Input_Data_Document_Signer'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 2: search transaction by agreement number'
+invoice.searchTransactionByReferenceNumber("")
+
+'Step 3: select transaction'
+invoice.actionTransaction("")
+

@@ -6,8 +6,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
-import org.openqa.selenium.WebElement
-
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -24,28 +22,37 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class SurveyTaskAssignment extends BaseHelper{
+public class CustomerConfirmationPage extends BaseHelper{
 
-	private TestObject txfReffNo	= createTestObject("txfReffNo", "id", "ucSearch_txtTrxRefNo_ltlSrvyTaskRefNoSch")
-	private TestObject btnSearch	= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+	private TestObject lblTitle			= createTestObject("lblTitle", "id", "")
+	private TestObject txfApplicationNo	= createTestObject("txfApplicationNo", "id", "")
+	private TestObject btnSearch		= createTestObject("btnSearch", "id", "")
 
-	private TestObject lblTitle		= createTestObject("lblTitle", "id", "pageTitle")
-	private TestObject iframeMain	= createTestObject("iframeMain", "id", "mainPage")
+	//section go live information
+	private TestObject txfPersonName	= createTestObject("txfPersonName", "id", "")
+	private TestObject drpRelationship	= createTestObject("drpRelationship", "id", "")
+	private TestObject txfAgreementDate	= createTestObject("txfAgreementDate", "id", "")
+	private TestObject txfNotes			= createTestObject("txfNotes", "id", "")
+
+	private TestObject btnSubmit		= createTestObject("btnSubmit", "id", "")
+
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "")
 
 
-	private void verifyLandingSurveyPage() {
+
+	private void verifyLandingCustomerConfirmationPage() {
 		WebUI.switchToFrame(iframeMain, 3)
-		verifyLanding(lblTitle, 'Survey Task Assignment')
+		verifyLanding(lblTitle, 'Customer Confirmation')
 		WebUI.takeScreenshot()
 	}
 
-	private void searchTransactionByReferenceNumber(String reffNo) {
-		safetyInput(txfReffNo, reffNo)
+	private void searchTransactionByApplicationNumber(String appNo) {
+		safetyInput(txfApplicationNo, appNo)
 		safetyClick(btnSearch)
 	}
 
-	private void editTransaction(String reffNo) {
-		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$reffNo']")
+	private void entryTransaction(String appNo) {
+		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$appNo']")
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
 
 		if(rowExist) {
@@ -53,21 +60,22 @@ public class SurveyTaskAssignment extends BaseHelper{
 			WebUI.takeScreenshot()
 			safetyClick(btnPenEdit)
 		}else {
-			KeywordUtil.markFailedAndStop("reff no not exist $reffNo")
+			KeywordUtil.markFailedAndStop("reff no not exist $appNo")
 		}
 	}
 
-	private void cancelAllTask() {
-		WebUI.delay(2)
-		def cancel = getListElementByTestObject("//input[@title = 'Cancel']") //digunakan untuk mendapatkan semua btn cancel
-		def countCancel = cancel.size()
-		TestObject btnCancel = createTestObject("btnCancel", "xpath", "(//input[@title = 'Cancel'])[1]")
-		countCancel.times {
-			WebUI.click(btnCancel)
-			WebUI.delay(2)
-			WebUI.acceptAlert()
-			WebUI.delay(2)
-			WebUI.takeScreenshot()
-		}
+	private void inputGoLiveInformation(String name, String date, String relation, String note) {
+
+		safetyInput(txfPersonName, name, 1)
+		safetySelect(drpRelationship, relation, 1)
+		safetyInput(txfAgreementDate, date)
+		WebUI.click(txfNotes)
+		safetyInput(txfNotes, note)
+		WebUI.takeScreenshot()
+	}
+
+	private void clickSubmit() {
+		safetyClick(btnSubmit, 2)
+		WebUI.takeScreenshot()
 	}
 }
