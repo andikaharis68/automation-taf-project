@@ -25,8 +25,8 @@ InvoicePage invoice = new InvoicePage()
 invoice.verifyLandingInvoicePage()
 
 'Step 2: search transaction by agreement number'
-invoice.searchTransactionByReferenceNumber("")
+invoice.searchTransactionByReferenceNumber("251290011818")
 
 'Step 3: select transaction'
-invoice.actionTransaction("")
+invoice.actionTransaction("251290011818")
 

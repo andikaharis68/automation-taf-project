@@ -6,6 +6,9 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.awt.Robot
+import java.awt.event.KeyEvent
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -24,19 +27,19 @@ import internal.GlobalVariable
 
 public class CustomerConfirmationPage extends BaseHelper{
 
-	private TestObject lblTitle			= createTestObject("lblTitle", "id", "")
-	private TestObject txfApplicationNo	= createTestObject("txfApplicationNo", "id", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "id", "")
+	private TestObject lblTitle			= createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfApplicationNo	= createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAgrmntAppNo")
+	private TestObject btnSearch		= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//section go live information
-	private TestObject txfPersonName	= createTestObject("txfPersonName", "id", "")
-	private TestObject drpRelationship	= createTestObject("drpRelationship", "id", "")
-	private TestObject txfAgreementDate	= createTestObject("txfAgreementDate", "id", "")
-	private TestObject txfNotes			= createTestObject("txfNotes", "id", "")
+	private TestObject txfPersonName	= createTestObject("txfPersonName", "id", "txtCntctPerson")
+	private TestObject drpRelationship	= createTestObject("drpRelationship", "id", "ucrefCustRelationship_ddlReference")
+	private TestObject txfAgreementDate	= createTestObject("txfAgreementDate", "id", "ucdpAgrmntDt_txtDatePicker")
+	private TestObject txfNotes			= createTestObject("txfNotes", "id", "txtNotes")
 
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "id", "")
+	private TestObject btnSubmit		= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
-	private TestObject iframeMain		= createTestObject("iframeMain", "id", "")
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
 
 
 
@@ -56,7 +59,7 @@ public class CustomerConfirmationPage extends BaseHelper{
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
 
 		if(rowExist) {
-			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[7]//input")
+			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[5]//input")
 			WebUI.takeScreenshot()
 			safetyClick(btnPenEdit)
 		}else {
@@ -65,17 +68,19 @@ public class CustomerConfirmationPage extends BaseHelper{
 	}
 
 	private void inputGoLiveInformation(String name, String date, String relation, String note) {
-
+		Robot robot = new Robot()
+		
 		safetyInput(txfPersonName, name, 1)
 		safetySelect(drpRelationship, relation, 1)
 		safetyInput(txfAgreementDate, date)
-		WebUI.click(txfNotes)
+		robot.keyPress(KeyEvent.VK_TAB)
+		robot.keyPress(KeyEvent.VK_TAB)
 		safetyInput(txfNotes, note)
 		WebUI.takeScreenshot()
 	}
 
 	private void clickSubmit() {
-		safetyClick(btnSubmit, 2)
+		safetyClick(btnSubmit, 1)
 		WebUI.takeScreenshot()
 	}
 }

@@ -25,7 +25,7 @@ CustomerConfirmationPage cust = new CustomerConfirmationPage()
 WebUI.takeScreenshot()
 
 'Step 2: input data go live'
-cust.inputGoLiveInformation("", "", "", "")
+cust.inputGoLiveInformation("Park Luk Man", "28/05/2025", "GUARANTOR", "Testing go live")
 
 'Step 3: submit data'
 cust.clickSubmit()

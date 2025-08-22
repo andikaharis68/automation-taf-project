@@ -25,8 +25,8 @@ CustomerConfirmationPage cust = new CustomerConfirmationPage()
 cust.verifyLandingCustomerConfirmationPage()
 
 'Step 2: search transaction by application number'
-cust.searchTransactionByApplicationNumber("")
+cust.searchTransactionByApplicationNumber("0008APP20250200232")
 
 'Step 3: select entry transaction'
-cust.entryTransaction("")
+cust.entryTransaction("0008APP20250200232")
 

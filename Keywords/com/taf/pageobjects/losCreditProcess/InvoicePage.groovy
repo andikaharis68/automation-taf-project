@@ -6,6 +6,9 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.awt.Robot
+import java.awt.event.KeyEvent
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -24,23 +27,22 @@ import internal.GlobalVariable
 
 public class InvoicePage extends BaseHelper{
 
-	private TestObject lblTitle				= createTestObject("lblTitle", "id", "")
-	private TestObject txfAgreementNo		= createTestObject("txfAgreementNo", "id", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "id", "")
+	private TestObject lblTitle				= createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo		= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject btnSearch			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//section 2
-	private TestObject txfAgreementNo2		= createTestObject("txfAgreementNo2", "id", "")
-	private TestObject btnSearch2			= createTestObject("btnSearch2", "id", "")
-	private TestObject chkPurchaseOrder		= createTestObject("chkPurchaseOrder", "id", "")
-	private TestObject btnAddToTemp			= createTestObject("btnAddToTemp", "id", "")
-	private TestObject btnNext				= createTestObject("btnNext", "id", "")
+	private TestObject txfAgreementNo2		= createTestObject("txfAgreementNo2", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject btnSearch2			= createTestObject("btnSearch2", "id", "ucSearch_btnSearch")
+	private TestObject btnAddToTemp			= createTestObject("btnAddToTemp", "id", "lb_Form_AddToTemp")
+	private TestObject btnNext				= createTestObject("btnNext", "id", "lb_Toolbar_Next")
 
 	//section invoice summary
-	private TestObject txfInvoiceDate		= createTestObject("txfInvoiceDate", "id", "")
-	private TestObject txfInvoiceNumber		= createTestObject("txfInvoiceNumber", "id", "")
-	private TestObject btnSave				= createTestObject("btnSave", "id", "")
+	private TestObject txfInvoiceDate		= createTestObject("txfInvoiceDate", "id", "ucDPInvoiceDate_txtDatePicker")
+	private TestObject txfInvoiceNumber		= createTestObject("txfInvoiceNumber", "id", "txtInvoiceNo")
+	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Toolbar_Save")
 
-	private TestObject iframeMain			= createTestObject("iframeMain", "id", "")
+	private TestObject iframeMain			= createTestObject("iframeMain", "id", "mainPage")
 
 
 	private void verifyLandingInvoicePage() {
@@ -55,15 +57,14 @@ public class InvoicePage extends BaseHelper{
 	}
 
 	private void actionTransaction(String agreeNo) {
-		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$agreeNo']")
+		TestObject rowExist = createTestObject("rowExist", "xpath", "//input[@id = 'gvSupp_ibInvoice_0']")
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
 
 		if(rowExist) {
-			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[4]//input")
 			WebUI.takeScreenshot()
-			safetyClick(btnPenEdit)
+			safetyClick(rowExist)
 		}else {
-			KeywordUtil.markFailedAndStop("reff no not exist $agreeNo")
+			KeywordUtil.markFailedAndStop("agreement no not exist $agreeNo")
 		}
 	}
 
@@ -75,16 +76,28 @@ public class InvoicePage extends BaseHelper{
 		WebUI.takeScreenshot()
 	}
 
-	private void selectOrder() {
-		//pilih cehckbox nya
-		WebUI.click(btnAddToTemp)
-		WebUI.takeScreenshot()
+	private void selectOrder(String agreeNo) {
+		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$agreeNo']")
+		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
+
+		if(rowExist) {
+			TestObject btnAdd = createTestObject("btnAdd", "xpath", "${getXpath(rowExist)}/preceding::td[3]/input")
+			WebUI.click(btnAdd)
+			WebUI.delay(1)
+			WebUI.click(btnAddToTemp)
+			WebUI.delay(1)
+			WebUI.takeScreenshot()
+		}else {
+			KeywordUtil.markFailedAndStop("agreement no not exist $agreeNo")
+		}
 	}
 
 	private void inputInvoiceSummary(String invoiceNo, String invoiceDate) {
+		Robot robot = new Robot()
+		
 		WebUI.setText(txfInvoiceDate, invoiceDate)
 		WebUI.delay(2)
-		WebUI.click(txfInvoiceNumber)
+		robot.keyPress(KeyEvent.VK_TAB)
 		WebUI.setText(txfInvoiceNumber, invoiceNo)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
@@ -92,6 +105,11 @@ public class InvoicePage extends BaseHelper{
 
 	private void clickSave() {
 		safetyClick(btnSave)
+		WebUI.takeScreenshot()
+	}
+	
+	private void clickNext() {
+		safetyClick(btnNext)
 		WebUI.takeScreenshot()
 	}
 }

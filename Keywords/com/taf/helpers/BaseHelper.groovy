@@ -366,7 +366,6 @@ class BaseHelper {
 	static void safetyInput(TestObject to, String text, double delay = 0.1) {
 		handlePopupAlert()
 		WebUI.delay(delay)
-		WebUI.clearText(to)
 		WebUI.setText(to, text)
 	}
 

@@ -24,13 +24,16 @@ import org.openqa.selenium.Keys as Keys
 InvoicePage order = new InvoicePage()
 
 'Step 1: search purchase order'
-order.searchTransactionPurchase("")
+order.searchTransactionPurchase("251290011818")
 
 'Step 2: select purchase order'
-order.selectOrder()
+order.selectOrder("251290011818")
 
-'Step 3: input invoice summary'
-order.inputInvoiceSummary("", "")
+'Step 3: click next'
+order.clickNext()
 
-'Step 4: click save'
+'Step 4: input invoice summary'
+order.inputInvoiceSummary("KQ123", "28/05/2025")
+
+'Step 5: click save'
 order.clickSave()

@@ -34,7 +34,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
 	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "xpath", "")
 	private TestObject btnRequestHandling			= createTestObject("btnRequestHandling", "xpath", "")
-	private TestObject btnDocumentSigner			= createTestObject("btnDocumentSigner", "xpath", "")
+	private TestObject btnDocumentSigner			= createTestObject("btnDocumentSigner", "xpath", "//a[text() = 'Document Signer' and @class = 'rtIn']")
 	private TestObject btnDocumentPrinting			= createTestObject("btnDocumentPrinting", "xpath", "")
 	private TestObject btnApplicationInquiry		= createTestObject("btnApplicationInquiry", "xpath", "")
 	private TestObject btnAdditionalProcess			= createTestObject("btnAdditionalProcess", "xpath", "")
@@ -57,7 +57,9 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
 	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
 	private TestObject btnDeliveryOrder				= createTestObject("btnDeliveryOrder", "xpath", "//a[text() = 'Delivery Order']")
-	
+	private TestObject btnCustomerConfirmation		= createTestObject("btnCustomerConfirmation", "xpath", "//a[text() = 'Customer Confirmation']")
+	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")		
+
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 
@@ -209,14 +211,14 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
 		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void navigateToSurveyTask() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -227,7 +229,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnSurveyTaskAssignment)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToDeliveryOrder() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -238,7 +240,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnDeliveryOrder)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToNewApplication() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -247,5 +249,37 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnNewApplication)
 		WebUI.takeScreenshot()
 		WebUI.delay(2)
+	}
+	
+	private void navigateToCustomerConfirmation() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.click(btnCustomerConfirmation)
+		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToInvoice() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.click(btnInvoice)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToDocumentSigner() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
+		WebUI.click(btnDocumentSigner)
+		WebUI.switchToDefaultContent()
 	}
 }

@@ -21,11 +21,11 @@ import org.openqa.selenium.Keys as Keys
 
 BaseHelper.openBrowser()
 
-dataRow = [	'Username' : 'DWI0081',
+dataRow = [	'Username' : 'SRC1552',
 			'Password' : 'password',
 			'Office' : 'KELAPA GADING',
-			'Position' : 'TELE ACQUISITION',
-			'Role' : 'Sales Admin']
+			'Position' : 'SALES OFFICER',
+			'Role' : 'Marketing Officer']
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.delay(10)
