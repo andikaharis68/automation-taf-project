@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Credit_Approval_With_Decision_Engine</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d810037e-cd47-4f86-b42d-74da4c7cd4a9</testCaseGuid>
+</TestCaseEntity>

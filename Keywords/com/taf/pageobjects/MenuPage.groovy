@@ -32,16 +32,19 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
-	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "xpath", "")
+	private TestObject btnPurchaseOrder				= createTestObject("btnPurchaseOrder", "text", "Purchase Order Agreement")
 	private TestObject btnRequestHandling			= createTestObject("btnRequestHandling", "xpath", "")
 	private TestObject btnDocumentSigner			= createTestObject("btnDocumentSigner", "xpath", "//a[text() = 'Document Signer' and @class = 'rtIn']")
 	private TestObject btnDocumentPrinting			= createTestObject("btnDocumentPrinting", "xpath", "")
-	private TestObject btnApplicationInquiry		= createTestObject("btnApplicationInquiry", "xpath", "")
+	private TestObject btnExpandApplicationInquiry	= createTestObject("btnApplicationInquiry", "xpath", "//span[text() = 'Application Inquiry']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnApplicationInquiry		= createTestObject("btnApplicationInquiry", "xpath", "//a[text() = 'Application Inquiry']")
 	private TestObject btnAdditionalProcess			= createTestObject("btnAdditionalProcess", "xpath", "")
 	private TestObject btnReturnHandlingTask		= createTestObject("btnReturnHandlingTask", "xpath", "")
 	private TestObject btnUpdateLifeInsurance		= createTestObject("btnUpdateLifeInsurance", "xpath", "")
 	private TestObject btnESign						= createTestObject("btnESign", "xpath", "")
 	private TestObject btnCDECompletion				= createTestObject("btnCDECompletion", "text", "Centralized Data Entry Completion")
+	private TestObject btnCreditApproval			= createTestObject("btnCreditApproval", "text", "Credit Approval with Decision Engine")
+	
 
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")
 	private TestObject btnCustomer					= createTestObject("btnCustomer", "xpath", "//a[@id='rModuleList_lbModuleList_1']")
@@ -281,5 +284,42 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCreditProcess)
 		WebUI.click(btnDocumentSigner)
 		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToPurchaseOrder() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		WebUI.takeScreenshot()
+		safetyClick(btnPurchaseOrder)
+		switchDefaultContent()
+	}
+
+	private void navigateToCreditApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		WebUI.takeScreenshot()
+		safetyClick(btnCreditApproval)
+		switchDefaultContent()
+	}
+
+	private void navigateToApplicationInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 10)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		safetyClick(btnExpandApplicationInquiry)
+		WebUI.takeScreenshot()
+		safetyClick(btnApplicationInquiry)
+		switchDefaultContent()
 	}
 }

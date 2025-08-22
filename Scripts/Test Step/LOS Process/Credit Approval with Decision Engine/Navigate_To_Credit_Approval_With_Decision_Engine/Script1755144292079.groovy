@@ -14,20 +14,12 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
-Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("PurchaseOrder", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
-BaseHelper.openBrowser()
+MenuPage menu = new MenuPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Navigate_To_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Search_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Do_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Verify_Status_After_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: navigate to credit approval'
+menu.navigateToCreditApproval()

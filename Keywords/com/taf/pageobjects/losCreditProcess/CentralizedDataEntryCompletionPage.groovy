@@ -21,7 +21,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class CentralizedDataEntryCompletion extends BaseHelper {
+public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	//iframe
 	private TestObject iframeMainpage 			= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
