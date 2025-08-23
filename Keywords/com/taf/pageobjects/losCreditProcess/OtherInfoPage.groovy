@@ -32,8 +32,8 @@ public class OtherInfoPage extends BaseHelper {
 	private TestObject drpCreditApproval	= createTestObject("drpCreditApproval", "id", "rptAttribute_ucrefInputAttr_6_ddlReference_6")
 	private TestObject drpOwnedVehicle		= createTestObject("drpOwnedVehicle", "id", "rptAttribute_ucrefInputAttr_11_ddlReference_11")
 	private TestObject drpPrioritySeal		= createTestObject("drpPrioritySeal", "id", "rptAttribute_ucrefInputAttr_12_ddlReference_12") 
-	private TestObject txfNPWP				= createTestObject("txfNPWP", "id", "rptAttribute_ucrefInputAttr_13_ddlReference_13")
-	private TestObject txfNomorSK			= createTestObject("txfNomorSK", "id", "rptAttribute_ucrefInputAttr_14_ddlReference_14")
+	private TestObject txfNPWP				= createTestObject("txfNPWP", "id", "rptAttribute_txtAttrContent_13")
+	private TestObject txfNomorSK			= createTestObject("txfNomorSK", "id", "rptAttribute_txtAttrContent_14")
 	private TestObject drpSTNKinAHU			= createTestObject("drpSTNKinAHU", "id", "rptAttribute_ucrefInputAttr_15_ddlReference_15")
 	private TestObject drpStatusKepemilikan	= createTestObject("drpStatusKepemilikan", "id", "rptAttribute_ucrefInputAttr_16_ddlReference_16")
 	private TestObject drpCDENotes			= createTestObject("drpCDENotes", "id", "rptAttribute_ucrefInputAttr_17_ddlReference_17")
@@ -41,6 +41,7 @@ public class OtherInfoPage extends BaseHelper {
 	
 	private void verifyLandingInOtherInfoPage() {
 		verifyLanding(drpContactEmployee, "Other Info")
+		WebUI.takeScreenshot()
 	}
 	
 	private void selectContractEmployee(String contractEmployee) {
@@ -88,6 +89,7 @@ public class OtherInfoPage extends BaseHelper {
 	
 	private void selectCDEnotes(String notes) {
 		safetySelect(drpCDENotes, notes)
+		WebUI.takeScreenshot()
 	}
 	private void clickSave() {
 		safetyClick(btnSave)

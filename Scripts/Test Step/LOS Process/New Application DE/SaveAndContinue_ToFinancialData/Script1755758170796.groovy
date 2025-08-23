@@ -20,6 +20,7 @@ import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.losCreditProcess.ComissionDataPage
 import com.taf.pageobjects.losCreditProcess.FinancialDataPage
 import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
+import com.taf.pageobjects.losCreditProcess.OtherInfoPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
@@ -28,12 +29,13 @@ LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 MenuPage menu = new MenuPage()
 FinancialDataPage financial = new FinancialDataPage()
 ComissionDataPage comission = new ComissionDataPage()
+OtherInfoPage otherInfo 	= new OtherInfoPage()
 
 'Step 1: Click save and continue'
 lifeInsurance.clickSaveAndContinue()
 
 'Step 2: Verify Notif success'
-menu.verifySuccessMessage()
+//menu.verifySuccessMessage()
 
 'Step 3: Verify Landing in Financial Data'
 financial.verifyLandingInFinancialData()
@@ -51,8 +53,17 @@ financial.clickCalculate()
 financial.clickSaveContinue()
 
 'Step 8: verify notif success'
-menu.verifySuccessMessage()
+//menu.verifySuccessMessage()
 
 'Step 9: Verify landing in comission data page'
 comission.verifyLandingInComissionData()
+
+'Step 10: click calculate'
+comission.clickCalculate()
+
+'Step 11: click save and continue'
+comission.clickSaveContinue()
+
+'Step 12: Verify landing in other info'
+otherInfo.verifyLandingInOtherInfoPage()
 

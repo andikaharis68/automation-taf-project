@@ -39,6 +39,7 @@ import java.awt.event.KeyEvent
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.openqa.selenium.By
+import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.Keys
 import org.openqa.selenium.PageLoadStrategy
 
@@ -366,7 +367,7 @@ class BaseHelper {
 	static void safetyInput(TestObject to, String text, double delay = 0.1) {
 		handlePopupAlert()
 		WebUI.delay(delay)
-		WebUI.clearText(to)
+//		WebUI.clearText(to)
 		WebUI.setText(to, text)
 	}
 
@@ -424,16 +425,16 @@ class BaseHelper {
 	static void clickTABKeyboard(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
 	}
-	
+
 	static String generateRandomNPWP() {
 		Random rand = new Random()
-		
+
 		String firstDigit = (1 + rand.nextInt(9)).toString()
 		String otherDigits = (1..15).collect { rand.nextInt(10) }.join()
-		
+
 		return firstDigit + otherDigits
 	}
-	
+
 	static void manualClearText(TestObject to, double delay = 0.5) {
 		safetyClick(to)
 		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, 'a'))
@@ -441,5 +442,16 @@ class BaseHelper {
 		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
 		WebUI.delay(delay)
 	}
-	
+	def scrollDownUntillElementVisible(TestObject to, int maxScroll=10, int step=500) {
+		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getWebDriver()
+
+		for(int i=0; i<maxScroll; i++) {
+			KeywordUtil.logInfo("index $i")
+			if(WebUI.verifyElementVisible(to, FailureHandling.OPTIONAL)) {
+				KeywordUtil.logInfo("Element found after scroll ${i}")
+				return true
+			}
+			js.executeScript("window.scrollBy(0,"+ step + ")")
+		}
+	}
 }

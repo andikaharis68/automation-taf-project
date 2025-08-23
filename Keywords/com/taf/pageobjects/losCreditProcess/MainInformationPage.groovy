@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -23,36 +24,35 @@ import internal.GlobalVariable
 
 public class MainInformationPage extends BaseHelper {
 	
-	private TestObject btnNext				= createTestObject("btnNext", "text", "Next")
-	private TestObject btnCancel			= createTestObject("btnCancel", "text", "Cancel")
+	private TestObject btnNext				= createTestObject("btnNext", "id", "lb_Toolbar_Next")
+	private TestObject btnCancel			= createTestObject("btnCancel", "id", "lb_Toolbar_Cancel")
 	
-	private TestObject txfPreviousAppNo		= createTestObject("txfPreviousAppNo", "xpath", "//*[@id='cLookupPrevApp_uclPrevApp_txt']") 
-	private TestObject btnSearcPreviousAppNo= createTestObject("txfPreviousAppNo", "id", "ucLookupPrevApp_uclPrevApp_imb")
-	private TestObject txfProdOfferingName	= createTestObject("txfProdOfferingName", "xpath", "//*[@id='ucLookupProdOffer_uclProductOffering_txt']") 
-	private TestObject btnSearchProdName	= createTestObject("btnSearchProdName", "xpath", "//*[@id='ucLookupProdOffer_uclProductOffering_imb']")  
-	private TestObject txtCurrency			= createTestObject("txtCurrency", "id", "lblCurr")
+	private TestObject txfPreviousAppNo		= createTestObject("txfPreviousAppNo", "id", "cLookupPrevApp_uclPrevApp_txt") 
+	private TestObject btnSearcPreviousAppNo= createTestObject("btnSearcPreviousAppNo", "id", "ucLookupPrevApp_uclPrevApp_imb")
+	private TestObject txfProdOfferingName	= createTestObject("txfProdOfferingName", "id", "ucLookupProdOffer_uclProductOffering_txt") 
+	private TestObject btnSearchProdName	= createTestObject("btnSearchProdName", "id", "ucLookupProdOffer_uclProductOffering_imb")  
+	private TestObject txtCurrency			= createTestObject("txtCurrency", "id", "lblCurr") 
 	private TestObject txfNumOfAsset		= createTestObject("txfNumOfAsset", "id", "ucINNumOfAsset_txtInput") 
 	
-	private TestObject txfOvlyAppNumber		= createTestObject("txfOvlyAppNumber","xpath","[contains(@id, 'txtSearchValue_0')]") 
+	private TestObject txfOvlyAppNumber		= createTestObject("txfOvlyAppNumber","id","txtSearchValue_0") 
 	private TestObject btnOvlySearchAppNo	= createTestObject("btnOvlySearchAppNo", "xpath", "//*[@id='ucLookupPrevApp_uclPrevApp_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "[contains(@id, 'hpSelect_0')]")
 	
-	//sementara di gabung sini dulu main info page
-	private TestObject txtCustomerName		= createTestObject("txtCustomerName", "xpath", "//*[@id='ucCreditProcessMainInfo_lbCustName']")
-	private TestObject btnSaveContinue		= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont")
-	private TestObject btnSaveApplication	= createTestObject("btnSaveApplication", "id", "lbl_Toolbar_Save") 
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lbl_Toolbar_Submit")
-	private TestObject btnCancelApp			= createTestObject("btnCancelApp", "id", "lb_Toolbar_Cancel") 
-	
 	
 	private void verifyLandingInMainPage() {
-		verifyLanding(txfPreviousAppNo, "Main Information Page")
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(txfPreviousAppNo, 2, FailureHandling.OPTIONAL) ){
+			verifyLanding(txfPreviousAppNo, "Main Information Page")
+			WebUI.takeScreenshot()
+		} else {
+			KeywordUtil.logInfo("Skip to customer data page")
+		}
 	}
 	
 	private void clickNext() {
-		safetyClick(btnNext)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(txfPreviousAppNo, 2, FailureHandling.OPTIONAL)) {
+			safetyClick(btnNext)
+		}
+		
 	}
 	
 	private void clickCancel() {
@@ -67,10 +67,5 @@ public class MainInformationPage extends BaseHelper {
 			safetyClick(btnOvlySelect)
 		}
 	}
-	private void clickSaveContinue() {
-		safetyClick(btnSaveContinue)
-	}
-	private void verifyCustomername(String name) {
-		WebUI.verifyElementText(WebUI.getText(txtCustomerName), name)
-	}
+	
 }

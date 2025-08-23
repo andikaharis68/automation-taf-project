@@ -27,23 +27,28 @@ public class InsuranceDataPage extends BaseHelper {
 	private TestObject btnCopySelected		= createTestObject("btnCopySelected","id","lb_Form_DeleteSelected") 
 	private TestObject btnEdit				= createTestObject("btnEdit","id","gvEntryIns_imbEdit_0") 
 	private TestObject btnNext				= createTestObject("btnNext","id","lb_Toolbar_Next")
-	private TestObject btnCancel			= createTestObject("btnNext","id","lb_Toolbar_Cancel") 
+	private TestObject btnCancel			= createTestObject("btnCancel","id","lb_Toolbar_Cancel") 
 	private TestObject drpSchemeName		= createTestObject("drpSchemeName", "id", "ucInsInit_ucRefInsSchmName_ddlReference") 
 	private TestObject drpRateType			= createTestObject("drpRateType", "id", "ucInsInit_ucRefInsRateType_ddlReference")
 	private TestObject drpMainCoverageType	= createTestObject("drpMainCoverageType", "id", "ucRefMainCvgType_ddlReference") 
 	private TestObject btnCalculate			= createTestObject("btnCalculate", "id", "ucInsrate_lb_Form_Calculate")
 	private TestObject btnSave				= createTestObject("btnSave", "id", "lbSave")
 	private TestObject btnSaveContinue		= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont") 
+	private TestObject btnNextToSaveContinue= createTestObject("btnNextToSaveContinue", "id", "lb_Form_Next")
 	
 	private void verifyLandingInInsuranceData() {
-		verifyLanding(btnEdit, "Insurance Data")
+		verifyLanding(btnCopyToAll, "Insurance Data")
+		WebUI.takeScreenshot()
 	}
 	private void clickEdit() {
 		safetyClick(btnEdit)
+		WebUI.takeScreenshot()
 	}
 	
 	private void clickNext() {
-		safetyClick(btnNext)
+		WebUI.takeScreenshot()
+		WebUI.click(btnNext)
+		WebUI.delay(1)
 	}
 	
 	private void selectSchemeName(String schemeName) {
@@ -56,14 +61,20 @@ public class InsuranceDataPage extends BaseHelper {
 	
 	private void selectMainCoverageType(String mainCoverageType) {
 		safetySelect(drpMainCoverageType, mainCoverageType)
+		WebUI.takeScreenshot()
 	}
 	private void clickCalculate() {
 		safetyClick(btnCalculate)
 	}
 	private void clickSave() {
 		safetyClick(btnSave)
+		WebUI.takeScreenshot()
 	}
 	private void clickSaveAndContinue() {
 		safetyClick(btnSaveContinue)
+	}
+	private void clickNextToSaveAndContinue() {
+		safetyClick(btnNextToSaveContinue)
+		WebUI.takeScreenshot()
 	}
 }

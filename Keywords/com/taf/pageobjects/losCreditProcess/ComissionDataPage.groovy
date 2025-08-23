@@ -29,6 +29,7 @@ public class ComissionDataPage extends BaseHelper {
 	
 	private void verifyLandingInComissionData() {
 		verifyLanding(lblSection, "Comission Data")
+		WebUI.takeScreenshot()
 	}
 	private void clickCalculate() {
 		safetyClick(btnCalculate)

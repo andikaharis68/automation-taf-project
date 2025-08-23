@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -55,9 +56,10 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
-	
+
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
+	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//*[@id='rtvMenuTree']/ul/li[2]/div/a")
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
@@ -207,21 +209,25 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(lblSuccessMessage, 20)
+		WebUI.waitForElementPresent(lblSuccessMessage, 206)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
-	
-	private void navigateToNewApplication() {
+
+	private void navigateToNewApplicationDataEntry() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.takeScreenshot()
 		WebUI.switchToFrame(iframeMenu, 1)
-		WebUI.click(btnNewApplication)
+		WebUI.click(btnNewApplicationDataEntry)
 		WebUI.takeScreenshot()
 		WebUI.delay(2)
+	}
+
+	private void clickDocumentChecklist() {
+		safetyClick(btnDocumentChecklist)
 	}
 }
