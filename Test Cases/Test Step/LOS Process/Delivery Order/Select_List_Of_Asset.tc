@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Select_List_Of_Asset</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>822dc4f1-e1ad-4e7f-ba5f-62169e3dbb6d</testCaseGuid>
+</TestCaseEntity>

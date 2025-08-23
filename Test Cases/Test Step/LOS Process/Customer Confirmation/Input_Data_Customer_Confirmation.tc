@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Input_Data_Customer_Confirmation</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>e58d371b-9377-4736-b17a-b965e84f42b8</testCaseGuid>
+</TestCaseEntity>

@@ -68,6 +68,5 @@ public class AddCompanyCustomerPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("button new application not present")
 		}
-		
 	}
 }

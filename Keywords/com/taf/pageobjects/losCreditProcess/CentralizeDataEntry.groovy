@@ -36,18 +36,18 @@ public class CentralizeDataEntry extends BaseHelper {
 	private TestObject txfBirthDate 				= createTestObject("txfBirthDate", "id", "ucBirthDt_txtDatePicker")
 	private TestObject txfIdNo 						= createTestObject("txfIdNo", "id", "txtIdNo")
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
-	
+
 	public void switchToMainPage() {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMainpage, 2)
 	}
-	
+
 	public void searchCustomerName(String customerName) {
 		WebUI.setText(txfCustomerName, customerName)
 		WebUI.delay(2)
 		WebUI.click(btnSearch)
 	}
-	
+
 	public void selectProspect() {
 		WebUI.waitForElementPresent(btnIconActionProspect, 10)
 		WebUI.takeScreenshot()
@@ -66,17 +66,16 @@ public class CentralizeDataEntry extends BaseHelper {
 		safetyInput(txfIdNo, idNumber)
 		WebUI.sendKeys(txfBirthDate, Keys.chord(Keys.ENTER))
 	}
-	
+
 	public void clickButtonMatchingCustomer() {
 		WebUI.click(btnMatchingCustomer)
 		WebUI.takeScreenshot()
 		WebUI.delay(10)
 	}
-	
+
 	public void verifySuccessMessage() {
 		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
-
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>Navigate_To_Survey_Task</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>7f750f3e-5a18-4e06-9e15-d947fd976603</testCaseGuid>
+   <testCaseGuid>f9fab41a-5c80-47fa-8a78-889d7ded1146</testCaseGuid>
 </TestCaseEntity>

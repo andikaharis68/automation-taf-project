@@ -14,12 +14,12 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletion
+import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletion cdeCompletion = new CentralizedDataEntryCompletion()
+CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
 
 'Step 1: switch to iframe'
 cdeCompletion.switchToIframeMain()
@@ -40,7 +40,7 @@ cdeCompletion.inputCustomerJobData(ProfessionName, IndustryTypeName, JobPosition
 cdeCompletion.clickEditResidenceAddress()
 
 'Step 7: input residence address main'
-cdeCompletion.inputResidenceAddressMain(Kelurahan, Kecamatan, City, ZIPCODE, ResidenceAddress, RT, RW, PhoneArea, Phone, PhoneExt)
+cdeCompletion.inputResidenceAddressMain(Kelurahan, Kecamatan, City, ZipCode, ResidenceAddress, Rt, Rw, PhoneArea, Phone, PhoneExt)
 
 'Step 8: input residence address info'
 cdeCompletion.inputResidenceAddressInfo(BuildingType, BuildingOwnership, BuildingStayLength)

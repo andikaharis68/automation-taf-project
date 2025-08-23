@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>Navigate_To_Invoice</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>909b3495-3581-4f0d-b1d2-247da64d4521</testCaseGuid>
+   <testCaseGuid>8bb0dcc2-1395-4b87-876e-a7547aeda546</testCaseGuid>
 </TestCaseEntity>
