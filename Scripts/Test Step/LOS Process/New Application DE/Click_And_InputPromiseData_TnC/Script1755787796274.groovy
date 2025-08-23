@@ -14,20 +14,45 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.losCreditProcess.TermAndCondition
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [scenarioId: '7', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
-Map dataRow = [:]
-dataRow += scenarioData
-dataRow += BaseHelper.getTestDataByScenario("NewApplicationDE", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow["CredentialId"])
-BaseHelper.openBrowser()
+TermAndCondition tnc = new TermAndCondition()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_DocumentChecklist'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/SearchCustomer_by_ApplicationNo'), dataRow, FailureHandling.STOP_ON_FAILURE)
+'Step 1: Check and iput FC Ktp Pemohon'
+tnc.checkFcKTPPemohon1(CheckFcKtpPemohon)
 
+'Step 2: Check and input FC KK'
+tnc.checkFcKK(CheckFcKartuKeluarga)
+
+'Step 3: Check and input FC Ijin praktek'
+tnc.checkFcIjinPraktek(CheckFcIjinPraktek)
+
+'Step 4: Check and input FC Npwp'
+tnc.checkFcNpwp(CheckFcNpwp)
+
+'Step 5: Check and input Fc Tabungan' 
+tnc.checkFcTabungan(CheckFcTabungan)
+
+'Step 6: Chek and Input Fc Document kepemilikan rumah'
+tnc.checkFcDocKepemilikanRumah(CheckDocKepemilikanRumah)
+
+'Step 7: Check and iput FC Ktp Pemohon'
+tnc.checkFcKtpPemohon2(CheckFcKtpPemohon)
+
+'Step 8: click save'
+tnc.clickSave()
+
+'Step 9: Switch to iframe main page'
+tnc.switchToIframeMainPage()
+
+'Step 10: click submit'
+tnc.clickSubmit()
+
+WebUI.delay(30)
+
+'Step 11: Click confirmation ok'
+//tnc.clickConfirmationOk()
 

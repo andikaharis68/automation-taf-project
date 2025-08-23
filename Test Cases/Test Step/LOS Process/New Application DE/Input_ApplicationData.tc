@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>New_Application_DE</name>
+   <name>Input_ApplicationData</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>528019df-4556-4fe5-a375-3ad0dcd5a789</testCaseGuid>
+   <testCaseGuid>eeafa194-0d9b-4164-80ed-8e73bd393df6</testCaseGuid>
 </TestCaseEntity>

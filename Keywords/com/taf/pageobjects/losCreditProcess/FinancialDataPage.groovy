@@ -32,6 +32,7 @@ public class FinancialDataPage extends BaseHelper {
 	
 	private void verifyLandingInFinancialData() {
 		verifyLanding(lblSection, "Financial Data")
+		WebUI.takeScreenshot()
 	}
 	
 	private void clickSaveContinue() {

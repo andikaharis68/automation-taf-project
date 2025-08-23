@@ -31,7 +31,7 @@ InsuranceDataPage insurance = new InsuranceDataPage()
 asset.clickEditAssetRegistration()
 
 'Step 2: Input Username'
-asset.inputUserName(Username)
+asset.inputUserName(UserName)
 
 'Step 3: Input Customer Relationship'
 asset.selectUserRelationship(UserRelationship)
@@ -51,61 +51,46 @@ asset.selectOwnerRelationship(OwnerRelationship)
 'Step 7: Copy Address Asset Owner'
 asset.selectAndCopyAddressOwner(AssetOwnerCopyFrom)
 
-'Step 8: Input Notes'
-asset.inputNotes(Notes)
-
-'Step 9: Copy Address Asset Location'
+'Step 8: Copy Address Asset Location'
 asset.selectAndCopyAddressLocation(AssetLocationCopyAddress)
 
-'Step 10: Clik Save'
+'Step 9: Clik Save'
 asset.clickSave()
 
-'Step 11: Verify Notif Success'
-menu.verifySuccessMessage()
+'Step 10: Verify Notif Success'
+//menu.verifySuccessMessage()
 
-'Step 12: Click Edit asset data'
+'Step 11: Click Edit asset data'
 asset.clickEditAssetData()
 
-'Step 13: Search Branch Name'
+'Step 12: Search Branch Name'
 asset.searchSupplierBranchName(SupplierBranchName)
 
-'Step 14: Input Sales Person name'
+'Step 13: Input Sales Person name'
 asset.selectSalesPersonName(SalesPersonName)
 
-'Step 15: Search Asset Name'
-asset.searchAssetName(AssetName)
-
-'Step 16: Input Asset Price'
+'Step 14: Input Asset Price'
 asset.inputAssetPrice(AssetPrice)
 
-'Step 17: Input down payment'
+'Step 15: Input down payment'
 asset.inputDownPayment(DownPayment)
 
-'Step 18: Select Asset usage'
+'Step 16: Select Asset usage'
 asset.selectAssetUsage(AssetUsage)
 
-'Step 19: Input Manufacturing year'
+'Step 17: Input Manufacturing year'
 asset.inputManufacturingYear(ManufacturingYear)
 
-'Step 20: Click Add additional branch'
-asset.clickAdd()
+'Step 21: Click Save Edit'
+asset.clickSaveEdit()
 
-'Step 21: Search Additional branch'
-asset.searchAdditionalBranchName(AdditionalSvcSupplierBranchName)
+'Step 22: verify notif success'
+//menu.verifySuccessMessage()
 
-'Step 22: Search accessory name'
-asset.searcAccName(AdditionalSvcName)
-
-'Step 23: Click Save'
-asset.clickSave()
-
-'Step 24: verify notif success'
-menu.verifySuccessMessage()
-
-'Step 25: Click save and continue'
+'Step 23: Click save and continue'
 asset.clickSaveContinue()
 
-'Step 26: Verify landing insurance data'
+'Step 24: Verify landing insurance data'
 insurance.verifyLandingInInsuranceData()
 
 

@@ -3,6 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -14,20 +16,50 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.ApplicationDataPage
+import com.taf.pageobjects.losCreditProcess.AssetDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [scenarioId: '7', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
-Map dataRow = [:]
-dataRow += scenarioData
-dataRow += BaseHelper.getTestDataByScenario("NewApplicationDE", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow["CredentialId"])
-BaseHelper.openBrowser()
+ApplicationDataPage appData = new ApplicationDataPage()
+MenuPage menu = new MenuPage()
+AssetDataPage asset = new AssetDataPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_DocumentChecklist'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/SearchCustomer_by_ApplicationNo'), dataRow, FailureHandling.STOP_ON_FAILURE)
+'Step 1: Input Tenor'
+appData.inputTenor(Tenor)
 
+'Step 2: Select Payment Frequency'
+appData.selectPaymentFrequency(PaymentFrequency)
+
+'Step 3: Select margin type'
+appData.selectMarginType(InterestMarginType)
+
+'Step 4: Select Installment scheme'
+appData.selectInstallmentScheme(InstallmentScheme)
+
+'Step 5: Select sales officer'
+appData.selectSalesOfficer(SalesOfficer)
+
+'Step 6: Select Application source'
+appData.selectAppSource(ApplicationSource)
+
+'Step 7: Select and copy address from'
+appData.selectAndCopyAddressFrom(MailingAddressFrom)
+
+'Step 12: Input Phone number'
+appData.inputPhoneNumbers(PhoneNumber, 1)
+
+'Step 13: Select Characteristic of credit'
+appData.selectCharacteristicOfCredit(CharacteristicOfCredit)
+
+'Step 14: Click Save and continue'
+appData.clickSaveContinue()
+
+'Step 15: Verify success message'
+//menu.verifySuccessMessage()
+
+'Step 11: verify landing Asset registration data'
+asset.verifyLandinginAssetDataPage()
 
