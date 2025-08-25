@@ -21,6 +21,7 @@ import org.openqa.selenium.Keys as Keys
 import com.taf.pageobjects.MenuPage
 
 CreditSimulationToNewApplication credsim = new CreditSimulationToNewApplication()
+MenuPage menu = new MenuPage()
 
 'Step 1 : input main data'
 credsim.inputMainData(PhoneNumber, NpwpNumber)
@@ -51,3 +52,6 @@ credsim.switchToMainPage()
 
 'Step 8 : input button submit'
 credsim.clickSubmit()
+
+'Step 9 : verify popup success message'
+menu.verifySuccessMessage()

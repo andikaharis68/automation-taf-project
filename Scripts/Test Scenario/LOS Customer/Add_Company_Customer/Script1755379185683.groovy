@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 String scenarioId = "1"
 List<String> sheetNames = [
 	'Credentials', 'CustMainData', 'MainData', 'LegalAddress', 'CompanyAddress', 'ManagementShareholder', 
-	'ContactInformation', 'ContactInformation', 'FinancialData', 'LegalDocument', 'OtherAttribute']
+	'ContactInformation', 'FinancialData', 'LegalDocument', 'OtherAttribute']
 
 Map scenarioData = [:]
 scenarioData = BaseHelper.getTestDataMultipleSheet(sheetNames, "$GlobalVariable.TEST_DATA_LOCATION/LOS_Customer_Add_Company_TestData.xlsx", scenarioId)

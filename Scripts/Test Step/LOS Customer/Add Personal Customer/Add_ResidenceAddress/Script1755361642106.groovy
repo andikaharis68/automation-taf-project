@@ -27,62 +27,55 @@ AddressPage address = new AddressPage()
 address.clickAddAddress()
 
 'Step 2: Select Address Type = Residence Address'
-AddressType = "Residence Address"
-address.selectAddressType(AddressType)
+address.selectAddressType("Residence Address")
 
-'Step 3: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_TestData.xlsx", "Address")
+'Step 4: Select ZIP Code'
+address.checkAddress(ResidenceZipCode)
 
-'Step 4: Click copy address'
-address.clickCopyAddress()
-//
-//'Step 4: Input Address'
-//address.inputAddress(AddressData.Address)
-//
-//'Step 5: Input RT'
-//address.inputRT(AddressData.RT)
-//
-//'Step 6: Input RW'
-//address.inputRW(AddressData.RW)
-//
-//'Step 7: Select ZIP Code'
-//address.checkAddress(AddressData.ZIPCODE)
-//
-//'Step 8: Check Customer Have Fixed Line'
-//address.checkCustomerHaveFixedline(AddressData.CustomerDoesNotHaveFixedline)
-//
-//'Step 9: Input Phone 1'
-//address.inputPhoneNumbers(AddressData.Phone1, 1)
-//
-//'Step 10: Input Phone 2'
-//address.inputPhoneNumbers(AddressData.Phone2, 2)
-//
-//'Step 11: Input Phone 3'
-//address.inputPhoneNumbers(AddressData.Phone3, 3)
-//
-//'Step 12: Input Fax'
-//address.inputFax(AddressData.Fax)
-//
-//'Step 13: Select Building Class Location'
-//address.selectBuildingLocation(AddressData.BuildingLocationClass)
-//
-//'Step 14: Select Building Ownership'
-//address.selectBuildingOwnerShip(AddressData.BuildingOwnership)
-//
-//'Step 15: Input Building price estimates'
-//address.inputBuildingPriceEstimates(AddressData.BuildingPriceEstimates)
-//
-//'Step 16: Input Building stay length'
-//address.inputBuildingStayLength(AddressData.BuildingStayLength)
-//
-//'Step 17: Input Direction description'
-//address.inputDirectionDesc(AddressData.DirectionDescription)
-//
-//'Step 18: Input notes'
-//address.inputNotes(AddressData.Notes)
+'Step 5: Input Address'
+address.inputAddress(ResidenceAddress)
+
+'Step 6: Input RT'
+address.inputRT(ResidenceRT)
+
+'Step 7: Input RW'
+address.inputRW(ResidenceRW)
+
+'Step 8: Check Customer Have Fixed Line'
+address.checkCustomerHaveFixedline(ResidenceCustomerDoesNotHaveFixedline)
+
+'Step 9: Input Phone 1'
+address.inputPhoneNumbers(ResidencePhone1, 1)
+
+'Step 10: Input Phone 2'
+address.inputPhoneNumbers(ResidencePhone2, 2)
+
+'Step 11: Input Phone 3'
+address.inputPhoneNumbers(ResidencePhone3, 3)
+
+'Step 12: Input Fax'
+address.inputFax(ResidenceFax)
+
+'Step 13: Select Building Class Location'
+address.selectBuildingLocation(ResidenceBuildingLocationClass)
+
+'Step 14: Select Building Ownership'
+address.selectBuildingOwnerShip(ResidenceBuildingOwnership)
+
+'Step 15: Input Building price estimates'
+address.inputBuildingPriceEstimates(ResidenceBuildingPriceEstimates)
+
+'Step 16: Input Building stay length'
+address.inputBuildingStayLength(ResidenceBuildingStayLength)
+
+'Step 17: Input Direction description'
+address.inputDirectionDesc(ResidenceDirectionDescription)
+
+'Step 18: Input notes'
+address.inputNotes(ResidenceNotes)
 
 'Step 19: Input Company Name'
-address.inputCompanyName(AddressData.CompanyName)
+address.inputCompanyName(ResidenceCompanyName)
 
 'Step 20: Click Save'
 address.clickSaveAddress()

@@ -62,7 +62,7 @@ if(IsEditCompanyAddress == "Y") {
 	address.inputRW(CompanyRW)
 	
 	'Step 7: Select ZIP Code'
-	address.searchAddress(CompanyZipCode)
+	address.searchAddressCompany(CompanyZipCode)
 	
 	'Step 8: Check Customer Have Fixed Line'
 	address.checkCustomerHaveFixedline(CompanyCustomerDoesNotHaveFixedline)

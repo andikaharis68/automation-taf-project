@@ -60,12 +60,16 @@ public class EmergencyContactPage extends BaseHelper {
 
 	private void inputName(String name) {
 		if(name) {
+			if(name =="AUTO") {
+				name = generateRandomName()
+			}
 			safetyInput(txfName, name)
 		}
 	}
 
 	private void clickAddContact() {
 		safetyClick(btnAdd)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickSaveAndContinue() {
@@ -73,6 +77,7 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void clickSaveContact() {
+		WebUI.takeScreenshot()
 		safetyClick(btnSave)
 	}
 
@@ -112,8 +117,10 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyClick(btnSearchZIPCode)
 			safetyInput(txfOvlyZipCode, zipCode)
 			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
 			safetyClick(btnOvlySelect)
 		}
+		
 	}
 	
 	private void checkAddress(String zipCode) {
@@ -169,10 +176,14 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyInput(countryField, parts[0])
 			safetyInput(areaField, parts[1])
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void inputMobilePhone(String phone, int index) {
 		if(phone) {
+			if(phone =="AUTO") {
+				phone = generateRandomPhone()
+			}
 			TestObject countryField	= createTestObject("countryField", "xpath", "//*[@id='ucEmergencyContactInfo_txt_CustEmergencyCntct_MobilePhn${index}']")
 			safetyInput(countryField, phone)
 			WebUI.delay(2)
@@ -187,6 +198,7 @@ public class EmergencyContactPage extends BaseHelper {
 		def familyExist = WebUI.verifyElementPresent(nameSelected, 3, FailureHandling.OPTIONAL)
 		if(familyExist) {
 			safetyClick(editButton)
+			WebUI.takeScreenshot()
 		}else {
 			clickAddContact()
 		}

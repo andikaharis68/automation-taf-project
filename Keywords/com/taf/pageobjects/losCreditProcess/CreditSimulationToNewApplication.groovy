@@ -50,7 +50,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 	private TestObject txtCustomerRemarks = createTestObject("txtCustomerRemarks", "id", "lblRemarksCustomer")
 	private TestObject txtSpouseRemarks = createTestObject("txtSpouseRemarks", "id", "lblRemarksSpouse")
 	private TestObject txtSTNKRemarks = createTestObject("txtSTNKRemarks", "id", "lblRemarksSTNK")
-	
+
 	//upload document
 	private TestObject btnChooseFile = createTestObject("btnChooseFile", "id", "fileUploadDoc")
 	private TestObject txfRemarks = createTestObject("txfRemarks", "id", "txtRemarks")
@@ -75,19 +75,19 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 	public void inputOtherInfo(String notes) {
 		WebUI.setText(txfNotes, notes)
 	}
-	
+
 	public void switchToDefaultContent() {
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	public void switchToMainPage() {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMain, 2)
 	}
-	
+
 	public void waitSectionUploadFile(int maxWait) {
 		int wait = 0
-		while(wait < maxWait) {			
+		while(wait < maxWait) {
 			if(WebUI.waitForElementPresent(iframeAppForm, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
 				WebUI.switchToFrame(iframeAppForm, 2)
 				WebUI.scrollToElement(btnChooseFile, 1, FailureHandling.CONTINUE_ON_FAILURE)
@@ -96,7 +96,6 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 			WebUI.delay(1)
 			wait++
 		}
-		
 	}
 
 	public void uploadDocumentCustomer(String remark) {
@@ -108,7 +107,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 		WebUI.click(btnUpload)
 		WebUI.delay(3)
 	}
-	
+
 	public void uploadDocumentSpouse(String remark) {
 		File filePdf = new File(GlobalVariable.TEST_DATA_LOCATION + "Resources/Credit_Simulation.pdf")
 		WebUI.waitForElementPresent(btnChooseFile, 10)
@@ -118,7 +117,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 		WebUI.click(btnUpload)
 		WebUI.delay(3)
 	}
-	
+
 	public void uploadDocumentSTNK(String remark) {
 		File filePdf = new File(GlobalVariable.TEST_DATA_LOCATION + "Resources/Credit_Simulation.pdf")
 		WebUI.waitForElementPresent(btnChooseFile, 10)
@@ -130,6 +129,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 	}
 
 	public void clickSave() {
+		WebUI.takeScreenshot()
 		WebUI.click(btnSave)
 	}
 
@@ -140,5 +140,4 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 		WebUI.acceptAlert()
 		WebUI.delay(5)
 	}
-	
 }

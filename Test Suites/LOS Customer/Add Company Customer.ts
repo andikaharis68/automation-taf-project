@@ -18,11 +18,4 @@
       <testCaseId>Test Cases/Test Scenario/LOS Customer/Add_Company_Customer</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
-   <testCaseLink>
-      <guid>3da5b4a0-817e-4478-bf5e-870272933029</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
-      <testCaseId>Test Cases/Test Scenario/LOS Customer/Customer_Inquiry</testCaseId>
-      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
-   </testCaseLink>
 </TestSuiteEntity>

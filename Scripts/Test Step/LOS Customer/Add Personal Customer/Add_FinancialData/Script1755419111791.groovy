@@ -62,7 +62,7 @@ financial.inputAccName(AccountName)
 'Step 13: Input Acc No'
 financial.inputAccountNo(AccountNo)
 
-'Step 14: Click Save account (need fix)'
+'Step 14: Click Save account'
 financial.clickSaveAccount()
 
 'Step 15: Click Add Statement'

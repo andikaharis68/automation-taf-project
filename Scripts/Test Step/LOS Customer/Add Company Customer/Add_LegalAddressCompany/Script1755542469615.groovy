@@ -16,12 +16,18 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.customers.AddressPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 AddressPage address = new AddressPage()
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+menu.switchIframeCustForm()
 
 'Step 1: click add address'
 address.clickAddAddress()
@@ -39,7 +45,7 @@ address.inputRT(LegalRT)
 address.inputRW(LegalRW)
 
 'Step 7: Select ZIP Code'
-address.searchAddress(LegalZipCode)
+address.searchAddressCompany(LegalZipCode)
 
 'Step 8: Check Customer Have Fixed Line'
 address.checkCustomerHaveFixedline(LegalCustomerDoesNotHaveFixedline)
@@ -76,6 +82,9 @@ address.inputNotes(LegalNotes)
 
 'Step 19: Click Save'
 address.clickSaveAddress()
+
+'Step 20: Verify success message'
+menu.verifySuccessMessage()
 
 
 

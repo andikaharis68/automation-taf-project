@@ -62,9 +62,10 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject btnOK						= createTestObject("btnOK", "xpath", "//*[text()= 'OK']")
 
 	private void clickSaveContinue() {
-		safetyClick(btnSaveContinue)
 		WebUI.takeScreenshot()
+		safetyClick(btnSaveContinue)
 		handlePopupAlert(3)
+		handlePopUperror(lblAlert, btnOK)
 	}
 
 	static void handlePopUperror(TestObject to, TestObject btnOk) {
@@ -128,40 +129,39 @@ public class FinancialDataPage extends BaseHelper {
 	private void clickCalculateIncome() {
 		safetyClick(btnCalculateIncome)
 		handleAlertIfPresent()
-		WebUI.takeScreenshot()
+		
 	}
 	private void clickAddCustAcc() {
 		safetyClick(btnAddBankAcc)
 		handleAlertIfPresent()
-		WebUI.takeScreenshot()
 	}
 
 	private void selectBankName(String bankName) {
 		if(bankName) {
-			safetySelect(drpBankName, bankName)
+			safetySelect(drpBankName, bankName,3)
 		}
 	}
 	private void inputBranchName(String name) {
 		if(name) {
-			safetyInput(txfBankBranch, name)
+			safetyInput(txfBankBranch, name,3)
 		}
 	}
 
 	private void inputBICodeBank(String code) {
 		if(code) {
-			safetyInput(txfBICode, code)
+			safetyInput(txfBICode, code,3)
 		}
 	}
 
 	private void inputAccName(String name) {
 		if(name) {
-			safetyInput(txfAccName, name)
+			safetyInput(txfAccName, name,3)
 		}
 	}
 
 	private void inputAccountNo(String accNo) {
 		if(accNo) {
-			safetyInput(txfAccNo, accNo)
+			safetyInput(txfAccNo, accNo,3)
 			WebUI.delay(2)
 		}
 	}
@@ -169,20 +169,21 @@ public class FinancialDataPage extends BaseHelper {
 	private void selectBankAccPurpose(String purpose) {
 		if(purpose) {
 			safetyClick(drpBankAccPurpose)
-			safetySelect(drpBankAccPurpose, purpose)
+			safetySelect(drpBankAccPurpose, purpose,3)
 		}
 	}
 
 	private void clickSaveAccount() {
+		WebUI.delay(2)
 		safetyClick(btnSaveBankAcc)
-		handleAlertIfPresent()
+		WebUI.delay(2)
+		clickKeyboardEnter()
 		WebUI.takeScreenshot()
 	}
 	private void clickAddStatement() {
 		handleAlertIfPresent()
 		safetyClick(btnAddBankStatement)
 		handleAlertIfPresent()
-		WebUI.takeScreenshot()
 	}
 
 	private void selectBankNameStatement(String bankName) {
@@ -243,7 +244,6 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
-			clearText(drpDebit)
 			safetyInput(drpDebit, debit)
 		}
 	}
@@ -251,9 +251,9 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementCredit(String credit, Integer index) {
 		if(credit) {
 			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
-			clearText(drpCredit)
 			safetyInput(drpCredit, credit)
 		}
+		
 	}
 	private void inputIncomeSection(String monthlyIncome) {
 		inputGrossMonthlyIncome(monthlyIncome)
@@ -261,6 +261,9 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
+		if(accountName == "AUTO") {
+			accountName = generateRandomName()
+		}
 		selectBankName(bankName)
 		inputBranchName(branchName)
 		inputAccName(accountName)

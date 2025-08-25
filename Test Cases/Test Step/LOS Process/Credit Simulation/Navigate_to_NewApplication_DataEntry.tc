@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_to_NewApplication_DataEntry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ebcb3546-5220-4429-8ef9-419200aa2c4e</testCaseGuid>
+</TestCaseEntity>

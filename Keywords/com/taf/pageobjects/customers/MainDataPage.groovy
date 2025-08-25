@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.Keys
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -90,7 +92,9 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		safetySelectEdit(drpSalutation, salutation)
+		if(salutation) {			
+			safetySelect(drpSalutation, salutation)
+		}
 	}
 
 	private void inputPrefixName(String name) {
@@ -105,39 +109,38 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectMaritalStatus(String status) {
-		WebUI.scrollToElement(drpMaritalStatus, 2)
-		safetySelectEdit(drpMaritalStatus, status)
+		if(status) {			
+			safetySelect(drpMaritalStatus, status)
+		}
 	}
 	private void inputSuffixName(String name) {
 		if(name) {
 			safetyInput(txfSuffixName, name)
-			WebUI.delay(2)
 		}
 	}
 	private void inputNickName(String name) {
 		if(name) {
 			safetyInput(txfNickName, name)
-			WebUI.delay(2)
 		}
 	}
 
 	private void checkPremiumStatus(String isPremium) {
 		if(isPremium?.trim() == 'Y' && isPremium) {
 			WebUI.check(chxIsPremium)
-			WebUI.delay(2)
 		}
 	}
 
 	private void selectNationality(String nationality) {
-		WebUI.scrollToElement(drpNationality, 2)
-		safetySelectEdit(drpNationality, nationality)
+		if(nationality) {			
+			safetySelect(drpNationality, nationality)
+		}
 	}
 	private void selectCustomerGroup(String name, String customerGroup) {
 		if(customerGroup) {
-			WebUI.scrollToElement(btnSearchCustomerGroup, 2)
 			safetyClick(btnSearchCustomerGroup)
 			WebUI.delay(2)
 			safetyInput(txfOvlyCustomerName, name)
+			WebUI.takeScreenshot()
 			safetyClick(btnOvlySelect)
 			WebUI.delay(2)
 		}
@@ -145,7 +148,6 @@ public class MainDataPage extends BaseHelper {
 
 	private void inputNumberOfDependents(String numberOfDependents) {
 		if(numberOfDependents) {
-			WebUI.scrollToElement(txfNumOfDependent, 1)
 			safetyInput(txfNumOfDependent, numberOfDependents)
 			WebUI.delay(2)
 		}
@@ -153,7 +155,6 @@ public class MainDataPage extends BaseHelper {
 
 	private void inputNumberOfResidence(String numberOfResidence) {
 		if(numberOfResidence) {
-			WebUI.scrollToElement(txfNumOfResidence, 1)
 			safetyInput(txfNumOfResidence, numberOfResidence)
 			WebUI.delay(2)
 		}
@@ -161,20 +162,21 @@ public class MainDataPage extends BaseHelper {
 
 	private void inputFamilyCardNum(String familyCardNum) {
 		if(familyCardNum) {
-			WebUI.scrollToElement(txfFamilyCard, 2)
 			safetyInput(txfFamilyCard, familyCardNum)
 			WebUI.delay(2)
 		}
 	}
 
 	private void selectEducation(String education) {
-		WebUI.scrollToElement(drpEducation, 2)
-		safetySelectEdit(drpEducation, education)
+		if(education) {			
+			safetySelect(drpEducation, education)
+		}
 	}
 
 	private void selectReligion(String religion) {
-		WebUI.scrollToElement(drpReligion, 2)
-		safetySelectEdit(drpReligion, religion)
+		if(religion) {			
+			safetySelect(drpReligion, religion)
+		}
 	}
 
 
@@ -185,8 +187,10 @@ public class MainDataPage extends BaseHelper {
 			safetyInput(txfCountryName, country)
 
 			safetyClick(btnOvlySearchCountry)
+			WebUI.takeScreenshot()
 
 			safetyClick(btnSelectCountry)
+			
 		}
 	}
 
@@ -216,7 +220,6 @@ public class MainDataPage extends BaseHelper {
 	private void checkRIP(String rip) {
 		if(rip?.trim() == 'Y') {
 			safetyClick(chxRIP)
-			WebUI.takeScreenshot()
 		}
 	}
 
@@ -232,8 +235,10 @@ public class MainDataPage extends BaseHelper {
 	}
 	private void inputMobilePhone(int index, String phone) {
 		if (phone?.trim()) {
+			if(phone == "AUTO") {				
+				phone = generateRandomPhone()
+			}
 			TestObject phoneField = getMobilePhoneField(index)
-			WebUI.scrollToElement(phoneField, 1)
 			safetyInput(phoneField, phone)
 		}
 	}
@@ -241,15 +246,12 @@ public class MainDataPage extends BaseHelper {
 	private void inputEmail(int index, String email) {
 		if(email?.trim()) {
 			TestObject emailField = getEmailField(index)
-			WebUI.scrollToElement(emailField, 1)
 			safetyInput(emailField, email)
-			WebUI.takeScreenshot()
 		}
 	}
 	private void clickSaveAndContinue() {
-		WebUI.scrollToElement(btnSaveContinue, 5)
-		safetyClick(btnSaveContinue)
 		WebUI.takeScreenshot()
+		safetyClick(btnSaveContinue)
 	}
 
 	private void switchToIframeCustForm() {

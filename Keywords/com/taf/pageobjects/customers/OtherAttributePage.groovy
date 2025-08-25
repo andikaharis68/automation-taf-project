@@ -75,9 +75,7 @@ public class OtherAttributePage extends BaseHelper {
 	}
 
 	private void clickSaveAttributeData() {
-		WebUI.takeScreenshot()
 		safetyClick(btnSave)
-		WebUI.takeScreenshot()
 	}
 	
 	private void clickSaveData() {
@@ -170,6 +168,7 @@ public class OtherAttributePage extends BaseHelper {
 		if(isSplit && isSplit == '1') {
 			WebUI.check(chxIsSplitTreasure)
 		}
+		
 	}
 
 	private void selectDebitorGroupSlik(String group) {
@@ -244,6 +243,8 @@ public class OtherAttributePage extends BaseHelper {
 		if(date) {
 			safetyInput(txfRatingDate, date)
 		}
+		WebUI.takeScreenshot()
+		
 	}
 
 	private void checkCDENotes(String notes) {

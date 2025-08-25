@@ -67,6 +67,7 @@ public class CustomerInformationPage extends BaseHelper {
 	}
 	private void clickSearch() {
 		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickReset() {
@@ -88,7 +89,6 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private void searchCustomerName(String fullname) {
 		safetyInput(txfCustomerNo, fullname)
-		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
 
@@ -107,17 +107,15 @@ public class CustomerInformationPage extends BaseHelper {
 		}
 	}
 	private void clickCustomerHyperlink(String fullname) {
-		WebUI.takeScreenshot()
 		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[text()= '$fullname']")
 		if(WebUI.verifyElementPresent(txtFullName, 5)) {
 			KeywordUtil.markPassed("customer $fullname is exist")
 			safetyClick(txtFullName)
-			WebUI.takeScreenshot()
 		} else {
 			KeywordUtil.markFailed("customer $fullname is not found")
 		}
 	}
-	
+
 	private void clickCustomerHyperlinkEdit() {
 		TestObject hyperlink = createTestObject("hyperlink", "xpath", "//*[@id='gvCustomer_lbl_Cust_CustName_0']")
 		safetyClick(hyperlink)
