@@ -23,10 +23,10 @@ import internal.GlobalVariable
 
 public class ApplicationInquiryPage extends BaseHelper {
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "ucSearch_subSectionID")
+	private TestObject lblAgreementNo = createTestObject("lblAgreementNo", "", "")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch") 
 
 	//table
 	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
@@ -59,9 +59,15 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtLicensePlat = createTestObject("txtLicensePlat", "", "")
 	private TestObject txtChassisNo = createTestObject("txtChassisNo", "", "")
 	private TestObject txtLocStatus = createTestObject("txtLocStatus", "", "")
+	
+	private TestObject txfApplicationNo = createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
+	private TestObject btnEdit = createTestObject("btnEdit", "id", "")
+	
+	private TestObject txtApplicationStep = createTestObject("txtApplicationStep", "id", "gvApp_lbAppStep_0") 
 
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Asset Inventory Inquiry Page")
+		WebUI.takeScreenshot()
 	}
 
 	public void doSearch(String agreementNo) {
@@ -156,5 +162,23 @@ public class ApplicationInquiryPage extends BaseHelper {
 			String expected = expectedList[i]
 			validateIsEquals(actual, expected)
 		}
+	}
+	
+	private void inputApplicationNo(String appNo) {
+		safetyInput(txfApplicationNo, appNo)
+	}
+	
+	private void clickEdit() {
+		safetyClick(btnEdit)
+	}
+	
+	private void doSearchApplicationNo(String applicationNo) {
+		WebUI.setText(txfApplicationNo, applicationNo)
+		WebUI.click(btnSearch)
+		WebUI.takeScreenshot()
+	}
+	private void verifyApplicationStep() {
+		String expectedText = "DCK"
+		WebUI.verifyElementText(txtApplicationStep, expectedText)
 	}
 }

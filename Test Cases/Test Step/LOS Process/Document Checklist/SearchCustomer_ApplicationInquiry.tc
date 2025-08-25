@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>SearchCustomer_ApplicationInquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d610e3b9-b51b-4024-9d5d-13c57278ff77</testCaseGuid>
+</TestCaseEntity>

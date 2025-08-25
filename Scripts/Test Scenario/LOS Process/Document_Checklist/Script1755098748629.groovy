@@ -22,12 +22,12 @@ import org.openqa.selenium.Keys as Keys
 Map scenarioData = [scenarioId: '7', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
 Map dataRow = [:]
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataByScenario("NewApplicationDE", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataByScenario("DocumentChecklist", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow["scenarioId"])
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.STOP_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_DocumentChecklist'), dataRow, FailureHandling.STOP_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/SearchCustomer_by_ApplicationNo'), dataRow, FailureHandling.STOP_ON_FAILURE)
-
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/Navigate_to_ApplicationInquiry'), dataRow, FailureHandling.STOP_ON_FAILURE)
 

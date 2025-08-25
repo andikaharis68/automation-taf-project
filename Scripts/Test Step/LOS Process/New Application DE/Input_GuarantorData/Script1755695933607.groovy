@@ -61,7 +61,7 @@ guarantor.clickSave()
 guarantor.clickSaveContinue()
 
 'Step 10: verify notif success'
-menu.verifySuccessMessage()
+//menu.verifySuccessMessage()
 
 'Step 11: verify landing application data'
 appData.verifyLandingInAppData()

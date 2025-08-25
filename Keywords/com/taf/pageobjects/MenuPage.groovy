@@ -29,7 +29,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
 	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
 	private TestObject btnCentralizeDataEntry 		= createTestObject("btnCentralizeDataEntry", "text", "Centralized Data Entry")
-	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "text", "New Application Data Entry")
+	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "//a[text() = 'New Application Data Entry']") 
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
@@ -66,9 +66,9 @@ public class MenuPage extends BaseHelper {
 
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
+	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
 	private TestObject iframeMainPage				= createTestObject("iframeMenu", "xpath", "//*[@id='mainPage']")
 	private TestObject iframeCustForm 				= createTestObject("iframeMenu", "xpath", "//*[@id='custForm']")
-	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//*[@id='rtvMenuTree']/ul/li[2]/div/a")
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
@@ -84,6 +84,7 @@ public class MenuPage extends BaseHelper {
 
 	private void clickDropdownMenu() {
 		safetyClick(drpMenu)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -135,6 +136,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnDocumentPrinting)
 	}
 	private void clickApplicationInquiry() {
+		WebUI.switchToDefaultContent()
 		WebUI.click(btnApplicationInquiry)
 	}
 	private void clickAdditionalProcess() {
@@ -235,7 +237,9 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToNewApplicationDataEntry() {
+		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.click(btnNewApplicationDataEntry)
+		WebUI.takeScreenshot()
 	}
 	private void navigateToSurveyTask() {
 		WebUI.switchToDefaultContent()
@@ -264,12 +268,13 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(drpMenu)
 		WebUI.takeScreenshot()
 		WebUI.switchToFrame(iframeMenu, 1)
-		WebUI.click(btnNewApplicationDataEntry)
+		WebUI.click(btnNewApplication)
 		WebUI.takeScreenshot()
 		WebUI.delay(2)
 	}
 
 	private void clickDocumentChecklist() {
+		WebUI.switchToFrame(iframeMenu, 2)
 		safetyClick(btnDocumentChecklist)
 	}
 
@@ -341,4 +346,5 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}
+	
 }

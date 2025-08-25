@@ -17,41 +17,22 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.InsuranceDataPage
-import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.ApplicationInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-InsuranceDataPage insuranceData = new InsuranceDataPage()
-LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
+MenuPage menu = new MenuPage()
+ApplicationInquiryPage appInquiry = new ApplicationInquiryPage()
 
-'Step 1: Click Edit'
-insuranceData.clickEdit()
+'Step 1: Click application inquiry'
+menu.navigateToApplicationInquiry()
 
-'Step 2: Select Scheme Name'
-insuranceData.selectSchemeName(SchemeName)
+'Step 2: verify landing in application inquiry'
+appInquiry.verifyLandingScreen()
 
-'Step 3: Select Rate Type'
-insuranceData.selectRateType(RateType)
+'Step 3: Search app no'
+appInquiry.doSearchApplicationNo(ApplicationNo)
 
-'Step 4: Click next'
-insuranceData.clickNext()
-
-'Step 5: Select Main coverage type'
-insuranceData.selectMainCoverageType(MainCoverageType)
-
-'Step 6: Click Calculate'
-insuranceData.clickCalculate()
-
-'Step 7: Click save'
-insuranceData.clickSave()
-
-'Step 8: Click next'
-insuranceData.clickNextToSaveAndContinue()
-
-'Step 9: click save and continue'
-insuranceData.clickSaveAndContinue()
-
-'Step 10: Verify landing in life insurance data'
-lifeInsurance.verifyLandingInLifeInsuranceData()
+'Step 4: verify application step'
+appInquiry.verifyApplicationStep()

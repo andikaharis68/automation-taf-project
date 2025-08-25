@@ -31,7 +31,7 @@ tnc.checkFcKK(CheckFcKartuKeluarga)
 tnc.checkFcIjinPraktek(CheckFcIjinPraktek)
 
 'Step 4: Check and input FC Npwp'
-tnc.checkFcNpwp(CheckFcNpwp)
+tnc.checkFc Npwp(CheckFcNpwp)
 
 'Step 5: Check and input Fc Tabungan' 
 tnc.checkFcTabungan(CheckFcTabungan)
@@ -51,8 +51,6 @@ tnc.switchToIframeMainPage()
 'Step 10: click submit'
 tnc.clickSubmit()
 
-WebUI.delay(30)
-
 'Step 11: Click confirmation ok'
-//tnc.clickConfirmationOk()
+tnc.clickConfirmationOk()
 
