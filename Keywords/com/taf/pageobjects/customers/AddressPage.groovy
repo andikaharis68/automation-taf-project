@@ -25,11 +25,12 @@ import internal.GlobalVariable
 public class AddressPage extends BaseHelper {
 
 
-	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr']")
+	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr' or @id='lb_Form_Add']")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[contains(@id,'Type_ddlReference')]")
 	private TestObject txfAddress				= createTestObject("txfAddress", "xpath", "//*[contains(@id, 'txtOfficeAddr')]")
 	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[contains(@id,'txtRT')]")
 	private TestObject txfRW					= createTestObject("txfRW", "xpath", "//*[contains(@id,'txtRW')]")
+	private TestObject ovlZipCodeLookup	     	= createTestObject("ovlZipCodeLookup", "xpath", "//*[contains(@id,'mdnucAddr_ucLookupZipCode_uclZipCode') and contains(@style, 'visible')]")
 	private TestObject txfZIPCode				= createTestObject("txfZIPCode", "xpath", "//*[contains(@id,'uclZipCode_txt')]")
 	private TestObject btnSearchZIPCode			= createTestObject("btnSearchZIPCode", "xpath", "//*[contains(@id, 'uclZipCode_imb')]")
 	private TestObject txfSubdistrict			= createTestObject("txfSubdistrict", "xpath", "//*[contains(@id, 'txtKelurahan')]")
@@ -60,6 +61,7 @@ public class AddressPage extends BaseHelper {
 	private TestObject btnSave					= createTestObject("btnSave", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]")
 	private TestObject btnCancel				= createTestObject("btnCancel", "xpath", "//*[contains(@id,'lb_Form_Cancel_AddCust')]")
 	private TestObject iframeAddress			= createTestObject("iframeAddress", "xpath", "//*[contains(@id,'custForm')]")
+	private TestObject iframeMainPage			= createTestObject("iframeMainPage", "xpath", "//*[contains(@id,'mainPage')]")
 	private TestObject btnCopyAddress			= createTestObject("btnCopyAddress", "xpath", "//*[contains(@id,'lb_Form_CopyAddr')]")
 	private TestObject btnSaveAddress			= createTestObject("btnSaveAddress", "xpath", "//*[contains(@id,'lb_Form_Save_AddCust')]")
 	private TestObject drpCopyAddressFrom		= createTestObject("drpCopyAddressFrom", "xpath", "")
@@ -72,12 +74,28 @@ public class AddressPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 
+	private void switchToDefault() {
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void switchIframeMain() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	
+	private void switchIframeForm() {
+		WebUI.switchToFrame(iframeAddress, 2)
+	}
+
 	private void selectAddressType(String addressType) {
-		safetySelect(drpAddressType, addressType)
+		if(addressType) {			
+			safetySelect(drpAddressType, addressType)
+		}
 	}
 
 	private void inputAddress(String address) {
-		safetyInputEdit(txfAddress, address)
+		if(address) {			
+			safetyInput(txfAddress, address)
+		}
 	}
 
 	private Map getAddressDetail(String scenarioId, String addressType, String filePath, String sheetName) {
@@ -91,28 +109,42 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRT(String rt) {
-		safetyInputEdit(txfRT, rt, 1.5)
+		if(rt) {			
+			safetyInput(txfRT, rt, 1.5)
+		}
+	}
+
+	private void inputRW(String rw) {
+		if(rw) {			
+			safetyInput(txfRW, rw, 1.5)
+		}
 	}
 
 	private void searchAddress(String zipCode) {
 		if(zipCode) {
 			safetyClick(btnSearchZIPCode)
 			WebUI.delay(2)
-			safetyInput(txfOvlyZIPCode, zipCode)
-
-			WebUI.delay(2)
+			if(!WebUI.waitForElementPresent(ovlZipCodeLookup, 3)) {
+				safetyClick(btnSearchZIPCode)
+			}
+			slowlyInput(txfOvlyZIPCode, zipCode)
 			safetyClick(btnOvlySearch)
 			WebUI.takeScreenshot()
-			WebUI.delay(2)
 			safetyClick(btnOvlySelect) //select first address
-
 			WebUI.delay(2)
-			handleAlertIfPresent()
 		}
 	}
-
-	private void inputRW(String rw) {
-		safetyInputEdit(txfRW, rw, 1.5)
+	
+	private void searchAddressCompany(String zipCode) {
+		if(zipCode) {
+			safetyClick(btnSearchZIPCode)
+			WebUI.delay(2)
+			slowlyInput(txfOvlyZIPCode, zipCode)
+			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
+			safetyClick(btnOvlySelect) //select first address
+			WebUI.delay(2)
+		}
 	}
 
 	private void checkAddress(String zipCode) {
@@ -154,7 +186,6 @@ public class AddressPage extends BaseHelper {
 	}
 	private void clickAddAddress() {
 		safetyClick(btnAdd)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickSaveContinue() {
@@ -192,17 +223,22 @@ public class AddressPage extends BaseHelper {
 		safetyInputEdit(txfCompanyName, companyName)
 		WebUI.takeScreenshot()
 	}
+	
 	private void switchToIframeAddress() {
 		WebUI.switchToDefaultContent()
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
 	}
+	
 	private void inputPhoneNumbers(String phoneNumber, int index) {
 		if(phoneNumber) {
+			if(phoneNumber == "AUTO") {
+				phoneNumber = generateRandomPhone(true)
+			}
 			TestObject countryField, areaField, numberField
-			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}' or @id='UCAddress_txtPhnArea${index}]")
-			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}' or @id='UCAddress_txtPhn${index}]")
-			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}'or @id='UCAddress_txtPhoneExt${index}]")
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddr_txtPhnArea${index}' or @id='UCAddress_txtPhnArea${index}']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}' or @id='UCAddress_txtPhn${index}']")
+			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}'or @id='UCAddress_txtPhoneExt${index}']")
 
 			KeywordUtil.logInfo("phone " + phoneNumber)
 			String[] parts = phoneNumber.split("-")

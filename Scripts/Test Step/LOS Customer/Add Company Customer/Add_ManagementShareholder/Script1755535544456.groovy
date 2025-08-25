@@ -16,12 +16,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.customers.ManagementOrShareholderPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 ManagementOrShareholderPage management = new ManagementOrShareholderPage()
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+menu.switchIframeCustForm()
 
 'Step 1: Click Add personal'
 management.clickAddPersonal()
@@ -65,6 +71,8 @@ management.clickSaveCompany()
 'Step 14: Click Continue'
 management.clickContinue()
 
+'Step 15: Verify success message'
+menu.verifySuccessMessage()
 
 
 

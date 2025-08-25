@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Edit_Company_Other_Attribute</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>86eed305-812f-479b-8f43-2474478bee2c</testCaseGuid>
+</TestCaseEntity>

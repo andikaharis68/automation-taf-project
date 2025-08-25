@@ -30,7 +30,7 @@ mainData.selectSalutation(Salutation)
 mainData.inputPrefixName(PrefixName)
 
 'Step 3 Input Full Name'
-mainData.inputFullName(FullName)
+mainData.inputFullName(CustomerName)
 
 'Step 4: Input Suffix Name'
 mainData.inputSuffixName(CustomerSuffixName)
@@ -69,19 +69,19 @@ mainData.selectEducation(Education)
 mainData.selectReligion(Religion)
 
 'Step 16: Check isVIP'
-mainData.checkIsVIP(IsVIP)
+mainData.checkIsVIP(IsVip)
 
 'Step 17: Input Premium Note'
 mainData.inputPremiumNote(PremiumNote)
 
 'Step 18: Input SID No'
-mainData.inputSIDNo(SIDNo)
+mainData.inputSIDNo(SidNo)
 
 'Step 19: Check Affiliation with multifinance'
 mainData.checkAffiliationWithMultifinance(AffiliationWithMultifinance)
 
 'Step 20: Check RIP'
-mainData.checkRIP(RIP)
+mainData.checkRIP(Rip)
 
 'Step 21: Input Mobile Phone1'
 mainData.inputMobilePhone(1, MobilePhoneNo1)

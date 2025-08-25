@@ -14,12 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.customers.FinancialDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 FinancialDataPage financialData = new FinancialDataPage()
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+menu.switchIframeCustForm()
 
 'Step 1: Verify landing in Financial Page'
 financialData.verifyLandinginFinancialPage()
@@ -39,5 +45,5 @@ financialData.clickSaveAccount()
 'Step 6: Click save and continue'
 financialData.clickSaveContinue()
 
-'Step 7: Verify save success'
-//financialData.verifySaveSuccess()
+'Step 7: Verify success message'
+menu.verifySuccessMessage()
