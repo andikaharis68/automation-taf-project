@@ -66,34 +66,40 @@ cdeCompletion.copyAndAddLegalAddressFromResidenceAddress()
 'Step 15: save legal address'
 cdeCompletion.clickSaveAddress()
 
-'Step 16: input attribute list'
+'Step 16: input Income Section'
+cdeCompletion.inputIncome(GrossMonthlyIncome, GrossProfit, OtherIncome, SourceOfOtherIncome, LivingCost, OtherMonthlyInstallment)
+
+'Step 17: click calculate income'
+cdeCompletion.clickCalculateIncome()
+
+'Step 18: input attribute list'
 cdeCompletion.inputAttributeList(DebitorGroup, DebitorBusinessScale, CounterpartCategory, DebitorGroupSlik, AffiliateMultifinanceSlik)
 
-'Step 17: select way of payment'
+'Step 19: select way of payment'
 cdeCompletion.selectWayOfPayment(WayOfPayment)
 
-'Step 18: edit asset'
+'Step 20: edit asset'
 cdeCompletion.clickEditAsset()
 
-'Step 19: input asset user, select self usage'
+'Step 21: input asset user, select self usage'
 cdeCompletion.inputAssetUser(SelfUsage)
 
-'Step 20: copy asset location from legal address'
+'Step 22: copy asset location from legal address'
 cdeCompletion.copyAssetLocationFromLegalAddress()
 
-'Step 21: input other asset info'
+'Step 23: input other asset info'
 cdeCompletion.inputOtherAssetInfo(AssetUsage, TeleSurveyUnitUsage)
 
-'Step 22: save asset user'
+'Step 24: save asset user'
 cdeCompletion.clickSaveAssetUser()
 
-'Step 23: submit'
+'Step 25: submit'
 cdeCompletion.clickSubmit()
 
-'Step 24: verify submit success'
+'Step 26: verify submit success'
 cdeCompletion.verifySubmitSuccess()
 
-'Step 25: switch to default frame'
+'Step 27: switch to default frame'
 cdeCompletion.switchToDefaultContent()
 
 
