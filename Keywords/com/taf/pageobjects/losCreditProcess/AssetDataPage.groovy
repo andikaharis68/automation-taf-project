@@ -155,21 +155,27 @@ public class AssetDataPage extends BaseHelper {
 		safetyClick(btnOvlySelect)
 	}
 	private void selectSalesPersonName(String name) {
-		WebElement element = WebUI.findWebElement(drpSalesPersonName)
-		List<WebElement> options = element.findElements(By.tagName("option"))
-		boolean isFound = false
-		for(WebElement opt: options) {
-			if(opt.getText().trim().equalsIgnoreCase(name)) {
-				safetySelect(drpSalesPersonName, name)
-				isFound = true
-				break
+		boolean isDisabled = isOptionDisable(drpSalesPersonName)
+		if(!isDisabled) {
+			WebElement element = WebUI.findWebElement(drpSalesPersonName)
+			List<WebElement> options = element.findElements(By.tagName("option"))
+			boolean isFound = false
+			for(WebElement opt: options) {
+				if(opt.getText().trim().equalsIgnoreCase(name)) {
+					safetySelect(drpSalesPersonName, name)
+					isFound = true
+					break
+				}
 			}
+			if(!isFound) {
+				String firstLabel = options.getAt(1).getText()
+				safetySelect(drpSalesPersonName, firstLabel)
+				KeywordUtil.logInfo("label $name not found. select first option $firstLabel")
+			}
+		} else {
+			KeywordUtil.logInfo("option not clickable")
 		}
-		if(!isFound) {
-			String firstLabel = options.getAt(0).getText()
-			safetySelect(drpSalesPersonName, firstLabel)
-			KeywordUtil.logInfo("label $name not found. select first option $firstLabel")
-		}
+		
 	}
 
 	private void searchAssetName(String assetName) {
@@ -235,11 +241,16 @@ public class AssetDataPage extends BaseHelper {
 	
 	private void clickSaveEdit() {
 		WebUI.click(btnSaveEdit)
-		if(WebUI.waitForAlert(10, FailureHandling.OPTIONAL)) {
+		if(WebUI.waitForAlert(6, FailureHandling.OPTIONAL)) {
 			WebUI.acceptAlert()
 		}
 		WebUI.click(btnSaveEdit)
 		WebUI.takeScreenshot()
 		
+	}
+	
+	private boolean isOptionDisable(TestObject to) {
+		boolean isDisabled = !WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
+		return isDisabled
 	}
 }

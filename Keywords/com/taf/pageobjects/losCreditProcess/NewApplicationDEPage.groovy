@@ -28,12 +28,12 @@ public class NewApplicationDEPage extends BaseHelper {
 	private TestObject txfProductOfferName	= createTestObject("txfProductOfferName", "xpath", "//*[contains(@id,'txtProdOfferingName')]")
 	private TestObject txfOrderDate1		= createTestObject("txfOrderDate1", "xpath", "[contains(@id, 'ltlProspectOrdOrderDtGteSearch')]") 
 	private TestObject drpTaskClaim			= createTestObject("drpTaskClaim", "xpath", "[contains(@id, 'ltlWfPagingTaskClaimStat')]") 
-	private TestObject txfCustomerName		= createTestObject("txfCustomerName", "xpath", "//*[contains(@id, 'txtCustNamePaging')]") 
+	private TestObject txfCustomerName		= createTestObject("txfCustomerName", "id", "ucSearch_txtCustNamePaging_ltlCustCustNameSearch")  
 	private TestObject txfSalesPersonName	= createTestObject("txfSalesPersonName", "xpath", "[contains(@id, 'txtEmpName')]") 
 	private TestObject txfOrderDate2		= createTestObject("txfOrderDate2", "xpath", "[contains(@id, 'ltlProspectOrdOrderDtLteSearch')]")
 	private TestObject txfTaskClaimBy		= createTestObject("txfTaskClaimBy", "xpath", "[contains(@id, 'txtusername')]") 
 	
-	private TestObject btnSearch 			= createTestObject("btnSearch", "id", "ucSearch_btnSearch") 
+	private TestObject btnSearch 			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")  
 	private TestObject btnReset				= createTestObject("btnReset", "id", "ucSearch_lbReset") 
 	
 	//application listing

@@ -27,31 +27,37 @@ public class DocumentChecklistPage extends BaseHelper {
 	private TestObject txfAggreementNo		= createTestObject("txfAggreementNo","id","ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo") 
 	private TestObject txfPromiseDate		= createTestObject("txfPromiseDate","id","ucSearch_txtPromiseDt_ltlAgrmntPromiseDt_txtDatePicker") 
 	private TestObject drpTaskClaimStatus	= createTestObject("drpTaskClaimStatus","id","ucSearch_ddlusername_ltlWfPagingTaskClaimStat_ddlReference")
-	private TestObject txfCustomerName		= createTestObject("txfCustomerName","id","")
-	private TestObject txfProductOffering	= createTestObject("txfProductOffering","id","")
-	private TestObject txfTaskClaimBy		= createTestObject("txfTaskClaimBy","id","")
+	private TestObject txfCustomerName		= createTestObject("txfCustomerName","id","ucSearch_txtCustName_ltlCustCustName") 
+	private TestObject txfProductOffering	= createTestObject("txfProductOffering","id","ucSearch_txtProdOfferingName_ltlAgrmntProdOffering")
+	private TestObject txfTaskClaimBy		= createTestObject("txfTaskClaimBy","id","ucSearch_txtusername_ltlWfPagingTaskClaimBy")
 	private TestObject btnSearch			= createTestObject("btnSearch","id","ucSearch_btnSearch")
 	private TestObject btnEdit				= createTestObject("btnEdit","id","gvDocChklst_imbEdit_0")
 	
 	private TestObject btnSubmit 			= createTestObject("btnSubmit","id","lb_Toolbar_Submit") 
+	private TestObject iframeMain			= createTestObject("iframeMain", "xpath", "//*[@id='mainPage']")
 
 	private void verifyLandingInDocChecklist() {
-		verifyLanding(txfApplicationNo, "Document Checklist")
+		WebUI.delay(5)
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMain, 2)
+		verifyLanding(txfAggreementNo, "Document Checklist")
+		WebUI.takeScreenshot()
 	}
 
-	private void inputApplicationNo(String applicationNo) {
+	private void doSearch(String applicationNo) {
 		safetyInput(txfApplicationNo, applicationNo)
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
-	private void clickSearch() {
-		safetyClick(btnSearch)
-	}
 
 	private void clickEdit() {
 		safetyClick(btnEdit)
+		WebUI.takeScreenshot()
 	}
 	
 	private void clickSubmit() {
 		safetyClick(btnSubmit)
+		WebUI.takeScreenshot()
 	}
 }
