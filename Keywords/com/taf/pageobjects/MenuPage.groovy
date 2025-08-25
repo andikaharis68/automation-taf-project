@@ -97,7 +97,14 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickNewApplication() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
 		WebUI.click(btnNewApplication)
+		WebUI.switchToDefaultContent()
 	}
 
 	private void clickNotifFromSales() {
