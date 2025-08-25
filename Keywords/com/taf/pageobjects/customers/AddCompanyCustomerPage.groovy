@@ -53,6 +53,7 @@ public class AddCompanyCustomerPage extends BaseHelper {
 
 	private void inputCustomerNitku(String customerNitku) {
 		safetyInput(txtfCustomerNitku, customerNitku)
+		WebUI.takeScreenshot()
 	}
 
 	private void selectCompanyType(String companyType) {

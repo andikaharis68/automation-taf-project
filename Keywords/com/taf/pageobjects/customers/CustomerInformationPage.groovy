@@ -78,6 +78,7 @@ public class CustomerInformationPage extends BaseHelper {
 	}
 	private void addCompanyCustomer() {
 		safetyClick(btnAddCompanyCustomer)
+		WebUI.takeScreenshot()
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -107,10 +108,13 @@ public class CustomerInformationPage extends BaseHelper {
 		}
 	}
 	private void clickCustomerHyperlink(String fullname) {
-		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[text()= '$fullname']")
+		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[@id='gvCustomer_lbl_Cust_CustName_0']")
 		if(WebUI.verifyElementPresent(txtFullName, 5)) {
 			KeywordUtil.markPassed("customer $fullname is exist")
 			safetyClick(txtFullName)
+			WebUI.delay(2)
+			switchToNewTab()
+			WebUI.takeScreenshot()
 		} else {
 			KeywordUtil.markFailed("customer $fullname is not found")
 		}
@@ -122,5 +126,9 @@ public class CustomerInformationPage extends BaseHelper {
 		WebUI.delay(8)
 		WebUI.switchToWindowIndex(1)
 		WebUI.takeScreenshot()
+	}
+	private void switchToNewTab() {
+		int currentTab = WebUI.getWindowIndex()
+		WebUI.switchToWindowIndex(currentTab + 1)
 	}
 }

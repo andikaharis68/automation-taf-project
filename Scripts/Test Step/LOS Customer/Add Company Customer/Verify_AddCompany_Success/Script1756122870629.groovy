@@ -14,42 +14,21 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.customers.CustomerInformationPage
-import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-OtherAttributePage attr = new OtherAttributePage()
-MenuPage menu = new MenuPage()
 CustomerInformationPage custInfo = new CustomerInformationPage()
 
-menu.switchIframeMainPage()
+'Step 1: Search Customer name'
+custInfo.inputCustomerName(CompanyName)
 
-menu.switchIframeCustForm()
+'Step 2: Select Customer type'
+custInfo.selectCustomerType("Company")
 
-'Step 1: Verify landing in other attribute'
-attr.verifyLandingInOtherAttribute()
+'Step 3: Click button search'
+custInfo.clickSearch()
 
-'Step 2: Select Debitor grup'
-attr.selectDebitorGroup(DebitorGroup)
-
-'Step 3: Select Counterpart group'
-attr.selectCounterpartCategory(CounterpartCategory)
-
-'Step 4: Select Sustainable financial bussiness'
-attr.selectSustainableFinancial(SustainableFinancialBusiness)
-
-'Step 5: click Save and Submit'
-attr.clickSaveAndSubmit()
-
-'Step 6: Verify success message'
-menu.verifySuccessMessage()
-
-menu.switchIframeMainPage()
-
-'Step 7: Verify landing in Customer info page'
-custInfo.verifyLandingInCustInfoPage()
-
-
+'Step 4: Verify Customer list'
+custInfo.clickCustomerHyperlink(CompanyName)

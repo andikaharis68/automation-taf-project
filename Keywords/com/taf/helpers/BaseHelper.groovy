@@ -366,7 +366,7 @@ class BaseHelper {
 		WebUI.waitForElementPresent(to, 10, FailureHandling.OPTIONAL)
 		WebUI.click(to)
 		WebUI.delay(delay)
-		WebUI.waitForElementNotVisible(loadingBar, 10)
+		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
 
 	static void safetySelect(TestObject to, String text, double delay = 1) {
@@ -422,13 +422,13 @@ class BaseHelper {
 	static void clickEnter(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ENTER))
 	}
-	
+
 	static void clickKeyboardEnter() {
 		Robot robot = new Robot()
 		robot.keyPress(KeyEvent.VK_ENTER)
 		robot.keyRelease(KeyEvent.VK_ENTER)
 	}
-	
+
 	static void clickTABKeyboard(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
 	}
@@ -511,7 +511,7 @@ class BaseHelper {
 			return prefix + number + suffix
 		}
 	}
-	
+
 	def scrollDownUntillElementVisible(TestObject to, int maxScroll=10, int step=500) {
 		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getWebDriver()
 

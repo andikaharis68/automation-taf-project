@@ -42,7 +42,7 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject txfAccName					= createTestObject("txfAccName", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccName']")
 	private TestObject txfAccNo						= createTestObject("txfAccNo", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccNo']")
 	private TestObject drpBankAccPurpose			= createTestObject("drpBankAccPurpose", "xpath", "//*[@id='ucCustBankAccPurpose_ddlReference']")
-	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']")
+	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']") 
 
 	private TestObject btnAddBankStatement			= createTestObject("btnAddBankStatement", "xpath", "//*[@id='lb_Form_Add_BankStatement']")
 	private TestObject drpBankNameStatement			= createTestObject("drpBankNameStatement", "xpath", "//*[@id='ucBankStatement_ucBankName_ddlReference']")
@@ -178,6 +178,9 @@ public class FinancialDataPage extends BaseHelper {
 		safetyClick(btnSaveBankAcc)
 		WebUI.delay(2)
 		clickKeyboardEnter()
+		if(WebUI.waitForElementPresent(btnSaveBankAcc, 5, FailureHandling.OPTIONAL)) {
+			safetyClick(btnSaveBankAcc)
+		}
 		WebUI.takeScreenshot()
 	}
 	private void clickAddStatement() {
@@ -269,6 +272,7 @@ public class FinancialDataPage extends BaseHelper {
 		inputAccName(accountName)
 		inputAccountNo(accountNo)
 		selectBankAccPurpose(purpose)
+		WebUI.takeScreenshot()
 	}
 
 	public void switchToIframeMain() {

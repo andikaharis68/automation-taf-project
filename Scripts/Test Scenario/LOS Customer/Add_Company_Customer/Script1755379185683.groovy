@@ -39,3 +39,6 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company C
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_FinancialData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalDocument'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_OtherAttribute'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Verify_AddCompany_Success'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
+
