@@ -21,7 +21,7 @@
    <testCaseLink>
       <guid>357db929-37d0-4245-9ce8-283e5ebf527a</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Centralized_Data_Entry</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
@@ -63,7 +63,7 @@
    <testCaseLink>
       <guid>7231433c-8f3a-4c66-a2a8-3cc3e5235263</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Document_Signer</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
