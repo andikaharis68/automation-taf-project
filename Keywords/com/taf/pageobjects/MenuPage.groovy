@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -28,7 +29,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
 	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
 	private TestObject btnCentralizeDataEntry 		= createTestObject("btnCentralizeDataEntry", "text", "Centralized Data Entry")
-	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "text", "New Application Data Entry")
+	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "//a[text() = 'New Application Data Entry']") 
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
@@ -44,7 +45,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnESign						= createTestObject("btnESign", "xpath", "")
 	private TestObject btnCDECompletion				= createTestObject("btnCDECompletion", "text", "Centralized Data Entry Completion")
 	private TestObject btnCreditApproval			= createTestObject("btnCreditApproval", "text", "Credit Approval with Decision Engine")
-	
+
 
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")
 	private TestObject btnCustomer					= createTestObject("btnCustomer", "xpath", "//a[@id='rModuleList_lbModuleList_1']")
@@ -61,17 +62,29 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
 	private TestObject btnDeliveryOrder				= createTestObject("btnDeliveryOrder", "xpath", "//a[text() = 'Delivery Order']")
 	private TestObject btnCustomerConfirmation		= createTestObject("btnCustomerConfirmation", "xpath", "//a[text() = 'Customer Confirmation']")
-	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")		
+	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")
 
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
+	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
+	private TestObject iframeMainPage				= createTestObject("iframeMenu", "xpath", "//*[@id='mainPage']")
+	private TestObject iframeCustForm 				= createTestObject("iframeMenu", "xpath", "//*[@id='custForm']")
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
 	}
+	
+	private void switchIframeMainPage() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	
+	private void switchIframeCustForm() {
+		WebUI.switchToFrame(iframeCustForm, 2)
+	}
 
 	private void clickDropdownMenu() {
 		safetyClick(drpMenu)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -79,7 +92,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickCustomer() {
-		WebUI.click(btnCustomer)
+		safetyClick(btnCustomer)
 		WebUI.takeScreenshot()
 	}
 
@@ -130,6 +143,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnDocumentPrinting)
 	}
 	private void clickApplicationInquiry() {
+		WebUI.switchToDefaultContent()
 		WebUI.click(btnApplicationInquiry)
 	}
 	private void clickAdditionalProcess() {
@@ -218,17 +232,23 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
 		WebUI.click(btnProspect)
+		WebUI.takeScreenshot()
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}
 
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(lblSuccessMessage, 20)
+		WebUI.waitForElementPresent(lblSuccessMessage, 206)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
 
+	private void navigateToNewApplicationDataEntry() {
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnNewApplicationDataEntry)
+		WebUI.takeScreenshot()
+	}
 	private void navigateToSurveyTask() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -260,7 +280,12 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		WebUI.delay(2)
 	}
-	
+
+	private void clickDocumentChecklist() {
+		WebUI.switchToFrame(iframeMenu, 2)
+		safetyClick(btnDocumentChecklist)
+	}
+
 	private void navigateToCustomerConfirmation() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -281,7 +306,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.click(btnInvoice)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToDocumentSigner() {
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
@@ -329,4 +354,5 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}
+	
 }

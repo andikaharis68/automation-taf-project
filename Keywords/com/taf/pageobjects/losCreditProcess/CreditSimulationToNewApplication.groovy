@@ -129,6 +129,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 	}
 
 	public void clickSave() {
+		WebUI.takeScreenshot()
 		WebUI.click(btnSave)
 	}
 

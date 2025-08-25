@@ -45,9 +45,14 @@ public class AddPersonalCustomerPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 
-	private void inputCustomerName(String name) {
-		safetyInput(txfCustomerName, name)
-		WebUI.delay(2)
+	private String inputCustomerName(String name) {
+		if(name) {
+			if(name == "AUTO") {
+				name = generateRandomName()
+			}
+			safetyInput(txfCustomerName, name)
+		}
+		return name
 	}
 
 
@@ -61,22 +66,28 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 
 	private void selectIdType(String idType) {
-		safetySelect(drpIDType, idType)
+		if(idType) {			
+			safetySelect(drpIDType, idType)
+		}
 	}
 
 	private void inputIdNumber(String idNumber) {
-		handleAlertIfPresent()
-		safetyInput(txfIDNumber, idNumber)
+		if(idNumber) {
+			if(idNumber == "AUTO") {
+				idNumber = generateRandomNik()
+			}
+			safetyInput(txfIDNumber, idNumber)
+		}
 	}
-
 
 	private void inputIdExpiredDate(String idExpiredDate) {
 		WebUI.click(txfIDExpiredDate)
 		safetyInput(txfIDExpiredDate, idExpiredDate, 1.0)
 		clickEnter(txfIDExpiredDate)
 	}
+	
 	private void selectGender(String gender) {
-		TestObject radGender = createTestObject("radGender","xpath",	"//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
+		TestObject radGender = createTestObject("radGender","xpath", "//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
 		if (gender?.trim()) {
 			if (!WebUI.verifyElementChecked(radGender, 1, FailureHandling.OPTIONAL)) {
 				safetyClick(radGender)
@@ -95,17 +106,25 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 
 	private void inputNPWP(String npwp) {
-		String currentText = WebUI.getText(txfNPWP).trim()
-		if (currentText) {
-			KeywordUtil.logInfo("NPWP auto filled")
-		} else {
-			safetyInput(txfNPWP, npwp)
+		if(npwp) {
+			
+			String currentText = WebUI.getText(txfNPWP).trim()
+			if (currentText) {
+				KeywordUtil.logInfo("NPWP auto filled")
+			} else {
+				safetyInput(txfNPWP, npwp)
+			}
 		}
 	}
 
 	private void inputMotherMaidenName(String motherMaidenName) {
-		safetyInput(txfMotherMaidenName, motherMaidenName)
-		WebUI.takeScreenshot()
+		if(motherMaidenName) {
+			if(motherMaidenName == "AUTO") {
+				motherMaidenName = generateRandomName()
+			}
+			safetyInput(txfMotherMaidenName, motherMaidenName)
+			WebUI.takeScreenshot()
+		}
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)

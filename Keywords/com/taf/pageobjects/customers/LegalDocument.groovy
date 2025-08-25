@@ -28,6 +28,7 @@ public class LegalDocument extends BaseHelper {
 	private TestObject btnAdd 				= createTestObject("btnAdd", "id", "lb_Form_Add_LegalDocument")
 
 	//table
+	private TestObject lblNumberList 	= createTestObject("drpLegalDocType", "id", "id")
 	private TestObject drpLegalDocType 	= createTestObject("drpLegalDocType", "id", "gvLegalDocument_ddlLegalDocType_0")
 	private TestObject txfDocumentNo 	= createTestObject("txfDocumentNo", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNo_0")
 	private TestObject txfDateIssue 	= createTestObject("txfDateIssue", "id", "gvLegalDocument_ucDPLegalDocDocDt_0_txtDatePicker_0")
@@ -66,7 +67,11 @@ public class LegalDocument extends BaseHelper {
 		KeywordUtil.logInfo("Size of item: " + splittedLegalDoc.size())
 		for (int i=0; i<splittedLegalDoc.size(); i++) {
 			KeywordUtil.logInfo("Input legal document ke: ${i+1}")
-			clickAdd()
+			//tambahin wait for element
+			lblNumberList 	= createTestObject("lblNumberList", "id", "gvLegalDocument_lblNo_${i}")
+			if(!WebUI.waitForElementPresent(lblNumberList, 3)) {				
+				clickAdd()
+			}
 			drpLegalDocType 	= createTestObject("drpLegalDocType", "id", "gvLegalDocument_ddlLegalDocType_${i}")
 			txfDocumentNo 		= createTestObject("txfDocumentNo", "id", "gvLegalDocument_txt_CustCoyLegalDoc_DocNo_${i}")
 			txfDateIssue 		= createTestObject("txfDateIssue", "id", "gvLegalDocument_ucDPLegalDocDocDt_${i}_txtDatePicker_${i}")
@@ -85,7 +90,7 @@ public class LegalDocument extends BaseHelper {
 			safetyInputEdit(txfNotaryName, splittedNotaryName[i])
 			safetyInputEdit(txfNotaryLocation, splittedNotaryLoc[i])
 		}
-		
+		WebUI.takeScreenshot()
 	}
 	
 	public void clickSaveAndContinue() {

@@ -29,16 +29,21 @@ import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.edge.EdgeDriver
 import org.openqa.selenium.edge.EdgeOptions
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.WebDriver
 
 import static org.openqa.selenium.PageLoadStrategy.NONE
 
 import java.awt.Robot
 import java.awt.event.KeyEvent
+import java.security.SecureRandom
 
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.openqa.selenium.Alert
 import org.openqa.selenium.By
+import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.Keys
 import org.openqa.selenium.PageLoadStrategy
 
@@ -82,23 +87,6 @@ class BaseHelper {
 		String value = prop.getValue()
 
 		return (name == "xpath") ? value : "//*[contains(@${name}, '${value}')]"
-
-		//		24 Jul 2025 : ini sengaja dikomen soalnya pake return yg atas belum pernah dicoba, kalo aman nanti ini di hapus aja ya!!
-		//		switch (name) {
-		//			case "xpath":
-		//				return value // already a valid xpath
-		//			case "id":
-		//				return "//*[contains(@id, '${value}')]"
-		//			case "class":
-		//				return "//*[contains(@class, '${value}')]"
-		//			case "text":
-		//				return "//*[contains(text(), '${value}')]"
-		//			case "name":
-		//				return "//*[contains(@name, '${value}')]"
-		//			default:
-		//			// fallback to generic contains
-		//				return "//*[contains(@${name}, '${value}')]"
-		//		}
 	}
 
 	public List<WebElement> getListElementByTestObject(TestObject to) {
@@ -125,11 +113,6 @@ class BaseHelper {
 	}
 
 	static void openBrowser() {
-		//		EdgeOptions options = new EdgeOptions()
-		//		options.setPageLoadStrategy(PageLoadStrategy.NONE)
-		//		WebDriver driver = new EdgeDriver(options)
-		//		DriverFactory.changeWebDriver(driver)
-		//		driver.get(GlobalVariable.WEB_URL)
 
 		WebUI.openBrowser(GlobalVariable.WEB_URL)
 		WebUI.maximizeWindow()
@@ -141,6 +124,14 @@ class BaseHelper {
 		}else {
 			KeywordUtil.markFailed("Failed : Landing to $screenName")
 		}
+	}
+
+	static Map getTestDataMultipleSheet(List<String> sheetNames, String filePath, String scenarioId) {
+		Map scenarioData = [:]
+		sheetNames.each { sheetName ->
+			scenarioData += BaseHelper.getTestDataByScenario(sheetName, filePath, scenarioId)
+		}
+		return scenarioData
 	}
 
 
@@ -365,7 +356,6 @@ class BaseHelper {
 
 	static void safetyInput(TestObject to, String text, double delay = 0.1) {
 		handlePopupAlert()
-		WebUI.delay(delay)
 		WebUI.setText(to, text)
 	}
 
@@ -398,6 +388,18 @@ class BaseHelper {
 		}
 	}
 
+	static void slowlyInput(TestObject to, String text, double delay = 0.1) {
+		if(text) {
+			WebUI.delay(delay)
+			handlePopupAlert()
+			WebUI.waitForElementPresent(to, 5)
+			for (char c : text.toCharArray()) {
+				WebUI.sendKeys(to, String.valueOf(c))
+				WebUI.delay(delay)
+			}
+		}
+	}
+
 	static void handlePopupAlert(int timeoutInSeconds = 1) {
 		try {
 			WebUI.waitForAlert(timeoutInSeconds)
@@ -420,19 +422,18 @@ class BaseHelper {
 	static void clickEnter(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ENTER))
 	}
+	
+	static void clickKeyboardEnter() {
+		Robot robot = new Robot()
+		robot.keyPress(KeyEvent.VK_ENTER)
+		robot.keyRelease(KeyEvent.VK_ENTER)
+	}
+	
 	static void clickTABKeyboard(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
 	}
-	
-	static String generateRandomNPWP() {
-		Random rand = new Random()
-		
-		String firstDigit = (1 + rand.nextInt(9)).toString()
-		String otherDigits = (1..15).collect { rand.nextInt(10) }.join()
-		
-		return firstDigit + otherDigits
-	}
-	
+
+
 	static void manualClearText(TestObject to, double delay = 0.5) {
 		safetyClick(to)
 		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, 'a'))
@@ -440,5 +441,87 @@ class BaseHelper {
 		WebUI.sendKeys(to, Keys.chord(Keys.DELETE))
 		WebUI.delay(delay)
 	}
+
+	static String generateRandomNpwp() {
+		Random rand = new Random()
+		String firstDigit = (1 + rand.nextInt(9)).toString()
+		String otherDigits = (1..15).collect { rand.nextInt(10) }.join()
+		return firstDigit + otherDigits
+	}
+
+	static String generateRandomNik() {
+		SecureRandom rnd = new SecureRandom()
+		StringBuilder nik = new StringBuilder()
+		(1..16).each {
+			nik.append(rnd.nextInt(10)) // random digit 0-9
+		}
+		return nik.toString()
+	}
+
+	static String generateRandomName() {
+		SecureRandom rnd = new SecureRandom()
+		List<String> firstNames = [
+			"Andi",
+			"Budi",
+			"Citra",
+			"Dewi",
+			"Eka",
+			"Fajar",
+			"Gita",
+			"Hadi",
+			"Indra",
+			"Joko"
+		]
+		List<String> lastNames = [
+			"Santoso",
+			"Wijaya",
+			"Saputra",
+			"Sari",
+			"Putri",
+			"Pratama",
+			"Halim",
+			"Setiawan",
+			"Mahendra",
+			"Utami"
+		]
+		String first = firstNames[rnd.nextInt(firstNames.size())]
+		String last = lastNames[rnd.nextInt(lastNames.size())]
+		return "$first $last"
+	}
+
+	static String generateRandomPhone(boolean isStrip = false) {
+		SecureRandom rnd = new SecureRandom()
+		def prefixes = [
+			"812",
+			"813",
+			"821",
+			"822",
+			"823",
+			"852",
+			"853",
+			"856",
+			"857"
+		]
+		String prefix = prefixes[rnd.nextInt(prefixes.size())]
+		String number = (1..5).collect { rnd.nextInt(10) }.join("")
+		String suffix = (1..3).collect { rnd.nextInt(10) }.join("")
+		if(isStrip) {
+			return "${prefix}-${number}-${suffix}"
+		} else {
+			return prefix + number + suffix
+		}
+	}
 	
+	def scrollDownUntillElementVisible(TestObject to, int maxScroll=10, int step=500) {
+		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getWebDriver()
+
+		for(int i=0; i<maxScroll; i++) {
+			KeywordUtil.logInfo("index $i")
+			if(WebUI.verifyElementVisible(to, FailureHandling.OPTIONAL)) {
+				KeywordUtil.logInfo("Element found after scroll ${i}")
+				return true
+			}
+			js.executeScript("window.scrollBy(0,"+ step + ")")
+		}
+	}
 }

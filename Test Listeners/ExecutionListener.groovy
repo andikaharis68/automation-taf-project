@@ -33,8 +33,8 @@ class ExecutionListener {
 		GlobalVariable.TEST_CASE_NAME = testCaseName
 	}
 	
-//	@AfterTestCase
-//	def afterTestCase() {
+	@AfterTestCase
+	def afterTestCase() {
 //		(GlobalVariable.IS_CLOSE_BROWSER) ? WebUI.closeBrowser() : KeywordUtil.logInfo("Browser Not Closed")
-//	}
+	}
 }

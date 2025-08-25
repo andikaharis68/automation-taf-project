@@ -66,11 +66,12 @@ public class JobDataPage extends BaseHelper {
 		verifyLanding(txfProfessionName, "Job Data")
 		WebUI.takeScreenshot()
 	}
+
 	private void clickSaveContinue() {
 		WebUI.delay(2)
-		safetyClick(btnSaveAndContinue)
+		WebUI.click(btnSaveAndContinue)
 		WebUI.delay(2)
-		handleAlertIfPresent()
+		clickKeyboardEnter()
 	}
 
 	private void selectProfessionName(String professionName) {
@@ -94,13 +95,19 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void inputProfessionNo(String professionNo) {
-		safetyInputEdit(txfProfessionNo, professionNo)
+		if(professionNo) {			
+			safetyInput(txfProfessionNo, professionNo)
+		}
 	}
 	private void selectJobPosition(String jobPosition) {
-		safetySelectEdit(drpJobPosition, jobPosition)
+		if(jobPosition) {			
+			safetySelect(drpJobPosition, jobPosition)
+		}
 	}
 	private void inputCompanyName(String companyName) {
-		safetyInputEdit(txfCompanyName, companyName)
+		if(companyName) {			
+			safetyInput(txfCompanyName, companyName)
+		}
 	}
 
 
@@ -121,11 +128,15 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
-		safetySelectEdit(drpCompanyScale, companyScale)
+		if(companyScale) {			
+			safetySelect(drpCompanyScale, companyScale)
+		}
 	}
 
 	private void inputNumberOfEmployee(String numberOfEmployee) {
-		safetyInputEdit(txfNumberOfEmployee, numberOfEmployee)
+		if(numberOfEmployee) {			
+			safetyInput(txfNumberOfEmployee, numberOfEmployee)
+		}
 	}
 
 	private void selectEmploymentEstablishDate(String month, String year) {
@@ -145,36 +156,44 @@ public class JobDataPage extends BaseHelper {
 
 	private void inputPrevCompanyName(String prevCompanyName) {
 		if(prevCompanyName) {
-			safetyInputEdit(txfPrevCompanyName, prevCompanyName)
+			safetyInput(txfPrevCompanyName, prevCompanyName)
 			WebUI.delay(2)
 		}
 	}
 
 	private void selectPrevCompanyDate(String month, String year) {
 		//month
-		safetySelectEdit(drpPrevEmploymentDate, month)
+		safetySelect(drpPrevEmploymentDate, month)
 		WebUI.delay(2)
 		//year
-		safetyInputEdit(txfPrevEmploymentDate, year)
+		safetyInput(txfPrevEmploymentDate, year)
 		WebUI.delay(2)
 	}
 
 	private void inputOtherBussinessName(String bussinessName) {
-		safetyInputEdit(txfOtherBussinessName, bussinessName)
+		if(bussinessName) {
+			safetyInput(txfOtherBussinessName, bussinessName)
+		}
 	}
 	private void inputOtherBussinessType(String bussinessType) {
-		safetyInputEdit(txfOtherBussinessType, bussinessType)
+		if(bussinessType) {			
+			safetyInput(txfOtherBussinessType, bussinessType)
+		}
 	}
 	private void inputOtherJobPosition(String jobPosition) {
-		safetyInputEdit(txfOtherJobPosition, jobPosition)
+		if(jobPosition) {			
+			safetyInput(txfOtherJobPosition, jobPosition)
+		}
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
-		WebUI.delay(2)
-		safetySelectEdit(drpOtherEstablishDate, month)
-		WebUI.delay(2)
-		safetyInputEdit(txfOtherEstablishDate, year, 0.5)
-		WebUI.takeScreenshot()
+		if(month && year) {			
+			WebUI.delay(2)
+			safetySelect(drpOtherEstablishDate, month)
+			WebUI.delay(2)
+			safetyInput(txfOtherEstablishDate, year, 0.5)
+			WebUI.takeScreenshot()
+		}
 	}
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {

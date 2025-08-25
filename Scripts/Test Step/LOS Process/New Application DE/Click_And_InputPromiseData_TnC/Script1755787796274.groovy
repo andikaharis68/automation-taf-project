@@ -14,27 +14,43 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.GuarantorPage
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
+import com.taf.pageobjects.losCreditProcess.TermAndCondition
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MainInformationPage mainInfo = new MainInformationPage()
-GuarantorPage guarantor = new GuarantorPage()
+TermAndCondition tnc = new TermAndCondition()
 
-'Step 1: Input previous no '
-mainInfo.inputPreviousAppNo(PreviousAppNo) 
+'Step 1: Check and iput FC Ktp Pemohon'
+tnc.checkFcKTPPemohon1(CheckFcKtpPemohon)
 
-'Step 2: Click Next'
-mainInfo.clickNext()
+'Step 2: Check and input FC KK'
+tnc.checkFcKK(CheckFcKartuKeluarga)
 
-'Step 3: Verify Customer Name'
-mainInfo.verifyCustomername(CustomerName)
+'Step 3: Check and input FC Ijin praktek'
+tnc.checkFcIjinPraktek(CheckFcIjinPraktek)
 
-'Step 4: Click Save and continue'
-mainInfo.clickSaveContinue()
+'Step 4: Check and input FC Npwp'
+tnc.checkFc Npwp(CheckFcNpwp)
 
-'Step 5: verify Landing in guarantor'
-guarantor.verifyLandingInGuarantorPage()
+'Step 5: Check and input Fc Tabungan' 
+tnc.checkFcTabungan(CheckFcTabungan)
+
+'Step 6: Chek and Input Fc Document kepemilikan rumah'
+tnc.checkFcDocKepemilikanRumah(CheckDocKepemilikanRumah)
+
+'Step 7: Check and iput FC Ktp Pemohon'
+tnc.checkFcKtpPemohon2(CheckFcKtpPemohon)
+
+'Step 8: click save'
+tnc.clickSave()
+
+'Step 9: Switch to iframe main page'
+tnc.switchToIframeMainPage()
+
+'Step 10: click submit'
+tnc.clickSubmit()
+
+'Step 11: Click confirmation ok'
+tnc.clickConfirmationOk()
 

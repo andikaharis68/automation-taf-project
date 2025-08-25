@@ -15,12 +15,12 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.losCreditProcess.MainInformationPage
-import com.taf.pageobjects.losCreditProcess.NewApplicationPage
+import com.taf.pageobjects.losCreditProcess.NewApplicationDEPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage newApp = new NewApplicationPage()
+NewApplicationDEPage newApp = new NewApplicationDEPage()
 MainInformationPage mainInfo = new MainInformationPage()
 
 'Step 1: Switch to iframe main page'

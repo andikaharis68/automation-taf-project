@@ -77,7 +77,7 @@ job.inputOtherJobPosition(OtherJobPosition)
 'Step 18: Select Other Company Establish date'
 job.selectOtherCompanyEstablishDate(OtherEmploymentEstablishmentDateMonth, OtherEmploymentEstablishmentDateYear)
 
-'Step 19: Click Save and Continue'
+'Step 19: Click Save and Continue (need fix)'
 job.clickSaveContinue()
 
 'Step 20 : Verify Landing in emergency contact'

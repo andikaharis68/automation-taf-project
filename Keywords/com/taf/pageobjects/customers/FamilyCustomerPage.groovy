@@ -41,6 +41,7 @@ public class FamilyCustomerPage extends BaseHelper {
 	private TestObject txfMotherMaidenName	= createTestObject("txfMotherMaidenName", "xpath", "//*[@id='txtMotherMaidenName']")
 	private TestObject drpCustRelationship	= createTestObject("drpCustRelationship", "xpath", "//*[@id='ucMrCustRelationship_ddlReference']")
 
+	private TestObject btnNewFamily			= createTestObject("btnNewFamily", "id", "lb_Form_NewFam")
 	private TestObject btnNext				= createTestObject("btnNext", "xpath", "//*[@id='lb_Form_Next_Family']")
 	private TestObject btnCancel			= createTestObject("btnCancel", "xpath", "//*[@id='lb_Toolbar_Cancel']")
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
@@ -61,7 +62,12 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 
 	private void inputFamilyName(String name) {
-		safetyInput(txfFamilyName, name)
+		if(name) {
+			if(name == "AUTO") {
+				name = generateRandomName()
+			}
+			safetyInput(txfFamilyName, name)
+		}
 	}
 
 	private void selectCustomerModel(String model) {
@@ -78,13 +84,17 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 
 	private void inputIdNumber(String idNumber) {
-		safetyInput(txfIDNumber, idNumber)
+		if(idNumber) {
+			if(idNumber == "AUTO") {
+				idNumber = generateRandomNik()
+			}
+			safetyInput(txfIDNumber, idNumber)
+		}
 	}
 
 	private void inputIdExpiredDate(String idExpiredDate) {
 		safetyClick(txfIDExpiredDate)
 		safetyInput(txfIDExpiredDate, idExpiredDate)
-		WebUI.delay(2)
 		clickTABKeyboard(txfIDExpiredDate)
 	}
 	private void selectGender(String gender) {
@@ -101,29 +111,35 @@ public class FamilyCustomerPage extends BaseHelper {
 	private void inputPOB(String pob) {
 		safetyInput(txfPOB, pob)
 		clickTABKeyboard(txfPOB)
-		WebUI.delay(2)
 	}
 
 	private void inputDOB(String dob) {
 		safetyInput(txfDOB, dob)
 		clickTABKeyboard(txfDOB)
-		WebUI.delay(2)
 	}
 
 	private void inputNPWP(String npwp) {
-		String currentText = WebUI.getText(txfNPWP).trim()
-		if (!currentText) {
-			KeywordUtil.logInfo("NPWP auto filled")
-		} else {
-			safetyInput(txfNPWP, npwp)
-			WebUI.delay(2)
+		if(npwp) {
+			if(npwp == "AUTO") {
+				npwp = generateRandomNpwp()
+			}
+			String currentText = WebUI.getText(txfNPWP).trim()
+			if (!currentText) {
+				KeywordUtil.logInfo("NPWP auto filled")
+			} else {
+				safetyInput(txfNPWP, npwp)
+			}
 		}
 	}
 
 
 	private void inputMotherMaidenName(String motherMaidenName) {
-		safetyInput(txfMotherMaidenName, motherMaidenName)
-		WebUI.delay(2)
+		if(motherMaidenName) {
+			if(motherMaidenName == "AUTO") {
+				motherMaidenName = generateRandomName()
+			}
+			safetyInput(txfMotherMaidenName, motherMaidenName)
+		}
 	}
 	private void switchToIframeMain() {
 		WebUI.switchToFrame(iframeMainpage, 1)
@@ -149,9 +165,15 @@ public class FamilyCustomerPage extends BaseHelper {
 	}
 	private void clickSelectFamily() {
 		WebUI.delay(5)
-		safetyClick(radSelectFamily)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelectFamily)
+		if(WebUI.waitForElementPresent(radSelectFamily, 5)) {			
+			safetyClick(radSelectFamily)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectFamily)
+		} else {
+			safetyClick(btnNewFamily)
+			WebUI.takeScreenshot()
+		}
+		
 		WebUI.delay(2)
 	}
 }

@@ -21,7 +21,7 @@ import org.openqa.selenium.Keys as Keys
 
 String scenarioId = "1"
 Map dataRow = [:]
-String testDataName = "LOS_New_Application_DataEntry_TestData.xlsx"
+String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
 dataRow += BaseHelper.getTestDataByScenario("CreditSimulation", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 BaseHelper.openBrowser()

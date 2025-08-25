@@ -26,12 +26,13 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject lblSection				= createTestObject("lblSection","id", "ucToggleGridFinDataRegFixed_subSectionID")
 	private TestObject btnSaveContinue			= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont")
 	private TestObject btnCalculateFee			= createTestObject("btnCalculateFee", "id", "lb_Form_CalcFee")
-	private TestObject btnCalculate				= createTestObject("btnCalculate", "id", "lbCalculateFees")
+	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "//*[@id='lbCalculateFees']") 
 	private TestObject btnCalculateInstallment	= createTestObject("btnCalculateInstallment", "id", "lbCalculateFinancialData")
 	
 	
 	private void verifyLandingInFinancialData() {
 		verifyLanding(lblSection, "Financial Data")
+		WebUI.takeScreenshot()
 	}
 	
 	private void clickSaveContinue() {

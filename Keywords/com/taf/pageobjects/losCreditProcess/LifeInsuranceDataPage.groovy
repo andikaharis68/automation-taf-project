@@ -22,15 +22,18 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class LifeInsuranceDataPage extends BaseHelper {
-	
-	private TestObject lblSection			= createTestObject("lblSection", "xpath", "//*[@id='divLifeInsInfo']/table/tbody/tr[1]/td[1]") 
-	private TestObject btnSaveContinue	= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont") 
-	
+
+	private TestObject lblSection			= createTestObject("lblSection", "xpath", "//*[@id='ucToggleLifeInsInfo_subSectionID']")  
+	private TestObject btnSaveContinue		= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont")
+
 	private void verifyLandingInLifeInsuranceData() {
+		WebUI.delay(5)
 		verifyLanding(lblSection, "Life Insurance")
+		WebUI.takeScreenshot()
 	}
-	
+
 	private void clickSaveAndContinue() {
+		WebUI.delay(0.5)
 		safetyClick(btnSaveContinue)
 	}
 }

@@ -18,12 +18,13 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.losCreditProcess.InsuranceDataPage
+import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 InsuranceDataPage insuranceData = new InsuranceDataPage()
-MenuPage
+LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 
 'Step 1: Click Edit'
 insuranceData.clickEdit()
@@ -47,7 +48,10 @@ insuranceData.clickCalculate()
 insuranceData.clickSave()
 
 'Step 8: Click next'
-insuranceData.clickNext()
+insuranceData.clickNextToSaveAndContinue()
 
 'Step 9: click save and continue'
 insuranceData.clickSaveAndContinue()
+
+'Step 10: Verify landing in life insurance data'
+lifeInsurance.verifyLandingInLifeInsuranceData()

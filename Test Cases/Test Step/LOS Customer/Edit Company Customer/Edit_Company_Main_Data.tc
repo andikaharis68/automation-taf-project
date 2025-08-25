@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Next_Until_SubmitApplication</name>
+   <name>Edit_Company_Main_Data</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>58e600f0-9ce0-4bfd-8a6b-83c7562550f2</testCaseGuid>
+   <testCaseGuid>9b469f8c-8a74-4301-9175-0ce9db0119dc</testCaseGuid>
 </TestCaseEntity>

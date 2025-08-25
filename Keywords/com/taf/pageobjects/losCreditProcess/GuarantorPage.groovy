@@ -31,10 +31,11 @@ public class GuarantorPage extends BaseHelper {
 	private TestObject btnCancel			= createTestObject("btnCancel", "id", "lb_Form_Cancel")
 	private TestObject btnSearchCustName	= createTestObject("btnSearchCustName", "id", "ucLookupCust_uclCust_imb")
 	
-	private TestObject txfOvlyCustName		= createTestObject("txfOvlyCustName", "xpath", "[contains(@id, 'txtSearchValue_0')]")
-	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "[contains(@id, 'lbSearch')]") 
-	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "[contains(@id, 'hpSelect_0')]") 
+	private TestObject txfOvlyCustName		= createTestObject("txfOvlyCustName", "xpath", "//*[@id='ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']") 
+	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id,'lbSearch')]") 
+	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect_0')]") 
 	private TestObject drpCustRelationship	= createTestObject("drpCustRelationship", "id", "ddlRefMasterCustRelation")
+	private TestObject iframeApp			= createTestObject("iframeApp", "id", "appForm")
 	
 	
 	
@@ -49,34 +50,31 @@ public class GuarantorPage extends BaseHelper {
 	}
 	private void inputCustomerName(String name) {
 		safetyClick(btnSearchCustName)
+		Mobile.delay(2)
+		safetyClick(txfOvlyCustName)
 		safetyInput(txfOvlyCustName, name)
+		Mobile.delay(3)
 		safetyClick(btnOvlySearch)
-		safetyClick(btnOvlySelect)
 		WebUI.takeScreenshot()
+		safetyClick(btnOvlySelect)
 	}
 	
 	private void clickAddPersonal() {
 		safetyClick(btnAddPersonal)
+		WebUI.takeScreenshot()
 	}
 	
 	private void clickAddCompany() {
 		safetyClick(btnAddCompany)
+		WebUI.takeScreenshot()
 	}
 	
-	private Map getGuarantorData(String scenarioId, String type, String filePath, String sheetName) {
-		def testDataMultiple = BaseHelper.getTestDataMultipleByScenario(sheetName, filePath, scenarioId)
-		def testData = testDataMultiple?.find { it.AddressTypeName == type }
-		if (!testData) {
-			KeywordUtil.markFailed("AddressType '${type}' not found")
-		}
-		KeywordUtil.logInfo("testData: $testData")
-		return testData
-	}
 	private void clickSave() {
 		safetyClick(btnSave)
 		WebUI.takeScreenshot()
 	}
 	private void clickSaveContinue() {
+		WebUI.delay(5)
 		safetyClick(btnSaveContinue)
 	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>VerifySuccessMessage</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>9b469f8c-8a74-4301-9175-0ce9db0119dc</testCaseGuid>
+   <testCaseGuid>b1c725d3-33a6-445b-a880-aa08d8133bfe</testCaseGuid>
 </TestCaseEntity>

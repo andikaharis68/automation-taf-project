@@ -27,51 +27,30 @@ FinancialDataPage financial = new FinancialDataPage()
 contact.clickAddContact()
 
 'Step 2: Input name'
-contact.inputName(Name)
+contact.inputName(EmergencyName)
 
 'Step 3: Select Customer Relationship'
 contact.selectCustomerRelationship(CustRelationship)
 
 'Step 4: Input phone number1 '
-contact.inputMobilePhone(MobilePhone1, 1)
+contact.inputMobilePhone(EmergencyMobilePhone1, 1)
 
 'Step 5: Input phone number2'
-contact.inputMobilePhone(MobilePhone2, 2)
+contact.inputMobilePhone(EmergencyMobilePhone2, 2)
 
 'Step 6: Input phone number3'
-contact.inputMobilePhone(MobilePhone3, 3)
+contact.inputMobilePhone(EmergencyMobilePhone3, 3)
 
 'Step 7: Input email1'
-contact.inputEmails(Email1, 1)
+contact.inputEmails(EmergencyEmail1, 1)
 
 'Step 8: Input email2'
-contact.inputEmails(Email2, 2)
+contact.inputEmails(EmergencyEmail2, 2)
 
-'Step 9: Input address'
-contact.inputAddress(Address)
-
-'Step 10: Input RT'
-contact.inputRT(RT)
-
-'Step 11: Input RT'
-contact.inputRW(RW)
-
-'Step 12: Select Address'
-contact.searchAddress(ZIPCODE)
-
-'Step 13: Input phone number1 '
-contact.inputPhoneNumbers(Phone1, 1)
-
-'Step 14: Input phone number2'
-contact.inputPhoneNumbers(Phone2, 2)
-
-'Step 15: Input fax'
-contact.inputFax(Fax)
-
-'Step 16: Click save contact'
+'Step 9: Click save contact'
 contact.clickSaveContact()
 
-'Step 17: Verify Landing in Financial Data'
+'Step 10: Verify Landing in Financial Data'
 financial.verifyLandinginFinancialPage()
 
 
