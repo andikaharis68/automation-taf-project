@@ -93,7 +93,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickCustomer() {
-		WebUI.click(btnCustomer)
+		safetyClick(btnCustomer)
 		WebUI.takeScreenshot()
 		WebUI.delay(3)
 	}
@@ -227,6 +227,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
 		WebUI.click(btnProspect)
+		WebUI.takeScreenshot()
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}

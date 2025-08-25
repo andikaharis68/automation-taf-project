@@ -105,6 +105,15 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject drpBuildingOwner			= createTestObject("drpBuildingOwner", "id", "ucAddrInfoCust_ucOwnershipStat_ddlReference")
 	private TestObject txfBuildingStay			= createTestObject("txfBuildingStay", "id", "ucAddrInfoCust_txtStayLength_txtInput")
 
+	//income
+	private TestObject txfGrossMonthlyIncome	= createTestObject("txfGrossMonthlyIncome", "id", "txt_CustFinData_GrossMonthlyIncomeAmt_txtInput")
+	private TestObject txfGrossProfit			= createTestObject("txfGrossProfit", "id", "txt_CustFinData_GrossProfitAmt_txtInput")
+	private TestObject txfOtherIncome			= createTestObject("txfOtherIncome", "id", "txt_CustFinData_OthIncomeAmt_txtInput")
+	private TestObject txfSourceOfOtherIncome	= createTestObject("txfSourceOfOtherIncome", "id", "txt_CustFinData_SourceOfOthIncome")
+	private TestObject txfLivingCost			= createTestObject("txfLivingCost", "id", "txt_CustFinData_LivingCostAmt_txtInput")
+	private TestObject txfOtherMonthlyInstallment = createTestObject("txfOtherMonthlyInstallment", "id", "txt_CustFinData_OthMonthlyInstAmt_txtInput")
+	private TestObject btnCalculateIncome		= createTestObject("btnCalculateIncome", "id", "btnCalculate")
+	
 	//attribute list
 	private TestObject drpDebitorBusinessScale	= createTestObject("drpDebitorBusinessScale", "id", "ucAddrInfoCust_txtStayLength_txtInput")
 
@@ -162,6 +171,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void searchCentralizedDataCompletion(String customerName) {
+		WebUI.takeScreenshot()
 		WebUI.waitForElementPresent(txfCustomerName, 5)
 		safetyInput(txfCustomerName, customerName)
 		safetyClick(btnSearch)
@@ -171,6 +181,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void inputInfoDealAndDecision(String notes) {
+		WebUI.takeScreenshot()
 		safetyInput(txfNotesInfo, notes)
 	}
 
@@ -181,6 +192,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfMobilePhone, mobilePhone)
 		safetyClick(txfMotherName)
 		safetyInput(txfMotherName, motherName)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputContactResult(String isCallSucceded, String reason, String cpRelationship, String surveyorCode, String contactedName, String notes) {
@@ -215,6 +227,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfYearEmploymentDate, employmentYear, 1)
 
 		safetySelect(drpSurveyProfession, surveyProfession)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickEditResidenceAddress() {
@@ -222,6 +235,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void inputResidenceAddressMain(String kelurahan, String kecamatan, String city, String zipCode, String residenceAddress, String rt, String rw, String phoneArea, String phone, String phoneExt) {
+		WebUI.takeScreenshot()
 		//lookup zipcode
 		safetyClick(icoLookUpZipCode)
 		safetyInput(txfKelurahan, kelurahan)
@@ -247,10 +261,12 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetySelect(drpBuildingType, buildingType)
 		safetySelect(drpBuildingOwner, buildingOwner)
 		safetyInput(txfBuildingStay, buildingStayLength)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSaveAddress() {
 		safetyClick(btnSaveAddress)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickEditJobAddress() {
@@ -258,8 +274,10 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void copyJobAddressFromResidenceAddress() {
+		WebUI.takeScreenshot()
 		safetySelect(drpCopyAddress, "Residence Address")
 		safetyClick(btnCopy)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickAddAddress() {
@@ -267,9 +285,35 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void copyAndAddLegalAddressFromResidenceAddress() {
+		WebUI.takeScreenshot()
 		safetySelect(drpCopyAddress, "Residence Address")
 		safetyClick(btnCopy)
 		safetySelect(drpAddressType, "Legal Address")
+		WebUI.takeScreenshot()
+	}
+	
+	public void inputIncome(String grossMonthly, String grossProfit, String otherIncome, String sourceOfOtherIncome, String livingCost, String otherMonthly) {
+		manualClearText(txfGrossMonthlyIncome)
+		safetyInput(txfGrossMonthlyIncome, grossMonthly)
+		
+		manualClearText(txfGrossProfit)
+		safetyInput(txfGrossProfit, grossProfit)
+		
+		manualClearText(txfOtherIncome)
+		safetyInput(txfOtherIncome, otherIncome)
+		
+		safetyInput(txfSourceOfOtherIncome, sourceOfOtherIncome)
+		
+		manualClearText(txfLivingCost)
+		safetyInput(txfLivingCost, livingCost)
+		
+		manualClearText(txfOtherMonthlyInstallment)
+		safetyInput(txfOtherMonthlyInstallment, otherMonthly)
+	}
+	
+	public void clickCalculateIncome() {
+		safetyClick(btnCalculateIncome)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputAttributeList(String debitorGroup, String debitorScale, String counterpartCategory, String debitorGroupSlik, String affiliateMultifinanceSlik) {
@@ -278,8 +322,8 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfDescDebitor, debitorGroup)
 		safetyClick(btnSearchDebitor)
 		safetyClick(btnSelectDebitor)
-
-		//		safetySelect(drpDebitorBusinessScale, debitorScale) ini sementara di comment soalnya di web uat1 disable
+		WebUI.takeScreenshot()
+		//safetySelect(drpDebitorBusinessScale, debitorScale) ini di comment karena, auto input setelah calculate pada section income
 
 		//counterpart category
 		safetyClick(icoCounterpartCategory)
@@ -298,10 +342,12 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfAffiliateSlik, affiliateMultifinanceSlik)
 		safetyClick(btnSearchAffiliateSlik)
 		safetyClick(btnSelectAffiliateSlik)
+		WebUI.takeScreenshot()
 	}
 
 	public void selectWayOfPayment(String wayOfPayment) {
 		safetySelect(drpWayOfPayment, wayOfPayment)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickEditAsset() {
@@ -312,25 +358,29 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		txtSelfUsage = createTestObject("txtSelfUsage", "xpath", "//*[@id = 'rblAssetUser']//label[text() = '$selfUsage']")
 
 		safetyClick(txtSelfUsage)
+		WebUI.takeScreenshot()
 	}
 
 	public void copyAssetLocationFromLegalAddress() {
 		safetySelect(drpCopyAddressAsset, "Legal Address")
 		safetyClick(btnCopyAddressAsset)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputOtherAssetInfo(String assetUsage, String teleSurveyUnitUsage) {
 		safetySelect(txfAssetUsage, assetUsage)
 		safetySelect(txfSurveyUnitUsage, teleSurveyUnitUsage)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSaveAssetUser() {
 		safetyClick(btnSaveAssetUser)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSubmit() {
-		WebUI.takeScreenshot()
 		safetyClick(btnSubmit)
+		WebUI.takeScreenshot()
 	}
 
 	public void verifySubmitSuccess() {

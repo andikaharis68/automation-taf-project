@@ -28,7 +28,7 @@
    <testCaseLink>
       <guid>bd2afed7-420b-4814-9cf7-41d1aceb6976</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Centralized_Data_Entry_Completion</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
