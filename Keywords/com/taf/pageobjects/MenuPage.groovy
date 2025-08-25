@@ -17,6 +17,7 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
@@ -56,7 +57,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnTAFReports				= createTestObject("btnTAFReports", "xpath", "//a[@id='rModuleList_lbModuleList_6']")
 	private TestObject btnInternalSystem			= createTestObject("btnInternalSystem", "xpath", "//a[@id='rModuleList_lbModuleList_7']")
 	private TestObject btnCreditProcessInquiry		= createTestObject("btnCreditProcessInquiry", "xpath", "") // ada di favourite
-	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
+	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a") 
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
 	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
@@ -94,6 +95,7 @@ public class MenuPage extends BaseHelper {
 	private void clickCustomer() {
 		safetyClick(btnCustomer)
 		WebUI.takeScreenshot()
+		WebUI.delay(3)
 	}
 
 	private void switchDefaultContent() {
