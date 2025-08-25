@@ -10,19 +10,21 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.customers.AddressPage
-import com.taf.pageobjects.customers.CompanyCustomerMainDataPage
-
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.customers.AddressPage as AddressPage
+import com.taf.pageobjects.customers.CompanyCustomerMainDataPage as CompanyCustomerMainDataPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 CompanyCustomerMainDataPage companyCustomerMainDataPage = new CompanyCustomerMainDataPage()
+
 AddressPage address = new AddressPage()
+MenuPage menu = new MenuPage()
 
 'Step 1: check box the is new application'
 companyCustomerMainDataPage.clickIsNewApplication(NextToNewApplication)
@@ -60,18 +62,6 @@ companyCustomerMainDataPage.inputCustomerGroupThenSelectedFirstFound(CustomerGro
 'Step 12: save content after main data is filled'
 companyCustomerMainDataPage.saveContentAfterMainDataIsFilled()
 
-'Step 13: Verify Landing Address Page'
-address.verifyLandingInAddressSection()
-
-
-
-
-
-
-
-
-
-
-
-
+'Step 13: Verify success message'
+menu.verifySuccessMessage()
 

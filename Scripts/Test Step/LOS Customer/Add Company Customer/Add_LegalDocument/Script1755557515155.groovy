@@ -14,12 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.customers.LegalDocument
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 LegalDocument legalDoc = new LegalDocument()
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+menu.switchIframeCustForm()
 
 'Step 1: Verify landing in Legal Document Page'
 legalDoc.verifyLandingScreen()
@@ -32,3 +38,6 @@ legalDoc.clickSaveAndContinue()
 
 'Step 4: Verify save success'
 legalDoc.verifySaveSuccess()
+
+'Step 5: Verify success message'
+menu.verifySuccessMessage()

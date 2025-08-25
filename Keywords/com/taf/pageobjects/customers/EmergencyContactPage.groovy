@@ -60,6 +60,9 @@ public class EmergencyContactPage extends BaseHelper {
 
 	private void inputName(String name) {
 		if(name) {
+			if(name =="AUTO") {
+				name = generateRandomName()
+			}
 			safetyInput(txfName, name)
 		}
 	}
@@ -178,6 +181,9 @@ public class EmergencyContactPage extends BaseHelper {
 
 	private void inputMobilePhone(String phone, int index) {
 		if(phone) {
+			if(phone =="AUTO") {
+				phone = generateRandomPhone()
+			}
 			TestObject countryField	= createTestObject("countryField", "xpath", "//*[@id='ucEmergencyContactInfo_txt_CustEmergencyCntct_MobilePhn${index}']")
 			safetyInput(countryField, phone)
 			WebUI.delay(2)

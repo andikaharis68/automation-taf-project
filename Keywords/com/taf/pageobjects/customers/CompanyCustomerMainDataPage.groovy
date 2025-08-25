@@ -45,19 +45,30 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	private TestObject btnEditCustomer 						= createTestObject("btnEditCustomer", "xpath", "//*[@id='gvCustomerCompany_imbEdit_0']")
 	private TestObject btnMainTab 							= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
 	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
+	private TestObject iframeMainPage	 					= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 
 	
 	private void verifyLandingInMainPage() {
 		verifyLanding(iconLookUpCustomerGroup, "Company Customer Main Data")
 	}
 
+	private void switchToDefaultContent() {
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void switchToMainPage() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	
 	private void switchToIframeCustForm() {
 		WebUI.switchToFrame(iframeCustForm, 2, FailureHandling.STOP_ON_FAILURE)
 	}
 
 	private void clickIsNewApplication(String isNewApplication) {
-		if(isNewApplication?.trim() == 'Y') {
-			safetyClick(checkBoxIsNewApplication)
+		if(isNewApplication) {			
+			if(isNewApplication?.trim() == 'Y') {
+				safetyClick(checkBoxIsNewApplication)
+			}
 		}
 	}
 
@@ -90,21 +101,27 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	}
 
 	private void clickCheckBoxIsPremium(String isPremium, String premiumNote) {
-		if(isPremium?.trim() == 'Y') {
-			WebUI.check(cbIsPremium)
-			safetyInput(txfPremiumNote, premiumNote)
+		if(isPremium) {			
+			if(isPremium?.trim() == 'Y') {
+				WebUI.check(cbIsPremium)
+				safetyInput(txfPremiumNote, premiumNote)
+			}
 		}
 	}
 
 	private void clickCheckBoxIsAffiliate(String isAffiliate) {
-		if(isAffiliate?.trim() == 'Y') {
-			WebUI.check(cbIsAffialite)
+		if(isAffiliate) {			
+			if(isAffiliate?.trim() == 'Y') {
+				WebUI.check(cbIsAffialite)
+			}
 		}
 	}
 
 	private void clickCheckBoxIsVIP(String isVIP) {
-		if(isVIP.trim() == 'Y') {
-			WebUI.check(cbIsVIP)
+		if(isVIP) {			
+			if(isVIP.trim() == 'Y') {
+				WebUI.check(cbIsVIP)
+			}
 		}
 	}
 
@@ -131,6 +148,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 			// click select in first found
 			safetyClick(btnOvlySelectCustGroup)
 		}
+		WebUI.takeScreenshot()
 	}
 
 	private void saveContentAfterMainDataIsFilled() {

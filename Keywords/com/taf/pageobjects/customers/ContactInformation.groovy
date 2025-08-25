@@ -51,18 +51,32 @@ public class ContactInformation extends BaseHelper{
 	}
 
 	public void inputContactData(String name, String jobPosition) {
-		safetyInputEdit(txfName, name)
-		safetySelectEdit(drpJobPosition, jobPosition)
+		if(name && jobPosition) {			
+			if(name == "AUTO") {
+				name = generateRandomName()
+			}
+			safetyInputEdit(txfName, name)
+			safetySelectEdit(drpJobPosition, jobPosition)
+		} 
 	}
 
 	public void inputContactInformation(String mobilePhone1, String phone1, String email1) {
-		safetyInputEdit(txfMobilePhone1, mobilePhone1)
-
-		String[] splittedPhone = phone1.split("-")
-		safetyInputEdit(txfPhoneArea1, splittedPhone[0])
-		safetyInputEdit(txfPhone1, splittedPhone[1])
-		safetyInputEdit(txfPhoneExt1, splittedPhone[2])
-
+		if(mobilePhone1) {
+			if(mobilePhone1 == "AUTO") {
+				mobilePhone1 = generateRandomPhone()
+			}
+			safetyInputEdit(txfMobilePhone1, mobilePhone1)
+		}
+		
+		if(phone1) {
+			if(phone1 == "AUTO") {
+				phone1 = generateRandomPhone(true)
+			}
+			String[] splittedPhone = phone1.split("-")
+			safetyInputEdit(txfPhoneArea1, splittedPhone[0])
+			safetyInputEdit(txfPhone1, splittedPhone[1])
+			safetyInputEdit(txfPhoneExt1, splittedPhone[2])
+		}
 		safetyInputEdit(txfEmail1, email1)
 	}
 

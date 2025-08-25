@@ -33,13 +33,13 @@ family.selectCustomerModel(CustomerModel)
 family.inputFamilyName(FamilyName)
 
 'Step 4: Select id type'
-family.selectIdType(IDType)
+family.selectIdType(IdType)
 
 'Step 5: Input ID no'
-family.inputIdNumber(IDNumber)
+family.inputIdNumber(IdNumber)
 
 'Step 6: Input ID Expired Date'
-family.inputIdExpiredDate(IDExpiredDate)
+family.inputIdExpiredDate(IdExpiredDate)
 
 'Step 7: Select Gender'
 family.selectGender(Gender)
@@ -51,7 +51,7 @@ family.inputPOB(BirthPlace)
 family.inputDOB(BirthDate)
 
 'Step 10: Input NPWP'
-family.inputNPWP(NPWP)
+family.inputNPWP(Npwp)
 
 'Step 11: Input Mother Name'
 family.inputMotherMaidenName(MotherMaidenName)
