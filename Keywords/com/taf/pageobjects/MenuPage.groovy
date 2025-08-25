@@ -213,6 +213,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
 		WebUI.click(btnProspect)
+		WebUI.takeScreenshot()
 		WebUI.click(btnCDECompletion)
 		WebUI.switchToDefaultContent()
 	}
