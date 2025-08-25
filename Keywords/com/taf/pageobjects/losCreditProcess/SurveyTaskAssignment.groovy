@@ -60,9 +60,9 @@ public class SurveyTaskAssignment extends BaseHelper{
 	private void cancelAllTask() {
 		WebUI.delay(2)
 		def cancel = getListElementByTestObject("//input[@title = 'Cancel']") //digunakan untuk mendapatkan semua btn cancel
-		def countCancel = cancel.size() 
+		def countCancel = cancel.size()
 		TestObject btnCancel = createTestObject("btnCancel", "xpath", "(//input[@title = 'Cancel'])[1]")
-		countCancel.times { 
+		countCancel.times {
 			WebUI.click(btnCancel)
 			WebUI.delay(2)
 			WebUI.acceptAlert()

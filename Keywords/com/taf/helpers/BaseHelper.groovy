@@ -43,6 +43,7 @@ import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.openqa.selenium.Alert
 import org.openqa.selenium.By
+import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.Keys
 import org.openqa.selenium.PageLoadStrategy
 
@@ -508,6 +509,19 @@ class BaseHelper {
 			return "${prefix}-${number}-${suffix}"
 		} else {
 			return prefix + number + suffix
+		}
+	}
+	
+	def scrollDownUntillElementVisible(TestObject to, int maxScroll=10, int step=500) {
+		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getWebDriver()
+
+		for(int i=0; i<maxScroll; i++) {
+			KeywordUtil.logInfo("index $i")
+			if(WebUI.verifyElementVisible(to, FailureHandling.OPTIONAL)) {
+				KeywordUtil.logInfo("Element found after scroll ${i}")
+				return true
+			}
+			js.executeScript("window.scrollBy(0,"+ step + ")")
 		}
 	}
 }

@@ -24,6 +24,7 @@ import internal.GlobalVariable
 
 public class DocumentSignerPage extends BaseHelper{
 
+	private TestObject lblTitle					= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject txfAgreementNo			= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
 	private TestObject txfApplicationtNo		= createTestObject("txfApplicationtNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
 	private TestObject btnSearch				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
@@ -57,57 +58,84 @@ public class DocumentSignerPage extends BaseHelper{
 	private TestObject btnSelectApprover1		= createTestObject("btnSelectApprover1", "id", "uclCoyApprover1_uclCustCoyShareHolder_umd_ctl00_gvL_hpSelect_0") //hanya select yg atas
 
 
-
-	private void searchTransactionByAgreementNumber(String appNo) {
+	
+	private void verifyDocSignerLandingPage() {
+		WebUI.switchToFrame(iframeMainPage, 3)
+		verifyLanding(lblTitle, 'Document Signer')
+		WebUI.takeScreenshot()
+	}
+	
+	private void searchTransactionByApplicationNumber(String appNo) {
 		safetyInput(txfApplicationtNo, appNo)
 		safetyClick(btnSearch)
 		WebUI.takeScreenshot()
 	}
 
 
-	private void editTransaction(String appNo) {
+	private void entryDocument(String appNo) {
 		TestObject rowExist = createTestObject("rowExist", "xpath", "//a[text() = '$appNo']")
 		def exist = WebUI.verifyElementPresent(rowExist, 3, FailureHandling.OPTIONAL)
 
 		if(rowExist) {
 			TestObject btnPenEdit = createTestObject("btnPenEdit", "xpath", "${getXpath(rowExist)}/following::td[4]//input")
-			WebUI.takeScreenshot()
 			safetyClick(btnPenEdit)
+			WebUI.delay(1)
 		}else {
 			KeywordUtil.markFailedAndStop("reff no not exist $appNo")
 		}
 	}
 
-	private selectCompany(String input) {
-
-		safetyClick(btnLookUpOfficer2)
-
-		//pop up
-		safetyInput(txfEmployeeName, input)
-		safetyClick(btnSearchEmployee)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelectEmployee)
+	private selectCompanySigner(String input) {
+		
+		def exist = WebUI.verifyElementPresent(btnLookUpOfficer2, 2, FailureHandling.OPTIONAL)
+		
+		if(exist) {
+			safetyClick(btnLookUpOfficer2)
+			
+			//pop up
+			safetyInput(txfEmployeeName, input)
+			safetyClick(btnSearchEmployee)
+			WebUI.delay(2)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectEmployee)
+		}
 	}
 
 	private selectShareholder(String input) {
-
-		safetyClick(btnLookUpShareholder)
-
-		//pop up
-		safetyInput(txfCommisionerName, input)
-		safetyClick(btnSearchCommisioner)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelectCommisioner)
+		
+		def exist = WebUI.verifyElementPresent(btnLookUpShareholder, 2, FailureHandling.OPTIONAL)
+		
+		if(exist) {
+			safetyClick(btnLookUpShareholder)
+			
+			//pop up
+			safetyInput(txfCommisionerName, input)
+			safetyClick(btnSearchCommisioner)
+			WebUI.delay(2)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectCommisioner)
+		}
 	}
 
 	private selectOfficerApprover(String input) {
 
-		safetyClick(btnLookUpApprover1)
-
-		//pop up
-		safetyInput(txfApprover1Name, input)
-		safetyClick(btnSearchApprover1)
+		def exist = WebUI.verifyElementPresent(btnLookUpApprover1, 2, FailureHandling.OPTIONAL)
+		
+		if(exist) {
+			safetyClick(btnLookUpApprover1)
+			
+			//pop up
+			safetyInput(txfApprover1Name, input)
+			safetyClick(btnSearchApprover1)
+			WebUI.delay(2)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectApprover1)
+		}
+	}
+	
+	private clickSubmitSigner() {
+		WebUI.click(btnSubmit)
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
-		safetyClick(btnSelectApprover1)
 	}
 }

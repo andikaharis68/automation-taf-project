@@ -14,27 +14,12 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.GuarantorPage
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
+import com.taf.pageobjects.MenuPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MainInformationPage mainInfo = new MainInformationPage()
-GuarantorPage guarantor = new GuarantorPage()
+MenuPage menu = new MenuPage()
 
-'Step 1: Input previous no '
-mainInfo.inputPreviousAppNo(PreviousAppNo) 
-
-'Step 2: Click Next'
-mainInfo.clickNext()
-
-'Step 3: Verify Customer Name'
-mainInfo.verifyCustomername(CustomerName)
-
-'Step 4: Click Save and continue'
-mainInfo.clickSaveContinue()
-
-'Step 5: verify Landing in guarantor'
-guarantor.verifyLandingInGuarantorPage()
-
+'Step 1: select menu to navigate customer confirmation'
+menu.navigateToCustomerConfirmation()

@@ -17,6 +17,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.ApplicationDataPage
 import com.taf.pageobjects.losCreditProcess.GuarantorPage
 
 import internal.GlobalVariable as GlobalVariable
@@ -24,6 +25,7 @@ import org.openqa.selenium.Keys as Keys
 
 GuarantorPage guarantor = new GuarantorPage()
 MenuPage menu = new MenuPage()
+ApplicationDataPage appData = new ApplicationDataPage()
 
 'Step 1: click add personal'
 guarantor.clickAddPersonal()
@@ -37,17 +39,23 @@ guarantor.selectCustRelationship(CustomerRelationshipPersonal)
 'Step 4: Click Save'
 guarantor.clickSave()
 
-'Step 5: Click Add Company'
+'Step 5: Verify Success message'
+//menu.verifySuccessMessage()
+
+'Step 6: Click Add Company'
 guarantor.clickAddCompany()
 
-'Step 6: Input customer name'
+'Step 7: Input customer name'
 guarantor.inputCustomerName(GuarantorCompany)
 
-'Step 7: Select Customer relationship'
+'Step 8: Select Customer relationship'
 guarantor.selectCustRelationship(CustomerRelationshipCompany)
 
-'Step 8: Click Save'
+'Step 9: Click Save'
 guarantor.clickSave()
+
+'Step 10: Verify Success Message'
+//menu.verifySuccessMessage()
 
 'Step 9: Click save and continue'
 guarantor.clickSaveContinue()
@@ -55,8 +63,5 @@ guarantor.clickSaveContinue()
 'Step 10: verify notif success'
 menu.verifySuccessMessage()
 
-'Step 11:switch to iframe '
-
-'Step 10: verify landing'
-
-
+'Step 11: verify landing application data'
+appData.verifyLandingInAppData()

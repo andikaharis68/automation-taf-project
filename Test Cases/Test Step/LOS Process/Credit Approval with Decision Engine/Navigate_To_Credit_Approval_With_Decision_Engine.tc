@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_Credit_Approval_With_Decision_Engine</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>7f750f3e-5a18-4e06-9e15-d947fd976603</testCaseGuid>
+</TestCaseEntity>

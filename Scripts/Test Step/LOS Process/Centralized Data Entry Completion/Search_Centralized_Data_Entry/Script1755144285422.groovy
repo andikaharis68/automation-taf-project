@@ -14,12 +14,12 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletion
+import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletion cdeCompletion = new CentralizedDataEntryCompletion()
+CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
 
 'Step 1: switch to iframe'
 cdeCompletion.switchToIframeMain()

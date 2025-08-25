@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>Input_Data_Document_Signer</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>909b3495-3581-4f0d-b1d2-247da64d4521</testCaseGuid>
+   <testCaseGuid>b668eab9-9509-4075-bbdb-aa472612dc47</testCaseGuid>
 </TestCaseEntity>

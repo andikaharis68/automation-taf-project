@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_to_DocumentChecklist</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c7fefabb-38ee-4169-9e08-77c78bb247cc</testCaseGuid>
+</TestCaseEntity>

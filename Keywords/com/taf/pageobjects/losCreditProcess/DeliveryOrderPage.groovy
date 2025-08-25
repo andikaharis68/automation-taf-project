@@ -60,7 +60,7 @@ public class DeliveryOrderPage extends BaseHelper{
 		verifyLanding(lblTitle, "delivery order")
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void searchTransaction(String appNo) {
 		safetyInput(txfApplicationNo, appNo)
 		WebUI.click(btnSearch)
@@ -117,7 +117,7 @@ public class DeliveryOrderPage extends BaseHelper{
 	private void clickAllCheckBox(String faktur) {
 		def countMandatory = getListElementByTestObject("//span[contains(@id, 'gvAssetDoc_lblIsMandatory_')]") //mencari total mandatory
 		def looping = countMandatory.size()
-		looping.times { i -> 
+		looping.times { i ->
 			TestObject chkMandatory = createTestObject("chkMandatory", "xpath", "//span[@id = 'gvAssetDoc_lblIsMandatory_$i' and text() = 'Yes']/following::input[1]")
 			def isMandatory = WebUI.verifyElementPresent(chkMandatory, 1, FailureHandling.OPTIONAL)
 			if(isMandatory) {
@@ -125,7 +125,7 @@ public class DeliveryOrderPage extends BaseHelper{
 				WebUI.delay(2)
 			}
 		}
-		
+
 		WebUI.setText(txfFaktur, faktur)
 		WebUI.takeScreenshot()
 	}
