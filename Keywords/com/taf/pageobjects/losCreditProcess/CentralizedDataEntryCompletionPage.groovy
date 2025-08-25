@@ -152,7 +152,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject btnSaveAssetUser			= createTestObject("btnSaveAssetUser", "id", "lbSaveAsset")
 
 	//asset location
-	private TestObject drpCopyAddressAsset		= createTestObject("drpCopyAddressAsset", "id", "ucCopyAddrOwner_ddlReference")
+	private TestObject drpCopyAddressAsset		= createTestObject("drpCopyAddressAsset", "id", "ucCopyAddrAssLoc_ddlReference")
 	private TestObject btnCopyAddressAsset		= createTestObject("btnCopy", "id", "lb_Form_Copy_Assloc")
 
 	//other asset info
