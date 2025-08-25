@@ -66,10 +66,20 @@ public class MenuPage extends BaseHelper {
 
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
+	private TestObject iframeMainPage				= createTestObject("iframeMenu", "xpath", "//*[@id='mainPage']")
+	private TestObject iframeCustForm 				= createTestObject("iframeMenu", "xpath", "//*[@id='custForm']")
 	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//*[@id='rtvMenuTree']/ul/li[2]/div/a")
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
+	}
+	
+	private void switchIframeMainPage() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	
+	private void switchIframeCustForm() {
+		WebUI.switchToFrame(iframeCustForm, 2)
 	}
 
 	private void clickDropdownMenu() {

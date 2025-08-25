@@ -174,9 +174,10 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void clickSaveAccount() {
-		WebUI.delay(5)
+		WebUI.delay(2)
 		safetyClick(btnSaveBankAcc)
-		handleAlertIfPresent()
+		WebUI.delay(2)
+		clickKeyboardEnter()
 		WebUI.takeScreenshot()
 	}
 	private void clickAddStatement() {
@@ -260,6 +261,9 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
+		if(accountName == "AUTO") {
+			accountName = generateRandomName()
+		}
 		selectBankName(bankName)
 		inputBranchName(branchName)
 		inputAccName(accountName)

@@ -34,7 +34,7 @@ custInfo.switchToDefaultContent()
 
 'Step 3: Switch to iframe menu'
 custInfo.switchToIframeMain()
-
+	
 'Step 4: Verify landing add personal customer page'
 addPersonal.verifyLandingAddPersonalPage()
 
@@ -42,19 +42,19 @@ addPersonal.verifyLandingAddPersonalPage()
 addPersonal.selectCustomerModel(CustomerModel)
 
 'Step 6: Input Customer Name'
-addPersonal.inputCustomerName(CustomerName)
+CustomerName = addPersonal.inputCustomerName(CustomerName)
 
 'Step 7: Select Id Type'
-addPersonal.selectIdType(IDType)
+addPersonal.selectIdType(IdType)
 
 'Step 8: Input ID Number'
-addPersonal.inputIdNumber(IDNumber)
+addPersonal.inputIdNumber(IdNumber)
 
 'Step 9: Select Gender'
 addPersonal.selectGender(Gender)
 
 'Step 10: Input ID Expired Date'
-addPersonal.inputIdExpiredDate(IDExpiredDate)
+addPersonal.inputIdExpiredDate(IdExpiredDate)
 
 'Syep 11: Input POB'
 addPersonal.inputPOB(BirthPlace)
@@ -63,7 +63,7 @@ addPersonal.inputPOB(BirthPlace)
 addPersonal.inputDOB(BirthDate)
 
 'Step 13: Input NPWP'
-addPersonal.inputNPWP(NPWP)
+//addPersonal.inputNPWP(NPWP)
 
 'Step 14: Input Mother Maiden Name'
 addPersonal.inputMotherMaidenName(MotherMaidenName)
