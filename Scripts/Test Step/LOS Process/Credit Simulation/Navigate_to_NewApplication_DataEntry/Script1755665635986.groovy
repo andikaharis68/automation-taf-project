@@ -22,5 +22,8 @@ import org.openqa.selenium.Keys as Keys
 
 MenuPage menu = new MenuPage()
 
-'Step 1: Navigate to new application data entry'
+'Step 1: click dropdown menu'
+menu.clickDropdownMenu()
+
+'Step 2: Navigate to new application data entry'
 menu.navigateToNewApplicationDataEntry()

@@ -26,25 +26,25 @@ public class ApplicationInquiryPage extends BaseHelper {
 	//search
 	private TestObject txfApplicationNo		= createTestObject(txfApplicationNo, "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
 	private TestObject btnSearch			= createTestObject(btnSearch, "id", "ucSearch_btnSearch")
-	
+
 	//table
 	private TestObject txtApplicationStep	= createTestObject(txtApplicationStep, "id", "gvApp_lbAppStep_0")
-	
+
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
-	
+
 	public void verifyLandingScreen() {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMainpage, 1)
 		WebUI.takeScreenshot()
 		verifyLanding(txfApplicationNo, "Application Inquiry")
 	}
-	
+
 	public void searchByApplicationNo(String applicationNo) {
 		safetyInput(txfApplicationNo, applicationNo)
 		WebUI.takeScreenshot()
 		safetyClick(btnSearch)
 	}
-	
+
 	public void verifyApplicationStepForPurchaseOrder() {
 		String actualText = WebUI.getText(txtApplicationStep)
 		if (actualText == "POP") {
@@ -54,5 +54,4 @@ public class ApplicationInquiryPage extends BaseHelper {
 		}
 		WebUI.takeScreenshot()
 	}
-	
 }

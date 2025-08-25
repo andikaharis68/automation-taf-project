@@ -91,7 +91,7 @@
    <testCaseLink>
       <guid>943539c9-d750-45b5-bf46-281446c17cf3</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Document_Checklist</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

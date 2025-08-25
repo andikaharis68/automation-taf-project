@@ -77,47 +77,47 @@ public class TermAndCondition extends BaseHelper {
 	}
 	private void checkFcKTPPemohon1(String checkFotoCopyKTP) {
 		checkObject(cbFcKTPPemohon1, checkFotoCopyKTP)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 		
 	}
 
 	private void checkFcKK(String fcKK) {
 		checkObject(cbFcKK, fcKK)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 
 	private void checkFcIjinPraktek(String fcIjinPraktek) {
 		checkObject(cbFcIjinPraktek, fcIjinPraktek)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 
 	private void checkFcNpwp(String fcNpwp ) {
 		checkObject(cbFcNpwp, fcNpwp)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 		
 	}
 
 	private void checkFcTabungan(String fcTabungan ) {
 		checkObject(cbFcTabungan, fcTabungan)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 	private void checkFcDocKepemilikanRumah(String fcDocKepemilikanRumah ) {
 		checkObject(cbDocKepemilikanRumah, fcDocKepemilikanRumah)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 
 	private void checkCoverTabungan(String coverTabungan) {
 		checkObject(cbCoverTabungan, coverTabungan)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 
 	private void checkKartuKeluargaStnk(String KkStnk) {
 		checkObject(cbKkAtasNamaStnk, KkStnk)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 	}
 	private void checkInvoice(String invoice) {
 		checkObject(cbInvoice, invoice)
-		WebUI.delay(0.5)
+		WebUI.delay(5)
 		
 	}
 	

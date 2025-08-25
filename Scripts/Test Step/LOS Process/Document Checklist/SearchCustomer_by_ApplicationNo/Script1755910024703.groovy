@@ -22,12 +22,9 @@ import org.openqa.selenium.Keys as Keys
 DocumentChecklistPage doc = new DocumentChecklistPage()
 
 'Step 1: Input application no'
-doc.inputApplicationNo(ApplicationNo)
+doc.doSearch(ApplicationNo)
 
-'Step 2: Click search'
-doc.clickSearch()
-
-'Step 3: click Edit'
+'Step 2: click Edit'
 doc.clickEdit()
 
 'Step 4: Click submit'
