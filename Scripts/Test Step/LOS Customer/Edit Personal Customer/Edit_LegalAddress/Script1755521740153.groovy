@@ -21,60 +21,59 @@ import org.openqa.selenium.Keys as Keys
 
 AddressPage address = new AddressPage()
 
-'Step 1: click edit address'
-AddressType = "Legal Address"
-address.clickEditAddress(AddressType)
-
-'Step 2: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", "Address")
-
-'Step 3: Input Address'
-address.inputAddress(AddressData.Address)
-
-'Step 4: Input RT'
-address.inputRT(AddressData.RT)
-
-'Step 5: Input RW'
-address.inputRW(AddressData.RW)
-
-'Step 6: Select ZIP Code'
-address.searchAddress(AddressData.ZIPCODE)
-
-'Step 7: Check Customer Have Fixed Line'
-address.checkCustomerHaveFixedline(AddressData.CustomerDoesNotHaveFixedline)
-
-'Step 8: Input Phone 1'
-address.inputPhoneNumbers(AddressData.Phone1, 1)
-
-'Step 9: Input Phone 2'
-address.inputPhoneNumbers(AddressData.Phone2, 2)
-
-'Step 10: Input Phone 3'
-address.inputPhoneNumbers(AddressData.Phone3, 3)
-
-'Step 11: Input Fax'
-address.inputFax(AddressData.Fax)
-
-'Step 12: Select Building Class Location'
-address.selectBuildingLocation(AddressData.BuildingLocationClass)
-
-'Step 13: Select Building Ownership'
-address.selectBuildingOwnerShip(AddressData.BuildingOwnership)
-
-'Step 14: Input Building price estimates'
-address.inputBuildingPriceEstimates(AddressData.BuildingPriceEstimates)
-
-'Step 15: Input Building stay length'
-address.inputBuildingStayLength(AddressData.BuildingStayLength)
-
-'Step 16: Input Direction description'
-address.inputDirectionDesc(AddressData.DirectionDescription)
-
-'Step 17: Input notes'
-address.inputNotes(AddressData.Notes)
-
-'Step 18: Input Company Name'
-address.inputCompanyName(AddressData.CompanyName)
-
-'Step 20: Click Save'
-address.clickSaveAddress()
+if(IsEditLegalAddress == "Y") {
+	
+	'Step 1: click edit address'
+	address.clickEditAddress("Legal Address")
+	
+	'Step 4: Input Address'
+	address.inputAddress(LegalAddress)
+	
+	'Step 5: Input RT'
+	address.inputRT(LegalRT)
+	
+	'Step 6: Input RW'
+	address.inputRW(LegalRW)
+	
+	'Step 7: Select ZIP Code'
+	address.searchAddress(LegalZipCode)
+	
+	'Step 8: Check Customer Have Fixed Line'
+	address.checkCustomerHaveFixedline(LegalCustomerDoesNotHaveFixedline)
+	
+	'Step 9: Input Phone 1'
+	address.inputPhoneNumbers(LegalPhone1, 1)
+	
+	'Step 10: Input Phone 2'
+	address.inputPhoneNumbers(LegalPhone2, 2)
+	
+	'Step 11: Input Phone 3'
+	address.inputPhoneNumbers(LegalPhone3, 3)
+	
+	'Step 12: Input Fax'
+	address.inputFax(LegalFax)
+	
+	'Step 13: Select Building Class Location'
+	address.selectBuildingLocation(LegalBuildingLocationClass)
+	
+	'Step 14: Select Building Ownership'
+	address.selectBuildingOwnerShip(LegalBuildingOwnership)
+	
+	'Step 15: Input Building price estimates'
+	address.inputBuildingPriceEstimates(LegalBuildingPriceEstimates)
+	
+	'Step 16: Input Building stay length'
+	address.inputBuildingStayLength(LegalBuildingStayLength)
+	
+	'Step 17: Input Direction description'
+	address.inputDirectionDesc(LegalDirectionDescription)
+	
+	'Step 18: Input notes'
+	address.inputNotes(LegalNotes)
+	
+	'Step 19: Input Company Name'
+	address.inputCompanyName(LegalCompanyName)
+	
+	'Step 20: Click Save'
+	address.clickSaveAddress()
+}
