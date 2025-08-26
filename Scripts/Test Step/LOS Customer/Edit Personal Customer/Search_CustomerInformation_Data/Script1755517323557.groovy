@@ -21,9 +21,6 @@ import org.openqa.selenium.Keys as Keys
 
 CustomerInformationPage custInfo =  new CustomerInformationPage()
 
-'Step 1: Swith to Iframe Main Page'
-//custInfo.switchToIframeMain()
-
 'Step 2: Select Customer Type'
 custInfo.selectCustomerType(CustomerType)
 
