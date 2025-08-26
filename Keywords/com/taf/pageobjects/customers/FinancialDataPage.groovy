@@ -155,6 +155,9 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void inputAccName(String name) {
 		if(name) {
+			if(name == "AUTO") {
+				name = generateRandomName()
+			}
 			safetyInput(txfAccName, name,3)
 		}
 	}

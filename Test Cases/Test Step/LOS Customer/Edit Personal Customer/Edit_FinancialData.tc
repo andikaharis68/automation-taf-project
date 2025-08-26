@@ -4,5 +4,6 @@
    <name>Edit_FinancialData</name>
    <tag></tag>
    <comment></comment>
+   <recordOption>OTHER</recordOption>
    <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
 </TestCaseEntity>

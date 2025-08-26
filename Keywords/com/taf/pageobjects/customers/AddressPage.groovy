@@ -26,6 +26,7 @@ public class AddressPage extends BaseHelper {
 
 
 	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr' or @id='lb_Form_Add']")
+	private TestObject btnAddressMenu			= createTestObject("btnAddressMenu", "id", "lbADDR")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[contains(@id,'Type_ddlReference')]")
 	private TestObject txfAddress				= createTestObject("txfAddress", "xpath", "//*[contains(@id, 'txtOfficeAddr')]")
 	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[contains(@id,'txtRT')]")
@@ -86,6 +87,10 @@ public class AddressPage extends BaseHelper {
 		WebUI.switchToFrame(iframeAddress, 2)
 	}
 
+	private void clickMenuAddress() {
+		safetyClick(btnAddressMenu)
+	}
+	
 	private void selectAddressType(String addressType) {
 		if(addressType) {			
 			safetySelect(drpAddressType, addressType)
