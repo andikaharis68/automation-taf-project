@@ -10,21 +10,30 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CreditApprovalWithDecisionEnginePage
+import com.taf.pageobjects.losCreditProcess.WorkflowMonitoringPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MenuPage menu = new MenuPage()
-CreditApprovalWithDecisionEnginePage creditApproval = new CreditApprovalWithDecisionEnginePage()
+WorkflowMonitoringPage workflowMonitoring = new WorkflowMonitoringPage()
 
-'Step 1: verify landing in credit approval with decision engine'
-creditApproval.verifyLandingScreen()
+'Step 1: switch to second tab'
+workflowMonitoring.switchToSecondTab()
 
-'Step 2: search approval by application no, then process'
-creditApproval.searchApprovalByApplicationNo(ApplicationNo)
+'Step 2: verify landing in workflow monitoring screen'
+workflowMonitoring.verifyLandingScreen()
+
+'Step 3: verify is step is already on sms approve'
+IsSmsApprove = workflowMonitoring.verifyIsStepAlreadyOnSmsApprove()
+
+if (!IsSmsApprove) {
+	'Step 3.1: execution time handling'
+	workflowMonitoring.waitExecutionTimeHandling()
+	
+	'Step 3.2: double check is step already on sms approve after wait execution time'
+	IsSmsApprove = workflowMonitoring.verifyIsStepAlreadyOnSmsApprove()
+}

@@ -15,16 +15,11 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CreditApprovalWithDecisionEnginePage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 MenuPage menu = new MenuPage()
-CreditApprovalWithDecisionEnginePage creditApproval = new CreditApprovalWithDecisionEnginePage()
 
-'Step 1: verify landing in credit approval with decision engine'
-creditApproval.verifyLandingScreen()
-
-'Step 2: search approval by application no, then process'
-creditApproval.searchApprovalByApplicationNo(ApplicationNo)
+'Step 1: navigate to application inquiry'
+menu.navigateToApplicationInquiry()
