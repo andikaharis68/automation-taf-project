@@ -27,11 +27,14 @@ creditApproval.verifyLandingScreen()
 'Step 2: input approval request section'
 creditApproval.inputApprovalRequestSection(CustomerIncome, SpouseIncome, AdditionalIncome)
 
-'Step 3: input approval recommendation section'
+'Step 3: click calculate'
+creditApproval.clickCalculate()
+
+'Step 4: input approval recommendation section'
 creditApproval.inputApprovalRecommendationSection(LatarBelakangDebitur, FaktorMendukung, FaktorTidakMendukung, Syarat, CaCalculation)
 
-'Step 4: input approval action'
+'Step 5: input approval action'
 creditApproval.inputApprovalAction(Action, Notes)
 
-'Step 5: click submit'
+'Step 6: click submit'
 creditApproval.clickSubmit()

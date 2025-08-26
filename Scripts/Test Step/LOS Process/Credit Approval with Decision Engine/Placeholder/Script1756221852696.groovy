@@ -10,21 +10,22 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CreditApprovalWithDecisionEnginePage
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MenuPage menu = new MenuPage()
-CreditApprovalWithDecisionEnginePage creditApproval = new CreditApprovalWithDecisionEnginePage()
+Map placeholder = [:]
 
-'Step 1: verify landing in credit approval with decision engine'
-creditApproval.verifyLandingScreen()
+placeholder['ApprovalUsername'] = ''
+placeholder['ApprovalPassword'] = ''
+placeholder['ApprovalOffice'] = ''
+placeholder['ApprovalPosition'] = ''
+placeholder['ApprovalRole'] = ''
+placeholder['IsSmsApprove'] = false
 
-'Step 2: search approval by application no, then process'
-creditApproval.searchApprovalByApplicationNo(ApplicationNo)
+KeywordUtil.logInfo("Placeholder data : ${placeholder}")
+return placeholder

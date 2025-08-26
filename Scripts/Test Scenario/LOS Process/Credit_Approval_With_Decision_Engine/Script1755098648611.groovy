@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -24,9 +25,34 @@ Map dataRow = [:]
 String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
 dataRow += BaseHelper.getTestDataByScenario("CreditApproval", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
-BaseHelper.openBrowser()
+dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+int maxLoop = 10
+int i = 0 
+while(!dataRow['IsSmsApprove'] && i != maxLoop) {
+	KeywordUtil.logInfo("Credit Approval Ke : ${i+1}")
+	BaseHelper.openBrowser()
+	
+	//Get Credential for Approval
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	BaseHelper.closeBrowser()
+	
+	//Credit Approval
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	
+	//Checking Step 
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	
+	BaseHelper.closeBrowser()
+	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
+	i++
+}
+

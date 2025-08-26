@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Login_Browser_For_Credit_Approval</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>efc6f87f-b4f2-4c9f-af10-6a8b200a88f4</testCaseGuid>
+</TestCaseEntity>
