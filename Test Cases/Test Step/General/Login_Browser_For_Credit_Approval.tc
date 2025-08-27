@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_FinancialData</name>
+   <name>Login_Browser_For_Credit_Approval</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
+   <testCaseGuid>efc6f87f-b4f2-4c9f-af10-6a8b200a88f4</testCaseGuid>
 </TestCaseEntity>

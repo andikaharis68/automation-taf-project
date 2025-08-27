@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_FinancialData</name>
+   <name>Navigate_To_Application_Inquiry</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
+   <testCaseGuid>470e4aef-0246-46e8-a4c4-df44ff39ae7a</testCaseGuid>
 </TestCaseEntity>

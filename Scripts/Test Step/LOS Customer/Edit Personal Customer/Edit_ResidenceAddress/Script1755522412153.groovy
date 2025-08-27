@@ -22,64 +22,59 @@ import org.openqa.selenium.Keys as Keys
 
 AddressPage address = new AddressPage()
 
-'Step 1: click add address'
-AddressType = "Residence Address"
-address.clickEditAddress(AddressType)
-
-//'Step 2: Click copy address'
-//address.clickCopyAddress()
-
-'Step 2: Get Address Detail from excel'
-Map AddressData = address.getAddressDetail(ScenarioId, AddressType, GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", "Address")
-
-'Step 3: Input Address'
-address.inputAddress(AddressData.Address)
-
-'Step 4: Input RT'
-address.inputRT(AddressData.RT)
-
-'Step 5: Input RW'
-address.inputRW(AddressData.RW)
-
-'Step 6: Select ZIP Code'
-KeywordUtil.logInfo("zip code " + AddressData.ZIPCODE )
-address.searchAddress(AddressData.ZIPCODE)
-
-'Step 7: Check Customer Have Fixed Line'
-address.checkCustomerHaveFixedline(AddressData.CustomerDoesNotHaveFixedline)
-
-'Step 8: Input Phone 1'
-address.inputPhoneNumbers(AddressData.Phone1, 1)
-
-'Step 9: Input Phone 2'
-address.inputPhoneNumbers(AddressData.Phone2, 2)
-
-'Step 10: Input Phone 3'
-address.inputPhoneNumbers(AddressData.Phone3, 3)
-
-'Step 11: Input Fax'
-address.inputFax(AddressData.Fax)
-
-'Step 12: Select Building Class Location'
-address.selectBuildingLocation(AddressData.BuildingLocationClass)
-
-'Step 13: Select Building Ownership'
-address.selectBuildingOwnerShip(AddressData.BuildingOwnership)
-
-'Step 14: Input Building price estimates'
-address.inputBuildingPriceEstimates(AddressData.BuildingPriceEstimates)
-
-'Step 15: Input Building stay length'
-address.inputBuildingStayLength(AddressData.BuildingStayLength)
-
-'Step 16: Input Direction description'
-address.inputDirectionDesc(AddressData.DirectionDescription)
-
-'Step 17: Input notes'
-address.inputNotes(AddressData.Notes)
-
-'Step 18: Input Company Name'
-address.inputCompanyName(AddressData.CompanyName)
-
-'Step 19: Click Save'
-address.clickSaveAddress()
+if(IsEditResidenceAddress == "Y") {
+	
+	'Step 1: click add address'
+	address.clickEditAddress("Residence Address")
+	
+	'Step 4: Select ZIP Code'
+	address.checkAddress(ResidenceZipCode)
+	
+	'Step 5: Input Address'
+	address.inputAddress(ResidenceAddress)
+	
+	'Step 6: Input RT'
+	address.inputRT(ResidenceRT)
+	
+	'Step 7: Input RW'
+	address.inputRW(ResidenceRW)
+	
+	'Step 8: Check Customer Have Fixed Line'
+	address.checkCustomerHaveFixedline(ResidenceCustomerDoesNotHaveFixedline)
+	
+	'Step 9: Input Phone 1'
+	address.inputPhoneNumbers(ResidencePhone1, 1)
+	
+	'Step 10: Input Phone 2'
+	address.inputPhoneNumbers(ResidencePhone2, 2)
+	
+	'Step 11: Input Phone 3'
+	address.inputPhoneNumbers(ResidencePhone3, 3)
+	
+	'Step 12: Input Fax'
+	address.inputFax(ResidenceFax)
+	
+	'Step 13: Select Building Class Location'
+	address.selectBuildingLocation(ResidenceBuildingLocationClass)
+	
+	'Step 14: Select Building Ownership'
+	address.selectBuildingOwnerShip(ResidenceBuildingOwnership)
+	
+	'Step 15: Input Building price estimates'
+	address.inputBuildingPriceEstimates(ResidenceBuildingPriceEstimates)
+	
+	'Step 16: Input Building stay length'
+	address.inputBuildingStayLength(ResidenceBuildingStayLength)
+	
+	'Step 17: Input Direction description'
+	address.inputDirectionDesc(ResidenceDirectionDescription)
+	
+	'Step 18: Input notes'
+	address.inputNotes(ResidenceNotes)
+	
+	'Step 19: Input Company Name'
+	address.inputCompanyName(ResidenceCompanyName)
+	
+	'Step 20: Click Save'
+	address.clickSaveAddress()
+}

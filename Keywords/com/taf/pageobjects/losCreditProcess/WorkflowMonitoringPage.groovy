@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -21,27 +22,42 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class CreditApprovalWithDecisionEnginePage extends BaseHelper{
-	//search
-	private TestObject txfApplicationNo = createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNo")
-	private TestObject btnSearch 		= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+public class WorkflowMonitoringPage extends BaseHelper{
 	
-	//table
-	private TestObject btnProcess 		= createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
+	//step info - table	
+	private TestObject lblStepInfo =  createTestObject("txtLastStepName", "id", "ucSubSecGvWf_subSectionID")
+	private TestObject txtLastStepName =  createTestObject("txtLastStepName", "xpath", "(//*[contains(@id, 'gvWFView_lblWFSubsytemActName')])[last()]")
 	
-	private TestObject iframeMainpage 	= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+	public void switchToSecondTab() {
+		WebUI.switchToWindowIndex(1)
+	}
 	
 	public void verifyLandingScreen() {
+		WebUI.delay(5)
 		WebUI.switchToDefaultContent()
-		WebUI.switchToFrame(iframeMainpage, 1)
-		verifyLanding(txfApplicationNo, "Credit Approval With Decision Engine")
+		verifyLanding(lblStepInfo, "Workflow Monitoring")
 		WebUI.takeScreenshot()
 	}
 	
-	public void searchApprovalByApplicationNo(String applicationNo) {
-		safetyInput(txfApplicationNo, applicationNo)
-		safetyClick(btnSearch)
-		WebUI.takeScreenshot()
-		safetyClick(btnProcess)
+	public void waitExecutionTimeHandling() {
+		/*
+		 * This Function made for wait execution time on backend
+		 * Because the times is random, I assume 120s is great time to wait for stability testing
+		 */
+		WebUI.focus(txtLastStepName)
+		KeywordUtil.logInfo(WebUI.getText(txtLastStepName))
+		WebUI.delay(120)
+		WebUI.refresh()
+		WebUI.focus(txtLastStepName)
+		KeywordUtil.logInfo(WebUI.getText(txtLastStepName))
 	}
+	
+	public boolean verifyIsStepAlreadyOnSmsApprove() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+		String actualStep = WebUI.getText(txtLastStepName)
+		
+		return (actualStep == "SMS_APPROVE") ? true : false
+	}
+	
 }

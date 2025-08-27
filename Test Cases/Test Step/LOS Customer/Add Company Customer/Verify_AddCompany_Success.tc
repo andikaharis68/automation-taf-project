@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_FinancialData</name>
+   <name>Verify_AddCompany_Success</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
+   <testCaseGuid>5ce1f442-48f8-4409-8b4f-2f8926843ded</testCaseGuid>
 </TestCaseEntity>

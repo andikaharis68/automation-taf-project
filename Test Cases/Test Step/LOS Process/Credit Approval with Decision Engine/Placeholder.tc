@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Edit_FinancialData</name>
+   <name>Placeholder</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>5d979dcf-5f16-4c1f-abde-10fbf20b9662</testCaseGuid>
+   <testCaseGuid>4cb90584-3d50-4de6-8308-0641deffffd4</testCaseGuid>
 </TestCaseEntity>

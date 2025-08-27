@@ -23,76 +23,79 @@ import org.openqa.selenium.Keys as Keys
 OtherAttributePage attr = new OtherAttributePage()
 CustomerInformationPage custInfo = new CustomerInformationPage()
 
-'Step 1: Select Debitor grup'
-attr.selectDebitorGroup(DebitorGroup)
-
-'Step 2: Select Counterpart group'
-attr.selectCounterpartCategory(CounterpartCategory)
-
-'Step 3: Select Sustainable financial bussiness'
-attr.selectSustainableFinancial(SustainableFinancialBusiness)
-
-'Step 4: Input EAAccount Flag'
-attr.inputEAccountFlag(EAccountFlag)
-
-'Step 5: Input EAccount Join date'
-attr.inputEAccountJoinDate(EAccountJoinDate)
-
-//'Step 6: Input Customer Rating'
-//attr.inputCustomerRating(CustRating)
-//
-//'Step 7:input Good Bad Status'
-//attr.inputGoodBadStatus(GoodBadStatus)
-//
-//'Step 8: input terduga terorism'
-//attr.inputSuspectTerrorism(TerdugaTerorisPPSPM)
-//
-//'Step 9: Input SIM NO'
-//attr.inputSimNo(NoSIM)
-//
-//'Step 10: check is split treasure'
-//attr.checkIsSplitTreasure(IsSplitTreassure)
-//
-//'Step 11: select debitor group slik'
-//
-//
-//'Step 12: check violate bmpk'
-//attr.checkViolateBMPK(ViolateBMPK)
-//
-//'Step 13: check exceed bpmk'
-//attr.checkExceedBMPK(ExceedBMPK)
-//
-//'Step 14: Check affiliate with multifinance'
-
-'Step 15: check same address'
-attr.checkSameAddress(SameAddress)
-
-'Step 16: check same job'
-attr.checkSameJob(SameJob)
-
-'Step 17: check same position'
-attr.checkSamePosition(SamePosition)
-
-'Step 18: check different marital status'
-attr.checkDifferentMaritalStatus(DifferentMaritalStatus)
-
-'Step 19: check home ownership document'
-attr.checkHomeOwnershipDoc(HomeOwnershipDocument)
-
-'Step 20: No ATM'
-attr.inputATMNo(NoATM)
-
-'Step 21: Input customer data consent'
-attr.checkCustomerDataConsent(CustomerDataConsent)
-
-'Step 22: Input rating debitor'
-attr.inputRatingDebitor(RatingDebitor)
-
-'Step 23: Input rating date'
-attr.inputRatingDate(RatingDate)
-
-'Step 24: Click Save'
-attr.clickSaveAttributeData()
+if(IsEditOther == "Y") {
+	
+	'Step 1: Select Debitor grup'
+	attr.selectDebitorGroup(DebitorGroup)
+	
+	'Step 2: Select Counterpart group'
+	attr.selectCounterpartCategory(CounterpartCategory)
+	
+	'Step 3: Select Sustainable financial bussiness'
+	attr.selectSustainableFinancial(SustainableFinancialBusiness)
+	
+	'Step 4: Input EAAccount Flag'
+	attr.inputEAccountFlag(EAccountFlag)
+	
+	'Step 5: Input EAccount Join date'
+	attr.inputEAccountJoinDate(EAccountJoinDate)
+	
+	'Step 6: Input Customer Rating'
+	attr.inputCustomerRating(CustRating)
+	
+	'Step 7:input Good Bad Status'
+	attr.inputGoodBadStatus(GoodBadStatus)
+	
+	'Step 8: input terduga terorism'
+	attr.inputSuspectTerrorism(TerdugaTerorisPPSPM)
+	
+	'Step 9: Input SIM NO'
+	attr.inputSimNo(NoSIM)
+	
+	'Step 10: check is split treasure'
+	attr.checkIsSplitTreasure(IsSplitTreassure)
+	
+	'Step 11: select debitor group slik'
+	
+	
+	'Step 12: check violate bmpk'
+	attr.checkViolateBMPK(ViolateBMPK)
+	
+	'Step 13: check exceed bpmk'
+	attr.checkExceedBMPK(ExceedBMPK)
+	
+	'Step 14: Check affiliate with multifinance'
+	
+	'Step 15: check same address'
+	attr.checkSameAddress(SameAddress)
+	
+	'Step 16: check same job'
+	attr.checkSameJob(SameJob)
+	
+	'Step 17: check same position'
+	attr.checkSamePosition(SamePosition)
+	
+	'Step 18: check different marital status'
+	attr.checkDifferentMaritalStatus(DifferentMaritalStatus)
+	
+	'Step 19: check home ownership document'
+	attr.checkHomeOwnershipDoc(HomeOwnershipDocument)
+	
+	'Step 20: No ATM'
+	attr.inputATMNo(NoATM)
+	
+	'Step 21: Input customer data consent'
+	attr.checkCustomerDataConsent(CustomerDataConsent)
+	
+	'Step 22: Input rating debitor'
+	attr.inputRatingDebitor(RatingDebitor)
+	
+	'Step 23: Input rating date'
+	attr.inputRatingDate(RatingDate)
+	
+	'Step 24: Click Save'
+	attr.clickSaveAttributeData()
+} 
 
 'Step 25: Swith to iframe main '
 attr.switchToIframeMain()

@@ -24,25 +24,26 @@ import internal.GlobalVariable
 
 public class ApplicationInquiryPage extends BaseHelper {
 	//search
-	private TestObject txfApplicationNo		= createTestObject(txfApplicationNo, "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
-	private TestObject btnSearch			= createTestObject(btnSearch, "id", "ucSearch_btnSearch")
+	private TestObject txfApplicationNo		= createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
+	private TestObject btnSearch			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//table
-	private TestObject txtApplicationStep	= createTestObject(txtApplicationStep, "id", "gvApp_lbAppStep_0")
+	private TestObject txtApplicationStep	= createTestObject("txtApplicationStep", "id", "gvApp_lbAppStep_0")
+	private TestObject txtApplicationNo		= createTestObject("txtApplicationNo", "xpath", "//*[contains(@id, 'gvApp_lbAppNo') and text() = '0015APP20250600097']")
 
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
 	public void verifyLandingScreen() {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMainpage, 1)
-		WebUI.takeScreenshot()
 		verifyLanding(txfApplicationNo, "Application Inquiry")
+		WebUI.takeScreenshot()
 	}
 
 	public void searchByApplicationNo(String applicationNo) {
 		safetyInput(txfApplicationNo, applicationNo)
-		WebUI.takeScreenshot()
 		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
 	public void verifyApplicationStepForPurchaseOrder() {
@@ -53,5 +54,14 @@ public class ApplicationInquiryPage extends BaseHelper {
 			KeywordUtil.markFailed("Failed: Either TestObject / actual text: $actualText , is not POP")
 		}
 		WebUI.takeScreenshot()
+	}
+
+	public void selectInquiryByApplicationNo(String applicationNo) {
+		txtApplicationNo = createTestObject("txtApplicationNo", "xpath", "//*[contains(@id, 'gvApp_lbAppNo') and text() = '$applicationNo']")
+		safetyClick(txtApplicationNo)
+	}
+	
+	public void selectInquiryByApplicationStep() {
+		safetyClick(txtApplicationStep)
 	}
 }

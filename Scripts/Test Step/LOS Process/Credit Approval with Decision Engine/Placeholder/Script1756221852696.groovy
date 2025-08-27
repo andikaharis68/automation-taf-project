@@ -10,46 +10,22 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.customers.CustomerInformationPage
-import com.taf.pageobjects.customers.OtherAttributePage
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-OtherAttributePage attr = new OtherAttributePage()
-MenuPage menu = new MenuPage()
-CustomerInformationPage custInfo = new CustomerInformationPage()
+Map placeholder = [:]
 
-menu.switchIframeMainPage()
+placeholder['ApprovalUsername'] = ''
+placeholder['ApprovalPassword'] = ''
+placeholder['ApprovalOffice'] = ''
+placeholder['ApprovalPosition'] = ''
+placeholder['ApprovalRole'] = ''
+placeholder['IsSmsApprove'] = false
 
-menu.switchIframeCustForm()
-
-'Step 1: Verify landing in other attribute'
-attr.verifyLandingInOtherAttribute()
-
-'Step 2: Select Debitor grup'
-attr.selectDebitorGroup(DebitorGroup)
-
-'Step 3: Select Counterpart group'
-attr.selectCounterpartCategory(CounterpartCategory)
-
-'Step 4: Select Sustainable financial bussiness'
-attr.selectSustainableFinancial(SustainableFinancialBusiness)
-
-'Step 5: click Save and Submit'
-attr.clickSaveAndSubmit()
-
-'Step 6: Verify success message'
-menu.verifySuccessMessage()
-
-menu.switchIframeMainPage()
-
-'Step 7: Verify landing in Customer info page'
-custInfo.verifyLandingInCustInfoPage()
-
-
+KeywordUtil.logInfo("Placeholder data : ${placeholder}")
+return placeholder
