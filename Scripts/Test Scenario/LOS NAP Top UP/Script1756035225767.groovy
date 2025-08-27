@@ -19,27 +19,32 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+
+String scenarioId = "1"
+Map dataRow = [:]
+String testDataName = "LOS_New_Application_Sipdana_TopUp.xlsx"
+dataRow += BaseHelper.getTestDataByScenario("NewApplication", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
+
 BaseHelper.openBrowser()
-//	0008APP20250400409
-dataRow = [	'Username' : 'SRC1552',
-			'Password' : 'password',
-			'Office' : 'KELAPA GADING',
-			'Position' : 'SALES OFFICER',
-			'Role' : 'Marketing Officer']
+//	0008APP20250400409 [extended]
+// 	0008APP20250500258 [top up]
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.delay(10)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Navigate_To_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
-//nanti hapus
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Search_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-
-//WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Customer_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Gurantor_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Application_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data_Top_Up'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Asset_Registration'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Insurance_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Insurance_Life_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Calculate_Financial_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Calculate_Commission_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Other_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Other_Info_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Term_And_Condition'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Click_Submit_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage gurantor = new NewApplicationPage()
 
 'Step 1: input gurantor personal'
-gurantor.addGurantorPersonal("MEYQI STEVANUS SARIDIN", "GUARANTOR")
+gurantor.addGurantorPersonal(GurantorName, GurantorRelation)
 
 'Step 2: take screenshot after'
 WebUI.takeScreenshot()

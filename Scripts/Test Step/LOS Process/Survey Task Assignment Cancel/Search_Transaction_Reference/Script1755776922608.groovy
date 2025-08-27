@@ -25,7 +25,7 @@ SurveyTaskAssignment survey = new SurveyTaskAssignment()
 survey.verifyLandingSurveyPage()
 
 'step 2: search transaction'
-survey.searchTransactionByReferenceNumber("0007APP20250500005")
+survey.searchTransactionByReferenceNumber(ReferenceNo)
 
 'step 3: select transaction to edit'
-survey.editTransaction("0007APP20250500005")
+survey.editTransaction(ReferenceNo)

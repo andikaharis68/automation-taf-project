@@ -19,17 +19,13 @@ import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage cust = new NewApplicationPage()
+NewApplicationPage info = new NewApplicationPage()
 
-'Step 1: get text of application number'
-def appNo = cust.getAppNo()
-print(appNo)
+'Step 1: select application attribute'
+info.selectApplicationAttribute1(ContractEmployee, RentalBusiness, OnlineTransportation, FraudIndication, HighRiskCustomer, HighRiskBusiness, HighRiskProduct, CreditApprovalProses)
 
-'Step 2: switch iframe'
-cust.switchFrameForm()
+'Step 2: select application attribute'
+info.selectApplicationAttribute2(OwnedVehicle, PrioritySEAL, NPWP, SKKumham, STNKAHU, StatusNPWP, CDECode, ODOMeter)
 
-'Step 3: input customer data'
-cust.inputCustomerData(CustomerType, CustomerName)
-
-'Step 4: click save and continue'
-cust.clickSaveAndContinue()
+'Step 3: click save attribute'
+info.clickSaveAttribute()

@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage insurance = new NewApplicationPage()
 
 'Step 1: edit selected insurance'
-insurance.editInsuranceData("TOYOTA INSURANCE", "Group", "24", "ALL RISK")
+insurance.editInsuranceData(InsuranceSchemeName, InsuranceRateType, InsuranceCoveredType)
 
 'Step 2: click save and continue'
 insurance.clickSaveAndContinue()

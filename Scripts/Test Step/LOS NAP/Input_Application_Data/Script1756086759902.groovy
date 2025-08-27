@@ -22,13 +22,13 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage data = new NewApplicationPage()
 
 'Step 1: input application data'
-data.inputApplicationData("12", "MONTHLY", "Fixed Rate", "Reduler Fixed Installment")
+data.inputApplicationData(Tenor, PaymentFrequent, Margin, InstallmentScheme)
 
 'Step 2: input application information'
-data.inputApplicationInfo("AGENT", "Auto Debit BNI", "Pendidikan")
+data.inputApplicationInfo(ApplicationSource, WayOfPayment, PurposeOfUsage)
 
 'Step 3: copy address mailing'
-data.inputMailingAddress("Residence Address")
+data.inputMailingAddress(MailingAddress)
 
 'Step 4: take screenshot after'
 WebUI.takeScreenshot()

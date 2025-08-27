@@ -25,7 +25,13 @@ NewApplicationPage regis = new NewApplicationPage()
 regis.selectAssetRegis()
 
 'Step 2: input to complition data'
-regis.complitionDataRegistration("Self Usage", "Residence Address")
+regis.complitionDataRegistration(UsageRegistration, AdressRegistration)
 
-'Step 3: click save and continue'
+'Step 3: select asset location'
+regis.copyAssetLocation(AssetLocation)
+
+'Step 4: click button save'
+regis.clickSaveRegis()
+
+'Step 5: click save and continue'
 regis.clickSaveAndContinue()

@@ -21,27 +21,26 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage asset = new NewApplicationPage()
 
-'Step : click add asset'
+'Step 1: click add asset'
 asset.clickAddAsset()
 
 'Step 2: select supplier branch name'
-asset.inputSupplierInfo("TAF SIAP DANA")
-
+asset.inputSupplierInfo(SupplierBranchName)
 
 'Step 3: select top up agreement'
-asset.topUpAgreemnt("240140002492")
+asset.topUpAgreemnt(TopUpAgreementNo)
 
 'Step 4: input main asset'
-asset.inputMainAsset("180000000", "15")
+asset.inputMainAsset(AssetPrice, DownPaymentPrecentage)
 
 'Step 5: input asset data'
-asset.inputAssetData("P001", "R001", "P1012JH", "Baru", "Pribadi", "2021")
+asset.selectAsetUsage(AssetUsage)
 
 'Step 6: calculate market price'
 asset.clickGetMarketPrice()
 
 'Step 7: add additiona; service grid'
-asset.addGrid("Balik Nama BPKB - Prepaid", "PT DELTA LINTAS UTAMA", "1000000")
+asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
 
 'Step 8: save asset'
 asset.clickSaveAsset()

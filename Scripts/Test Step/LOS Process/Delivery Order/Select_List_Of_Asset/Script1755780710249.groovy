@@ -22,4 +22,4 @@ import org.openqa.selenium.Keys as Keys
 DeliveryOrderPage asset = new DeliveryOrderPage()
 
 'step 1: select asset to edit'
-asset.editAsset("0")
+asset.editAsset("0") //select just first row

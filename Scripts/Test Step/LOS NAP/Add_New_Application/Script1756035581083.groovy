@@ -28,4 +28,4 @@ nap.verifyLandingPage()
 nap.clickAddNewApplicaiton()
 
 'step 3: input main information'
-nap.inputMainInformation("SCR23707", "1")
+nap.inputMainInformation(ProductOfferingCode, NumOfAsset)

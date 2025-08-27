@@ -14,22 +14,16 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.NewApplicationDEPage
 import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage cust = new NewApplicationPage()
+NewApplicationPage financial = new NewApplicationPage()
 
-'Step 1: get text of application number'
-def appNo = cust.getAppNo()
-print(appNo)
+'step 1: calculate financial data'
+financial.calculateFinancialData()
 
-'Step 2: switch iframe'
-cust.switchFrameForm()
-
-'Step 3: input customer data'
-cust.inputCustomerData(CustomerType, CustomerName)
-
-'Step 4: click save and continue'
-cust.clickSaveAndContinue()
+'step 2: cilck save and continue'
+financial.clickSaveAndContinue()

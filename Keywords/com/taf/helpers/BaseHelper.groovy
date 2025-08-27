@@ -524,4 +524,11 @@ class BaseHelper {
 			js.executeScript("window.scrollBy(0,"+ step + ")")
 		}
 	}
+	
+	static void pageDown(int times) {
+		Robot robot = new Robot()
+		times.times { 
+			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
+		}
+	}
 }

@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.awt.Robot
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -14,6 +16,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword
@@ -56,13 +59,13 @@ public class NewApplicationPage extends BaseHelper{
 	//section tab gurantor
 	private TestObject btnAddPersonalGurantor		= createTestObject("btnAddPersonalGurantor", "id", "lb_AgrmntGuarantor_AddPersonal")
 	private TestObject btnAddCompanyGurantor		= createTestObject("btnAddCompanyGurantor", "id", "lb_AgrmntGuarantor_AddCompany")
-	private TestObject btnLookUpGurantorName
+	private TestObject btnLookUpGurantorName		= createTestObject("btnLookUpGurantorName", "id", "ucLookupCust_uclCust_imb")
 	//pop up
-	private TestObject txfGurantorName				= createTestObject("txfGurantorName", "id", "")
-	private TestObject btnSearchGurantor			= createTestObject("btnSearchGurantor", "id", "")
-	private TestObject btnSelectGurantor			= createTestObject("btnSelectGurantor", "id", "")
-	private TestObject drpGurantorRelation			= createTestObject("drpGurantorRelation", "id", "")
-	private TestObject btnSaveGurantor				= createTestObject("btnSaveGurantor", "id", "")
+	private TestObject txfGurantorName				= createTestObject("txfGurantorName", "id", "ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject btnSearchGurantor			= createTestObject("btnSearchGurantor", "id", "ucLookupCust_uclCust_umd_ctl00_ucS_lbSearch")
+	private TestObject btnSelectGurantor			= createTestObject("btnSelectGurantor", "id", "ucLookupCust_uclCust_umd_ctl00_gvL_hpSelect_0")
+	private TestObject drpGurantorRelation			= createTestObject("drpGurantorRelation", "id", "ddlRefMasterCustRelation")
+	private TestObject btnSaveGurantor				= createTestObject("btnSaveGurantor", "id", "lb_Form_Save")
 	
 
 
@@ -105,7 +108,7 @@ public class NewApplicationPage extends BaseHelper{
 
 
 	//section tab asset data
-	private TestObject btnAddAsset					= createTestObject("btnAddAsset", "id", "")
+	private TestObject btnAddAsset					= createTestObject("btnAddAsset", "id", "lb_Form_Add")
 	private TestObject btnLookUpSupplier			= createTestObject("btnLookUpSupplier", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_imb")
 	//pop up
 	private TestObject txfSupplierBranchName		= createTestObject("txfSupplierBranchName", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
@@ -114,12 +117,12 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSupplierSearch			= createTestObject("btnSupplierSearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectSupplier			= createTestObject("btnSelectSupplier", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")//select first row
 	//section top up agreement
-	private TestObject btnLookUpTopUp				= createTestObject("btnLookUpTopUp", "id", "")
+	private TestObject btnLookUpTopUp				= createTestObject("btnLookUpTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_imb")
 	//pop up
-	private TestObject txfApplicationNoTopUP		= createTestObject("txfApplicationNoTopUP", "id", "")
-	private TestObject txfAgreementNoTopUp			= createTestObject("txfAgreementNoTopUp", "id", "")
-	private TestObject btnSearchTopUp				= createTestObject("btnSearchTopUp", "id", "")
-	private TestObject btnSelectTopUp				= createTestObject("btnSelectTopUp", "id", "")
+	private TestObject txfApplicationNoTopUP		= createTestObject("txfApplicationNoTopUP", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject txfAgreementNoTopUp			= createTestObject("txfAgreementNoTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
+	private TestObject btnSearchTopUp				= createTestObject("btnSearchTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_ucS_lbSearch")
+	private TestObject btnSelectTopUp				= createTestObject("btnSelectTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_gvL_hpSelect_0")
 	//section main asset
 	private TestObject btnLookUpAssetName			= createTestObject("btnLookUpAssetName", "id", "ucLookupAssetSchm_uclAssetSchm_imb")
 	//pop up
@@ -128,7 +131,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSelectAsset				= createTestObject("btnSelectAsset", "id", "ucLookupAssetSchm_uclAssetSchm_umd_ctl00_gvL_hpSelect_0")//select first row
 	private TestObject txfAssetPrice				= createTestObject("txfAssetPrice", "id", "ucAssetPrice_txtInput")
 	private TestObject rdnDPType 					= createTestObject("rdnDPType", "xpath", "//label[text() = '{data}']/preceding-sibling::input")//sepertinya dibawah ikut function
-	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "id", "ucDownPayment_txtInput")
+	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "xpath", "//input[@id = 'ucDownPaymentPrcnt_txtInput' or @id = 'ucDownPayment_txtInput']")
 	private TestObject btnGetMarketPrice			= createTestObject("btnGetMarketPrice", "id", "lb_Form_GetMktPrcAndCalcUpPrcnt")
 	//section asset data
 	private TestObject txfNoMesin					= createTestObject("txfNoMesin", "id", "txtSerialNo1")
@@ -154,13 +157,17 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSelectSupplierGrid		= createTestObject("btnSelectSupplierGrid", "id", "ucSpplSvcName_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")
 	private TestObject txfServicePrice				= createTestObject("txfServicePrice", "id", "ucSvcPrice_txtInput")
 	private TestObject btnSaveAsset					= createTestObject("btnSaveAsset", "id", "lb_Form_Save_AddSvc")
+	private TestObject btnSaveEditAsset				= createTestObject("btnSaveEditAsset", "id", "lb_Form_Save_AddEdit")
 
 	//list of asset
 	private TestObject btnPenAssetRegistration		= createTestObject("btnPenAssetRegistration", "id", "gvAssetList_imbEdit_0")//select first row
 	//section asset owner
 	private TestObject drpCopyAddressRegis			= createTestObject("drpCopyAddressRegis", "id", "ucCopyAddrOwner_ddlReference")
 	private TestObject btnCopyAddressRegis			= createTestObject("btnCopyAddressRegis", "id", "lb_Form_Copy_OwnerAddr")
+	private TestObject drpCopyAddressLocation		= createTestObject("drpCopyAddressLocation", "id", "ucCopyAddrAssLoc_ddlReference")
+	private TestObject btnCopyAddressLocation		= createTestObject("btnCopyAddressLocation", "id", "lb_Form_Copy_Assloc")
 	private TestObject btnSaveRegis					= createTestObject("btnSaveRegis", "id", "lb_Form_Save_Reg")
+	
 
 
 	//section tab insurance data
@@ -172,7 +179,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject drpRateType					= createTestObject("drpRateType", "id", "ucInsInit_ucRefInsRateType_ddlReference")
 	private TestObject txfInsuranceLength			= createTestObject("txfInsuranceLength", "id", "ucInsInit_ucINInsLength_txtInput")
 	//section coverage
-	private TestObject drpMainCoverageType			= createTestObject("drpMainCoverageType", "id", "ucInsrate_rptMainCvgType_ctl01_ucRefMainCvgType_ddlReference")
+	private TestObject drpMainCoverageType			= createTestObject("drpMainCoverageType", "id", "ucRefMainCvgType_ddlReference")
 	private TestObject btnNext						= createTestObject("btnNext", "id", "lb_Toolbar_Next")
 	private TestObject btnCalculateInsurance		= createTestObject("btnCalculateInsurance", "id", "ucInsrate_lb_Form_Calculate")
 	private TestObject btnSaveInsurance				= createTestObject("btnSaveInsurance", "id", "lbSave")
@@ -182,7 +189,6 @@ public class NewApplicationPage extends BaseHelper{
 	//section tab insurance life
 	private TestObject chkCoverLifeInsurance		= createTestObject("chkCoverLifeInsurance", "id", "cbIsCoverLifeIns")
 	private TestObject drpLifeInscoBranchName		= createTestObject("drpLifeInscoBranchName", "id", "ddlLifeInscoName")
-	private TestObject chkCustomerInsured			= createTestObject("chkCustomerInsured", "xpath", "//label[text() = '{data}']/preceding-sibling::input")//input data
 	private TestObject drpPremiumPaymentMethod		= createTestObject("drpPremiumPaymentMethod", "id", "ddlPaymentMethod")
 	private TestObject txfNotesLifeInsurance		= createTestObject("txfNotesLifeInsurance", "id", "txt_LifeInsH_NewCoverNotes")
 
@@ -215,12 +221,11 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject drpSTNK						= createTestObject("drpSTNK", "id", "rptAttribute_ucrefInputAttr_16_ddlReference_16")
 	private TestObject drpStatusNPWP				= createTestObject("drpStatusNPWP", "id", "rptAttribute_ucrefInputAttr_17_ddlReference_17")
 	private TestObject drpCDENotes					= createTestObject("drpCDENotes", "id", "rptAttribute_ucrefInputAttr_18_ddlReference_18")
+	private TestObject txfOdoMeter					= createTestObject("txfOdoMeter", "id", "rptAttribute_txtAttrContent_19")
 	private TestObject btnSaveOtherInfo				= createTestObject("btnSaveOtherInfo", "id", "lb_Form_Save")
 
 
 	//section tab TnC
-	private TestObject lblRequiredDocument			= createTestObject("", "id", "")
-	private TestObject chkRequiredDocument			= createTestObject("", "id", "")
 	private TestObject txfPromiseDateRequired		= createTestObject("", "id", "")
 	private TestObject btnSaveTnC					= createTestObject("btnSaveTnC", "id", "lb_Form_Save")
 
@@ -259,7 +264,7 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.click(btnOfferingSearch)
 		WebUI.takeScreenshot()
 		WebUI.click(btnSelectOffering)
-		
+		WebUI.delay(1)
 		WebUI.setText(txfNumOfAsset, numOfAsset)
 		WebUI.takeScreenshot()
 		
@@ -301,7 +306,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void inputApplicationData(String tenor, String payFreq, String margin, String installament) {
-		WebUI.setText(txfTenor, tenor)
+		safetyInput(txfTenor, tenor)
 		safetySelect(drpPaymentFrequent, payFreq, 1)
 		safetySelect(drpMarginType, margin, 1)
 		safetySelect(drpInstallamentScheme, installament, 1)
@@ -310,7 +315,9 @@ public class NewApplicationPage extends BaseHelper{
 	private void inputApplicationInfo(String appSource, String wayPay, String usage) {
 		safetySelect(drpApplicationSource, appSource, 1)
 		safetySelect(drpWayOfPayment, wayPay, 1)
-		safetySelect(drpPurposeOfUsage, usage, 1)
+		if(WebUI.waitForElementPresent(drpPurposeOfUsage, 3, FailureHandling.OPTIONAL)) {
+			safetySelect(drpPurposeOfUsage, usage, 1)
+		}
 	}
 	
 	private void inputMailingAddress(String address) {
@@ -325,7 +332,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void inputSupplierInfo(String name) {
-		WebUI.click(btnLookUpSupplier)
+		safetyClick(btnLookUpSupplier)
 		WebUI.delay(1)
 		WebUI.setText(txfSupplierName, name)
 		WebUI.click(btnSupplierSearch)
@@ -334,16 +341,16 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void topUpAgreemnt(String label) {
-		WebUI.click(btnLookUpTopUp)
+		safetyClick(btnLookUpTopUp, 0.5)
 		WebUI.delay(1)
-		WebUI.setText(txfApplicationNoTopUP, label)
+		WebUI.setText(txfAgreementNoTopUp, label)
 		WebUI.click(btnSearchTopUp)
 		WebUI.takeScreenshot()
-		WebUI.click(btnSelectTopUp)
+		safetyClick(btnSelectTopUp, 2)
 	}
 	
 	private void inputAssetName(String assetName) {
-		WebUI.click(btnLookUpAssetName)
+		safetyClick(btnLookUpAssetName, 0.5)
 		WebUI.delay(1)
 		WebUI.setText(txfAssetName, assetName)
 		WebUI.click(btnAssetSearch)
@@ -352,8 +359,10 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void inputMainAsset(String assetPrice, String downPayment) {
-		safetyInput(txfAssetPrice, assetPrice)
-		safetyInput(txfDownPayment, downPayment)
+		manualClearText(txfAssetPrice)
+		safetyInput(txfAssetPrice, assetPrice, 2)
+		manualClearText(txfDownPayment)
+		safetyInput(txfDownPayment, downPayment, 2)
 	}
 	
 	private void clickGetMarketPrice() {
@@ -370,10 +379,15 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.setText(txfLicensePlate, licenseNo)
 		WebUI.delay(1)
 		WebUI.click(rdnAssetCondition)
-		safetySelect(drpAssetUsage, usage, 1)
+		selectAsetUsage(usage)
 		WebUI.setText(txfManufacturingYear, year)
 		
 	}
+	
+	private void selectAsetUsage(String usage) {
+		safetySelect(drpAssetUsage, usage, 1)
+	}
+	
 	
 	private void inputAssetAttribute() {
 		//bukan mandatory
@@ -391,12 +405,15 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.click(btnSupplierSearchGrid)
 		WebUI.takeScreenshot()
 		WebUI.click(btnSelectSupplierGrid)
+		manualClearText(txfServicePrice)
 		safetyInput(txfServicePrice, servicePrice)
-		//ada button save nya harusnya
+		safetyClick(btnSaveAsset, 1)
+		WebUI.takeScreenshot()
 	}
 	
+	
 	private void clickSaveAsset() {
-		safetyClick(btnSaveAsset, 1)
+		safetyClick(btnSaveEditAsset, 1)
 		WebUI.takeScreenshot()
 	}
 	
@@ -412,16 +429,15 @@ public class NewApplicationPage extends BaseHelper{
 		safetySelect(drpCopyAddressRegis, address, 1)
 		WebUI.click(btnCopyAddressRegis)
 		WebUI.takeScreenshot()
-		WebUI.click(btnSaveRegis)
 	}
 	
-	private void editInsuranceData(String schemeName, String rate, String insLength, String covType) {
-		WebUI.click(btnEditInsuranceData)
+	private void editInsuranceData(String schemeName, String rate, String covType) {
+		safetyClick(btnEditInsuranceData, 0.5)
 		WebUI.takeScreenshot()
 		
 		safetySelect(drpSchemeName, schemeName, 1)
 		safetySelect(drpRateType, rate, 1)
-		WebUI.setText(txfInsuranceLength, insLength)
+
 		safetySelect(drpMainCoverageType, covType)
 		WebUI.takeScreenshot()
 		safetyClick(btnNext, 5)
@@ -430,22 +446,120 @@ public class NewApplicationPage extends BaseHelper{
 		safetyClick(btnCalculateInsurance, 5)
 		WebUI.takeScreenshot()
 		
+		WebUI.delay(3)
 		safetyClick(btnSaveInsurance, 3)
 		WebUI.takeScreenshot()
 		safetyClick(btnNextInsuranceData, 1)
 		WebUI.takeScreenshot()
 	}
 	
+	private void copyAssetLocation(String address) {
+		safetySelect(drpCopyAddressLocation, address, 1)
+		WebUI.click(btnCopyAddressLocation)
+		WebUI.takeScreenshot()
+	}
 	
+	private void clickSaveRegis() {
+		WebUI.delay(1)
+		safetyClick(btnSaveRegis)
+	}
+	
+	private void inputInsuranceLife(String inscoName, String insured, String payMethod, String note) {
+		
+		def isChecked = WebUI.verifyElementChecked(chkCoverLifeInsurance, 5, FailureHandling.OPTIONAL)
+		
+		if(!isChecked) {
+			WebUI.check(chkCoverLifeInsurance)
+			safetySelect(drpLifeInscoBranchName, inscoName, 1)
+			TestObject chkCustomerInsured = createTestObject("chkCustomerInsured", "xpath", "//label[text() = '$insured']/preceding-sibling::input")
+			safetyClick(chkCustomerInsured, 1)
+			safetySelect(drpPremiumPaymentMethod, payMethod, 1)
+			WebUI.setText(txfNotesLifeInsurance, note)
+			WebUI.takeScreenshot()
+		}
+	}
+	
+	private void calculateFinancialData() {
+		safetyClick(btnCalculateFee, 2)
+		safetyClick(btnCalculate, 2)
+		safetyClick(btnCalculateInstallment, 2)
+		def tableSxist = WebUI.waitForElementPresent(tableInstallment, 10, FailureHandling.OPTIONAL)
+		if(tableSxist) {
+//			pageDown(3)
+			WebUI.scrollToElement(tableInstallment, 3)
+			WebUI.takeScreenshot()
+		}else {
+			KeywordUtil.logInfo("table installment not exist")
+		}
+
+	}
+	
+	private void selectApplicationAttribute1(String contractLessThen, String rentalBusiness, String onlineTransport, String fraud, String riskCust, String riskBuss, String riskProd, String creditProses) {
+		safetySelectEdit(drpContractEmployee, contractLessThen, 1)
+		safetySelectEdit(drpRentalBusiness, rentalBusiness, 1)
+		safetySelectEdit(drpAssetForOnline, onlineTransport, 1)
+		safetySelectEdit(drpFraudIndication, fraud, 1)
+		safetySelectEdit(drpHighRiskCustomer, riskCust, 1)
+		safetySelectEdit(drpHighRiskBusiness, riskBuss, 1)
+		safetySelectEdit(drpHighRiskProduct, riskProd, 1)
+		safetySelectEdit(drpCreditApproval, creditProses, 1)
+	}
+	
+	private void selectApplicationAttribute2(String ownVehicle, String seal, String npwp, String noSK, String stnk, String statusNPWP, String cde, String odo) {
+		safetySelectEdit(drpOwnedVihecle, ownVehicle, 1)
+		safetySelectEdit(drpPrioritySeal, seal, 1)
+		safetyInput(txfNPWP, npwp, 1)
+		safetyInput(txfNomorSK, noSK, 1)
+		safetySelectEdit(drpSTNK, stnk, 1)
+		safetySelectEdit(drpStatusNPWP, statusNPWP, 1)
+		safetySelectEdit(drpCDENotes, cde, 1)
+		safetyInput(txfOdoMeter, odo)
+	}
+	
+	private void clickSaveAttribute() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSaveOtherInfo)
+	}
+	
+	
+	private void tncDocumentMandatory() {
+		def requiredDoc = getListElementByTestObject("//span[contains(@id, 'gvTermCondition_lblIsMandatory_')]")
+		def index = requiredDoc.size()
+		
+		index.times { i ->
+			TestObject chkRequiredDocument = createTestObject("chkRequiredDocument", "xpath", "(//span[@id = 'gvTermCondition_lblIsMandatory_$i' and text() = 'Yes']/following::input)[1]")
+			if(WebUI.waitForElementPresent(chkRequiredDocument, 1, FailureHandling.OPTIONAL)) {
+				safetyClick(chkRequiredDocument, 0.8)
+			}
+		}
+		
+		WebUI.takeScreenshot()
+	}
+	
+	private void clickSaveTnC() {
+		WebUI.click(btnSaveTnC)
+		WebUI.delay(8)
+		WebUI.takeScreenshot()
+	}
+		
 	private void clickSaveAndContinue() {
 		safetyClick(btnSaveAndContinue, 0.5)
 		WebUI.takeScreenshot()
 	}
 	
 	private switchFrameForm() {
-//		WebUI.switchToDefaultContent()
 		WebUI.delay(5)
 		WebUI.switchToFrame(iframeForm, 3)
+	}
+	
+	private clickSubmitNAP() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMain, 3)
+		WebUI.click(btnSubmit)
+		WebUI.delay(15)
+		WebUI.acceptAlert()
+		WebUI.delay(15)
+		WebUI.takeScreenshot()
 	}
 	
 	

@@ -25,7 +25,7 @@ DeliveryOrderPage order = new DeliveryOrderPage()
 order.verifyLandingPage()
 
 'step 2: search application number'
-order.searchTransaction("0008APP20250200232")
+order.searchTransaction(ApplicationNo)
 
 'step 3: select edit row'
-order.editTransaction("0008APP20250200232")
+order.editTransaction(ApplicationNo)

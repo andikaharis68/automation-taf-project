@@ -19,17 +19,7 @@ import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage cust = new NewApplicationPage()
+NewApplicationPage other = new NewApplicationPage()
 
-'Step 1: get text of application number'
-def appNo = cust.getAppNo()
-print(appNo)
-
-'Step 2: switch iframe'
-cust.switchFrameForm()
-
-'Step 3: input customer data'
-cust.inputCustomerData(CustomerType, CustomerName)
-
-'Step 4: click save and continue'
-cust.clickSaveAndContinue()
+'Step : click save and continue'
+other.clickSaveAndContinue()
