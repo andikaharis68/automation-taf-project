@@ -14,21 +14,11 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
+ApplicationInquiryPage inquiry = new ApplicationInquiryPage()
 
-'Step 1: switch to iframe'
-cdeCompletion.switchToIframeMain()
-
-'Step 2: search centralized data complition by customer name'
-cdeCompletion.searchCentralizedDataCompletion(CustomerName)
-
-'Step 3: Click Edit on action pencil'
-cdeCompletion.clickActionPencil()
-
-'Step 3: switch to default frame'
-cdeCompletion.switchToDefaultContent()
+inquiry.updateData(TestDataName, "MasterData", ScenarioId)

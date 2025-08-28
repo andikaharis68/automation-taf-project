@@ -64,4 +64,14 @@ public class ApplicationInquiryPage extends BaseHelper {
 	public void selectInquiryByApplicationStep() {
 		safetyClick(txtApplicationStep)
 	}
+	
+	public void updateData(String fileName, String sheetName, String scenarioId) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		
+		
+		saveDataToExcel("Akuaa", rowFilter, filePath, sheetName, "ApplicationNo")
+	}
+	
 }
