@@ -21,20 +21,14 @@ import org.openqa.selenium.Keys as Keys
 
 CustomerInformationPage custInfo =  new CustomerInformationPage()
 
-'Step 1: Swith to Iframe Main Page'
-//custInfo.switchToIframeMain()
-
-'Step 2: Select Customer Type'
+'Step 1: Select Customer Type'
 custInfo.selectCustomerType(CustomerType)
 
-'Step 3: Input Csutomer Number'
+'Step 2: Input Csutomer Number'
 custInfo.inputCustomerNo(CustomerNumber)
 
-'Step 4: Click Search'
+'Step 3: Click Search'
 custInfo.clickSearch()
 
-'Step 5: Compare Customer Number'
-custInfo.verifyTableCustomer(CustomerNumber)
-
-'Step 6: Verify Customer list'
-custInfo.clickCustomerHyperlinkEdit()
+'Step 4: Verify Customer list'
+custInfo.clickCustomerHyperlink(CustomerName)

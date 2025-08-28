@@ -119,7 +119,14 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickNewApplication() {
+		WebUI.switchToDefaultContent()
+		WebUI.click(drpMenu)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		WebUI.switchToFrame(iframeMenu, 1)
+		WebUI.click(btnCreditProcess)
 		WebUI.click(btnNewApplication)
+		WebUI.switchToDefaultContent()
 	}
 
 	private void clickNotifFromSales() {
@@ -229,7 +236,6 @@ public class MenuPage extends BaseHelper {
 
 	private void navigateToCentralizedDataEntryCompletion() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(drpMenu, 10)
 		WebUI.click(drpMenu)
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.selectOptionByLabel(drpModul, "MARKETING", false)
@@ -322,8 +328,7 @@ public class MenuPage extends BaseHelper {
 
 	private void navigateToPurchaseOrder() {
 		switchDefaultContent()
-		WebUI.waitForElementPresent(drpMenu, 10)
-		clickDropdownMenu()
+		safetyClick(drpMenu)
 		switchToIframeMenu()
 		safetySelect(drpModul, "LOAN ORIGINATION")
 		safetyClick(btnCreditProcess)
@@ -334,8 +339,7 @@ public class MenuPage extends BaseHelper {
 
 	private void navigateToCreditApproval() {
 		switchDefaultContent()
-		WebUI.waitForElementPresent(drpMenu, 10)
-		clickDropdownMenu()
+		safetyClick(drpMenu)
 		switchToIframeMenu()
 		safetySelect(drpModul, "LOAN ORIGINATION")
 		safetyClick(btnCreditProcess)
@@ -346,8 +350,7 @@ public class MenuPage extends BaseHelper {
 
 	private void navigateToApplicationInquiry() {
 		switchDefaultContent()
-		WebUI.waitForElementPresent(drpMenu, 10)
-		clickDropdownMenu()
+		WebUI.click(drpMenu)
 		switchToIframeMenu()
 		safetySelect(drpModul, "LOAN ORIGINATION")
 		safetyClick(btnCreditProcess)

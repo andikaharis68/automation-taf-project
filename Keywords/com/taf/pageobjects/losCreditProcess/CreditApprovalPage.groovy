@@ -45,9 +45,17 @@ public class CreditApprovalPage extends BaseHelper{
 	}
 
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
+		manualClearText(txfCustomerIncome)
 		safetyInput(txfCustomerIncome, customerIncome)
+		
+		manualClearText(txfSpouseIncome)
 		safetyInput(txfSpouseIncome, spouseIncome)
+		
+		manualClearText(txfAdditionalIncome)
 		safetyInput(txfAdditionalIncome, additionalIncome)
+	}
+	
+	public void clickCalculate() {
 		safetyClick(btnCalculate)
 		WebUI.takeScreenshot()
 	}
@@ -58,15 +66,17 @@ public class CreditApprovalPage extends BaseHelper{
 		safetyInput(txfFaktorTidakMendukung, faktorTidakMendukung)
 		safetyInput(txfSyarat, syarat)
 		safetyInput(txfCaCalculation, caCalculation)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputApprovalAction(String action, String notes) {
 		safetySelect(drpAction, action)
 		safetyInput(txfNotes, notes)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSubmit() {
-		WebUI.takeScreenshot()
 		safetyClick(btnSubmit)
+		WebUI.takeScreenshot()
 	}
 }

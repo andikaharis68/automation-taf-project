@@ -24,12 +24,16 @@ import internal.GlobalVariable
 public class CreditApprovalWithDecisionEnginePage extends BaseHelper{
 	//search
 	private TestObject txfApplicationNo = createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNo")
-	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+	private TestObject btnSearch 		= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	
 	//table
-	private TestObject btnProcess = createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
+	private TestObject btnProcess 		= createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
+	
+	private TestObject iframeMainpage 	= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	
 	public void verifyLandingScreen() {
+		WebUI.switchToDefaultContent()
+		WebUI.switchToFrame(iframeMainpage, 1)
 		verifyLanding(txfApplicationNo, "Credit Approval With Decision Engine")
 		WebUI.takeScreenshot()
 	}
@@ -37,7 +41,7 @@ public class CreditApprovalWithDecisionEnginePage extends BaseHelper{
 	public void searchApprovalByApplicationNo(String applicationNo) {
 		safetyInput(txfApplicationNo, applicationNo)
 		safetyClick(btnSearch)
-		safetyClick(btnProcess)
 		WebUI.takeScreenshot()
+		safetyClick(btnProcess)
 	}
 }

@@ -19,13 +19,13 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-BaseHelper.openBrowser()
 
-dataRow = [	'Username' : 'DWI0081',
-			'Password' : 'password',
-			'Office' : 'SURVEY AREA 1',
-			'Position' : 'BASE MASTER',
-			'Role' : 'BASE MASTER']
+String scenarioId = "1"
+Map dataRow = [:]
+String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
+dataRow += BaseHelper.getTestDataByScenario("Survey", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
+BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.delay(10)

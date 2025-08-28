@@ -23,59 +23,62 @@ import org.openqa.selenium.Keys as Keys
 JobDataPage job = new JobDataPage()
 EmergencyContactPage contact = new EmergencyContactPage()
 
-'Step 1: Input Profession name'
-job.selectProfessionName(ProfessionName)
-
-'Step 2: Input Profession No'
-job.inputProfessionNo(ProfessionalNo)
-
-'Step 3: Select Job Position'
-job.selectJobPosition(JobPosition)
-
-'Step 4: Select Job Status'
-job.selectJobStatus(JobStatus)
-
-'Step 5: Input Company Name'
-job.inputCompanyName(CompanyName)
-
-'Step 6: Check is Internal Employee'
-job.chxInternalEmployee(InternalEmployee)
-
-'Step 7: Select Industry Type Name'
-job.selectIndustryTypeName(IndustryTypeName)
-
-'Step 8 : Select Company Scale'
-job.selectCompanyScale(CompanyScale)
-
-'Step 9: Select InvestmentType'
-job.selectInvestmentType(InvestmentType)
-
-'Step 10: Input Number of employee'
-job.inputNumberOfEmployee(NumberofEmployee)
-
-'Step 11: Select Employement Establish Date'
-job.selectEmploymentEstablishDate(EmploymentEstablishmentDateMonth, EmploymentEstablishmentDateYear)
-
-'Step 12: Check is Well Known company'
-job.checkIsWellKnowCompany(IsWellKnownCompany)
-
-'Step 13: Input Previous Company'
-job.inputPrevCompanyName(PreviousCompanyName)
-
-'Step 14: Select Previous Employement date'
-job.selectPrevCompanyDate(PreviousEmployementDateMonth, PreviousEmployementDateYear)
-
-'Step 15: Input Other Bussiness Name'
-job.inputOtherBussinessName(OtherBusinessName)
-
-'Step 16: Input Other Bussiness Type'
-job.inputOtherBussinessType(OtherBussinessType)
-
-'Step 17: Input Other job position'
-job.inputOtherJobPosition(OtherJobPosition)
-
-'Step 18: Select Other Company Establish date'
-job.selectOtherCompanyEstablishDate(OtherEmploymentEstablishmentDateMonth, OtherEmploymentEstablishmentDateYear)
+if(IsEditJobData == "Y") {
+	
+	'Step 1: Input Profession name'
+	job.selectProfessionName(ProfessionName)
+	
+	'Step 2: Input Profession No'
+	job.inputProfessionNo(ProfessionalNo)
+	
+	'Step 3: Select Job Position'
+	job.selectJobPosition(JobPosition)
+	
+	'Step 4: Select Job Status'
+	job.selectJobStatus(JobStatus)
+	
+	'Step 5: Input Company Name'
+	job.inputCompanyName(CompanyName)
+	
+	'Step 6: Check is Internal Employee'
+	job.chxInternalEmployee(InternalEmployee)
+	
+	'Step 7: Select Industry Type Name'
+	job.selectIndustryTypeName(IndustryTypeName)
+	
+	'Step 8 : Select Company Scale'
+	job.selectCompanyScale(CompanyScale)
+	
+	'Step 9: Select InvestmentType'
+	job.selectInvestmentType(InvestmentType)
+	
+	'Step 10: Input Number of employee'
+	job.inputNumberOfEmployee(NumberofEmployee)
+	
+	'Step 11: Select Employement Establish Date'
+	job.selectEmploymentEstablishDate(EmploymentEstablishmentDateMonth, EmploymentEstablishmentDateYear)
+	
+	'Step 12: Check is Well Known company'
+	job.checkIsWellKnowCompany(IsWellKnownCompany)
+	
+	'Step 13: Input Previous Company'
+	job.inputPrevCompanyName(PreviousCompanyName)
+	
+	'Step 14: Select Previous Employement date'
+	job.selectPrevCompanyDate(PreviousEmployementDateMonth, PreviousEmployementDateYear)
+	
+	'Step 15: Input Other Bussiness Name'
+	job.inputOtherBussinessName(OtherBusinessName)
+	
+	'Step 16: Input Other Bussiness Type'
+	job.inputOtherBussinessType(OtherBussinessType)
+	
+	'Step 17: Input Other job position'
+	job.inputOtherJobPosition(OtherJobPosition)
+	
+	'Step 18: Select Other Company Establish date'
+	job.selectOtherCompanyEstablishDate(OtherEmploymentEstablishmentDateMonth, OtherEmploymentEstablishmentDateYear)
+}
 
 'Step 19: Click Save and Continue'
 job.clickSaveContinue()

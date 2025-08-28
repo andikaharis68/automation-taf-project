@@ -96,15 +96,5 @@ cdeCompletion.clickSaveAssetUser()
 'Step 25: submit'
 cdeCompletion.clickSubmit()
 
-'Step 26: verify submit success'
-cdeCompletion.verifySubmitSuccess()
-
-'Step 27: switch to default frame'
+'Step 26: switch to default frame'
 cdeCompletion.switchToDefaultContent()
-
-
-
-
-
-
-

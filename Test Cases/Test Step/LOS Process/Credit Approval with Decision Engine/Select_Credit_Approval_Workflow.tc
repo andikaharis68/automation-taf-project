@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Select_Credit_Approval_Workflow</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>2b9006d9-f11b-4d7c-8e6a-8336e35db6e2</testCaseGuid>
+</TestCaseEntity>

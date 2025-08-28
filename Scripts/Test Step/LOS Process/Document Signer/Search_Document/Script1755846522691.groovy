@@ -25,7 +25,7 @@ DocumentSignerPage doc = new DocumentSignerPage()
 doc.verifyDocSignerLandingPage()
 
 'Step 2: search document by applicaiton number'
-doc.searchTransactionByApplicationNumber("0008APP20250500117")
+doc.searchTransactionByApplicationNumber(ApplicationNo)
 
 'Step 3: select entry document'
-doc.entryDocument("0008APP20250500117")
+doc.entryDocument(ApplicationNo)

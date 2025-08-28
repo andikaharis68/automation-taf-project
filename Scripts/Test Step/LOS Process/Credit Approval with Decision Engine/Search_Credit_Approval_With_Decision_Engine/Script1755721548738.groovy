@@ -23,11 +23,8 @@ import org.openqa.selenium.Keys as Keys
 MenuPage menu = new MenuPage()
 CreditApprovalWithDecisionEnginePage creditApproval = new CreditApprovalWithDecisionEnginePage()
 
-'Step 1: Switch to Iframe Main Page'
-menu.switchToIframeMain()
-
-'Step 2: verify landing in credit approval with decision engine'
+'Step 1: verify landing in credit approval with decision engine'
 creditApproval.verifyLandingScreen()
 
-'Step 3: search approval by application no, then process'
+'Step 2: search approval by application no, then process'
 creditApproval.searchApprovalByApplicationNo(ApplicationNo)

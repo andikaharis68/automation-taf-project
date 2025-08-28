@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Validate_Step_On_Sms_Approve</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>8620a671-2310-437f-8026-53fdf7f98f7a</testCaseGuid>
+</TestCaseEntity>

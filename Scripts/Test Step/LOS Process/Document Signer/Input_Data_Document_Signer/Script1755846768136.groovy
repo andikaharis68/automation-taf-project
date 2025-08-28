@@ -25,13 +25,13 @@ DocumentSignerPage doc = new DocumentSignerPage()
 WebUI.takeScreenshot()
 
 'Step 2: select company singer'
-doc.selectCompanySigner("%")
+doc.selectCompanySigner(CompanySigner)
 
 'Step 3: select shareholder signer'
-doc.selectShareholder("%")
+doc.selectShareholder(ShareholderSigner)
 
 'Step 4: select approver signer'
-doc.selectOfficerApprover("%")
+doc.selectOfficerApprover(ApproverSigner)
 
 'Step 5: take screenshot after'
 WebUI.takeScreenshot()

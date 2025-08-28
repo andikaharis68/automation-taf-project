@@ -21,47 +21,24 @@ import org.openqa.selenium.Keys as Keys
 
 String scenarioId = "1"
 List<String> sheetNames = [
-	'Credentials', 'CustMainData', 'MainData', 'LegalAddress', 'ResidenceAddress', 'JobAddress', 'Family',
-	'JobData', 'EmergencyContact', 'FinancialData', 'OtherAttribute']
+	'Credentials', 'CustomerInformation', 'MainData', 'LegalAddress', 'ResidenceAddress', 'JobAddress', 
+	'Family', 'JobData', 'EmergencyContact', 'FinancialData', 'OtherAttribute']
 Map scenarioData = [:]
 scenarioData = BaseHelper.getTestDataMultipleSheet(sheetNames, "$GlobalVariable.TEST_DATA_LOCATION/LOS_Customer_Edit_Personal_TestData.xlsx", scenarioId)
 
+BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/NavigateTo_CustomerInformation_Page'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Search_CustomerInformation_Data'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_MainData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-
-
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Check_Address_List'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-
-if(scenarioData['LegalAdressExist']) {
-	println('masuk legal ada')
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_LegalAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-}
-
-if(scenarioData['ResidenceAddressExist']) {
-	println('masuk residence ada')
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_ResidenceAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-}
-
-if(scenarioData['JobAddressExist']) {
-	println('masuk job ada')
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-}
-
-scenarioData += BaseHelper.getTestDataByScenario("Family", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", scenarioData['ScenarioId'])
-scenarioData += BaseHelper.getTestDataByScenario("JobData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", scenarioData['ScenarioId'])
-
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_LegalAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_ResidenceAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobAddress'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Add_FamilyCustomer'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_JobData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-
-scenarioData += BaseHelper.getTestDataByScenario("EmergencyContact", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", scenarioData['ScenarioId'])
-scenarioData += BaseHelper.getTestDataByScenario("FinancialData", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", scenarioData['ScenarioId'])
-scenarioData += BaseHelper.getTestDataByScenario("OtherAttribute", GlobalVariable.TEST_DATA_LOCATION + "/" + "LOS_Customer_Edit_Personal_TestData.xlsx", scenarioData['ScenarioId'])
-
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_EmergencyContact'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_FinancialData'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Edit_OtherAttribute'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Edit Personal Customer/Verify_EditCustomer_Seccess'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase(''), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
+
 

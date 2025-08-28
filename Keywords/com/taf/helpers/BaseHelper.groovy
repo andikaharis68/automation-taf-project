@@ -529,4 +529,10 @@ class BaseHelper {
 		int currentTab = WebUI.getWindowIndex()
 		WebUI.switchToWindowIndex(currentTab + 1)
 	}
+	static void pageDown(int times) {
+		Robot robot = new Robot()
+		times.times {
+			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
+		}
+	}
 }
