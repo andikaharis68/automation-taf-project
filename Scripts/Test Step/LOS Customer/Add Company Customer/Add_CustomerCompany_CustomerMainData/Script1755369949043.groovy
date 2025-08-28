@@ -29,39 +29,42 @@ MenuPage menu = new MenuPage()
 'Step 1: check box the is new application'
 companyCustomerMainDataPage.clickIsNewApplication(NextToNewApplication)
 
-'Step 2: need to switch iframe customer form'
+'Step 2: Get Application No'
+ApplicationNo = companyCustomerMainDataPage.getApplicationNo()
+
+'Step 3: need to switch iframe customer form'
 companyCustomerMainDataPage.switchToIframeCustForm()
 
-'Step 3: Verify landing in main data page'
+'Step 4: Verify landing in main data page'
 companyCustomerMainDataPage.verifyLandingInMainPage()
 
-'Step 4: checkbox the is affiliate'
+'Step 5: checkbox the is affiliate'
 companyCustomerMainDataPage.clickCheckBoxIsAffiliate(AffiliationWithMultifinance)
 
-'Step 5: checkbox the is premium customer'
+'Step 6: checkbox the is premium customer'
 companyCustomerMainDataPage.clickCheckBoxIsPremium(IsPremium, PremiumNote)
 
-'Step 6: checkbox the is VIP customer'
+'Step 7: checkbox the is VIP customer'
 companyCustomerMainDataPage.clickCheckBoxIsVIP(IsVIP)
 
-'Step 7: input the number of employees'
+'Step 8: input the number of employees'
 companyCustomerMainDataPage.inputNumberOfEmployees(NumberofEmployee)
 
-'Step 8: input customer sidNo'
+'Step 9: input customer sidNo'
 companyCustomerMainDataPage.inputCustomerSidNo(SIDNo)
 
-'Step 9: input establishment date'
+'Step 10: input establishment date'
 companyCustomerMainDataPage.inputEstablishmentDate(EstablishmentDate)
 
-'Step 10: input industry name from lookup industry'
+'Step 11: input industry name from lookup industry'
 companyCustomerMainDataPage.inputIndustryNameFromLookup(IndustryTypeName)
 
-'Step 11: input customer group for first found in lookup'
+'Step 12: input customer group for first found in lookup'
 companyCustomerMainDataPage.inputCustomerGroupThenSelectedFirstFound(CustomerGroup)
 
-'Step 12: save content after main data is filled'
+'Step 13: save content after main data is filled'
 companyCustomerMainDataPage.saveContentAfterMainDataIsFilled()
 
-'Step 13: Verify success message'
+'Step 14: Verify success message'
 menu.verifySuccessMessage()
 

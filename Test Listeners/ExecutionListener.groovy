@@ -15,6 +15,7 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.taf.helpers.ScenarioContext
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 
 import internal.GlobalVariable as GlobalVariable
@@ -35,6 +36,17 @@ class ExecutionListener {
 	
 	@AfterTestCase
 	def afterTestCase() {
-//		(GlobalVariable.IS_CLOSE_BROWSER) ? WebUI.closeBrowser() : KeywordUtil.logInfo("Browser Not Closed")
+		(GlobalVariable.IS_CLOSE_BROWSER) ? WebUI.closeBrowser() : KeywordUtil.logInfo("Browser Not Closed")
+	}
+	
+	@BeforeTestSuite
+	def beforeSuite(TestSuiteContext ctx) {
+		ScenarioContext.clear()
+	}
+	
+	@AfterTestSuite
+	def afterSuite(TestSuiteContext ctx) {
+		ScenarioContext.clear()
+		
 	}
 }

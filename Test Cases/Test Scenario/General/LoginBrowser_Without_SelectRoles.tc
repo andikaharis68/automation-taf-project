@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>LoginBrowser_Without_SelectRoles</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>9e3d2f34-8d3c-4dce-a556-e4f5a2bead89</testCaseGuid>
+</TestCaseEntity>

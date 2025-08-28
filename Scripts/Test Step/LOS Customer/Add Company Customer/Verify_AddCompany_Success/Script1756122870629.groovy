@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 CustomerInformationPage custInfo = new CustomerInformationPage()
 
 'Step 1: Search Customer name'
-custInfo.inputCustomerName(CompanyName)
+custInfo.inputCustomerNo(ApplicationNo)
 
 'Step 2: Select Customer type'
 custInfo.selectCustomerType("Company")

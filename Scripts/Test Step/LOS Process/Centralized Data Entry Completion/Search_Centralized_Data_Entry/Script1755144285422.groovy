@@ -27,5 +27,8 @@ cdeCompletion.switchToIframeMain()
 'Step 2: search centralized data complition by customer name'
 cdeCompletion.searchCentralizedDataCompletion(CustomerName)
 
+'Step 3: Click Edit on action pencil'
+cdeCompletion.clickActionPencil()
+
 'Step 3: switch to default frame'
 cdeCompletion.switchToDefaultContent()

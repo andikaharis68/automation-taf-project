@@ -28,6 +28,8 @@ ApplicationInquiryPage appInquiry = new ApplicationInquiryPage()
 'Step 1: Click application inquiry'
 menu.navigateToApplicationInquiry()
 
+menu.switchToIframeMainPage()
+
 'Step 2: verify landing in application inquiry'
 appInquiry.verifyLandingScreen()
 
@@ -36,3 +38,6 @@ appInquiry.doSearchApplicationNo(ApplicationNo)
 
 'Step 4: verify application step'
 appInquiry.verifyApplicationStep()
+
+'Step 5: Switch to customer view'
+appInquiry.switchToCustomerView()

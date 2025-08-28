@@ -20,11 +20,17 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
+Map scenarioData = [
+	'ScenarioId' : "1",
+	'TestDataName': "LOS_Process_Credit_Simulation_TestData.xlsx"
+]
 Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("CreditApproval", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
+
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataByScenario("CreditApproval", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataByScenario("MasterData", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["MasterDataId"])
+
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 int maxLoop = 10

@@ -74,10 +74,13 @@ addPersonal.clickNextButton()
 'Step 16: Click edit or new app'
 mainData.clickNewCustomerIfPresent()
 
-'Step 17: Switch to frame custform'
+'Step 17: Get App No'
+ApplicationNo = mainData.getApplicationNo()
+
+'Step 18: Switch to frame custform'
 mainData.switchToIframeCustForm()
 
-'Step 18: Verify landing in main data page'
+'Step 19: Verify landing in main data page'
 mainData.verifyLandingInMainData()
 
 

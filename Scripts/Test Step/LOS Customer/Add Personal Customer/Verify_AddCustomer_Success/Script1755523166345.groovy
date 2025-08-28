@@ -21,8 +21,8 @@ import org.openqa.selenium.Keys as Keys
 
 CustomerInformationPage custInfo = new CustomerInformationPage()
 
-'Step 1: Search Customer name'
-custInfo.inputCustomerName(CustomerName)
+'Step 1: Search Customer No'
+custInfo.inputCustomerNo(ApplicationNo)
 
 'Step 2: Select Customer type'
 custInfo.selectCustomerType("Personal")
