@@ -66,7 +66,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	}
 
 	private void selectIdType(String idType) {
-		if(idType) {			
+		if(idType) {
 			safetySelect(drpIDType, idType)
 		}
 	}
@@ -85,7 +85,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 		safetyInput(txfIDExpiredDate, idExpiredDate, 1.0)
 		clickEnter(txfIDExpiredDate)
 	}
-	
+
 	private void selectGender(String gender) {
 		TestObject radGender = createTestObject("radGender","xpath", "//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
 		if (gender?.trim()) {
@@ -107,7 +107,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void inputNPWP(String npwp) {
 		if(npwp) {
-			
+
 			String currentText = WebUI.getText(txfNPWP).trim()
 			if (currentText) {
 				KeywordUtil.logInfo("NPWP auto filled")

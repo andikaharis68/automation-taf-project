@@ -46,6 +46,8 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	private TestObject btnMainTab 							= createTestObject("btnMainTab", "xpath", "//*[@id='lbMAIN']")
 	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
 	private TestObject iframeMainPage	 					= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
+	
+	private TestObject txtCustomerNo						= createTestObject("txtCustomerNo", "id", "lblCustCoyNo")
 
 	
 	private void verifyLandingInMainPage() {
@@ -153,5 +155,10 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 
 	private void saveContentAfterMainDataIsFilled() {
 		safetyClick(btnSaveCustMainData)
+	}
+	
+	private String getApplicationNo() {
+		String appNo = WebUI.getText(txtCustomerNo)
+		return appNo
 	}
 }

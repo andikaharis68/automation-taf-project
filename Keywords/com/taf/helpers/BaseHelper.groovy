@@ -525,13 +525,17 @@ class BaseHelper {
 		}
 	}
 
+	def switchToNewTab() {
+		int currentTab = WebUI.getWindowIndex()
+		WebUI.switchToWindowIndex(currentTab + 1)
+	}
+
 	static void pageDown(int times) {
 		Robot robot = new Robot()
 		times.times {
 			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
 		}
 	}
-	
 	
 	static List readExcelFile(String xlsLoc, String sheetName, int colNameRowIdx = 0, int dataRowIdx = 1) {
 		def rows = []

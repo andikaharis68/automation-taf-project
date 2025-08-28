@@ -29,7 +29,7 @@ import internal.GlobalVariable
 public class AssetDataPage extends BaseHelper {
 
 	private TestObject btnSaveContinue 		= createTestObject("btnSaveContinue","id","lb_Form_SaveCont")
-	private TestObject txtAssetName			= createTestObject("txtAssetName","xpath","//*[@id='gvAssetList_lblAssetJoin_0']") 
+	private TestObject txtAssetName			= createTestObject("txtAssetName","xpath","//*[@id='gvAssetList_lblAssetJoin_0']")
 	private TestObject txtSupplierBranchName= createTestObject("txtSupplierBranchName", "xpath", "//*[@id='gvAssetList']/tbody/tr[2]/td[3]")
 	private TestObject txtAssetPrice		= createTestObject("txtAssetPrice","id","gvAssetList_lblAssetPrice_0")
 	private TestObject txtDownPayment		= createTestObject("txtDownPayment","id","gvAssetList_lblDownPayment_0")
@@ -39,7 +39,7 @@ public class AssetDataPage extends BaseHelper {
 	private TestObject btnEditAssetRegist	= createTestObject("btnEditAssetRegist","id","gvAssetList_imbEdit_0")
 	private TestObject btnEdit				= createTestObject("btnEdit","id","gvAssetList_imbEdit2_0")
 
-	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Form_Save_Reg") 
+	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Form_Save_Reg")
 	private TestObject btnSaveEdit			= createTestObject("btnSaveEdit", "id", "lb_Form_Save_Edit")
 	private TestObject btnCancel			= createTestObject("btnCancel", "id", "lb_Form_Cancel_Reg")
 
@@ -65,16 +65,16 @@ public class AssetDataPage extends BaseHelper {
 	private TestObject drpAssetUsage				= createTestObject("drpAssetUsage","id","ucAssetUsage_ddlReference")
 	private TestObject txfManufacturingYear			= createTestObject("txfManufacturingYear","id","txtManufacturingYear")
 
-	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'txtSearchValue_0')]") 
+	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'txtSearchValue_0')]")
 	private TestObject txfOvlySearchAccName			= createTestObject("txfOvlySearchAccName", "xpath", "//*[contains(@id, 'txtSearchValue_1')]")
 	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id, 'ucS_lbSearch')]")
 	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect')]")
-	
-	private TestObject btnAddAdditionalBranch		= createTestObject("btnAddAdditionalBranch", "id", "lb_Form_Add_Acc") 
+
+	private TestObject btnAddAdditionalBranch		= createTestObject("btnAddAdditionalBranch", "id", "lb_Form_Add_Acc")
 	private TestObject btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "xpath", "//*[contains(@id, 'uclSupplBranchSchm_0_imb_0')]")
-	private TestObject btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_0_imb_0") 
-	
-	private TestObject txfCity						= createTestObject("txfCity", "id", "ucAssLocAddr_txtCity") 
+	private TestObject btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_0_imb_0")
+
+	private TestObject txfCity						= createTestObject("txfCity", "id", "ucAssLocAddr_txtCity")
 
 	private void verifyLandinginAssetDataPage() {
 		WebUI.delay(2)
@@ -175,19 +175,18 @@ public class AssetDataPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("option not clickable")
 		}
-		
 	}
 
 	private void searchAssetName(String assetName) {
 		safetyClick(btnSearchAssetName)
-		
+
 		WebUI.delay(2)
 		WebUI.setText(txfOvlySearchName, assetName)
 		WebUI.delay(2)
-		
+
 		safetyClick(btnOvlySearch)
 		WebUI.takeScreenshot()
-		
+
 		safetyClick(btnOvlySelect)
 	}
 
@@ -202,7 +201,7 @@ public class AssetDataPage extends BaseHelper {
 		clickTABKeyboard(txfDownPayment)
 		WebUI.delay(1)
 	}
-	
+
 	private void selectAssetUsage(String assetUsage) {
 		safetySelect(drpAssetUsage, assetUsage)
 		WebUI.delay(1)
@@ -222,23 +221,21 @@ public class AssetDataPage extends BaseHelper {
 		safetyClick(btnOvlySearch)
 		safetyClick(btnOvlySelect)
 	}
-	
+
 	private void searcAccName(String accName) {
 		safetyClick(btnSearchAssetAccessoryName)
 		safetyInput(txfOvlySearchAccName, accName)
 		safetyClick(btnOvlySearch)
 		WebUI.takeScreenshot()
 		safetyClick(btnOvlySelect)
-		
+
 		WebUI.takeScreenshot()
-		
 	}
 	private void clickAdd() {
 		safetyClick(btnAddAdditionalBranch)
 		WebUI.delay(3)
-		
 	}
-	
+
 	private void clickSaveEdit() {
 		WebUI.click(btnSaveEdit)
 		if(WebUI.waitForAlert(6, FailureHandling.OPTIONAL)) {
@@ -246,9 +243,8 @@ public class AssetDataPage extends BaseHelper {
 		}
 		WebUI.click(btnSaveEdit)
 		WebUI.takeScreenshot()
-		
 	}
-	
+
 	private boolean isOptionDisable(TestObject to) {
 		boolean isDisabled = !WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
 		return isDisabled
