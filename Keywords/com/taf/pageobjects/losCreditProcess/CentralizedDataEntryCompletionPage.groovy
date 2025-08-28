@@ -33,7 +33,10 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	//search
 	private TestObject txfCustomerName 			= createTestObject("txfCustomerName", "id", "ucSearch_txtCustName_ltlCustCustName")
 	private TestObject btnSearch 				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+	
+	//table
 	private TestObject btnPencil 				= createTestObject("btnPencil", "id", "gvProspectList_imbAction_0")
+	private TestObject txtFirstProspectNo 		= createTestObject("txtFirstProspectNo", "id", "gvProspectList_lbProspectNo_0")
 
 	//info from deal and decision
 	private TestObject txfNotesInfo 			= createTestObject("txfNotesInfo", "id", "txtNoteFromSupplBranchEmp")
@@ -171,13 +174,19 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void searchCentralizedDataCompletion(String customerName) {
-		WebUI.takeScreenshot()
 		WebUI.waitForElementPresent(txfCustomerName, 5)
+		WebUI.takeScreenshot()
 		safetyInput(txfCustomerName, customerName)
 		safetyClick(btnSearch)
-		WebUI.waitForElementPresent(btnPencil, 5)
 		WebUI.takeScreenshot()
+	}
+	
+	public void clickActionPencil() {
 		safetyClick(btnPencil)
+	}
+	
+	public void clickResultByFirstProspectNo() {
+		safetyClick(txtFirstProspectNo)
 	}
 
 	public void inputInfoDealAndDecision(String notes) {
