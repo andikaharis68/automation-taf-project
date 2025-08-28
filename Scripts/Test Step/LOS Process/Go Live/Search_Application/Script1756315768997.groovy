@@ -14,6 +14,19 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.losCreditProcess.GoLivePage
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+GoLivePage golive = new GoLivePage()
+MenuPage menu = new MenuPage()
+
+menu.switchIframeMainPage()
+
+golive.inputApplicationNo(ApplicationNo)
+
+golive.clickButtonSearch()
+
+golive.selectApplicationNo()
