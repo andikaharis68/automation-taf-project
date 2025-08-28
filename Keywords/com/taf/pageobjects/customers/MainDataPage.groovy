@@ -85,6 +85,7 @@ public class MainDataPage extends BaseHelper {
 
 	private TestObject lblNewCustomer					= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
 	private TestObject btnEdit							= createTestObject("btnEdit", "xpath", "//*[@id='gvCustomerPersonal_imbEdit_0']")
+	private TestObject txtAppNo							= createTestObject("txtAppNo", "id", "lblCustNo")
 
 	private void verifyLandingInMainData() {
 		verifyLanding(drpSalutation, "Main Data")
@@ -283,5 +284,10 @@ public class MainDataPage extends BaseHelper {
 		TestObject iframeMainPage = createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 		WebUI.verifyElementPresent(iframeMainPage, 5)
 		WebUI.switchToFrame(iframeMainPage, 1)
+	}
+	
+	private String getApplicationNo() {
+		String appNo = WebUI.getText(txtAppNo)
+		return appNo
 	}
 }

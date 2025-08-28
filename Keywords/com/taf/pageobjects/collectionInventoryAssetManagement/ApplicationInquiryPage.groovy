@@ -60,7 +60,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtChassisNo = createTestObject("txtChassisNo", "", "")
 	private TestObject txtLocStatus = createTestObject("txtLocStatus", "", "")
 	
-	private TestObject txfApplicationNo = createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
+	private TestObject txfApplicationNo = createTestObject("txfApplicationNo", "xpath", "//*[@id='ucSearch_txtAppNo_ltlAppAppNoSearch']") 
 	private TestObject btnEdit = createTestObject("btnEdit", "id", "")
 	
 	private TestObject txtApplicationStep = createTestObject("txtApplicationStep", "id", "gvApp_lbAppStep_0") 
@@ -173,12 +173,20 @@ public class ApplicationInquiryPage extends BaseHelper {
 	}
 	
 	private void doSearchApplicationNo(String applicationNo) {
-		WebUI.setText(txfApplicationNo, applicationNo)
-		WebUI.click(btnSearch)
+		safetyInput(txfApplicationNo, applicationNo)
+		safetyClick(btnSearch)
 		WebUI.takeScreenshot()
 	}
 	private void verifyApplicationStep() {
 		String expectedText = "DCK"
 		WebUI.verifyElementText(txtApplicationStep, expectedText)
+	}
+	
+	private void switchToCustomerView() {
+		TestObject txtAppNo = createTestObject("txtAppNo", "id", "gvApp_lbAppNo_0") 
+		safetyClick(txtAppNo)
+		switchToNewTab()
+		WebUI.takeScreenshot()
+		
 	}
 }

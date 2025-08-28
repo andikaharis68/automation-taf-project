@@ -42,7 +42,7 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject txfAccName					= createTestObject("txfAccName", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccName']")
 	private TestObject txfAccNo						= createTestObject("txfAccNo", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccNo']")
 	private TestObject drpBankAccPurpose			= createTestObject("drpBankAccPurpose", "xpath", "//*[@id='ucCustBankAccPurpose_ddlReference']")
-	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']") 
+	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']")
 
 	private TestObject btnAddBankStatement			= createTestObject("btnAddBankStatement", "xpath", "//*[@id='lb_Form_Add_BankStatement']")
 	private TestObject drpBankNameStatement			= createTestObject("drpBankNameStatement", "xpath", "//*[@id='ucBankStatement_ucBankName_ddlReference']")
@@ -88,7 +88,7 @@ public class FinancialDataPage extends BaseHelper {
 		}
 	}
 	private void clearText(TestObject to) {
-		safetyClick(to)
+		WebUI.click(to)
 		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, "a"))
 		WebUI.sendKeys(to,Keys.chord(Keys.BACK_SPACE))
 	}
@@ -129,7 +129,6 @@ public class FinancialDataPage extends BaseHelper {
 	private void clickCalculateIncome() {
 		safetyClick(btnCalculateIncome)
 		handleAlertIfPresent()
-		
 	}
 	private void clickAddCustAcc() {
 		safetyClick(btnAddBankAcc)
@@ -174,10 +173,10 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void clickSaveAccount() {
-		WebUI.delay(2)
 		safetyClick(btnSaveBankAcc)
-		WebUI.delay(2)
+		WebUI.delay(3)
 		clickKeyboardEnter()
+		handlePopupAlert()
 		if(WebUI.waitForElementPresent(btnSaveBankAcc, 5, FailureHandling.OPTIONAL)) {
 			safetyClick(btnSaveBankAcc)
 		}
@@ -232,7 +231,7 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void selectStatementMonth(String month, Integer index) {
 		if(month) {
-			TestObject drpMonth = createTestObject("", "xpath", "//*[@id='gvBankStatementAddEdit_ddlMonth_${index}']")
+			TestObject drpMonth = createTestObject("safetyInputEdit", "xpath", "//*[@id='gvBankStatementAddEdit_ddlMonth_${index}']")
 			safetySelect(drpMonth, month)
 		}
 	}
@@ -247,16 +246,18 @@ public class FinancialDataPage extends BaseHelper {
 	private void inputStatementDebit(String debit, Integer index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
+			clearText(drpDebit)
 			safetyInput(drpDebit, debit)
+			WebUI.delay(2)
 		}
 	}
 
 	private void inputStatementCredit(String credit, Integer index) {
 		if(credit) {
 			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
+			clearText(drpCredit)
 			safetyInput(drpCredit, credit)
 		}
-		
 	}
 	private void inputIncomeSection(String monthlyIncome) {
 		inputGrossMonthlyIncome(monthlyIncome)

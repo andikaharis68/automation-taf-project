@@ -19,7 +19,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [scenarioId: '7', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
+Map scenarioData = [scenarioId: '8', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
 Map dataRow = [:]
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataByScenario("DocumentChecklist", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])

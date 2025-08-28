@@ -524,4 +524,9 @@ class BaseHelper {
 			js.executeScript("window.scrollBy(0,"+ step + ")")
 		}
 	}
+
+	def switchToNewTab() {
+		int currentTab = WebUI.getWindowIndex()
+		WebUI.switchToWindowIndex(currentTab + 1)
+	}
 }
