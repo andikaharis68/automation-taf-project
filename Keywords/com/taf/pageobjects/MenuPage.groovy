@@ -64,7 +64,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnDeliveryOrder				= createTestObject("btnDeliveryOrder", "xpath", "//a[text() = 'Delivery Order']")
 	private TestObject btnCustomerConfirmation		= createTestObject("btnCustomerConfirmation", "xpath", "//a[text() = 'Customer Confirmation']")
 	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")
-
+	private TestObject btnGoLive					= createTestObject("btnGoLive", "text", "Go Live")
+	
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
@@ -353,4 +354,14 @@ public class MenuPage extends BaseHelper {
 		switchDefaultContent()
 	}
 	
+	private void navigateToGoLive() {
+		switchDefaultContent()
+		WebUI.click(drpMenu)
+		switchToIframeMenu()
+		safetySelect(drpModul, "LOAN ORIGINATION")
+		safetyClick(btnCreditProcess)
+		WebUI.takeScreenshot()
+		safetyClick(btnGoLive)
+		switchDefaultContent()
+	}
 }
