@@ -14,57 +14,63 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
+import com.taf.helpers.ScenarioContext
 
 import internal.GlobalVariable
 
 public class DisbursementApprovalPage extends BaseHelper {
 	//search
-	private TestObject drpAPTypeName = createTestObject("drpAPTypeName", "", "")
-	private TestObject txfApDestination = createTestObject("txfApDestination", "", "")
-	private TestObject drpBankName = createTestObject("drpBankName", "", "")
-	private TestObject drpPaymentVoucherDate = createTestObject("drpPaymentVoucherDate", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject drpAPTypeName			 = createTestObject("drpAPTypeName", "id", "ucSearch_ddlRefAccPayableTypeId_ltlRefAccPayableTypeAccPayableTypeNameSearch_ddlReference")
+	private TestObject txfApDestination 		 = createTestObject("txfApDestination", "id", "ucSearch_txtAccPayableDestination_ltlAccPayableAccPayableDestinationSearch")
+	private TestObject drpBankName 				 = createTestObject("drpBankName", "id", "ucSearch_ddlAPDestBankCode_ltlRefBankBankNameSearch_ddlReference")
+	private TestObject txfPaymentVoucherDate 	 = createTestObject("txfPaymentVoucherDate", "id", "ucSearch_txtPayVoucherDt_ltlPayVoucherHPayVoucherDtLTESearch_txtDatePicker")
+	private TestObject btnSearch				 = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+
 	//AP Disbursement Approval-Grid
-	private TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "", "")
-	private TestObject btnApproveSelected = createTestObject("btnApproveSelected", "", "")
-	private TestObject btnApprove = createTestObject("btnApprove", "", "")
+	private TestObject btnApproveSelected		 = createTestObject("btnApproveSelected", "id", "lb_Btn_ApproveSelected")
+	private TestObject btnApprove 				 = createTestObject("btnApprove", "id", "lb_Form_Approve")
 	//popup status
-	private TestObject txtPopupStatus = createTestObject("txtPopupStatus", "", "")
-	private TestObject btnPopupOke = createTestObject("btnPopupOke", "", "")
+	private TestObject txtPopupStatus			 = createTestObject("txtPopupStatus", "", "")
+	private TestObject btnPopupOke				 = createTestObject("btnPopupOke", "", "")
 	private TestObject lblPopupTransactionStatus = createTestObject("lblPopupTransactionStatus", "", "")
 	private TestObject txtPopupTransactionStatus = createTestObject("txtPopupTransactionStatus", "", "")
+	private TestObject txtVoucherNo				 = createTestObject("txtVoucherNo", "id", "rptDetail_lblPayVoucherNo_0")
 
-	public void inputSearchApplication(String apTypeName, String apDestination, String bankName, String voucherDate) {
-		WebUI.selectOptionByLabel(drpAPTypeName, apTypeName, false)
-		WebUI.setText(txfApDestination, apDestination)
-		WebUI.selectOptionByLabel(drpBankName, bankName, false)
-		WebUI.selectOptionByLabel(drpPaymentVoucherDate, voucherDate, false)
+	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
+		safetySelect(drpAPTypeName, apTypeName)
+		safetyInput(txfApDestination, apDestination)
+		safetySelect(drpBankName, bankName)
 	}
 
 	public void clickButtonSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
+		WebUI.delay(3)
 	}
 
-	public void checklistApDisbursement(String apNo) {
-		cbkApDisbursement = createTestObject("cbkApDisbursement", "", "")
-		WebUI.click(cbkApDisbursement)
+	public void checklistApDisbursement(String apBalance) {
+		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apBalance')]]//input[@type='checkbox']")
+		safetyClick(cbkApDisbursement)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonApproveSelected() {
-		WebUI.click(btnApproveSelected)
+		safetyClick(btnApproveSelected)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonApprove() {
-		WebUI.click(btnApprove)
+		safetyClick(btnApprove)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonPopupOke() {
 		WebUI.waitForElementPresent(txtPopupStatus, 10)
-		WebUI.click(btnPopupOke)
+		safetyClick(btnPopupOke)
 	}
 
 	public void verifyPopupStatusTransaction() {
@@ -72,4 +78,16 @@ public class DisbursementApprovalPage extends BaseHelper {
 		WebUI.waitForElementPresent(lblPopupTransactionStatus, 10)
 		WebUI.waitForElementPresent(txtPopupTransactionStatus, 10)
 	}
+
+	private String saveDataToContext() {
+		ScenarioContext.put("PaymentVoucherNo", WebUI.getText(txtVoucherNo))
+		String voucherNo = ScenarioContext.get("PaymentVoucherNo")
+		KeywordUtil.logInfo("voucher no " +  voucherNo)
+	}
+	private String getApBalanceFromContext() {
+		String apBalance = ScenarioContext.get("ApBalance")
+		KeywordUtil.logInfo("appBalance" + apBalance)
+		return apBalance
+	}
 }
+

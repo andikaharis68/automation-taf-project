@@ -30,7 +30,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject drpFavourite 				= createTestObject("drpFavourite", "xpath", "//img[@id='imgFavourite']")
 	private TestObject btnCreditSimulation 			= createTestObject("btnCreditSimulation", "text", "Credit Simulation")
 	private TestObject btnCentralizeDataEntry 		= createTestObject("btnCentralizeDataEntry", "text", "Centralized Data Entry")
-	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "//a[text() = 'New Application Data Entry']") 
+	private TestObject btnNewApplicationDataEntry	= createTestObject("btnNewApplicationDataEntry", "xpath", "//a[text() = 'New Application Data Entry']")
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "text", "New Application")
 	private TestObject btnNotifFromSalesAndCDE		= createTestObject("btnNotifFromSalesAndCDE", "xpath", "")
 	private TestObject btnAgreementDistribution		= createTestObject("btnAgreementDistribution", "xpath", "")
@@ -57,7 +57,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnTAFReports				= createTestObject("btnTAFReports", "xpath", "//a[@id='rModuleList_lbModuleList_6']")
 	private TestObject btnInternalSystem			= createTestObject("btnInternalSystem", "xpath", "//a[@id='rModuleList_lbModuleList_7']")
 	private TestObject btnCreditProcessInquiry		= createTestObject("btnCreditProcessInquiry", "xpath", "") // ada di favourite
-	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a") 
+	private TestObject btnSubMenuCustomer 			= createTestObject("btnSubMenuCustomer", "xpath", "//*[@id='rtvMenuTree']/ul/li[1]/div/a")
 	private TestObject btnCustomerNegative			= createTestObject("btnCustomerNegative", "xpath", "")
 	private TestObject btnProspect					= createTestObject("btnProspect", "id", "rModuleList_lbModuleList_0")
 	private TestObject btnSurveyTaskAssignment		= createTestObject("btnSurveyTaskAssignment", "xpath", "//a[text() = 'Survey Task Assignment']")
@@ -68,17 +68,24 @@ public class MenuPage extends BaseHelper {
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
-	private TestObject iframeMainPage				= createTestObject("iframeMenu", "xpath", "//*[@id='mainPage']")
+	private TestObject iframeMainPage				= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 	private TestObject iframeCustForm 				= createTestObject("iframeMenu", "xpath", "//*[@id='custForm']")
+	
+	private TestObject btnDisbursementSelection		= createTestObject("btnDisbursementSelection", "xpath", "//a[text() = 'Disbursement Selection']")
+	private TestObject btnDisbursementApproval		= createTestObject("btnDisbursementApproval", "xpath", "//a[text() = 'Disbursement Approval']")
+	private TestObject btnDisbursementExecution		= createTestObject("btnDisbursementExecution", "xpath", "//a[text() = 'Disbursement Execution']")
+	
+
+	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
 	}
-	
+
 	private void switchIframeMainPage() {
 		WebUI.switchToFrame(iframeMainPage, 2)
 	}
-	
+
 	private void switchIframeCustForm() {
 		WebUI.switchToFrame(iframeCustForm, 2)
 	}
@@ -240,7 +247,7 @@ public class MenuPage extends BaseHelper {
 
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(lblSuccessMessage, 206)
+		WebUI.waitForElementPresent(lblSuccessMessage, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
@@ -352,5 +359,50 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}
-	
+
+	private void navigateToDisbursmentSelection() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "DISBURSEMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnDisbursementSelection)
+		WebUI.takeScreenshot()
+		switchDefaultContent()
+	}
+	private void switchToIframeMainPage() {
+		WebUI.switchToFrame(iframeMainPage, 2)
+	}
+	private void clickLogoutButton() {
+		WebUI.switchToDefaultContent()
+		safetyClick(btnLogout)
+		if(WebUI.alertText(5)) {
+			WebUI.acceptAlert()
+		} else {
+			KeywordUtil.logInfo("alert not found")
+		}
+	}
+	private void navigateToDisbursmentApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "DISBURSEMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnDisbursementApproval)
+		WebUI.takeScreenshot()
+		WebUI.switchToDefaultContent()
+	}
+	private void navigateToDisbursmentExecution() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "DISBURSEMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnDisbursementExecution)
+		WebUI.takeScreenshot()
+		WebUI.switchToDefaultContent()
+	}
 }

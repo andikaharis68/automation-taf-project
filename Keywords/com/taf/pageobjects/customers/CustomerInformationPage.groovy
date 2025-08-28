@@ -127,8 +127,5 @@ public class CustomerInformationPage extends BaseHelper {
 		WebUI.switchToWindowIndex(1)
 		WebUI.takeScreenshot()
 	}
-	private void switchToNewTab() {
-		int currentTab = WebUI.getWindowIndex()
-		WebUI.switchToWindowIndex(currentTab + 1)
-	}
+	
 }
