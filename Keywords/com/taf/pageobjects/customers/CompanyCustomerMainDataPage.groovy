@@ -47,8 +47,7 @@ public class CompanyCustomerMainDataPage extends BaseHelper {
 	private TestObject iframeCustForm	 					= createTestObject("iframeCustForm", "xpath", "//*[@id='custForm']")
 	private TestObject iframeMainPage	 					= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 	
-	private TestObject txtCustomerNo						= createTestObject("txtCustomerNo", "id", "lblCustCoyNo")
-
+    private TestObject txtCustomerNo                        = createTestObject("txtCustomerNo", "id", "lblCustCoyNo")
 	
 	private void verifyLandingInMainPage() {
 		verifyLanding(iconLookUpCustomerGroup, "Company Customer Main Data")

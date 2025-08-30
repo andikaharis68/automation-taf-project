@@ -26,6 +26,10 @@ public class ManagementOrShareholderPage extends BaseHelper {
 
 	private TestObject btnAddPersonal		= createTestObject("btnAddPersonal", "xpath", "//*[@id='lb_Form_AddPersonal_Management']")
 	private TestObject btnAddCompany		= createTestObject("btnAddCompany", "xpath", "//*[@id='lb_Form_AddCompany_Management']")
+	private TestObject btnEditPersonal		= createTestObject("btnEditPersonal", "id", "gvManagement_imbEdit_0")
+	private TestObject btnEditCompany		= createTestObject("btnEditCompany", "id", "gvManagement_imbEdit_1")
+	private TestObject txtEditPersonal		= createTestObject("txtEditPersonal", "xpath", "//*[text() = 'Personal']")
+	private TestObject txtEditCompany		= createTestObject("txtEditCompany", "xpath", "//*[text() = 'Company']")
 	private TestObject btnContinue			= createTestObject("btnContinue", "xpath", "//*[@id='lb_Form_Continue_Management']")
 	private TestObject btnSearchNamePersonal= createTestObject("btnSearchFullName", "xpath", "//*[@id='ucCustMainDataPersonal_ucLookupCust_uclCust_imb']")
 	private TestObject btnSearchNameCompany	= createTestObject("btnSearchNameCompany", "xpath", "//*[@id='ucCustMainDataCoy_ucLookupCust_uclCust_imb']")
@@ -75,6 +79,22 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	private void clickAddCompany() {
 		safetyClick(btnAddCompany)
 	}
+	
+	private void clickEditPersonal() {
+		if(WebUI.waitForElementPresent(txtEditPersonal, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
+			safetyClick(btnEditPersonal)
+		} else {			
+			safetyClick(btnAddPersonal)
+		}
+	}
+
+	private void clickEditCompany() {
+		if(WebUI.waitForElementPresent(txtEditCompany, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
+			safetyClick(btnEditCompany)
+		} else {			
+			safetyClick(btnAddCompany)
+		}
+	}
 
 	private void clickNextCompany() {
 		safetyClick(btnNextCompany)
@@ -84,13 +104,16 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	}
 
 	private void searchCustomerName(String name) {
+		WebUI.takeScreenshot()
 		safetyClick(btnSearchNamePersonal)
 		safetyInput(txfOvlyCustomerName, name)
 		safetyClick(btnOvlySearch) //select first
+		WebUI.takeScreenshot()
 		safetyClick(btnOvlySelect)
 	}
 	
 	private void searchCustomerNameCompany(String companyName) {
+		WebUI.takeScreenshot()
 		safetyClick(btnSearchNameCompany)
 		safetyInput(txfOvlyCustomerNameCompany, companyName)
 		safetyClick(btnOvlySearchCompany) //select first
@@ -205,10 +228,12 @@ public class ManagementOrShareholderPage extends BaseHelper {
 	}
 	
 	private void clickSavePersonal() {
+		WebUI.takeScreenshot()
 		safetyClick(btnSavePersonal)
 	}
 	
 	private void clickContinue() {
+		WebUI.takeScreenshot()
 		safetyClick(btnContinue)
 	}
 }

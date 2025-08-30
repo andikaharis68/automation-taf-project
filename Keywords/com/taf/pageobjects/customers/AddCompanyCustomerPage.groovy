@@ -26,7 +26,7 @@ public class AddCompanyCustomerPage extends BaseHelper {
 
 	private TestObject txfCustomerName				= createTestObject("txfCustomerName", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_CustName']")
 	private TestObject drpIDCompanyType				= createTestObject("drpIDCompanyType", "xpath", "//*[@id='ucCustMainInfo_ucRefMrCoyType_ddlReference']")
-	private TestObject txtfCustomerNPWP 			= createTestObject("txtfCustomerNPWP", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_Npwp']")
+	private TestObject txfCustomerNPWP 				= createTestObject("txfCustomerNPWP", "xpath", "//*[@id='ucCustMainInfo_txt_Cust_Npwp']")
 	private TestObject txtfCustomerNitku 			= createTestObject("txtfCustomerNitku", "xpath", "//*[@id='ucCustMainInfo_txt_CustCoy_Nitku']")
 	private TestObject btnNext						= createTestObject("btnNext", "xpath", "//*[@id='lb_Toolbar_Next']")
 	private TestObject btnNewApplication			= createTestObject("btnNewApplication", "xpath", "//*[@id='lb_Form_NewCust']")
@@ -45,10 +45,15 @@ public class AddCompanyCustomerPage extends BaseHelper {
 		safetyInput(txfCustomerName, customerName)
 	}
 
-	private void inputCustomerNPWP() {
-		String randomNPWP = generateRandomNpwp()
+	private void inputCustomerNPWP(String npwp) {
+	String randomNPWP = generateRandomNpwp()
 		KeywordUtil.logInfo("NPWP : $randomNPWP")
-		safetyInput(txtfCustomerNPWP, randomNPWP)
+		npwp = npwp == "AUTO" ? randomNPWP : npwp
+
+		boolean isEnabled = WebUI.verifyElementClickable(txfCustomerNPWP, FailureHandling.OPTIONAL)
+		if (isEnabled) {
+			safetyInput(txfCustomerNPWP, npwp)
+		}
 	}
 
 	private void inputCustomerNitku(String customerNitku) {
@@ -69,5 +74,7 @@ public class AddCompanyCustomerPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("button new application not present")
 		}
+		WebUI.takeScreenshot()
+		
 	}
 }

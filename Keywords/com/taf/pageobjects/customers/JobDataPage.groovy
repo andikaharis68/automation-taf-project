@@ -45,7 +45,7 @@ public class JobDataPage extends BaseHelper {
 	private TestObject txfPrevEmploymentDate		= createTestObject("txfPrevEmploymentDate", "xpath", "//*[@id='ucPrevEstablishmentDt_txtYear']")
 	private TestObject drpPrevEmploymentDate		= createTestObject("drpPrevEmploymentDate", "xpath", "//*[@id='ucPrevEstablishmentDt_ddlMonth']")
 	private TestObject txfOtherBussinessName		= createTestObject("txfOtherBussinessName", "xpath", "//*[@id='txtOthBizName']")
-	private TestObject txfOtherBussinessType		= createTestObject("txfOtherBussinessType", "xpath", "//*[@id='txtOthBizType']")
+	private TestObject txfOtherBussinessType		= createTestObject("txfOtherBussinessType", "xpath", "//*[@id='txtOthBizType']") 
 	private TestObject txfOtherBussinessIndustryType= createTestObject("txfOtherBussinessIndustryType", "xpath", "//*[@id='ucOthBizIndustry_uclIndustry_txt']")
 	private TestObject btnSearchOtherIndustryType	= createTestObject("btnSearchOtherIndustryType", "xpath", "//*[@id='ucOthBizIndustry_uclIndustry_imb']")
 	private TestObject txfOtherJobPosition			= createTestObject("txfOtherJobPosition", "xpath", "//*[@id='txtOthBizJobPosition']")
@@ -56,9 +56,13 @@ public class JobDataPage extends BaseHelper {
 	private TestObject txfOvlyCategory				= createTestObject("txfOvlyCategory", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1']")
 	private TestObject btnOvlySearchProfesi			= createTestObject("btnOvlySearchProfesi", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelectProfesi			= createTestObject("btnOvlySelectProfesi", "xpath", "//*[@id='ucProfession_uclProf_umd_ctl00_gvL']/tbody/tr[2]/td[3]")
-	private TestObject txfOvlyIndustryType			= createTestObject("txfOvlyIndustryType", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+	private TestObject txfOvlyIndustryType			= createTestObject("txfOvlyIndustryType", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']") 
 	private TestObject btnOvlySearchIndustry		= createTestObject("btnOvlySearchIndustry", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlySelectIndustry		= createTestObject("btnOvlySelectIndustry", "xpath", "//*[@id='ucIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0']")
+	
+	private TestObject txfOvlyOtherBussinessType	= createTestObject("txfOvlyOtherBussinessType", "id", "ucOthBizIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3")
+	private TestObject btnOvlySearcyOtherBusType	= createTestObject("btnOvlySearcyOtherBusType", "id", "ucOthBizIndustry_uclIndustry_umd_ctl00_ucS_lbSearch") 
+	private TestObject btnOvlySelectOtherBussiness	= createTestObject("btnOvlySelectOtherBussiness", "id", "ucOthBizIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0") 
 
 
 
@@ -90,22 +94,25 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void chxInternalEmployee(String isInternalEmployee) {
-		if(isInternalEmployee?.trim() == "Y" && isInternalEmployee) {
-			safetyClick(chxIsInternalEmployee)
+		boolean isChecked = WebUI.verifyElementChecked(chxIsInternalEmployee, 1, FailureHandling.OPTIONAL)
+		if (isInternalEmployee.equalsIgnoreCase("Y")) {
+			if(!isChecked) {
+				safetyClick(chxIsInternalEmployee)
+			}
 		}
 	}
 	private void inputProfessionNo(String professionNo) {
-		if(professionNo) {			
+		if(professionNo) {
 			safetyInput(txfProfessionNo, professionNo)
 		}
 	}
 	private void selectJobPosition(String jobPosition) {
-		if(jobPosition) {			
+		if(jobPosition) {
 			safetySelect(drpJobPosition, jobPosition)
 		}
 	}
 	private void inputCompanyName(String companyName) {
-		if(companyName) {			
+		if(companyName) {
 			safetyInput(txfCompanyName, companyName)
 		}
 	}
@@ -128,13 +135,13 @@ public class JobDataPage extends BaseHelper {
 		}
 	}
 	private void selectCompanyScale(String companyScale) {
-		if(companyScale) {			
+		if(companyScale) {
 			safetySelect(drpCompanyScale, companyScale)
 		}
 	}
 
 	private void inputNumberOfEmployee(String numberOfEmployee) {
-		if(numberOfEmployee) {			
+		if(numberOfEmployee) {
 			safetyInput(txfNumberOfEmployee, numberOfEmployee)
 		}
 	}
@@ -146,11 +153,12 @@ public class JobDataPage extends BaseHelper {
 	}
 
 	private void checkIsWellKnowCompany(String isWellCompany) {
-		if(isWellCompany == '1') {
-			safetyClick(chxIsWellCompany)
-			WebUI.delay(2)
-		}else if(isWellCompany) {
-			safetyClick(chxIsWellCompany)
+		boolean isChecked = WebUI.verifyElementChecked(chxIsWellCompany, 1, FailureHandling.OPTIONAL)
+		if (isWellCompany.equalsIgnoreCase("Y")) {
+			if(!isChecked) {
+				safetyClick(chxIsWellCompany)
+				WebUI.delay(2)
+			}
 		}
 	}
 
@@ -172,29 +180,64 @@ public class JobDataPage extends BaseHelper {
 
 	private void inputOtherBussinessName(String bussinessName) {
 		if(bussinessName) {
-			safetyInput(txfOtherBussinessName, bussinessName)
+			String name = WebUI.getAttribute(txfOtherBussinessName, 'value', FailureHandling.STOP_ON_FAILURE)
+			if(name) {
+				manualClearText(txfOtherBussinessName)
+			}
+			safetyInput(txfOtherBussinessName, bussinessName, 2)
 		}
 	}
-	private void inputOtherBussinessType(String bussinessType) {
-		if(bussinessType) {			
-			safetyInput(txfOtherBussinessType, bussinessType)
+	private void selectOtherIndustryType(String otherIndustryType) {
+		if(otherIndustryType) {
+			safetyClick(btnSearchOtherIndustryType)
+			handleAlertIfPresent()
+			if(!WebUI.waitForElementPresent(txfOvlyOtherBussinessType, 3, FailureHandling.OPTIONAL)) {
+				safetyClick(btnSearchOtherIndustryType)
+			}
+			safetyInput(txfOvlyOtherBussinessType, otherIndustryType)
+			safetyClick(btnOvlySearcyOtherBusType)
+			WebUI.takeScreenshot()
+			safetyClick(btnOvlySelectOtherBussiness, 2)
+		}
+	}
+	private void inputOtherBussinessType(String otherBussinessType) {
+		if(otherBussinessType) {
+			String name = WebUI.getAttribute(txfOtherBussinessType, 'value', FailureHandling.STOP_ON_FAILURE)
+			if(name) {
+				manualClearText(txfOtherBussinessType)
+			}
+			safetyInput(txfOtherBussinessType, otherBussinessType, 2)
 		}
 	}
 	private void inputOtherJobPosition(String jobPosition) {
-		if(jobPosition) {			
+		if(jobPosition) {
 			safetyInput(txfOtherJobPosition, jobPosition)
 		}
+		WebUI.takeScreenshot()
+		
 	}
 
 	private void selectOtherCompanyEstablishDate(String month, String year) {
-		if(month && year) {			
+		if(month && year) {
 			WebUI.delay(2)
 			safetySelect(drpOtherEstablishDate, month)
 			WebUI.delay(2)
 			safetyInput(txfOtherEstablishDate, year, 0.5)
+			handleAlertIfPresent()
+		}
+	}
+
+	private void editOtherCompanyEstablishDate(String month, String year) {
+		if(month && year) {
+			WebUI.delay(2)
+			safetySelect(drpOtherEstablishDate, month)
+			WebUI.delay(2)
+			safetyInputEdit(txfOtherEstablishDate, year)
+			handlePopupAlert()
 			WebUI.takeScreenshot()
 		}
 	}
+
 	private void selectInvestmentType(String investmentType) {
 		if(investmentType) {
 			TestObject chxSelected = createTestObject("chxSelected", "xpath", "//label[normalize-space(text())='$investmentType']/preceding-sibling::input[@type='radio']")
