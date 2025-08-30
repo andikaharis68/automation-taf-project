@@ -19,7 +19,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
+String scenarioId = GlobalVariable.SCENARIO_ID
 List<String> sheetNames = [
 	'Credentials', 'CustMainData', 'MainData', 'LegalAddress', 'CompanyAddress', 'ManagementShareholder', 
 	'ContactInformation', 'FinancialData', 'LegalDocument', 'OtherAttribute']
@@ -40,5 +40,3 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company C
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_LegalDocument'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Add_OtherAttribute'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Customer/Add Company Customer/Verify_AddCompany_Success'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)
-
-
