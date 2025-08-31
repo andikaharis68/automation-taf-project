@@ -345,19 +345,23 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void inputSupplierInfo(String name) {
-		safetyClick(btnLookUpSupplier, 2)
-		WebUI.setText(txfSupplierName, name)
-		safetyClick(btnSupplierSearch, 5)
-		WebUI.takeScreenshot()
-		WebUI.click(btnSelectSupplier)	
+		if(name != "-") {
+			safetyClick(btnLookUpSupplier, 2)
+			WebUI.setText(txfSupplierName, name)
+			safetyClick(btnSupplierSearch, 5)
+			WebUI.takeScreenshot()
+			WebUI.click(btnSelectSupplier)
+		}
 	}
 	
 	private void topUpAgreemnt(String label) {
-		safetyClick(btnLookUpTopUp, 2)
-		WebUI.setText(txfAgreementNoTopUp, label)
-		safetyClick(btnSearchTopUp, 5)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelectTopUp, 2)
+		if(label != "-") {
+			safetyClick(btnLookUpTopUp, 2)
+			WebUI.setText(txfAgreementNoTopUp, label)
+			safetyClick(btnSearchTopUp, 5)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectTopUp, 2)
+		}
 	}
 	
 	private void inputAssetName(String assetName) {
@@ -371,12 +375,13 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void searchAssetMain(String assetName, String note) {
-		safetyClick(btnLookUpAssetName, 1.5)
-		safetyInput(txfAssetName, assetName, 1)
-		safetyClick(btnAssetSearch, 1)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelectAsset, 2)
-		
+		if(assetName != "-") {
+			safetyClick(btnLookUpAssetName, 1.5)
+			safetyInput(txfAssetName, assetName, 1)
+			safetyClick(btnAssetSearch, 1)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelectAsset, 2)
+		}
 		safetyInput(txfAssetNote, note, 1)
 	}
 	
@@ -417,22 +422,24 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void addGrid(String serviceName, String branchName, String servicePrice) {
-		WebUI.click(btnAddGrid)
-		WebUI.delay(1)
-		
-		safetySelect(drpAssetServiceName, serviceName)
-		
-		WebUI.click(btnLookUpSupplierGird)
-		WebUI.delay(1)
-		WebUI.setText(txfSupplierBranchNameGrid, branchName)
-		WebUI.click(btnSupplierSearchGrid)
-		WebUI.delay(2)
-		WebUI.takeScreenshot()
-		WebUI.click(btnSelectSupplierGrid)
-		manualClearText(txfServicePrice)
-		safetyInput(txfServicePrice, servicePrice)
-		safetyClick(btnSaveAsset, 1)
-		WebUI.takeScreenshot()
+		if(serviceName != "-") {
+			WebUI.click(btnAddGrid)
+			WebUI.delay(1)
+			
+			safetySelect(drpAssetServiceName, serviceName)
+			
+			WebUI.click(btnLookUpSupplierGird)
+			WebUI.delay(1)
+			WebUI.setText(txfSupplierBranchNameGrid, branchName)
+			WebUI.click(btnSupplierSearchGrid)
+			WebUI.delay(2)
+			WebUI.takeScreenshot()
+			WebUI.click(btnSelectSupplierGrid)
+			manualClearText(txfServicePrice)
+			safetyInput(txfServicePrice, servicePrice)
+			safetyClick(btnSaveAsset, 1)
+			WebUI.takeScreenshot()
+		}
 	}
 	
 	
