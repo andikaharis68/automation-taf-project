@@ -27,8 +27,6 @@ dataRow += BaseHelper.getTestDataByScenario("NewApplication", GlobalVariable.TES
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 
 BaseHelper.openBrowser()
-//	0008APP20250400409 [extended]
-// 	0008APP20250500258 [top up]
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.delay(10)
@@ -38,7 +36,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Applicatio
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Customer_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Gurantor_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Application_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data_Top_Up'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Asset_Registration'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Insurance_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Insurance_Life_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

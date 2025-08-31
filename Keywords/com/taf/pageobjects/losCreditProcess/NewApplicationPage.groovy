@@ -7,6 +7,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import java.awt.Robot
+import java.awt.event.KeyEvent
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -49,10 +50,10 @@ public class NewApplicationPage extends BaseHelper{
 
 
 	//section tab customer
-	private TestObject btnLookUpCustomerName		= createTestObject("btnLookUpCustomerName", "id", "uclCust_uclCust_imb")
+	private TestObject btnLookUpCustomerName		= createTestObject("btnLookUpCustomerName", "xpath", "//input[@id = 'uclCust_uclCust_imb']")
 	//pop up
 	private TestObject txfCustomerName				= createTestObject("txfCustomerName", "id", "uclCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
-	private TestObject btnSearchCustomerName		= createTestObject("btnSearchCustomerName", "id", "uclCust_uclCust_umd_ctl00_ucS_lbSearch")
+	private TestObject btnSearchCustomerName		= createTestObject("btnSearchCustomerName", "xpath", "//a[@id = 'uclCust_uclCust_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnSelectCustomerName		= createTestObject("btnSelectCustomerName", "id", "uclCust_uclCust_umd_ctl00_gvL_hpSelect_0")//select first row
 
 
@@ -74,13 +75,10 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject drpPaymentFrequent			= createTestObject("drpPaymentFrequent", "id", "ucRefPaymentFreq_ddlReference")
 	private TestObject drpMarginType				= createTestObject("drpMarginType", "id", "ucRefInterestType_ddlReference")
 	private TestObject drpInstallamentScheme		= createTestObject("drpInstallamentScheme", "id", "ucRefInstScheme_ddlReference")
-	private TestObject rdnFirstInstallmentType 		= createTestObject("rdnFirstInstallmentType", "xpath", "//label[text() = '{data}']/preceding-sibling::input")//sepertinya ini dibawah ikut function
 
 	//section application info
 	private TestObject drpApplicationSource			= createTestObject("drpApplicationSource", "id", "ucRefAppSource_ddlReference")
-	private TestObject rdnFiduciaCovered			= createTestObject("rdnFiduciaCovered", "xpath", "//label[text() = '{data}']/preceding-sibling::input")
 	private TestObject drpWayOfPayment				= createTestObject("drpWayOfPayment", "id", "ucRefWOP_ddlReference")
-	private TestObject rdnSelfUsage 				= createTestObject("rdnSelfUsage", "xpath", "//label[text() = '{data}']/preceding-sibling::input")//sepertinya ini dibawah ikut function
 	private TestObject drpPurposeOfUsage			= createTestObject("drpPurposeOfUsage", "id", "ucPurposeOfUsage_ddlReference")
 
 	//section mailing address
@@ -124,14 +122,14 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSearchTopUp				= createTestObject("btnSearchTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectTopUp				= createTestObject("btnSelectTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_umd_ctl00_gvL_hpSelect_0")
 	//section main asset
-	private TestObject btnLookUpAssetName			= createTestObject("btnLookUpAssetName", "id", "ucLookupAssetSchm_uclAssetSchm_imb")
+	private TestObject btnLookUpAssetName			= createTestObject("btnLookUpAssetName", "xpath", "//input[@id = 'ucLookupAssetSchm_uclAssetSchm_imb' or @id = 'ucLookupAssetMaster_uclMaster_imb']")
 	//pop up
-	private TestObject txfAssetName					= createTestObject("txfAssetName", "id", "ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
-	private TestObject btnAssetSearch				= createTestObject("btnAssetSearch", "id", "ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_lbSearch")
-	private TestObject btnSelectAsset				= createTestObject("btnSelectAsset", "id", "ucLookupAssetSchm_uclAssetSchm_umd_ctl00_gvL_hpSelect_0")//select first row
+	private TestObject txfAssetName					= createTestObject("txfAssetName", "xpath", "//input[@id = 'ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0' or @id = 'ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+	private TestObject btnAssetSearch				= createTestObject("btnAssetSearch", "xpath", "//a[@id = 'ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_lbSearch' or @id = 'ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_lbSearch']")
+	private TestObject btnSelectAsset				= createTestObject("btnSelectAsset", "xpath", "//a[@id = 'ucLookupAssetSchm_uclAssetSchm_umd_ctl00_gvL_hpSelect_0' or @id = 'ucLookupAssetMaster_uclMaster_umd_ctl00_gvL_hpSelect_0']")//select first row
 	private TestObject txfAssetPrice				= createTestObject("txfAssetPrice", "id", "ucAssetPrice_txtInput")
-	private TestObject rdnDPType 					= createTestObject("rdnDPType", "xpath", "//label[text() = '{data}']/preceding-sibling::input")//sepertinya dibawah ikut function
 	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "xpath", "//input[@id = 'ucDownPaymentPrcnt_txtInput' or @id = 'ucDownPayment_txtInput']")
+	private TestObject txfAssetNote					= createTestObject("txfAssetNote", "xpath", "//*[@id='txtNotesMainAss']")
 	private TestObject btnGetMarketPrice			= createTestObject("btnGetMarketPrice", "id", "lb_Form_GetMktPrcAndCalcUpPrcnt")
 	//section asset data
 	private TestObject txfNoMesin					= createTestObject("txfNoMesin", "id", "txtSerialNo1")
@@ -162,11 +160,13 @@ public class NewApplicationPage extends BaseHelper{
 	//list of asset
 	private TestObject btnPenAssetRegistration		= createTestObject("btnPenAssetRegistration", "id", "gvAssetList_imbEdit_0")//select first row
 	//section asset owner
+	private TestObject txfTaxDateRegis				= createTestObject("txfTaxDateRegis", "id", "ucTaxDate_txtDatePicker")
 	private TestObject drpCopyAddressRegis			= createTestObject("drpCopyAddressRegis", "id", "ucCopyAddrOwner_ddlReference")
 	private TestObject btnCopyAddressRegis			= createTestObject("btnCopyAddressRegis", "id", "lb_Form_Copy_OwnerAddr")
 	private TestObject drpCopyAddressLocation		= createTestObject("drpCopyAddressLocation", "id", "ucCopyAddrAssLoc_ddlReference")
 	private TestObject btnCopyAddressLocation		= createTestObject("btnCopyAddressLocation", "id", "lb_Form_Copy_Assloc")
-	private TestObject btnSaveRegis					= createTestObject("btnSaveRegis", "id", "lb_Form_Save_Reg")
+	private TestObject btnSaveRegis					= createTestObject("btnSaveRegis", "xpath", "//a[@id = 'lb_Form_Save_Reg']")
+	private TestObject tableDocListRegis			= createTestObject("tableDocListRegis", "id", "upAssetDoc")
 	
 
 
@@ -202,26 +202,32 @@ public class NewApplicationPage extends BaseHelper{
 
 	//section tab commision data
 	private TestObject btnCalculateCommision		= createTestObject("btnCalculateCommision", "id", "lb_Form_Calculate")
+	private TestObject btnAddCommission				= createTestObject("btnAddCommission", "id", "lb_Form_Add_SupplBranchEmp")
+	private TestObject btnLookUpCommission			= createTestObject("btnLookUpCommission", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_imb_0")
+	private TestObject txfCommissionName			= createTestObject("txfCommissionName", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_0")
+	private TestObject btnSearchCommission			= createTestObject("btnSearchCommission", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+	private TestObject btnSelectCommission			= createTestObject("btnSelectCommission", "id", "")
+	private TestObject txfDiffOther					= createTestObject("txfDiffOther", "id", "gvSupplEmpCommission_ucinRefundFromOth2_0_txtInput_0")
 
 	//section tab other data : kosong
 
 	//section tab other info
-	private TestObject drpContractEmployee			= createTestObject("drpContractEmployee", "id", "rptAttribute_ucrefInputAttr_0_ddlReference_0")
-	private TestObject drpRentalBusiness			= createTestObject("drpRentalBusiness", "id", "rptAttribute_ucrefInputAttr_1_ddlReference_1")
-	private TestObject drpAssetForOnline			= createTestObject("drpAssetForOnline", "id", "rptAttribute_ucrefInputAttr_2_ddlReference_2")
-	private TestObject drpFraudIndication			= createTestObject("drpFraudIndication", "id", "rptAttribute_ucrefInputAttr_3_ddlReference_3")
-	private TestObject drpHighRiskCustomer			= createTestObject("drpHighRiskCustomer", "id", "rptAttribute_ucrefInputAttr_4_ddlReference_4")
-	private TestObject drpHighRiskBusiness			= createTestObject("drpHighRiskBusiness", "id", "rptAttribute_ucrefInputAttr_5_ddlReference_5")
-	private TestObject drpHighRiskProduct			= createTestObject("drpHighRiskProduct", "id", "rptAttribute_ucrefInputAttr_6_ddlReference_6")
-	private TestObject drpCreditApproval			= createTestObject("drpCreditApproval", "id", "rptAttribute_ucrefInputAttr_7_ddlReference_7")
-	private TestObject drpOwnedVihecle				= createTestObject("drpOwnedVihecle", "id", "rptAttribute_ucrefInputAttr_12_ddlReference_12")
-	private TestObject drpPrioritySeal				= createTestObject("drpPrioritySeal", "id", "rptAttribute_ucrefInputAttr_13_ddlReference_13")
-	private TestObject txfNPWP						= createTestObject("txfNPWP", "id", "rptAttribute_txtAttrContent_14")
-	private TestObject txfNomorSK					= createTestObject("txfNomorSK", "id", "rptAttribute_txtAttrContent_15")
-	private TestObject drpSTNK						= createTestObject("drpSTNK", "id", "rptAttribute_ucrefInputAttr_16_ddlReference_16")
-	private TestObject drpStatusNPWP				= createTestObject("drpStatusNPWP", "id", "rptAttribute_ucrefInputAttr_17_ddlReference_17")
-	private TestObject drpCDENotes					= createTestObject("drpCDENotes", "id", "rptAttribute_ucrefInputAttr_18_ddlReference_18")
-	private TestObject txfOdoMeter					= createTestObject("txfOdoMeter", "id", "rptAttribute_txtAttrContent_19")
+	private TestObject drpContractEmployee			= createTestObject("drpContractEmployee", "xpath", "//span[text() = 'Contract Employee Less Than Tenor']/following::select[1]")
+	private TestObject drpRentalBusiness			= createTestObject("drpRentalBusiness", "xpath", "//span[text() = 'Rental Business Without Vehicle']/following::select[1]")
+	private TestObject drpAssetForOnline			= createTestObject("drpAssetForOnline", "xpath", "//span[text() = 'Asset For Online Transport']/following::select[1]")
+	private TestObject drpFraudIndication			= createTestObject("drpFraudIndication", "xpath", "//span[text() = 'Fraud Indication']/following::select[1]")
+	private TestObject drpHighRiskCustomer			= createTestObject("drpHighRiskCustomer", "xpath", "//span[text() = 'High Risk Customer']/following::select[1]")
+	private TestObject drpHighRiskBusiness			= createTestObject("drpHighRiskBusiness", "xpath", "//span[text() = 'High Risk Business']/following::select[1]")
+	private TestObject drpHighRiskProduct			= createTestObject("drpHighRiskProduct", "xpath", "//span[text() = 'High Risk Product']/following::select[1]")
+	private TestObject drpCreditApproval			= createTestObject("drpCreditApproval", "xpath", "//span[text() = 'Credit Approval Process']/following::select[1]")
+	private TestObject drpOwnedVihecle				= createTestObject("drpOwnedVihecle", "xpath", "//span[text() = 'Owned Vehicle']/following::select[1]")
+	private TestObject drpPrioritySeal				= createTestObject("drpPrioritySeal", "xpath", "//span[text() = 'Priority SEAL']/following::select[1]")
+	private TestObject txfNPWP						= createTestObject("txfNPWP", "xpath", "//span[text() = 'NPWP a.n. STNK/BPKB']/following::input[1]")
+	private TestObject txfNomorSK					= createTestObject("txfNomorSK", "xpath", "//span[text() = 'Nomor SK Kumham a.n. BPKB Badan']/following::input[1]")
+	private TestObject drpSTNK						= createTestObject("drpSTNK", "xpath", "//span[text() = 'a.n STNK/BPKB Badan terdaftar di AHU']/following::select[1]")
+	private TestObject drpStatusNPWP				= createTestObject("drpStatusNPWP", "xpath", "//span[text() = 'Status Kepemilikan NPWP']/following::select[1]")
+	private TestObject drpCDENotes					= createTestObject("drpCDENotes", "xpath", "//span[text() = 'CDE NOTES']/following::select[1]")
+	private TestObject txfOdoMeter					= createTestObject("txfOdoMeter", "xpath", "//span[text() = 'Odometer']/following::input[1]")
 	private TestObject btnSaveOtherInfo				= createTestObject("btnSaveOtherInfo", "id", "lb_Form_Save")
 
 
@@ -284,6 +290,7 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.setText(txfCustomerName, custName)
 		WebUI.click(btnSearchCustomerName)
 		WebUI.click(btnSelectCustomerName)
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
 		
 	}
@@ -297,7 +304,7 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.setText(txfGurantorName, name)
 		WebUI.click(btnSearchGurantor)
 		WebUI.click(btnSelectGurantor)
-		WebUI.takeScreenshot()
+		WebUI.delay(2)
 		
 		safetySelect(drpGurantorRelation, relation)
 		WebUI.takeScreenshot()
@@ -305,19 +312,26 @@ public class NewApplicationPage extends BaseHelper{
 		
 	}
 	
-	private void inputApplicationData(String tenor, String payFreq, String margin, String installament) {
+	private void inputApplicationData(String tenor, String payFreq, String margin, String installament, String FirstInstallmentType) {
 		safetyInput(txfTenor, tenor)
 		safetySelect(drpPaymentFrequent, payFreq, 1)
 		safetySelect(drpMarginType, margin, 1)
 		safetySelect(drpInstallamentScheme, installament, 1)
+		TestObject rdnFirstInstallmentType 		= createTestObject("rdnFirstInstallmentType", "xpath", "//label[text() = '$FirstInstallmentType']/preceding-sibling::input")
 	}
 	
-	private void inputApplicationInfo(String appSource, String wayPay, String usage) {
+	private void inputApplicationInfo(String appSource, String wayPay, String usage, String self, String fiducia) {
 		safetySelect(drpApplicationSource, appSource, 1)
 		safetySelect(drpWayOfPayment, wayPay, 1)
 		if(WebUI.waitForElementPresent(drpPurposeOfUsage, 3, FailureHandling.OPTIONAL)) {
 			safetySelect(drpPurposeOfUsage, usage, 1)
 		}
+		TestObject rdnSelfUsage = createTestObject("rdnSelfUsage", "xpath", "//label[text() = '$self']/preceding-sibling::input")
+		TestObject rdnFiduciaCovered = createTestObject("rdnFiduciaCovered", "xpath", "//label[text() = '$fiducia']/preceding-sibling::input")
+		
+		safetyClick(rdnFiduciaCovered, 2)
+		safetyClick(rdnFiduciaCovered, 2)
+		
 	}
 	
 	private void inputMailingAddress(String address) {
@@ -326,25 +340,22 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void clickAddAsset() {
-		WebUI.click(btnAddAsset)
-		WebUI.delay(1)
+		safetyClick(btnAddAsset, 10)
 		WebUI.takeScreenshot()
 	}
 	
 	private void inputSupplierInfo(String name) {
-		safetyClick(btnLookUpSupplier)
-		WebUI.delay(1)
+		safetyClick(btnLookUpSupplier, 2)
 		WebUI.setText(txfSupplierName, name)
-		WebUI.click(btnSupplierSearch)
+		safetyClick(btnSupplierSearch, 5)
 		WebUI.takeScreenshot()
 		WebUI.click(btnSelectSupplier)	
 	}
 	
 	private void topUpAgreemnt(String label) {
-		safetyClick(btnLookUpTopUp, 0.5)
-		WebUI.delay(1)
+		safetyClick(btnLookUpTopUp, 2)
 		WebUI.setText(txfAgreementNoTopUp, label)
-		WebUI.click(btnSearchTopUp)
+		safetyClick(btnSearchTopUp, 5)
 		WebUI.takeScreenshot()
 		safetyClick(btnSelectTopUp, 2)
 	}
@@ -354,11 +365,24 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.delay(1)
 		WebUI.setText(txfAssetName, assetName)
 		WebUI.click(btnAssetSearch)
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
 		WebUI.click(btnSelectAsset)	
 	}
 	
-	private void inputMainAsset(String assetPrice, String downPayment) {
+	private void searchAssetMain(String assetName, String note) {
+		safetyClick(btnLookUpAssetName, 1.5)
+		safetyInput(txfAssetName, assetName, 1)
+		safetyClick(btnAssetSearch, 1)
+		WebUI.takeScreenshot()
+		safetyClick(btnSelectAsset, 2)
+		
+		safetyInput(txfAssetNote, note, 1)
+	}
+	
+	private void inputMainAsset(String dpType, String assetPrice, String downPayment) {
+		TestObject rdnDPType = createTestObject("rdnDPType", "xpath", "//label[text() = '$dpType']/preceding-sibling::input")
+		safetyClick(rdnDPType, 2)
 		manualClearText(txfAssetPrice)
 		safetyInput(txfAssetPrice, assetPrice, 2)
 		manualClearText(txfDownPayment)
@@ -374,13 +398,12 @@ public class NewApplicationPage extends BaseHelper{
 	private void inputAssetData(String noMesin, String noRangka, String licenseNo, String conditoin, String usage, String year) {
 		TestObject rdnAssetCondition = createTestObject("rdnAssetCondition", "xpath", "//label[text() = '$conditoin']/preceding-sibling::input")
 		
-		WebUI.setText(txfNoMesin, noMesin)
-		WebUI.setText(txfNoRangka, noRangka)
-		WebUI.setText(txfLicensePlate, licenseNo)
-		WebUI.delay(1)
+		safetyInputEdit(txfNoMesin, noMesin, 1.5)
+		safetyInputEdit(txfNoRangka, noRangka, 1.5)
+		safetyInputEdit(txfLicensePlate, licenseNo, 1.5)
 		WebUI.click(rdnAssetCondition)
 		selectAsetUsage(usage)
-		WebUI.setText(txfManufacturingYear, year)
+		safetyInputEdit(txfManufacturingYear, year, 1.5)
 		
 	}
 	
@@ -403,6 +426,7 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.delay(1)
 		WebUI.setText(txfSupplierBranchNameGrid, branchName)
 		WebUI.click(btnSupplierSearchGrid)
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
 		WebUI.click(btnSelectSupplierGrid)
 		manualClearText(txfServicePrice)
@@ -413,7 +437,7 @@ public class NewApplicationPage extends BaseHelper{
 	
 	
 	private void clickSaveAsset() {
-		safetyClick(btnSaveEditAsset, 1)
+		safetyClick(btnSaveEditAsset, 10)
 		WebUI.takeScreenshot()
 	}
 	
@@ -426,9 +450,20 @@ public class NewApplicationPage extends BaseHelper{
 	private void complitionDataRegistration(String usage, String address) {
 		TestObject rdnSelfUsageRegis = createTestObject("rdnSelfUsageRegis", "xpath", "//label[text() = '$usage']/preceding-sibling::input")
 		WebUI.click(rdnSelfUsageRegis)
-		safetySelect(drpCopyAddressRegis, address, 1)
-		WebUI.click(btnCopyAddressRegis)
+		safetySelect(drpCopyAddressRegis, address, 3)
+		safetyClick(btnCopyAddressRegis, 3)
 		WebUI.takeScreenshot()
+	}
+	
+	private void inputTaxDate(String date) {
+		Robot bot = new Robot()
+		
+		TestObject mandatory = createTestObject("mandatory", "xpath", "(${getXpath(txfTaxDateRegis)}/following::span[@class = 'mandatoryStyle'])[1]")
+		if(WebUI.verifyElementPresent(mandatory, 3, FailureHandling.OPTIONAL)) {
+			safetyInput(txfTaxDateRegis, date, 2)
+			bot.keyPress(KeyEvent.VK_ESCAPE)
+			clickTABKeyboard(txfTaxDateRegis)
+		}
 	}
 	
 	private void editInsuranceData(String schemeName, String rate, String covType) {
@@ -454,13 +489,40 @@ public class NewApplicationPage extends BaseHelper{
 	}
 	
 	private void copyAssetLocation(String address) {
-		safetySelect(drpCopyAddressLocation, address, 1)
-		WebUI.click(btnCopyAddressLocation)
+		WebUI.delay(5)
+		safetySelect(drpCopyAddressLocation, address, 3)
+		safetyClick(btnCopyAddressLocation, 3)
 		WebUI.takeScreenshot()
+	}
+	
+	private boolean checkTableRegis() {
+		return WebUI.verifyElementPresent(tableDocListRegis, 5, FailureHandling.OPTIONAL)
+	}
+	
+	private void checkMandatoryDocRegis() {
+		
+		def requiredDoc = getListElementByTestObject("//span[contains(@id, 'gvAssetDocEdit_lblIsMandatory_')]")
+		def index = requiredDoc.size()
+		
+		index.times { i ->
+			TestObject chkRequiredDocument = createTestObject("chkRequiredDocument", "xpath", "(//span[@id = 'gvAssetDocEdit_lblIsMandatory_$i' and text() = 'Yes']/following::input)[1]")
+			if(WebUI.waitForElementPresent(chkRequiredDocument, 1, FailureHandling.OPTIONAL)) {
+				safetyClick(chkRequiredDocument, 0.8)
+			}
+		}
+		
+		index.times { i ->
+			TestObject txfDocument = createTestObject("txfDocument", "xpath", "(//span[@id = 'gvAssetDocEdit_lblIsValueNeeded_$i' and text() = 'Yes']/following::input[2])[1]")
+			if(WebUI.verifyElementPresent(txfDocument, 2, FailureHandling.OPTIONAL)) {
+				safetyInput(txfDocument, generateRandomNpwp(), 0.8)
+			}
+		}
+		
 	}
 	
 	private void clickSaveRegis() {
 		WebUI.delay(1)
+		WebUI.scrollToElement(btnSaveRegis, 3)
 		safetyClick(btnSaveRegis)
 	}
 	
@@ -485,7 +547,6 @@ public class NewApplicationPage extends BaseHelper{
 		safetyClick(btnCalculateInstallment, 2)
 		def tableSxist = WebUI.waitForElementPresent(tableInstallment, 10, FailureHandling.OPTIONAL)
 		if(tableSxist) {
-//			pageDown(3)
 			WebUI.scrollToElement(tableInstallment, 3)
 			WebUI.takeScreenshot()
 		}else {

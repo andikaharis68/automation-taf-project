@@ -22,10 +22,10 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage data = new NewApplicationPage()
 
 'Step 1: input application data'
-data.inputApplicationData(Tenor, PaymentFrequent, Margin, InstallmentScheme)
+data.inputApplicationData(Tenor, PaymentFrequent, Margin, InstallmentScheme, FirstInstallmentType)
 
 'Step 2: input application information'
-data.inputApplicationInfo(ApplicationSource, WayOfPayment, PurposeOfUsage)
+data.inputApplicationInfo(ApplicationSource, WayOfPayment, PurposeOfUsage, SelfUsageData, FiduciaCovered)
 
 'Step 3: copy address mailing'
 data.inputMailingAddress(MailingAddress)

@@ -27,11 +27,20 @@ regis.selectAssetRegis()
 'Step 2: input to complition data'
 regis.complitionDataRegistration(UsageRegistration, AdressRegistration)
 
+'Step 2.2: tax'
+regis.inputTaxDate("25/09/2025")
+
 'Step 3: select asset location'
 regis.copyAssetLocation(AssetLocation)
 
-'Step 4: click button save'
+'Step 4: document checklist'
+def exist = regis.checkTableRegis()
+if(exist) {
+	regis.checkMandatoryDocRegis()
+}
+
+'Step 5: click button save'
 regis.clickSaveRegis()
 
-'Step 5: click save and continue'
+'Step 6: click save and continue'
 regis.clickSaveAndContinue()

@@ -21,9 +21,10 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage life = new NewApplicationPage()
 
-'Step 1: cover insurance life'
-life.inputInsuranceLife(LifeInscoInsurance, CustomerInsured, PremiumPaymentMethod, InsuranceNote)
-
+if(CoverLifeInsurance == "Yes") {
+	'Step 1: cover insurance life'
+	life.inputInsuranceLife(LifeInscoInsurance, CustomerInsured, PremiumPaymentMethod, InsuranceNote)
+}
 
 'Step 2: click save and continue'
 life.clickSaveAndContinue()

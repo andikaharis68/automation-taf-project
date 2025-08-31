@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>LOS NAP Non Top UP</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f996d0df-4c0d-4285-8146-f8939d6dd4ba</testCaseGuid>
+</TestCaseEntity>

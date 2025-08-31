@@ -21,11 +21,10 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage gurantor = new NewApplicationPage()
 
-'Step 1: input gurantor personal'
-gurantor.addGurantorPersonal(GurantorName, GurantorRelation)
+if(GurantorName != '-') {
+	'Step 1: input gurantor personal'
+	gurantor.addGurantorPersonal(GurantorName, GurantorRelation)
+}
 
-'Step 2: take screenshot after'
-WebUI.takeScreenshot()
-
-'Step 3: click save and continue'
+'Step 2: click save and continue'
 gurantor.clickSaveAndContinue()
