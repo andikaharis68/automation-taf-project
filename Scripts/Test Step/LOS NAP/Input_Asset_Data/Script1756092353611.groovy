@@ -28,9 +28,7 @@ asset.clickAddAsset()
 asset.inputSupplierInfo(SupplierBranchName)
 
 'Step 3: select top up agreement'
-if(TopUpAgreementNo != '-') {
-	asset.topUpAgreemnt(TopUpAgreementNo)
-}
+asset.topUpAgreemnt(TopUpAgreementNo)
 
 'Step 4: input main asset'
 asset.searchAssetMain(AssetName, AssetNote)
@@ -45,9 +43,7 @@ asset.inputAssetData(AssetNoMesin, AssetNoRangka, AssetLicensePlateNo, AssetCond
 asset.clickGetMarketPrice()
 
 'Step 7: add additiona; service grid'
-if(AssetServiceName != '-') {
-	asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
-}
+asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
 
 'Step 8: save asset'
 asset.clickSaveAsset()

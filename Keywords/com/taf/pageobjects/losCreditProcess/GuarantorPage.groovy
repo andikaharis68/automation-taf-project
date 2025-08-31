@@ -51,7 +51,6 @@ public class GuarantorPage extends BaseHelper {
 	private void inputCustomerName(String name) {
 		safetyClick(btnSearchCustName)
 		Mobile.delay(2)
-		safetyClick(txfOvlyCustName)
 		safetyInput(txfOvlyCustName, name)
 		Mobile.delay(3)
 		safetyClick(btnOvlySearch)

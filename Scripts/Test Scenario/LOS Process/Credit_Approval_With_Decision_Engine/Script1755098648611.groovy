@@ -22,16 +22,16 @@ import org.openqa.selenium.Keys as Keys
 
 Map scenarioData = [
 	'ScenarioId' : "1",
-	'TestDataName': "LOS_Process_Credit_Simulation_TestData.xlsx"
+	'TestDataName': "LOS_Process_Credit_Simulation_TestData.xlsx",
+	'SheetNames': ['CreditApproval', 'MasterData']
 ]
 Map dataRow = [:]
 
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataByScenario("CreditApproval", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
-dataRow += BaseHelper.getTestDataByScenario("MasterData", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["MasterDataId"])
 
-dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
 int maxLoop = 10
 int i = 0 
@@ -40,22 +40,22 @@ while(!dataRow['IsSmsApprove'] && i != maxLoop) {
 	BaseHelper.openBrowser()
 	
 	//Get Credential for Approval
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow)
 	BaseHelper.closeBrowser()
 	
 	//Credit Approval
 	BaseHelper.openBrowser()
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow)
 	
 	//Checking Step 
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow)
 	
 	BaseHelper.closeBrowser()
 	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())

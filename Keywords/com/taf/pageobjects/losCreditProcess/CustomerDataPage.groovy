@@ -34,6 +34,9 @@ public class CustomerDataPage extends BaseHelper {
 	private TestObject btnCancelApp			= createTestObject("btnCancelApp", "id", "lb_Toolbar_Cancel")
 	private TestObject iframeAppForm		= createTestObject("iframeAppForm", "xpath", "//*[@id='appForm']") 
 	private TestObject tabCustomer			= createTestObject("tabCustomer", "xpath", "//*[@id='lbCUS']") 
+	
+	//main data
+	private TestObject txtApplicationNo		= createTestObject("txtApplicationNo", "id", "ucCreditProcessMainInfo_lbAppNo")
 
 	private void clickSaveContinue() {
 		WebUI.scrollToElement(txtMotherMaidenName, 3)
@@ -53,5 +56,14 @@ public class CustomerDataPage extends BaseHelper {
 	}
 	private void clickTabCustomer() {
 		safetyClick(tabCustomer)
+	}
+	
+	public void updateAppNoToMasterData(String fileName, String scenarioId) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		String appNo = WebUI.getText(txtApplicationNo)
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		
+		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 	}
 }

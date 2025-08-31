@@ -19,18 +19,18 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 'SheetNames': ['DeliveryOrder', 'MasterData']]
 Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("DeliveryOrder", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 
 BaseHelper.openBrowser()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Navigate_To_Delivery_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Search_Application_Number'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Submit_Asset'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Navigate_To_Delivery_Order'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Search_Application_Number'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Submit_Asset'), dataRow)
