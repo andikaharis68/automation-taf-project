@@ -30,18 +30,21 @@ MenuPage menu = new MenuPage()
 'Step 1: Click Next'
 mainInfo.clickNext()
 
-'Step 2: Click Tab customer'
+'Step 2: Update Application No To Excel Test Data (for next steps purpose)'
+customer.updateAppNoToMasterData(TestDataName, ScenarioId)
+
+'Step 3: Click Tab customer'
 customer.clickTabCustomer()
 
-'Step 3: Switch to iframe app'
+'Step 4: Switch to iframe app'
 customer.switchToIframeApp()
 
-'Step 4: Click Save and continue'
+'Step 5: Click Save and continue'
 customer.clickSaveContinue()
 
-'Step 5: verify succcess message'
+'Step 6: verify succcess message'
 //menu.verifySuccessMessage()
 
-'Step 6: verify Landing in guarantor'
+'Step 7: verify Landing in guarantor'
 guarantor.verifyLandingInGuarantorPage()
 

@@ -19,24 +19,21 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [scenarioId: '1', testDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx']
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 'SheetNames': ['NewApplicationDE', 'MasterData']]
 Map dataRow = [:]
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataByScenario("NewApplicationDE", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow['scenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['testDataName'], dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 BaseHelper.openBrowser()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_NewApplication_DataEntry'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Search_DataCustomer'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Next_Until_GuarantorPage'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_GuarantorData'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_ApplicationData'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Edit_AssetRegistrationData'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_InsuranceData'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/SaveAndContinue_ToFinancialData'), dataRow, FailureHandling.STOP_ON_FAILURE)
-
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_OtherInfo'), dataRow, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Click_And_InputPromiseData_TnC'), dataRow, FailureHandling.STOP_ON_FAILURE)
-
-
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_NewApplication_DataEntry'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Search_DataCustomer'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Next_Until_GuarantorPage'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_GuarantorData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_ApplicationData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Edit_AssetRegistrationData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_InsuranceData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/SaveAndContinue_ToFinancialData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_OtherInfo'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Click_And_InputPromiseData_TnC'), dataRow)

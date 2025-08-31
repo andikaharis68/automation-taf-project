@@ -19,15 +19,15 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String scenarioId = "1"
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 'SheetNames': ['PurchaseOrder', 'MasterData']]
 Map dataRow = [:]
-String testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
-dataRow += BaseHelper.getTestDataByScenario("PurchaseOrder", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 BaseHelper.openBrowser()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Navigate_To_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Search_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Do_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Verify_Status_After_Purchase_Order'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Navigate_To_Purchase_Order'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Search_Purchase_Order'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Do_Purchase_Order'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Verify_Status_After_Purchase_Order'), dataRow)
