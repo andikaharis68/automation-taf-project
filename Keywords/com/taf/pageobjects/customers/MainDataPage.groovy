@@ -46,6 +46,7 @@ public class MainDataPage extends BaseHelper {
 	private TestObject drpMaritalStatus					= createTestObject("drpMaritalStatus", "xpath", "//*[@id='ucMrMaritalStat_ddlReference']")
 	private TestObject txfCustomerGroup					= createTestObject("txfCustomerGroup", "xpath", "//*[@id='ucCustGroup_uclCust_txt']")
 	private TestObject btnSearchCustomerGroup			= createTestObject("btnSearchCustomerGroup", "xpath", "//*[@id='ucCustGroup_uclCust_imb']")
+	private TestObject btnSearchCustomerGroupOverlay	= createTestObject("btnSearchCustomerGroupOverlay", "xpath", "//*[@id='ucCustGroup_uclCust_umd_ctl00_ucS_lbSearch']")
 	private TestObject txfNumOfDependent				= createTestObject("txfNumOfDependent", "xpath", "//*[@id='ucNoDependents_txtInput']")
 	private TestObject txfNumOfResidence				= createTestObject("txfNumOfResidence", "xpath", "//*[@id='ucNoResidence_txtInput']")
 	private TestObject txfFamilyCard					= createTestObject("txfFamilyCard", "xpath", "//*[@id='txtFamilyCardNo']")
@@ -85,6 +86,7 @@ public class MainDataPage extends BaseHelper {
 
 	private TestObject lblNewCustomer					= createTestObject("lblNewCustomer", "xpath", "//*[@id='lb_Form_NewCustomer']")
 	private TestObject btnEdit							= createTestObject("btnEdit", "xpath", "//*[@id='gvCustomerPersonal_imbEdit_0']")
+	private TestObject txtAppNo							= createTestObject("txtAppNo", "id", "lblCustNo")
 
 	private void verifyLandingInMainData() {
 		verifyLanding(drpSalutation, "Main Data")
@@ -92,7 +94,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectSalutation(String salutation) {
-		if(salutation) {			
+		if(salutation) {
 			safetySelect(drpSalutation, salutation)
 		}
 	}
@@ -109,7 +111,7 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectMaritalStatus(String status) {
-		if(status) {			
+		if(status) {
 			safetySelect(drpMaritalStatus, status)
 		}
 	}
@@ -124,22 +126,24 @@ public class MainDataPage extends BaseHelper {
 		}
 	}
 
-	private void checkPremiumStatus(String isPremium) {
-		if(isPremium?.trim() == 'Y' && isPremium) {
+	private void checkPremiumAndInputNotes(String isPremium, String premiumNote) {
+		if(isPremium?.trim() == 'Y') {
 			WebUI.check(chxIsPremium)
+			safetyInput(txfPremiumNote, premiumNote)
 		}
 	}
 
 	private void selectNationality(String nationality) {
-		if(nationality) {			
+		if(nationality) {
 			safetySelect(drpNationality, nationality)
 		}
 	}
-	private void selectCustomerGroup(String name, String customerGroup) {
+	private void selectCustomerGroup(String customerGroup) {
 		if(customerGroup) {
 			safetyClick(btnSearchCustomerGroup)
 			WebUI.delay(2)
-			safetyInput(txfOvlyCustomerName, name)
+			safetyInput(txfOvlyCustomerName, customerGroup, 1)
+			safetyClick(btnSearchCustomerGroupOverlay, 1)
 			WebUI.takeScreenshot()
 			safetyClick(btnOvlySelect)
 			WebUI.delay(2)
@@ -148,6 +152,7 @@ public class MainDataPage extends BaseHelper {
 
 	private void inputNumberOfDependents(String numberOfDependents) {
 		if(numberOfDependents) {
+			manualClearText(txfNumOfDependent)
 			safetyInput(txfNumOfDependent, numberOfDependents)
 			WebUI.delay(2)
 		}
@@ -168,13 +173,13 @@ public class MainDataPage extends BaseHelper {
 	}
 
 	private void selectEducation(String education) {
-		if(education) {			
+		if(education) {
 			safetySelect(drpEducation, education)
 		}
 	}
 
 	private void selectReligion(String religion) {
-		if(religion) {			
+		if(religion) {
 			safetySelect(drpReligion, religion)
 		}
 	}
@@ -182,15 +187,14 @@ public class MainDataPage extends BaseHelper {
 
 	private void selectCountry(String country) {
 		if(country) {
-			safetyClick(btnSearchCountry)
+			safetyClick(btnSearchCountry, 2)
 
-			safetyInput(txfCountryName, country)
+			safetyInput(txfCountryName, country, 1)
 
-			safetyClick(btnOvlySearchCountry)
+			safetyClick(btnOvlySearchCountry, 2)
 			WebUI.takeScreenshot()
 
 			safetyClick(btnSelectCountry)
-			
 		}
 	}
 
@@ -221,6 +225,7 @@ public class MainDataPage extends BaseHelper {
 		if(rip?.trim() == 'Y') {
 			safetyClick(chxRIP)
 		}
+		WebUI.takeScreenshot()
 	}
 
 
@@ -235,7 +240,7 @@ public class MainDataPage extends BaseHelper {
 	}
 	private void inputMobilePhone(int index, String phone) {
 		if (phone?.trim()) {
-			if(phone == "AUTO") {				
+			if(phone == "AUTO") {
 				phone = generateRandomPhone()
 			}
 			TestObject phoneField = getMobilePhoneField(index)
@@ -283,5 +288,9 @@ public class MainDataPage extends BaseHelper {
 		TestObject iframeMainPage = createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 		WebUI.verifyElementPresent(iframeMainPage, 5)
 		WebUI.switchToFrame(iframeMainPage, 1)
+	}
+	private String getApplicationNo() {
+		String appNo = WebUI.getText(txtAppNo)
+		return appNo
 	}
 }

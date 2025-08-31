@@ -32,7 +32,7 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	private TestObject txfIDExpiredDate		= createTestObject("txfIDExpiredDate", "xpath", "//input[@id='ucIdExpiredDt_txtDatePicker']")
 	private TestObject txfPOB				= createTestObject("txfPOB", "xpath", "//input[@id='txtBirthPlace']")
 	private TestObject txfDOB				= createTestObject("txfDOB", "xpath", "//*[@id='ucBirthDate_txtDatePicker']")
-	private TestObject txfNPWP				= createTestObject("txfNPWP", "xpath", "//*[@id='txtNpwp']")
+	private TestObject txfNPWP				= createTestObject("txfNPWP", "xpath", "//*[@id='txtNpwp']") //*[@id="txtNpwp"]
 	private TestObject txfMotherMaidenName	= createTestObject("txfMotherMaidenName", "xpath", "//*[@id='txtMotherMaidenName']")
 
 	private TestObject btnNext				= createTestObject("btnNext", "xpath", "//*[@id='lb_Toolbar_Next']")
@@ -57,16 +57,14 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 
 	private void selectCustomerModel(String model) {
-		if (model?.trim()) {
+		if (model?.trim() != "Professional" ) {
 			TestObject radCustomerModel = createTestObject("radCustomerModel","xpath",	"//label[normalize-space(text())='${model}']/preceding-sibling::input[@type='radio']")
-			if (!WebUI.verifyElementChecked(radCustomerModel, 1, FailureHandling.OPTIONAL)) {
-				safetyClick(radCustomerModel)
-			}
+			safetyClick(radCustomerModel)
 		}
 	}
 
 	private void selectIdType(String idType) {
-		if(idType) {			
+		if(idType) {
 			safetySelect(drpIDType, idType)
 		}
 	}
@@ -83,9 +81,10 @@ public class AddPersonalCustomerPage extends BaseHelper {
 	private void inputIdExpiredDate(String idExpiredDate) {
 		WebUI.click(txfIDExpiredDate)
 		safetyInput(txfIDExpiredDate, idExpiredDate, 1.0)
+		WebUI.delay(2)
 		clickEnter(txfIDExpiredDate)
 	}
-	
+
 	private void selectGender(String gender) {
 		TestObject radGender = createTestObject("radGender","xpath", "//label[normalize-space(text())='${gender}']/preceding-sibling::input[@type='radio']")
 		if (gender?.trim()) {
@@ -102,18 +101,18 @@ public class AddPersonalCustomerPage extends BaseHelper {
 
 	private void inputDOB(String dob) {
 		safetyInput(txfDOB, dob)
+		WebUI.delay(2)
 		clickEnter(txfDOB)
 	}
 
 	private void inputNPWP(String npwp) {
-		if(npwp) {
-			
-			String currentText = WebUI.getText(txfNPWP).trim()
-			if (currentText) {
-				KeywordUtil.logInfo("NPWP auto filled")
-			} else {
-				safetyInput(txfNPWP, npwp)
-			}
+		String randomNPWP = generateRandomNpwp()
+		KeywordUtil.logInfo("NPWP : $randomNPWP")
+		npwp = npwp == "AUTO" ? randomNPWP : npwp
+
+		boolean isEnabled = WebUI.verifyElementClickable(txfNPWP, FailureHandling.OPTIONAL)
+		if (isEnabled) {
+			safetyInput(txfNPWP, npwp)
 		}
 	}
 

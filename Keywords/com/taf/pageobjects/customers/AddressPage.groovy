@@ -26,6 +26,10 @@ public class AddressPage extends BaseHelper {
 
 
 	private TestObject btnAdd					= createTestObject("btnAdd", "xpath", "//*[@id='lb_Form_Add_Addr' or @id='lb_Form_Add']")
+	private TestObject btnEditLegalAddress		= createTestObject("btnEditLegalAddress", "id", "gvCustAddress_imbEdit_0")
+	private TestObject txtLegalAddress			= createTestObject("txtLegalAddress", "text", "Legal Address")
+	private TestObject btnEditCompanyAddress	= createTestObject("btnEditCompanyAddress", "id", "gvCustAddress_imbEdit_1")
+	private TestObject txtCompanyAddress		= createTestObject("txtCompanyAddress", "text", "Company Address")
 	private TestObject btnAddressMenu			= createTestObject("btnAddressMenu", "id", "lbADDR")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[contains(@id,'Type_ddlReference')]")
 	private TestObject txfAddress				= createTestObject("txfAddress", "xpath", "//*[contains(@id, 'txtOfficeAddr')]")
@@ -37,7 +41,7 @@ public class AddressPage extends BaseHelper {
 	private TestObject txfSubdistrict			= createTestObject("txfSubdistrict", "xpath", "//*[contains(@id, 'txtKelurahan')]")
 	private TestObject txfDistrict				= createTestObject("txfDistrict", "xpath", "//*[contains(@id,'txtKecamatan')]")
 	private TestObject txfCity					= createTestObject("txfCity", "xpath", "//*[contains(@id,'uctxtCity')]")
-	private TestObject chxCustomerHaveFixedLine	= createTestObject("chxCustomerHaveFixedLine", "xpath", "//*[contains(@id,'ucAddr_cbIsPhn1NoMandatory')]")
+	private TestObject chxCustomerHaveFixedLine	= createTestObject("chxCustomerHaveFixedLine", "xpath", "//*[contains(@id,'cbIsPhn1NoMandatory')]")
 
 	private TestObject drpBuildingLoc			= createTestObject("drpBuildingLoc", "xpath", "//*[contains(@id,'ucAddrLocation_ddlReference')]")
 	private TestObject drpBuildingOwnership		= createTestObject("drpBuildingOwnership", "xpath", "//*[contains(@id,'ucOwnershipStat_ddlReference')]")
@@ -189,14 +193,39 @@ public class AddressPage extends BaseHelper {
 			safetySelect(drpBuildingOwnership, ownership)
 		}
 	}
+	
+	private boolean clickEditLegalAddress() {
+		if(WebUI.waitForElementPresent(txtLegalAddress, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
+			safetyClick(btnEditLegalAddress)
+			return true
+		} else {		
+			return false	
+			safetyClick(btnAdd)
+		}
+		WebUI.takeScreenshot()
+	}
+	
+	private boolean clickEditCompanyAddress() {
+		if(WebUI.waitForElementPresent(txtCompanyAddress, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
+			safetyClick(btnEditCompanyAddress)
+			return true
+		} else {			
+			safetyClick(btnAdd)
+			return false
+		}
+		WebUI.takeScreenshot()
+	}
+	
 	private void clickAddAddress() {
 		safetyClick(btnAdd)
+		WebUI.takeScreenshot()
 	}
 
 	private void clickSaveContinue() {
 		safetyClick(btnSaveContinue)
 	}
 	private void clickSaveAddress() {
+		WebUI.takeScreenshot()
 		WebUI.scrollToElement(btnSave, 2)
 		safetyClick(btnSave)
 		WebUI.takeScreenshot()
@@ -206,11 +235,13 @@ public class AddressPage extends BaseHelper {
 	}
 	private void inputBuildingPriceEstimates(String priceEstimates) {
 		if(priceEstimates) {
+			manualClearText(txfBuildingPriceEstimate)
 			safetyInput(txfBuildingPriceEstimate, priceEstimates)
 		}
 	}
 	private void inputBuildingStayLength(String buildingLength) {
 		if(buildingLength) {
+			manualClearText(txfBuildingStayLength)
 			safetyInput(txfBuildingStayLength, buildingLength)
 		}
 	}

@@ -48,7 +48,6 @@ public class LegalDocument extends BaseHelper {
 
 	public void verifyLandingScreen() {
 		verifyLanding(btnAdd, "Legal Document")
-		WebUI.takeScreenshot()
 	}
 	
 	public void clickAdd() {

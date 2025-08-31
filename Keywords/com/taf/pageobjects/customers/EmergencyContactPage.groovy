@@ -44,8 +44,9 @@ public class EmergencyContactPage extends BaseHelper {
 	private TestObject txfCity				= createTestObject("txfCity", "xpath", "//*[@id='ucEmergencyAddr_txtCity']")
 
 	private TestObject txfOvlyCity			= createTestObject("txfOvlyCity", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2']")
-	private TestObject txfOvlyZipCode		= createTestObject("txfOvlyZipCode", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
-	 
+	//	private TestObject txfOvlyZipCode		= createTestObject("txfOvlyZipCode", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+	private TestObject txfOvlyZipCode	     = createTestObject("ovlZipCodeLookup", "xpath", "//*[contains(@id,'txtSearchValue_3')]")
+
 	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch']")
 	private TestObject btnOvlyReset			= createTestObject("btnOvlyReset", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbReset']")
 	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0']")
@@ -73,12 +74,20 @@ public class EmergencyContactPage extends BaseHelper {
 	}
 
 	private void clickSaveAndContinue() {
-		safetyClick(btnSaveAndContinue)
+		if(WebUI.waitForElementPresent(btnSaveAndContinue, 5, FailureHandling.OPTIONAL)) {
+			safetyClick(btnSaveAndContinue)
+		}
 	}
 
 	private void clickSaveContact() {
+		TestObject btnClose = createTestObject("btnClose", "xpath", "//*[@id='ucEmergencyAddr_ucLookupZipCode_uclZipCode_umd_dv']/a")
+		if(WebUI.waitForElementPresent(btnClose, 5, FailureHandling.OPTIONAL)) {
+			safetyClick(btnClose)
+		}
+		if(WebUI.waitForElementPresent(btnSave, 5, FailureHandling.OPTIONAL)) {
+			safetyClick(btnSave)
+		}
 		WebUI.takeScreenshot()
-		safetyClick(btnSave)
 	}
 
 	private void selectCustomerRelationship(String relationship) {
@@ -108,38 +117,21 @@ public class EmergencyContactPage extends BaseHelper {
 	private void inputRW(String RW) {
 		if(RW) {
 			safetyInput(txfRW, RW)
-			
 		}
 	}
 
 	private void searchAddress(String zipCode) {
 		if(zipCode) {
 			safetyClick(btnSearchZIPCode)
-			safetyInput(txfOvlyZipCode, zipCode)
+			WebUI.delay(2)
+			if(!WebUI.waitForElementPresent(txfOvlyZipCode, 3)) {
+				safetyClick(btnSearchZIPCode)
+			}
+			slowlyInput(txfOvlyZipCode, zipCode)
 			safetyClick(btnOvlySearch)
 			WebUI.takeScreenshot()
-			safetyClick(btnOvlySelect)
-		}
-		
-	}
-	
-	private void checkAddress(String zipCode) {
-		int maxRetry = 3
-		int attempt = 0
-		boolean isZipCodeBlank = true
-		
-		while (isZipCodeBlank && attempt < maxRetry) {
-			searchAddress(zipCode)   // trigger proses (hit ke DB / API)
-			WebUI.delay(2)      // kasih waktu 2 detik nunggu respon update
-		
-			def zipCodeValue = WebUI.getAttribute(txfOvlyZipCode, 'value')
-			isZipCodeBlank = (zipCodeValue == null || zipCodeValue.trim().isEmpty())
-		
-			attempt++
-		}
-		
-		if (isZipCodeBlank) {
-			KeywordUtil.markFailedAndStop("City field masih kosong setelah ${maxRetry} percobaan.")
+			safetyClick(btnOvlySelect) //select first address
+			WebUI.delay(2)
 		}
 	}
 
@@ -159,7 +151,7 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyInput(countryField, parts[0])
 			safetyInput(areaField, parts[1])
 			safetyInput(numberField, parts[2])
-			
+			clickEnter(numberField)
 		}
 	}
 
@@ -176,6 +168,7 @@ public class EmergencyContactPage extends BaseHelper {
 			safetyInput(countryField, parts[0])
 			safetyInput(areaField, parts[1])
 		}
+		WebUI.delay(3)
 		WebUI.takeScreenshot()
 	}
 
@@ -189,12 +182,11 @@ public class EmergencyContactPage extends BaseHelper {
 			WebUI.delay(2)
 		}
 	}
-	
+
 	private void selectEdited(String name) {
 		TestObject nameSelected = createTestObject("nameSelected", "xpath", "//span[text() = '$name']")
 		TestObject editButton = createTestObject("editButton", "xpath", "//span[text() = '$name']/following::td[6]")
-//		TestObject deleteButton = createTestObject("deleteButton", "xpath", "//span[text() = '$name']/following::td[7]")
-		
+
 		def familyExist = WebUI.verifyElementPresent(nameSelected, 3, FailureHandling.OPTIONAL)
 		if(familyExist) {
 			safetyClick(editButton)
@@ -203,5 +195,7 @@ public class EmergencyContactPage extends BaseHelper {
 			clickAddContact()
 		}
 	}
-	
+	private void takeScreenShot() {
+		WebUI.takeScreenshot()
+	}
 }

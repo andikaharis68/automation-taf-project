@@ -32,6 +32,7 @@ public class LoginPage extends BaseHelper {
 	private TestObject txtPosition	= createTestObject("txtPosition", "", "")
 	private TestObject txtRole 		= createTestObject("txtRole", "", "")
 	private TestObject btnSelect 	= createTestObject("btnSelect", "", "")
+	private TestObject lblRoles		= createTestObject("lblRoles", "xpath", "//a[text() = 'Select Your Roles']")
 
 
 	public void login(String username, String password) {
@@ -43,20 +44,22 @@ public class LoginPage extends BaseHelper {
 	}
 
 	private void selectRoles(String office, String position, String role) {
-		TestObject dynamicSelectButton
-		String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-		String upper = 'abcdefghijklmnopqrstuvwxyz'
+		if(WebUI.waitForElementPresent(lblRoles, 5, FailureHandling.OPTIONAL)) {
+			TestObject dynamicSelectButton
+			String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+			String upper = 'abcdefghijklmnopqrstuvwxyz'
 
-		String xpath = """
+			String xpath = """
         //tr[
             contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
         ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
     """
-		dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
-		WebUI.waitForElementClickable(dynamicSelectButton, 5)
-		WebUI.click(dynamicSelectButton)
+			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
+			WebUI.click(dynamicSelectButton)
+		} else {
+			KeywordUtil.logInfo("No need select roles")
+		}
 	}
-	
 }

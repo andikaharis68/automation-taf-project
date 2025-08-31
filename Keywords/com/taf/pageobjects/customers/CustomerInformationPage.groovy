@@ -44,7 +44,6 @@ public class CustomerInformationPage extends BaseHelper {
 
 	private void verifyLandingInCustInfoPage() {
 		verifyLanding(txfCustomerNo, "Customer Information")
-		WebUI.takeScreenshot()
 	}
 
 	private void inputCustomerName(String name) {
@@ -108,7 +107,14 @@ public class CustomerInformationPage extends BaseHelper {
 		}
 	}
 	private void clickCustomerHyperlink(String fullname) {
-		TestObject txtFullName = createTestObject("txtFullName", "xpath", "//*[@id='gvCustomer_lbl_Cust_CustName_0']")
+		WebUI.delay(5)
+		TestObject txtFullName 
+		if(fullname) {			
+			txtFullName = createTestObject("txtFullName", "xpath", "//*[text()= '$fullname']")
+		} else {
+			txtFullName = createTestObject("txtFullName", "id", "gvCustomer_lbl_Cust_CustName_0")
+		}
+		
 		if(WebUI.verifyElementPresent(txtFullName, 5)) {
 			KeywordUtil.markPassed("customer $fullname is exist")
 			safetyClick(txtFullName)

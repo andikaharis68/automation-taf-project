@@ -40,6 +40,9 @@ import java.awt.event.KeyEvent
 import java.security.SecureRandom
 
 import org.apache.poi.ss.usermodel.*
+import org.apache.poi.xssf.usermodel.XSSFCell
+import org.apache.poi.xssf.usermodel.XSSFRow
+import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.openqa.selenium.Alert
 import org.openqa.selenium.By
@@ -255,8 +258,6 @@ class BaseHelper {
 		return scenarioDataMultiple
 	}
 
-
-
 	static Map<String, String> getTestDataByScenarioAndAddressType(
 			String sheetName,
 			String filePath,
@@ -433,7 +434,6 @@ class BaseHelper {
 		WebUI.sendKeys(to, Keys.chord(Keys.TAB))
 	}
 
-
 	static void manualClearText(TestObject to, double delay = 0.5) {
 		safetyClick(to)
 		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, 'a'))
@@ -525,10 +525,202 @@ class BaseHelper {
 		}
 	}
 
+	def switchToNewTab() {
+		int currentTab = WebUI.getWindowIndex()
+		WebUI.switchToWindowIndex(currentTab + 1)
+	}
+
 	static void pageDown(int times) {
 		Robot robot = new Robot()
 		times.times {
 			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
 		}
 	}
+	
+	static List readExcelFile(String xlsLoc, String sheetName, int colNameRowIdx = 0, int dataRowIdx = 1) {
+		def rows = []
+
+		FileInputStream fis
+		XSSFWorkbook workbook
+		XSSFSheet worksheet
+
+		try {
+			File xlsFile = new File(xlsLoc)
+			if(!xlsFile.exists()) {
+				println("Target file is not found in following path: " + xlsFile.canonicalPath)
+				WebUI.comment("Target file is not found in following path: " + xlsFile.canonicalPath)
+			}
+			fis = new FileInputStream(xlsFile)
+			workbook  = new XSSFWorkbook(fis);
+			worksheet = workbook.getSheet(sheetName.substring(0, Math.min(sheetName.length(), 31))) // safeguard if supplied sheet name > 31 char
+
+			//List out all the columns
+			XSSFRow columnRow = worksheet.getRow(colNameRowIdx)
+			int colIndex = 0
+			def columns = []
+			while(columnRow.getCell(colIndex)) {
+				XSSFCell columnCell = columnRow.getCell(colIndex)
+				columns[colIndex] = columnCell.toString()
+				colIndex++
+			}
+
+			//loop the rows
+			while(worksheet.getRow(dataRowIdx)) {
+				XSSFRow dataRow = worksheet.getRow(dataRowIdx)
+				def data = [:]
+
+				for(int i = 0; i < colIndex; i++) {
+					XSSFCell dataCell = dataRow.getCell(i)
+					String cellValue = dataCell.toString()
+					if(cellValue.trim().endsWith(".0")) { cellValue = cellValue.trim().substring(0, cellValue.length() - 2) }
+					data[columns[i]] = cellValue
+				}
+				println("Rows content: $data")
+				rows.add(data)
+
+				dataRowIdx++
+			}
+		}
+		catch (Exception ex) {
+			println("ERROR: " + ex.message)
+		}
+		finally {
+			if(workbook) workbook.close()
+			if(fis) fis.close()
+
+			println("Excel load completed!")
+		}
+
+		//return list of rows. Each item is a map of colName: value for that row.
+		return rows
+	}
+	
+	static int getExcelRowNumber(String xlsLoc, String sheetName, Map criteria, int dataRowIdx = 1) {
+		List xlsContent = readExcelFile(xlsLoc, sheetName)
+		int rowNum = -1
+
+		for(int i = 0; i < xlsContent.size(); i++) {
+			boolean matchCriteria = true
+			criteria.each { key, value ->
+				println("Finding $key: $value in " + xlsContent[i] + " --> " + xlsContent[i][key])
+				if(xlsContent[i][key] != value) {
+					matchCriteria = false
+				}
+			}
+			if(matchCriteria) {
+				rowNum = i
+				break
+			}
+		}
+		return rowNum + dataRowIdx
+
+	}
+	
+	static int getExcelColumnIndex(String xlsLoc, String sheetName, String columnName, int colNameRowIdx = 0) {
+		int targetColIndex = -1
+
+		FileInputStream fis
+		XSSFWorkbook workbook
+		XSSFSheet worksheet
+
+		try {
+			File xlsFile = new File(xlsLoc)
+			if(!xlsFile.exists()) {
+				println("Target file is not found in following path: " + xlsFile.canonicalPath)
+				WebUI.comment("Target file is not found in following path: " + xlsFile.canonicalPath)
+			}
+			fis = new FileInputStream(xlsFile)
+			workbook  = new XSSFWorkbook(fis);
+			worksheet = workbook.getSheet(sheetName.substring(0, Math.min(sheetName.length(), 31))) // safeguard if supplied sheet name > 31 char
+
+			//List out all the columns
+			XSSFRow columnRow = worksheet.getRow(colNameRowIdx)
+			int colIndex = 0
+			while(columnRow.getCell(colIndex)) {
+				XSSFCell columnCell = columnRow.getCell(colIndex)
+				if(columnCell.toString().equalsIgnoreCase(columnName)) {
+					targetColIndex = colIndex
+					break
+				}
+				colIndex++
+			}
+
+		}
+		catch (Exception ex) {
+			println("ERROR: " + ex.message)
+		}
+		finally {
+			if(workbook) workbook.close()
+			if(fis) fis.close()
+
+			println("Excel load completed!")
+		}
+
+		return targetColIndex
+	}
+	
+	public static void updateExcelCellValue(String xlsLoc, String sheetName, int colNumber, int rowNumber, String val) {
+		FileInputStream fis
+		FileOutputStream fos
+		XSSFWorkbook workbook
+		XSSFSheet worksheet
+
+		try {
+			File xlsFile = new File(xlsLoc)
+			if(!xlsFile.exists()) {
+				println("Target file is not found in following path: " + xlsFile.canonicalPath)
+				WebUI.comment("Target file is not found in following path: " + xlsFile.canonicalPath)
+			}
+			
+			if (!xlsFile.canWrite()) {
+				println "Excel file is currently locked or opened by another program: ${xlsFile.absolutePath}"
+				WebUI.comment("File is locked or not writable (possibly opened in Excel): ${xlsFile.canonicalPath}")
+				return
+			}
+			
+			
+			fis = new FileInputStream(xlsFile)
+			workbook  = new XSSFWorkbook(fis)
+			worksheet = workbook.getSheet(sheetName.substring(0, Math.min(sheetName.length(), 31))) // safeguard if supplied sheet name > 31 char
+
+			//Retrieve the row and check for null
+			XSSFRow sheetrow = worksheet.getRow(rowNumber);
+			if(sheetrow == null){
+				sheetrow = worksheet.createRow(rowNumber);
+			}
+			//Update the value of cell
+			XSSFCell cell = sheetrow.getCell(colNumber);
+			if(cell == null){
+				cell = sheetrow.createCell(colNumber);
+			}
+			cell.setCellValue(val);
+
+			fos = new FileOutputStream(new File(xlsLoc));
+			workbook.write(fos);
+			fos.close();
+		}
+		catch (Exception ex) {
+			println("ERROR: " + ex.message)
+			ex.printStackTrace()
+			
+			// Fail the test explicitly
+			KeywordUtil.markFailed("Excel update failed: " + ex.message)
+		}
+		finally {
+			if(fis) fis.close()
+			if(fos) fos.close()
+			KeywordUtil.markPassed("Excel Updated!!")
+			println("Excel updated!")
+		}
+	}
+
+	public static String saveDataToExcel(String newValue, Map rowFilter, String dataFilePath, String sheetName, String columnName) {
+		KeywordUtil.logInfo("newValue: $newValue")
+		int columnIndex = getExcelColumnIndex(dataFilePath, sheetName, columnName)
+		int rowIndex = getExcelRowNumber(dataFilePath, sheetName, rowFilter)
+		updateExcelCellValue(dataFilePath, sheetName, columnIndex, rowIndex, newValue)
+	}
+
+	
+	
 }

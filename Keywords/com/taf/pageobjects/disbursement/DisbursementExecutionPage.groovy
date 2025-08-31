@@ -14,60 +14,71 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
+import com.taf.helpers.ScenarioContext
 
 import internal.GlobalVariable
 
 public class DisbursementExecutionPage extends BaseHelper {
 	//search
-	private TestObject drpAPTypeName = createTestObject("drpAPTypeName", "", "")
-	private TestObject txfApDestination = createTestObject("txfApDestination", "", "")
-	private TestObject drpBankName = createTestObject("drpBankName", "", "")
-	private TestObject drpPaymentVoucherDate = createTestObject("drpPaymentVoucherDate", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject drpAPTypeName 			 = createTestObject("drpAPTypeName", "xpath","//*[contains(@id, 'ltlRefAccPayableTypeAccPayableTypeNameSearch')]") 
+	private TestObject txfApDestination 		 = createTestObject("txfApDestination", "xpath","//*[contains(@id, 'txtAccPayableDestination')]") 
+	private TestObject drpBankName 				 = createTestObject("drpBankName", "xpath", "//*[contains(@id,'ltlRefBankBankNameSearch')]") 
+	private TestObject txfPaymentVoucherDate 	 = createTestObject("txfPaymentVoucherDate", "xpath", "//*[contains(@id, 'ltlPayVoucherHPayVoucherDtLTESearch')]") 
+	private TestObject btnSearch 				 = createTestObject("btnSearch", "id", "ucSearch_btnSearch") 
+	
 	//AP Disbursement Process-Grid
-	private TestObject btnIconAction = createTestObject("btnIconAction", "", "")
+	private TestObject btnExecutedSelected 		 = createTestObject("btnExecutedSelected", "id", "lb_Btn_ExecuteSelected") 
+	
 	//AP Bank Disbursement
-	private TestObject txfRecipientName = createTestObject("txfRecipientName", "", "")
-	private TestObject txfCurrencyRate = createTestObject("txfCurrencyRate", "", "")
-	private TestObject txfDisbursementNote = createTestObject("txfDisbursementNote", "", "")
-	private TestObject btnDisburse = createTestObject("btnDisburse", "", "")
+	private TestObject txfRecipientName 		 = createTestObject("txfRecipientName", "id", "txtRecipientName")
+	private TestObject txfCurrencyRate 			 = createTestObject("txfCurrencyRate", "id", "ucInputNumber_PayVoucherH_CurrRateAmt_txtInput") 
+	private TestObject txfDisbursementNote 		 = createTestObject("txfDisbursementNote", "id", "txtNotes") 
+	private TestObject btnDisburse				 = createTestObject("btnDisburse", "id", "lbDisburse")
 	//Popup status
 	private TestObject lblPopupTransactionStatus = createTestObject("lblPopupTransactionStatus", "", "")
 	private TestObject txtPopupTransactionStatus = createTestObject("txtPopupTransactionStatus", "", "")
 
-	public void inputSearchApplication(String apTypeName, String apDestination, String bankName, String voucherDate) {
-		WebUI.selectOptionByLabel(drpAPTypeName, apTypeName, false)
-		WebUI.setText(txfApDestination, apDestination)
-		WebUI.selectOptionByLabel(drpBankName, bankName, false)
-		WebUI.selectOptionByLabel(drpPaymentVoucherDate, voucherDate, false)
+	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
+		safetySelect(drpAPTypeName, apTypeName)
+		safetyInput(txfApDestination, apDestination)
+		safetySelect(drpBankName, bankName)
 	}
 
 	public void clickButtonSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
 	}
 
-	public void clickButtonIconAction() {
-		WebUI.click(btnIconAction)
+	public void clickExecutedSelected() {
+		safetyClick(btnExecutedSelected)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputApBankDisbursement(String recipientName, String currencyRate, String disbursementNote) {
-		WebUI.setText(txfRecipientName, recipientName)
-		WebUI.setText(txfCurrencyRate, currencyRate)
-		WebUI.setText(txfDisbursementNote, disbursementNote)
+		safetyInput(txfRecipientName, recipientName)
+		safetyInput(txfCurrencyRate, currencyRate)
+		clearAndSetText(txfDisbursementNote, disbursementNote)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonDisburse() {
-		WebUI.click(btnDisburse)
+		safetyClick(btnDisburse)
+		WebUI.takeScreenshot()
 	}
 
-	public void verifyPopupStatusTransaction() {
-		txtPopupTransactionStatus = createTestObject("txtPopUpTransactioStatus", "", "")
-		WebUI.waitForElementPresent(lblPopupTransactionStatus, 10)
-		WebUI.waitForElementPresent(txtPopupTransactionStatus, 10)
+	public void checklistApDisbursement(String paymentVoucherNo) {
+		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//a[contains(text(),'$paymentVoucherNo')]]//input[@type='checkbox']")
+		safetyClick(cbkApDisbursement)
+		WebUI.takeScreenshot()
+	}
+	private String getPaymentVoucherNoFromContext() {
+		String paymentVoucherNo = ScenarioContext.get("PaymentVoucherNo")
+		KeywordUtil.logInfo("appBalance" + paymentVoucherNo)
+		return paymentVoucherNo
 	}
 }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Example</name>
+   <name>Navigate_to_DisbursementSelection</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>3fb22295-319b-4dc2-ab8a-44c5e0289366</testCaseGuid>
+   <testCaseGuid>84f138da-1c28-409b-bbbe-e42fe0178f10</testCaseGuid>
 </TestCaseEntity>

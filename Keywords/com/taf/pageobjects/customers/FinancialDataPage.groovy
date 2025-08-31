@@ -6,6 +6,7 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.apache.poi.ss.usermodel.charts.ManualLayout
 import org.openqa.selenium.Keys
 
 import com.kms.katalon.core.annotation.Keyword
@@ -42,17 +43,21 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject txfAccName					= createTestObject("txfAccName", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccName']")
 	private TestObject txfAccNo						= createTestObject("txfAccNo", "xpath", "//*[@id='ucBankStatementCustBankAcc_txtAccNo']")
 	private TestObject drpBankAccPurpose			= createTestObject("drpBankAccPurpose", "xpath", "//*[@id='ucCustBankAccPurpose_ddlReference']")
-	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']") 
+	private TestObject btnSaveBankAcc				= createTestObject("btnSaveBankAcc", "xpath", "//*[@id='lb_Form_Save_BankAcc']")
 
-	private TestObject btnAddBankStatement			= createTestObject("btnAddBankStatement", "xpath", "//*[@id='lb_Form_Add_BankStatement']")
+	private TestObject btnAddBankStatement			= createTestObject("btnAddBankStatement", "xpath", "//*[@id='lb_Form_Add_BankStatement']") 
+	private TestObject btnEditBankStatement			= createTestObject("btnEditBankStatement", "id", "gvBankStatement_imbEdit_0") 
+	private TestObject btnAddDetailStatement		= createTestObject("btnAddDetailStatement", "xpath", "//*[@id='lb_Form_Add_BankStatementDetail']") 
+	 
 	private TestObject drpBankNameStatement			= createTestObject("drpBankNameStatement", "xpath", "//*[@id='ucBankStatement_ucBankName_ddlReference']")
 	private TestObject txfBankBranchStatement		= createTestObject("txfBankBranchStatement", "xpath", "//*[@id='ucBankStatement_txtBankBranch']")
 	private TestObject txfBICodeStatement			= createTestObject("txfBICodeStatement", "xpath", "//*[@id='ucBankStatement_txtBiCode']")
 	private TestObject txfAccNameStatement			= createTestObject("txfAccNameStatement", "xpath", "//*[@id='ucBankStatement_txtAccName']")
 	private TestObject txfAccNoStatement			= createTestObject("txfAccNoStatement", "xpath", "//*[@id='ucBankStatement_txtAccNo']")
 	private TestObject btnSaveStatement				= createTestObject("btnSaveStatement", "xpath", "//*[@id='lb_Form_Save_BankStatement']")
-	private TestObject btnCalculateStatement		= createTestObject("btnCalculateStatement", "xpath", "//*[@id='lb_Form_Calculate_BankStatementAddEdit']")
-	private TestObject txfCreditBeginningBalance	= createTestObject("txfCreditBeginningBalance", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDCreditAmt_0_txtInput_0']")
+	private TestObject btnCalculateStatement		= createTestObject("btnCalculateStatement", "xpath", "//*[@id='lb_Form_Calculate_BankStatementAddEdit']") 
+	private TestObject txfCreditBeginningBalance	= createTestObject("txfCreditBeginningBalance", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDCreditAmt_0_txtInput_0']")  
+	private TestObject btnSaveBankStatement			= createTestObject("btnSaveBankStatement", "id", "lb_Form_Save_BankStatement") 
 
 	//iframe
 	private TestObject iframeMainpage 				= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
@@ -62,7 +67,6 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject btnOK						= createTestObject("btnOK", "xpath", "//*[text()= 'OK']")
 
 	private void clickSaveContinue() {
-		WebUI.takeScreenshot()
 		safetyClick(btnSaveContinue)
 		handlePopupAlert(3)
 		handlePopUperror(lblAlert, btnOK)
@@ -78,7 +82,6 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void verifyLandinginFinancialPage() {
 		verifyLanding(txfGrossMonthlyIncome, "Financial Data")
-		WebUI.takeScreenshot()
 	}
 
 	private void inputGrossMonthlyIncome(String income) {
@@ -91,6 +94,7 @@ public class FinancialDataPage extends BaseHelper {
 		safetyClick(to)
 		WebUI.sendKeys(to, Keys.chord(Keys.CONTROL, "a"))
 		WebUI.sendKeys(to,Keys.chord(Keys.BACK_SPACE))
+		WebUI.delay(3)
 	}
 
 	private void inputGrossProfit(String grossProfit) {
@@ -128,8 +132,8 @@ public class FinancialDataPage extends BaseHelper {
 	}
 	private void clickCalculateIncome() {
 		safetyClick(btnCalculateIncome)
+		WebUI.takeScreenshot()
 		handleAlertIfPresent()
-		
 	}
 	private void clickAddCustAcc() {
 		safetyClick(btnAddBankAcc)
@@ -177,18 +181,28 @@ public class FinancialDataPage extends BaseHelper {
 	}
 
 	private void clickSaveAccount() {
-		WebUI.delay(2)
 		safetyClick(btnSaveBankAcc)
-		WebUI.delay(2)
 		clickKeyboardEnter()
+		handlePopupAlert()
 		if(WebUI.waitForElementPresent(btnSaveBankAcc, 5, FailureHandling.OPTIONAL)) {
 			safetyClick(btnSaveBankAcc)
 		}
 		WebUI.takeScreenshot()
 	}
+	
 	private void clickAddStatement() {
 		handleAlertIfPresent()
 		safetyClick(btnAddBankStatement)
+		handleAlertIfPresent()
+	}
+	
+	private void clickEditStatement() {
+		handleAlertIfPresent()
+		if(WebUI.waitForElementPresent(btnEditBankStatement, 3, FailureHandling.CONTINUE_ON_FAILURE)) {
+			safetyClick(btnEditBankStatement)
+		} else {			
+			safetyClick(btnAddBankStatement)
+		}
 		handleAlertIfPresent()
 	}
 
@@ -224,6 +238,7 @@ public class FinancialDataPage extends BaseHelper {
 	private void clickCalculateStatement() {
 		safetyClick(btnCalculateStatement)
 		handleAlertIfPresent()
+		WebUI.takeScreenshot()
 	}
 
 	private void inputStatementBeginingBalance(String balance) {
@@ -232,50 +247,74 @@ public class FinancialDataPage extends BaseHelper {
 			safetyInput(txfCreditBeginningBalance, balance)
 		}
 	}
+	private void inputStatmentBeginningBalanceCompany(String balance) {
+		TestObject txfBeginningBalance	= createTestObject("txfBeginningBalance", "id", "txt_Beg_Bal_txtInput")
+		if(balance) {
+			clearText(txfBeginningBalance)
+			safetyInput(txfBeginningBalance, balance)
+		}
+	}
 
-	private void selectStatementMonth(String month, Integer index) {
+	private void selectStatementMonth(String month, int index) {
 		if(month) {
 			TestObject drpMonth = createTestObject("", "xpath", "//*[@id='gvBankStatementAddEdit_ddlMonth_${index}']")
 			safetySelect(drpMonth, month)
 		}
 	}
+	
+	private void selectStatement(String month, String year, String debit, String credit, int index) {
+		KeywordUtil.logInfo("data $debit and $credit")
+		selectStatementMonth(month, index)
+		inputStatementYear(year, index)
+		inputStatementDebit(debit, index)
+		inputStatementCredit(credit, index)
+	}
 
-	private void inputStatementYear(String year, Integer index) {
+	private void inputStatementYear(String year, int index) {
 		if(year) {
 			TestObject txfYear = createTestObject("txfYear", "xpath", "//*[@id='gvBankStatementAddEdit_txtYear_${index}']")
 			safetyInput(txfYear, year)
 			WebUI.delay(2)
 		}
 	}
-	private void inputStatementDebit(String debit, Integer index) {
+	private void inputStatementDebit(String debit, int index) {
 		if(debit) {
 			TestObject drpDebit = createTestObject("drpDebit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
-			safetyInput(drpDebit, debit)
+			clearText(drpDebit)
+			slowlyInput(drpDebit, debit)
+			clickTABKeyboard(drpDebit)
+			WebUI.delay(3)
 		}
 	}
 
-	private void inputStatementCredit(String credit, Integer index) {
-		if(credit) {
-			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDDebitAmt_${index}_txtInput_${index}']")
+	private void inputStatementCredit(String credit, int index) {
+		if(credit) { 
+			TestObject drpCredit = createTestObject("drpCredit", "xpath", "//*[@id='gvBankStatementAddEdit_txtCustBankStatementDCreditAmt_${index}_txtInput_${index}']") 
+			manualClearText(drpCredit)
 			safetyInput(drpCredit, credit)
 		}
-		
 	}
-	private void inputIncomeSection(String monthlyIncome) {
+	private void inputIncomeSection(String monthlyIncome, String grossProfit, String otherIncome, String sourceOfIncome, String cost, String monthlyInstallment ) {
 		inputGrossMonthlyIncome(monthlyIncome)
+		inputGrossProfit(grossProfit)
+		inputOtherIncome(otherIncome)
+		inputSourceOfIncome(sourceOfIncome)
+		inputLivingCost(cost)
+		inputOtherMonthlyInstallment(monthlyInstallment)
+		
 		clickCalculateIncome()
 	}
 
-	private void inputCustomerBankAccount(String bankName, String branchName, String accountName, String accountNo, String purpose) {
+	private void inputCustomerBankAccount(String bankName, String branchName, String biCode, String accountName, String accountNo, String purpose) {
 		if(accountName == "AUTO") {
 			accountName = generateRandomName()
 		}
 		selectBankName(bankName)
 		inputBranchName(branchName)
+		inputBICodeBank(biCode)
 		inputAccName(accountName)
 		inputAccountNo(accountNo)
 		selectBankAccPurpose(purpose)
-		WebUI.takeScreenshot()
 	}
 
 	public void switchToIframeMain() {
@@ -286,4 +325,32 @@ public class FinancialDataPage extends BaseHelper {
 	public void verifySaveSuccess() {
 		verifyPopUpSuccess(lblSuccess, "Financial Data")
 	}
+	private void takeScreenShot() {
+		WebUI.takeScreenshot()
+	}
+	private void clickAddDetailStatement() {
+		safetyClick(btnAddDetailStatement)
+	}
+	private void clickSaveBankStatement() {
+		safetyClick(btnSaveBankStatement)
+		WebUI.takeScreenshot()
+	}
+	private void inputBankStatement(String bankName, String bankBranch, String biCode, String accName, String accNo, String balance) {
+		selectBankNameStatement(bankName)
+		inputBankBranchStatement(bankBranch)
+		inputBICodeStatement(biCode)
+		inputAccNameStatement(accName)
+		inputAccNoStatement(accNo)
+		inputStatementBeginingBalance(balance)
+	}
+	
+	private void inputBankStatementCompany(String bankName, String bankBranch, String biCode, String accName, String accNo, String balance) {
+		selectBankNameStatement(bankName)
+		inputBankBranchStatement(bankBranch)
+		inputBICodeStatement(biCode)
+		inputAccNameStatement(accName)
+		inputAccNoStatement(accNo)
+		inputStatmentBeginningBalanceCompany(balance)
+	}
+	
 }
