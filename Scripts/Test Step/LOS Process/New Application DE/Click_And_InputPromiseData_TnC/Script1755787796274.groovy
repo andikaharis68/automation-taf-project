@@ -31,7 +31,7 @@ tnc.checkFcKK(CheckFcKartuKeluarga)
 tnc.checkFcIjinPraktek(CheckFcIjinPraktek)
 
 'Step 4: Check and input FC Npwp'
-tnc.checkFc Npwp(CheckFcNpwp)
+tnc.checkFcNpwp(CheckFcNpwp)
 
 'Step 5: Check and input Fc Tabungan' 
 tnc.checkFcTabungan(CheckFcTabungan)

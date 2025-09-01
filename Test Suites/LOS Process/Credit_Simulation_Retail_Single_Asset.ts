@@ -40,10 +40,10 @@
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>fe6b350b-4edc-44ea-9d6b-30392a788859</guid>
+      <guid>e68c997b-dd9b-46a9-85af-655c4cb081e1</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>false</isRun>
-      <testCaseId>Test Cases/Test Scenario/LOS Process/Delivery_Order</testCaseId>
+      <testCaseId>Test Cases/Test Scenario/LOS Process/Survey_Task_Assignment_Cancel</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
@@ -68,10 +68,10 @@
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>e68c997b-dd9b-46a9-85af-655c4cb081e1</guid>
+      <guid>fe6b350b-4edc-44ea-9d6b-30392a788859</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>false</isRun>
-      <testCaseId>Test Cases/Test Scenario/LOS Process/Survey_Task_Assignment_Cancel</testCaseId>
+      <testCaseId>Test Cases/Test Scenario/LOS Process/Delivery_Order</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
@@ -98,7 +98,7 @@
    <testCaseLink>
       <guid>6e0d034f-ae69-4761-a7c2-8dca80f66e68</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Go_Live</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

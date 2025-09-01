@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>UpdateExcel</name>
+   <name>Search_ByPaymentVoucherNo</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>306e50d9-a156-4283-a6b1-99820de006e9</testCaseGuid>
+   <testCaseGuid>c058fe94-5413-4b77-9a65-10be6dc0b4b1</testCaseGuid>
 </TestCaseEntity>
