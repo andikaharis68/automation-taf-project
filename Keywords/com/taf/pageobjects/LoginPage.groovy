@@ -32,7 +32,7 @@ public class LoginPage extends BaseHelper {
 	private TestObject txtPosition	= createTestObject("txtPosition", "", "")
 	private TestObject txtRole 		= createTestObject("txtRole", "", "")
 	private TestObject btnSelect 	= createTestObject("btnSelect", "", "")
-	private TestObject lblRoles		= createTestObject("lblRoles", "xpath", "//*[contains(text(), 'Select your roles')]")
+	private TestObject lblRoles		= createTestObject("lblRoles", "id", "uModDRole_ctl00_gvRoles_lbSelectRole_0") 
 
 
 	public void login(String username, String password) {

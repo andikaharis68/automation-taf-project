@@ -65,17 +65,19 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnCustomerConfirmation		= createTestObject("btnCustomerConfirmation", "xpath", "//a[text() = 'Customer Confirmation']")
 	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")
 	private TestObject btnGoLive					= createTestObject("btnGoLive", "text", "Go Live")
-	
+
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
 	private TestObject iframeMainPage				= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
 	private TestObject iframeCustForm 				= createTestObject("iframeMenu", "xpath", "//*[@id='custForm']")
-	
+
 	private TestObject btnDisbursementSelection		= createTestObject("btnDisbursementSelection", "xpath", "//a[text() = 'Disbursement Selection']")
 	private TestObject btnDisbursementApproval		= createTestObject("btnDisbursementApproval", "xpath", "//a[text() = 'Disbursement Approval']")
 	private TestObject btnDisbursementExecution		= createTestObject("btnDisbursementExecution", "xpath", "//a[text() = 'Disbursement Execution']")
 	
+	private TestObject btnExpandInquiry				= createTestObject("btnExpandInquiry", "xpath", "//span[text() = 'Inquiry']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnPayVoucherInquiry			= createTestObject("btnPayVoucherInquiry", "xpath", "//a[text() = 'Pay Voucher Inquiry']")
 
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
@@ -360,7 +362,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}
-	
+
 	private void navigateToGoLive() {
 		switchDefaultContent()
 		WebUI.click(drpMenu)
@@ -415,6 +417,18 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnDisbursementExecution)
 		WebUI.takeScreenshot()
+		WebUI.switchToDefaultContent()
+	}
+	private void navigatePayVoucherInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "DISBURSEMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnExpandInquiry)
+		WebUI.takeScreenshot()
+		safetyClick(btnPayVoucherInquiry)
 		WebUI.switchToDefaultContent()
 	}
 }

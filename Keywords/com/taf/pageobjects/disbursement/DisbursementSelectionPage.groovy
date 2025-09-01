@@ -19,7 +19,6 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
-import com.taf.helpers.ScenarioContext
 
 import internal.GlobalVariable
 
@@ -58,6 +57,7 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 
 	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination) {
+		apDestination  =apDestination.trim()
 		safetySelect(drpAPTypeName, apTypeName)
 		safetyInput(txfApDueDate, apDueDate)
 		clickKeyboardEnter()
@@ -88,13 +88,15 @@ public class DisbursementSelectionPage extends BaseHelper {
 		return selectionData
 	}
 
-	private void saveDateToScenarioContext() {
-		ScenarioContext.put("ApDescription", WebUI.getText(txtApDescription))
-		ScenarioContext.put("ApAmount",  WebUI.getText(txtApDescription))
-		ScenarioContext.put("AppNo", WebUI.getText(txtAppNo))
-		ScenarioContext.put("ApBalance", WebUI.getText(txtAppBalanceSelected))
-		String apBalance = ScenarioContext.get("ApBalance")
-		KeywordUtil.logInfo(apBalance)
+	public void updateAppNoandBalanceToMasterData(String fileName, String scenarioId) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		String appNo = WebUI.getText(txtAppNo)
+		String appBalance = WebUI.getText(txtAppBalanceSelected)
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		
+		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
+		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
 	}
 	public String getApDescription() {
 		return WebUI.getText(txtApDescription)
