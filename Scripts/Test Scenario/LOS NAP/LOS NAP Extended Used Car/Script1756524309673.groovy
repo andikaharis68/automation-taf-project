@@ -34,12 +34,10 @@ WebUI.delay(10)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Navigate_To_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Search_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Customer_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Gurantor_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Application_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data_EUC'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Asset_Registration'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Insurance_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Insurance_Life_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
