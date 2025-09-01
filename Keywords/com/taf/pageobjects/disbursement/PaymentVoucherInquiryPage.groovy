@@ -21,28 +21,36 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class PaymentVoucherInquiry extends BaseHelper {
+public class PaymentVoucherInquiryPage extends BaseHelper {
 	//search
-	private TestObject drpAPTypeName = createTestObject("drpAPTypeName", "", "")
-	private TestObject txfVoucherNo = createTestObject("txfVoucherNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
-	private TestObject btnVoucherNo = createTestObject("btnVoucherNo", "", "")
-	private TestObject txtStatus = createTestObject("txtStatus", "", "")
-	
-	public void inputSearchApplication(String apTypeName, String voucherNo) {
-		WebUI.selectOptionByLabel(drpAPTypeName, apTypeName, false)
-		WebUI.setText(txfVoucherNo, voucherNo)
+	private TestObject drpAPTypeName = createTestObject("drpAPTypeName", "id", "ucSearch_ddlRefAccPayableTypeId_ltlRefAccPayableTypeAccPayableTypeNameSearch_ddlReference")
+	private TestObject txfVoucherNo = createTestObject("txfVoucherNo", "id", "ucSearch_txtPayVoucherNo_ltlPayVoucherHPayVoucherNoSearch")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+	private TestObject btnVoucherNo = createTestObject("btnVoucherNo", "id", "gvGrid_lbPayVoucherNo_0")
+	private TestObject txtStatus = createTestObject("txtStatus", "id", "gvGrid_lblStatus_0")
+
+
+	private void verifyLandingInquiryPage() {
+		verifyLanding(drpAPTypeName, "Pay Voucher Inquiry")
+		WebUI.takeScreenshot()
 	}
-	
+	public void inputSearchApplication(String apTypeName, String voucherNo) {
+		safetySelect(drpAPTypeName, apTypeName)
+		safetyInput(txfVoucherNo, voucherNo)
+	}
+
 	public void clickButtonSearch() {
 		WebUI.click(btnSearch)
+		WebUI.takeScreenshot()
 	}
-	
-	public void clickButtonVoucherNo() {
-		WebUI.click(btnVoucherNo)
-	}
-	
+
 	public void verifyStatusPaid() {
-		WebUI.waitForElementPresent(txtStatus, 10)
+		WebUI.waitForElementPresent(txtStatus, 5)
+		WebUI.verifyElementText(txtStatus, "PAID", FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	private void clickVoucherNoAndNavigateToNewTab() {
+		safetyClick(btnVoucherNo)
+		switchToNewTab()
+		WebUI.takeScreenshot()
 	}
 }

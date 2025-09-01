@@ -14,20 +14,15 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_TestData.xlsx ', 'SheetNames': ['Execution', 'MasterData']]
+MenuPage menu = new MenuPage()
 
-Map dataRow = [:]
-dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
-	
-BaseHelper.openBrowser()
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Execution/Navigate_to_DisbursementExecution'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Execution/Input_DisbursementExecution'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: Navigate to payment voucher inquiry'
+menu.navigatePayVoucherInquiry()
 
+'Step 2: Switch to iframe main page'
+menu.switchToIframeMainPage()

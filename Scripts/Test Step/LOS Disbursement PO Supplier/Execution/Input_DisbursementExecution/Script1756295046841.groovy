@@ -27,18 +27,14 @@ execution.inputSearchApplication(ApTypeName, ApDestination, BankName)
 'Step 2: Click Search'
 execution.clickButtonSearch()
 
-'Step 3: Get payment voucher no'
-//PaymentVoucherNo = '0000PV20250500004SUF'
-PaymentVoucherNo = execution.getPaymentVoucherNoFromContext()
-
-'Step 4: Check app disbursement'
+'Step 3: Check app disbursement'
 execution.checklistApDisbursement(PaymentVoucherNo)
 
-'Step 5: Click Executed Selected'
+'Step 4: Click Executed Selected'
 execution.clickExecutedSelected()
 
-'Step 6: Input bank disbursement'
+'Step 5: Input bank disbursement'
 execution.inputApBankDisbursement(RecipientName, CurrencyRate, DisbursementNotes)
 
-'Step 7: Click Disburse button'
+'Step 6: Click Disburse button'
 execution.clickButtonDisburse()

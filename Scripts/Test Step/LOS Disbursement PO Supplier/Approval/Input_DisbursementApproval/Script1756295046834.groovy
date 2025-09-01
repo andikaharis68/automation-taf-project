@@ -23,10 +23,6 @@ import org.openqa.selenium.Keys as Keys
 DisbursementApprovalPage approval = new DisbursementApprovalPage()
 MenuPage menu = new MenuPage()
 
-'Step 0: Get data from scenario context'
-//ApBalance = '244,490,000.00'
-ApBalance = approval.getApBalanceFromContext()
-
 'Step 1: Select Ap Type name '
 approval.inputSearchApplication(ApTypeName, ApDestination, BankName)
 
@@ -34,13 +30,13 @@ approval.inputSearchApplication(ApTypeName, ApDestination, BankName)
 approval.clickButtonSearch()
 
 'Step 3: Click checkbox'
-approval.checklistApDisbursement(ApBalance)
+approval.checklistApDisbursement(ApplicationBalance)
 
 'Step 4: Click Approved selected'
 approval.clickButtonApproveSelected()
 
 'Step 5: Get Voucher No'
-approval.saveDataToContext()
+approval.updatePaymentVoucherNoToExcel(TestDataName, ScenarioId)
 
 'Step 6: Click Approve'
 approval.clickButtonApprove()

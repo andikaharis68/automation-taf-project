@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_ByPaymentVoucherNo</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c058fe94-5413-4b77-9a65-10be6dc0b4b1</testCaseGuid>
+</TestCaseEntity>

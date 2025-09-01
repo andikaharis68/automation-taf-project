@@ -38,7 +38,7 @@ selection.checklistApDisbursement(ApDestination)
 selection.clickButtonAddToTemp()
 
 'Step 5: Get Selection Data'
-selection.saveDateToScenarioContext()
+selection.updateAppNoandBalanceToMasterData(TestDataName, ScenarioId)
 
 'Step 6: Click Next'
 selection.clickNext()

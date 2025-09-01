@@ -19,7 +19,6 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
-import com.taf.helpers.ScenarioContext
 
 import internal.GlobalVariable
 
@@ -79,15 +78,13 @@ public class DisbursementApprovalPage extends BaseHelper {
 		WebUI.waitForElementPresent(txtPopupTransactionStatus, 10)
 	}
 
-	private String saveDataToContext() {
-		ScenarioContext.put("PaymentVoucherNo", WebUI.getText(txtVoucherNo))
-		String voucherNo = ScenarioContext.get("PaymentVoucherNo")
-		KeywordUtil.logInfo("voucher no " +  voucherNo)
-	}
-	private String getApBalanceFromContext() {
-		String apBalance = ScenarioContext.get("ApBalance")
-		KeywordUtil.logInfo("appBalance" + apBalance)
-		return apBalance
+	public void updatePaymentVoucherNoToExcel(String fileName, String scenarioId) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		String paymentVoucherNo = WebUI.getText(txtVoucherNo)
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		
+		saveDataToExcel(paymentVoucherNo, rowFilter, filePath, "MasterData", "PaymentVoucherNo")
 	}
 }
 

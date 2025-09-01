@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_to_PaymentVoucherInquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ffcd9d2a-f36b-4884-88bb-b09154d3dd5c</testCaseGuid>
+</TestCaseEntity>
