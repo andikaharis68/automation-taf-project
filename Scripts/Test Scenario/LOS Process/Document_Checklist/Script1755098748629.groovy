@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -19,7 +20,12 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 'SheetNames': ['DocumentChecklist', 'MasterData']]
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, 
+					TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 
+					'SheetNames': ['DocumentChecklist', 'MasterData'],
+					'StepApplication': 'CCF', //ini step apps nya
+					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step
+					'Counter': 0] //ini counter nya
 Map dataRow = [:]
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
@@ -27,6 +33,21 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DA
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+
+//Checking Step
+while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
+	dataRow['Counter'] += 1
+	KeywordUtil.logInfo("$dataRow['StepCheck']")
+	WebUI.delay(GlobalVariable.WAIT)
+}
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dataRow)
+if(!dataRow['StepCheck']) {
+	KeywordUtil.markFailedAndStop("Step tidak sampai CCF")
+}
+
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Simulation/Navigate_to_DocumentChecklist'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/SearchCustomer_by_ApplicationNo'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Document Checklist/Navigate_to_ApplicationInquiry'), dataRow)

@@ -37,13 +37,13 @@ public class ApplicationInquiryPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMainpage, 1)
 		verifyLanding(txfApplicationNo, "Application Inquiry")
-		WebUI.takeScreenshot()
+//		WebUI.takeScreenshot()
 	}
 
 	public void searchByApplicationNo(String applicationNo) {
 		safetyInput(txfApplicationNo, applicationNo)
 		safetyClick(btnSearch)
-		WebUI.takeScreenshot()
+//		WebUI.takeScreenshot()
 	}
 
 	public void verifyApplicationStepForPurchaseOrder() {
@@ -63,6 +63,11 @@ public class ApplicationInquiryPage extends BaseHelper {
 	
 	public void selectInquiryByApplicationStep() {
 		safetyClick(txtApplicationStep)
+	}
+	
+	public boolean checkApplicationStep(String step) {
+		def actualStep = WebUI.getText(txtApplicationStep)
+		return actualStep.equals(step)
 	}
 	
 }

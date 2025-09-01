@@ -60,4 +60,9 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		return (actualStep == "SMS_APPROVE") ? true : false
 	}
 	
+	public void verifyStep() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+	}
+	
 }
