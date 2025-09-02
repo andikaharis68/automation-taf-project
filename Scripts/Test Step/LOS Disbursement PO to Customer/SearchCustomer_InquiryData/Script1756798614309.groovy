@@ -10,24 +10,25 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.disbursement.OnlineDisbursementInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_PO_Supplier_TestData.xlsx ', 'SheetNames': ['Selection', 'MasterData']]
-Map dataRow = [:]
-dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
-BaseHelper.openBrowser()
+OnlineDisbursementInquiryPage inquiry = new OnlineDisbursementInquiryPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Selection/Navigate_to_DisbursementSelection'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Selection/Input_DisbursementSelection'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: Search customer by agreement no'
+inquiry.searchByAgreementNo(AgreementNo)
 
+'Step 2: Click batch no'
+inquiry.clickBatchNoAndNavigateToNewTab()
+
+'Step 3: Get Status'
+PaymentStatus = inquiry.getStatus()
+
+'Step 4: Click Payment voucher no and switch new tab'
+inquiry.clickVoucherNo()

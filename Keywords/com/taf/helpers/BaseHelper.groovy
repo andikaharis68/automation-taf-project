@@ -536,7 +536,7 @@ class BaseHelper {
 			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
 		}
 	}
-	
+
 	static List readExcelFile(String xlsLoc, String sheetName, int colNameRowIdx = 0, int dataRowIdx = 1) {
 		def rows = []
 
@@ -572,7 +572,9 @@ class BaseHelper {
 				for(int i = 0; i < colIndex; i++) {
 					XSSFCell dataCell = dataRow.getCell(i)
 					String cellValue = dataCell.toString()
-					if(cellValue.trim().endsWith(".0")) { cellValue = cellValue.trim().substring(0, cellValue.length() - 2) }
+					if(cellValue.trim().endsWith(".0")) {
+						cellValue = cellValue.trim().substring(0, cellValue.length() - 2)
+					}
 					data[columns[i]] = cellValue
 				}
 				println("Rows content: $data")
@@ -594,7 +596,7 @@ class BaseHelper {
 		//return list of rows. Each item is a map of colName: value for that row.
 		return rows
 	}
-	
+
 	static int getExcelRowNumber(String xlsLoc, String sheetName, Map criteria, int dataRowIdx = 1) {
 		List xlsContent = readExcelFile(xlsLoc, sheetName)
 		int rowNum = -1
@@ -613,9 +615,8 @@ class BaseHelper {
 			}
 		}
 		return rowNum + dataRowIdx
-
 	}
-	
+
 	static int getExcelColumnIndex(String xlsLoc, String sheetName, String columnName, int colNameRowIdx = 0) {
 		int targetColIndex = -1
 
@@ -644,7 +645,6 @@ class BaseHelper {
 				}
 				colIndex++
 			}
-
 		}
 		catch (Exception ex) {
 			println("ERROR: " + ex.message)
@@ -658,7 +658,7 @@ class BaseHelper {
 
 		return targetColIndex
 	}
-	
+
 	public static void updateExcelCellValue(String xlsLoc, String sheetName, int colNumber, int rowNumber, String val) {
 		FileInputStream fis
 		FileOutputStream fos
@@ -671,14 +671,14 @@ class BaseHelper {
 				println("Target file is not found in following path: " + xlsFile.canonicalPath)
 				WebUI.comment("Target file is not found in following path: " + xlsFile.canonicalPath)
 			}
-			
+
 			if (!xlsFile.canWrite()) {
 				println "Excel file is currently locked or opened by another program: ${xlsFile.absolutePath}"
 				WebUI.comment("File is locked or not writable (possibly opened in Excel): ${xlsFile.canonicalPath}")
 				return
 			}
-			
-			
+
+
 			fis = new FileInputStream(xlsFile)
 			workbook  = new XSSFWorkbook(fis)
 			worksheet = workbook.getSheet(sheetName.substring(0, Math.min(sheetName.length(), 31))) // safeguard if supplied sheet name > 31 char
@@ -702,7 +702,7 @@ class BaseHelper {
 		catch (Exception ex) {
 			println("ERROR: " + ex.message)
 			ex.printStackTrace()
-			
+
 			// Fail the test explicitly
 			KeywordUtil.markFailed("Excel update failed: " + ex.message)
 		}
@@ -720,7 +720,18 @@ class BaseHelper {
 		int rowIndex = getExcelRowNumber(dataFilePath, sheetName, rowFilter)
 		updateExcelCellValue(dataFilePath, sheetName, columnIndex, rowIndex, newValue)
 	}
-
-	
-	
+	def boolean checkElementIsInteractable(TestObject to) {
+		String isClickable = WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
+		KeywordUtil.logInfo("isClickable: $isClickable")
+		
+		return isClickable
+	}
+	def String getNumberFromString(TestObject to) {
+		String str = WebUI.getText(to)
+		def matcher = (str =~ /\d+/)
+		if(matcher.find()) {
+			return matcher.group(0)
+		}
+		return ""
+	}
 }
