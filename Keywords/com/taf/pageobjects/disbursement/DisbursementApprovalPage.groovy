@@ -52,7 +52,7 @@ public class DisbursementApprovalPage extends BaseHelper {
 	}
 
 	public void checklistApDisbursement(String apBalance) {
-		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apBalance')]]//input[@type='checkbox']")
+		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apBalance')]//input[@type='checkbox']")
 		safetyClick(cbkApDisbursement)
 		WebUI.takeScreenshot()
 	}

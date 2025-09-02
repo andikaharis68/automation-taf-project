@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Online_Disbursement_Inquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c7c7a249-964c-4d4c-b27d-4431896a683d</testCaseGuid>
+</TestCaseEntity>

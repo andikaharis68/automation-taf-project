@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>SearchCustomer_InquiryData</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f5bfbf24-a89c-455b-b600-82d51dde898d</testCaseGuid>
+</TestCaseEntity>

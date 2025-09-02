@@ -19,7 +19,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_TestData.xlsx ', 'SheetNames': ['Approval', 'MasterData']]
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_PO_Supplier_TestData.xlsx', 'SheetNames': ['Approval', 'MasterData']]
 
 Map dataRow = [:]
 dataRow += scenarioData
@@ -27,7 +27,7 @@ dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVari
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 	
 BaseHelper.openBrowser()
-WebUI.callTestCase(findTestCase('Test Cases/Test Scenario/General/LoginBrowser_Without_SelectRoles'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Approval/Navigate_to_DisbursementApproval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Approval/Input_DisbursementApproval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

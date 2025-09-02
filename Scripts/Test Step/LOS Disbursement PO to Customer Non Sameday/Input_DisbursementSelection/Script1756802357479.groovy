@@ -3,6 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -10,24 +12,41 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.helpers.BaseHelper
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.disbursement.DisbursementSelectionPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_PO_Supplier_TestData.xlsx ', 'SheetNames': ['Selection', 'MasterData']]
-Map dataRow = [:]
-dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
-BaseHelper.openBrowser()
+DisbursementSelectionPage selection = new DisbursementSelectionPage()
+MenuPage menu = new MenuPage()
 
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Selection/Navigate_to_DisbursementSelection'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Disbursement PO Supplier/Selection/Input_DisbursementSelection'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+'Step 1: Search Application'
+selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination)
+
+'Step 2: Click search'
+selection.clickButtonSearch()
+
+'Step 3: Click checkbox'
+selection.checklistApDisbursement(ApDestination)
+
+'Step 4: Click Add To Temp'
+selection.clickButtonAddToTemp()
+
+'Step 5: Click Next'
+selection.clickNext()
+
+'Step 6: Select Way of payment'
+selection.inputSelectionDetail(WayOfPayment, SourceBankAccount)
+
+'Step 7: Get Selection Data'
+selection.updateMasterDataPOtoCustomerNonSameday(TestDataName, ScenarioId)
+
+'Step 8: Click request approval'
+selection.clickRequestForApprovalandTakeScreenshot()
+
 

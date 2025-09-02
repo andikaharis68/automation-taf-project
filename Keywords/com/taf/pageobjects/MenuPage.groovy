@@ -78,6 +78,8 @@ public class MenuPage extends BaseHelper {
 	
 	private TestObject btnExpandInquiry				= createTestObject("btnExpandInquiry", "xpath", "//span[text() = 'Inquiry']/preceding-sibling::span[@class = 'rtPlus']")
 	private TestObject btnPayVoucherInquiry			= createTestObject("btnPayVoucherInquiry", "xpath", "//a[text() = 'Pay Voucher Inquiry']")
+	private TestObject btnOnlineDisburseInquiry		= createTestObject("btnOnlineDisburseInquiry", "xpath", "//a[text() = 'Online Disbursement Inquiry']")
+	
 
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
@@ -429,6 +431,16 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnExpandInquiry)
 		WebUI.takeScreenshot()
 		safetyClick(btnPayVoucherInquiry)
+		WebUI.switchToDefaultContent()
+	}
+	private void navigateToOnlineDisbursementInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "DISBURSEMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnOnlineDisburseInquiry)
 		WebUI.switchToDefaultContent()
 	}
 }
