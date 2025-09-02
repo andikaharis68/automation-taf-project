@@ -30,11 +30,14 @@ asset.inputSupplierInfo(SupplierBranchName)
 'Step 3: select top up agreement'
 asset.topUpAgreemnt(TopUpAgreementNo)
 
-'Step 4: input asset price'
+'Step 4: input main asset'
+asset.searchAssetMain(AssetName, AssetNote)
+
+'Step 4.2: input asset price'
 asset.inputMainAsset(DPType, AssetPrice, DownPayment)
 
 'Step 5: input asset data'
-asset.selectAsetUsage(AssetUsage)
+asset.inputAssetData(AssetNoMesin, AssetNoRangka, AssetLicensePlateNo, AssetCondition, AssetUsage, AssetManufacturingYear)
 
 'Step 6: calculate market price'
 asset.clickGetMarketPrice()

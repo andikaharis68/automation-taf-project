@@ -14,33 +14,29 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.NewApplicationPage
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
+import com.taf.pageobjects.losCreditProcess.WorkflowMonitoringPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage asset = new NewApplicationPage()
+ApplicationInquiryPage info = new ApplicationInquiryPage()
+WorkflowMonitoringPage workflowMonitoring = new WorkflowMonitoringPage()
 
-'Step 1: click add asset'
-asset.clickAddAsset()
 
-'Step 2: select supplier branch name'
-asset.inputSupplierInfo(SupplierBranchName)
+'Step 1: delay and take screenshot'
+WebUI.delay(3)
+WebUI.takeScreenshot()
 
-'Step 3: select top up agreement'
-asset.topUpAgreemnt(TopUpAgreementNo)
+'Step 2: klik application step'
+info.selectInquiryByApplicationStep()
 
-'Step 4: input asset price'
-asset.inputMainAsset(DPType, AssetPrice, DownPayment)
+'Step 3: switch to second tab'
+workflowMonitoring.switchToSecondTab()
 
-'Step 5: input asset data'
-asset.selectAsetUsage(AssetUsage)
+'Step 4: verify landing in workflow monitoring screen'
+workflowMonitoring.verifyLandingScreen()
 
-'Step 6: calculate market price'
-asset.clickGetMarketPrice()
+'Step 5: verify is step is already on sms approve'
+workflowMonitoring.verifyStep()
 
-'Step 7: add additiona; service grid'
-asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
-
-'Step 8: save asset'
-asset.clickSaveAsset()

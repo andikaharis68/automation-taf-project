@@ -381,8 +381,9 @@ public class NewApplicationPage extends BaseHelper{
 			safetyClick(btnAssetSearch, 1)
 			WebUI.takeScreenshot()
 			safetyClick(btnSelectAsset, 2)
+			safetyInput(txfAssetNote, note, 1)
 		}
-		safetyInput(txfAssetNote, note, 1)
+		
 	}
 	
 	private void inputMainAsset(String dpType, String assetPrice, String downPayment) {

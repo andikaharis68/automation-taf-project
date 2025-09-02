@@ -360,7 +360,7 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "LOAN ORIGINATION")
 		safetyClick(btnCreditProcess)
 		safetyClick(btnExpandApplicationInquiry)
-		WebUI.takeScreenshot()
+//		WebUI.takeScreenshot()
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}

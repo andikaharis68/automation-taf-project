@@ -14,33 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.NewApplicationPage
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage asset = new NewApplicationPage()
+ApplicationInquiryPage inquiry =  new ApplicationInquiryPage()
 
-'Step 1: click add asset'
-asset.clickAddAsset()
+'Step 1: verify landing in application inquiry screen'
+inquiry.verifyLandingScreen()
 
-'Step 2: select supplier branch name'
-asset.inputSupplierInfo(SupplierBranchName)
+'Step 2: search inquiry by application no'
+inquiry.searchByApplicationNo(ApplicationNo)
 
-'Step 3: select top up agreement'
-asset.topUpAgreemnt(TopUpAgreementNo)
-
-'Step 4: input asset price'
-asset.inputMainAsset(DPType, AssetPrice, DownPayment)
-
-'Step 5: input asset data'
-asset.selectAsetUsage(AssetUsage)
-
-'Step 6: calculate market price'
-asset.clickGetMarketPrice()
-
-'Step 7: add additiona; service grid'
-asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
-
-'Step 8: save asset'
-asset.clickSaveAsset()
+'Step 3: check step'
+StepCheck = inquiry.checkApplicationStep(StepApplication)
