@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>NAP_Sipdana_Top_Up</name>
+   <name>NAP_Sipdana_Non_Top_Up</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -10,74 +10,74 @@
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
    <rerunImmediately>false</rerunImmediately>
-   <testSuiteGuid>dbe1e02b-f329-494e-a9ae-557bc472bcc7</testSuiteGuid>
+   <testSuiteGuid>46163b2e-f6c5-4639-98d0-639c77f0c8b9</testSuiteGuid>
    <testCaseLink>
-      <guid>463d68b1-230f-4b5c-b047-54ea05350277</guid>
+      <guid>3f1e040d-dd7e-40a3-947c-d365f4d2f030</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Test Scenario/LOS NAP/LOS NAP Top UP</testCaseId>
+      <testCaseId>Test Cases/Test Scenario/LOS NAP/LOS NAP Non Top UP</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>5fed4f86-b1fe-44c4-8447-910e831be172</guid>
+      <guid>f8f4bf8f-5b0a-4eb8-9db4-cd36a02dc48e</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Survey_Task_Assignment_Cancel</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>409d31af-b95d-421b-bd4d-9a7ce9c353d3</guid>
+      <guid>5019629c-62dd-4551-b951-e7735a945782</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Credit_Approval_With_Decision_Engine</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>d7270124-b640-45a9-bd44-79ea92d4c260</guid>
+      <guid>7ad80f17-49f9-410f-87e3-45a03226349f</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Purchase_Order</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>e4121d21-ac1f-41f2-8335-5c6e7d449d4a</guid>
+      <guid>495cd1f1-c095-4a4e-9516-e706bea1a49d</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Document_Signer</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>aaaece65-4146-4d0f-bcdf-e1b76d0cca3f</guid>
+      <guid>aa1c8678-e58f-4621-b87a-899459cc2ed9</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Delivery_Order</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>e1d310b2-8c74-42cc-a19e-c81763ae0874</guid>
+      <guid>44b0811f-48db-4b69-a53a-8f15577064fa</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Customer_Confirmation</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>0937afcd-0228-4c05-a23b-823d1e9aab15</guid>
+      <guid>9e5460ac-ba9c-4d58-aab7-fefecd960f86</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Invoice</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>0136376a-6b7a-4bab-bf85-cb1fb92e584a</guid>
+      <guid>28e632f9-a1c5-446d-a450-650d03b6193e</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Document_Checklist</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
-      <guid>91542ead-cb83-4959-8ac8-26ccdefa5792</guid>
+      <guid>ad4c91aa-4e54-4d72-934e-ffbe1edb790b</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Go_Live</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

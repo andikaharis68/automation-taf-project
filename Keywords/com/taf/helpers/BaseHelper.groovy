@@ -369,6 +369,17 @@ class BaseHelper {
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
+	
+	static void safetyClickYudho(TestObject to, double delay = 1) {
+		TestObject loadingBar = new TestObject("loadingBar")
+		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
+		WebUI.waitForElementPresent(to, 10, FailureHandling.OPTIONAL)
+		WebUI.click(to)
+		WebUI.delay(delay)
+		handleAlertIfPresent()
+		WebUI.click(to)
+		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
+	}
 
 	static void safetySelect(TestObject to, String text, double delay = 1) {
 		handlePopupAlert()

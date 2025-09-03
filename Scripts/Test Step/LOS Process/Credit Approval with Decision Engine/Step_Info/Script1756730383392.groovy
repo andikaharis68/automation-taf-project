@@ -40,3 +40,6 @@ workflowMonitoring.verifyLandingScreen()
 'Step 5: verify is step is already on sms approve'
 workflowMonitoring.verifyStep()
 
+'Step 6: switch to first tab'
+workflowMonitoring.switchToFirstTab()
+

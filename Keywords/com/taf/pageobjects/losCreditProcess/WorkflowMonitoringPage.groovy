@@ -32,6 +32,10 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		WebUI.switchToWindowIndex(1)
 	}
 	
+	public void switchToFirstTab() {
+		WebUI.switchToWindowIndex(0)
+	}
+	
 	public void verifyLandingScreen() {
 		WebUI.delay(5)
 		WebUI.switchToDefaultContent()

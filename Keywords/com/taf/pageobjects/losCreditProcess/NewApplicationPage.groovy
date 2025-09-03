@@ -408,7 +408,7 @@ public class NewApplicationPage extends BaseHelper{
 
 	private void inputMailingAddress(String address) {
 		safetySelect(drpCopyAddress, address, 1)
-		WebUI.click(btnCopyAddress)
+		safetyClick(btnCopyAddress, 2)
 	}
 
 	private void clickAddAsset() {
@@ -419,7 +419,7 @@ public class NewApplicationPage extends BaseHelper{
 	private void inputSupplierInfo(String name) {
 		if(name != "-") {
 			safetyClick(btnLookUpSupplier, 2)
-			WebUI.setText(txfSupplierName, name)
+			WebUI.setText(txfSupplierBranchName, name)
 			safetyClick(btnSupplierSearch, 2)
 			WebUI.click(btnSelectSupplier)
 		}
@@ -462,8 +462,10 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void clickGetMarketPrice() {
-		safetyClick(btnGetMarketPrice, 1.5)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(btnGetMarketPrice, 3, FailureHandling.OPTIONAL)) {
+			safetyClick(btnGetMarketPrice, 1.5)
+			WebUI.takeScreenshot()
+		}
 	}
 
 	private void inputAssetData(String noMesin, String noRangka, String licenseNo, String conditoin, String usage, String year) {
@@ -507,7 +509,7 @@ public class NewApplicationPage extends BaseHelper{
 
 
 	private void clickSaveAsset() {
-		safetyClick(btnSaveEditAsset, 10)
+		safetyClickYudho(btnSaveEditAsset, 4)
 		WebUI.takeScreenshot()
 	}
 
@@ -670,7 +672,7 @@ public class NewApplicationPage extends BaseHelper{
 		safetyInput(txfNomorSK, noSK, 1)
 		safetySelectEdit(drpSTNK, stnk, 1)
 		safetySelectEdit(drpStatusNPWP, statusNPWP, 1)
-		safetySelectEdit(drpCDENotes, cde, 1)
+		safetySelectEdit(drpCDENotes, cde, 1) 
 		safetyInputEdit(txfOdoMeter, odo)
 	}
 
@@ -681,14 +683,17 @@ public class NewApplicationPage extends BaseHelper{
 
 
 	private void tncDocumentMandatory() {
+		WebUI.delay(15)
 		def requiredDoc = getListElementByTestObject("//span[contains(@id, 'gvTermCondition_lblIsMandatory_')]")
 		def index = requiredDoc.size()
+		KeywordUtil.logInfo("$index")
 
 		index.times { i ->
 			TestObject chkRequiredDocument = createTestObject("chkRequiredDocument", "xpath", "(//span[@id = 'gvTermCondition_lblIsMandatory_$i' and text() = 'Yes']/following::input)[1]")
 			if(WebUI.waitForElementPresent(chkRequiredDocument, 1, FailureHandling.OPTIONAL)) {
 				safetyClick(chkRequiredDocument, 0.8)
 			}
+			KeywordUtil.logInfo("$i")
 		}
 
 		WebUI.takeScreenshot()
@@ -701,8 +706,11 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void clickSaveAndContinue() {
-		safetyClick(btnSaveAndContinue, 0.5)
-		WebUI.takeScreenshot()
+		def exist = WebUI.verifyElementPresent(btnSaveAndContinue, 3, FailureHandling.OPTIONAL)
+		if(exist) {
+			safetyClick(btnSaveAndContinue, 0.5)
+			WebUI.takeScreenshot()
+		}
 	}
 
 	private switchFrameForm() {

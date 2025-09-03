@@ -44,7 +44,7 @@ public class LoginPage extends BaseHelper {
 	}
 
 	private void selectRoles(String office, String position, String role) {
-		if(WebUI.waitForElementPresent(lblRoles, 5, FailureHandling.OPTIONAL)) {
+		if(WebUI.waitForElementVisible(lblRoles, 2, FailureHandling.OPTIONAL)) {
 			TestObject dynamicSelectButton
 			String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 			String upper = 'abcdefghijklmnopqrstuvwxyz'
