@@ -10,41 +10,38 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
+import com.taf.pageobjects.confinsWorkflow.LoginPage
+import com.taf.pageobjects.confinsWorkflow.MenuPage
+import com.taf.pageobjects.confinsWorkflow.TaskMonitoringPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
+MenuPage menu = new MenuPage()
+TaskMonitoringPage task = new TaskMonitoringPage()
+LoginPage login = new LoginPage()
 
-'Step 1: switch to iframe'
-cdeCompletion.switchToIframeMain()
+'Step 0: Login'
+login.doLogin("applconfins", "password")// mbak mintul pindahin ke test data ya nanti
 
-int counter = 0
-Boolean isFound = false
-while(!isFound && (GlobalVariable.COUNTER > counter)) {
-	'Step 2: search centralized data complition by customer name'
-	cdeCompletion.searchCentralizedDataCompletion(CustomerName)
-	
-	isFound = cdeCompletion.checkIsSearchResultFound()
-	if (!isFound) {
-		cdeCompletion.delay()
-	}
-	counter++	
-}
+'Step 1: Navigate to Task Monitoring'
+menu.navigateToTaskMonitoring()
 
-if(!isFound) {
-	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
-}else {
-	'Step 3: Click Edit on action pencil'
-	cdeCompletion.clickActionPencil()
-}
+'Step 2: Switch To Iframe Main Page'
+menu.switchIframeMainPage()
 
+'Step 4: Search By TransactionNO/ApplicationNo'
+task.searchByTransactionNo(ApplicationNo)
 
-'Step 3: switch to default frame'
-cdeCompletion.switchToDefaultContent()
+'Step 5: click Search'
+task.clickSearch()
+
+'Step 6: click select'
+task.clickSelect()
+
+'Step 7: click resume nya'
+task.clickResume()

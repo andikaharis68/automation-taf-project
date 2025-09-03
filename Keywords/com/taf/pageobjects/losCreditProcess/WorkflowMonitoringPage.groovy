@@ -23,11 +23,11 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class WorkflowMonitoringPage extends BaseHelper{
-	
-	//step info - table	
+
+	//step info - table
 	private TestObject lblStepInfo =  createTestObject("txtLastStepName", "id", "ucSubSecGvWf_subSectionID")
 	private TestObject txtLastStepName =  createTestObject("txtLastStepName", "xpath", "(//*[contains(@id, 'gvWFView_lblWFSubsytemActName')])[last()]")
-	
+
 	public void switchToSecondTab() {
 		WebUI.switchToWindowIndex(1)
 	}
@@ -42,7 +42,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		verifyLanding(lblStepInfo, "Workflow Monitoring")
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void waitExecutionTimeHandling() {
 		/*
 		 * This Function made for wait execution time on backend
@@ -55,18 +55,30 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		WebUI.focus(txtLastStepName)
 		KeywordUtil.logInfo(WebUI.getText(txtLastStepName))
 	}
-	
+
 	public boolean verifyIsStepAlreadyOnSmsApprove() {
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
 		String actualStep = WebUI.getText(txtLastStepName)
-		
+
 		return (actualStep == "SMS_APPROVE") ? true : false
 	}
 	
+	public boolean verifyIsStepAlreadyOnPurchaseOrder() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+		String actualStep = WebUI.getText(txtLastStepName)
+
+		return (actualStep == "Purchase Order") ? true : false
+	}
+	
+	public void delayAndRefresh() {
+		WebUI.delay(GlobalVariable.WAIT)
+		WebUI.refresh()
+	}
+
 	public void verifyStep() {
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
 	}
-	
 }

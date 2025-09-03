@@ -54,6 +54,20 @@ public class CentralizeDataEntry extends BaseHelper {
 		WebUI.click(btnIconActionProspect)
 		WebUI.delay(2)
 	}
+	
+	public Boolean checkIsSearchResultFound() {
+		if (WebUI.waitForElementPresent(btnIconActionProspect, 5, FailureHandling.OPTIONAL)) {
+			return true
+		}else {
+			return false
+		}
+	}
+	
+	public void delay() {
+		WebUI.delay(GlobalVariable.WAIT)
+		KeywordUtil.logInfo("Already Delay ${GlobalVariable.WAIT} seconds, and ready to search again!")
+	}
+	
 
 	public void inputCustomerMainData(String customerName, String birthPlace, String birthDate, String idNumber) {
 		WebUI.takeScreenshot()
