@@ -23,8 +23,8 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage cust = new NewApplicationPage()
 
 'Step 1: get text of application number'
-def appNo = cust.getAppNo()
-KeywordUtil.logInfo(appNo)
+ApplicationNo = cust.getAppNo()
+cust.saveApplicationNo(ApplicationNo, ExcelName, GlobalVariable.SCENARIO_ID)
 
 'Step 2: switch iframe'
 cust.switchFrameForm()

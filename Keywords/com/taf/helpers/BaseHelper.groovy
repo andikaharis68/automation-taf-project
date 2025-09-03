@@ -723,7 +723,7 @@ class BaseHelper {
 	def boolean checkElementIsInteractable(TestObject to) {
 		String isClickable = WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
 		KeywordUtil.logInfo("isClickable: $isClickable")
-		
+
 		return isClickable
 	}
 	def String getNumberFromString(TestObject to) {

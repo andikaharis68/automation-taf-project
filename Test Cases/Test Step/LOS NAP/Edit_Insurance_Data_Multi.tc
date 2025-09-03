@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Edit_Insurance_Data_Multi</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>cc9c2959-c658-4639-82d5-5428f1ed2d90</testCaseGuid>
+</TestCaseEntity>

@@ -19,11 +19,28 @@ import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage search = new NewApplicationPage()
+NewApplicationPage asset = new NewApplicationPage()
 
+'Step 1: click add asset'
+asset.clickAddAsset()
 
-'Step 1: verify landing page'
-search.verifyLandingPage()
+'Step 2: select supplier branch name'
+asset.inputSupplierInfo(SupplierBranchName)
 
-'Step 2: search application'
-search.searchApp("0008APP20250600840")
+'Step 3: select sales person'
+asset.selectSalesPerson(SalesPersonName)
+
+'Step 4: input main asset'
+asset.searchAssetMain(AssetName, AssetNote)
+
+'Step 4.2: input asset price'
+asset.inputMainAsset(DPType, AssetPrice, DownPayment)
+
+'Step 5: input asset data'
+asset.inputAssetData(AssetNoMesin, AssetNoRangka, AssetLicensePlateNo, AssetCondition, AssetUsage, AssetManufacturingYear)
+
+'Step 6: add additiona; service grid'
+asset.addAccessories(AccessorySupplierBranchName, AccessoryName, AccessoryPrice, AccessoryDPAmount, AccessoryNotes)
+
+'Step 7: save asset'
+asset.clickSaveAsset()

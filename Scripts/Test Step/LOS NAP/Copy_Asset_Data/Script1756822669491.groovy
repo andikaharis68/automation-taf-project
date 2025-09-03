@@ -19,11 +19,10 @@ import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage search = new NewApplicationPage()
+NewApplicationPage asset = new NewApplicationPage()
 
+'Step 1: copy asset'
+asset.copyAsset(NumOfAsset)
 
-'Step 1: verify landing page'
-search.verifyLandingPage()
-
-'Step 2: search application'
-search.searchApp("0008APP20250600840")
+'Step 2: save and continue'
+asset.clickSaveAndContinue()

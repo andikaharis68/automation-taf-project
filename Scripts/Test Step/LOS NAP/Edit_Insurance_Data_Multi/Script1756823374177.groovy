@@ -19,11 +19,13 @@ import com.taf.pageobjects.losCreditProcess.NewApplicationPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-NewApplicationPage search = new NewApplicationPage()
+NewApplicationPage insurance = new NewApplicationPage()
 
+'Step 1: edit selected insurance'
+insurance.editInsuranceDataMulti(InsuranceSchemeName, InsuranceRateType, InsuranceCoveredType)
 
-'Step 1: verify landing page'
-search.verifyLandingPage()
+'Step 2: copy isnurace aset data'
+insurance.copyInsuranceAsset()
 
-'Step 2: search application'
-search.searchApp("0008APP20250600840")
+'Step 3: click save and continue'
+insurance.clickSaveAndContinue()
