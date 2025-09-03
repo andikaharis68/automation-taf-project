@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -27,5 +28,27 @@ cde.switchToMainPage()
 'Step 2: search by customer name'
 cde.searchCustomerName(CustomerName)
 
-'Step 3: select from prospect list'
-cde.selectProspect()
+int counter = 0
+Boolean isFound = false
+while(!isFound && (GlobalVariable.COUNTER > counter)) {
+	
+	'Step 2: search by customer name'
+	cde.searchCustomerName(CustomerName)
+	
+	isFound = cde.checkIsSearchResultFound()
+	if (!isFound) {
+		cde.delay()
+	}
+	counter++
+}
+
+if(!isFound) {
+	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
+}else {
+	'Step 3: select from prospect list'
+	cde.selectProspect()
+}
+
+
+
+

@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -119,6 +120,17 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	
 	//attribute list
 	private TestObject drpDebitorBusinessScale	= createTestObject("drpDebitorBusinessScale", "id", "ucAddrInfoCust_txtStayLength_txtInput")
+	private TestObject txfAccountFlag			= createTestObject("txfAccountFlag", "id", "rptOtherAttribute_txtAttrContent_0")
+	private TestObject txfAccountDate			= createTestObject("txfAccountDate", "id", "rptOtherAttribute_txtAttrContent_1")
+	private TestObject txfCustRating			= createTestObject("txfCustRating", "id", "rptOtherAttribute_txtAttrContent_2")
+	private TestObject txfGoodBadStatus			= createTestObject("txfGoodBadStatus", "id", "rptOtherAttribute_txtAttrContent_3")
+	private TestObject txfTerdugaTeroris		= createTestObject("txfTerdugaTeroris", "id", "rptOtherAttribute_txtAttrContent_4")
+	private TestObject txfNoSim					= createTestObject("txfNoSim", "id", "rptOtherAttribute_txtAttrContent_5")
+	private TestObject chxIsSplitTreasure		= createTestObject("chxIsSplitTreasure", "id", "rptOtherAttribute_cbxAttrValue_6")
+	private TestObject chxViolateBMPK			= createTestObject("chxViolateBMPK", "id", "rptOtherAttribute_cbxAttrValue_8")
+	private TestObject chxExceedBMPK			= createTestObject("chxExceedBMPK", "id", "rptOtherAttribute_cbxAttrValue_9")
+	private TestObject txfNoATM					= createTestObject("txfNoATM", "id", "rptOtherAttribute_txtAttrContent_16")
+	private TestObject txfRatingDebitor			= createTestObject("txfRatingDebitor", "id", "rptOtherAttribute_txtAttrContent_18")
 
 	//attribute list - debitor group lookup
 	private TestObject icoDebitorBusinessGroup	= createTestObject("icoDebitorBusinessGroup", "id", "UCDebtGrp_ucBebtGroup_imb")
@@ -131,6 +143,12 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfDescCounterpart		= createTestObject("txfDescCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
 	private TestObject btnSearchCounterpart		= createTestObject("btnSearchCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectCounterpart		= createTestObject("btnSelectCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_gvL_hpSelect_0")
+	
+	//attribute list - Sustainable Financial Lookup
+	private TestObject icoSustainable			= createTestObject("icoSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_imb")
+	private TestObject txfDescSustainable		= createTestObject("txfDescSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
+	private TestObject btnSearchSustainable		= createTestObject("btnSearchSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_lbSearch")
+	private TestObject btnSelectSustainable		= createTestObject("btnSelectSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_gvL_hpSelect_0")
 
 	//attribute list - debitor group slik lookup
 	private TestObject icoDebitorGroupSlik		= createTestObject("icoDebitorGroupSlik", "id", "rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_imb_7")
@@ -161,6 +179,13 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	//other asset info
 	private TestObject txfAssetUsage			= createTestObject("txfAssetUsage", "id", "ucRefAssetUsage_ddlReference")
 	private TestObject txfSurveyUnitUsage		= createTestObject("txfSurveyUnitUsage", "id", "ucTeleSurveyUnitUsage_ddlReference")
+	private TestObject radYesOnline				= createTestObject("radYesOnline", "id", "rblAssetOnlTransport_0")
+	private TestObject radNoOnline				= createTestObject("radNoOnline", "id", "rblAssetOnlTransport_1")
+	private TestObject radYesValid				= createTestObject("radYesValid", "id", "rblSpkValid_0")
+	private TestObject radNoValid				= createTestObject("radNoValid", "id", "rblSpkValid_1")
+	private TestObject txfUsageAssetOnline		= createTestObject("txfUsageAssetOnline", "id", "txtUsageAssetOnl")
+	private TestObject txfSpkNo					= createTestObject("txfSpkNo", "id", "txtSpkNo")
+	
 
 	//popup success
 	private TestObject lblSuccess				= createTestObject("txfSurveyUnitUsage", "text", "Submit Success")
@@ -179,6 +204,20 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfCustomerName, customerName)
 		safetyClick(btnSearch)
 		WebUI.takeScreenshot()
+	}
+	
+	public Boolean checkIsSearchResultFound() {
+		if (WebUI.waitForElementPresent(btnPencil, 5, FailureHandling.OPTIONAL)) {
+			return true
+		}else {
+			return false
+		}
+	}
+	
+	public void delay() {
+		WebUI.delay(GlobalVariable.WAIT)
+//		WebUI.refresh()
+		KeywordUtil.logInfo("Already Delay ${GlobalVariable.WAIT} seconds, and ready to search again!")
 	}
 	
 	public void clickActionPencil() {
@@ -233,6 +272,8 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfCompanyName, companyName)
 		//employment establishment date
 		safetySelect(drpMonthEmploymentDate, employmentMonth)
+		WebUI.delay(1)
+		safetyClick(txfYearEmploymentDate)
 		safetyInput(txfYearEmploymentDate, employmentYear, 1)
 
 		safetySelect(drpSurveyProfession, surveyProfession)
@@ -269,6 +310,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	public void inputResidenceAddressInfo(String buildingType, String buildingOwner, String buildingStayLength) {
 		safetySelect(drpBuildingType, buildingType)
 		safetySelect(drpBuildingOwner, buildingOwner)
+		manualClearText(txfBuildingStay)
 		safetyInput(txfBuildingStay, buildingStayLength)
 		WebUI.takeScreenshot()
 	}
@@ -353,6 +395,130 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnSelectAffiliateSlik)
 		WebUI.takeScreenshot()
 	}
+	
+	public void selectSustainableFinancial(String sustainable) {
+		safetyClick(icoSustainable)
+		safetyInput(txfDescSustainable, sustainable)
+		safetyClick(btnSearchSustainable)
+		safetyClick(btnSelectSustainable)
+	}
+	
+	public void inputEAccountFlag(String flag) {
+		safetyClick(txfAccountFlag)
+		safetyInput(txfAccountFlag, flag)
+	}
+	
+	public void inputEAccountJoinDate(String joinDate) {
+		safetyClick(txfAccountDate)
+		safetyInput(txfAccountDate, joinDate)
+	}
+	
+	public void inputCustRating(String rating) {
+		Boolean isInteractable = checkElementIsInteractable(txfCustRating)
+		if (isInteractable) {
+			safetyClick(txfCustRating)
+			safetyInput(txfCustRating, rating)
+		}
+	}
+	
+	public void inputGoodBadStatus(String status) {
+		Boolean isInteractable = checkElementIsInteractable(txfCustRating)
+		if (isInteractable) {
+			safetyClick(txfGoodBadStatus)
+			safetyInput(txfGoodBadStatus, status)			
+		}
+	}
+	
+	public void inputTerdugaTeroris(String dugaan) {
+		safetyClick(txfTerdugaTeroris)
+		safetyInput(txfTerdugaTeroris, dugaan)
+	}
+	
+	public void inputNoSIM(String noSim) {
+		safetyClick(txfNoSim)
+		safetyInput(txfNoSim, noSim)
+	}
+	
+	public void checkIsSplitTreasure(String isSplit) {
+		if(isSplit && isSplit == 'Y') {
+			WebUI.check(chxIsSplitTreasure)
+		}
+	}
+	
+	public void checkViolateBMPK(String bmpk ) {
+		if(bmpk && bmpk == "Y") {
+			WebUI.check(chxViolateBMPK)
+		}
+	}
+
+	public void checkExceedBMPK(String bmpk) {
+		if(bmpk && bmpk == "Y") {
+			WebUI.check(chxExceedBMPK)
+		}
+	}
+	
+	public void checkSameAddress(String sameAddress, String index) {
+		if (sameAddress) {
+			String labelText = sameAddress.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index) //11
+		}
+	}
+
+	public void checkSameJob(String sameJob, String index) {
+		if (sameJob) {
+			String labelText = sameJob.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+	public void checkSamePosition(String samePosition, String index) {
+		if (samePosition) {
+			String labelText = samePosition.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+	public void checkDifferentMaritalStatus(String maritalStatus, String index) {
+		KeywordUtil.logInfo(maritalStatus)
+		if (maritalStatus) {
+			String labelText = maritalStatus.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+	public void checkHomeOwnershipDoc(String ownership, String index) {
+		if (ownership) {
+			String labelText = ownership.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+
+	public void checkCustomerDataConsent(String dataConsent, String index) {
+		if(dataConsent) {
+			String labelText = dataConsent.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+	
+	public void checkCDENotes(String notes, String index) {
+		if (notes) {
+			String labelText = notes.equalsIgnoreCase("Y") ? "Yes" : "No"
+			clickYesNo(labelText, index)
+		}
+	}
+	public void inputATMNo(String atmNo) {
+		if(atmNo) {
+			safetyInput(txfNoATM, atmNo)
+		}
+	}
+	
+	public void inputRatingDebitor(String rating) {
+		if(rating) {
+			safetyInput(txfRatingDebitor, rating)
+		}
+	}
+	
+	public void clickYesNo(String labelText, String index) {
+		TestObject radYesNo = createTestObject("radYesNo", "xpath", "//label[normalize-space(text())='$labelText']/preceding-sibling::input[@type='radio'and contains(@id, 'rblAttrValue_$index')]")
+		safetyClick(radYesNo)
+	}
 
 	public void selectWayOfPayment(String wayOfPayment) {
 		safetySelect(drpWayOfPayment, wayOfPayment)
@@ -380,6 +546,30 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetySelect(txfAssetUsage, assetUsage)
 		safetySelect(txfSurveyUnitUsage, teleSurveyUnitUsage)
 		WebUI.takeScreenshot()
+	}
+	
+	public void checkAssetOnlineTransport(String onlineTransport) {
+		if(onlineTransport && onlineTransport == "Y") {
+			safetyClick(radYesOnline)
+		}else {
+			safetyClick(radNoOnline)
+		}
+	}
+	
+	public void inputUsageAssetForOnlineTransport(String usageTransport) {
+		safetyInput(txfUsageAssetOnline, usageTransport)
+	}
+	
+	public void inputSPKNo(String spkNo) {
+		safetyInput(txfSpkNo, spkNo)
+	}
+	
+	public void checkSpkValid(String valid) {
+		if(valid && valid == "Y") {
+			safetyClick(radYesValid)
+		}else {
+			safetyClick(radNoValid)
+		}
 	}
 
 	public void clickSaveAssetUser() {

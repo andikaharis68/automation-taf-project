@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Validate_Step_On_Purchase_Order</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>71c755c5-65ab-46c7-9fca-7b4b7ce72d01</testCaseGuid>
+</TestCaseEntity>

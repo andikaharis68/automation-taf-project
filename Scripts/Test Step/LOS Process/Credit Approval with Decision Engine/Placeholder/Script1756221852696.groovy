@@ -26,6 +26,7 @@ placeholder['ApprovalOffice'] = ''
 placeholder['ApprovalPosition'] = ''
 placeholder['ApprovalRole'] = ''
 placeholder['IsSmsApprove'] = false
+placeholder['IsPurchaseOrder'] = false
 
 KeywordUtil.logInfo("Placeholder data : ${placeholder}")
 return placeholder
