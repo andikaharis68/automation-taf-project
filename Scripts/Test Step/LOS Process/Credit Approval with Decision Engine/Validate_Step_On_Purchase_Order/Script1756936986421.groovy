@@ -10,41 +10,32 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.CentralizedDataEntryCompletionPage
+import com.taf.pageobjects.losCreditProcess.WorkflowMonitoringPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompletionPage()
+WorkflowMonitoringPage workflowMonitoring = new WorkflowMonitoringPage()
 
-'Step 1: switch to iframe'
-cdeCompletion.switchToIframeMain()
+'Step 1: switch to second tab'
+workflowMonitoring.switchToSecondTab()
+
+'Step 2: verify landing in workflow monitoring screen'
+workflowMonitoring.verifyLandingScreen()
+
+'Step 3: verify is step is already on purchase order'
+IsPurchaseOrder = workflowMonitoring.verifyIsStepAlreadyOnPurchaseOrder()
 
 int counter = 0
-Boolean isFound = false
-while(!isFound && (GlobalVariable.COUNTER > counter)) {
-	'Step 2: search centralized data complition by customer name'
-	cdeCompletion.searchCentralizedDataCompletion(CustomerName)
+while (!IsPurchaseOrder && GlobalVariable.COUNTER > counter) {
+	'Step 3.1: delay and refresh handling'
+	workflowMonitoring.delayAndRefresh()
 	
-	isFound = cdeCompletion.checkIsSearchResultFound()
-	if (!isFound) {
-		cdeCompletion.delay()
-	}
-	counter++	
+	'Step 3.2: double check is step already on purchase order after wait execution time'
+	IsPurchaseOrder = workflowMonitoring.verifyIsStepAlreadyOnPurchaseOrder()
+	counter++
 }
-
-if(!isFound) {
-	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
-}else {
-	'Step 3: Click Edit on action pencil'
-	cdeCompletion.clickActionPencil()
-}
-
-
-'Step 3: switch to default frame'
-cdeCompletion.switchToDefaultContent()

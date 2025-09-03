@@ -33,7 +33,7 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DA
 
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
-int maxLoop = 10
+int maxLoop = GlobalVariable.COUNTER
 int i = 0 
 while(!dataRow['IsSmsApprove'] && i != maxLoop) {
 	KeywordUtil.logInfo("Credit Approval Ke : ${i+1}")
@@ -60,5 +60,21 @@ while(!dataRow['IsSmsApprove'] && i != maxLoop) {
 	BaseHelper.closeBrowser()
 	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
 	i++
+}
+
+if (dataRow['IsSmsApprove']) {
+	//Login on Workflow Monitoring and resume for sms_approve handler
+	WebUI.openBrowser(GlobalVariable.WEB_WORKFLOW_URL)
+	WebUI.maximizeWindow()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Resume_Sms_Approve'), dataRow)
+	BaseHelper.closeBrowser()
+	
+	//Checking step is ready for purchase order
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Purchase_Order'), dataRow)
+
 }
 
