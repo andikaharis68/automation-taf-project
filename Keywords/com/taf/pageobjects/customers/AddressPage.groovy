@@ -82,11 +82,11 @@ public class AddressPage extends BaseHelper {
 	private void switchToDefault() {
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void switchIframeMain() {
 		WebUI.switchToFrame(iframeMainPage, 2)
 	}
-	
+
 	private void switchIframeForm() {
 		WebUI.switchToFrame(iframeAddress, 2)
 	}
@@ -94,15 +94,15 @@ public class AddressPage extends BaseHelper {
 	private void clickMenuAddress() {
 		safetyClick(btnAddressMenu)
 	}
-	
+
 	private void selectAddressType(String addressType) {
-		if(addressType) {			
+		if(addressType) {
 			safetySelect(drpAddressType, addressType)
 		}
 	}
 
 	private void inputAddress(String address) {
-		if(address) {			
+		if(address) {
 			safetyInput(txfAddress, address)
 		}
 	}
@@ -118,13 +118,13 @@ public class AddressPage extends BaseHelper {
 	}
 
 	private void inputRT(String rt) {
-		if(rt) {			
+		if(rt) {
 			safetyInput(txfRT, rt, 1.5)
 		}
 	}
 
 	private void inputRW(String rw) {
-		if(rw) {			
+		if(rw) {
 			safetyInput(txfRW, rw, 1.5)
 		}
 	}
@@ -143,7 +143,7 @@ public class AddressPage extends BaseHelper {
 			WebUI.delay(2)
 		}
 	}
-	
+
 	private void searchAddressCompany(String zipCode) {
 		if(zipCode) {
 			safetyClick(btnSearchZIPCode)
@@ -193,29 +193,29 @@ public class AddressPage extends BaseHelper {
 			safetySelect(drpBuildingOwnership, ownership)
 		}
 	}
-	
+
 	private boolean clickEditLegalAddress() {
 		if(WebUI.waitForElementPresent(txtLegalAddress, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
 			safetyClick(btnEditLegalAddress)
 			return true
-		} else {		
-			return false	
+		} else {
+			return false
 			safetyClick(btnAdd)
 		}
 		WebUI.takeScreenshot()
 	}
-	
+
 	private boolean clickEditCompanyAddress() {
 		if(WebUI.waitForElementPresent(txtCompanyAddress, 5, FailureHandling.CONTINUE_ON_FAILURE)) {
 			safetyClick(btnEditCompanyAddress)
 			return true
-		} else {			
+		} else {
 			safetyClick(btnAdd)
 			return false
 		}
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void clickAddAddress() {
 		safetyClick(btnAdd)
 		WebUI.takeScreenshot()
@@ -259,13 +259,13 @@ public class AddressPage extends BaseHelper {
 		safetyInputEdit(txfCompanyName, companyName)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void switchToIframeAddress() {
 		WebUI.switchToDefaultContent()
 		WebUI.verifyElementPresent(iframeAddress, 5)
 		WebUI.switchToFrame(iframeAddress, 1)
 	}
-	
+
 	private void inputPhoneNumbers(String phoneNumber, int index) {
 		if(phoneNumber) {
 			if(phoneNumber == "AUTO") {

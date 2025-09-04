@@ -3,8 +3,6 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
-
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -16,54 +14,53 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.losCreditProcess.ComissionDataPage
 import com.taf.pageobjects.losCreditProcess.FinancialDataPage
-import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
 import com.taf.pageobjects.losCreditProcess.OtherInfoPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
-MenuPage menu = new MenuPage()
 FinancialDataPage financial = new FinancialDataPage()
 ComissionDataPage comission = new ComissionDataPage()
 OtherInfoPage otherInfo 	= new OtherInfoPage()
 
-'Step 1: Click save and continue'
-lifeInsurance.clickSaveAndContinue()
+'Step 1: Input Fees'
+financial.inputFee(AdminFeeAmount, NotaryAmount, AdditionalAdminFee, OtherFee)
 
-'Step 2: Verify Notif success'
-//menu.verifySuccessMessage()
+'Step 2: Input provision fee'
+financial.inputProvisionFee(ProvisionType, ProvisionAmount)
 
-'Step 3: Verify Landing in Financial Data'
-financial.verifyLandingInFinancialData()
+'Step 3: Input Fiduciary'
+financial.inputFiduciary(FiduciaOption, FiduciaFeeAmount)
 
 'Step 4: Click calculate fee'
 financial.clickCalculateFee()
 
-'Step 5: Click calculate installment'
+'Step 5: Input financial Data'
+financial.inputFinancialData(ResidualValue, Rate, Margin, GraceAmount, GracePeriod, Spread, TDPPaidatCompany, SubsidySupplier, SubsidyRate)
+
+'Step 6: Click calculate installment'
 financial.clickCalculateInstallment()
 
 'Step 6: Click calculate'
 financial.clickCalculate()
 
-'Step 7: Click save and continue'
+'Step 4: Click save and continue'
 financial.clickSaveContinue()
 
-'Step 8: verify notif success'
-//menu.verifySuccessMessage()
-
-'Step 9: Verify landing in comission data page'
+'Step 5: Verify landing in comission data page'
 comission.verifyLandingInComissionData()
 
-'Step 10: click calculate'
+'Step 6: Add Supplier Employee'
+comission.addSupplierEmployeeSection(SupplierBranchName, EmployeeName, DiffOther)
+
+'Step 7: click calculate'
 comission.clickCalculate()
 
-'Step 11: click save and continue'
+'Step 8: click save and continue'
 comission.clickSaveContinue()
 
-'Step 12: Verify landing in other info'
+'Step 9: Verify landing in other info'
 otherInfo.verifyLandingInOtherInfoPage()
 

@@ -34,6 +34,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Applicatio
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_ApplicationData'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Edit_AssetRegistrationData'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_InsuranceData'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/SaveAndContinue_ToFinancialData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_LifeInsuranceData'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_FinancialData'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_OtherInfo'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Click_And_InputPromiseData_TnC'), dataRow)

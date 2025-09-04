@@ -23,8 +23,12 @@ import internal.GlobalVariable
 
 public class LifeInsuranceDataPage extends BaseHelper {
 
-	private TestObject lblSection			= createTestObject("lblSection", "xpath", "//*[@id='ucToggleLifeInsInfo_subSectionID']")  
+	private TestObject lblSection			= createTestObject("lblSection", "xpath", "//*[@id='ucToggleLifeInsInfo_subSectionID']")
 	private TestObject btnSaveContinue		= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont")
+	private TestObject cbIsCoveredInsurance	= createTestObject("cbIsCoveredInsurance", "id", "cbIsCoverLifeIns")
+	private TestObject drpLifeInscoBranch	= createTestObject("drpLifeInscoBranch", "id", "ddlLifeInscoName")
+	private TestObject drpPremiumPayment	= createTestObject("drpPremiumPayment","id", "ddlPaymentMethod")
+	private TestObject txfNotes				= createTestObject("txfNotes", "id", "txt_LifeInsH_NewCoverNotes")
 
 	private void verifyLandingInLifeInsuranceData() {
 		WebUI.delay(5)
@@ -35,5 +39,50 @@ public class LifeInsuranceDataPage extends BaseHelper {
 	private void clickSaveAndContinue() {
 		WebUI.delay(0.5)
 		safetyClick(btnSaveContinue)
+	}
+	private void isCoveredInsurance(String isCoveredInsurance) {
+		if(isCoveredInsurance?.trim().equalsIgnoreCase("Y") ) {
+			WebUI.check(cbIsCoveredInsurance)
+			WebUI.delay(1)
+		}
+	}
+	private void selectLifeInscoBranchName(String branchName) {
+		if(branchName) {
+			safetySelect(drpLifeInscoBranch, branchName)
+			WebUI.delay(1)
+		}
+	}
+	private void selectCustomerInsured(String custInsured) {
+		if(custInsured) {
+			TestObject cbCustInsured = createTestObject("cbCustInsured","xpath","//label[normalize-space(text())='${custInsured}']/preceding-sibling::input[@type='checkbox']")
+			String strChecked = WebUI.getAttribute(cbCustInsured, "checked")
+			boolean isChecked = strChecked.toBoolean()
+			if(!isChecked) {
+				safetyClick(cbCustInsured)
+				WebUI.delay(1)
+			}
+		}
+	}
+	private void selectPremiumPaymentMethod(String paymentMethod) {
+		if(paymentMethod) {
+			safetySelect(drpPremiumPayment, paymentMethod)
+			WebUI.delay(1)
+		}
+	}
+	private void inputNotes(String notes) {
+		if(notes) {
+			safetyInput(txfNotes, notes)
+			WebUI.delay(1)
+		}
+	}
+	private inputLifeInsuranceInfo(String isCOverInsurance, String branchName, String customerInsured, String premiumPayment, String notes) {
+		boolean isOptionDisabled = checkOptionDisabled(cbIsCoveredInsurance)
+		if(!isOptionDisabled) {
+			isCoveredInsurance(isCOverInsurance)
+			selectLifeInscoBranchName(branchName)
+			selectCustomerInsured(customerInsured)
+			selectPremiumPaymentMethod(premiumPayment)
+			inputNotes(notes)
+		}
 	}
 }

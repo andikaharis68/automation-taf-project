@@ -723,7 +723,7 @@ class BaseHelper {
 	def boolean checkElementIsInteractable(TestObject to) {
 		String isClickable = WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
 		KeywordUtil.logInfo("isClickable: $isClickable")
-		
+
 		return isClickable
 	}
 	def String getNumberFromString(TestObject to) {
@@ -733,5 +733,23 @@ class BaseHelper {
 			return matcher.group(0)
 		}
 		return ""
+	}
+	def boolean checkOptionDisabled(TestObject to) {
+		String strDisabled = WebUI.getAttribute(to, "disabled")
+		KeywordUtil.logInfo("disabled: $strDisabled")
+		boolean isDisabled = strDisabled.toBoolean()
+		return isDisabled
+	}
+
+	def void selectFirstOption(TestObject dropdown, String name) {
+		WebElement element = WebUI.findWebElement(dropdown)
+		List<WebElement> options = element.findElements(By.tagName("option"))
+		if (options != null && options.size() > 1) {
+			String firstLabel = options.get(1).getText()  
+			safetySelect(dropdown, firstLabel)
+			KeywordUtil.logInfo("Label '$name' not found. Selected first option: $firstLabel")
+		} else {
+			KeywordUtil.markWarning("No selectable options available in dropdown")
+		}
 	}
 }
