@@ -27,39 +27,24 @@ ApplicationDataPage appData = new ApplicationDataPage()
 MenuPage menu = new MenuPage()
 AssetDataPage asset = new AssetDataPage()
 
-'Step 1: Input Tenor'
-appData.inputTenor(Tenor)
+'Step 1: Input Application data'
+appData.inputApplicationData(MouNo, Tenor, PaymentFrequency, InterestMarginType, InstallmentScheme, SalesOfficer)
 
-'Step 2: Select Payment Frequency'
-appData.selectPaymentFrequency(PaymentFrequency)
+'Step 2: Select app source'
+appData.inputApplicationInfoSection(ApplicationSource, FiduciaCovered, WayOfPayment)
 
-'Step 3: Select margin type'
-appData.selectMarginType(InterestMarginType)
-
-'Step 4: Select Installment scheme'
-appData.selectInstallmentScheme(InstallmentScheme)
-
-'Step 5: Select sales officer'
-appData.selectSalesOfficer(SalesOfficer)
-
-'Step 6: Select Application source'
-appData.selectAppSource(ApplicationSource)
-
-'Step 7: Select and copy address from'
+'Step 3: Select and copy address from'
 appData.selectAndCopyAddressFrom(MailingAddressFrom)
 
-'Step 12: Input Phone number'
+'Step 4: Input Phone number'
 appData.inputPhoneNumbers(PhoneNumber, 1)
 
-'Step 13: Select Characteristic of credit'
+'Step 5: Select Characteristic of credit'
 appData.selectCharacteristicOfCredit(CharacteristicOfCredit)
 
-'Step 14: Click Save and continue'
+'Step 6: Click Save and continue'
 appData.clickSaveContinue()
 
-'Step 15: Verify success message'
-//menu.verifySuccessMessage()
-
-'Step 11: verify landing Asset registration data'
+'Step 7: verify landing Asset registration data'
 asset.verifyLandinginAssetDataPage()
 

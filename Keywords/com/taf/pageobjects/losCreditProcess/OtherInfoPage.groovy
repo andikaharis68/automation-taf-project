@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -14,6 +15,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -22,77 +24,113 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class OtherInfoPage extends BaseHelper {
-	
-	private TestObject drpContactEmployee	= createTestObject("drpContactEmployee", "id", "rptAttribute_ucrefInputAttr_0_ddlReference_0") 
-	private TestObject drpRentalBussiness	= createTestObject("drpRentalBussiness", "id","rptAttribute_ucrefInputAttr_1_ddlReference_1")  
-	private TestObject drpAssetforOnline	= createTestObject("drpAssetforOnline", "id", "rptAttribute_ucrefInputAttr_2_ddlReference_2") 
+
+	private TestObject drpContactEmployee	= createTestObject("drpContactEmployee", "id", "rptAttribute_ucrefInputAttr_0_ddlReference_0")
+	private TestObject drpRentalBussiness	= createTestObject("drpRentalBussiness", "id","rptAttribute_ucrefInputAttr_1_ddlReference_1")
+	private TestObject drpAssetforOnline	= createTestObject("drpAssetforOnline", "id", "rptAttribute_ucrefInputAttr_2_ddlReference_2")
 	private TestObject drpFraudIndication	= createTestObject("drpFraudIndication", "id", "rptAttribute_ucrefInputAttr_3_ddlReference_3")
 	private TestObject drpHighRiskCustomer	= createTestObject("drpHighRiskCustomer", "id", "rptAttribute_ucrefInputAttr_4_ddlReference_4")
 	private TestObject drpHighRiskBusiness	= createTestObject("drpHighRiskBusiness", "id", "rptAttribute_ucrefInputAttr_5_ddlReference_5")
 	private TestObject drpCreditApproval	= createTestObject("drpCreditApproval", "id", "rptAttribute_ucrefInputAttr_6_ddlReference_6")
 	private TestObject drpOwnedVehicle		= createTestObject("drpOwnedVehicle", "id", "rptAttribute_ucrefInputAttr_11_ddlReference_11")
-	private TestObject drpPrioritySeal		= createTestObject("drpPrioritySeal", "id", "rptAttribute_ucrefInputAttr_12_ddlReference_12") 
+	private TestObject drpPrioritySeal		= createTestObject("drpPrioritySeal", "id", "rptAttribute_ucrefInputAttr_12_ddlReference_12")
 	private TestObject txfNPWP				= createTestObject("txfNPWP", "id", "rptAttribute_txtAttrContent_13")
 	private TestObject txfNomorSK			= createTestObject("txfNomorSK", "id", "rptAttribute_txtAttrContent_14")
 	private TestObject drpSTNKinAHU			= createTestObject("drpSTNKinAHU", "id", "rptAttribute_ucrefInputAttr_15_ddlReference_15")
 	private TestObject drpStatusKepemilikan	= createTestObject("drpStatusKepemilikan", "id", "rptAttribute_ucrefInputAttr_16_ddlReference_16")
 	private TestObject drpCDENotes			= createTestObject("drpCDENotes", "id", "rptAttribute_ucrefInputAttr_17_ddlReference_17")
 	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Form_Save")
-	
+
 	private void verifyLandingInOtherInfoPage() {
 		verifyLanding(drpContactEmployee, "Other Info")
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void selectContractEmployee(String contractEmployee) {
-		safetySelect(drpContactEmployee, contractEmployee)
+		String label = "Contract Employee Less Than Tenor"
+		selectDropdownByLabel(label, contractEmployee)
 	}
 	private void selectRentalBussiness(String rentalBussiness) {
-		safetySelect(drpRentalBussiness, rentalBussiness)
+		String label = "Rental Business Without Vehicle"
+		selectDropdownByLabel(label, rentalBussiness)
 	}
 	private void selectAssetforOnlienTransport(String assetForOnline) {
-		safetySelect(drpAssetforOnline, assetForOnline)
+		String label = "Asset For Online Transport"
+		selectDropdownByLabel(label, assetForOnline)
 	}
 	private void selectFraudIndication(String fraudIndication) {
-		safetySelect(drpFraudIndication, fraudIndication)
+		String label = "Fraud Indication"
+		selectDropdownByLabel(label, fraudIndication)
 	}
+
 	private void selectHighRiskCustomer(String highRiskCust) {
-		safetySelect(drpHighRiskCustomer, highRiskCust)
+		String label = "High Risk Customer"
+		selectDropdownByLabel(label, highRiskCust)
 	}
 	private void selectHighRiskBussiness(String hightRiskBussiness) {
-		safetySelect(drpHighRiskBusiness, hightRiskBussiness)
+		String label = "High Risk Business"
+		selectDropdownByLabel(label, hightRiskBussiness)
 	}
-	
+
 	private void selectCreditApprovalProcess(String creditApproval) {
-		safetySelect(drpCreditApproval, creditApproval)
+		String label = "Credit Approval Process"
+		selectDropdownByLabel(label, creditApproval)
 	}
-	
+
 	private void selectOwnedVehicle(String ownedVehicle) {
-		safetySelect(drpOwnedVehicle, ownedVehicle)
+		String label = "Owned Vehicle"
+		selectDropdownByLabel(label, ownedVehicle)
 	}
 	private void selectPrioritySeal(String prioritySeal) {
-		safetySelect(drpPrioritySeal, prioritySeal)
+		String label = "Priority SEAL"
+		selectDropdownByLabel(label, prioritySeal)
 	}
 	private void inputNPWP(String npwp) {
-		safetyInput(txfNPWP, npwp)
+		String label = "NPWP a.n. STNK/BPKB"
+		inputByLabel(label, npwp)
 	}
-	
+
 	private void inputNomorSK(String nomorSK) {
-		safetyInput(txfNomorSK, nomorSK)
+		String label = "Nomor SK Kumham a.n. BPKB Badan"
+		inputByLabel(label, nomorSK)
 	}
 	private void selectStnk(String stnk) {
-		safetySelect(drpSTNKinAHU, stnk)
-	} 
-	private void selectStatusKepemilikanNPWP(String status) {
-		safetySelect(drpStatusKepemilikan, status)
+		String label = "a.n STNK/BPKB Badan terdaftar di AHU"
+		selectDropdownByLabel(label, stnk)
 	}
-	
+	private void selectStatusKepemilikanNPWP(String status) {
+		String label = "Status Kepemilikan NPWP"
+		selectDropdownByLabel(label, status)
+	}
+
 	private void selectCDEnotes(String notes) {
-		safetySelect(drpCDENotes, notes)
+		String label = "CDE NOTES"
+		selectDropdownByLabel(label, notes)
 		WebUI.takeScreenshot()
 	}
 	private void clickSave() {
 		safetyClick(btnSave)
+	}
+
+	private void selectDropdownByLabel(String labelText, String optionText) {
+		TestObject dropdown  = createTestObject("spanLabel", "xpath", "//span[normalize-space(text())='$labelText']/ancestor::td/following-sibling::td//select")
+		if (WebUI.verifyElementPresent(dropdown, 5, OPTIONAL)) {
+			safetySelect(dropdown, optionText)
+			KeywordUtil.logInfo("Selected option '$optionText' for label '$labelText'")
+			WebUI.delay(1)
+		} else {
+			KeywordUtil.markWarning("Dropdown for label '$labelText' not found")
+		}
+	}
+	private void inputByLabel(String labelText, String inputText) {
+		TestObject textField  = createTestObject("textField", "xpath", "//span[normalize-space(text())='$labelText']/ancestor::td/following-sibling::td//input")
+		if (WebUI.verifyElementPresent(textField, 5, OPTIONAL)) {
+			safetyInput(textField, inputText)
+			KeywordUtil.logInfo("text field label '$labelText'")
+			WebUI.delay(1)
+		} else {
+			KeywordUtil.markWarning("text field for label '$labelText' not found")
+		}
 	}
 }
 

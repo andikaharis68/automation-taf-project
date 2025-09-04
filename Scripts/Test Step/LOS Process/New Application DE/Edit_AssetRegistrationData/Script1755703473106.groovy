@@ -30,70 +30,44 @@ InsuranceDataPage insurance = new InsuranceDataPage()
 'Step 1: Click Edit Asset Registartion'
 asset.clickEditAssetRegistration()
 
-'Step 2: Input Username'
-asset.inputUserName(UserName)
+'Step 2: input Asset user section'
+asset.inputAssetUserSection(SelfUsage, UserName, UserRelationship)
 
-'Step 3: Input Customer Relationship'
-asset.selectUserRelationship(UserRelationship)
+'Step 3: Input Asset owner section'
+asset.inputAssetOwnerSection(OwnerName, OwnerIdType, OwnerIdNo, OwnerRelationship, AssetOwnerCopyFrom, TaxDate, AssetOwnerNotes)
 
-'Step 4: Input Owner name'
-asset.inputOwnerName(OwnerName)
-
-'Step 5: Select Owner Id type'
-asset.selectIdType(OwnerIdType)
-
-'Step 6: Input owner Id no'
-asset.inputOwnerIdNo(OwnerIdNo)
-
-'Step 8: Select owner relationship'
-asset.selectOwnerRelationship(OwnerRelationship)
-
-'Step 7: Copy Address Asset Owner'
-asset.selectAndCopyAddressOwner(AssetOwnerCopyFrom)
-
-'Step 8: Copy Address Asset Location'
+'Step 4: Copy Address Asset Location'
 asset.selectAndCopyAddressLocation(AssetLocationCopyAddress)
 
-'Step 9: Clik Save'
+'Step 4.1: Input asset document'
+asset.inputAssetDocument(BpkpDocNo, FakturDocNo)
+
+'Step 5: Clik Save'
 asset.clickSave()
 
-'Step 10: Verify Notif Success'
-//menu.verifySuccessMessage()
-
-'Step 11: Click Edit asset data'
+'Step 6: Click Edit asset data'
 asset.clickEditAssetData()
 
-'Step 12: Search Branch Name'
-asset.searchSupplierBranchName(SupplierBranchName)
+'Step 7: Input Supplier info '
+asset.inputSupplierInfoSection(SupplierBranchName, SalesPersonName)
 
-'Step 13: Input Sales Person name'
-asset.selectSalesPersonName(SalesPersonName)
+'Step 8 : input main asset section'
+asset.inputMainAssetSection(AssetName, AssetPrice, DpType, DownPayment, MainAssetNotes)
 
-'Step 14: Input Asset Price'
-asset.inputAssetPrice(AssetPrice)
+'Step 9: Input Asset Data Section'
+asset.inputAssetDataSection(NoMesin, NoRangka,LicensePlateNo ,AssetCondition , AssetUsage, ManufacturingYear)
 
-'Step 15: Input down payment'
-asset.inputDownPayment(DownPayment)
+'Step 10: Input asset attribute'
+asset.inputAssetAttributeSection(MadeIn, Cylinder, Transmition, Color, Region)
 
-'Step 16: Select Asset usage'
-asset.selectAssetUsage(AssetUsage)
+'Step 11: Input Accessory Grid'
+asset.inputAccessoriesGridSection(AdditionalSvcSupplierBranchName, AdditionalSvcName, AdditionalSvcPrice, AdditionalDpAmount, AdditionalSvcNotes)
 
-'Step 17: Input Manufacturing year'
-asset.inputManufacturingYear(ManufacturingYear)
-
-'Step 21: Click Save Edit'
+'Step 12: Click Save Edit'
 asset.clickSaveEdit()
 
-'Step 22: verify notif success'
-//menu.verifySuccessMessage()
-
-'Step 23: Click save and continue'
+'Step 13: Click save and continue'
 asset.clickSaveContinue()
 
-'Step 24: Verify landing insurance data'
+'Step 14: Verify landing insurance data'
 insurance.verifyLandingInInsuranceData()
-
-
-
-
-

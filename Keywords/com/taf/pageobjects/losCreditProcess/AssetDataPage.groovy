@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -8,6 +9,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import org.openqa.selenium.By
 import org.openqa.selenium.By.ByTagName
+import org.openqa.selenium.Keys
 import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
@@ -57,24 +59,44 @@ public class AssetDataPage extends BaseHelper {
 	private TestObject btnCopyAddressLoc	= createTestObject("btnCopyAddressLoc", "id", "lb_Form_Copy_Assloc")
 
 	private TestObject btnSearchSupplierBranchName	= createTestObject("btnSearchSupplierBranchName","xpath","//*[contains(@id, 'uclSupplBranchSchm_imb')]")
-	private TestObject drpSalesPersonName			= createTestObject("drpSalesPersonName","id","ucSalesPerson_ddlReference") //*[@id="ucSalesPerson_ddlReference"]
+	private TestObject drpSalesPersonName			= createTestObject("drpSalesPersonName","id","ucSalesPerson_ddlReference")
 	private TestObject txtAdminHead					= createTestObject("txtAdminHead","xpath","//*[@id='dMainSuppl']/table[2]/tbody/tr/td[2]")
 	private TestObject btnSearchAssetName			= createTestObject("btnSearchAssetName","id","ucLookupAssetMaster_uclMaster_imb")
+	private TestObject txfAssetName 				= createTestObject("txfAssetName", "id", "ucLookupAssetMaster_uclMaster_txt")
+
 	private TestObject txfAssetPrice				= createTestObject("txfAssetPrice","id","ucAssetPrice_txtInput")
-	private TestObject txfDownPayment				= createTestObject("btnDownPayment", "id", "ucDownPayment_txtInput")
+	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "xpath", "//input[@id='ucDownPayment_txtInput' or @id='ucDownPaymentPrcnt_txtInput']")
 	private TestObject drpAssetUsage				= createTestObject("drpAssetUsage","id","ucAssetUsage_ddlReference")
 	private TestObject txfManufacturingYear			= createTestObject("txfManufacturingYear","id","txtManufacturingYear")
 
-	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'txtSearchValue_0')]")
-	private TestObject txfOvlySearchAccName			= createTestObject("txfOvlySearchAccName", "xpath", "//*[contains(@id, 'txtSearchValue_1')]")
-	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id, 'ucS_lbSearch')]")
-	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect')]")
+	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject txfOvlySearchAccName			= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_1")
+	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_lbSearch")
+	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_gvL_hpSelect_0")
 
 	private TestObject btnAddAdditionalBranch		= createTestObject("btnAddAdditionalBranch", "id", "lb_Form_Add_Acc")
-	private TestObject btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "xpath", "//*[contains(@id, 'uclSupplBranchSchm_0_imb_0')]")
+	private TestObject btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_imb_0")
 	private TestObject btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_0_imb_0")
 
 	private TestObject txfCity						= createTestObject("txfCity", "id", "ucAssLocAddr_txtCity")
+	private TestObject txfNoMesin					= createTestObject("txfNoMesin", "id", "txtSerialNo1")
+	private TestObject txfNoRangka					= createTestObject("txfNoRangka", "id", "txtSerialNo2")
+	private TestObject txfLicensePlatNo				= createTestObject("txfLicensePlatNo", "id", "txtLicensePlateNo")
+	private TestObject txfMadeIn					= createTestObject("txfMadeIn", "id", "rptAttribute_txtAttrContent_0")
+	private TestObject txfCylinder					= createTestObject("txfCylinder", "id", "rptAttribute_txtAttrContent_1")
+	private TestObject txfTransmition				= createTestObject("txfTransmition", "id", "rptAttribute_txtAttrContent_2")
+	private TestObject txfColor						= createTestObject("txfColor", "id", "rptAttribute_txtAttrContent_3")
+	private TestObject drpRegion					= createTestObject("drpRegion", "id", "rptAttribute_ucrefInputAttr_4_ddlReference_4")
+
+	private TestObject txfAdditionalAssetPrice		= createTestObject("txfAdditionalAssetPrice", "id", "gvAccessories_ucInputNumber_0_txtInput_0")
+	private TestObject txfAdditionalDpAmount		= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_0_txtInput_0")
+	private TestObject txfAdditionalNotes			= createTestObject("txfAdditionalNotes", "id", "gvAccessories_txtNotes_0")
+	private TestObject txfOwnerNotes				= createTestObject("txfOwnerNotes", "id", "txtNotes")
+	private TestObject txfMainAssetNotes			= createTestObject("txfMainAssetNotes", "id", "txtNotesMainAss")
+	private TestObject lblSubSection				= createTestObject("lblSubSection", "id", "ucToggleAssetDoc_subSectionID")
+	private TestObject btnTrash 					= createTestObject("btnTrash", "id", "gvAccessories_imbDelete_0")
+	
+
 
 	private void verifyLandinginAssetDataPage() {
 		WebUI.delay(2)
@@ -86,8 +108,10 @@ public class AssetDataPage extends BaseHelper {
 		safetyClick(btnSaveContinue)
 	}
 	private void clickSave() {
+		WebUI.delay(2)
 		safetyClick(btnSave)
 		WebUI.takeScreenshot()
+		WebUI.delay(3)
 	}
 	private void clickEditAssetRegistration() {
 		WebUI.click(btnEditAssetRegist)
@@ -96,35 +120,52 @@ public class AssetDataPage extends BaseHelper {
 	}
 	private void selectSelfUsage(String selfUsage) {
 		if(selfUsage?.trim()) {
-			TestObject radSelfUsage = createTestObject("radSelfUsage","xpath",	"//label[normalize-space(text())='${selfUsage}']/preceding-sibling::input[@type='radio']")
-			if (!WebUI.verifyElementChecked(radSelfUsage, 2, FailureHandling.OPTIONAL)) {
-				safetyClick(radSelfUsage)
-			}
+			TestObject radSelfUsage = createTestObject("radSelfUsage","xpath",	"//label[normalize-space(text())='$selfUsage']/preceding-sibling::input[@type='radio']")
+			safetyClick(radSelfUsage)
 		}
 	}
 
 	private void inputUserName(String name) {
-		safetyInput(txfUserName, name)
+		boolean isOptionDisabled = checkOptionDisabled(txfUserName)
+		if( !isOptionDisabled && !name.equalsIgnoreCase(WebUI.getText(txfUserName))) {
+			clearAndSetText(txfUserName, name)
+		}
 	}
 	private void selectUserRelationship(String relationship) {
-		safetySelect(drpUserRelationship, relationship)
+		if(!relationship?.trim().equalsIgnoreCase(relationship)) {
+			safetySelect(drpUserRelationship, relationship)
+		}
 	}
 	private void inputOwnerName(String ownerName) {
-		safetyInput(txfOwnerName, ownerName)
+		String strElement = WebUI.getText(txfOwnerName)
+		if(!ownerName.equalsIgnoreCase(strElement)) {
+			safetyInput(txfOwnerName, ownerName)
+		}
 	}
 	private void selectIdType(String idType) {
-		safetySelect(drpIdType, idType)
+		boolean isOptionDisabled = checkOptionDisabled(drpIdType)
+		if(!isOptionDisabled) {
+			safetySelect(drpIdType, idType)
+		} else {
+			KeywordUtil.logInfo("Option ID type disable")
+		}
 	}
 
 	private void inputOwnerIdNo(String idNo) {
-		safetyInput(txfOwnerIdNo, idNo)
+		String elementText = WebUI.getText(txfOwnerIdNo)
+		if(!idNo.equalsIgnoreCase(elementText)) {
+			safetyInput(txfOwnerIdNo, idNo)
+		}
 	}
 	private void selectOwnerRelationship(String relationship ) {
 		safetySelect(drpOwnerRelationship, relationship)
 	}
 
 	private void selectAndCopyAddressOwner(String copyAddressFrom) {
-		safetySelect(drpCopyAddressFrom, copyAddressFrom)
+		boolean isElementEnabled = WebUI.verifyElementPresent(drpCopyAddressFrom, 2, OPTIONAL)
+		if(isElementEnabled) {
+			safetySelect(drpCopyAddressFrom, copyAddressFrom)
+		}
 		safetyClick(btnCopyAddressOwner)
 		WebUI.scrollToElement(txfNotes, 2)
 		WebUI.takeScreenshot()
@@ -132,7 +173,9 @@ public class AssetDataPage extends BaseHelper {
 
 	private void inputTaxDate(String date) {
 		if(date) {
+			WebUI.click(txfTaxDate)
 			safetyInput(txfTaxDate, date)
+			clickTABKeyboard(txfTaxDate)
 		}
 	}
 	private void inputNotes(String notes) {
@@ -142,64 +185,73 @@ public class AssetDataPage extends BaseHelper {
 	}
 
 	private void selectAndCopyAddressLocation(String copyAddressFrom) {
-		safetySelect(drpCopyAddressLoc, copyAddressFrom)
+		boolean isElementEnabled = WebUI.verifyElementPresent(drpCopyAddressFrom, 2, OPTIONAL)
+		if(isElementEnabled) {
+			safetySelect(drpCopyAddressLoc, copyAddressFrom)
+		}
 		safetyClick(btnCopyAddressLoc)
 		WebUI.scrollToElement(txfCity, 2)
 		WebUI.takeScreenshot()
 	}
 	private void searchSupplierBranchName(String supplierBranchName) {
+		TestObject txfOvlyBranchName = createTestObject("txfOvlyBranchName", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+		TestObject btnOvlySearch	 = createTestObject("btnOvlySearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
+		TestObject btnSelect		 = createTestObject("btnSelect", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")
 		safetyClick(btnSearchSupplierBranchName)
-		safetyInput(txfOvlySearchName, supplierBranchName)
+		safetyInput(txfOvlyBranchName, supplierBranchName)
 		safetyClick(btnOvlySearch)
 		WebUI.takeScreenshot()
-		safetyClick(btnOvlySelect)
+		safetyClick(btnSelect)
 	}
 	private void selectSalesPersonName(String name) {
-		boolean isDisabled = isOptionDisable(drpSalesPersonName)
-		if(!isDisabled) {
+		boolean isDisabled = checkOptionDisabled(drpSalesPersonName)
+		if (!isDisabled) {
 			WebElement element = WebUI.findWebElement(drpSalesPersonName)
 			List<WebElement> options = element.findElements(By.tagName("option"))
 			boolean isFound = false
-			for(WebElement opt: options) {
-				if(opt.getText().trim().equalsIgnoreCase(name)) {
+			for (WebElement opt : options) {
+				if (opt.getText().trim().equalsIgnoreCase(name)) {
 					safetySelect(drpSalesPersonName, name)
 					isFound = true
 					break
 				}
 			}
-			if(!isFound) {
-				String firstLabel = options.getAt(1).getText()
-				safetySelect(drpSalesPersonName, firstLabel)
-				KeywordUtil.logInfo("label $name not found. select first option $firstLabel")
+			if (!isFound) {
+				selectFirstOption(drpSalesPersonName, name)
 			}
 		} else {
-			KeywordUtil.logInfo("option not clickable")
+			KeywordUtil.markWarning("Option not clickable or disabled")
+		}
+	}
+	private void searchAssetName(String assetName) {
+		boolean isDisabled = checkOptionDisabled(btnSearchAssetName)
+		String elementText = WebUI.getText(txfAssetName)
+		if(!assetName.equalsIgnoreCase(elementText) && !isDisabled) {
+			safetyClick(btnSearchAssetName)
+			safetyInput(txfOvlySearchName, assetName)
+			safetyClick(btnOvlySearch)
+
+			WebUI.takeScreenshot()
+			safetyClick(btnOvlySelect)
 		}
 	}
 
-	private void searchAssetName(String assetName) {
-		safetyClick(btnSearchAssetName)
-
-		WebUI.delay(2)
-		WebUI.setText(txfOvlySearchName, assetName)
-		WebUI.delay(2)
-
-		safetyClick(btnOvlySearch)
-		WebUI.takeScreenshot()
-
-		safetyClick(btnOvlySelect)
-	}
-
 	private void inputAssetPrice(String price) {
-		clearAndSetText(txfAssetPrice, price)
-		WebUI.delay(1)
+		String elementText = WebUI.getText(txfAssetPrice)
+		if(!price.equalsIgnoreCase(elementText)) {
+			clearAndSetText(txfAssetPrice, price)
+			WebUI.delay(1)
+		}
 	}
 
 	private void inputDownPayment(String downPayment) {
-		WebUI.click(txfDownPayment)
-		clearAndSetText(txfDownPayment, downPayment)
-		clickTABKeyboard(txfDownPayment)
-		WebUI.delay(1)
+		boolean isDisableElement = checkOptionDisabled(txfDownPayment)
+		String elementText = WebUI.getText(txfDownPayment)
+		if(!isDisableElement && !downPayment.equalsIgnoreCase(elementText)) {
+			manualClearText(txfDownPayment)
+			safetyInput(txfDownPayment, downPayment)
+			clickTABKeyboard(txfDownPayment)
+		}
 	}
 
 	private void selectAssetUsage(String assetUsage) {
@@ -207,8 +259,11 @@ public class AssetDataPage extends BaseHelper {
 		WebUI.delay(1)
 	}
 	private void inputManufacturingYear(String year) {
+		String elementText = WebUI.getText(txfManufacturingYear)
 		WebUI.delay(1)
-		safetyInput(txfManufacturingYear, year)
+		if(!year.equalsIgnoreCase(elementText)) {
+			safetyInput(txfManufacturingYear, year)
+		}
 		WebUI.takeScreenshot()
 	}
 	private void clickEditAssetData() {
@@ -216,37 +271,261 @@ public class AssetDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void searchAdditionalBranchName(String additionalBranchName) {
-		safetyClick(btnSearchAdditionBranch)
-		safetyInput(txfOvlySearchName, additionalBranchName)
-		safetyClick(btnOvlySearch)
-		safetyClick(btnOvlySelect)
+		txfOvlySearchName = createTestObject("txfOvlySearchName", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_0")
+		btnOvlySearch = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+		btnOvlySelect = createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_gvL_0_hpSelect_0")
+		if(additionalBranchName) {
+			'search additional branch name'
+			safetyClick(btnSearchAdditionBranch)
+			WebUI.delay(2)
+			safetyInput(txfOvlySearchName, additionalBranchName)
+			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
+			safetyClick(btnOvlySelect)
+		}
 	}
 
-	private void searcAccName(String accName) {
-		safetyClick(btnSearchAssetAccessoryName)
-		safetyInput(txfOvlySearchAccName, accName)
-		safetyClick(btnOvlySearch)
-		WebUI.takeScreenshot()
-		safetyClick(btnOvlySelect)
-
-		WebUI.takeScreenshot()
+	private void searchAccName(String accName) {
+		btnOvlySearch = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+		btnOvlySelect  = createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_gvL_0_hpSelect_0")
+		if(accName) {
+			safetyClick(btnSearchAssetAccessoryName)
+			safetyInput(txfOvlySearchAccName, accName)
+			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
+			safetyClick(btnOvlySelect)
+		}
 	}
-	private void clickAdd() {
+	private void clickAddAdditionalBranch() {
 		safetyClick(btnAddAdditionalBranch)
 		WebUI.delay(3)
 	}
 
 	private void clickSaveEdit() {
 		WebUI.click(btnSaveEdit)
-		if(WebUI.waitForAlert(6, FailureHandling.OPTIONAL)) {
-			WebUI.acceptAlert()
+		handleAlertIfPresent()
+		if(WebUI.verifyElementPresent(btnSaveEdit, 3, FailureHandling.OPTIONAL)) {
+			safetyClick(btnSaveEdit)
 		}
-		WebUI.click(btnSaveEdit)
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
 
-	private boolean isOptionDisable(TestObject to) {
-		boolean isDisabled = !WebUI.verifyElementClickable(to, FailureHandling.OPTIONAL)
-		return isDisabled
+	private void selectDPType(String dpType) {
+		if(dpType) {
+			TestObject radDpType = createTestObject("radDpType","xpath","//label[normalize-space(text())='${dpType}']/preceding-sibling::input[@type='radio']")
+			safetyClick(radDpType)
+			handleAlertIfPresent()
+			WebUI.delay(3)
+		}
+	}
+	private void inputNoMesin(String noMesin) {
+		String randomStr = generateRandom5DigitString()
+		if(noMesin) {
+			noMesin = noMesin.equalsIgnoreCase("AUTO") ? randomStr : noMesin
+			safetyInput(txfNoMesin, noMesin)
+		}
+	}
+
+	private String generateRandom5DigitString() {
+		Random rnd = new Random()
+		int number = (int) (Math.random() * 90000) + 10000
+		return String.valueOf(number)
+	}
+
+	private void inputNoRangka(String noRangka) {
+		if(noRangka) {
+			String randomStr = generateRandom5DigitString()
+			noRangka = noRangka.equalsIgnoreCase("AUTO") ? randomStr : noRangka
+			safetyInput(txfNoRangka, noRangka)
+		}
+	}
+
+	private void inputLicensePlatNo(String platNo) {
+		if(platNo) {
+			String randomStr = generateRandom5DigitString()
+			platNo = platNo.equalsIgnoreCase("AUTO") ? randomStr : platNo
+			safetyInput(txfLicensePlatNo, platNo)
+		}
+	}
+
+	private void selectAssetCondition(String condition) {
+		if(condition) {
+			TestObject radCondition = createTestObject("radCondition","xpath","//label[normalize-space(text())='${condition}']/preceding-sibling::input[@type='radio']")
+			safetyClick(radCondition)
+		}
+	}
+	private void inputMadeIn(String madeIn) {
+		if(madeIn) {
+			slowlyInput(txfMadeIn, madeIn)
+		}
+	}
+
+	private void inputCylinder(String cylinder) {
+		if(cylinder) {
+			slowlyInput(txfCylinder, cylinder)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputTransmition(String transmition) {
+		if(transmition) {
+			safetyInput(txfTransmition, transmition)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputColor(String color) {
+		if(color) {
+			slowlyInput(txfColor, color)
+			WebUI.delay(2)
+		}
+	}
+
+	private void selectRegion(String region) {
+		if(region) {
+			safetySelect(drpRegion, region)
+			WebUI.delay(2)
+		}
+	}
+	private void inputAdditionalAssetPrice(String assetPrice) {
+		if(assetPrice) {
+			manualClearText(txfAdditionalAssetPrice)
+			safetyInput(txfAdditionalAssetPrice, assetPrice)
+		}
+	}
+
+	private void inputAdditionalDpAmount(String dpAmount) {
+		if(dpAmount) {
+			manualClearText(txfAdditionalDpAmount)
+			safetyInput(txfAdditionalDpAmount, dpAmount)
+		}
+	}
+	private void inputAdditionalNotes(String notes) {
+		if(notes) {
+			safetyInput(txfAdditionalNotes, notes)
+		}
+	}
+
+	private void inputAccessoriesGridSection(String branchName, String accessoryName, String assetPrice, String dpAmount, String notes) {
+		if(WebUI.verifyElementPresent(btnTrash, 2, OPTIONAL)) {
+			safetyClick(btnTrash)
+			WebUI.acceptAlert()
+			WebUI.delay(3)
+		}
+		if(branchName) {
+			safetyClick(btnAddAdditionalBranch)
+			WebUI.delay(2)
+			searchAdditionalBranchName(branchName)
+			searchAccName(accessoryName)
+			inputAdditionalAssetPrice(assetPrice)
+			inputAdditionalDpAmount(dpAmount)
+			inputAdditionalNotes(notes)
+		}
+	}
+	
+	private void inputAssetUserSection(String selfUsage,String userName, String userRelationship) {
+		selectSelfUsage(selfUsage)
+		inputUserName(userName)
+		selectUserRelationship(userRelationship)
+		WebUI.takeScreenshot()
+	}
+
+	private void inputAssetOwnerNotes(String notes) {
+		if(notes) {
+			safetyInput(txfOwnerNotes, notes)
+		}
+	}
+	private void inputAssetOwnerSection(String name, String idType, String idNo, String ownerRelationship, String copyAddressFrom, String taxDate, String notes) {
+		boolean isDisable = checkOptionDisabled(txfOwnerName)
+		if(!isDisable) {
+			inputOwnerName(name)
+			selectIdType(idType)
+			inputOwnerIdNo(idNo)
+			selectOwnerRelationship(ownerRelationship)
+			selectAndCopyAddressOwner(copyAddressFrom)
+		}
+
+		inputTaxDate(taxDate)
+		inputAssetOwnerNotes(notes)
+	}
+
+	private void inputSupplierInfoSection(String name, String salesPersonName) {
+		WebUI.delay(2)
+		boolean isDisabled = checkOptionDisabled(drpSalesPersonName)
+		if(!isDisabled) {
+			searchSupplierBranchName(name)
+			selectSalesPersonName(salesPersonName)
+			WebUI.delay(3)
+		} else {
+			KeywordUtil.markWarning("Data supplier info tidak bisa di edit")
+		}
+	}
+	private void inputMainAssetNotes(String notes) {
+		String elementText = WebUI.getText(txfMainAssetNotes)
+		if(!notes?.equalsIgnoreCase(elementText)) {
+			safetyInput(txfMainAssetNotes, notes)
+		}
+	}
+	private void inputMainAssetSection(String assetName, String assetPrice, String dpType, String downPayment, String notes) {
+		WebUI.delay(3)
+		searchAssetName(assetName)
+		inputAssetPrice(assetPrice)
+		selectDPType(dpType)
+		inputDownPayment(downPayment)
+		inputMainAssetNotes(notes)
+	}
+	private void inputAssetDataSection(String noMesin, String noRangka, String platNo, String condition, String assetUsage, String year) {
+		inputNoMesin(noMesin)
+		inputNoRangka(noRangka)
+		inputLicensePlatNo(platNo)
+		selectAssetCondition(condition)
+		selectAssetUsage(assetUsage)
+		inputManufacturingYear(year)
+	}
+	private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
+		inputMadeIn(madeIn)
+		inputCylinder(cylinder)
+		inputTransmition(transmition)
+		inputColor(color)
+		selectRegion(region)
+	}
+
+	private void inputDocumentNo(String documentNo, int index) {
+		TestObject txfDoc = createTestObject("txfDoc", "id", "gvAssetDocEdit_txtDocNo_$index")
+		if(documentNo) {
+			String strValue = WebUI.getAttribute(txfDoc, "value")
+			if(!strValue) {
+				manualClearText(txfDoc)
+			}
+			safetyInput(txfDoc, documentNo)
+		}
+	}
+
+	private void checkAllAssetDocument() {
+		for(int i=0 ; i< 8; i++) {
+			TestObject chxDoc = createTestObject("chxDoc", "id", "gvAssetDocEdit_cbChecked_$i")
+			String strChecked = WebUI.getAttribute(chxDoc, "checked")
+			boolean isChecked = strChecked.toBoolean()
+			if(!isChecked) {
+				safetyClick(chxDoc)
+				WebUI.delay(0.5)
+			}
+		}
+	}
+	private void inputBPKPNo(String documentNo) {
+		inputDocumentNo(documentNo, 0)
+	}
+	private void inputFakturNo(String documentNo) {
+		inputDocumentNo(documentNo, 1)
+	}
+
+	private void inputAssetDocument(String bpkpNo, String fakturNo) {
+		boolean assetDocPresent = WebUI.waitForElementPresent(lblSubSection, 4, FailureHandling.OPTIONAL)
+		if(assetDocPresent && bpkpNo) {
+			checkAllAssetDocument()
+			inputBPKPNo(bpkpNo)
+			inputFakturNo(fakturNo)
+		}
 	}
 }

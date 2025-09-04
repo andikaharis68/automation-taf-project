@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -24,103 +25,105 @@ import internal.GlobalVariable
 
 public class TermAndCondition extends BaseHelper {
 
-	private TestObject btnSave					= createTestObject("btnSave","id","lb_Form_Save")
-	
-	private TestObject cbFcKTPPemohon1			= createTestObject("cbFcKTPPemohon1","id","gvTermCondition_cbChecked_0")
-	private TestObject txfFcKTPPemohon1			= createTestObject("txfFcKTPPemohon1","id","gvTermCondition_ucDPPromiseDt_0_txtDatePicker_0")
-
-	private TestObject cbFcKK					= createTestObject("cbFcKK","id","gvTermCondition_cbChecked_1")
-	private TestObject txfDateFcKK				= createTestObject("txfDateFcKK","xpath","[contains(@id, 'txtDatePicker_1')]")
-
-	private TestObject cbFcIjinPraktek			= createTestObject("cbFcIjinPraktek","id","gvTermCondition_cbChecked_2")
-	private TestObject txfFcIjinPraktek			= createTestObject("txfFcIjinPraktek","xpath","[contains(@id, 'txtDatePicker_2')]")
-
-	private TestObject cbFcNpwp					= createTestObject("cbFcNpwp","id","gvTermCondition_cbChecked_3")
-	private TestObject txfFcNpwp				= createTestObject("txfFcNpwp","xpath","[contains(@id, 'txtDatePicker_3')]")
-
-	private TestObject cbFcTabungan				= createTestObject("cbFcTabungan","id","gvTermCondition_cbChecked_4")
-	private TestObject txfFcTabungan			= createTestObject("txfFcTabungan","xpath","[contains(@id, 'txtDatePicker_4')]")
-
-	private TestObject cbDocKepemilikanRumah	= createTestObject("cbDocKepemilikanRumah","id","gvTermCondition_cbChecked_5")
-	private TestObject txfDocKepemilikanRumah	= createTestObject("txfDocKepemilikanRumah","xpath","[contains(@id, 'txtDatePicker_5')]")
-
-	private TestObject cbCoverTabungan			= createTestObject("cbCoverTabungan","id","gvTermCondition_cbChecked_6")
-	private TestObject txfCoverTabungan			= createTestObject("txfCoverTabungan","xpath","[contains(@id, 'txtDatePicker_6')]")
-
-	private TestObject cbKkAtasNamaStnk			= createTestObject("cbKkAtasNamaStnk","id","gvTermCondition_cbChecked_7")
-	private TestObject txfKkAtasNamaStnk		= createTestObject("txfKkAtasNamaStnk","xpath","[contains(@id, 'txtDatePicker_7')]")
-
-	private TestObject cbFcKtpPemohon2			= createTestObject("txfDateFcKTPPemohon1","id","gvTermCondition_cbChecked_8")
-	private TestObject txfFcKtpPemohon2			= createTestObject("txfFcKtpPemohon2","xpath","[contains(@id, 'txtDatePicker_8')")
-
-	private TestObject cbInvoice				= createTestObject("cbInvoice","id","gvTermCondition_cbChecked_9")
-	private TestObject txfInvoice				= createTestObject("txfInvoice","xpath","[contains(@id, 'txtDatePicker_9')")
-	
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lbl_Toolbar_Submit") 
-	private TestObject iframeMainPage			= createTestObject("iframeMainPage", "id", "mainPage")
+	private TestObject btnSave			= createTestObject("btnSave","id","lb_Form_Save")
+	private TestObject lblSection		= createTestObject("lblSection", "id", "ucTermCond_subSectionID")
+	private TestObject btnSubmit		= createTestObject("btnSubmit", "id", "lbl_Toolbar_Submit")
+	private TestObject iframeMainPage	= createTestObject("iframeMainPage", "id", "mainPage")
 
 	private void verifyLandingInTnCPage() {
-		verifyLanding(cbFcKTPPemohon1, "Term and Condition")
+		verifyLanding(lblSection, "Term and Condition")
 		WebUI.takeScreenshot()
 	}
 
-	private void checkObject(TestObject to, String element) {
-		if(element == 'Y') {
-			if (!WebUI.verifyElementChecked(to, 1, FailureHandling.OPTIONAL)) {
-				WebUI.check(to)
-			}
-		}
-	}
-	
-	private void checkFcKtpPemohon2(String checkFcKTP) {
-		checkObject(cbFcKtpPemohon2, checkFcKTP)
-	}
-	private void checkFcKTPPemohon1(String checkFotoCopyKTP) {
-		checkObject(cbFcKTPPemohon1, checkFotoCopyKTP)
-		WebUI.delay(5)
-		
+	private void fillDataForKTPPemohon(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI KTP PEMOHON"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkFcKK(String fcKK) {
-		checkObject(cbFcKK, fcKK)
-		WebUI.delay(5)
+	private void fillDataForFCKTPSpouse(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI KTP SUAMI/ISTRI"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForForFCKK(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI KARTU KELUARGA"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkFcIjinPraktek(String fcIjinPraktek) {
-		checkObject(cbFcIjinPraktek, fcIjinPraktek)
-		WebUI.delay(5)
+	private void fillDataForFCIjinPraktek(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI IJIN PRAKTEK"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkFcNpwp(String fcNpwp ) {
-		checkObject(cbFcNpwp, fcNpwp)
-		WebUI.delay(5)
-		
+	private void fillDataForFCNpwp(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI NPWP"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkFcTabungan(String fcTabungan ) {
-		checkObject(cbFcTabungan, fcTabungan)
-		WebUI.delay(5)
-	}
-	private void checkFcDocKepemilikanRumah(String fcDocKepemilikanRumah ) {
-		checkObject(cbDocKepemilikanRumah, fcDocKepemilikanRumah)
-		WebUI.delay(5)
+	private void fillDataForFCTabungan(String checkFc, String promiseDate, String expiredDate, String notes ) {
+		String label = "FOTOKOPI TABUNGAN/REKENING KORAN"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkCoverTabungan(String coverTabungan) {
-		checkObject(cbCoverTabungan, coverTabungan)
-		WebUI.delay(5)
+	private void fillDataFCDocSuratMenikah(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "DOKUMEN SURAT MENIKAH"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 
-	private void checkKartuKeluargaStnk(String KkStnk) {
-		checkObject(cbKkAtasNamaStnk, KkStnk)
-		WebUI.delay(5)
+	private void fillDataCoverBukuTabungan(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "Cover Buku Tabungan"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
-	private void checkInvoice(String invoice) {
-		checkObject(cbInvoice, invoice)
-		WebUI.delay(5)
-		
+
+	private void fillDataForKkStnk(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "KK Atas Nama STNK"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
-	
+	private void fillDataForInvoice(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "INVOICE"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+
+	private void fillDataForFCKTPKomisaris(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI KTP KOMISARIS"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFCKTPDirektur(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI KTP DIREKTUR ATAU YANG DIBERI KUASA"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFCSiup(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI SIUP"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcFinanceReport(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI LAPORAN KEUANGAN"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcTDP(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI TDP/TDR"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcAktePendirian(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FC AKTE PENDIRIAN PERUSAHAAN DAN PERUBAHANNYA"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcRekeningListrik(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI REKENING LISTRIK"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcDocKeuanganLain(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "DOK KEUANGAN LAIN (BON KEUANGAN / NOTA PENJUALAN)"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+
+	private void fillDataForFcSPK(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "SURAT PERJANJIAN KERJA JK USAHA RENTAL/KONTRAKTOR"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForDocKepemilikanRumah(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "DOKUMEN KEPEMILIKAN RUMAH (PBB / AKTA JUAL BELI)"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
 	private void clickSave() {
 		WebUI.takeScreenshot()
 		safetyClick(btnSave)
@@ -133,10 +136,44 @@ public class TermAndCondition extends BaseHelper {
 	private void clickSubmit() {
 		safetyClick(btnSubmit)
 	}
-	
+
 	private void clickConfirmationOk() {
 		if(WebUI.waitForAlert(5)) {
 			WebUI.acceptAlert()
 		}
+	}
+
+	private void setInputIfPresent(String docLabel, String partialId, String value, String fieldName) {
+		if (!value) return
+		TestObject inputField = createTestObject("input_${fieldName}", "xpath", "//tr[td/span[text()='${docLabel}']]//input[contains(@id,'${partialId}')]")
+		boolean isElementDisabled = checkOptionDisabled(inputField)
+		if (WebUI.verifyElementPresent(inputField, 3, OPTIONAL) && !isElementDisabled) {
+			safetyInput(inputField, value)
+			WebUI.comment("${fieldName} for '${docLabel}' set to ${value}")
+			clickTABKeyboard(inputField)
+			WebUI.delay(2)
+		}
+	}
+
+	private void clickCheckboxByDocName(String docLabel, String checkValue) {
+		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td/span[text()='${docLabel}']]//input[@type='checkbox']")
+
+		if (WebUI.verifyElementPresent(checkbox, 5, OPTIONAL) && checkValue?.equalsIgnoreCase("Y")) {
+			if (!WebUI.verifyElementChecked(checkbox, 1, OPTIONAL)) {
+				safetyClick(checkbox)
+				WebUI.comment("Checkbox for '${docLabel}' is now checked.")
+				WebUI.delay(2)
+			} else {
+				WebUI.comment("Checkbox for '${docLabel}' was already checked.")
+			}
+		}
+	}
+
+	private void fillDocumentData(String docLabel, String checkValue, String promiseDate, String expiredDate, String notes) {
+		clickCheckboxByDocName(docLabel, checkValue)
+
+		setInputIfPresent(docLabel, 'ucDPPromiseDt', promiseDate, 'Promise Date')
+		setInputIfPresent(docLabel, 'ucDPExpiredDt', expiredDate, 'Expired Date')
+		setInputIfPresent(docLabel, 'txtNote', notes, 'Notes')
 	}
 }

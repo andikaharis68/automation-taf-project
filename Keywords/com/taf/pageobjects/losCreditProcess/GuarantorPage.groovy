@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -36,7 +37,7 @@ public class GuarantorPage extends BaseHelper {
 	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect_0')]") 
 	private TestObject drpCustRelationship	= createTestObject("drpCustRelationship", "id", "ddlRefMasterCustRelation")
 	private TestObject iframeApp			= createTestObject("iframeApp", "id", "appForm")
-	
+	private TestObject txfGuarantorPersonal = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_0") 
 	
 	
 	private void verifyLandingInGuarantorPage() {
@@ -75,5 +76,40 @@ public class GuarantorPage extends BaseHelper {
 	private void clickSaveContinue() {
 		WebUI.delay(5)
 		safetyClick(btnSaveContinue)
+	}
+	
+	private void addGuantorPersonal(String guarantorPersonal, String customerRelationship) {
+		boolean isNameExist = checkGuarantorIsExist(guarantorPersonal)
+		if(guarantorPersonal && !isNameExist) {
+			clickAddPersonal()
+			inputCustomerName(guarantorPersonal)
+			selectCustRelationship(customerRelationship)
+			clickSave()
+		}
+	}
+	
+	private boolean checkGuarantorIsExist(String name) {
+		for(int i=0; i<=5; i++) {
+			TestObject txfGuarantor = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_$i")
+			String labelText = WebUI.verifyElementPresent(txfGuarantor, 1, OPTIONAL) ? WebUI.getText(txfGuarantor) : ""
+			KeywordUtil.logInfo("index $i $labelText")
+			
+			if(name.trim().equalsIgnoreCase(labelText.trim())) {
+				return true
+			}
+		}
+		
+		return false
+	}
+	
+	private void addGuantorCompany(String guarantorCompany, String customerRelationshipCompany) {
+		boolean isNameExist = checkGuarantorIsExist(guarantorCompany)
+		KeywordUtil.logInfo("exist  $isNameExist")
+		if(guarantorCompany && !isNameExist) {
+			clickAddCompany()
+			inputCustomerName(guarantorCompany)
+			selectCustRelationship(customerRelationshipCompany)
+			clickSave()
+		}
 	}
 }

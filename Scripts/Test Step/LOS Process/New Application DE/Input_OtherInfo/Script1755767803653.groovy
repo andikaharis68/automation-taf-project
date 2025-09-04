@@ -16,7 +16,6 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
 import com.taf.pageobjects.losCreditProcess.OtherInfoPage
 import com.taf.pageobjects.losCreditProcess.TermAndCondition
 
@@ -24,7 +23,6 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 OtherInfoPage otherInfo = new OtherInfoPage()
-MenuPage menu = new MenuPage()
 TermAndCondition tnc = new TermAndCondition()
 
 'Step 1: Select contract employee'
@@ -69,11 +67,8 @@ otherInfo.selectStatusKepemilikanNPWP(StatusKepemilikanNpwp)
 'Step 14: Select CDE Notes'
 otherInfo.selectCDEnotes(CdeNotes)
 
-'Step 14: Click button save'
+'Step 15: Click button save'
 otherInfo.clickSave()
-
-'Step 15: Verify Success Message'
-//menu.verifySuccessMessage()
 
 'Step 16: Verify Landing in Tnc Page'
 tnc.verifyLandingInTnCPage()

@@ -16,30 +16,20 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.InsuranceDataPage
+import com.taf.pageobjects.losCreditProcess.FinancialDataPage
 import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-InsuranceDataPage insuranceData = new InsuranceDataPage()
 LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
+FinancialDataPage financial = new FinancialDataPage()
 
-'Step 1: Click Edit'
-insuranceData.clickEdit()
+'Step 1: Input Life insurance info'
+lifeInsurance.inputLifeInsuranceInfo(CoverLifeInsurance, LifeInscoBranchName, CustomerInsured, PremiumPaymentMethod, LifeInsuranceNotes)
 
-'Step 2: Input Insurance Data initialization'
-insuranceData.inputInsuranceDataInitialization(InsuredBy, InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+'Step 2: Click save and continue'
+lifeInsurance.clickSaveAndContinue()
 
-'Step 3: Click save'
-insuranceData.clickSave()
-
-'Step 7: Click next'
-insuranceData.clickNextToSaveAndContinue()
-
-'Step 8: click save and continue'
-insuranceData.clickSaveAndContinue()
-
-'Step 9: Verify landing in life insurance data'
-lifeInsurance.verifyLandingInLifeInsuranceData()
+'Step 3: Verify Landing in Financial Data'
+financial.verifyLandingInFinancialData()
