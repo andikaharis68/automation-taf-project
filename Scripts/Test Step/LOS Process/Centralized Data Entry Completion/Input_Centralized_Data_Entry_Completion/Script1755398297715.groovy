@@ -74,6 +74,25 @@ cdeCompletion.clickCalculateIncome()
 
 'Step 18: input attribute list'
 cdeCompletion.inputAttributeList(DebitorGroup, DebitorBusinessScale, CounterpartCategory, DebitorGroupSlik, AffiliateMultifinanceSlik)
+cdeCompletion.selectSustainableFinancial(SustainableFinancialBusiness)
+cdeCompletion.inputEAccountFlag(EAccountFlag)
+cdeCompletion.inputEAccountJoinDate(EAccountJoinDate)
+//cdeCompletion.inputCustRating(CustRating)
+//cdeCompletion.inputGoodBadStatus(GoodBadStatus)
+cdeCompletion.inputTerdugaTeroris(TerdugaTerorisPPSPM)
+cdeCompletion.inputNoSIM(NoSIM)
+cdeCompletion.checkIsSplitTreasure(IsSplitTreassure)
+cdeCompletion.checkViolateBMPK(ViolateBMPK)
+cdeCompletion.checkExceedBMPK(ExceedBMPK)
+cdeCompletion.checkSameAddress(SameAddress, "11")
+cdeCompletion.checkSameJob(SameJob, "12")
+cdeCompletion.checkSamePosition(SamePosition, "13")
+cdeCompletion.checkDifferentMaritalStatus(DifferentMaritalStatus, "14")
+cdeCompletion.checkHomeOwnershipDoc(HomeOwnershipDocument, "15")
+cdeCompletion.inputATMNo(NoATM)
+cdeCompletion.checkCustomerDataConsent(CustomerDataConsent, "17")
+cdeCompletion.inputRatingDebitor(RatingDebitor)
+cdeCompletion.checkCDENotes(CdeNotes, "20")
 
 'Step 19: select way of payment'
 cdeCompletion.selectWayOfPayment(WayOfPayment)
@@ -89,6 +108,10 @@ cdeCompletion.copyAssetLocationFromLegalAddress()
 
 'Step 23: input other asset info'
 cdeCompletion.inputOtherAssetInfo(AssetUsage, TeleSurveyUnitUsage)
+cdeCompletion.checkAssetOnlineTransport(AssetForOnlineTransport)
+cdeCompletion.inputUsageAssetForOnlineTransport(UsageAssetforOnlineTransport)
+cdeCompletion.inputSPKNo(SPKNo)
+cdeCompletion.checkSpkValid(SPKValid)
 
 'Step 24: save asset user'
 cdeCompletion.clickSaveAssetUser()
