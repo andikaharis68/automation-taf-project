@@ -21,34 +21,95 @@ import org.openqa.selenium.Keys as Keys
 
 TermAndCondition tnc = new TermAndCondition()
 
-'Step 1: Check and iput FC Ktp Pemohon'
-tnc.checkFcKTPPemohon1(CheckFcKtpPemohon)
+'Step 1: fill data based on customer type'
+if(CustomerType == "Personal") {
+	
+	'Step 1: fill data FC Ktp Pemohon'
+	tnc.fillDataForKTPPemohon(CheckFcKtpPemohon, PromiseDateKtpPemohon, ExpiredDateKtpPemohon, NotesKtpPemohon)
+	
+	'Step 2: fill data FC Ktp Spouse'
+	tnc.fillDataForFCKTPSpouse(CheckFcKtpSpouse, PromiseDateFcKtpSpouse, ExpiredDatecKtpSpouse, NotesFcKtpSpouse)
+	
+	'Step 3: fill data Fc KK'
+	tnc.fillDataForForFCKK(CheckFcKartuKeluarga, PromiseDateKK, ExpiredDateKK, 	NotesKtpKK)
+	
+	'Step 4: fill data FC Ijin praktek'
+	tnc.fillDataForFCIjinPraktek(CheckFcIjinPraktek, PromiseDateIjinPraktek, ExpiredDateIjinPraktek, NotesIjinPraktek)
+	
+	'Step 5: fill data Fc Npwp'
+	tnc.fillDataForFCNpwp(CheckFcNpwp, PromiseDateNpwp, ExpiredDateNpwp, NotesNpwp)
+	
+	'Step 6: fill data Fc tabungan'
+	tnc.fillDataForFCTabungan(CheckFcTabungan, PromiseDateTabungan, ExpiredDateTabungan, NotesTabungan)
+	
+	'Step 7: fill data document surat menikah'
+	tnc.fillDataFCDocSuratMenikah(CheckDocMenikah, PromiseDateDocMenikah, ExpiredDateDocMenikah, NotesDocMenikah)
+	
+	'Step 8: fill data document rumah'
+	tnc.fillDataForDocKepemilikanRumah(CheckDocKepemilikanRumah, PromiseDateDocKepemilikanRumah, ExpiredDateDocKepemilikanRumah, NotesDocKepemilikanRumah)
+	
+	'Step 9: fill data cover buku tabungan'
+	tnc.fillDataCoverBukuTabungan(CheckCoverBukuTabungan, PromiseDateCoverBukuTabungan, ExpireDateCoverBukuTabungan, NotesCoverBukuTabungan)
+	
+	'Step 10: fill data KK ataas nama STNK'
+	tnc.fillDataForKkStnk(CheckKkAtasNamaStnk, PromiseDateKkAtasNamaStnk, ExpiredDateKkAtasNamaStnk, NotesKkAtasNamaStnk)
+	
+	'Step 11: fill data invoice'
+	tnc.fillDataForInvoice(CheckInvoice, PromiseDateInvoice, ExpiredDateInvoice, NotesInvoice)
+	
+} else {
+	'Step 1: fill data Fc ktp komisaris'
+	tnc.fillDataForFCKTPKomisaris(CheckFcKtpKomisaris, PromiseDateFcKtpKomisaris, ExpiredDateFcKtpKomisaris, NotesKtpKomisaris)
+	
+	'Step 2: fill data fc ktp direktur'
+	tnc.fillDataForFCKTPDirektur(CheckFcKtpDirektur, PromiseDateFcKtpDirektur, ExpiredDateKtpDirektur, NotesKtpDirektur)
+	
+	'Step 3: fill data FC Ijin praktek'
+	tnc.fillDataForFCIjinPraktek(CheckFcIjinPraktek, PromiseDateIjinPraktek, ExpiredDateIjinPraktek, NotesIjinPraktek)
+	
+	'Step 4: fill data Fc Npwp'
+	tnc.fillDataForFCNpwp(CheckFcNpwp, PromiseDateNpwp, ExpiredDateNpwp, NotesNpwp)
+	
+	'Step 5: fill data fc siup'
+	tnc.fillDataForFCSiup(CheckFcSIUP, PromiseDateFcSIUP, ExpiredDateFcSIUP, NotesSIUP)
+	
+	'Step 6: fill data Fc tabungan'
+	tnc.fillDataForFCTabungan(CheckFcTabungan, PromiseDateTabungan, ExpiredDateTabungan, NotesTabungan)
+	
+	'Step 7: fill data finance report'
+	tnc.fillDataForFcFinanceReport(CheckFcLaporanKeuangan, PromiseDateLaporanKeuangan, ExpiredDateLaporanKeuangan, NotesLaporanKeuangan)
+	
+	'Step 8: fill data fc tdp'
+	tnc.fillDataForFcTDP(CheckFcTDP, PromiseDateFcTDP, ExpiredDateFcTDP, NotesFcTDP)
+	
+	'Step 9: fill data akte pendirian'
+	tnc.fillDataForFcAktePendirian(CheckFcAktePendirian, PromiseDateFcAktePendirian, ExpiredDateFcAktePendirian, NotesAktePendirian)
+	
+	'Step 10: fill data rekening listrik'
+	tnc.fillDataForFcRekeningListrik(CheckFcRekeningListrik, PromiseDateFcRekeningListrik,ExpiredDateFcRekeningListrik, NotesFcRekeningListrik)
+	
+	'Step 11: fill data Fc document keuangan lain'
+	tnc.fillDataForFcDocKeuanganLain(CheckFcDocumentKeuanganLain, PromiseDateFcDocumentKeuanganLain, ExpiredDateFcDocumentKeuanganLain, NotesFcDocumentKeuanganLain)
+	
+	'Step 12: fill data fc SPK '
+	tnc.fillDataForFcSPK(CheckFcSPK, PromiseDateFcSPK, ExpiredDateFcSPK, NotesFcSPK)
+	
+	'Step 13: fill data document kepemilikan rumah'
+	tnc.fillDataForDocKepemilikanRumah(CheckDocKepemilikanRumah, PromiseDateDocKepemilikanRumah, ExpiredDateDocKepemilikanRumah, NotesDocKepemilikanRumah)
+	
+	'Step 14: fill data invoice'
+	tnc.fillDataForInvoice(CheckInvoice, PromiseDateInvoice, ExpiredDateInvoice, NotesInvoice)
+	
+}
 
-'Step 2: Check and input FC KK'
-tnc.checkFcKK(CheckFcKartuKeluarga)
 
-'Step 3: Check and input FC Ijin praktek'
-tnc.checkFcIjinPraktek(CheckFcIjinPraktek)
-
-'Step 4: Check and input FC Npwp'
-tnc.checkFcNpwp(CheckFcNpwp)
-
-'Step 5: Check and input Fc Tabungan' 
-tnc.checkFcTabungan(CheckFcTabungan)
-
-'Step 6: Chek and Input Fc Document kepemilikan rumah'
-tnc.checkFcDocKepemilikanRumah(CheckDocKepemilikanRumah)
-
-'Step 7: Check and iput FC Ktp Pemohon'
-tnc.checkFcKtpPemohon2(CheckFcKtpPemohon)
-
-'Step 8: click save'
+'Step 2: click save'
 tnc.clickSave()
 
-'Step 9: Switch to iframe main page'
+'Step 3: Switch to iframe main page'
 tnc.switchToIframeMainPage()
 
-'Step 10: click submit'
+'Step 4: click submit'
 tnc.clickSubmit()
 
 'Step 11: Click confirmation ok'

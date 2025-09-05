@@ -39,12 +39,11 @@ customer.clickTabCustomer()
 'Step 4: Switch to iframe app'
 customer.switchToIframeApp()
 
-'Step 5: Click Save and continue'
-customer.clickSaveContinue()
+'Step 5: Get customer type checked'
+CustomerType = customer.getCustomerTypeChecked()
 
-'Step 6: verify succcess message'
-//menu.verifySuccessMessage()
+'Step 6: Click Save and continue'
+customer.clickSaveContinue()
 
 'Step 7: verify Landing in guarantor'
 guarantor.verifyLandingInGuarantorPage()
-
