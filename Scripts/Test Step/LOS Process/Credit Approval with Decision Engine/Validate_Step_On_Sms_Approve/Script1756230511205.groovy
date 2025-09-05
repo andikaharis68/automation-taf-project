@@ -37,4 +37,6 @@ while (!IsSmsApprove && GlobalVariable.COUNTER > counter) {
 	
 	'Step 3.2: double check is step already on sms approve after wait execution time'
 	IsSmsApprove = workflowMonitoring.verifyIsStepAlreadyOnSmsApprove()
+	
+	counter++
 }

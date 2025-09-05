@@ -28,7 +28,7 @@ if(CustomerType == "Personal") {
 	tnc.fillDataForKTPPemohon(CheckFcKtpPemohon, PromiseDateKtpPemohon, ExpiredDateKtpPemohon, NotesKtpPemohon)
 	
 	'Step 2: fill data FC Ktp Spouse'
-	tnc.fillDataForFCKTPSpouse(CheckFcKtpSpouse, PromiseDateFcKtpSpouse, ExpiredDatecKtpSpouse, NotesFcKtpSpouse)
+	tnc.fillDataForFCKTPSpouse(CheckFcKtpSpouse, PromiseDateFcKtpSpouse, ExpiredDateFcKtpSpouse, NotesFcKtpSpouse)
 	
 	'Step 3: fill data Fc KK'
 	tnc.fillDataForForFCKK(CheckFcKartuKeluarga, PromiseDateKK, ExpiredDateKK, 	NotesKtpKK)
@@ -54,7 +54,10 @@ if(CustomerType == "Personal") {
 	'Step 10: fill data KK ataas nama STNK'
 	tnc.fillDataForKkStnk(CheckKkAtasNamaStnk, PromiseDateKkAtasNamaStnk, ExpiredDateKkAtasNamaStnk, NotesKkAtasNamaStnk)
 	
-	'Step 11: fill data invoice'
+	'Step 11: fil data for Fc Slip gaji'
+	tnc.fillDataForFcSlipGaji(CheckFcSlipGaji, PromiseDateFcSlipGaji, ExpiredDateFcSlipGaji, NotesFcSlipGaji)
+	
+	'Step 12: fill data invoice'
 	tnc.fillDataForInvoice(CheckInvoice, PromiseDateInvoice, ExpiredDateInvoice, NotesInvoice)
 	
 } else {

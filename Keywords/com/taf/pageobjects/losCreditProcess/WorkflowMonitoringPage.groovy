@@ -27,6 +27,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	//step info - table
 	private TestObject lblStepInfo =  createTestObject("txtLastStepName", "id", "ucSubSecGvWf_subSectionID")
 	private TestObject txtLastStepName =  createTestObject("txtLastStepName", "xpath", "(//*[contains(@id, 'gvWFView_lblWFSubsytemActName')])[last()]")
+	
 
 	public void switchToSecondTab() {
 		WebUI.switchToWindowIndex(1)
@@ -76,5 +77,19 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	public void verifyStep() {
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
+		
 	}
+	private boolean checkLastStepIsSurvey() {
+		String actualLastStep = WebUI.getText(txtLastStepName).trim()
+		WebUI.comment("Detected last step: '${actualLastStep}'")
+		if(actualLastStep.contains("survey")) {
+			return true
+		} else {
+			return false
+		}
+	}
+	private void switchToPreviousTab() {
+		int currentTab = WebUI.getWindowIndex()
+		WebUI.switchToWindowIndex(currentTab - 1)
+	} 
 }

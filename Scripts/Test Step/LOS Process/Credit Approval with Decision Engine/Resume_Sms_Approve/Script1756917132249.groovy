@@ -26,7 +26,7 @@ TaskMonitoringPage task = new TaskMonitoringPage()
 LoginPage login = new LoginPage()
 
 'Step 0: Login'
-login.doLogin("applconfins", "password")// mbak mintul pindahin ke test data ya nanti
+login.doLogin("applconfins", "password")
 
 'Step 1: Navigate to Task Monitoring'
 menu.navigateToTaskMonitoring()

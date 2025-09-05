@@ -26,10 +26,11 @@ import internal.GlobalVariable
 
 public class InsuranceDataPage extends BaseHelper {
 
+	private TestObject lblSection			= createTestObject("lblSection", "id", "ucIGridSection_subSectionID")
 	private TestObject btnCopyToAll			= createTestObject("btnCopyToAll","id","lb_Form_CopyToAll")
 	private TestObject btnCopySelected		= createTestObject("btnCopySelected","id","lb_Form_DeleteSelected")
 	private TestObject btnEdit				= createTestObject("btnEdit","id","gvEntryIns_imbEdit_0")
-	private TestObject btnNext				= createTestObject("btnNext","id","lb_Toolbar_Next")  
+	private TestObject btnNext				= createTestObject("btnNext","id","lb_Toolbar_Next")
 	private TestObject btnCancel			= createTestObject("btnCancel","id","lb_Toolbar_Cancel")
 	private TestObject drpSchemeName		= createTestObject("drpSchemeName", "id", "ucInsInit_ucRefInsSchmName_ddlReference")
 	private TestObject drpRateType			= createTestObject("drpRateType", "id", "ucInsInit_ucRefInsRateType_ddlReference")
@@ -46,10 +47,11 @@ public class InsuranceDataPage extends BaseHelper {
 	private TestObject txfPolicyNo			= createTestObject("txfPolicyNo", "id", "ucInsInit_txtPolicyNo")
 	private TestObject txfCoverageAmount	= createTestObject("txfCoverageAmount", "id", "ucInsInit_ucINInsCvgAmt_txtInput")
 	private TestObject txfEndDate			= createTestObject("txfEndDate", "id", "ucInsInit_ucDPCustCoverEndDt_txtDatePicker")
+	private TestObject txfInsuranceLength	= createTestObject("txfInsuranceLength", "id", "ucInsInit_ucINInsLength_txtInput")
 
 
 	private void verifyLandingInInsuranceData() {
-		verifyLanding(btnEdit, "Insurance Data")
+		verifyLanding(lblSection, "Insurance Data")
 		WebUI.takeScreenshot()
 	}
 	private void clickEdit() {
@@ -120,7 +122,7 @@ public class InsuranceDataPage extends BaseHelper {
 
 	private void inputInsuranceDataInitialization(String insuredBy, String inscoBranchName,
 			String policyName, String startDate, String insuranceNote, String policyNo, String coverageAmount, String endDate) {
-			
+		if(WebUI.verifyElementPresent(txfInscoBranchName, 2, OPTIONAL)) {
 			selectInsuredBy(insuredBy)
 			inputInscoBranchName(inscoBranchName)
 			inputPolicyName(policyName)
@@ -129,9 +131,23 @@ public class InsuranceDataPage extends BaseHelper {
 			inputPolicyNo(policyNo)
 			inputCoverageAmount(coverageAmount)
 			inputEndDate(endDate)
+			WebUI.takeScreenshot()
+		}
 	}
-	
-	
+
+	private void inputInsuranceOtherDataInitIfPresent(String insuredBy, String schemeName, String rateType, String main,String coverPeriod, String length) {
+		if(WebUI.verifyElementPresent(drpSchemeName, 2, OPTIONAL)) {
+			selectInsuredBy(insuredBy)
+			selectSchemeName(schemeName)
+			selectRateType(rateType)
+			selectMainCoverageType(main)
+			selectCoverPeriod(coverPeriod)
+			inputInsuranceLength(length)
+			WebUI.takeScreenshot()
+		}
+	}
+
+
 	private void inputInsuranceNotes(String notes) {
 		boolean isElementEnabled = WebUI.verifyElementPresent(txfInsuranceNotes, 3, OPTIONAL)
 		if(notes && isElementEnabled) {
@@ -167,7 +183,6 @@ public class InsuranceDataPage extends BaseHelper {
 		if(policyNo && isElementEnabled) {
 			safetyInput(txfPolicyNo, policyNo)
 			WebUI.delay(1)
-			
 		}
 	}
 	private void inputCoverageAmount(String amount) {
@@ -183,17 +198,18 @@ public class InsuranceDataPage extends BaseHelper {
 		boolean isElementEnabled = WebUI.verifyElementPresent(txfEndDate, 3, OPTIONAL)
 		if(date && isElementEnabled) {
 			safetyInput(txfEndDate, date)
-			clickEnter(txfEndDate)
+			clickTABKeyboard(txfEndDate)
 			WebUI.delay(1)
-			
 		}
 	}
-	
+
 	private void inputDataInitializationPersonal(String schemeName, String coverPeriod, String rateType) {
 		selectSchemeName(schemeName)
 		selectCoverPeriod(coverPeriod)
 		selectRateType(rateType)
 		WebUI.delay(1)
-		
+	}
+	private void inputInsuranceLength(String length) {
+		safetyInput(txfInsuranceLength, length)
 	}
 }

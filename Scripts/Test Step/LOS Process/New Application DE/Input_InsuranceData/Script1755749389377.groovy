@@ -29,17 +29,20 @@ LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 'Step 1: Click Edit'
 insuranceData.clickEdit()
 
-'Step 2: Input Insurance Data initialization'
+'Step 2: Input Insurance Data initialization if present'
 insuranceData.inputInsuranceDataInitialization(InsuredBy, InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+
+'Step 3: Input Insurance Data init'
+insuranceData.inputInsuranceOtherDataInitIfPresent(InsuredBy, SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength) 
 
 'Step 3: Click save'
 insuranceData.clickSave()
 
-'Step 7: Click next'
+'Step 4: Click next'
 insuranceData.clickNextToSaveAndContinue()
 
-'Step 8: click save and continue'
+'Step 5: click save and continue'
 insuranceData.clickSaveAndContinue()
 
-'Step 9: Verify landing in life insurance data'
+'Step 6: Verify landing in life insurance data'
 lifeInsurance.verifyLandingInLifeInsuranceData()

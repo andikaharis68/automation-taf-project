@@ -51,6 +51,7 @@ public class ApplicationViewPage extends BaseHelper{
 	public Map getApprovalCredential() {
 		// focus on owner, for ss purpose
 		WebUI.focus(txtLastTaskOwner)
+		WebUI.scrollToElement(txtLastTaskOwner, 2)
 		WebUI.takeScreenshot()
 		Map credentialData = [:]
 		credentialData['office'] = WebUI.getText(txtOriginalOffice)

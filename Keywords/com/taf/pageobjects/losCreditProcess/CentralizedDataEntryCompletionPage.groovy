@@ -201,8 +201,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	public void searchCentralizedDataCompletion(String customerName) {
 		WebUI.waitForElementPresent(txfCustomerName, 5)
 		WebUI.takeScreenshot()
-		safetyInput(txfCustomerName, customerName)
-		safetyClick(btnSearch)
+		retrySearchCustomer(customerName, txfCustomerName, btnSearch, btnPencil)
 		WebUI.takeScreenshot()
 	}
 	
