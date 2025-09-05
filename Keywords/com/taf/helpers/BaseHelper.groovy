@@ -377,7 +377,9 @@ class BaseHelper {
 		WebUI.click(to)
 		WebUI.delay(delay)
 		handleAlertIfPresent()
-		WebUI.click(to)
+		if(WebUI.waitForElementVisible(to, 3,FailureHandling.OPTIONAL)) {
+			WebUI.click(to)
+		}
 		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
 
@@ -467,6 +469,15 @@ class BaseHelper {
 			nik.append(rnd.nextInt(10)) // random digit 0-9
 		}
 		return nik.toString()
+	}
+	
+	static String generateRandomNumber(int lenght) {
+		SecureRandom rnd = new SecureRandom()
+		StringBuilder num = new StringBuilder()
+		(1..lenght).each {
+			num.append(rnd.nextInt(10)) // random digit 0-9
+		}
+		return num.toString()
 	}
 
 	static String generateRandomName() {

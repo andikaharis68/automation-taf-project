@@ -14,26 +14,34 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.InvoicePage
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
+import com.taf.pageobjects.losCreditProcess.WorkflowMonitoringPage
 
-import internal.GlobalVariable
-import net.sf.jasperreports.crosstabs.fill.calculation.OrderByColumnOrderer
-
+import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-InvoicePage order = new InvoicePage()
+ApplicationInquiryPage info = new ApplicationInquiryPage()
+WorkflowMonitoringPage workflowMonitoring = new WorkflowMonitoringPage()
 
-'Step 1: search purchase order'
-order.searchTransactionPurchase(AgreementNo)
 
-'Step 2: select purchase order'
-order.selectOrder(AgreementNo)
+'Step 1: delay and take screenshot'
+WebUI.delay(3)
+WebUI.takeScreenshot()
 
-'Step 3: click next'
-order.clickNext()
+'Step 2: klik application step'
+info.selectInquiryByApplicationStep()
 
-'Step 4: input invoice summary'
-order.inputInvoiceSummary(InvoiceDate)
+'Step 3: switch to second tab'
+workflowMonitoring.switchToSecondTab()
 
-'Step 5: click save'
-order.clickSave()
+'Step 4: verify landing in workflow monitoring screen'
+workflowMonitoring.verifyLandingScreen()
+
+'Step 5: verify is step is need survey or not'
+def actualFlow = workflowMonitoring.getLastWorkFlow()
+
+'Step 5.1: compare actual and expectation'
+StepCheck = actualFlow.equalsIgnoreCase("Survey Assignment")
+
+'Step 6: switch to first tab'
+workflowMonitoring.switchToFirstTab()

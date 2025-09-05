@@ -514,7 +514,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void selectAssetRegis() {
-		WebUI.click(btnPenAssetRegistration)
+		safetyClick(btnPenAssetRegistration, 5)
 		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}

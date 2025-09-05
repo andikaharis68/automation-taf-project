@@ -14,26 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.InvoicePage
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
 
-import internal.GlobalVariable
-import net.sf.jasperreports.crosstabs.fill.calculation.OrderByColumnOrderer
-
+import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-InvoicePage order = new InvoicePage()
+ApplicationInquiryPage inquiry =  new ApplicationInquiryPage()
 
-'Step 1: search purchase order'
-order.searchTransactionPurchase(AgreementNo)
+'Step 1: verify landing in application inquiry screen'
+inquiry.verifyLandingScreen()
 
-'Step 2: select purchase order'
-order.selectOrder(AgreementNo)
+'Step 2: search inquiry by application no'
+inquiry.searchByApplicationNo(ApplicationNo)
 
-'Step 3: click next'
-order.clickNext()
-
-'Step 4: input invoice summary'
-order.inputInvoiceSummary(InvoiceDate)
-
-'Step 5: click save'
-order.clickSave()
+'Step 3: get agreement no'
+AgreementNo = inquiry.getAgreementNo()

@@ -21,7 +21,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 Map scenarioData = [ ScenarioId: GlobalVariable.SCENARIO_ID, 
-					TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 
+					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
 					'SheetNames': ['DocumentSigner', 'MasterData'],
 					'StepApplication': 'POP', //ini step apps nya
 					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step

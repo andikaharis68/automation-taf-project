@@ -21,7 +21,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 Map scenarioData = [ ScenarioId: GlobalVariable.SCENARIO_ID, 
-					TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 
+					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
 					'SheetNames': ['DeliveryOrder', 'MasterData'],
 					'StepApplication': 'RVC', //ini step apps nya
 					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step
@@ -49,8 +49,21 @@ if(!dataRow['StepCheck']) {
 	KeywordUtil.markFailedAndStop("Step tidak sampai RVC")
 }
 
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Navigate_To_Delivery_Order'), dataRow)
+
+//digunakan untuk mengetahui jumlah aset
+dataRow += ['NumOfAsset' : 0,
+			'AssetPlace' : ""]
+
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Search_Application_Number'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+
+//looping jumlah aset
+dataRow['NumOfAsset'].times{ i -> 
+	dataRow['AssetPlace'] = i.toString()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+}
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Submit_Asset'), dataRow)

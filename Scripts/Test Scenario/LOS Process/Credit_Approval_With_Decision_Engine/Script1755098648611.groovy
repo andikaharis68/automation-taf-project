@@ -21,8 +21,8 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 Map scenarioData = [
-	'ScenarioId' : "1",
-	'TestDataName': "LOS_Process_Credit_Simulation_TestData.xlsx",
+	'ScenarioId' : GlobalVariable.SCENARIO_ID,
+	'TestDataName': "LOS_New_Application_Retail_MultiAset.xlsx",
 	'SheetNames': ['CreditApproval', 'MasterData']
 ]
 Map dataRow = [:]

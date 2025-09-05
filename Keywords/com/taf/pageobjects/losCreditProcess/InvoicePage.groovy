@@ -92,13 +92,13 @@ public class InvoicePage extends BaseHelper{
 		}
 	}
 
-	private void inputInvoiceSummary(String invoiceNo, String invoiceDate) {
+	private void inputInvoiceSummary(String invoiceDate) {
 		Robot robot = new Robot()
 		
 		WebUI.setText(txfInvoiceDate, invoiceDate)
 		WebUI.delay(2)
 		robot.keyPress(KeyEvent.VK_TAB)
-		WebUI.setText(txfInvoiceNumber, invoiceNo)
+		WebUI.setText(txfInvoiceNumber, "inv"+generateRandomNumber(7))
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}

@@ -29,3 +29,6 @@ order.searchTransaction(ApplicationNo)
 
 'step 3: select edit row'
 order.editTransaction(ApplicationNo)
+
+'step 4: get num of asset'
+NumOfAsset = order.numOfAsset()

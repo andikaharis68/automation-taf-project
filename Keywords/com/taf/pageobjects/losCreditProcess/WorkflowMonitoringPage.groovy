@@ -81,4 +81,10 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
 	}
+	
+	public String getLastWorkFlow() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+		return WebUI.getText(txtLastStepName)
+	}
 }
