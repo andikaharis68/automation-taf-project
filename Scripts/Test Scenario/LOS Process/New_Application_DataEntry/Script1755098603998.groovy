@@ -38,3 +38,4 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Applicatio
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_FinancialData'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Input_OtherInfo'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/New Application DE/Click_And_InputPromiseData_TnC'), dataRow)
+

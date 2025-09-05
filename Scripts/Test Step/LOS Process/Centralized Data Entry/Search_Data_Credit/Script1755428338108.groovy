@@ -28,27 +28,6 @@ cde.switchToMainPage()
 'Step 2: search by customer name'
 cde.searchCustomerName(CustomerName)
 
-int counter = 0
-Boolean isFound = false
-while(!isFound && (GlobalVariable.COUNTER > counter)) {
-	
-	'Step 2: search by customer name'
-	cde.searchCustomerName(CustomerName)
-	
-	isFound = cde.checkIsSearchResultFound()
-	if (!isFound) {
-		cde.delay()
-	}
-	counter++
-}
-
-if(!isFound) {
-	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
-}else {
-	'Step 3: select from prospect list'
-	cde.selectProspect()
-}
-
 
 
 

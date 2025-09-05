@@ -173,9 +173,8 @@ public class ApplicationDataPage extends BaseHelper {
 
 	private void selectFirstInstallmentType(String firstInstallment) {
 		TestObject radFirstInstallment = createTestObject("radFirstInstallment","xpath","//label[normalize-space(text())='${firstInstallment}']/preceding-sibling::input[@type='radio']")
-		boolean isElementInteractable = checkElementIsInteractable(radFirstInstallment)
-		KeywordUtil.logInfo("element interactable is " +  isElementInteractable)
-		if (firstInstallment?.trim() && isElementInteractable) {
+		boolean isElementDisabled = checkOptionDisabled(radFirstInstallment)
+		if (firstInstallment?.trim() && !isElementDisabled) {
 			safetyClick(radFirstInstallment)
 		}
 	}
@@ -195,12 +194,13 @@ public class ApplicationDataPage extends BaseHelper {
 		}
 	}
 	
-	private void inputApplicationData(String mouNo, String tenor, String frequency, String marginType, String installmentScheme, String salesOfficerName) {
+	private void inputApplicationData(String mouNo, String tenor, String frequency, String marginType, String installmentScheme, String firstInstallmentType, String salesOfficerName) {
 		searchMOUNo(mouNo)
 		inputTenor(tenor)
 		selectPaymentFrequency(frequency)
 		selectMarginType(marginType)
 		selectInstallmentScheme(installmentScheme)
+		selectFirstInstallmentType(firstInstallmentType)
 		selectSalesOfficer(salesOfficerName)
 	}
 	private void inputApplicationInfoSection(String appSource, String fiduciaCovered, String wayOfPayment) {

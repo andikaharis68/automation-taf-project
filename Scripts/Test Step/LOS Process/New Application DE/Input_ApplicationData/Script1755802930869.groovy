@@ -28,7 +28,7 @@ MenuPage menu = new MenuPage()
 AssetDataPage asset = new AssetDataPage()
 
 'Step 1: Input Application data'
-appData.inputApplicationData(MouNo, Tenor, PaymentFrequency, InterestMarginType, InstallmentScheme, SalesOfficer)
+appData.inputApplicationData(MouNo, Tenor, PaymentFrequency, InterestMarginType, InstallmentScheme, FirstInstallmentType, SalesOfficer)
 
 'Step 2: Select app source'
 appData.inputApplicationInfoSection(ApplicationSource, FiduciaCovered, WayOfPayment)

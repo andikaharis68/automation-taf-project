@@ -25,26 +25,28 @@ CentralizedDataEntryCompletionPage cdeCompletion = new CentralizedDataEntryCompl
 'Step 1: switch to iframe'
 cdeCompletion.switchToIframeMain()
 
-int counter = 0
-Boolean isFound = false
-while(!isFound && (GlobalVariable.COUNTER > counter)) {
-	'Step 2: search centralized data complition by customer name'
-	cdeCompletion.searchCentralizedDataCompletion(CustomerName)
-	
-	isFound = cdeCompletion.checkIsSearchResultFound()
-	if (!isFound) {
-		cdeCompletion.delay()
-	}
-	counter++	
-}
+'Step 2: retry customer till found with max attempts and click button edit pencil'
+cdeCompletion.searchCentralizedDataCompletion(CustomerName)
 
-if(!isFound) {
-	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
-}else {
-	'Step 3: Click Edit on action pencil'
-	cdeCompletion.clickActionPencil()
-}
-
+//int counter = 0
+//Boolean isFound = false
+//while(!isFound && (GlobalVariable.COUNTER > counter)) {
+//	'Step 2: search centralized data complition by customer name'
+//	cdeCompletion.searchCentralizedDataCompletion(CustomerName)
+//	
+//	isFound = cdeCompletion.checkIsSearchResultFound()
+//	if (!isFound) {
+//		cdeCompletion.delay()
+//	}
+//	counter++	
+//}
+//
+//if(!isFound) {
+//	KeywordUtil.markFailedAndStop("Customer Name Not Found, it could be not on step CDE Completion")
+//}else {
+//	'Step 3: Click Edit on action pencil'
+//	cdeCompletion.clickActionPencil()
+//}
 
 'Step 3: switch to default frame'
 cdeCompletion.switchToDefaultContent()

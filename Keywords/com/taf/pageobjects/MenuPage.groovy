@@ -75,11 +75,11 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnDisbursementSelection		= createTestObject("btnDisbursementSelection", "xpath", "//a[text() = 'Disbursement Selection']")
 	private TestObject btnDisbursementApproval		= createTestObject("btnDisbursementApproval", "xpath", "//a[text() = 'Disbursement Approval']")
 	private TestObject btnDisbursementExecution		= createTestObject("btnDisbursementExecution", "xpath", "//a[text() = 'Disbursement Execution']")
-	
+
 	private TestObject btnExpandInquiry				= createTestObject("btnExpandInquiry", "xpath", "//span[text() = 'Inquiry']/preceding-sibling::span[@class = 'rtPlus']")
 	private TestObject btnPayVoucherInquiry			= createTestObject("btnPayVoucherInquiry", "xpath", "//a[text() = 'Pay Voucher Inquiry']")
 	private TestObject btnOnlineDisburseInquiry		= createTestObject("btnOnlineDisburseInquiry", "xpath", "//a[text() = 'Online Disbursement Inquiry']")
-	
+
 
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
@@ -360,7 +360,7 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "LOAN ORIGINATION")
 		safetyClick(btnCreditProcess)
 		safetyClick(btnExpandApplicationInquiry)
-//		WebUI.takeScreenshot()
+		//		WebUI.takeScreenshot()
 		safetyClick(btnApplicationInquiry)
 		switchDefaultContent()
 	}

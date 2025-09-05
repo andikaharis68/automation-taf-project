@@ -95,7 +95,7 @@ public class AssetDataPage extends BaseHelper {
 	private TestObject txfMainAssetNotes			= createTestObject("txfMainAssetNotes", "id", "txtNotesMainAss")
 	private TestObject lblSubSection				= createTestObject("lblSubSection", "id", "ucToggleAssetDoc_subSectionID")
 	private TestObject btnTrash 					= createTestObject("btnTrash", "id", "gvAccessories_imbDelete_0")
-	
+
 
 
 	private void verifyLandinginAssetDataPage() {
@@ -106,6 +106,7 @@ public class AssetDataPage extends BaseHelper {
 
 	private void clickSaveContinue() {
 		safetyClick(btnSaveContinue)
+		WebUI.delay(5)
 	}
 	private void clickSave() {
 		WebUI.delay(2)
@@ -197,11 +198,14 @@ public class AssetDataPage extends BaseHelper {
 		TestObject txfOvlyBranchName = createTestObject("txfOvlyBranchName", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
 		TestObject btnOvlySearch	 = createTestObject("btnOvlySearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
 		TestObject btnSelect		 = createTestObject("btnSelect", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")
-		safetyClick(btnSearchSupplierBranchName)
-		safetyInput(txfOvlyBranchName, supplierBranchName)
-		safetyClick(btnOvlySearch)
-		WebUI.takeScreenshot()
-		safetyClick(btnSelect)
+		boolean isDisabled = checkOptionDisabled(btnSearchSupplierBranchName)
+		if(!isDisabled) {
+			safetyClick(btnSearchSupplierBranchName)
+			safetyInput(txfOvlyBranchName, supplierBranchName)
+			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
+			safetyClick(btnSelect)
+		}
 	}
 	private void selectSalesPersonName(String name) {
 		boolean isDisabled = checkOptionDisabled(drpSalesPersonName)
@@ -226,7 +230,9 @@ public class AssetDataPage extends BaseHelper {
 	private void searchAssetName(String assetName) {
 		boolean isDisabled = checkOptionDisabled(btnSearchAssetName)
 		String elementText = WebUI.getText(txfAssetName)
+		KeywordUtil.logInfo("$assetName dan $elementText")
 		if(!assetName.equalsIgnoreCase(elementText) && !isDisabled) {
+			KeywordUtil.logInfo("masukk")
 			safetyClick(btnSearchAssetName)
 			safetyInput(txfOvlySearchName, assetName)
 			safetyClick(btnOvlySearch)
@@ -234,6 +240,7 @@ public class AssetDataPage extends BaseHelper {
 			WebUI.takeScreenshot()
 			safetyClick(btnOvlySelect)
 		}
+		KeywordUtil.logInfo("tidak masukk")
 	}
 
 	private void inputAssetPrice(String price) {
@@ -307,7 +314,6 @@ public class AssetDataPage extends BaseHelper {
 		if(WebUI.verifyElementPresent(btnSaveEdit, 3, FailureHandling.OPTIONAL)) {
 			safetyClick(btnSaveEdit)
 		}
-		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
 
@@ -355,30 +361,43 @@ public class AssetDataPage extends BaseHelper {
 			safetyClick(radCondition)
 		}
 	}
+
+	private void inputIfDifferent(TestObject to, String expectedValue) {
+		//get current value from text field
+		String currentValue = WebUI.getAttribute(to, "value")
+		if(currentValue == null) {
+			currentValue = ""
+		}
+		if(currentValue.equalsIgnoreCase(expectedValue)) {
+			WebUI.comment("Value already matches: $expectedValue, no input needed")
+		} else {
+			WebUI.comment(" Value is different. Current; $currentValue, expected: $expectedValue")
+			manualClearText(to)
+			safetyInput(to, expectedValue)
+			WebUI.delay(2)
+		}
+	}
 	private void inputMadeIn(String madeIn) {
 		if(madeIn) {
-			slowlyInput(txfMadeIn, madeIn)
+			inputIfDifferent(txfMadeIn, madeIn)
 		}
 	}
 
 	private void inputCylinder(String cylinder) {
 		if(cylinder) {
-			slowlyInput(txfCylinder, cylinder)
-			WebUI.delay(2)
+			inputIfDifferent(txfCylinder, cylinder)
 		}
 	}
 
 	private void inputTransmition(String transmition) {
 		if(transmition) {
-			safetyInput(txfTransmition, transmition)
-			WebUI.delay(2)
+			inputIfDifferent(txfTransmition, transmition)
 		}
 	}
 
 	private void inputColor(String color) {
 		if(color) {
-			slowlyInput(txfColor, color)
-			WebUI.delay(2)
+			inputIfDifferent(txfColor, color)
 		}
 	}
 
@@ -423,7 +442,7 @@ public class AssetDataPage extends BaseHelper {
 			inputAdditionalNotes(notes)
 		}
 	}
-	
+
 	private void inputAssetUserSection(String selfUsage,String userName, String userRelationship) {
 		selectSelfUsage(selfUsage)
 		inputUserName(userName)
@@ -452,80 +471,75 @@ public class AssetDataPage extends BaseHelper {
 
 	private void inputSupplierInfoSection(String name, String salesPersonName) {
 		WebUI.delay(2)
-		boolean isDisabled = checkOptionDisabled(drpSalesPersonName)
-		if(!isDisabled) {
-			searchSupplierBranchName(name)
-			selectSalesPersonName(salesPersonName)
-			WebUI.delay(3)
-		} else {
-			KeywordUtil.markWarning("Data supplier info tidak bisa di edit")
-		}
-	}
-	private void inputMainAssetNotes(String notes) {
-		String elementText = WebUI.getText(txfMainAssetNotes)
-		if(!notes?.equalsIgnoreCase(elementText)) {
-			safetyInput(txfMainAssetNotes, notes)
-		}
-	}
-	private void inputMainAssetSection(String assetName, String assetPrice, String dpType, String downPayment, String notes) {
+		searchSupplierBranchName(name)
+		selectSalesPersonName(salesPersonName)
 		WebUI.delay(3)
-		searchAssetName(assetName)
-		inputAssetPrice(assetPrice)
-		selectDPType(dpType)
-		inputDownPayment(downPayment)
-		inputMainAssetNotes(notes)
+}
+private void inputMainAssetNotes(String notes) {
+	String elementText = WebUI.getText(txfMainAssetNotes)
+	if(!notes?.equalsIgnoreCase(elementText)) {
+		safetyInput(txfMainAssetNotes, notes)
 	}
-	private void inputAssetDataSection(String noMesin, String noRangka, String platNo, String condition, String assetUsage, String year) {
-		inputNoMesin(noMesin)
-		inputNoRangka(noRangka)
-		inputLicensePlatNo(platNo)
-		selectAssetCondition(condition)
-		selectAssetUsage(assetUsage)
-		inputManufacturingYear(year)
-	}
-	private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
-		inputMadeIn(madeIn)
-		inputCylinder(cylinder)
-		inputTransmition(transmition)
-		inputColor(color)
-		selectRegion(region)
-	}
+}
+private void inputMainAssetSection(String assetName, String assetPrice, String dpType, String downPayment, String notes) {
+	WebUI.delay(3)
+	searchAssetName(assetName)
+	inputAssetPrice(assetPrice)
+	selectDPType(dpType)
+	inputDownPayment(downPayment)
+	inputMainAssetNotes(notes)
+}
+private void inputAssetDataSection(String noMesin, String noRangka, String platNo, String condition, String assetUsage, String year) {
+	inputNoMesin(noMesin)
+	inputNoRangka(noRangka)
+	inputLicensePlatNo(platNo)
+	selectAssetCondition(condition)
+	selectAssetUsage(assetUsage)
+	inputManufacturingYear(year)
+}
+private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
+	inputMadeIn(madeIn)
+	inputCylinder(cylinder)
+	inputTransmition(transmition)
+	inputColor(color)
+	selectRegion(region)
+}
 
-	private void inputDocumentNo(String documentNo, int index) {
-		TestObject txfDoc = createTestObject("txfDoc", "id", "gvAssetDocEdit_txtDocNo_$index")
-		if(documentNo) {
-			String strValue = WebUI.getAttribute(txfDoc, "value")
-			if(!strValue) {
-				manualClearText(txfDoc)
-			}
-			safetyInput(txfDoc, documentNo)
+private void inputDocumentNo(String documentNo, int index) {
+	TestObject txfDoc = createTestObject("txfDoc", "id", "gvAssetDocEdit_txtDocNo_$index")
+	if(documentNo) {
+		String strValue = WebUI.getAttribute(txfDoc, "value")
+		if(!strValue) {
+			manualClearText(txfDoc)
+		}
+		safetyInput(txfDoc, documentNo)
+	}
+}
+
+private void checkAllAssetDocument() {
+	for(int i=0 ; i< 8; i++) {
+		TestObject chxDoc = createTestObject("chxDoc", "id", "gvAssetDocEdit_cbChecked_$i")
+		String strChecked = WebUI.getAttribute(chxDoc, "checked")
+		boolean isChecked = strChecked.toBoolean()
+		if(!isChecked) {
+			safetyClick(chxDoc)
+			WebUI.delay(0.5)
 		}
 	}
+}
+private void inputBPKPNo(String documentNo) {
+	inputDocumentNo(documentNo, 0)
+}
+private void inputFakturNo(String documentNo) {
+	inputDocumentNo(documentNo, 1)
+}
 
-	private void checkAllAssetDocument() {
-		for(int i=0 ; i< 8; i++) {
-			TestObject chxDoc = createTestObject("chxDoc", "id", "gvAssetDocEdit_cbChecked_$i")
-			String strChecked = WebUI.getAttribute(chxDoc, "checked")
-			boolean isChecked = strChecked.toBoolean()
-			if(!isChecked) {
-				safetyClick(chxDoc)
-				WebUI.delay(0.5)
-			}
-		}
+private void inputAssetDocument(String bpkpNo, String fakturNo) {
+	boolean assetDocPresent = WebUI.waitForElementPresent(lblSubSection, 4, FailureHandling.OPTIONAL)
+	if(assetDocPresent && bpkpNo) {
+		checkAllAssetDocument()
+		inputBPKPNo(bpkpNo)
+		inputFakturNo(fakturNo)
 	}
-	private void inputBPKPNo(String documentNo) {
-		inputDocumentNo(documentNo, 0)
-	}
-	private void inputFakturNo(String documentNo) {
-		inputDocumentNo(documentNo, 1)
-	}
-
-	private void inputAssetDocument(String bpkpNo, String fakturNo) {
-		boolean assetDocPresent = WebUI.waitForElementPresent(lblSubSection, 4, FailureHandling.OPTIONAL)
-		if(assetDocPresent && bpkpNo) {
-			checkAllAssetDocument()
-			inputBPKPNo(bpkpNo)
-			inputFakturNo(fakturNo)
-		}
-	}
+}
 }

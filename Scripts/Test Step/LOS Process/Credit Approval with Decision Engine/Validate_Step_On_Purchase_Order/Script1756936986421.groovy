@@ -30,12 +30,12 @@ workflowMonitoring.verifyLandingScreen()
 'Step 3: verify is step is already on purchase order'
 IsPurchaseOrder = workflowMonitoring.verifyIsStepAlreadyOnPurchaseOrder()
 
-int counter = 0
-while (!IsPurchaseOrder && GlobalVariable.COUNTER > counter) {
+int attempt = 0
+while (!IsPurchaseOrder && GlobalVariable.COUNTER > attempt) {
 	'Step 3.1: delay and refresh handling'
 	workflowMonitoring.delayAndRefresh()
 	
 	'Step 3.2: double check is step already on purchase order after wait execution time'
 	IsPurchaseOrder = workflowMonitoring.verifyIsStepAlreadyOnPurchaseOrder()
-	counter++
+	attempt++
 }

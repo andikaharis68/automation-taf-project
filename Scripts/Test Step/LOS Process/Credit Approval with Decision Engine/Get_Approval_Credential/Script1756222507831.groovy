@@ -54,3 +54,4 @@ if (ApprovalRole.toString().equalsIgnoreCase("Credit Division Head")) {
 }
 
 KeywordUtil.logInfo("$ApprovalUsername, $ApprovalPassword, $ApprovalOffice, $ApprovalPosition, $ApprovalRole")
+WebUI.delay(5)
