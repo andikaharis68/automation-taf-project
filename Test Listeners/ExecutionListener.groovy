@@ -45,13 +45,15 @@ class ExecutionListener {
 		String sourceId = RunConfiguration.getReportFolder()
 		if (sourceId.contains("Set_Default_Data_Store")) {
 			GlobalVariable.SCENARIO_ID = JsonDataStore.getValue("ScenarioId")
-			KeywordUtil.logInfo("tets : " + sourceId)
 		} 
 	
 	}
 
 	@AfterTestSuite
 	def afterTestSuites(TestSuiteContext testSuiteContext) {
-		JsonDataStore.setValue("ScenarioId", JsonDataStore.getValue("ScenarioId") + 1)
+		String sourceId = RunConfiguration.getReportFolder()
+		if (sourceId.contains("Set_Default_Data_Store")) {
+			JsonDataStore.setValue("ScenarioId", JsonDataStore.getValue("ScenarioId") + 1)
+		}
 	}
 }

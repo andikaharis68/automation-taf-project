@@ -138,7 +138,25 @@ class BaseHelper {
 		return scenarioData
 	}
 
-
+	static String getTestDataName() {
+		String testDataName
+		String configName = RunConfiguration.getExecutionSourceId()
+		if(configName.contains("NAP")) {
+			if(configName.contains("Multi_Aset")) {
+				testDataName = "LOS_New_Application_Retail_MultiAset.xlsx"
+			} else if (configName.contains("Used_Car")) {
+				testDataName = "LOS_New_Application_ExtensedUsedCar.xlsx"
+			} else if (configName.contains("Non_Top_Up")) {
+				testDataName = "LOS_New_Application_Siapdana_NonTopUp.xlsx"
+			} else {
+				testDataName = "LOS_New_Application_Siapdana_TopUp.xlsx"
+			}
+		} else {
+			testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
+		}
+		return testDataName
+	}
+	
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
 		Workbook workbook = new XSSFWorkbook(fis)
