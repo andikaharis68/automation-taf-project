@@ -129,8 +129,9 @@ public class CreditSimulation extends BaseHelper {
 		BaseHelper.safetyClick(btnSelect)
 
 		WebUI.waitForElementVisible(drpMaritalStatus, 20)
-		BaseHelper.safetySelect(drpMaritalStatus, maritalStatus)
-		//		WebUI.selectOptionByLabel(drpMaritalStatus, maritalStatus, false)
+		if(customerType == "Personal") {
+			BaseHelper.safetySelect(drpMaritalStatus, maritalStatus)
+		}
 		BaseHelper.clearAndSetText(txfNumOfAsset, numOfAsset)
 	}
 

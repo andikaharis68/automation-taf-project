@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -25,7 +26,7 @@ List<String> sheetNames = [
 	'ContactInformation', 'FinancialData', 'LegalDocument', 'OtherAttribute']
 
 Map scenarioData = [:]
-scenarioData = BaseHelper.getTestDataMultipleSheet(sheetNames, "$GlobalVariable.TEST_DATA_LOCATION/LOS_Customer_Add_Company_TestData.xlsx", scenarioId)
+scenarioData = BaseHelper.getTestDataMultipleSheet(sheetNames, "${GlobalVariable.TEST_DATA_LOCATION}/LOS_Customer_Add_Company_TestData.xlsx", scenarioId)
 
 BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.CONTINUE_ON_FAILURE)

@@ -27,44 +27,76 @@ cdeCompletion.switchToIframeMain()
 'Step 2: input information from deal and decision engine'
 cdeCompletion.inputInfoDealAndDecision(InformationFromDealNotes)
 
+boolean isCompany = cdeCompletion.getCustomerTypeIsCompany()
+
 'Step 3: input customer main data'
-cdeCompletion.inputCustomerMainData(Gender, Religion, Education, MobilePhone1, MotherMaidenName)
+if(!isCompany) {	
+	cdeCompletion.inputCustomerMainData(PersonalCustomerModel, Gender, Religion, Education, MobilePhone1, MotherMaidenName)
+} else {
+	cdeCompletion.inputCustomerMainDataCompany(IndutryTypeName, NumberOfEmployee, EstablishmentDate, AffiliationWithMultifinance)
+}
 
 'Step 4: input contact result'
 cdeCompletion.inputContactResult(IsCallSucceded, Reason, ContactedPersonRelationship, SurveyorCode, ContactedName, ContactResultNotes)
 
 'Step 5: input customer job data'
-cdeCompletion.inputCustomerJobData(ProfessionName, IndustryTypeName, JobPosition, JobStatus, CompanyName, EmploymentEstablishmentMonth, EmploymentEstablishmentYear, TeleSurveyPosition)
+if(!isCompany) {	
+	cdeCompletion.inputCustomerJobData(ProfessionName, IndustryTypeName, JobPosition, JobStatus, CompanyName, EmploymentEstablishmentMonth, EmploymentEstablishmentYear, TeleSurveyPosition)
+}
 
 'Step 6: edit residence address'
-cdeCompletion.clickEditResidenceAddress()
+if(!isCompany) {	
+	cdeCompletion.clickEditResidenceAddress()
+} else {
+	cdeCompletion.clickEditCompanyAddress()
+}
 
 'Step 7: input residence address main'
-cdeCompletion.inputResidenceAddressMain(Kelurahan, Kecamatan, City, ZipCode, ResidenceAddress, Rt, Rw, PhoneArea, Phone, PhoneExt)
+cdeCompletion.inputResidenceAddressMain(ZipCode, ResidenceAddress, Rt, Rw, PhoneArea, Phone, PhoneExt)
 
 'Step 8: input residence address info'
-cdeCompletion.inputResidenceAddressInfo(BuildingType, BuildingOwnership, BuildingStayLength)
+if(!isCompany) {	
+	cdeCompletion.inputResidenceAddressInfo(BuildingType, BuildingOwnership, BuildingStayLength)
+} else {
+	cdeCompletion.inputResidenceAddressInfo("", BuildingOwnership, BuildingStayLength)
+}
 
 'Step 9: save residance address'
 cdeCompletion.clickSaveAddress()
 
 'Step 10: edit job address'
-cdeCompletion.clickEditJobAddress()
+if(!isCompany) {
+	
+	cdeCompletion.clickEditJobAddress()
+	
+	'Step 11: copy address from residence address to job address'
+	cdeCompletion.copyJobAddressFromResidenceAddress()
+	
+	'Step 12: save job addess'
+	cdeCompletion.clickSaveAddress()
+	
+	'Step 13: add new address'
+	cdeCompletion.clickAddAddress()
+	
+	'Step 14: copy and add legal address'
+	cdeCompletion.copyAndAddLegalAddressFromResidenceAddress()
+	
+	'Step 15: save legal address'
+	cdeCompletion.clickSaveAddress()
+} else {
+	'Step 13: add new address'
+	cdeCompletion.clickAddAddress()
+	
+	cdeCompletion.copyFromCompanyAddress()
+	
+	cdeCompletion.clickSaveAddress()
+	
+	cdeCompletion.inputCompnyShareHolder()
+	
+	cdeCompletion.inputCompanyContactInfo(ContactInfoName, ContactInfoJobPosition)
 
-'Step 11: copy address from residence address to job address'
-cdeCompletion.copyJobAddressFromResidenceAddress()
-
-'Step 12: save job addess'
-cdeCompletion.clickSaveAddress()
-
-'Step 13: add new address'
-cdeCompletion.clickAddAddress()
-
-'Step 14: copy and add legal address'
-cdeCompletion.copyAndAddLegalAddressFromResidenceAddress()
-
-'Step 15: save legal address'
-cdeCompletion.clickSaveAddress()
+	cdeCompletion.inputLegalDocument(DocumentNo, DateIssued)
+}
 
 'Step 16: input Income Section'
 cdeCompletion.inputIncome(GrossMonthlyIncome, GrossProfit, OtherIncome, SourceOfOtherIncome, LivingCost, OtherMonthlyInstallment)
@@ -75,24 +107,26 @@ cdeCompletion.clickCalculateIncome()
 'Step 18: input attribute list'
 cdeCompletion.inputAttributeList(DebitorGroup, DebitorBusinessScale, CounterpartCategory, DebitorGroupSlik, AffiliateMultifinanceSlik)
 cdeCompletion.selectSustainableFinancial(SustainableFinancialBusiness)
-cdeCompletion.inputEAccountFlag(EAccountFlag)
-cdeCompletion.inputEAccountJoinDate(EAccountJoinDate)
+if(!isCompany) {	
+	cdeCompletion.inputEAccountFlag(EAccountFlag)
+	cdeCompletion.inputEAccountJoinDate(EAccountJoinDate)
 //cdeCompletion.inputCustRating(CustRating)
 //cdeCompletion.inputGoodBadStatus(GoodBadStatus)
-cdeCompletion.inputTerdugaTeroris(TerdugaTerorisPPSPM)
-cdeCompletion.inputNoSIM(NoSIM)
-cdeCompletion.checkIsSplitTreasure(IsSplitTreassure)
+	cdeCompletion.inputTerdugaTeroris(TerdugaTerorisPPSPM)
+	cdeCompletion.inputNoSIM(NoSIM)
+	cdeCompletion.checkIsSplitTreasure(IsSplitTreassure)
+	cdeCompletion.checkSameAddress(SameAddress, "11")
+	cdeCompletion.checkSameJob(SameJob, "12")
+	cdeCompletion.checkSamePosition(SamePosition, "13")
+	cdeCompletion.checkDifferentMaritalStatus(DifferentMaritalStatus, "14")
+	cdeCompletion.checkHomeOwnershipDoc(HomeOwnershipDocument, "15")
+	cdeCompletion.inputATMNo(NoATM)
+	cdeCompletion.checkCustomerDataConsent(CustomerDataConsent, "17")
+	cdeCompletion.checkCDENotes(CdeNotes, "20")
+}
 cdeCompletion.checkViolateBMPK(ViolateBMPK)
 cdeCompletion.checkExceedBMPK(ExceedBMPK)
-cdeCompletion.checkSameAddress(SameAddress, "11")
-cdeCompletion.checkSameJob(SameJob, "12")
-cdeCompletion.checkSamePosition(SamePosition, "13")
-cdeCompletion.checkDifferentMaritalStatus(DifferentMaritalStatus, "14")
-cdeCompletion.checkHomeOwnershipDoc(HomeOwnershipDocument, "15")
-cdeCompletion.inputATMNo(NoATM)
-cdeCompletion.checkCustomerDataConsent(CustomerDataConsent, "17")
 cdeCompletion.inputRatingDebitor(RatingDebitor)
-cdeCompletion.checkCDENotes(CdeNotes, "20")
 
 'Step 19: select way of payment'
 cdeCompletion.selectWayOfPayment(WayOfPayment)
@@ -104,7 +138,13 @@ cdeCompletion.clickEditAsset()
 cdeCompletion.inputAssetUser(SelfUsage)
 
 'Step 22: copy asset location from legal address'
-cdeCompletion.copyAssetLocationFromLegalAddress()
+if(!isCompany) {	
+	cdeCompletion.copyAssetLocationFromLegalAddress()
+} else {
+	cdeCompletion.copyAddressAssetOwner()
+//	cdeCompletion.selectOwnerIdType(OwnerIdType)
+	cdeCompletion.copyAssetLocationFromLegalAddress()
+}
 
 'Step 23: input other asset info'
 cdeCompletion.inputOtherAssetInfo(AssetUsage, TeleSurveyUnitUsage)

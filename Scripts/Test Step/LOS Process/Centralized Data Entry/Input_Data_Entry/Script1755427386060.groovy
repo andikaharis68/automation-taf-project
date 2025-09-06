@@ -24,11 +24,17 @@ CentralizeDataEntry cde = new CentralizeDataEntry()
 'Step 1: switch iframe'
 cde.switchToMainPage()
 
+'Step 2: cek tipe customer'
+String customerType = cde.checkCustomerType()
+
 'Step 2: input data customer'
-cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+if(customerType == "Personal") {	
+	cde.inputCustomerMainData(CustomerName, BirthPlace, BirthDate, IdNumber)
+} else {
+	cde.inputCustomerMainDataCompany(CustomerModel, CompanyType)
+}
 
 'Step 3: click button matching customer'
 cde.clickButtonMatchingCustomer()
 
-'Step 4: verify success message'
 cde.verifySuccessMessage()
