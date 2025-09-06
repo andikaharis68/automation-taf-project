@@ -11,16 +11,17 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
-import com.taf.pageobjects.losCreditProcess.NewApplicationDEPage
-
+import com.taf.pageobjects.losCreditProcess.MainInformationPage as MainInformationPage
+import com.taf.pageobjects.losCreditProcess.NewApplicationDEPage as NewApplicationDEPage
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 NewApplicationDEPage newApp = new NewApplicationDEPage()
+
 MainInformationPage mainInfo = new MainInformationPage()
 
 'Step 1: Switch to iframe main page'
@@ -29,11 +30,8 @@ newApp.switchToMainPage()
 'Step 2: Verify Landing in new app page'
 newApp.verifyLandingInNewAppPage()
 
-'Step 3: Search customer name'
+'Step 3: retry customer till found with max attempts and click button edit pencil'
 newApp.searchCustomerName(CustomerName)
 
-'Step 4: Click edit data'
-newApp.clickEditData()
-
-'Step 5: Verify Landing in main info page'
+'Step 4: Verify Landing in main info page'
 mainInfo.verifyLandingInMainPage()

@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -61,12 +62,22 @@ public class CreditApprovalPage extends BaseHelper{
 	}
 
 	public void inputApprovalRecommendationSection(String latarBelakang, String faktorMendukung, String faktorTidakMendukung, String syarat, String caCalculation) {
-		safetyInput(txfLatarBelakang, latarBelakang)
-		safetyInput(txfFaktorMendukung, faktorMendukung)
-		safetyInput(txfFaktorTidakMendukung, faktorTidakMendukung)
-		safetyInput(txfSyarat, syarat)
-		safetyInput(txfCaCalculation, caCalculation)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(txfLatarBelakang, 2, OPTIONAL)) {
+			safetyInput(txfLatarBelakang, latarBelakang)
+		}
+		if(WebUI.verifyElementPresent(txfFaktorMendukung, 2, OPTIONAL)) {
+			safetyInput(txfFaktorMendukung, faktorMendukung)
+		}
+		if(WebUI.verifyElementPresent(txfFaktorTidakMendukung, 2, OPTIONAL)) {
+			safetyInput(txfFaktorTidakMendukung, faktorTidakMendukung)
+		}
+		if(WebUI.verifyElementPresent(txfFaktorTidakMendukung, 2, OPTIONAL)) {
+			safetyInput(txfSyarat, syarat)
+		}
+		if(WebUI.verifyElementPresent(txfFaktorTidakMendukung, 2, OPTIONAL)) {
+			safetyInput(txfCaCalculation, caCalculation)
+			WebUI.takeScreenshot()
+		}
 	}
 
 	public void inputApprovalAction(String action, String notes) {

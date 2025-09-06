@@ -16,6 +16,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -76,6 +77,10 @@ public class TermAndCondition extends BaseHelper {
 
 	private void fillDataForKkStnk(String checkFc, String promiseDate, String expiredDate, String notes) {
 		String label = "KK Atas Nama STNK"
+		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
+	}
+	private void fillDataForFcSlipGaji(String checkFc, String promiseDate, String expiredDate, String notes) {
+		String label = "FOTOKOPI SLIP GAJI"
 		fillDocumentData(label, checkFc, promiseDate, expiredDate, notes)
 	}
 	private void fillDataForInvoice(String checkFc, String promiseDate, String expiredDate, String notes) {
@@ -140,13 +145,16 @@ public class TermAndCondition extends BaseHelper {
 	private void clickConfirmationOk() {
 		if(WebUI.waitForAlert(5)) {
 			WebUI.acceptAlert()
+			WebUI.takeScreenshot()
+		} else {
+			KeywordUtil.markFailed("Pop up not found ")
 		}
 	}
 
 	private void setInputIfPresent(String docLabel, String partialId, String value, String fieldName) {
 		if (!value) return
 		TestObject inputField = createTestObject("input_${fieldName}", "xpath", "//tr[td/span[text()='${docLabel}']]//input[contains(@id,'${partialId}')]")
-		boolean isElementDisabled = checkOptionDisabled(inputField)
+		boolean isElementDisabled =  WebUI.verifyElementPresent(inputField, 3, OPTIONAL) ? checkOptionDisabled(inputField) : false
 		if (WebUI.verifyElementPresent(inputField, 3, OPTIONAL) && !isElementDisabled) {
 			safetyInput(inputField, value)
 			WebUI.comment("${fieldName} for '${docLabel}' set to ${value}")
@@ -157,7 +165,6 @@ public class TermAndCondition extends BaseHelper {
 
 	private void clickCheckboxByDocName(String docLabel, String checkValue) {
 		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td/span[text()='${docLabel}']]//input[@type='checkbox']")
-
 		if (WebUI.verifyElementPresent(checkbox, 5, OPTIONAL) && checkValue?.equalsIgnoreCase("Y")) {
 			if (!WebUI.verifyElementChecked(checkbox, 1, OPTIONAL)) {
 				safetyClick(checkbox)
@@ -171,7 +178,6 @@ public class TermAndCondition extends BaseHelper {
 
 	private void fillDocumentData(String docLabel, String checkValue, String promiseDate, String expiredDate, String notes) {
 		clickCheckboxByDocName(docLabel, checkValue)
-
 		setInputIfPresent(docLabel, 'ucDPPromiseDt', promiseDate, 'Promise Date')
 		setInputIfPresent(docLabel, 'ucDPExpiredDt', expiredDate, 'Expired Date')
 		setInputIfPresent(docLabel, 'txtNote', notes, 'Notes')

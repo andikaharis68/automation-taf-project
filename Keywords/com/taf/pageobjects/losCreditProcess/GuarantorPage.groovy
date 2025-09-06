@@ -92,8 +92,6 @@ public class GuarantorPage extends BaseHelper {
 		for(int i=0; i<=5; i++) {
 			TestObject txfGuarantor = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_$i")
 			String labelText = WebUI.verifyElementPresent(txfGuarantor, 1, OPTIONAL) ? WebUI.getText(txfGuarantor) : ""
-			KeywordUtil.logInfo("index $i $labelText")
-			
 			if(name.trim().equalsIgnoreCase(labelText.trim())) {
 				return true
 			}

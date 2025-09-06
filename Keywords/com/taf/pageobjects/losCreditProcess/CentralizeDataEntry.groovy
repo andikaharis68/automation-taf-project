@@ -45,9 +45,7 @@ public class CentralizeDataEntry extends BaseHelper {
 	}
 
 	public void searchCustomerName(String customerName) {
-		WebUI.setText(txfCustomerName, customerName)
-		WebUI.delay(2)
-		WebUI.click(btnSearch)
+		retrySearchCustomer(customerName, txfCustomerName, btnSearch, btnIconActionProspect)
 	}
 
 	public void selectProspect() {
