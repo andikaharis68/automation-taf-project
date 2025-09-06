@@ -59,20 +59,21 @@ public class AssetDataPage extends BaseHelper {
 	private TestObject btnCopyAddressLoc	= createTestObject("btnCopyAddressLoc", "id", "lb_Form_Copy_Assloc")
 
 	private TestObject btnSearchSupplierBranchName	= createTestObject("btnSearchSupplierBranchName","xpath","//*[contains(@id, 'uclSupplBranchSchm_imb')]")
-	private TestObject drpSalesPersonName			= createTestObject("drpSalesPersonName","id","ucSalesPerson_ddlReference")
+	private TestObject drpSalesPersonName			= createTestObject("drpSalesPersonName","id","ucSalesPerson_ddlReference") 
 	private TestObject txtAdminHead					= createTestObject("txtAdminHead","xpath","//*[@id='dMainSuppl']/table[2]/tbody/tr/td[2]")
-	private TestObject btnSearchAssetName			= createTestObject("btnSearchAssetName","id","ucLookupAssetMaster_uclMaster_imb")
-	private TestObject txfAssetName 				= createTestObject("txfAssetName", "id", "ucLookupAssetMaster_uclMaster_txt")
+	private TestObject btnSearchAssetName			= createTestObject("btnSearchAssetName","xpath"," //*[@id='ucLookupAssetMaster_uclMaster_imb' or @id='ucLookupAssetSchm_uclAssetSchm_imb']")
+	private TestObject txfAssetName 				= createTestObject("txfAssetName", "xpath", "//*[@id='ucLookupAssetMaster_uclMaster_txt' or @id='ucLookupAssetSchm_uclAssetSchm_txt']") 
 
 	private TestObject txfAssetPrice				= createTestObject("txfAssetPrice","id","ucAssetPrice_txtInput")
 	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "xpath", "//input[@id='ucDownPayment_txtInput' or @id='ucDownPaymentPrcnt_txtInput']")
 	private TestObject drpAssetUsage				= createTestObject("drpAssetUsage","id","ucAssetUsage_ddlReference")
 	private TestObject txfManufacturingYear			= createTestObject("txfManufacturingYear","id","txtManufacturingYear")
 
-	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "xpath", "//*[@id='ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0' or @id='ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']") 
 	private TestObject txfOvlySearchAccName			= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_1")
-	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_lbSearch")
-	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "id", "ucLookupAssetMaster_uclMaster_umd_ctl00_gvL_hpSelect_0")
+	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "xpath", "//*[@id='ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_lbSearch' or @id='ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_lbSearch']") 
+	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "xpath", "//*[@id='ucLookupAssetMaster_uclMaster_umd_ctl00_gvL_hpSelect_0' or @id='ucLookupAssetSchm_uclAssetSchm_umd_ctl00_gvL_hpSelect_0']") 
+	private TestObject btnCloseOverlay				= createTestObject("btnCloseOverlay", "xpath", "//*[@id='ucLookupAssetSchm_uclAssetSchm_umd_dv']/a") 
 
 	private TestObject btnAddAdditionalBranch		= createTestObject("btnAddAdditionalBranch", "id", "lb_Form_Add_Acc")
 	private TestObject btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_imb_0")
@@ -186,11 +187,26 @@ public class AssetDataPage extends BaseHelper {
 	}
 
 	private void selectAndCopyAddressLocation(String copyAddressFrom) {
-		boolean isElementEnabled = WebUI.verifyElementPresent(drpCopyAddressFrom, 2, OPTIONAL)
+		boolean isElementEnabled = WebUI.verifyElementPresent(drpCopyAddressLoc, 2, OPTIONAL)
 		if(isElementEnabled) {
-			safetySelect(drpCopyAddressLoc, copyAddressFrom)
+			WebElement element = WebUI.findWebElement(drpCopyAddressLoc)
+			List<WebElement> options = element.findElements(By.tagName("option"))
+			boolean isFound = false
+			for (WebElement opt : options) {
+				if (opt.getText().trim().equalsIgnoreCase(copyAddressFrom)) {
+					safetySelect(drpCopyAddressLoc, copyAddressFrom)
+					isFound = true
+					WebUI.click(btnCopyAddressLoc)
+					WebUI.delay(1)
+					break
+				}
+			}
+			if (!isFound) {
+				selectFirstOption(drpCopyAddressLoc, copyAddressFrom)
+			}
+		} else {
+			KeywordUtil.markWarning("Option not clickable or disabled")
 		}
-		safetyClick(btnCopyAddressLoc)
 		WebUI.scrollToElement(txfCity, 2)
 		WebUI.takeScreenshot()
 	}
@@ -206,6 +222,7 @@ public class AssetDataPage extends BaseHelper {
 			WebUI.takeScreenshot()
 			safetyClick(btnSelect)
 		}
+		WebUI.delay(2)
 	}
 	private void selectSalesPersonName(String name) {
 		boolean isDisabled = checkOptionDisabled(drpSalesPersonName)
@@ -230,17 +247,18 @@ public class AssetDataPage extends BaseHelper {
 	private void searchAssetName(String assetName) {
 		boolean isDisabled = checkOptionDisabled(btnSearchAssetName)
 		String elementText = WebUI.getText(txfAssetName)
-		KeywordUtil.logInfo("$assetName dan $elementText")
 		if(!assetName.equalsIgnoreCase(elementText) && !isDisabled) {
-			KeywordUtil.logInfo("masukk")
 			safetyClick(btnSearchAssetName)
 			safetyInput(txfOvlySearchName, assetName)
 			safetyClick(btnOvlySearch)
-
 			WebUI.takeScreenshot()
-			safetyClick(btnOvlySelect)
+			if(WebUI.verifyElementPresent(btnOvlySelect, 2, OPTIONAL)) {
+				safetyClick(btnOvlySelect)
+			} else {
+				safetyClick(btnCloseOverlay)
+				KeywordUtil.markWarning("Asset name $assetName not found")
+			}
 		}
-		KeywordUtil.logInfo("tidak masukk")
 	}
 
 	private void inputAssetPrice(String price) {
@@ -474,72 +492,72 @@ public class AssetDataPage extends BaseHelper {
 		searchSupplierBranchName(name)
 		selectSalesPersonName(salesPersonName)
 		WebUI.delay(3)
-}
-private void inputMainAssetNotes(String notes) {
-	String elementText = WebUI.getText(txfMainAssetNotes)
-	if(!notes?.equalsIgnoreCase(elementText)) {
-		safetyInput(txfMainAssetNotes, notes)
 	}
-}
-private void inputMainAssetSection(String assetName, String assetPrice, String dpType, String downPayment, String notes) {
-	WebUI.delay(3)
-	searchAssetName(assetName)
-	inputAssetPrice(assetPrice)
-	selectDPType(dpType)
-	inputDownPayment(downPayment)
-	inputMainAssetNotes(notes)
-}
-private void inputAssetDataSection(String noMesin, String noRangka, String platNo, String condition, String assetUsage, String year) {
-	inputNoMesin(noMesin)
-	inputNoRangka(noRangka)
-	inputLicensePlatNo(platNo)
-	selectAssetCondition(condition)
-	selectAssetUsage(assetUsage)
-	inputManufacturingYear(year)
-}
-private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
-	inputMadeIn(madeIn)
-	inputCylinder(cylinder)
-	inputTransmition(transmition)
-	inputColor(color)
-	selectRegion(region)
-}
-
-private void inputDocumentNo(String documentNo, int index) {
-	TestObject txfDoc = createTestObject("txfDoc", "id", "gvAssetDocEdit_txtDocNo_$index")
-	if(documentNo) {
-		String strValue = WebUI.getAttribute(txfDoc, "value")
-		if(!strValue) {
-			manualClearText(txfDoc)
-		}
-		safetyInput(txfDoc, documentNo)
-	}
-}
-
-private void checkAllAssetDocument() {
-	for(int i=0 ; i< 8; i++) {
-		TestObject chxDoc = createTestObject("chxDoc", "id", "gvAssetDocEdit_cbChecked_$i")
-		String strChecked = WebUI.getAttribute(chxDoc, "checked")
-		boolean isChecked = strChecked.toBoolean()
-		if(!isChecked) {
-			safetyClick(chxDoc)
-			WebUI.delay(0.5)
+	private void inputMainAssetNotes(String notes) {
+		String elementText = WebUI.getText(txfMainAssetNotes)
+		if(!notes?.equalsIgnoreCase(elementText)) {
+			safetyInput(txfMainAssetNotes, notes)
 		}
 	}
-}
-private void inputBPKPNo(String documentNo) {
-	inputDocumentNo(documentNo, 0)
-}
-private void inputFakturNo(String documentNo) {
-	inputDocumentNo(documentNo, 1)
-}
-
-private void inputAssetDocument(String bpkpNo, String fakturNo) {
-	boolean assetDocPresent = WebUI.waitForElementPresent(lblSubSection, 4, FailureHandling.OPTIONAL)
-	if(assetDocPresent && bpkpNo) {
-		checkAllAssetDocument()
-		inputBPKPNo(bpkpNo)
-		inputFakturNo(fakturNo)
+	private void inputMainAssetSection(String assetName, String assetPrice, String dpType, String downPayment, String notes) {
+		WebUI.delay(3)
+		searchAssetName(assetName)
+		inputAssetPrice(assetPrice)
+		selectDPType(dpType)
+		inputDownPayment(downPayment)
+		inputMainAssetNotes(notes)
 	}
-}
+	private void inputAssetDataSection(String noMesin, String noRangka, String platNo, String condition, String assetUsage, String year) {
+		inputNoMesin(noMesin)
+		inputNoRangka(noRangka)
+		inputLicensePlatNo(platNo)
+		selectAssetCondition(condition)
+		selectAssetUsage(assetUsage)
+		inputManufacturingYear(year)
+	}
+	private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
+		inputMadeIn(madeIn)
+		inputCylinder(cylinder)
+		inputTransmition(transmition)
+		inputColor(color)
+		selectRegion(region)
+	}
+
+	private void inputDocumentNo(String documentNo, int index) {
+		TestObject txfDoc = createTestObject("txfDoc", "id", "gvAssetDocEdit_txtDocNo_$index")
+		if(documentNo) {
+			String strValue = WebUI.getAttribute(txfDoc, "value")
+			if(!strValue) {
+				manualClearText(txfDoc)
+			}
+			safetyInput(txfDoc, documentNo)
+		}
+	}
+
+	private void checkAllAssetDocument() {
+		for(int i=0 ; i< 8; i++) {
+			TestObject chxDoc = createTestObject("chxDoc", "id", "gvAssetDocEdit_cbChecked_$i")
+			String strChecked = WebUI.getAttribute(chxDoc, "checked")
+			boolean isChecked = strChecked.toBoolean()
+			if(!isChecked) {
+				safetyClick(chxDoc)
+				WebUI.delay(0.5)
+			}
+		}
+	}
+	private void inputBPKPNo(String documentNo) {
+		inputDocumentNo(documentNo, 0)
+	}
+	private void inputFakturNo(String documentNo) {
+		inputDocumentNo(documentNo, 1)
+	}
+
+	private void inputAssetDocument(String bpkpNo, String fakturNo) {
+		boolean assetDocPresent = WebUI.waitForElementPresent(lblSubSection, 4, FailureHandling.OPTIONAL)
+		if(assetDocPresent && bpkpNo) {
+			checkAllAssetDocument()
+			inputBPKPNo(bpkpNo)
+			inputFakturNo(fakturNo)
+		}
+	}
 }
