@@ -58,7 +58,7 @@ public class NewApplicationDEPage extends BaseHelper {
 	}
 
 	private void searchCustomerName(String name) {
-		retrySearchCustomer(name, txfCustomerName, btnSearch, btnEditPencil)
+		retrySearchCustomer(name.trim(), txfCustomerName, btnSearch, btnEditPencil)
 		WebUI.takeScreenshot()
 	}
 

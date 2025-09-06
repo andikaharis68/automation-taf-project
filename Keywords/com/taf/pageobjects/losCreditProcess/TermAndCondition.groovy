@@ -7,6 +7,9 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -18,6 +21,7 @@ import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
@@ -150,10 +154,15 @@ public class TermAndCondition extends BaseHelper {
 			KeywordUtil.markFailed("Pop up not found ")
 		}
 	}
+	
+	private void waitAndTakeScreenshot() {
+		WebUI.delay(10)
+		WebUI.takeScreenshot()
+	}
 
 	private void setInputIfPresent(String docLabel, String partialId, String value, String fieldName) {
 		if (!value) return
-		TestObject inputField = createTestObject("input_${fieldName}", "xpath", "//tr[td/span[text()='${docLabel}']]//input[contains(@id,'${partialId}')]")
+			TestObject inputField = createTestObject("input_${fieldName}", "xpath", "//tr[td/span[text()='${docLabel}']]//input[contains(@id,'${partialId}')]")
 		boolean isElementDisabled =  WebUI.verifyElementPresent(inputField, 3, OPTIONAL) ? checkOptionDisabled(inputField) : false
 		if (WebUI.verifyElementPresent(inputField, 3, OPTIONAL) && !isElementDisabled) {
 			safetyInput(inputField, value)
@@ -181,5 +190,34 @@ public class TermAndCondition extends BaseHelper {
 		setInputIfPresent(docLabel, 'ucDPPromiseDt', promiseDate, 'Promise Date')
 		setInputIfPresent(docLabel, 'ucDPExpiredDt', expiredDate, 'Expired Date')
 		setInputIfPresent(docLabel, 'txtNote', notes, 'Notes')
+	}
+	
+	def void clickDuplicateCheckboxesOnlySecond() {
+		def driver = DriverFactory.getWebDriver()
+		List<WebElement> docNames = driver.findElements(By.xpath("//span[starts-with(@id,'gvTermCondition_lblDocName_')]"))
+		List<WebElement> checkboxes = driver.findElements(By.xpath("//input[starts-with(@id,'gvTermCondition_cbChecked_')]"))
+		Map<String, List<Integer>> nameToIndexes = [:]
+		
+		for (int i = 0; i < docNames.size(); i++) {
+			String docName = docNames[i].getText().trim()
+			
+			if (!nameToIndexes.containsKey(docName)) {
+				nameToIndexes[docName] = []
+			}
+			nameToIndexes[docName] << i
+		}
+		// Cek duplikat
+		nameToIndexes.each { docName, indexes ->
+			if (indexes.size() > 1) {
+				println "⚠️ Document '${docName}' duplicate pada index: ${indexes}"
+				indexes.drop(1).each { idx ->
+					WebElement cb = checkboxes[idx]
+					if (!cb.isSelected()) {
+						cb.click()
+						println "✅ Checkbox untuk '${docName}' di baris ${idx} dicentang"
+					}
+				}
+			}
+		}
 	}
 }

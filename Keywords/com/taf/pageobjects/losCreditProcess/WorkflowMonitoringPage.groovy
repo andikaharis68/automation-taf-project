@@ -16,6 +16,7 @@ import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
@@ -27,7 +28,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	//step info - table
 	private TestObject lblStepInfo =  createTestObject("txtLastStepName", "id", "ucSubSecGvWf_subSectionID")
 	private TestObject txtLastStepName =  createTestObject("txtLastStepName", "xpath", "(//*[contains(@id, 'gvWFView_lblWFSubsytemActName')])[last()]")
-	
+
 
 	public void switchToSecondTab() {
 		WebUI.switchToWindowIndex(1)
@@ -60,7 +61,15 @@ public class WorkflowMonitoringPage extends BaseHelper{
 
 		return (actualStep == "SMS_APPROVE") ? true : false
 	}
-	
+
+	public boolean verifyIsStepAlreadyOnApprovalfor() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+		String actualStep = WebUI.getText(txtLastStepName)
+		KeywordUtil.logInfo("element " + actualStep)
+		return (actualStep.containsIgnoreCase("Approval for")) ? true : false
+	}
+
 	public boolean verifyIsStepAlreadyOnPurchaseOrder() {
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
@@ -68,7 +77,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 
 		return (actualStep == "Purchase Order") ? true : false
 	}
-	
+
 	public void delayAndRefresh() {
 		WebUI.delay(GlobalVariable.WAIT)
 		WebUI.refresh()
@@ -77,7 +86,6 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	public void verifyStep() {
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
-		
 	}
 	private boolean checkLastStepIsSurvey() {
 		String actualLastStep = WebUI.getText(txtLastStepName).trim()
@@ -91,5 +99,16 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	private void switchToPreviousTab() {
 		int currentTab = WebUI.getWindowIndex()
 		WebUI.switchToWindowIndex(currentTab - 1)
-	} 
+	}
+
+	private void switchToPreviousTabAndCloseTab() {
+		def driver = DriverFactory.getWebDriver()
+		def tabs = driver.getWindowHandles().toList()
+		driver.switchTo().window(tabs[0])
+		driver.switchTo().window(tabs[1])
+		driver.close()
+		driver.switchTo().window(tabs[0])
+		WebUI.delay(5)
+		
+	}
 }
