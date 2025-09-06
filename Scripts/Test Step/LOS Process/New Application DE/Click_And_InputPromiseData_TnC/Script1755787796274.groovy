@@ -60,6 +60,9 @@ if(CustomerType == "Personal") {
 	'Step 12: fill data invoice'
 	tnc.fillDataForInvoice(CheckInvoice, PromiseDateInvoice, ExpiredDateInvoice, NotesInvoice)
 	
+	'Step 13: checked if there is doc name duplicated'
+	tnc.clickDuplicateCheckboxesOnlySecond()
+	
 } else {
 	'Step 1: fill data Fc ktp komisaris'
 	tnc.fillDataForFCKTPKomisaris(CheckFcKtpKomisaris, PromiseDateFcKtpKomisaris, ExpiredDateFcKtpKomisaris, NotesKtpKomisaris)
@@ -117,4 +120,6 @@ tnc.clickSubmit()
 
 'Step 11: Click confirmation ok'
 tnc.clickConfirmationOk()
+
+tnc.waitAndTakeScreenshot()
 

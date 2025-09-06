@@ -89,7 +89,8 @@ public class GuarantorPage extends BaseHelper {
 	}
 	
 	private boolean checkGuarantorIsExist(String name) {
-		for(int i=0; i<=5; i++) {
+		int maxLoop = countGuarantorExist()
+		for(int i=0; i <= maxLoop; i++) {
 			TestObject txfGuarantor = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_$i")
 			String labelText = WebUI.verifyElementPresent(txfGuarantor, 1, OPTIONAL) ? WebUI.getText(txfGuarantor) : ""
 			if(name.trim().equalsIgnoreCase(labelText.trim())) {
@@ -98,6 +99,13 @@ public class GuarantorPage extends BaseHelper {
 		}
 		
 		return false
+	}
+	private int countGuarantorExist() {
+		TestObject txtGuarantorName = createTestObject("txtGuarantorName", "xpath", "//span[starts-with(@id,'gvGuarantor_lbGuarantorName')]")
+		def elements = WebUI.findWebElements(txtGuarantorName, 5)
+		int counter = elements.size()
+		KeywordUtil.logInfo("max loop $counter")
+		return counter
 	}
 	
 	private void addGuantorCompany(String guarantorCompany, String customerRelationshipCompany) {

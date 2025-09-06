@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -53,6 +54,9 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void clickSaveContinue() {
 		safetyClick(btnSaveContinue)
+		if(WebUI.verifyElementPresent(btnCalculateFee, 2, OPTIONAL)) { //cek masih ada di screen financial atau ga
+			safetyClick(btnSaveContinue)
+		}
 	}
 	private void clickCalculateFee() {
 		safetyClick(btnCalculateFee)

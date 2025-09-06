@@ -29,20 +29,48 @@ LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 'Step 1: Click Edit'
 insuranceData.clickEdit()
 
-'Step 2: Input Insurance Data initialization if present'
-insuranceData.inputInsuranceDataInitialization(InsuredBy, InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+'Step 2: Get radio selected'
+ActualInsuredBy = insuranceData.selectInsuredBy(InsuredBy)
+IsInsuredByDisabled = insuranceData.checkOptionInsuredByDisabled(InsuredBy)
 
-'Step 3: Input Insurance Data init'
-insuranceData.inputInsuranceOtherDataInitIfPresent(InsuredBy, SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength) 
+if(ActualInsuredBy == "Customer") {
+	'Step 3: Input Insurance Data init customer'
+	insuranceData.inputInsuranceDataInitCustomer(InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+	
+} else if(ActualInsuredBy == "Company") {
+	
+	'Step 3: Input Insurance Data initialization company'
+	insuranceData.inputInsuranceOtherDataInitCompany(SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength)
+	
+} else {
+	'Step 3: Input Insurance Data initialization Customer/Company'
+	insuranceData.inputInsuranceDataInitCustomer(InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+	
+	insuranceData.inputInsuranceOtherDataInitCompany(SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength)
+	
+}
 
-'Step 3: Click save'
-insuranceData.clickSave()
+if(!IsInsuredByDisabled) {
+	'Step 4: Click next'
+	insuranceData.clickNext()
+	
+	'Step 5: Click calculate'
+	insuranceData.clickCalculate()
+	
+	'Step 6: Click save after calculate'
+	insuranceData.clickSaveAfterCalculate()
+	
+} else {
+	'Step 6: Click save'
+	insuranceData.clickSave()
+} 
 
-'Step 4: Click next'
+
+'Step 7: Click next'
 insuranceData.clickNextToSaveAndContinue()
 
-'Step 5: click save and continue'
+'Step 8: click save and continue'
 insuranceData.clickSaveAndContinue()
 
-'Step 6: Verify landing in life insurance data'
+'Step 9: Verify landing in life insurance data'
 lifeInsurance.verifyLandingInLifeInsuranceData()

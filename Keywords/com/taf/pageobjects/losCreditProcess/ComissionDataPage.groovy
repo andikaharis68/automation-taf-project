@@ -41,7 +41,8 @@ public class ComissionDataPage extends BaseHelper {
 	private TestObject txfDifOther			= createTestObject("txfDifOther", "id", "gvSupplEmpCommission_ucinRefundFromOth2_0_txtInput_0")
 
 	private void verifyLandingInComissionData() {
-		verifyLanding(lblSection, "Comission Data")
+		WebUI.delay(2)
+		verifyLanding(btnCalculate, "Comission Data")
 		WebUI.takeScreenshot()
 	}
 	private void clickCalculate() {

@@ -35,34 +35,34 @@ dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Cre
 
 int maxLoop = GlobalVariable.COUNTER
 int i = 0 
-//while(!dataRow['IsSmsApprove'] && i < maxLoop) {
-//	KeywordUtil.logInfo("Credit Approval attempt : ${i+1}")
-//	BaseHelper.openBrowser()
-//	
-//	//Get Credential for Approval
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow)
-//	BaseHelper.closeBrowser()
-//	
-//	//Credit Approval
-//	BaseHelper.openBrowser()
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow)
-//	
-//	//Checking Step 
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
-//	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow)
-//	
-//	BaseHelper.closeBrowser()
-//	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
-//	i++
-//}
+while(!dataRow['IsSmsApprove'] && i < maxLoop) {
+	KeywordUtil.logInfo("Credit Approval attempt : ${i+1}")
+	BaseHelper.openBrowser()
+	
+	//Get Credential for Approval
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Wait_Untill_Appear_Approvalfor'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow)
+	BaseHelper.closeBrowser()
+	//Credit Approval
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Credit_Approval_With_Decision_Engine'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Search_Credit_Approval_With_Decision_Engine'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Do_Credit_Approval_With_Decision_Engine'), dataRow)
+	
+	//Checking Step 
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow)
+	
+	BaseHelper.closeBrowser()
+	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
+	i++
+}
 
-//if (dataRow['IsSmsApprove']) {
+if (dataRow['IsSmsApprove']) {
 	// Login on Workflow Monitoring and resume for sms_approve handler
 	dataRow['CredentialId'] = '9'
 	WebUI.openBrowser(GlobalVariable.WEB_WORKFLOW_URL)
@@ -77,5 +77,5 @@ int i = 0
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Purchase_Order'), dataRow)
 
-//}
+}
 

@@ -735,6 +735,9 @@ class BaseHelper {
 		}
 		return ""
 	}
+	/**
+	 * if option disabled return true
+	 */
 	def boolean checkOptionDisabled(TestObject to) {
 		String strDisabled = WebUI.getAttribute(to, "disabled")
 		KeywordUtil.logInfo("disabled: $strDisabled")
@@ -768,7 +771,6 @@ class BaseHelper {
 			boolean isCustomerFound = WebUI.verifyTextPresent(name, false,OPTIONAL)
 
 			if (isCustomerFound) {
-				KeywordUtil.logInfo("masuk")
 				WebUI.comment("Customer '${name}' is visible on the page.")
 				WebUI.takeScreenshot()
 				// Wait for Edit button (pencil icon) to appear
