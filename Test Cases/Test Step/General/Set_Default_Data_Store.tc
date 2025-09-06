@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Set_Default_Data_Store</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>4fbe1987-ac44-404b-b49d-8b366a684fbf</testCaseGuid>
+</TestCaseEntity>

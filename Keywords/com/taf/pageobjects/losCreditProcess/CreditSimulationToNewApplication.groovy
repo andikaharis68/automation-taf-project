@@ -42,6 +42,7 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 	//address info
 	private TestObject txfJobAddress = createTestObject("txfJobAddress", "id", "txtOfficeAddr")
 	private TestObject txfResidanceAddress = createTestObject("txfResidanceAddress", "id", "txtResidenceAddr")
+	private TestObject txfCompanyAddress = createTestObject("txfCompanyAddress", "id", "txtCompanyAddr")
 
 	//other info
 	private TestObject txfNotes = createTestObject("txfNotes", "id", "txtNotes")
@@ -64,12 +65,19 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 		verifyLandingScreen()
 		WebUI.takeScreenshot()
 		WebUI.setText(txfMobilePhone, phoneNumber)
+		if(npwpNo == "AUTO") {
+			npwpNo = generateRandomNpwp()
+		}
 		WebUI.setText(txfNPWP, npwpNo)
 	}
 
 	public void inputAddressInfo(String jobAddress, residanceAddress) {
 		WebUI.setText(txfJobAddress, jobAddress)
 		WebUI.setText(txfResidanceAddress, residanceAddress)
+	}
+	
+	public void inputCompanyAddress(String companyAddress) {
+		WebUI.setText(txfCompanyAddress, companyAddress)
 	}
 
 	public void inputOtherInfo(String notes) {
@@ -138,6 +146,6 @@ public class CreditSimulationToNewApplication extends BaseHelper {
 		WebUI.click(btnSubmit)
 		WebUI.delay(1)
 		WebUI.acceptAlert()
-		WebUI.delay(5)
+		WebUI.delay(10)
 	}
 }

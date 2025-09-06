@@ -31,10 +31,12 @@ public class CentralizeDataEntry extends BaseHelper {
 	private TestObject btnSearch 					= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	private TestObject btnIconActionProspect 		= createTestObject("btnIconActionProspect", "id", "gvProspectTeleDataEntry_imbEdit_0")
 	private TestObject btnMatchingCustomer 			= createTestObject("btnMatchingCustomer", "id", "lb_Toolbar_Matching")
+	private TestObject lblCustomerType  			= createTestObject("lblCustomerType", "id", "lblCustType")
 	private TestObject txfCustomerName 				= createTestObject("txfCustomerName", "id", "txtCustName")
 	private TestObject txfBirthPlace 				= createTestObject("txfBirthPlace", "id", "txtBirthPlace")
 	private TestObject txfBirthDate 				= createTestObject("txfBirthDate", "id", "ucBirthDt_txtDatePicker")
 	private TestObject txfIdNo 						= createTestObject("txfIdNo", "id", "txtIdNo")
+	private TestObject drpCompanyType 				= createTestObject("drpCompanyType", "id", "ucMrCoyType_ddlReference")
 	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
 
 	public void switchToMainPage() {
@@ -67,26 +69,43 @@ public class CentralizeDataEntry extends BaseHelper {
 	}
 	
 
+	public String checkCustomerType() {
+		WebUI.waitForElementPresent(lblCustomerType, 10)
+		String customerType = WebUI.getText(lblCustomerType)
+		return customerType
+	}
+	
 	public void inputCustomerMainData(String customerName, String birthPlace, String birthDate, String idNumber) {
-		WebUI.takeScreenshot()
-		WebUI.waitForElementPresent(txfCustomerName, 10)
+		WebUI.takeScreenshot()		
 		safetyInput(txfCustomerName, customerName)
 		safetyInput(txfBirthPlace, birthPlace)
 		safetyInput(txfBirthDate, birthDate)
 		KeywordUtil.logInfo("1")
 		WebUI.sendKeys(txfBirthDate, Keys.chord(Keys.ENTER))
+		if(idNumber == "AUTO") {
+			idNumber = generateRandomNik()
+		}
 		safetyInput(txfIdNo, idNumber)
 		WebUI.sendKeys(txfBirthDate, Keys.chord(Keys.ENTER))
 	}
+	
+	public void inputCustomerMainDataCompany(String customerModel, String CompanyType) {
+		WebUI.takeScreenshot()
+		TestObject rbtCustomerModel = createTestObject("rbtCustomerModel", "text", customerModel)
+		WebUI.waitForElementPresent(rbtCustomerModel, 10)
+		safetyClick(rbtCustomerModel)
+		safetySelect(drpCompanyType, CompanyType)
+	}
 
 	public void clickButtonMatchingCustomer() {
+		handlePopupAlert()
 		WebUI.click(btnMatchingCustomer)
 		WebUI.takeScreenshot()
 		WebUI.delay(10)
 	}
 
 	public void verifySuccessMessage() {
-		WebUI.waitForElementPresent(lblSuccessMessage, 20)
+		WebUI.verifyElementPresent(btnSearch, 20)
 		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}

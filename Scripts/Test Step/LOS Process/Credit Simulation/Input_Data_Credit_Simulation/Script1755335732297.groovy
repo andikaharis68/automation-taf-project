@@ -32,7 +32,9 @@ credsim.inputMainInformation(CustomerName, CustomerType, ProductOfferingCode, Ma
 credsim.inputApplicationData(Tenor, InstallmentScheme, PaymentFrequency)
 
 'Step 3: input section life insurance data'
-credsim.inputLifeInsuranceData(LifeInscoBranchName, PremiumPaymentMethod)
+if(CustomerType == "Personal") {	
+	credsim.inputLifeInsuranceData(LifeInscoBranchName, PremiumPaymentMethod)
+}
 
 'Step 4: klik next'
 credsim.clickNext()
