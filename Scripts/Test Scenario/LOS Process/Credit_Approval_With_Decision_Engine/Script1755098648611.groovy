@@ -31,7 +31,7 @@ Map scenarioData = [
 Map dataRow = [:]
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${dataRow['TestDataName']}", dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow["CredentialId"])
 
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
