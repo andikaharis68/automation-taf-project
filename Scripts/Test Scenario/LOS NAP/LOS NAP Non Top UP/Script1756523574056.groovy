@@ -20,8 +20,9 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 String scenarioId = GlobalVariable.SCENARIO_ID
+String testDataName = BaseHelper.getTestDataName()
 Map dataRow = [:]
-String testDataName = "LOS_New_Application_Siapdana_NonTopUp.xlsx"
+
 dataRow += BaseHelper.getTestDataByScenario("NewApplication", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 dataRow += ["ExcelName" : testDataName,
@@ -37,7 +38,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Applicatio
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Customer_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Gurantor_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Application_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Asset_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Inpu_Asset_Data_Non_TopUp'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Asset_Registration'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Edit_Insurance_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Input_Insurance_Life_Data'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

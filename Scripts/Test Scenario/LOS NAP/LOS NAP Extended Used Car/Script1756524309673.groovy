@@ -19,9 +19,10 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String testDataName = BaseHelper.getTestDataName()
 String scenarioId = GlobalVariable.SCENARIO_ID
 Map dataRow = [:]
-String testDataName = "LOS_New_Application_ExtendedUsedCar.xlsx"
+
 dataRow += BaseHelper.getTestDataByScenario("NewApplication", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 dataRow += ["ExcelName" : testDataName,

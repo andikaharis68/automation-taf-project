@@ -463,7 +463,7 @@ public class NewApplicationPage extends BaseHelper{
 
 	private void clickGetMarketPrice() {
 		if(WebUI.verifyElementPresent(btnGetMarketPrice, 3, FailureHandling.OPTIONAL)) {
-			safetyClick(btnGetMarketPrice, 1.5)
+			safetyClickYudho(btnGetMarketPrice, 1.5)
 			WebUI.takeScreenshot()
 		}
 	}
@@ -476,11 +476,15 @@ public class NewApplicationPage extends BaseHelper{
 		safetyInputEdit(txfLicensePlate, licenseNo, 1.5)
 		WebUI.click(rdnAssetCondition)
 		selectAsetUsage(usage)
-		safetyInputEdit(txfManufacturingYear, year, 1.5)
+		inputManufacturingYear(year)
 	}
 
 	private void selectAsetUsage(String usage) {
 		safetySelect(drpAssetUsage, usage, 1)
+	}
+	
+	private void inputManufacturingYear(String year) {
+		safetyInputEdit(txfManufacturingYear, year, 1.5)
 	}
 
 

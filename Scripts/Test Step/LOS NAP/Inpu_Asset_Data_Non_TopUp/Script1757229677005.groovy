@@ -34,13 +34,16 @@ asset.searchAssetMain(AssetName, AssetNote)
 asset.inputMainAsset(DPType, AssetPrice, DownPayment)
 
 'Step 5: input asset data'
-asset.inputAssetData(AssetNoMesin, AssetNoRangka, AssetLicensePlateNo, AssetCondition, AssetUsage, AssetManufacturingYear)
+asset.selectAsetUsage(AssetUsage)
 
-'Step 6: calculate market price'
+'Step 6: input manufacturing year'
+asset.inputManufacturingYear(AssetManufacturingYear)
+
+'Step 7: calculate market price'
 asset.clickGetMarketPrice()
 
-'Step 7: add additiona; service grid'
+'Step 8: add additiona; service grid'
 asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
 
-'Step 8: save asset'
+'Step 9: save asset'
 asset.clickSaveAsset()
