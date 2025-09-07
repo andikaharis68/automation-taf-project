@@ -16,6 +16,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.AssetDataPage
 import com.taf.pageobjects.losCreditProcess.OtherInfoPage
 import com.taf.pageobjects.losCreditProcess.TermAndCondition
 
@@ -24,6 +25,7 @@ import org.openqa.selenium.Keys as Keys
 
 OtherInfoPage otherInfo = new OtherInfoPage()
 TermAndCondition tnc = new TermAndCondition()
+AssetDataPage asset = new AssetDataPage()
 
 'Step 1: Select contract employee'
 otherInfo.selectContractEmployee(ContractEmployeeLessThanTenor)
@@ -69,6 +71,9 @@ otherInfo.selectCDEnotes(CdeNotes)
 
 'Step 15: Click button save'
 otherInfo.clickSave()
+
+'Step 15.1: Check error after click save and continue'
+asset.checkErrorAfterClickSave()
 
 'Step 16: Verify Landing in Tnc Page'
 tnc.verifyLandingInTnCPage()

@@ -16,6 +16,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.AssetDataPage
 import com.taf.pageobjects.losCreditProcess.FinancialDataPage
 import com.taf.pageobjects.losCreditProcess.LifeInsuranceDataPage
 
@@ -24,12 +25,17 @@ import org.openqa.selenium.Keys as Keys
 
 LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 FinancialDataPage financial = new FinancialDataPage()
+AssetDataPage asset = new AssetDataPage()
+
 
 'Step 1: Input Life insurance info'
 lifeInsurance.inputLifeInsuranceInfo(CoverLifeInsurance, LifeInscoBranchName, CustomerInsured, PremiumPaymentMethod, LifeInsuranceNotes)
 
 'Step 2: Click save and continue'
 lifeInsurance.clickSaveAndContinue()
+
+'Step 2.1: Check error after click save and continue'
+asset.checkErrorAfterClickSave()
 
 'Step 3: Verify Landing in Financial Data'
 financial.verifyLandingInFinancialData()
