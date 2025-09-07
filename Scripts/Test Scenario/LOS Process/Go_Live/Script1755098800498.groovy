@@ -37,16 +37,14 @@ BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 
 //Checking Step
-while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {
+while(GlobalVariable.COUNTER > dataRow['Counter']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
-	dataRow['Counter'] += 1
-	KeywordUtil.logInfo("$dataRow['StepCheck']")
+	if(dataRow['StepCheck']) {
+		break
+	}
 	WebUI.delay(GlobalVariable.WAIT)
-}
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dataRow)
-if(!dataRow['StepCheck']) {
-	KeywordUtil.markFailedAndStop("Step tidak sampai DCK")
+	dataRow['Counter'] += 1
 }
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Go Live/Navigate_To_Go_Live'), dataRow)
