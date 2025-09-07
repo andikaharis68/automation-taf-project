@@ -5,7 +5,8 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import com.github.fge.jsonschema.library.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.checkpoint.Checkpoint
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
@@ -22,21 +23,30 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ ScenarioId: GlobalVariable.SCENARIO_ID, 
-					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
-					'SheetNames': ['Survey', 'MasterData'],
-					'StepApplication': 'PAP', //ini step apps nya
-					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step
-					'Counter': 0] //ini counter nya
+String testDataName = BaseHelper.getTestDataName()
+
+Map scenarioData = [ 
+	'ScenarioId': GlobalVariable.SCENARIO_ID,  
+	'SheetNames': ['Survey', 'MasterData'],
+	'StepApplication': 'PAP',
+	'StepCheck': false, 
+	'Counter': 0
+] 
 
 Map dataRow = [:]
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow["CredentialId"])
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
-WebUI.delay(10)
+// Run wait loop
+BaseHelper.waitForStep( dataRow,
+    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dr) },
+    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dr) })
+// Final check
+BaseHelper.validateStepReached(dataRow, { 
+	dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dr)})
 
 //Checking Step
 while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {

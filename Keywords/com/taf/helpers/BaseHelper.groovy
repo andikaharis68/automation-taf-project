@@ -1,6 +1,7 @@
 package com.taf.helpers
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -137,7 +138,25 @@ class BaseHelper {
 		return scenarioData
 	}
 
-
+	static String getTestDataName() {
+		String testDataName
+		String configName = RunConfiguration.getExecutionSourceId()
+		if(configName.contains("NAP")) {
+			if(configName.contains("Multi_Aset")) {
+				testDataName = "LOS_New_Application_Retail_MultiAset.xlsx"
+			} else if (configName.contains("Used_Car")) {
+				testDataName = "LOS_New_Application_ExtensedUsedCar.xlsx"
+			} else if (configName.contains("Non_Top_Up")) {
+				testDataName = "LOS_New_Application_Siapdana_NonTopUp.xlsx"
+			} else {
+				testDataName = "LOS_New_Application_Siapdana_TopUp.xlsx"
+			}
+		} else {
+			testDataName = "LOS_Process_Credit_Simulation_TestData.xlsx"
+		}
+		return testDataName
+	}
+	
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
 		Workbook workbook = new XSSFWorkbook(fis)
@@ -756,6 +775,9 @@ class BaseHelper {
 		}
 		return ""
 	}
+	/**
+	 * if option disabled return true
+	 */
 	def boolean checkOptionDisabled(TestObject to) {
 		String strDisabled = WebUI.getAttribute(to, "disabled")
 		KeywordUtil.logInfo("disabled: $strDisabled")
@@ -767,11 +789,79 @@ class BaseHelper {
 		WebElement element = WebUI.findWebElement(dropdown)
 		List<WebElement> options = element.findElements(By.tagName("option"))
 		if (options != null && options.size() > 1) {
-			String firstLabel = options.get(1).getText()  
+			String firstLabel = options.get(1).getText()
 			safetySelect(dropdown, firstLabel)
 			KeywordUtil.logInfo("Label '$name' not found. Selected first option: $firstLabel")
 		} else {
 			KeywordUtil.markWarning("No selectable options available in dropdown")
+		}
+	}
+
+	static boolean retrySearchCustomer(String name, TestObject textField, TestObject btnSearch, TestObject btnEdit) {
+		int maxAttempts = GlobalVariable.COUNTER
+		int waitTime = GlobalVariable.WAIT
+
+		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+			WebUI.comment("Attempt ${attempt} of ${maxAttempts} — Searching for customer: '${name}'")
+			// Input customer name
+			safetyInput(textField, name)
+			// Click search
+			safetyClick(btnSearch)
+			WebUI.delay(2)
+			boolean isCustomerFound = WebUI.verifyTextPresent(name, false,OPTIONAL)
+
+			if (isCustomerFound) {
+				WebUI.comment("Customer '${name}' is visible on the page.")
+				WebUI.takeScreenshot()
+				// Wait for Edit button (pencil icon) to appear
+				if (WebUI.waitForElementPresent(btnEdit, 3, OPTIONAL)) {
+					WebUI.delay(1)
+					WebUI.comment("edit button found for customer '${name}', clicking Edit.")
+					safetyClick(btnEdit)
+					return true
+				} else {
+					WebUI.comment("Customer found but Edit button not yet present.")
+				}
+			} else {
+				KeywordUtil.markFailed("Customer '${name}' not found in current attempt.")
+			}
+			WebUI.delay(waitTime)
+		}
+
+		WebUI.comment("Failed to find customer '${name}' after ${maxAttempts} attempts.")
+		return false
+	}
+
+	static Map waitForStep(Map dataRow, Closure navigateTestCase, Closure checkTestCase) {
+		int maxAttempts = GlobalVariable.COUNTER
+		int waitTime = GlobalVariable.WAIT
+
+		while (!dataRow['StepCheck'] && dataRow['Counter'] < maxAttempts) {
+			WebUI.comment("Attempt ${dataRow['Counter'] + 1} of ${maxAttempts} — Checking current step...")
+
+			navigateTestCase.call(dataRow)
+			checkTestCase.call(dataRow)
+
+			dataRow['Counter'] += 1
+			WebUI.comment("Step Check result: ${dataRow['StepCheck']}")
+
+			if (dataRow['StepCheck']) {
+				WebUI.comment("Target step '${dataRow['StepApplication']}' reached.")
+				break
+			}
+
+			WebUI.delay(waitTime)
+		}
+
+		return dataRow
+	}
+
+	static void validateStepReached(Map dataRow, Closure infoTestCase) {
+		infoTestCase.call(dataRow)
+		if (!dataRow['StepCheck']) {
+			KeywordUtil.markFailedAndStop("Step not reached: Expected '${dataRow['StepApplication']}'")
+		} else {
+			KeywordUtil.logInfo("Step successfully reached: '${dataRow['StepApplication']}'")
 		}
 	}
 }

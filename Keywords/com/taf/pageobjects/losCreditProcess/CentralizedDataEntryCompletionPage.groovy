@@ -43,16 +43,28 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfNotesInfo 			= createTestObject("txfNotesInfo", "id", "txtNoteFromSupplBranchEmp")
 
 	//customer main data
+	private TestObject lblCustomertype 			= createTestObject("lblCustomertype", "id", "lbl_Customer_CustomerType")
 	private TestObject drpGender 				= createTestObject("drpGender", "id", "ucMrGender_ddlReference")
 	private TestObject drpReligion 				= createTestObject("drpReligion", "id", "ucMrReligion_ddlReference")
 	private TestObject drpEducation 			= createTestObject("drpEducation", "id", "ucMrEducation_ddlReference")
 	private TestObject txfMobilePhone 			= createTestObject("txfMobilePhone", "id", "txtMobilePhnNo1")
 	private TestObject txfMotherName 			= createTestObject("txfMotherName", "id", "txtMotherMaidenName")
 
+	//Company main data
+	private TestObject btnIconIndustryType		= createTestObject("btnIconIndustryType", "id", "ucLookupIndustry_uclIndustry_imb")
+	private TestObject ovlIndustryTypeName		= createTestObject("ovlIndustryTypeName", "id", "ucLookupIndustry_uclIndustry_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3")
+	private TestObject ovlSearchIndustryType	= createTestObject("ovlSearchIndustryType", "id", "ucLookupIndustry_uclIndustry_umd_ctl00_ucS_lbSearch")
+	private TestObject ovlSelectIndustryType	= createTestObject("ovlSelectIndustryType", "id", "ucLookupIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0")
+	private TestObject txfNumbOfEmployee		= createTestObject("txfNumbOfEmployee", "id", "ucINNumOfEmp_txtInput")
+	private TestObject txfEstablisDate			= createTestObject("txfEstablisDate", "id", "ucDPEstablishmentDate_txtDatePicker")
+	private TestObject radAffiliation			= createTestObject("radAffiliation", "id", "cb_Cust_IsAffiliateWithMf")
+	
+	
 	//contact result
 	private TestObject txtCallSucceded 			= createTestObject("txtCallSucceded", "id", "txtMotherMaidenName")
 	private TestObject drpReason 				= createTestObject("drpReason", "id", "ucFailedReason_ddlReference")
-	private TestObject drpCPRelationdhip 		= createTestObject("drpCPRelationdhip", "id", "ucRefCntctedPersonRelation_ddlReference")
+	private TestObject drpCPRelationdhip 		= createTestObject("drpCPRelationdhip", "xpath", "//*[@id = 'ucRefCntctedPersonRelation_ddlReference' or @id = 'ucRefContactPersonRelation_ddlReference']")
+	
 	private TestObject drpSurveyorCode 			= createTestObject("drpSurveyorCode", "id", "ucRefSurveyorCode_ddlReference")
 	private TestObject txfContactedName 		= createTestObject("txfContactedName", "id", "txtContactedPerson")
 	private TestObject txfNotesContactResult 	= createTestObject("txfNotesContactResult", "id", "txtCntctResultNotes")
@@ -78,36 +90,59 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject btnSelectIndustry 		= createTestObject("btnSelectIndustry", "id", "uclIndustry_uclIndustry_umd_ctl00_gvL_hpSelect_0")
 
 	//customer address listing
-	private TestObject btnPencilResidenceAddress= createTestObject("btnPencilResidenceAddress", "id", "gvAddr_imbEdit_0")
-	private TestObject btnPencilJobAddress 		= createTestObject("btnPencilJobAddress", "id", "gvAddr_imbEdit_1")
+	private TestObject btnPencilResidenceAddress= createTestObject("btnPencilResidenceAddress", "xpath", "(//*[text() = 'Residence Address']//following::*[contains(@id,'gvAddr_imbEdit')])[1]")
+	private TestObject btnPencilCompanyAddress	= createTestObject("btnPencilCompanyAddress", "xpath", "(//*[text() = 'Company Address']//following::*[contains(@id,'gvCustAddress_imbEdit')])[1]")
+	private TestObject btnPencilJobAddress 		= createTestObject("btnPencilJobAddress", "xpath", "(//*[text() = 'Job Address']//following::*[contains(@id,'gvAddr_imbEdit')])[1]")
 	private TestObject btnAddAddress 			= createTestObject("btnAddAddress", "id", "lb_Form_Add")
+	private TestObject btnDeleteLegalAddress 	= createTestObject("btnDeleteLegalAddress", "xpath", "(//*[text() = 'Legal Address']//following::*[contains(@id,'gvCustAddress_imbDelete')])[1]")
+	
+	//Legal Doocument
+	private TestObject btnAddLegalDocument		= createTestObject("btnAddLegalDocument", "id", "lb_Form_Add_LegalDocument")
+	private TestObject drpDocType				= createTestObject("drpDocType", "id", "ucMrLegalDocType_ddlReference")
+	private TestObject txfDocNo					= createTestObject("txtDocNo", "id", "txtDocNo")
+	private TestObject txfDateIssued			= createTestObject("txtDocNo", "id", "ucDPDocDt_txtDatePicker")
+	private TestObject btnSaveLegalDoc			= createTestObject("btnSaveLegalDoc", "id", "lb_Form_Save_LegalDoc")
 
 	//customer address listing - residence address main, job address & legal address
-	private TestObject btnSaveAddress			= createTestObject("btnSaveResidenceAddress", "id", "lb_Form_Save")
-	private TestObject txfRT					= createTestObject("txfRT", "id", "ucAddr_txtRT")
-	private TestObject txfRW					= createTestObject("txfRW", "id", "ucAddr_txtRW")
-	private TestObject txfResidenceAddress		= createTestObject("txfResidenceAddress", "id", "ucAddr_txtOfficeAddr")
-	private TestObject txfPhoneAreaResidence	= createTestObject("txfPhoneAreaResidence", "id", "ucAddr_txtPhnArea1")
-	private TestObject txfPhoneResidence		= createTestObject("txfPhoneResidence", "id", "ucAddr_txtPhn1")
-	private TestObject txfPhoneExtResidence		= createTestObject("txfPhoneExtResidence", "id", "ucAddr_txtPhoneExt1")
+	private TestObject btnSaveAddress			= createTestObject("btnSaveResidenceAddress", "xpath", "//*[@id = 'lb_Form_Save' or @id = 'lb_Form_Save_CustAddr']")
+	private TestObject txfRT					= createTestObject("txfRT", "xpath", "//*[@id = 'ucAddr_txtRT' or @id = 'ucAddress_txtRT']")
+	private TestObject txfRW					= createTestObject("txfRW", "xpath", "//*[@id = 'ucAddr_txtRW' or @id = 'ucAddress_txtRW']")
+	private TestObject txfResidenceAddress		= createTestObject("txfResidenceAddress", "xpath", "//*[@id = 'ucAddr_txtOfficeAddr' or @id = 'ucAddress_txtOfficeAddr']")
+	private TestObject txfPhoneAreaResidence	= createTestObject("txfPhoneAreaResidence", "xpath", "//*[@id = 'ucAddr_txtPhnArea1' or @id = 'ucAddress_txtPhnArea1']")
+	private TestObject txfPhoneResidence		= createTestObject("txfPhoneResidence", "xpath", "//*[@id = 'ucAddr_txtPhn1' or @id = 'ucAddress_txtPhn1']")
+	private TestObject txfPhoneExtResidence		= createTestObject("txfPhoneExtResidence", "xpath", "//*[@id = 'ucAddr_txtPhoneExt1' or @id = 'ucAddress_txtPhoneExt1']")
 
 	private TestObject drpCopyAddress			= createTestObject("drpCopyAddress", "id", "ucCopyAddr_ddlReference")
-	private TestObject btnCopy					= createTestObject("btnCopy", "id", "lb_Form_Copy_Addr")
-	private TestObject drpAddressType			= createTestObject("drpAddressType", "id", "ucAddrType_ddlReference")
+	private TestObject btnCopy					= createTestObject("btnCopy", "xpath", "//*[@id = 'lb_Form_Copy_Addr' or @id = 'lb_Form_CopyAddr']")
+	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[@id = 'ucAddrType_ddlReference' or @id = 'ucRefAddressType_ddlReference']")
+	
+	//company shareholder
+	private TestObject btnAddShareholderCompany	= createTestObject("btnAddShareholder", "id", "lb_Form_AddCompany_Management")
+	private TestObject btnSearchShareholder		= createTestObject("btnSearchShareholder", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_imb")
+	private TestObject txfPopupInputName		= createTestObject("txfPopupInputName", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject btnPopupSearch			= createTestObject("btnPopupSearch", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_ucS_lbSearch")
+	private TestObject btnPopupSelect			= createTestObject("btnPopupSelect", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_umd_ctl00_gvL_hpSelect_0")
+	private TestObject txfSharePercent			= createTestObject("txfSharePercent", "id", "ucINSharePercentageCoy_txtInput")
+	private TestObject btnSaveShareholder		= createTestObject("btnSaveShareholder", "id", "lb_Form_Save_AddCoyManShareListing")
+	private TestObject btnDeleteShareHolder		= createTestObject("btnDeleteShareHolder", "id", "gvManagement_imbDelete_0")
+	
+	//company contact info
+	private TestObject txfContactInfoName		= createTestObject("txfContactInfoName", "id", "txt_CustEmergencyContact_Name")
+	private TestObject drpContactInfoJobPosition= createTestObject("drpContactInfoJobPosition", "id", "ucRefPersonalJobPositionEmergency_ddlReference")
 
 	//customer address listing - residence address main - zipcode lookup
-	private TestObject icoLookUpZipCode			= createTestObject("icoLookUpZipCode", "id", "ucAddr_ucLookupZipCode_uclZipCode_imb")
+	private TestObject icoLookUpZipCode			= createTestObject("icoLookUpZipCode", "xpath", "//*[@id='ucAddr_ucLookupZipCode_uclZipCode_imb' or @id = 'ucAddress_ucLookupZipCode_uclZipCode_imb']")
 	private TestObject txfKelurahan				= createTestObject("txfKelurahan", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
 	private TestObject txfKecamatan				= createTestObject("txfKecamatan", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
 	private TestObject txfCity					= createTestObject("txfCity", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2")
-	private TestObject txfZipCode				= createTestObject("txfZipCode", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3")
-	private TestObject btnSearchZipCode			= createTestObject("btnSearchZipCode", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch")
-	private TestObject btnSelectZipCode			= createTestObject("btnSelectZipCode", "id", "ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0")
+	private TestObject txfZipCode				= createTestObject("txfZipCode", "xpath", "//*[@id = 'ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3' or @id = 'ucAddress_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3']")
+	private TestObject btnSearchZipCode			= createTestObject("btnSearchZipCode", "xpath", "//*[@id = 'ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch' or @id = 'ucAddress_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch']")
+	private TestObject btnSelectZipCode			= createTestObject("btnSelectZipCode", "xpath", "//*[@id = 'ucAddr_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0' or @id = 'ucAddress_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0']")
 
 	//customer address listing - residence address info
 	private TestObject drpBuildingType			= createTestObject("drpBuildingType", "id", "ucAddrInfoCust_ucMrBuildingType_ddlReference")
-	private TestObject drpBuildingOwner			= createTestObject("drpBuildingOwner", "id", "ucAddrInfoCust_ucOwnershipStat_ddlReference")
-	private TestObject txfBuildingStay			= createTestObject("txfBuildingStay", "id", "ucAddrInfoCust_txtStayLength_txtInput")
+	private TestObject drpBuildingOwner			= createTestObject("drpBuildingOwner", "xpath", "//*[@id = 'ucAddrInfoCust_ucOwnershipStat_ddlReference' or @id = 'ucAddressInfo_ucOwnershipStat_ddlReference']")
+	private TestObject txfBuildingStay			= createTestObject("txfBuildingStay", "xpath", "//*[@id = 'ucAddrInfoCust_txtStayLength_txtInput' or @id = 'ucAddressInfo_txtStayLength_txtInput']")
 
 	//income
 	private TestObject txfGrossMonthlyIncome	= createTestObject("txfGrossMonthlyIncome", "id", "txt_CustFinData_GrossMonthlyIncomeAmt_txtInput")
@@ -126,11 +161,11 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfGoodBadStatus			= createTestObject("txfGoodBadStatus", "id", "rptOtherAttribute_txtAttrContent_3")
 	private TestObject txfTerdugaTeroris		= createTestObject("txfTerdugaTeroris", "id", "rptOtherAttribute_txtAttrContent_4")
 	private TestObject txfNoSim					= createTestObject("txfNoSim", "id", "rptOtherAttribute_txtAttrContent_5")
-	private TestObject chxIsSplitTreasure		= createTestObject("chxIsSplitTreasure", "id", "rptOtherAttribute_cbxAttrValue_6")
-	private TestObject chxViolateBMPK			= createTestObject("chxViolateBMPK", "id", "rptOtherAttribute_cbxAttrValue_8")
-	private TestObject chxExceedBMPK			= createTestObject("chxExceedBMPK", "id", "rptOtherAttribute_cbxAttrValue_9")
+	private TestObject chxIsSplitTreasure		= createTestObject("chxIsSplitTreasure", "xpath", "(//*[text() = 'IS SPLIT TREASURE']//following::*[contains(@id , 'rptOtherAttribute_cbxAttrValue')])[1]")
+	private TestObject chxViolateBMPK			= createTestObject("chxViolateBMPK", "xpath", "(//*[text() = 'VIOLATE BMPK']//following::*[contains(@id , 'rptOtherAttribute_cbxAttrValue')])[1]")
+	private TestObject chxExceedBMPK			= createTestObject("chxExceedBMPK", "xpath", "(//*[text() = 'EXCEED BMPK']//following::*[contains(@id , 'rptOtherAttribute_cbxAttrValue')])[1]")
 	private TestObject txfNoATM					= createTestObject("txfNoATM", "id", "rptOtherAttribute_txtAttrContent_16")
-	private TestObject txfRatingDebitor			= createTestObject("txfRatingDebitor", "id", "rptOtherAttribute_txtAttrContent_18")
+	private TestObject txfRatingDebitor			= createTestObject("txfRatingDebitor", "xpath", "(//*[text() = 'RATING DEBITOR']//following::*[contains(@id,'rptOtherAttribute_txtAttrContent')])[1]")
 
 	//attribute list - debitor group lookup
 	private TestObject icoDebitorBusinessGroup	= createTestObject("icoDebitorBusinessGroup", "id", "UCDebtGrp_ucBebtGroup_imb")
@@ -151,30 +186,33 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject btnSelectSustainable		= createTestObject("btnSelectSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_gvL_hpSelect_0")
 
 	//attribute list - debitor group slik lookup
-	private TestObject icoDebitorGroupSlik		= createTestObject("icoDebitorGroupSlik", "id", "rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_imb_7")
-	private TestObject txfDebitorGroupSlik		= createTestObject("txfDebitorGroupSlik", "id", "rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_ucS_7_rptFixedSearch_7_txtSearchValue_0")
-	private TestObject btnSearchDebitorGroupSlik= createTestObject("btnSearchDebitorGroupSlik", "id", "rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_ucS_7_lbSearch_7")
-	private TestObject btnSelectDebitorGroupSlik= createTestObject("btnSelectDebitorGroupSlik", "id", "rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_gvL_7_hpSelect_0")
+	private TestObject icoDebitorGroupSlik		= createTestObject("icoDebitorGroupSlik", "xpath", "(//*[contains(text(),'DEBITOR GROUP SLIK')]//following::input[@type = 'image'])[1]")
+	private TestObject txfDebitorGroupSlik		= createTestObject("txfDebitorGroupSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_ucS_7_rptFixedSearch_7_txtSearchValue_0' or @id = 'rptOtherAttribute_UCRefMaster_3_ucLookupRefMaster_3_umd_3_ctl00_3_ucS_3_rptFixedSearch_3_txtSearchValue_0']")
+	private TestObject btnSearchDebitorGroupSlik= createTestObject("btnSearchDebitorGroupSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_ucS_7_lbSearch_7' or @id = 'rptOtherAttribute_UCRefMaster_3_ucLookupRefMaster_3_umd_3_ctl00_3_ucS_3_lbSearch_3']")
+	private TestObject btnSelectDebitorGroupSlik= createTestObject("btnSelectDebitorGroupSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_7_ucLookupRefMaster_7_umd_7_ctl00_7_gvL_7_hpSelect_0' or @id = 'rptOtherAttribute_UCRefMaster_3_ucLookupRefMaster_3_umd_3_ctl00_3_gvL_3_hpSelect_0']")
 
 	//attribute list - affiliate with multifinance slik
-	private TestObject icoAffiliateSlik			= createTestObject("icoAffiliateSlik", "id", "rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_imb_10")
-	private TestObject txfAffiliateSlik			= createTestObject("txfAffiliateSlik", "id", "rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_ucS_10_rptFixedSearch_10_txtSearchValue_0")
-	private TestObject btnSearchAffiliateSlik	= createTestObject("btnSearchAffiliateSlik", "id", "rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_ucS_10_lbSearch_10")
-	private TestObject btnSelectAffiliateSlik	= createTestObject("btnSelectAffiliateSlik", "id", "rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_gvL_10_hpSelect_0")
+	private TestObject icoAffiliateSlik			= createTestObject("icoAffiliateSlik", "xpath", "(//*[contains(text(),'AFFILIATE WITH MULTIFINANCE SLIK')]//following::input[@type = 'image'])[1]")
+	private TestObject txfAffiliateSlik			= createTestObject("txfAffiliateSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_ucS_10_rptFixedSearch_10_txtSearchValue_0' or @id= 'rptOtherAttribute_UCRefMaster_9_ucLookupRefMaster_9_umd_9_ctl00_9_ucS_9_rptFixedSearch_9_txtSearchValue_0']")
+	private TestObject btnSearchAffiliateSlik	= createTestObject("btnSearchAffiliateSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_ucS_10_lbSearch_10' or @id= 'rptOtherAttribute_UCRefMaster_9_ucLookupRefMaster_9_umd_9_ctl00_9_ucS_9_lbSearch_9']")
+	private TestObject btnSelectAffiliateSlik	= createTestObject("btnSelectAffiliateSlik", "xpath", "//*[@id = 'rptOtherAttribute_UCRefMaster_10_ucLookupRefMaster_10_umd_10_ctl00_10_gvL_10_hpSelect_0' or @id= 'rptOtherAttribute_UCRefMaster_9_ucLookupRefMaster_9_umd_9_ctl00_9_gvL_9_hpSelect_0']")
 
 	//application info
-	private TestObject drpWayOfPayment			= createTestObject("drpWayOfPayment", "id", "ucRefWOP_ddlReference")
+	private TestObject drpWayOfPayment			= createTestObject("drpWayOfPayment", "xpath", "//*[@id = 'ucRefWOP_ddlReference' or @id = 'ucRefWop_ddlReference']")
 
 	//list of asset
 	private TestObject btnPencilAsset 			= createTestObject("btnPencilAsset", "id", "gvAsset_imbEdit_0")
 
 	//asset user
 	private TestObject txtSelfUsage
-	private TestObject btnSaveAssetUser			= createTestObject("btnSaveAssetUser", "id", "lbSaveAsset")
+	private TestObject btnSaveAssetUser			= createTestObject("btnSaveAssetUser", "xpath", "//*[@id = 'lbSaveAsset' or @id = 'lb_Form_Save_AssetList']")
 
 	//asset location
 	private TestObject drpCopyAddressAsset		= createTestObject("drpCopyAddressAsset", "id", "ucCopyAddrAssLoc_ddlReference")
-	private TestObject btnCopyAddressAsset		= createTestObject("btnCopy", "id", "lb_Form_Copy_Assloc")
+	private TestObject btnCopyAddressAsset		= createTestObject("btnCopyAddressAsset", "id", "lb_Form_Copy_Assloc")
+	private TestObject drpCopyAddressOwner		= createTestObject("drpCopyAddressOwner", "id", "ucCopyAddrOwner_ddlReference")
+	private TestObject btnCopyAddressOwner		= createTestObject("btnCopyAddressOwner", "id", "lb_Form_Copy_OwnerAddr")
+	private TestObject drpOwnerIdType			= createTestObject("drpOwnerIdType", "id", "ucMrIdType_ddlReference")
 
 	//other asset info
 	private TestObject txfAssetUsage			= createTestObject("txfAssetUsage", "id", "ucRefAssetUsage_ddlReference")
@@ -186,7 +224,6 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfUsageAssetOnline		= createTestObject("txfUsageAssetOnline", "id", "txtUsageAssetOnl")
 	private TestObject txfSpkNo					= createTestObject("txfSpkNo", "id", "txtSpkNo")
 	
-
 	//popup success
 	private TestObject lblSuccess				= createTestObject("txfSurveyUnitUsage", "text", "Submit Success")
 
@@ -201,8 +238,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	public void searchCentralizedDataCompletion(String customerName) {
 		WebUI.waitForElementPresent(txfCustomerName, 5)
 		WebUI.takeScreenshot()
-		safetyInput(txfCustomerName, customerName)
-		safetyClick(btnSearch)
+		retrySearchCustomer(customerName, txfCustomerName, btnSearch, btnPencil)
 		WebUI.takeScreenshot()
 	}
 	
@@ -221,6 +257,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 	
 	public void clickActionPencil() {
+		WebUI.takeScreenshot()
 		safetyClick(btnPencil)
 	}
 	
@@ -232,21 +269,43 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyInput(txfNotesInfo, notes)
 	}
+	
+	public boolean getCustomerTypeIsCompany() {
+		if(WebUI.waitForElementPresent(lblCustomertype, 5)) {
+			return true
+		} else {
+			return false
+		}
+	}
 
-	public void inputCustomerMainData(String gender, String religion, String education, String mobilePhone, String motherName) {
+	public void inputCustomerMainData(String customerModel, String gender, String religion, String education, String mobilePhone, String motherName) {
+		TestObject lblCustomerModel = createTestObject("lblCustomerModel", "xpath", "//*[contains(@id, 'rblCustModel')]//*[text() = '${customerModel}']")
+		safetyClick(lblCustomerModel)
 		safetySelect(drpGender, gender)
 		safetySelect(drpReligion, religion)
 		safetySelect(drpEducation, education)
 		safetyInput(txfMobilePhone, mobilePhone)
 		safetyClick(txfMotherName)
 		safetyInput(txfMotherName, motherName)
-		WebUI.takeScreenshot()
 	}
+	
+	public void inputCustomerMainDataCompany(String indutryTypeName, String numberOfEmployee, String establishmentDate, String affiliationWithMultifinance) {
+		safetyClick(btnIconIndustryType)
+		safetyInput(ovlIndustryTypeName, indutryTypeName)
+		safetyClick(ovlSearchIndustryType)
+		safetyClick(ovlSelectIndustryType)
+		safetyInput(txfNumbOfEmployee, numberOfEmployee)
+		safetyInput(txfEstablisDate, establishmentDate)
+		if(affiliationWithMultifinance == "Y") {			
+			safetyClick(radAffiliation)
+		}
+	}
+
 
 	public void inputContactResult(String isCallSucceded, String reason, String cpRelationship, String surveyorCode, String contactedName, String notes) {
 		txtCallSucceded = createTestObject("txtCallSucceded", "xpath", "//*[@id = 'rblIsCallSucceded']//label[text() = '$isCallSucceded']")//Yes or No
 		safetyClick(txtCallSucceded)
-
+		WebUI.delay(5)
 		safetySelect(drpReason, reason)
 		safetySelect(drpCPRelationdhip, cpRelationship)
 		safetySelect(drpSurveyorCode, surveyorCode)
@@ -283,14 +342,15 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	public void clickEditResidenceAddress() {
 		safetyClick(btnPencilResidenceAddress)
 	}
+	
+	public void clickEditCompanyAddress() {
+		safetyClick(btnPencilCompanyAddress)
+	}
 
-	public void inputResidenceAddressMain(String kelurahan, String kecamatan, String city, String zipCode, String residenceAddress, String rt, String rw, String phoneArea, String phone, String phoneExt) {
+	public void inputResidenceAddressMain(String zipCode, String residenceAddress, String rt, String rw, String phoneArea, String phone, String phoneExt) {
 		WebUI.takeScreenshot()
 		//lookup zipcode
 		safetyClick(icoLookUpZipCode)
-		safetyInput(txfKelurahan, kelurahan)
-		safetyInput(txfKecamatan, kecamatan)
-		safetyInput(txfCity, city)
 		safetyInput(txfZipCode, zipCode)
 		safetyClick(btnSearchZipCode)
 		safetyClick(btnSelectZipCode)
@@ -307,8 +367,10 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfPhoneExtResidence, phoneExt)
 	}
 
-	public void inputResidenceAddressInfo(String buildingType, String buildingOwner, String buildingStayLength) {
-		safetySelect(drpBuildingType, buildingType)
+	public void inputResidenceAddressInfo(String buildingType = '', String buildingOwner, String buildingStayLength) {
+		if(buildingType) {			
+			safetySelect(drpBuildingType, buildingType)
+		}
 		safetySelect(drpBuildingOwner, buildingOwner)
 		manualClearText(txfBuildingStay)
 		safetyInput(txfBuildingStay, buildingStayLength)
@@ -319,27 +381,66 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnSaveAddress)
 		WebUI.takeScreenshot()
 	}
-
+	
+	public void inputCompnyShareHolder() {
+		if(WebUI.waitForElementPresent(btnDeleteShareHolder, 2)) {
+			safetyClick(btnDeleteShareHolder)
+		}
+		safetyClick(btnAddShareholderCompany)
+		safetyClick(btnSearchShareholder)
+		safetyInput(txfPopupInputName, "%")
+		safetyClick(btnPopupSearch)
+		safetyClick(btnPopupSelect)
+		manualClearText(txfSharePercent)
+		safetyInput(txfSharePercent, "100")
+		WebUI.takeScreenshot()
+		safetyClick(btnSaveShareholder)
+	}
+	
+	public void inputCompanyContactInfo(String name, String jobPosition) {
+		safetyInput(txfContactInfoName, name)
+		safetySelect(drpContactInfoJobPosition, jobPosition)
+	}
+	
+	public void inputLegalDocument(String docNo, String dateIssue) {
+		List<String> docTypes = ["AKTA PENDIRIAN", "LAST AKTA"]
+		docTypes.forEach { docType -> 			
+			safetyClick(btnAddLegalDocument)
+			safetySelect(drpDocType, docType)
+			safetyInput(txfDocNo, docNo)
+			safetyInput(txfDateIssued, dateIssue)
+			WebUI.takeScreenshot()
+			safetyClick(btnSaveLegalDoc)
+		}
+	}
+	
 	public void clickEditJobAddress() {
 		safetyClick(btnPencilJobAddress)
 	}
 
 	public void copyJobAddressFromResidenceAddress() {
-		WebUI.takeScreenshot()
 		safetySelect(drpCopyAddress, "Residence Address")
 		safetyClick(btnCopy)
 		WebUI.takeScreenshot()
 	}
 
 	public void clickAddAddress() {
+		if(WebUI.waitForElementPresent(btnDeleteLegalAddress, 3)) {
+			safetyClick(btnDeleteLegalAddress)
+		}
 		safetyClick(btnAddAddress)
 	}
 
 	public void copyAndAddLegalAddressFromResidenceAddress() {
-		WebUI.takeScreenshot()
 		safetySelect(drpCopyAddress, "Residence Address")
 		safetyClick(btnCopy)
 		safetySelect(drpAddressType, "Legal Address")
+		WebUI.takeScreenshot()
+	}
+	
+	public void copyFromCompanyAddress() {
+		safetySelect(drpAddressType, "Legal Address")
+		safetyClick(btnCopy)
 		WebUI.takeScreenshot()
 	}
 	
@@ -373,7 +474,6 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfDescDebitor, debitorGroup)
 		safetyClick(btnSearchDebitor)
 		safetyClick(btnSelectDebitor)
-		WebUI.takeScreenshot()
 		//safetySelect(drpDebitorBusinessScale, debitorScale) ini di comment karena, auto input setelah calculate pada section income
 
 		//counterpart category
@@ -401,6 +501,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyInput(txfDescSustainable, sustainable)
 		safetyClick(btnSearchSustainable)
 		safetyClick(btnSelectSustainable)
+		WebUI.takeScreenshot()
 	}
 	
 	public void inputEAccountFlag(String flag) {
@@ -536,10 +637,19 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 
+	public void copyAddressAssetOwner() {
+		safetySelect(drpCopyAddressAsset, "Legal Address")
+		safetyClick(btnCopyAddressOwner)
+	}
+
 	public void copyAssetLocationFromLegalAddress() {
 		safetySelect(drpCopyAddressAsset, "Legal Address")
 		safetyClick(btnCopyAddressAsset)
 		WebUI.takeScreenshot()
+	}
+	
+	public void selectOwnerIdType(String idType) {
+		safetySelect(drpOwnerIdType, idType)
 	}
 
 	public void inputOtherAssetInfo(String assetUsage, String teleSurveyUnitUsage) {

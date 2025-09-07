@@ -4,6 +4,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -28,11 +29,14 @@ public class LoginPage extends BaseHelper {
 	private TestObject txfUsername	= createTestObject("txfUsername", "xpath", "//input[@id='txtUsername']")
 	private TestObject txfPassword	= createTestObject("txfPassword", "xpath", "//input[@id='txtPassword']")
 	private TestObject btnLogin		= createTestObject("btnLogin", "xpath", "//input[@id='lbLogin']")
-	private TestObject txtOffice 	= createTestObject("txtOffice", "", "")
+	private TestObject txtOffice 	= createTestObject("txtOffice", "", "//th[normalize-space(text())= 'OFFICE')")
 	private TestObject txtPosition	= createTestObject("txtPosition", "", "")
 	private TestObject txtRole 		= createTestObject("txtRole", "", "")
 	private TestObject btnSelect 	= createTestObject("btnSelect", "", "")
-	private TestObject lblRoles		= createTestObject("lblRoles", "id", "uModDRole_ctl00_gvRoles_lbSelectRole_0") 
+	private TestObject lblRoles		= createTestObject("lblRoles", "xpath", "//*[contains(text(), 'Select your roles') and not(ancestor::*[contains(@class, 'overlay') and contains(@style, 'visibility: hidden')])]")
+	private TestObject btnLogout	= createTestObject("btnLogout", "id", "navLogout")
+	private TestObject btnLastSelect= createTestObject("btnLastSelect", "xpath", "(//*[contains(@id, 'uModDRole_ctl00_gvRoles_lbSelectRole')])[last()]")
+
 
 
 	public void login(String username, String password) {
@@ -58,6 +62,30 @@ public class LoginPage extends BaseHelper {
     """
 			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
 			WebUI.click(dynamicSelectButton)
+		} else {
+			KeywordUtil.logInfo("No need select roles")
+		}
+	}
+	private void selectRolesCreditApproval(String office, String position, String role) {
+		if(!WebUI.waitForElementPresent(btnLogout, 5, FailureHandling.OPTIONAL)) {
+			TestObject dynamicSelectButton
+			String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+			String upper = 'abcdefghijklmnopqrstuvwxyz'
+
+			String xpath = """
+        //tr[
+            contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
+            and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
+            and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
+        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
+    """
+
+			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
+			if(!WebUI.verifyElementPresent(dynamicSelectButton, 5, FailureHandling.OPTIONAL)) {
+				safetyClick(btnLastSelect)
+			} else {
+				WebUI.click(dynamicSelectButton)
+			}
 		} else {
 			KeywordUtil.logInfo("No need select roles")
 		}

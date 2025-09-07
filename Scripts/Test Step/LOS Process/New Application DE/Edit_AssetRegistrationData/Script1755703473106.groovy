@@ -48,11 +48,11 @@ asset.clickSave()
 'Step 6: Click Edit asset data'
 asset.clickEditAssetData()
 
-'Step 7: Input Supplier info '
-asset.inputSupplierInfoSection(SupplierBranchName, SalesPersonName)
-
-'Step 8 : input main asset section'
+'Step 7 : input main asset section'
 asset.inputMainAssetSection(AssetName, AssetPrice, DpType, DownPayment, MainAssetNotes)
+
+'Step 8: Input Supplier info '
+asset.inputSupplierInfoSection(SupplierBranchName, SalesPersonName)
 
 'Step 9: Input Asset Data Section'
 asset.inputAssetDataSection(NoMesin, NoRangka,LicensePlateNo ,AssetCondition , AssetUsage, ManufacturingYear)

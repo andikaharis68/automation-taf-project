@@ -22,6 +22,10 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.helpers.BaseHelper
 
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+
+
 import internal.GlobalVariable
 
 public class ApplicationDataPage extends BaseHelper {
@@ -91,11 +95,25 @@ public class ApplicationDataPage extends BaseHelper {
 	private void selectAndCopyAddressFrom(String addressType) {
 		boolean isElementEnabled = WebUI.verifyElementPresent(drpCopyAddressFrom, 2, OPTIONAL)
 		if(isElementEnabled) {
-			safetySelect(drpCopyAddressFrom, addressType)
+			WebElement element = WebUI.findWebElement(drpCopyAddressFrom)
+			List<WebElement> options = element.findElements(By.tagName("option"))
+			boolean isFound = false
+			for (WebElement opt : options) {
+				if (opt.getText().trim().equalsIgnoreCase(addressType)) {
+					safetySelect(drpCopyAddressFrom, addressType)
+					isFound = true
+					WebUI.click(btnCopyAddress)
+					WebUI.delay(1)
+					break
+				}
+			}
+			if (!isFound) {
+				selectFirstOption(drpCopyAddressFrom, addressType)
+			}
+		} else {
+			KeywordUtil.markWarning("Option not clickable or disabled")
 		}
-		WebUI.delay(3)
-		WebUI.click(btnCopyAddress)
-		WebUI.delay(1)
+		
 	}
 
 	private void inputAddress(String address) {
@@ -173,9 +191,8 @@ public class ApplicationDataPage extends BaseHelper {
 
 	private void selectFirstInstallmentType(String firstInstallment) {
 		TestObject radFirstInstallment = createTestObject("radFirstInstallment","xpath","//label[normalize-space(text())='${firstInstallment}']/preceding-sibling::input[@type='radio']")
-		boolean isElementInteractable = checkElementIsInteractable(radFirstInstallment)
-		KeywordUtil.logInfo("element interactable is " +  isElementInteractable)
-		if (firstInstallment?.trim() && isElementInteractable) {
+		boolean isElementDisabled = checkOptionDisabled(radFirstInstallment)
+		if (firstInstallment?.trim() && !isElementDisabled) {
 			safetyClick(radFirstInstallment)
 		}
 	}
@@ -195,12 +212,13 @@ public class ApplicationDataPage extends BaseHelper {
 		}
 	}
 	
-	private void inputApplicationData(String mouNo, String tenor, String frequency, String marginType, String installmentScheme, String salesOfficerName) {
+	private void inputApplicationData(String mouNo, String tenor, String frequency, String marginType, String installmentScheme, String firstInstallmentType, String salesOfficerName) {
 		searchMOUNo(mouNo)
 		inputTenor(tenor)
 		selectPaymentFrequency(frequency)
 		selectMarginType(marginType)
 		selectInstallmentScheme(installmentScheme)
+		selectFirstInstallmentType(firstInstallmentType)
 		selectSalesOfficer(salesOfficerName)
 	}
 	private void inputApplicationInfoSection(String appSource, String fiduciaCovered, String wayOfPayment) {

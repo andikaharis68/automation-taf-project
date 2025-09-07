@@ -8,6 +8,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import org.joda.time.chrono.IslamicChronology
+import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -16,7 +17,9 @@ import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
+import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -26,10 +29,11 @@ import internal.GlobalVariable
 
 public class InsuranceDataPage extends BaseHelper {
 
+	private TestObject lblSection			= createTestObject("lblSection", "id", "ucIGridSection_subSectionID")
 	private TestObject btnCopyToAll			= createTestObject("btnCopyToAll","id","lb_Form_CopyToAll")
 	private TestObject btnCopySelected		= createTestObject("btnCopySelected","id","lb_Form_DeleteSelected")
 	private TestObject btnEdit				= createTestObject("btnEdit","id","gvEntryIns_imbEdit_0")
-	private TestObject btnNext				= createTestObject("btnNext","id","lb_Toolbar_Next")  
+	private TestObject btnNext				= createTestObject("btnNext","id","lb_Toolbar_Next")
 	private TestObject btnCancel			= createTestObject("btnCancel","id","lb_Toolbar_Cancel")
 	private TestObject drpSchemeName		= createTestObject("drpSchemeName", "id", "ucInsInit_ucRefInsSchmName_ddlReference")
 	private TestObject drpRateType			= createTestObject("drpRateType", "id", "ucInsInit_ucRefInsRateType_ddlReference")
@@ -46,10 +50,11 @@ public class InsuranceDataPage extends BaseHelper {
 	private TestObject txfPolicyNo			= createTestObject("txfPolicyNo", "id", "ucInsInit_txtPolicyNo")
 	private TestObject txfCoverageAmount	= createTestObject("txfCoverageAmount", "id", "ucInsInit_ucINInsCvgAmt_txtInput")
 	private TestObject txfEndDate			= createTestObject("txfEndDate", "id", "ucInsInit_ucDPCustCoverEndDt_txtDatePicker")
+	private TestObject txfInsuranceLength	= createTestObject("txfInsuranceLength", "id", "ucInsInit_ucINInsLength_txtInput")
 
 
 	private void verifyLandingInInsuranceData() {
-		verifyLanding(btnEdit, "Insurance Data")
+		verifyLanding(lblSection, "Insurance Data")
 		WebUI.takeScreenshot()
 	}
 	private void clickEdit() {
@@ -59,7 +64,7 @@ public class InsuranceDataPage extends BaseHelper {
 
 	private void clickNext() {
 		WebUI.takeScreenshot()
-		WebUI.click(btnNext)
+		safetyClick(btnNext)
 		WebUI.delay(1)
 	}
 
@@ -85,9 +90,23 @@ public class InsuranceDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void clickCalculate() {
+		WebUI.scrollToElement(btnCalculate, 5)
 		safetyClick(btnCalculate)
+		WebUI.takeScreenshot()
 	}
 	private void clickSave() {
+		WebUI.scrollToElement(btnSave, 5)
+		safetyClick(btnSave)
+		handleAlertIfPresent()
+		if(WebUI.verifyElementPresent(btnSave, 2, OPTIONAL)) {
+			safetyClick(btnSave)
+		}
+		WebUI.takeScreenshot()
+	}
+
+	private void clickSaveAfterCalculate() {
+		TestObject btnSave = createTestObject("btnSave", "id","lbSave" )
+		WebUI.scrollToElement(btnSave, 5)
 		safetyClick(btnSave)
 		handleAlertIfPresent()
 		if(WebUI.verifyElementPresent(btnSave, 2, OPTIONAL)) {
@@ -102,39 +121,100 @@ public class InsuranceDataPage extends BaseHelper {
 		safetyClick(btnNextToSaveContinue)
 		WebUI.takeScreenshot()
 	}
-	private void selectInsuredBy(String insuredBy) {
+//	private String selectInsuredBy(String insuredBy) {
+//		TestObject radInsuredBy = createTestObject("radInsuredBy","xpath","//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
+//		boolean isOptionDisabled = checkOptionDisabled(radInsuredBy)
+//		if(insuredBy && !isOptionDisabled) {
+//			safetyClick(radInsuredBy)
+//			WebUI.delay(1)
+//		} else {
+//			//radio disable get selected radio label
+//			insuredBy = getSelectedRadioLabel()
+//		}
+//		return insuredBy
+//	}
+	private TestObject getInsuredByRadio(String insuredBy) {
+		String xpath = "//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']"
+		return createTestObject("radio_" + insuredBy, "xpath", xpath)
+	}
+	private String selectInsuredBy(String insuredBy) {
+		if (!insuredBy) return getSelectedRadioLabel()
+	
+		TestObject radioOption = getInsuredByRadio(insuredBy)
+	
+		if (!checkOptionDisabled(radioOption)) {
+			safetyClick(radioOption)
+			WebUI.delay(1)
+			return insuredBy
+		}
+	
+		// If radio is disabled, return currently selected
+		return getSelectedRadioLabel()
+	}
+	
+	private boolean isInsuredByOptionDisabled(String insuredBy) {
+		return checkOptionDisabled(getInsuredByRadio(insuredBy))
+	}
+
+	private boolean checkOptionInsuredByDisabled(String insuredBy) {
 		TestObject radInsuredBy = createTestObject("radInsuredBy","xpath","//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
 		boolean isOptionDisabled = checkOptionDisabled(radInsuredBy)
-		if(insuredBy && !isOptionDisabled) {
-			safetyClick(radInsuredBy, insuredBy)
-			WebUI.delay(1)
-		}
+		return isOptionDisabled
 	}
+	private String getSelectedRadioLabel() {
+		TestObject radios = createTestObject("radios", "xpath", "//input[contains(@id,'ucInsInit_rblInsAssetCoveredBy_')]")
+		List<WebElement> radioList = WebUI.findWebElements(radios, 5)
+		for (WebElement radio : radioList) {
+			if (radio.isSelected()) {
+				String id = radio.getAttribute("id")
+				TestObject labelObj = new TestObject("labelForRadio")
+				labelObj.addProperty("xpath", ConditionType.EQUALS, "//label[@for='${id}']")
+				String labelText = WebUI.getText(labelObj)
+				KeywordUtil.logInfo("Insured by " + labelText + ".")
+				return labelText
+			}
+		}
+		return "Not found checked"
+	}
+
+
 	private void selectCoverPeriod(String coverPeriod) {
 		TestObject radCoverPeriod = createTestObject("radCoverPeriod","xpath","//label[normalize-space(text())='${coverPeriod}']/preceding-sibling::input[@type='radio']")
 		boolean isElementEnabled  = WebUI.verifyElementPresent(radCoverPeriod, 3, OPTIONAL)
-		if(coverPeriod && isElementEnabled) {
+		if(coverPeriod?.trim() && isElementEnabled) {
 			safetyClick(radCoverPeriod)
 		}
 	}
 
-	private void inputInsuranceDataInitialization(String insuredBy, String inscoBranchName,
+	private void inputInsuranceDataInitCustomer(String inscoBranchName,
 			String policyName, String startDate, String insuranceNote, String policyNo, String coverageAmount, String endDate) {
-			
-			selectInsuredBy(insuredBy)
-			inputInscoBranchName(inscoBranchName)
-			inputPolicyName(policyName)
-			inputStartDate(startDate)
-			inputInsuranceNotes(insuranceNote)
-			inputPolicyNo(policyNo)
-			inputCoverageAmount(coverageAmount)
-			inputEndDate(endDate)
+
+		WebUI.comment("Input data initialization insured by Customer.")
+		inputInscoBranchName(inscoBranchName)
+		inputPolicyName(policyName)
+		inputStartDate(startDate)
+		inputInsuranceNotes(insuranceNote)
+		inputPolicyNo(policyNo)
+		inputCoverageAmount(coverageAmount)
+		inputEndDate(endDate)
+		WebUI.takeScreenshot()
 	}
-	
-	
+
+	private void inputInsuranceOtherDataInitCompany(String schemeName, String rateType, String main,String coverPeriod, String length) {
+		WebUI.comment("Input data initialization insured by Company.")
+		selectSchemeName(schemeName)
+		selectRateType(rateType)
+		selectMainCoverageType(main)
+		selectCoverPeriod(coverPeriod)
+		inputInsuranceLength(length)
+		WebUI.takeScreenshot()
+	}
+
+
+
 	private void inputInsuranceNotes(String notes) {
 		boolean isElementEnabled = WebUI.verifyElementPresent(txfInsuranceNotes, 3, OPTIONAL)
-		if(notes && isElementEnabled) {
+		if(notes?.trim() && isElementEnabled) {
 			safetyInput(txfInsuranceNotes, notes)
 		}
 	}
@@ -156,6 +236,7 @@ public class InsuranceDataPage extends BaseHelper {
 	private void inputStartDate(String date) {
 		boolean isElementEnabled = WebUI.verifyElementPresent(txfStartDate, 3, OPTIONAL)
 		if(date && isElementEnabled) {
+			WebUI.scrollToElement(txfStartDate, 1)
 			safetyInput(txfStartDate, date)
 			clickEnter(txfStartDate)
 			WebUI.delay(1)
@@ -167,7 +248,6 @@ public class InsuranceDataPage extends BaseHelper {
 		if(policyNo && isElementEnabled) {
 			safetyInput(txfPolicyNo, policyNo)
 			WebUI.delay(1)
-			
 		}
 	}
 	private void inputCoverageAmount(String amount) {
@@ -182,18 +262,23 @@ public class InsuranceDataPage extends BaseHelper {
 	private void inputEndDate(String date) {
 		boolean isElementEnabled = WebUI.verifyElementPresent(txfEndDate, 3, OPTIONAL)
 		if(date && isElementEnabled) {
+			WebUI.scrollToElement(txfEndDate, 1)
 			safetyInput(txfEndDate, date)
-			clickEnter(txfEndDate)
+			clickTABKeyboard(txfEndDate)
 			WebUI.delay(1)
-			
 		}
 	}
-	
+
 	private void inputDataInitializationPersonal(String schemeName, String coverPeriod, String rateType) {
 		selectSchemeName(schemeName)
 		selectCoverPeriod(coverPeriod)
 		selectRateType(rateType)
 		WebUI.delay(1)
-		
+	}
+	private void inputInsuranceLength(String length) {
+		boolean isDisabled = checkOptionDisabled(txfInsuranceLength)
+		if(length?.trim() && !isDisabled) {
+			safetyInput(txfInsuranceLength, length)
+		}
 	}
 }

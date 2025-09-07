@@ -20,6 +20,8 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String testDataName = BaseHelper.getTestDataName()
+
 Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, 
 					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
 					'SheetNames': ['CustomerConfirmation', 'MasterData'],
@@ -29,9 +31,8 @@ Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID,
 					'AgreementDate' : ''] 
 Map dataRow = [:]
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
-
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow["CredentialId"])
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)

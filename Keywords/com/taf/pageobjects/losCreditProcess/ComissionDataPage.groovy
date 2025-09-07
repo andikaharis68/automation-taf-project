@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -40,7 +41,8 @@ public class ComissionDataPage extends BaseHelper {
 	private TestObject txfDifOther			= createTestObject("txfDifOther", "id", "gvSupplEmpCommission_ucinRefundFromOth2_0_txtInput_0")
 
 	private void verifyLandingInComissionData() {
-		verifyLanding(lblSection, "Comission Data")
+		WebUI.delay(2)
+		verifyLanding(btnCalculate, "Comission Data")
 		WebUI.takeScreenshot()
 	}
 	private void clickCalculate() {
@@ -54,7 +56,7 @@ public class ComissionDataPage extends BaseHelper {
 	}
 
 	private void searchSupplierBranchName(String branchName) {
-		if(branchName) {
+		if(branchName && WebUI.verifyElementPresent(btnSearchBranchName, 2, OPTIONAL)) {
 			safetyClick(btnSearchBranchName)
 			WebUI.delay(0.5)
 
@@ -68,7 +70,7 @@ public class ComissionDataPage extends BaseHelper {
 	}
 
 	private void selectEmployeeName(String name) {
-		if(name) {
+		if(name && WebUI.verifyElementPresent(drpEmployeeName, 2, OPTIONAL)) {
 			WebElement element = WebUI.findWebElement(drpEmployeeName)
 			List<WebElement> options = element.findElements(By.tagName("option"))
 			boolean isFound = false
@@ -87,7 +89,7 @@ public class ComissionDataPage extends BaseHelper {
 		}
 	}
 	private void inputDifOther(String difOther) {
-		if(difOther) {
+		if(difOther && WebUI.verifyElementPresent(txfDifOther, 2, OPTIONAL)) {
 			manualClearText(txfDifOther)
 			safetyInput(txfDifOther, difOther)
 		}
@@ -96,6 +98,7 @@ public class ComissionDataPage extends BaseHelper {
 	private void addSupplierEmployeeSection(String branchName, String employeeName, String difOther) {
 		if(branchName) {
 			safetyClick(btnAdd)
+			WebUI.takeScreenshot()
 			searchSupplierBranchName(branchName)
 			selectEmployeeName(employeeName)
 			inputDifOther(difOther)

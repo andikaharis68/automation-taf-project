@@ -3,7 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.checkpoint.Checkpoint
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
@@ -20,31 +21,32 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String testDataName = BaseHelper.getTestDataName()
+
 Map scenarioData = [
 	'ScenarioId' : GlobalVariable.SCENARIO_ID,
-	'TestDataName': "LOS_New_Application_Retail_MultiAset.xlsx",
 	'SheetNames': ['CreditApproval', 'MasterData']
 ]
-Map dataRow = [:]
 
+Map dataRow = [:]
 dataRow += scenarioData
-dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
-dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow["CredentialId"])
 
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
 int maxLoop = GlobalVariable.COUNTER
 int i = 0 
-while(!dataRow['IsSmsApprove'] && i != maxLoop) {
-	KeywordUtil.logInfo("Credit Approval Ke : ${i+1}")
+while(!dataRow['IsSmsApprove'] && i < maxLoop) {
+	KeywordUtil.logInfo("Credit Approval attempt : ${i+1}")
 	BaseHelper.openBrowser()
 	
 	//Get Credential for Approval
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Wait_Untill_Appear_Approvalfor'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Get_Approval_Credential'), dataRow)
 	BaseHelper.closeBrowser()
-	
 	//Credit Approval
 	BaseHelper.openBrowser()
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow)
@@ -63,7 +65,8 @@ while(!dataRow['IsSmsApprove'] && i != maxLoop) {
 }
 
 if (dataRow['IsSmsApprove']) {
-	//Login on Workflow Monitoring and resume for sms_approve handler
+	// Login on Workflow Monitoring and resume for sms_approve handler
+	dataRow['CredentialId'] = '9'
 	WebUI.openBrowser(GlobalVariable.WEB_WORKFLOW_URL)
 	WebUI.maximizeWindow()
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Resume_Sms_Approve'), dataRow)

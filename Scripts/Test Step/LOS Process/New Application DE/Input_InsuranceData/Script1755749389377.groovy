@@ -29,11 +29,42 @@ LifeInsuranceDataPage lifeInsurance = new LifeInsuranceDataPage()
 'Step 1: Click Edit'
 insuranceData.clickEdit()
 
-'Step 2: Input Insurance Data initialization'
-insuranceData.inputInsuranceDataInitialization(InsuredBy, InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+'Step 2: Get radio selected'
+ActualInsuredBy = insuranceData.selectInsuredBy(InsuredBy)
+IsInsuredByDisabled = insuranceData.checkOptionInsuredByDisabled(InsuredBy)
 
-'Step 3: Click save'
-insuranceData.clickSave()
+if(ActualInsuredBy == "Customer") {
+	'Step 3: Input Insurance Data init customer'
+	insuranceData.inputInsuranceDataInitCustomer(InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+	
+} else if(ActualInsuredBy == "Company") {
+	
+	'Step 3: Input Insurance Data initialization company'
+	insuranceData.inputInsuranceOtherDataInitCompany(SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength)
+	
+} else {
+	'Step 3: Input Insurance Data initialization Customer/Company'
+	insuranceData.inputInsuranceDataInitCustomer(InscoBranchName, PolicyName, StartDate, InsuranceNote, PolicyNo, CoverageAmount, EndDate)
+	
+	insuranceData.inputInsuranceOtherDataInitCompany(SchemeName, RateType, MainCoverageType, CoverPeriod, InsuranceLength)
+	
+}
+
+if(!IsInsuredByDisabled) {
+	'Step 4: Click next'
+	insuranceData.clickNext()
+	
+	'Step 5: Click calculate'
+	insuranceData.clickCalculate()
+	
+	'Step 6: Click save after calculate'
+	insuranceData.clickSaveAfterCalculate()
+	
+} else {
+	'Step 6: Click save'
+	insuranceData.clickSave()
+} 
+
 
 'Step 7: Click next'
 insuranceData.clickNextToSaveAndContinue()
