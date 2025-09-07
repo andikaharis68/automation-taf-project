@@ -71,6 +71,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		WebUI.takeScreenshot()
 		String actualStep = WebUI.getText(txtLastStepName)
 		KeywordUtil.logInfo("element " + actualStep)
+		WebUI.delay(3)
 		return (actualStep.containsIgnoreCase("Approval for")) ? true : false
 	}
 

@@ -39,26 +39,41 @@ public class CreditApprovalPage extends BaseHelper{
 	//approval action
 	private TestObject drpAction 				= createTestObject("drpAction", "id", "ddlAction")
 	private TestObject txfNotes 				= createTestObject("txfNotes", "id", "txtNotes")
+	private TestObject lblMatchingResult		= createTestObject("lblSectionApproval", "id", "ucToggleMatchResult_subSectionID") //*[@id=""]
 
 	public void verifyLandingScreen() {
-		verifyLanding(txfCustomerIncome, "Credit Approval")
+		WebUI.scrollToElement(lblMatchingResult, 3)
+		verifyLanding(lblMatchingResult, "Credit Approval")
 		WebUI.takeScreenshot()
 	}
 
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
-		manualClearText(txfCustomerIncome)
-		safetyInput(txfCustomerIncome, customerIncome)
+		WebUI.delay(3)
+		if(WebUI.verifyElementPresent(txfCustomerIncome, 2, OPTIONAL)) {
+			WebUI.scrollToElement(txfCustomerIncome, 2)
+			manualClearText(txfCustomerIncome)
+			safetyInput(txfCustomerIncome, customerIncome)
+		}
+	
+		if(WebUI.verifyElementPresent(txfSpouseIncome, 2, OPTIONAL)) {
+			manualClearText(txfSpouseIncome)
+			safetyInput(txfSpouseIncome, spouseIncome)
+		}
 		
-		manualClearText(txfSpouseIncome)
-		safetyInput(txfSpouseIncome, spouseIncome)
+		if(WebUI.verifyElementPresent(txfAdditionalIncome, 2, OPTIONAL)) {
+			manualClearText(txfAdditionalIncome)
+			safetyInput(txfAdditionalIncome, additionalIncome)
+		}
 		
-		manualClearText(txfAdditionalIncome)
-		safetyInput(txfAdditionalIncome, additionalIncome)
+		
 	}
 	
 	public void clickCalculate() {
-		safetyClick(btnCalculate)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(btnCalculate, 5, OPTIONAL)) {
+			safetyClick(btnCalculate)
+			WebUI.takeScreenshot()
+		}
+		
 	}
 
 	public void inputApprovalRecommendationSection(String latarBelakang, String faktorMendukung, String faktorTidakMendukung, String syarat, String caCalculation) {
@@ -81,6 +96,7 @@ public class CreditApprovalPage extends BaseHelper{
 	}
 
 	public void inputApprovalAction(String action, String notes) {
+		WebUI.scrollToElement(drpAction, 2)
 		safetySelect(drpAction, action)
 		safetyInput(txfNotes, notes)
 		WebUI.takeScreenshot()
