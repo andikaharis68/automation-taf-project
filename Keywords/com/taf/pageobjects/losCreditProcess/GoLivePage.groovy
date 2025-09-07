@@ -38,6 +38,8 @@ public class GoLivePage extends BaseHelper {
 	private TestObject lblBussinessDate			= createTestObject("lblBussinessDate", "id", "ltlBusinessDate")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	private TestObject txfAgreementDate			= createTestObject("txfAgreementDate", "id", "ucAgrmntDt_txtDatePicker")
+	
+	private TestObject lblErrorMessage			= createTestObject("lblErrorMessage", "xpath", "//*[@id='errorList' and contains(@style, 'block')]//option")
 
 	
 	private void verifyLandingInGoLive() {
@@ -79,5 +81,10 @@ public class GoLivePage extends BaseHelper {
 	private void clickButtonSubmit() {
 		WebUI.takeScreenshot()
 		safetyClick(btnSubmit)
+	}
+	
+	private void verifySuccessGoLive() {
+		WebUI.verifyElementPresent(btnSearch, 10)
+		WebUI.takeScreenshot()
 	}
 }

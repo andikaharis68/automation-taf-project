@@ -66,7 +66,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnInvoice					= createTestObject("btnInvoice", "xpath", "//a[text() = 'Invoice']")
 	private TestObject btnGoLive					= createTestObject("btnGoLive", "text", "Go Live")
 
-	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//p[@id ='messageContent' and contains(text(), 'Save Success')]")
+	private TestObject lblSuccessMessage 			= createTestObject("lblSuccessMessage", "xpath", "//*[@id ='messageContent' and contains(text(), 'Success')]")
 	private TestObject iframeMenu 					= createTestObject("iframeMenu", "xpath", "//*[@id='treeContainer']")
 	private TestObject btnDocumentChecklist			= createTestObject("btnDocumentChecklist", "xpath", "//a[text() = 'Document Checklist']")
 	private TestObject iframeMainPage				= createTestObject("iframeMainPage", "xpath", "//*[@id='mainPage']")
@@ -252,8 +252,7 @@ public class MenuPage extends BaseHelper {
 
 	public void verifySuccessMessage() {
 		WebUI.switchToDefaultContent()
-		WebUI.waitForElementPresent(lblSuccessMessage, 20)
-		WebUI.delay(2)
+		WebUI.verifyElementPresent(lblSuccessMessage, 20, FailureHandling.CONTINUE_ON_FAILURE)
 		WebUI.takeScreenshot()
 	}
 

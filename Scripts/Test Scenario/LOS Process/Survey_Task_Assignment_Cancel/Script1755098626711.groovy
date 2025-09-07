@@ -40,17 +40,19 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
-// Run wait loop
-BaseHelper.waitForStep( dataRow,
-    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dr) },
-    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dr) })
-// Final check
-BaseHelper.validateStepReached(dataRow, { 
-	dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dr)})
 
-if(dataRow['isStepSurvey']) {
-	// Main Step
+//Checking Step
+while(GlobalVariable.COUNTER > dataRow['Counter']) {
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
+	dataRow['Counter'] += 1
+	WebUI.delay(GlobalVariable.WAIT)
+}
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Check_Survey_Needed'), dataRow)
+if(dataRow['StepCheck']) {
+	//Main Step
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Navigate_To_Survey_Task'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Search_Transaction_Reference'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Survey Task Assignment Cancel/Cancel_Survey_Task_Assignment'), dataRow)
-} 
+}
