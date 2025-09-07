@@ -42,7 +42,3 @@ StepCheck = workflowMonitoring.getLastWorkFlow()
 
 'Step 6: switch to first tab'
 workflowMonitoring.switchToFirstTab()
-
-'Step 6: check last step'
-boolean isStepSurvey = workflowMonitoring.checkLastStepIsSurvey()
-

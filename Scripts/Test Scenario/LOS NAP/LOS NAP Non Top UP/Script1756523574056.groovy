@@ -21,7 +21,7 @@ import org.openqa.selenium.Keys as Keys
 
 String scenarioId = GlobalVariable.SCENARIO_ID
 Map dataRow = [:]
-String testDataName = "LOS_New_Application_Sipdana_NonTopUp.xlsx"
+String testDataName = "LOS_New_Application_Siapdana_NonTopUp.xlsx"
 dataRow += BaseHelper.getTestDataByScenario("NewApplication", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 dataRow += ["ExcelName" : testDataName,

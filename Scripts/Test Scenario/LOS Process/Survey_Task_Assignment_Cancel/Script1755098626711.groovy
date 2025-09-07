@@ -40,13 +40,6 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
-// Run wait loop
-BaseHelper.waitForStep( dataRow,
-    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dr) },
-    { dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dr) })
-// Final check
-BaseHelper.validateStepReached(dataRow, { 
-	dr -> WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dr)})
 
 //Checking Step
 while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {
