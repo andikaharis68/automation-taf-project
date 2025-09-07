@@ -61,6 +61,10 @@ while(!dataRow['IsSmsApprove'] && i < maxLoop) {
 	
 	BaseHelper.closeBrowser()
 	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
+	if(dataRow['IsSmsApprove']) {
+		break;
+	}
+	
 	i++
 }
 

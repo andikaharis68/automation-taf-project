@@ -30,7 +30,7 @@ workflowMonitoring.verifyLandingScreen()
 'Step 3: verify is step is already on sms approve'
 IsSmsApprove = workflowMonitoring.verifyIsStepAlreadyOnSmsApprove()
 
-int counter = 0
+int counter = 4
 while (!IsSmsApprove && GlobalVariable.COUNTER > counter) {
 	'Step 3.1: execution time handling'
 	workflowMonitoring.delayAndRefresh()

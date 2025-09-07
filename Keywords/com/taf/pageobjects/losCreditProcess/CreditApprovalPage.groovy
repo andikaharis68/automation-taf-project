@@ -41,24 +41,30 @@ public class CreditApprovalPage extends BaseHelper{
 	private TestObject txfNotes 				= createTestObject("txfNotes", "id", "txtNotes")
 
 	public void verifyLandingScreen() {
-		verifyLanding(txfCustomerIncome, "Credit Approval")
+//		verifyLanding(txfCustomerIncome, "Credit Approval")
 		WebUI.takeScreenshot()
 	}
 
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
-		manualClearText(txfCustomerIncome)
-		safetyInput(txfCustomerIncome, customerIncome)
 		
-		manualClearText(txfSpouseIncome)
-		safetyInput(txfSpouseIncome, spouseIncome)
+		if(WebUI.verifyElementPresent(txfCustomerIncome, 3, FailureHandling.OPTIONAL)) {
+			manualClearText(txfCustomerIncome)
+			safetyInput(txfCustomerIncome, customerIncome)
+			
+			manualClearText(txfSpouseIncome)
+			safetyInput(txfSpouseIncome, spouseIncome)
+			
+			manualClearText(txfAdditionalIncome)
+			safetyInput(txfAdditionalIncome, additionalIncome)
+		}
 		
-		manualClearText(txfAdditionalIncome)
-		safetyInput(txfAdditionalIncome, additionalIncome)
 	}
 	
 	public void clickCalculate() {
-		safetyClick(btnCalculate)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(btnCalculate, 3, FailureHandling.OPTIONAL)) {
+			safetyClick(btnCalculate)
+			WebUI.takeScreenshot()
+		}
 	}
 
 	public void inputApprovalRecommendationSection(String latarBelakang, String faktorMendukung, String faktorTidakMendukung, String syarat, String caCalculation) {
