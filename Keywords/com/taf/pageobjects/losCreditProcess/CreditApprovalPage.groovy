@@ -49,31 +49,24 @@ public class CreditApprovalPage extends BaseHelper{
 
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
 		WebUI.delay(3)
-		if(WebUI.verifyElementPresent(txfCustomerIncome, 2, OPTIONAL)) {
-			WebUI.scrollToElement(txfCustomerIncome, 2)
+		if(WebUI.verifyElementPresent(txfCustomerIncome, 3, FailureHandling.OPTIONAL)) {
 			manualClearText(txfCustomerIncome)
 			safetyInput(txfCustomerIncome, customerIncome)
-		}
-	
-		if(WebUI.verifyElementPresent(txfSpouseIncome, 2, OPTIONAL)) {
+			
 			manualClearText(txfSpouseIncome)
 			safetyInput(txfSpouseIncome, spouseIncome)
-		}
-		
-		if(WebUI.verifyElementPresent(txfAdditionalIncome, 2, OPTIONAL)) {
+			
 			manualClearText(txfAdditionalIncome)
 			safetyInput(txfAdditionalIncome, additionalIncome)
 		}
 		
-		
 	}
 	
 	public void clickCalculate() {
-		if(WebUI.verifyElementPresent(btnCalculate, 5, OPTIONAL)) {
+		if(WebUI.verifyElementPresent(btnCalculate, 3, FailureHandling.OPTIONAL)) {
 			safetyClick(btnCalculate)
 			WebUI.takeScreenshot()
 		}
-		
 	}
 
 	public void inputApprovalRecommendationSection(String latarBelakang, String faktorMendukung, String faktorTidakMendukung, String syarat, String caCalculation) {

@@ -506,7 +506,7 @@ public class NewApplicationPage extends BaseHelper{
 			safetyClick(btnSelectSupplierGrid, 1)
 			manualClearText(txfServicePrice)
 			safetyInput(txfServicePrice, servicePrice)
-			safetyClick(btnSaveAsset, 1)
+			safetyClickYudho(btnSaveAsset, 1)
 			WebUI.takeScreenshot()
 		}
 	}

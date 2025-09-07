@@ -36,9 +36,9 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
 int maxLoop = GlobalVariable.COUNTER
-int i = 0 
-while(!dataRow['IsSmsApprove'] && i < maxLoop) {
-	KeywordUtil.logInfo("Credit Approval attempt : ${i+1}")
+int retryCount = 0 
+while(!dataRow['IsSmsApprove'] && retryCount < maxLoop) {
+	KeywordUtil.logInfo("===== Credit Approval Attempt: ${retryCount + 1} =====")
 	BaseHelper.openBrowser()
 	
 	//Get Credential for Approval
@@ -60,12 +60,16 @@ while(!dataRow['IsSmsApprove'] && i < maxLoop) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Sms_Approve'), dataRow)
 	
 	BaseHelper.closeBrowser()
-	KeywordUtil.logInfo("Sms Approve : "+ dataRow['IsSmsApprove'].toString())
-	i++
+    KeywordUtil.logInfo("IsSmsApprove result after attempt ${retryCount + 1}: " + dataRow['IsSmsApprove'])
+	if(dataRow['IsSmsApprove']) {
+		break;
+	}
+	
+	retryCount++
 }
 
 if (dataRow['IsSmsApprove']) {
-	// Login on Workflow Monitoring and resume for sms_approve handler
+	KeywordUtil.logInfo("SMS Approve is true. Proceeding with Resume Sms Approve flow...")
 	dataRow['CredentialId'] = '9'
 	WebUI.openBrowser(GlobalVariable.WEB_WORKFLOW_URL)
 	WebUI.maximizeWindow()
@@ -78,5 +82,5 @@ if (dataRow['IsSmsApprove']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Select_Credit_Approval_Workflow'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Validate_Step_On_Purchase_Order'), dataRow)
-}
+} 
 

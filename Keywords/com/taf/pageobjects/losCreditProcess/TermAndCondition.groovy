@@ -149,7 +149,6 @@ public class TermAndCondition extends BaseHelper {
 	private void clickConfirmationOk() {
 		if(WebUI.waitForAlert(5)) {
 			WebUI.acceptAlert()
-			WebUI.takeScreenshot()
 		} else {
 			KeywordUtil.markFailed("Pop up not found ")
 		}

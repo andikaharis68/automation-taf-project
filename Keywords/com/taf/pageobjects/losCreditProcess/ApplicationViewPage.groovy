@@ -30,8 +30,8 @@ public class ApplicationViewPage extends BaseHelper{
 	private TestObject btnTabApprovalHistory = createTestObject("btnTabApprovalHistory", "id", "lb_Tab_ApvHist")
 	
 	//approval history
-	private TestObject txtLastNode = createTestObject("txtLastNode", "xpath", "(//*[contains(@id, 'gvApvHist_lblApprovalNode')])[last()]")
-	private TestObject txtLastTaskOwner = createTestObject("txtLastTaskOwner", "xpath", "(//*[contains(@id, 'gvApvHist_lblApprovalTaskOwner')])[last()]")
+	private TestObject txtLastNode = createTestObject("txtLastNode", "xpath", "//span[text() = '-' and contains(@id, 'gvApvHist_lblApprovedBy')]/preceding::span[contains(@id, 'gvApvHist_lblApprovalNode')][1]")
+	private TestObject txtLastTaskOwner = createTestObject("txtLastTaskOwner", "xpath", "//span[text() = '-' and contains(@id, 'gvApvHist_lblApprovedBy')]/preceding::span[contains(@id, 'gvApvHist_lblApprovalTaskOwner')][1]")
 	
 	public void switchToSecondTab() {
 		WebUI.switchToWindowIndex(1)
