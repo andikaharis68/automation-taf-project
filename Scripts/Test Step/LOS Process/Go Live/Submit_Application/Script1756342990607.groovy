@@ -31,4 +31,4 @@ golive.inputAgreementDate(bussinessDate)
 
 golive.clickButtonSubmit()
 
-menu.verifySuccessMessage()
+golive.verifySuccessGoLive()

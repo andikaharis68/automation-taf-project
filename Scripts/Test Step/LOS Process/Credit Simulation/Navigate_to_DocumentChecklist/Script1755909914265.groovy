@@ -23,6 +23,8 @@ import org.openqa.selenium.Keys as Keys
 MenuPage menu = new MenuPage()
 DocumentChecklistPage doc = new DocumentChecklistPage()
 
+WebUI.switchToDefaultContent()
+
 'Step 1: Click dropdown menu'
 menu.clickDropdownMenu()
 

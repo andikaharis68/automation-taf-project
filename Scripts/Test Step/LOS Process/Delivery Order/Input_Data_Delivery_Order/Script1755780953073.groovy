@@ -25,7 +25,7 @@ DeliveryOrderPage data =  new DeliveryOrderPage()
 WebUI.takeScreenshot()
 
 'Step 2: input delivery information'
-data.inputDeliveryInformation(NoMesin, NoRangka)
+data.inputDeliveryInformation()
 
 'Step 3: input asset attributes'
 data.inputAssetAttribute(MadeIn, Cylinder, Transmition, Color, Region)
@@ -37,7 +37,7 @@ data.inputAssetOwner(TaxDate)
 data.inputDocumentLetter(DocLetterDate)
 
 'Step 6: check all checkbox mandatory'
-data.clickAllCheckBox(Faktur)
+data.clickAllCheckBox()
 
 'Step 7: click save'
 data.clickSave()

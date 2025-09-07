@@ -5,6 +5,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import static org.assertj.core.api.InstanceOfAssertFactories.INTEGER
 
 import java.awt.Robot
 import java.awt.event.KeyEvent
@@ -67,7 +68,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSelectGurantor			= createTestObject("btnSelectGurantor", "id", "ucLookupCust_uclCust_umd_ctl00_gvL_hpSelect_0")
 	private TestObject drpGurantorRelation			= createTestObject("drpGurantorRelation", "id", "ddlRefMasterCustRelation")
 	private TestObject btnSaveGurantor				= createTestObject("btnSaveGurantor", "id", "lb_Form_Save")
-	
+
 
 
 	//section tab application data
@@ -114,6 +115,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject txfSupplierAddress			= createTestObject("txfSupplierAddress", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2")
 	private TestObject btnSupplierSearch			= createTestObject("btnSupplierSearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectSupplier			= createTestObject("btnSelectSupplier", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")//select first row
+	private TestObject drpSalesPerson				= createTestObject("drpSalesPerson", "id", "ucSalesPerson_ddlReference")
 	//section top up agreement
 	private TestObject btnLookUpTopUp				= createTestObject("btnLookUpTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_imb")
 	//pop up
@@ -167,10 +169,12 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnCopyAddressLocation		= createTestObject("btnCopyAddressLocation", "id", "lb_Form_Copy_Assloc")
 	private TestObject btnSaveRegis					= createTestObject("btnSaveRegis", "xpath", "//a[@id = 'lb_Form_Save_Reg']")
 	private TestObject tableDocListRegis			= createTestObject("tableDocListRegis", "id", "upAssetDoc")
-	
+
 
 
 	//section tab insurance data
+	private TestObject btnCopyAllAssetInsurance		= createTestObject("btnCopyAllAssetInsurance", "id", "lb_Form_CopyToAll")
+	private TestObject chkBoxInsuranceData			= createTestObject("chkBoxInsuranceData", "id", "gvEntryIns_cbCheckIns_0")//select first chk
 	private TestObject btnEditInsuranceData			= createTestObject("btnEditInsuranceData", "id", "gvEntryIns_imbEdit_0")//select first row
 	//section insurance data intialization
 	private TestObject rdnInsuredBy					= createTestObject("rdnInsuredBy", "xpath", "//label[text() = '{data}']/preceding-sibling::input")
@@ -244,74 +248,143 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject drpFloatingPeriod			= createTestObject("", "id", "")
 	private TestObject iframeMain					= createTestObject("iframeMain", "id", "mainPage")
 	private TestObject iframeForm					= createTestObject("iframeForm", "xpath", "//iframe[@id = 'appForm']")
-	
-	
+
+
+	//section Accessories
+	private TestObject btnAddAccessories			= createTestObject("btnAddAccessories", "id", "lb_Form_Add_Acc")
+	private TestObject btnLookUpSupAccessories		= createTestObject("btnLookUpSupAccessories", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_imb_0")
+	private TestObject txfSupAccessories			= createTestObject("txfSupAccessories", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_0")
+	private TestObject btnSearchSupAccessories		= createTestObject("btnSearchSupAccessories", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+	private TestObject btnSelectSupAccessories		= createTestObject("btnSelectSupAccessories", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_umd_0_ctl00_0_gvL_0_hpSelect_0")
+	private TestObject btnLookUpAccessories			= createTestObject("btnLookUpAccessories", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_imb_0")
+	private TestObject txfNameAccessories			= createTestObject("txfNameAccessories", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_1")
+	private TestObject btnSearchAccessories			= createTestObject("btnSearchAccessories", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+	private TestObject btnSelectAccessories			= createTestObject("btnSelectAccessories", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_gvL_0_hpSelect_0")
+	private TestObject txfAccessoriesPrice			= createTestObject("txfAccessoriesPrice", "id", "gvAccessories_ucInputNumber_0_txtInput_0")
+	private TestObject txfAccessoriesDP				= createTestObject("txfAccessoriesDP", "id", "gvAccessories_ucInputNumber2_0_txtInput_0")
+	private TestObject txfAccessoriesNote			= createTestObject("txfAccessoriesNote", "id", "gvAccessories_txtNotes_0")
+
+	//copy asset
+	private TestObject txfNumAsset					= createTestObject("txfNumAsset", "id", "txtNumOfCopyAsset")
+	private TestObject btnCopyAsset					= createTestObject("btnCopyAsset", "id", "lb_Form_Copy_Ass")
+
+
+	private void addAccessories(String supName, String accName, String price, String dp, String note) {
+		WebUI.click(btnAddAccessories)
+		handleAlertIfPresent()
+		if(supName != "-") {
+			safetyClick(btnAddAccessories)
+
+			safetyClick(btnLookUpSupAccessories, 1)
+			WebUI.setText(txfSupAccessories, supName)
+			safetyClick(btnSearchSupAccessories, 1)
+			safetyClick(btnSelectSupAccessories)
+
+
+			safetyClick(btnLookUpAccessories, 1)
+			WebUI.setText(txfNameAccessories, accName)
+			safetyClick(btnSearchAccessories)
+			safetyClick(btnSelectAccessories)
+
+			manualClearText(txfAccessoriesPrice, 1)
+			safetyInputEdit(txfAccessoriesPrice, price)
+			manualClearText(txfAccessoriesDP, 1)
+			safetyInputEdit(txfAccessoriesDP, dp)
+			safetyInputEdit(txfAccessoriesNote, note)
+
+			WebUI.takeScreenshot()
+		}
+	}
+
+	private void copyAsset(String x) {
+		String asset = (Integer.parseInt(x) - 1).toString()
+		safetyInput(txfNumAsset, asset)
+
+		safetyClick(btnCopyAsset, 2)
+		WebUI.takeScreenshot()
+	}
+
 	private void verifyLandingPage() {
 		WebUI.switchToFrame(iframeMain, 0)
 		verifyLanding(lblTitle, "New Application")
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void searchApp(String appNo) {
 		WebUI.setText(txfApplicationNumber, appNo)
 		safetyClick(btnSearch, 1)
 		WebUI.click(btnSelectApplication)
 	}
-	
+
 	private void clickAddNewApplicaiton() {
 		safetyClick(btnAdd, 1)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void inputMainInformation(String productOfferingCode, String numOfAsset) {
-		WebUI.click(btnLookUpOfferingName)
-		WebUI.delay(1)
-		WebUI.setText(txfOfferingCode, productOfferingCode)
-		WebUI.click(btnOfferingSearch)
+		safetyClick(btnLookUpOfferingName, 1)
+		safetyInput(txfOfferingCode, productOfferingCode)
+		safetyClick(btnOfferingSearch, 1)
+		safetyClick(btnSelectOffering, 1)
+		safetyInput(txfNumOfAsset, numOfAsset, 1)
 		WebUI.takeScreenshot()
-		WebUI.click(btnSelectOffering)
-		WebUI.delay(1)
-		WebUI.setText(txfNumOfAsset, numOfAsset)
-		WebUI.takeScreenshot()
-		
-		safetyClick(btnNext)	
+
+		safetyClick(btnNext)
 	}
-	
+
 	private String getAppNo() {
 		WebUI.takeScreenshot()
 		return WebUI.getText(lblApplicationNumber)
 	}
-	
+
+	private void saveApplicationNo(String appNo, String excelName, String scenarioId) {
+		String excelFilePath = GlobalVariable.TEST_DATA_LOCATION + "/" + excelName
+		Map criteria = ["ScenarioId":scenarioId]
+		saveDataToExcel(appNo, criteria, excelFilePath, "MasterData", "ApplicationNo")
+	}
+
 	private void inputCustomerData(String type, String custName) {
 		TestObject rdnType 	= createTestObject("rdnType", "xpath", "//label[text() = '$type']/preceding-sibling::input")
 		safetyClick(rdnType, 1)
-		WebUI.click(btnLookUpCustomerName)
-		WebUI.delay(1)
-		WebUI.setText(txfCustomerName, custName)
-		WebUI.click(btnSearchCustomerName)
-		WebUI.click(btnSelectCustomerName)
-		WebUI.delay(2)
+		safetyClick(btnLookUpCustomerName, 1)
+		safetyInput(txfCustomerName, custName, 1)
+		safetyClick(btnSearchCustomerName)
+		safetyClick(btnSelectCustomerName, 2)
 		WebUI.takeScreenshot()
-		
 	}
-	
+
 	private void addGurantorPersonal(String name, String relation) {
-		safetyClick(btnAddPersonalGurantor, 1)
-		WebUI.takeScreenshot()
-		
-		WebUI.click(btnLookUpGurantorName)
-		WebUI.delay(1)
-		WebUI.setText(txfGurantorName, name)
-		WebUI.click(btnSearchGurantor)
-		WebUI.click(btnSelectGurantor)
-		WebUI.delay(2)
-		
-		safetySelect(drpGurantorRelation, relation)
-		WebUI.takeScreenshot()
-		WebUI.click(btnSaveGurantor)
-		
+		if(name != '-') {
+			safetyClick(btnAddPersonalGurantor, 1)
+			WebUI.takeScreenshot()
+
+			safetyClick(btnLookUpGurantorName,1)
+			safetyInput(txfGurantorName, name)
+			safetyClick(btnSearchGurantor, 1)
+			safetyClick(btnSelectGurantor, 2)
+			
+			safetySelect(drpGurantorRelation, relation)
+			WebUI.takeScreenshot()
+			WebUI.click(btnSaveGurantor)
+		}
 	}
-	
+
+	private void addGurantorCompany(String name, String relation) {
+		if(name != '-') {
+			safetyClick(btnAddCompanyGurantor, 1)
+			WebUI.takeScreenshot()
+
+			safetyClick(btnLookUpGurantorName, 1)
+			safetyInput(txfGurantorName, name)
+			safetyClick(btnSearchGurantor, 1)
+			safetyClick(btnSelectGurantor, 2)
+
+			safetySelect(drpGurantorRelation, relation)
+			WebUI.takeScreenshot()
+			WebUI.click(btnSaveGurantor)
+		}
+	}
+
 	private void inputApplicationData(String tenor, String payFreq, String margin, String installament, String FirstInstallmentType) {
 		safetyInput(txfTenor, tenor)
 		safetySelect(drpPaymentFrequent, payFreq, 1)
@@ -319,7 +392,7 @@ public class NewApplicationPage extends BaseHelper{
 		safetySelect(drpInstallamentScheme, installament, 1)
 		TestObject rdnFirstInstallmentType 		= createTestObject("rdnFirstInstallmentType", "xpath", "//label[text() = '$FirstInstallmentType']/preceding-sibling::input")
 	}
-	
+
 	private void inputApplicationInfo(String appSource, String wayPay, String usage, String self, String fiducia) {
 		safetySelect(drpApplicationSource, appSource, 1)
 		safetySelect(drpWayOfPayment, wayPay, 1)
@@ -328,32 +401,36 @@ public class NewApplicationPage extends BaseHelper{
 		}
 		TestObject rdnSelfUsage = createTestObject("rdnSelfUsage", "xpath", "//label[text() = '$self']/preceding-sibling::input")
 		TestObject rdnFiduciaCovered = createTestObject("rdnFiduciaCovered", "xpath", "//label[text() = '$fiducia']/preceding-sibling::input")
-		
+
 		safetyClick(rdnFiduciaCovered, 2)
 		safetyClick(rdnFiduciaCovered, 2)
-		
 	}
-	
+
 	private void inputMailingAddress(String address) {
 		safetySelect(drpCopyAddress, address, 1)
-		WebUI.click(btnCopyAddress)
+		safetyClick(btnCopyAddress, 2)
 	}
-	
+
 	private void clickAddAsset() {
 		safetyClick(btnAddAsset, 10)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void inputSupplierInfo(String name) {
 		if(name != "-") {
 			safetyClick(btnLookUpSupplier, 2)
-			WebUI.setText(txfSupplierName, name)
-			safetyClick(btnSupplierSearch, 5)
-			WebUI.takeScreenshot()
+			WebUI.setText(txfSupplierBranchName, name)
+			safetyClick(btnSupplierSearch, 2)
 			WebUI.click(btnSelectSupplier)
 		}
 	}
-	
+
+	private void selectSalesPerson(String name) {
+		if(name != "-") {
+			safetySelect(drpSalesPerson, name, 1)
+		}
+	}
+
 	private void topUpAgreemnt(String label) {
 		if(label != "-") {
 			safetyClick(btnLookUpTopUp, 2)
@@ -363,17 +440,7 @@ public class NewApplicationPage extends BaseHelper{
 			safetyClick(btnSelectTopUp, 2)
 		}
 	}
-	
-	private void inputAssetName(String assetName) {
-		safetyClick(btnLookUpAssetName, 0.5)
-		WebUI.delay(1)
-		WebUI.setText(txfAssetName, assetName)
-		WebUI.click(btnAssetSearch)
-		WebUI.delay(2)
-		WebUI.takeScreenshot()
-		WebUI.click(btnSelectAsset)	
-	}
-	
+
 	private void searchAssetMain(String assetName, String note) {
 		if(assetName != "-") {
 			safetyClick(btnLookUpAssetName, 1.5)
@@ -383,9 +450,8 @@ public class NewApplicationPage extends BaseHelper{
 			safetyClick(btnSelectAsset, 2)
 			safetyInput(txfAssetNote, note, 1)
 		}
-		
 	}
-	
+
 	private void inputMainAsset(String dpType, String assetPrice, String downPayment) {
 		TestObject rdnDPType = createTestObject("rdnDPType", "xpath", "//label[text() = '$dpType']/preceding-sibling::input")
 		safetyClick(rdnDPType, 2)
@@ -394,67 +460,69 @@ public class NewApplicationPage extends BaseHelper{
 		manualClearText(txfDownPayment)
 		safetyInput(txfDownPayment, downPayment, 2)
 	}
-	
+
 	private void clickGetMarketPrice() {
-		WebUI.click(btnGetMarketPrice)
-		WebUI.delay(1)
-		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(btnGetMarketPrice, 3, FailureHandling.OPTIONAL)) {
+			safetyClickYudho(btnGetMarketPrice, 1.5)
+			WebUI.takeScreenshot()
+		}
 	}
-	
+
 	private void inputAssetData(String noMesin, String noRangka, String licenseNo, String conditoin, String usage, String year) {
 		TestObject rdnAssetCondition = createTestObject("rdnAssetCondition", "xpath", "//label[text() = '$conditoin']/preceding-sibling::input")
-		
+
 		safetyInputEdit(txfNoMesin, noMesin, 1.5)
 		safetyInputEdit(txfNoRangka, noRangka, 1.5)
 		safetyInputEdit(txfLicensePlate, licenseNo, 1.5)
 		WebUI.click(rdnAssetCondition)
 		selectAsetUsage(usage)
-		safetyInputEdit(txfManufacturingYear, year, 1.5)
-		
+		inputManufacturingYear(year)
 	}
-	
+
 	private void selectAsetUsage(String usage) {
 		safetySelect(drpAssetUsage, usage, 1)
 	}
 	
-	
+	private void inputManufacturingYear(String year) {
+		safetyInputEdit(txfManufacturingYear, year, 1.5)
+	}
+
+
 	private void inputAssetAttribute() {
 		//bukan mandatory
 	}
-	
+
 	private void addGrid(String serviceName, String branchName, String servicePrice) {
 		if(serviceName != "-") {
 			WebUI.click(btnAddGrid)
 			WebUI.delay(1)
-			
+
 			safetySelect(drpAssetServiceName, serviceName)
-			
-			WebUI.click(btnLookUpSupplierGird)
+
+			safetyClick(btnLookUpSupplierGird)
 			WebUI.delay(1)
-			WebUI.setText(txfSupplierBranchNameGrid, branchName)
-			WebUI.click(btnSupplierSearchGrid)
-			WebUI.delay(2)
-			WebUI.takeScreenshot()
-			WebUI.click(btnSelectSupplierGrid)
+			safetyInput(txfSupplierBranchNameGrid, branchName)
+			safetyClick(btnSupplierSearchGrid, 2)
+			safetyClick(btnSelectSupplierGrid, 1)
 			manualClearText(txfServicePrice)
 			safetyInput(txfServicePrice, servicePrice)
 			safetyClick(btnSaveAsset, 1)
 			WebUI.takeScreenshot()
 		}
 	}
-	
-	
+
+
 	private void clickSaveAsset() {
-		safetyClick(btnSaveEditAsset, 10)
+		safetyClickYudho(btnSaveEditAsset, 4)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void selectAssetRegis() {
-		WebUI.click(btnPenAssetRegistration)
+		safetyClick(btnPenAssetRegistration, 5)
 		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
-		
+
 	private void complitionDataRegistration(String usage, String address) {
 		TestObject rdnSelfUsageRegis = createTestObject("rdnSelfUsageRegis", "xpath", "//label[text() = '$usage']/preceding-sibling::input")
 		WebUI.click(rdnSelfUsageRegis)
@@ -462,10 +530,10 @@ public class NewApplicationPage extends BaseHelper{
 		safetyClick(btnCopyAddressRegis, 3)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void inputTaxDate(String date) {
 		Robot bot = new Robot()
-		
+
 		TestObject mandatory = createTestObject("mandatory", "xpath", "(${getXpath(txfTaxDateRegis)}/following::span[@class = 'mandatoryStyle'])[1]")
 		if(WebUI.verifyElementPresent(mandatory, 3, FailureHandling.OPTIONAL)) {
 			safetyInput(txfTaxDateRegis, date, 2)
@@ -473,71 +541,99 @@ public class NewApplicationPage extends BaseHelper{
 			clickTABKeyboard(txfTaxDateRegis)
 		}
 	}
-	
+
 	private void editInsuranceData(String schemeName, String rate, String covType) {
 		safetyClick(btnEditInsuranceData, 0.5)
 		WebUI.takeScreenshot()
-		
+
 		safetySelect(drpSchemeName, schemeName, 1)
 		safetySelect(drpRateType, rate, 1)
 
 		safetySelect(drpMainCoverageType, covType)
-		WebUI.takeScreenshot()
 		safetyClick(btnNext, 5)
 		WebUI.takeScreenshot()
-		
+
 		safetyClick(btnCalculateInsurance, 5)
 		WebUI.takeScreenshot()
-		
+
 		WebUI.delay(3)
 		safetyClick(btnSaveInsurance, 3)
 		WebUI.takeScreenshot()
 		safetyClick(btnNextInsuranceData, 1)
 		WebUI.takeScreenshot()
 	}
-	
+
+	private void editInsuranceDataMulti(String schemeName, String rate, String covType) {
+		TestObject bottom = createTestObject("bottom", "xpath", "(//b[contains(text(), 'Total Main Premium')])[last()]")
+
+		safetyClick(btnEditInsuranceData, 0.5)
+		WebUI.takeScreenshot()
+
+		safetySelect(drpSchemeName, schemeName, 1)
+		safetySelect(drpRateType, rate, 1)
+
+		safetySelect(drpMainCoverageType, covType)
+		safetyClick(btnNext, 5)
+		WebUI.takeScreenshot()
+
+		safetyClick(btnCalculateInsurance, 5)
+		WebUI.scrollToElement(bottom, 3)
+		WebUI.takeScreenshot()
+
+		WebUI.delay(3)
+		safetyClick(btnSaveInsurance, 3)
+		WebUI.takeScreenshot()
+	}
+
+	private void copyInsuranceAsset() {
+		safetyClick(chkBoxInsuranceData, 1)
+
+		safetyClick(btnCopyAllAssetInsurance, 1)
+
+		safetyClick(btnNextInsuranceData, 1)
+	}
+
 	private void copyAssetLocation(String address) {
 		WebUI.delay(5)
 		safetySelect(drpCopyAddressLocation, address, 3)
 		safetyClick(btnCopyAddressLocation, 3)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private boolean checkTableRegis() {
 		return WebUI.verifyElementPresent(tableDocListRegis, 5, FailureHandling.OPTIONAL)
 	}
-	
+
 	private void checkMandatoryDocRegis() {
-		
+
 		def requiredDoc = getListElementByTestObject("//span[contains(@id, 'gvAssetDocEdit_lblIsMandatory_')]")
 		def index = requiredDoc.size()
-		
+
 		index.times { i ->
 			TestObject chkRequiredDocument = createTestObject("chkRequiredDocument", "xpath", "(//span[@id = 'gvAssetDocEdit_lblIsMandatory_$i' and text() = 'Yes']/following::input)[1]")
 			if(WebUI.waitForElementPresent(chkRequiredDocument, 1, FailureHandling.OPTIONAL)) {
 				safetyClick(chkRequiredDocument, 0.8)
 			}
 		}
-		
+
 		index.times { i ->
 			TestObject txfDocument = createTestObject("txfDocument", "xpath", "(//span[@id = 'gvAssetDocEdit_lblIsValueNeeded_$i' and text() = 'Yes']/following::input[2])[1]")
 			if(WebUI.verifyElementPresent(txfDocument, 2, FailureHandling.OPTIONAL)) {
 				safetyInput(txfDocument, generateRandomNpwp(), 0.8)
 			}
 		}
-		
 	}
-	
+
 	private void clickSaveRegis() {
 		WebUI.delay(1)
 		WebUI.scrollToElement(btnSaveRegis, 3)
 		safetyClick(btnSaveRegis)
 	}
-	
+
 	private void inputInsuranceLife(String inscoName, String insured, String payMethod, String note) {
-		
+
 		def isChecked = WebUI.verifyElementChecked(chkCoverLifeInsurance, 5, FailureHandling.OPTIONAL)
-		
+
 		if(!isChecked) {
 			WebUI.check(chkCoverLifeInsurance)
 			safetySelect(drpLifeInscoBranchName, inscoName, 1)
@@ -548,7 +644,7 @@ public class NewApplicationPage extends BaseHelper{
 			WebUI.takeScreenshot()
 		}
 	}
-	
+
 	private void calculateFinancialData() {
 		safetyClick(btnCalculateFee, 2)
 		safetyClick(btnCalculate, 2)
@@ -560,9 +656,8 @@ public class NewApplicationPage extends BaseHelper{
 		}else {
 			KeywordUtil.logInfo("table installment not exist")
 		}
-
 	}
-	
+
 	private void selectApplicationAttribute1(String contractLessThen, String rentalBusiness, String onlineTransport, String fraud, String riskCust, String riskBuss, String riskProd, String creditProses) {
 		safetySelectEdit(drpContractEmployee, contractLessThen, 1)
 		safetySelectEdit(drpRentalBusiness, rentalBusiness, 1)
@@ -573,7 +668,7 @@ public class NewApplicationPage extends BaseHelper{
 		safetySelectEdit(drpHighRiskProduct, riskProd, 1)
 		safetySelectEdit(drpCreditApproval, creditProses, 1)
 	}
-	
+
 	private void selectApplicationAttribute2(String ownVehicle, String seal, String npwp, String noSK, String stnk, String statusNPWP, String cde, String odo) {
 		safetySelectEdit(drpOwnedVihecle, ownVehicle, 1)
 		safetySelectEdit(drpPrioritySeal, seal, 1)
@@ -581,46 +676,52 @@ public class NewApplicationPage extends BaseHelper{
 		safetyInput(txfNomorSK, noSK, 1)
 		safetySelectEdit(drpSTNK, stnk, 1)
 		safetySelectEdit(drpStatusNPWP, statusNPWP, 1)
-		safetySelectEdit(drpCDENotes, cde, 1)
-		safetyInput(txfOdoMeter, odo)
+		safetySelectEdit(drpCDENotes, cde, 1) 
+		safetyInputEdit(txfOdoMeter, odo)
 	}
-	
+
 	private void clickSaveAttribute() {
 		WebUI.takeScreenshot()
 		safetyClick(btnSaveOtherInfo)
 	}
-	
-	
+
+
 	private void tncDocumentMandatory() {
+		WebUI.delay(15)
 		def requiredDoc = getListElementByTestObject("//span[contains(@id, 'gvTermCondition_lblIsMandatory_')]")
 		def index = requiredDoc.size()
-		
+		KeywordUtil.logInfo("$index")
+
 		index.times { i ->
 			TestObject chkRequiredDocument = createTestObject("chkRequiredDocument", "xpath", "(//span[@id = 'gvTermCondition_lblIsMandatory_$i' and text() = 'Yes']/following::input)[1]")
 			if(WebUI.waitForElementPresent(chkRequiredDocument, 1, FailureHandling.OPTIONAL)) {
 				safetyClick(chkRequiredDocument, 0.8)
 			}
+			KeywordUtil.logInfo("$i")
 		}
-		
+
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void clickSaveTnC() {
 		WebUI.click(btnSaveTnC)
 		WebUI.delay(8)
 		WebUI.takeScreenshot()
 	}
-		
+
 	private void clickSaveAndContinue() {
-		safetyClick(btnSaveAndContinue, 0.5)
-		WebUI.takeScreenshot()
+		def exist = WebUI.verifyElementPresent(btnSaveAndContinue, 3, FailureHandling.OPTIONAL)
+		if(exist) {
+			safetyClick(btnSaveAndContinue, 0.5)
+			WebUI.takeScreenshot()
+		}
 	}
-	
+
 	private switchFrameForm() {
 		WebUI.delay(5)
 		WebUI.switchToFrame(iframeForm, 3)
 	}
-	
+
 	private clickSubmitNAP() {
 		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMain, 3)
@@ -630,6 +731,4 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.delay(15)
 		WebUI.takeScreenshot()
 	}
-	
-	
 }

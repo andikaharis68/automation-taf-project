@@ -42,7 +42,7 @@ public class CustomerConfirmationPage extends BaseHelper{
 	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
 
 
-
+	
 	private void verifyLandingCustomerConfirmationPage() {
 		WebUI.switchToFrame(iframeMain, 3)
 		verifyLanding(lblTitle, 'Customer Confirmation')

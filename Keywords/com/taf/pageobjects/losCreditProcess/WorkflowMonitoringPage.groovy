@@ -33,7 +33,11 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	public void switchToSecondTab() {
 		WebUI.switchToWindowIndex(1)
 	}
-
+	
+	public void switchToFirstTab() {
+		WebUI.switchToWindowIndex(0)
+	}
+	
 	public void verifyLandingScreen() {
 		WebUI.delay(5)
 		WebUI.switchToDefaultContent()
@@ -87,6 +91,13 @@ public class WorkflowMonitoringPage extends BaseHelper{
 		WebUI.focus(txtLastStepName)//for ss purpose
 		WebUI.takeScreenshot()
 	}
+	
+	public String getLastWorkFlow() {
+		WebUI.focus(txtLastStepName)//for ss purpose
+		WebUI.takeScreenshot()
+		return WebUI.getText(txtLastStepName)
+	}
+	
 	private boolean checkLastStepIsSurvey() {
 		String actualLastStep = WebUI.getText(txtLastStepName).trim()
 		WebUI.comment("Detected last step: '${actualLastStep}'")

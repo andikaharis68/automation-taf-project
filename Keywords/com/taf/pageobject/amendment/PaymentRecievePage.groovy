@@ -23,34 +23,40 @@ import internal.GlobalVariable
 
 public class PaymentRecievePage extends BaseHelper{
 
-	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject txtReferenceNo		= createTestObject("txtReferenceNo", "xpath", "")
-	private TestObject txtAmount			= createTestObject("txtAmount", "xpath", "")
-	private TestObject btnPenAction			= createTestObject("btnPenAction", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "//input[@id = 'ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch']")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "//input[@id = 'txtRcvFrom']")
+	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "//textarea[@id = 'txtNotes']")
+	private TestObject txtReferenceNo		= createTestObject("txtReferenceNo", "xpath", "//input[@id = 'txtReferenceNo']")
+	private TestObject txtAmount			= createTestObject("txtAmount", "xpath", "//input[@id = 'ucReceiveAmt_txtInput']")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
 
 	public void searchAgreement(String agreementNo) {
 
-		WebUI.setText(txtAgreementNumber, agreementNo)
-		WebUI.click(btnSearch)
+		safetyInput(txtAgreementNumber, agreementNo, 1)
+		safetyClick(btnSearch, 2)
 	}
 
-	public void inputDataRecieve(String recieveForm, String note, String reffNo, String amount) {
+	public void inputDataRecieve(String recieveForm, String note, String reffNo, String amount, String agreeNo) {
 
-		WebUI.setText(txtRecieveForm, recieveForm)
-		WebUI.setText(txtNotes, note)
-		WebUI.setText(txtReferenceNo, reffNo)
-		WebUI.setText(txtAmount, amount)
-
-		WebUI.click(btnPenAction)
+		safetyInput(txtRecieveForm, recieveForm, 2)
+		safetyInput(txtNotes, note, 1)
+		safetyInput(txtReferenceNo, reffNo, 2)
+		manualClearText(txtAmount)
+		safetyInput(txtAmount, amount, 1)
+		WebUI.takeScreenshot()
+		selectAmendment(agreeNo)
+	}
+	
+	public void selectAmendment(String agreeNo) {
+		TestObject btnPenAction	= createTestObject("btnPenAction", "xpath", "//a[text() = '$agreeNo']/following::input[1]")
+		safetyClick(btnPenAction, 5)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSubmit() {
-
-		WebUI.click(btnSubmit)
+		safetyClick(btnSubmit, 3)
+		WebUI.takeScreenshot()
 	}
 }

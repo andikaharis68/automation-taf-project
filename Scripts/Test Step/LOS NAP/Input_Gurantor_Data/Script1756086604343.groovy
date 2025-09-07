@@ -21,9 +21,14 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage gurantor = new NewApplicationPage()
 
-if(GurantorName != '-') {
+if(CustomerType == "Personal") {
 	'Step 1: input gurantor personal'
+	
 	gurantor.addGurantorPersonal(GurantorName, GurantorRelation)
+}else if(CustomerType == "Company") {
+	'Step 1: input gurantor company'
+	
+	gurantor.addGurantorCompany(GurantorName, GurantorRelation)
 }
 
 'Step 2: click save and continue'

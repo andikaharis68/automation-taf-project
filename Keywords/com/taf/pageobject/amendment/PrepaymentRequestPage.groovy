@@ -23,13 +23,14 @@ import internal.GlobalVariable
 
 public class PrepaymentRequestPage extends BaseHelper{
 
-	private TestObject txtDate				= createTestObject("txtDate", "xpath", "")
-	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
+	private TestObject txtDate				= createTestObject("txtDate", "xpath", "//input[@id = 'ucDpEffectiveDt_txtDatePicker']")
+	private TestObject btnCalculatePayment	= createTestObject("btnCalculatePayment", "xpath", "//input[@id = 'lbCalPrepaymet']")
+	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "//select[@id = 'ucApproval_ddlReason']")
+	private TestObject drpApprovedBy		= createTestObject("drpApprovedBy", "xpath", "//select[@id = 'ucApproval_ddlApvBy']")
+	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "//textarea[@id = 'ucApproval_txtNotes']")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
+	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "//p[@id = 'messageContent']")
+	private TestObject lblBalanceAmount		= createTestObject("lblBalanceAmount", "xpath", "")
 
 
 	public void calculatePayment(String date) {
@@ -43,6 +44,10 @@ public class PrepaymentRequestPage extends BaseHelper{
 		WebUI.selectOptionByLabel(drpReasonDescription, reasonDescription, false)
 		WebUI.selectOptionByLabel(drpApprovedBy, approver, false)
 		WebUI.setText(txtNotes, notes)
+	}
+	
+	public String getBalance() {
+		return WebUI.getText(lblBalanceAmount)
 	}
 
 	public void clickSubmit() {

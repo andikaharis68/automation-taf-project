@@ -30,6 +30,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	//table
 	private TestObject txtApplicationStep	= createTestObject("txtApplicationStep", "id", "gvApp_lbAppStep_0")
 	private TestObject txtApplicationNo		= createTestObject("txtApplicationNo", "xpath", "//*[contains(@id, 'gvApp_lbAppNo') and text() = '0015APP20250600097']")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "id", "gvApp_lbAgrmntNo_0")
 
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 
@@ -70,4 +71,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 		return actualStep.equals(step)
 	}
 	
+	public String getAgreementNo() {
+		return WebUI.getText(txtAgreementNo)
+	}
 }

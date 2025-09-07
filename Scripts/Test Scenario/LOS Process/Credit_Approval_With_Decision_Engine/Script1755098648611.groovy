@@ -24,7 +24,7 @@ import org.openqa.selenium.Keys as Keys
 String testDataName = BaseHelper.getTestDataName()
 
 Map scenarioData = [
-	'ScenarioId' : "1",
+	'ScenarioId' : GlobalVariable.SCENARIO_ID,
 	'SheetNames': ['CreditApproval', 'MasterData']
 ]
 

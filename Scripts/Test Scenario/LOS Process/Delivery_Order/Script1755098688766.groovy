@@ -38,20 +38,35 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), d
 WebUI.delay(10)
 
 //Checking Step
-while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {
+while(GlobalVariable.COUNTER > dataRow['Counter']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
-	dataRow['Counter'] += 1
-	KeywordUtil.logInfo("$dataRow['StepCheck']")
+	if(dataRow['StepCheck']) {
+		break
+	}
 	WebUI.delay(GlobalVariable.WAIT)
+	dataRow['Counter'] += 1
 }
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dataRow)
 if(!dataRow['StepCheck']) {
 	KeywordUtil.markFailedAndStop("Step tidak sampai RVC")
 }
 
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Navigate_To_Delivery_Order'), dataRow)
+
+//digunakan untuk mengetahui jumlah aset
+dataRow += ['NumOfAsset' : 0,
+			'AssetPlace' : ""]
+
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Search_Application_Number'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+
+//looping jumlah aset
+dataRow['NumOfAsset'].times{ i -> 
+	dataRow['AssetPlace'] = i.toString()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+}
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Submit_Asset'), dataRow)

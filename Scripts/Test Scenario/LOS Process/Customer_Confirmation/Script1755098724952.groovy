@@ -23,11 +23,12 @@ import org.openqa.selenium.Keys as Keys
 String testDataName = BaseHelper.getTestDataName()
 
 Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, 
-					TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 
+					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
 					'SheetNames': ['CustomerConfirmation', 'MasterData'],
 					'StepApplication': 'DLO', //ini step apps nya
 					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step
-					'Counter': 0] //ini counter nya
+					'Counter': 0, //ini counter nya
+					'AgreementDate' : ''] 
 Map dataRow = [:]
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
@@ -38,12 +39,14 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), d
 WebUI.delay(10)
 
 //Checking Step
-while(!dataRow['StepCheck'] && (GlobalVariable.COUNTER > dataRow['Counter'])) {
+while(GlobalVariable.COUNTER > dataRow['Counter']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
-	dataRow['Counter'] += 1
-	KeywordUtil.logInfo("$dataRow['StepCheck']")
+	if(dataRow['StepCheck']) {
+		break
+	}
 	WebUI.delay(GlobalVariable.WAIT)
+	dataRow['Counter'] += 1
 }
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Step_Info'), dataRow)
 if(!dataRow['StepCheck']) {

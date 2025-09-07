@@ -24,20 +24,28 @@ import internal.GlobalVariable
 public class AgreementTransferApprovalPage extends BaseHelper{
 
 	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
+	private TestObject drpAction				= createTestObject("drpAction", "xpath", "//select[@id = 'ddlAction']")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "//textarea[@id = 'txtNotes']")
 	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
+	private TestObject lblNotification			= createTestObject("lblNotification", "id", "messageContent")
+	private TestObject lblRole					= createTestObject("lblRole", "id", "gvNextPerson_lblNodeName_0")
+	private TestObject lblUser					= createTestObject("lblUser", "id", "gvNextPerson_ddlNodeNextPerson_0")
 
 
 	public void approval(String action, String note, String person) {
 
-		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.selectOptionByLabel(drpNextPerson, person, false)
-		WebUI.click(btnSubmit)
+//		safetyClick(sectionApprovalAction)
+		safetySelect(drpAction, action)
+		safetyInput(txtNotes, note)
+		
+		if(WebUI.waitForElementVisible(drpNextPerson, 3, FailureHandling.OPTIONAL)) {
+			safetySelect(drpNextPerson, person)
+		}
+		
+		WebUI.takeScreenshot()
+		safetyClick(btnSubmit, 4)
 		WebUI.verifyElementVisible(lblNotification)
+		WebUI.takeScreenshot()
 	}
 }
