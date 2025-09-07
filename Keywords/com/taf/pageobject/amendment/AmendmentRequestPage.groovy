@@ -23,16 +23,16 @@ import internal.GlobalVariable
 
 public class AmendmentRequestPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
 
 
 	public void searchAmendment(String amendmentType, String customerName) {
 
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtCustomerName, customerName)
-		WebUI.click(btnSearch)
+		safetySelect(drpAmendmentType, amendmentType, 1)
+		safetyInput(txtCustomerName, customerName)
+		safetyClick(btnSearch, 1)
 
 
 		clickPenAction(customerName)
@@ -40,6 +40,6 @@ public class AmendmentRequestPage extends BaseHelper{
 
 	private void clickPenAction(customerName) {
 
-		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
+		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "//span[text() = '$customerName']/following::input[1]")
 	}
 }
