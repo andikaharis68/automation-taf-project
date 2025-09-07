@@ -78,7 +78,12 @@ public class DeliveryOrderPage extends BaseHelper{
 			KeywordUtil.markFailedAndStop("reff no not exist $appNo")
 		}
 	}
-
+	
+	private int numOfAsset() {
+		WebUI.delay(5)
+		def listAsset = getListElementByTestObject("//input[contains(@id, 'gvAssetList_ibDelOrd_')]")
+		return listAsset.size()
+	}
 
 	private void editAsset(String index) {
 		WebUI.takeScreenshot()
@@ -87,7 +92,9 @@ public class DeliveryOrderPage extends BaseHelper{
 		WebUI.click(btnEdit)
 	}
 
-	private void inputDeliveryInformation(String noMesin, String noRangka) {
+	private void inputDeliveryInformation() {
+		def noMesin = generateRandomNumber(6)
+		def noRangka = "RK" + generateRandomNumber(4)
 		safetyInput(txfNoMesin, noMesin)
 		safetyInput(txfNoRangka, noRangka)
 	}
@@ -114,7 +121,7 @@ public class DeliveryOrderPage extends BaseHelper{
 	}
 
 
-	private void clickAllCheckBox(String faktur) {
+	private void clickAllCheckBox() {
 		def countMandatory = getListElementByTestObject("//span[contains(@id, 'gvAssetDoc_lblIsMandatory_')]") //mencari total mandatory
 		def looping = countMandatory.size()
 		looping.times { i ->
@@ -126,13 +133,14 @@ public class DeliveryOrderPage extends BaseHelper{
 			}
 		}
 
+		def faktur = generateRandomNumber(8)
 		WebUI.setText(txfFaktur, faktur)
 		WebUI.takeScreenshot()
 	}
 
 	private void clickSave() {
 		WebUI.click(btnSave)
-		WebUI.delay(3)
+		WebUI.delay(5)
 	}
 
 	private void clickNext() {

@@ -52,8 +52,21 @@ if(!dataRow['StepCheck']) {
 	KeywordUtil.markFailedAndStop("Step tidak sampai RVC")
 }
 
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Navigate_To_Delivery_Order'), dataRow)
+
+//digunakan untuk mengetahui jumlah aset
+dataRow += ['NumOfAsset' : 0,
+			'AssetPlace' : ""]
+
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Search_Application_Number'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+
+//looping jumlah aset
+dataRow['NumOfAsset'].times{ i -> 
+	dataRow['AssetPlace'] = i.toString()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Select_List_Of_Asset'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Input_Data_Delivery_Order'), dataRow)
+}
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Delivery Order/Submit_Asset'), dataRow)

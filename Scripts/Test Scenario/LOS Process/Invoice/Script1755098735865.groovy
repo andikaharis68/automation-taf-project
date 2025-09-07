@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 String testDataName = BaseHelper.getTestDataName()
 
 Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, 'SheetNames': ['Invoice', 'MasterData']]
-Map dataRow = [:]
+Map dataRow = ['AgreementNo':'', 'InvoiceDate':'']
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])
 dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow["CredentialId"])
@@ -31,6 +31,10 @@ BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 WebUI.delay(10)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Inquiry_Get_Agreement_No'), dataRow)
+
+
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Invoice/Navigate_To_Invoice'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Invoice/Search_Agreement_Number'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Invoice/Search_Purchase_Order'), dataRow)

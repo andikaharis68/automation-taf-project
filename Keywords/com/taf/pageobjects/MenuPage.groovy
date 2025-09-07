@@ -45,7 +45,7 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnUpdateLifeInsurance		= createTestObject("btnUpdateLifeInsurance", "xpath", "")
 	private TestObject btnESign						= createTestObject("btnESign", "xpath", "")
 	private TestObject btnCDECompletion				= createTestObject("btnCDECompletion", "text", "Centralized Data Entry Completion")
-	private TestObject btnCreditApproval			= createTestObject("btnCreditApproval", "text", "Credit Approval with Decision Engine")
+	private TestObject btnCreditApproval			= createTestObject("btnCreditApproval", "xpath", "//a[text() = 'Credit Approval with Decision Engine']")
 
 
 	private TestObject btnCreditProcess				= createTestObject("btnCreditProcess", "xpath", "//a[@id='rModuleList_lbModuleList_0']")

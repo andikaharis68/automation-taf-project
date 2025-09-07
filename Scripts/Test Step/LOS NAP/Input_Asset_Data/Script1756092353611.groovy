@@ -39,7 +39,7 @@ asset.selectAsetUsage(AssetUsage)
 'Step 6: calculate market price'
 asset.clickGetMarketPrice()
 
-'Step 7: add additiona; service grid'
+'Step 7: add additional service grid'
 asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
 
 'Step 8: save asset'

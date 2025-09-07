@@ -33,7 +33,7 @@ order.selectOrder(AgreementNo)
 order.clickNext()
 
 'Step 4: input invoice summary'
-order.inputInvoiceSummary(InvoiceNo, InvoiceDate)
+order.inputInvoiceSummary(InvoiceDate)
 
 'Step 5: click save'
 order.clickSave()

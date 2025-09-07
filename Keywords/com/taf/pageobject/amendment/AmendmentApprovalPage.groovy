@@ -23,11 +23,12 @@ import internal.GlobalVariable
 
 public class AmendmentApprovalPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustName']")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject btnProcess		= createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
 
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "//input[@id = 'ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo']")
 	private TestObject list				= createTestObject("list", "xpath", "")
 
 
@@ -40,24 +41,19 @@ public class AmendmentApprovalPage extends BaseHelper{
 
 	public void searchAmendmentbyAgreementNo(String amendmentType, String agreementNo) {
 
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
-		WebUI.verifyElementVisible(list)
-		//click button based on list
-		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
-		WebUI.click(btnProcess)
+		safetySelect(drpAmendmentType, amendmentType, 1)
+		safetyInput(txtAgreementNo, agreementNo)
+		safetyClick(btnSearch, 2)
+		WebUI.takeScreenshot()
+		safetyClick(btnProcess, 10)
 	}
 
 	public void searchAmendmentbyCustName2(String amendmentType, String customerName) {
 
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtCustomerName, customerName)
-		WebUI.click(btnSearch)
-
-		WebUI.verifyElementVisible(list)
-		//click button based on list
-		TestObject btnProcess		= createTestObject("btnProcess", "xpath", "")
-		WebUI.click(btnProcess)
+		safetySelect(drpAmendmentType, amendmentType, false)
+		safetyInput(txtCustomerName, customerName)
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
+		safetyClick(btnProcess, 10)
 	}
 }

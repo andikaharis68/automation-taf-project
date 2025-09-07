@@ -23,11 +23,12 @@ import org.openqa.selenium.Keys as Keys
 String testDataName = BaseHelper.getTestDataName()
 
 Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, 
-					TestDataName: 'LOS_Process_Credit_Simulation_TestData.xlsx', 
+					TestDataName: 'LOS_New_Application_Retail_MultiAset.xlsx', 
 					'SheetNames': ['CustomerConfirmation', 'MasterData'],
 					'StepApplication': 'DLO', //ini step apps nya
 					'StepCheck': false, //ini step check nya. nampung hasil dari euqals actual step dan expectation step
-					'Counter': 0] //ini counter nya
+					'Counter': 0, //ini counter nya
+					'AgreementDate' : ''] 
 Map dataRow = [:]
 dataRow += scenarioData
 dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}", dataRow['ScenarioId'])

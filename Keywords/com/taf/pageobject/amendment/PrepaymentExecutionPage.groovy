@@ -22,9 +22,9 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class PrepaymentExecutionPage extends BaseHelper{
-	
+
 	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
-	
+
 	public void clickSubmit() {
 		WebUI.click(btnSubmit)
 	}

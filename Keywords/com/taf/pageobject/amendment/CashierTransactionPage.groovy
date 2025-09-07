@@ -23,20 +23,20 @@ import internal.GlobalVariable
 
 public class CashierTransactionPage extends BaseHelper{
 
-	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "")
-	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "")
-	private TestObject txtDate			= createTestObject("txtDate", "xpath", "")
-	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "xpath", "")
+	private TestObject drpWOP			= createTestObject("drpWOP", "xpath", "//select[@id = 'ddlWOP']")
+	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "//select[@id = 'ddlBankAccount']")
+	private TestObject txtDate			= createTestObject("txtDate", "xpath", "//input[@id = 'ucDatePicker_txtDatePicker']")
+	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "id", "lbPaySingle")
 
 	public void inputChasier(String WOP, String accName, String date) {
 
-		WebUI.selectOptionByLabel(drpWOP, WOP, false)
-		WebUI.selectOptionByLabel(drpAccountName, accName, false)
-		WebUI.setText(txtDate, date)
+		safetySelect(drpWOP, WOP, 1.5)
+		safetySelect(drpAccountName, accName, 1.5)
+		safetyInput(txtDate, date, 2)
 	}
 
 	public void clickPaymentSingle() {
-
+		WebUI.takeScreenshot()
 		WebUI.click(btnPaymentSingle)
 	}
 }

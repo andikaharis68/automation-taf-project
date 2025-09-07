@@ -45,6 +45,9 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), d
 while(GlobalVariable.COUNTER > dataRow['Counter']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
+	if(dataRow['StepCheck']) {
+		break
+	}
 	dataRow['Counter'] += 1
 	WebUI.delay(GlobalVariable.WAIT)
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Inpu_Asset_Data_Non_TopUp</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>1dd1480c-2775-49d2-a502-20c1c1546287</testCaseGuid>
+</TestCaseEntity>

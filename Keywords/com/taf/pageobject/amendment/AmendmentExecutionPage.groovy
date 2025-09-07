@@ -23,9 +23,9 @@ import internal.GlobalVariable
 
 public class AmendmentExecutionPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
+	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
+	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
 
 
 	public void searchAmendment(String amendmentType, String customerName) {

@@ -23,10 +23,13 @@ import internal.GlobalVariable
 
 public class AmendmentInquiryPage extends BaseHelper{
 
-	private TestObject drpAmendmentType		= createTestObject("drpAmendmentType", "xpath", "")
-	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject lblStatus			= createTestObject("lblStatus", "xpath", "")
+	private TestObject drpAmendmentType		= createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucSearch_ddlAmendmentTypeCode_ltlAmendmentTypeAmendmentTypeId_ddlReference']")
+	private TestObject txtAgreementNumber	= createTestObject("txtAgreementNumber", "xpath", "//input[@id = 'ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch']")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject lblStatus			= createTestObject("lblStatus", "xpath", "//span[@id = 'gvPaging_lblStatus_0']")
+	private TestObject lblReqNo				= createTestObject("lblReqNo", "id", "gvPaging_lbAmendmentNo_0")
+	private TestObject lblRole				= createTestObject("lblRole", "id", "gvPrepayApvHist_lblApprovalNode_1")
+	private TestObject lblUser				= createTestObject("lblUser", "id", "gvPrepayApvHist_lblApprovalTaskOwner_1")
 
 	public searchAgreement(String amendmentType, String agreementNo) {
 
@@ -36,4 +39,19 @@ public class AmendmentInquiryPage extends BaseHelper{
 
 		//verify status or table
 	}
+
+	public String getRequestNumber() {
+		return WebUI.getText(lblReqNo)
+	}
+	
+	public void getTask() {
+		WebUI.getText(lblRole)
+		WebUI.getText(lblUser)
+	}
+	
+	public void clickRequestNo() {
+		safetyClick(lblReqNo, 3)
+		WebUI.takeScreenshot()
+	}
 }
+

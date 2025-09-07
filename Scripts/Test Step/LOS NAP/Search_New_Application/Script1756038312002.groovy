@@ -26,4 +26,4 @@ NewApplicationPage search = new NewApplicationPage()
 search.verifyLandingPage()
 
 'Step 2: search application'
-search.searchApp("0008APP20250500192")
+search.searchApp("0008APP20250600840")

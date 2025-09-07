@@ -38,8 +38,7 @@ workflowMonitoring.switchToSecondTab()
 workflowMonitoring.verifyLandingScreen()
 
 'Step 5: verify is step is already on sms approve'
-workflowMonitoring.verifyStep()
+StepCheck = workflowMonitoring.getLastWorkFlow()
 
-'Step 6: check last step'
-boolean isStepSurvey = workflowMonitoring.checkLastStepIsSurvey()
-
+'Step 6: switch to first tab'
+workflowMonitoring.switchToFirstTab()
