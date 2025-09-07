@@ -45,6 +45,9 @@ asset.inputAssetDocument(BpkpDocNo, FakturDocNo)
 'Step 5: Clik Save'
 asset.clickSave()
 
+'Step 5.1: Get error field not fill'
+asset.checkErrorAfterClickSave()
+
 'Step 6: Click Edit asset data'
 asset.clickEditAssetData()
 
@@ -65,6 +68,9 @@ asset.inputAccessoriesGridSection(AdditionalSvcSupplierBranchName, AdditionalSvc
 
 'Step 12: Click Save Edit'
 asset.clickSaveEdit()
+
+'Step 12.1: Get error field not fill'
+asset.checkErrorAfterClickSave()
 
 'Step 13: Click save and continue'
 asset.clickSaveContinue()

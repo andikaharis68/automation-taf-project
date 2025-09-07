@@ -14,12 +14,16 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.AssetDataPage
+import com.taf.pageobjects.losCreditProcess.NewApplicationDEPage
 import com.taf.pageobjects.losCreditProcess.TermAndCondition
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 TermAndCondition tnc = new TermAndCondition()
+AssetDataPage asset = new AssetDataPage()
+NewApplicationDEPage newApp = new NewApplicationDEPage()
 
 'Step 1: fill data based on customer type'
 if(CustomerType == "Personal") {
@@ -112,6 +116,9 @@ if(CustomerType == "Personal") {
 'Step 2: click save'
 tnc.clickSave()
 
+'Step 2.1: Check error after click save and continue'
+asset.checkErrorAfterClickSave()
+
 'Step 3: Switch to iframe main page'
 tnc.switchToIframeMainPage()
 
@@ -121,5 +128,6 @@ tnc.clickSubmit()
 'Step 11: Click confirmation ok'
 tnc.clickConfirmationOk()
 
-tnc.waitAndTakeScreenshot()
+'Step 12: Verify landing in new application data entry'
+newApp.verifyLandingInNewAppPage()
 
