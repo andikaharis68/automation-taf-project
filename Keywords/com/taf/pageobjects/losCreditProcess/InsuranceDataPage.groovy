@@ -121,46 +121,25 @@ public class InsuranceDataPage extends BaseHelper {
 		safetyClick(btnNextToSaveContinue)
 		WebUI.takeScreenshot()
 	}
-//	private String selectInsuredBy(String insuredBy) {
-//		TestObject radInsuredBy = createTestObject("radInsuredBy","xpath","//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
-//		boolean isOptionDisabled = checkOptionDisabled(radInsuredBy)
-//		if(insuredBy && !isOptionDisabled) {
-//			safetyClick(radInsuredBy)
-//			WebUI.delay(1)
-//		} else {
-//			//radio disable get selected radio label
-//			insuredBy = getSelectedRadioLabel()
-//		}
-//		return insuredBy
-//	}
-	private TestObject getInsuredByRadio(String insuredBy) {
-		String xpath = "//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']"
-		return createTestObject("radio_" + insuredBy, "xpath", xpath)
-	}
+	
 	private String selectInsuredBy(String insuredBy) {
 		if (!insuredBy) return getSelectedRadioLabel()
-	
-		TestObject radioOption = getInsuredByRadio(insuredBy)
-	
-		if (!checkOptionDisabled(radioOption)) {
+		TestObject radioOption = createTestObject("radioOption", "xpath", "//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
+		// Try to click if not disabled
+		if(!checkOptionDisabled(radioOption)) {
 			safetyClick(radioOption)
 			WebUI.delay(1)
 			return insuredBy
 		}
-	
-		// If radio is disabled, return currently selected
+		// Fallback: get currently selected label
 		return getSelectedRadioLabel()
 	}
 	
 	private boolean isInsuredByOptionDisabled(String insuredBy) {
-		return checkOptionDisabled(getInsuredByRadio(insuredBy))
+		TestObject radioOption = createTestObject("radioOption", "xpath", "//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
+		return checkOptionDisabled(radioOption)
 	}
-
-	private boolean checkOptionInsuredByDisabled(String insuredBy) {
-		TestObject radInsuredBy = createTestObject("radInsuredBy","xpath","//label[normalize-space(text())='${insuredBy}']/preceding-sibling::input[@type='radio']")
-		boolean isOptionDisabled = checkOptionDisabled(radInsuredBy)
-		return isOptionDisabled
-	}
+	
 	private String getSelectedRadioLabel() {
 		TestObject radios = createTestObject("radios", "xpath", "//input[contains(@id,'ucInsInit_rblInsAssetCoveredBy_')]")
 		List<WebElement> radioList = WebUI.findWebElements(radios, 5)

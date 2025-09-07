@@ -63,6 +63,7 @@ public class NewApplicationDEPage extends BaseHelper {
 	}
 
 	private void verifyLandingInNewAppPage() {
+		WebUI.delay(5)
 		verifyLanding(btnAdd, "New Application")
 		WebUI.takeScreenshot()
 	}

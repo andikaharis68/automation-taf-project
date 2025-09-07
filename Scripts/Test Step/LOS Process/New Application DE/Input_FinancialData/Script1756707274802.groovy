@@ -14,6 +14,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.pageobjects.losCreditProcess.AssetDataPage
 import com.taf.pageobjects.losCreditProcess.ComissionDataPage
 import com.taf.pageobjects.losCreditProcess.FinancialDataPage
 import com.taf.pageobjects.losCreditProcess.OtherInfoPage
@@ -24,6 +25,8 @@ import org.openqa.selenium.Keys as Keys
 FinancialDataPage financial = new FinancialDataPage()
 ComissionDataPage comission = new ComissionDataPage()
 OtherInfoPage otherInfo 	= new OtherInfoPage()
+AssetDataPage asset = new AssetDataPage()
+
 
 'Step 1: Input Fees'
 financial.inputFee(AdminFeeAmount, NotaryAmount, AdditionalAdminFee, OtherFee)
@@ -49,6 +52,9 @@ financial.clickCalculate()
 'Step 4: Click save and continue'
 financial.clickSaveContinue()
 
+'Step 4.1: Check error after click save and continue'
+asset.checkErrorAfterClickSave()
+
 'Step 5: Verify landing in comission data page'
 comission.verifyLandingInComissionData()
 
@@ -60,6 +66,9 @@ comission.clickCalculate()
 
 'Step 8: click save and continue'
 comission.clickSaveContinue()
+
+'Step 8.1: Check error after click save and continue'
+asset.getAllErrorFields()
 
 'Step 9: Verify landing in other info'
 otherInfo.verifyLandingInOtherInfoPage()
