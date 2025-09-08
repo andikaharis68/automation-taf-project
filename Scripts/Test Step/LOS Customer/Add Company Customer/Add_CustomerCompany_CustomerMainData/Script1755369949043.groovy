@@ -29,7 +29,7 @@ MenuPage menu = new MenuPage()
 'Step 1: check box the is new application'
 companyCustomerMainDataPage.clickIsNewApplication(NextToNewApplication)
 
-'Step 2: Get Application No'
+'Step 2: Get Application no'
 ApplicationNo = companyCustomerMainDataPage.getApplicationNo()
 
 'Step 3: need to switch iframe customer form'

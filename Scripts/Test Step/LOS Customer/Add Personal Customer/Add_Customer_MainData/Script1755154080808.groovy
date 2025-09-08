@@ -63,7 +63,7 @@ addPersonal.inputPOB(BirthPlace)
 addPersonal.inputDOB(BirthDate)
 
 'Step 13: Input NPWP'
-//addPersonal.inputNPWP(NPWP)
+addPersonal.inputNPWP(NPWP)
 
 'Step 14: Input Mother Maiden Name'
 addPersonal.inputMotherMaidenName(MotherMaidenName)
@@ -74,7 +74,7 @@ addPersonal.clickNextButton()
 'Step 16: Click edit or new app'
 mainData.clickNewCustomerIfPresent()
 
-'Step 17: Get App No'
+'Step 17: Get Application no'
 ApplicationNo = mainData.getApplicationNo()
 
 'Step 18: Switch to frame custform'

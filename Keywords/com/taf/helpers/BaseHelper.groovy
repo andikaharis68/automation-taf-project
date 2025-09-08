@@ -818,7 +818,7 @@ class BaseHelper {
 					WebUI.delay(1)
 					WebUI.comment("edit button found for customer '${name}', clicking Edit.")
 					safetyClick(btnEdit)
-					return true
+					break
 				} else {
 					WebUI.comment("Customer found but Edit button not yet present.")
 				}

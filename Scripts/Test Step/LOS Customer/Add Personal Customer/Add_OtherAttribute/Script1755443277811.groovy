@@ -15,6 +15,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.customers.CustomerInformationPage
+import com.taf.pageobjects.customers.FinancialDataPage
 import com.taf.pageobjects.customers.OtherAttributePage
 
 import internal.GlobalVariable as GlobalVariable
@@ -22,6 +23,7 @@ import org.openqa.selenium.Keys as Keys
 
 OtherAttributePage attr = new OtherAttributePage()
 CustomerInformationPage custInfo = new CustomerInformationPage()
+FinancialDataPage financial = new FinancialDataPage()
 
 'Step 1: Select Debitor grup'
 attr.selectDebitorGroup(DebitorGroup)
@@ -53,54 +55,59 @@ attr.inputSimNo(NoSIM)
 'Step 10: check is split treasure'
 attr.checkIsSplitTreasure(IsSplitTreassure)
 
-'Step 11: select debitor group slik'
-
-
-'Step 12: check violate bmpk'
+'Step 11: check violate bmpk'
 attr.checkViolateBMPK(ViolateBMPK)
 
-'Step 13: check exceed bpmk'
+financial.takeScreenShot()
+
+'Step 12: check exceed bpmk'
 attr.checkExceedBMPK(ExceedBMPK)
 
-'Step 14: Check affiliate with multifinance'
+'Step 13: search slik debitor group'
+attr.selectDebitorGroupSlik(DebitorGroupSLIK)
 
-'Step 15: check same address'
-attr.checkSameAddress(SameAddress)
+'Step 13: check same address'
+attr.checkSameAddress(SameAddress, "11")
 
-'Step 16: check same job'
+'Step 14: check same job'
 attr.checkSameJob(SameJob)
 
-'Step 17: check same position'
+'Step 15: check same position'
 attr.checkSamePosition(SamePosition)
 
-'Step 18: check different marital status'
-attr.checkDifferentMaritalStatus(DifferentMaritalStatus)
+'Step 16: check different marital status'
+attr.checkDifferentMaritalStatus(DifferentMaritalStatus, "14")
 
-'Step 19: check home ownership document'
-attr.checkHomeOwnershipDoc(HomeOwnershipDocument)
+'Step 17: check home ownership document'
+attr.checkHomeOwnershipDoc(HomeOwnershipDocument, "15")
 
-'Step 20: No ATM'
+'Step 18: No ATM'
 attr.inputATMNo(NoATM)
 
-'Step 21: Input customer data consent'
-attr.checkCustomerDataConsent(CustomerDataConsent)
+'Step 19: Input customer data consent'
+attr.checkCustomerDataConsent(CustomerDataConsent, "17")
 
-'Step 22: Input rating debitor'
+'Step 20: Input rating debitor'
 attr.inputRatingDebitor(RatingDebitor)
 
-'Step 23: Input rating date'
+'Step 21: Input rating date'
 attr.inputRatingDate(RatingDate)
 
-'Step 24: Click Save'
+'Step 22: check CDE notes'
+attr.checkCDENotes(CdeNotes, "20")
+
+'Step 23: Click Save'
 attr.clickSaveAttributeData()
 
-'Step 25: Swith to iframe main '
+'Step 24: Swith to iframe main '
 attr.switchToIframeMain()
 
 'Step 25: click save data'
 attr.clickSaveData()
 
-'Step 25: Verify landing in Customer info page'
+'Step 26: Verify landing in Customer info page'
 custInfo.verifyLandingInCustInfoPage()
+
+financial.takeScreenShot()
 
 

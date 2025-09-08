@@ -63,5 +63,7 @@ public class PurchaseOrderPage extends BaseHelper{
 	public void clickSubmit() {
 		WebUI.takeScreenshot()
 		safetyClick(btnSubmit)
+		WebUI.delay(10)
+		WebUI.takeScreenshot()
 	}
 }

@@ -39,7 +39,7 @@ addCompanyCustomerPage.inputCustomerName(CompanyName)
 addCompanyCustomerPage.selectCompanyType(CompanyType)
 
 'Step 5: input customer NPWP'
-addCompanyCustomerPage.inputCustomerNPWP()
+addCompanyCustomerPage.inputCustomerNPWP(NPWP)
 
 'Step 6: input customer NITKU'
 addCompanyCustomerPage.inputCustomerNitku(NITKU)

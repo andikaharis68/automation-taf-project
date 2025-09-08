@@ -40,60 +40,35 @@ if(IsEditOther == "Y") {
 	'Step 5: Input EAccount Join date'
 	attr.inputEAccountJoinDate(EAccountJoinDate)
 	
-	'Step 6: Input Customer Rating'
-	attr.inputCustomerRating(CustRating)
+	'Step 6: check same address'
+	attr.checkSameAddress(SameAddress, "11")
 	
-	'Step 7:input Good Bad Status'
-	attr.inputGoodBadStatus(GoodBadStatus)
-	
-	'Step 8: input terduga terorism'
-	attr.inputSuspectTerrorism(TerdugaTerorisPPSPM)
-	
-	'Step 9: Input SIM NO'
-	attr.inputSimNo(NoSIM)
-	
-	'Step 10: check is split treasure'
-	attr.checkIsSplitTreasure(IsSplitTreassure)
-	
-	'Step 11: select debitor group slik'
-	
-	
-	'Step 12: check violate bmpk'
-	attr.checkViolateBMPK(ViolateBMPK)
-	
-	'Step 13: check exceed bpmk'
-	attr.checkExceedBMPK(ExceedBMPK)
-	
-	'Step 14: Check affiliate with multifinance'
-	
-	'Step 15: check same address'
-	attr.checkSameAddress(SameAddress)
-	
-	'Step 16: check same job'
+	'Step 7: check same job'
 	attr.checkSameJob(SameJob)
 	
-	'Step 17: check same position'
+
+	'Step 8: check different marital status'
+	attr.checkDifferentMaritalStatus(DifferentMaritalStatus, "14")
+	
+	'Step 9: check same position'
 	attr.checkSamePosition(SamePosition)
 	
-	'Step 18: check different marital status'
-	attr.checkDifferentMaritalStatus(DifferentMaritalStatus)
+	'Step 10: check home ownership document'
+	attr.checkHomeOwnershipDoc(HomeOwnershipDocument, "15")
 	
-	'Step 19: check home ownership document'
-	attr.checkHomeOwnershipDoc(HomeOwnershipDocument)
-	
-	'Step 20: No ATM'
+	'Step 11: No ATM'
 	attr.inputATMNo(NoATM)
 	
-	'Step 21: Input customer data consent'
-	attr.checkCustomerDataConsent(CustomerDataConsent)
+	'Step 12: Input customer data consent'
+	attr.checkCustomerDataConsent(CustomerDataConsent, "17")
 	
-	'Step 22: Input rating debitor'
+	'Step 13: Input rating debitor'
 	attr.inputRatingDebitor(RatingDebitor)
 	
-	'Step 23: Input rating date'
+	'Step 14: Input rating date'
 	attr.inputRatingDate(RatingDate)
 	
-	'Step 24: Click Save'
+	'Step 15: Click Save'
 	attr.clickSaveAttributeData()
 } 
 

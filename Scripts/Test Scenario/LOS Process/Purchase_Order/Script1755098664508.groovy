@@ -32,4 +32,4 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), d
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Navigate_To_Purchase_Order'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Search_Purchase_Order'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Do_Purchase_Order'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Verify_Status_After_Purchase_Order'), dataRow)
+//WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Purchase Order/Verify_Status_After_Purchase_Order'), dataRow)

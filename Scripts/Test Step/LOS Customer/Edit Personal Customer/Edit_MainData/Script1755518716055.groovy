@@ -49,13 +49,13 @@ if(IsEditMainData == "Y") {
 	mainData.inputNickName(NickName)
 	
 	'Step 6: Check Is Premium'
-	mainData.checkPremiumStatus(IsPremium)
+	mainData.checkPremiumAndInputNotes(IsPremium, PremiumNote)
 	
 	'Step 7: Select Marital Status'
 	mainData.selectMaritalStatus(MaritalStatus)
 	
 	'Step 8: Select Customer Group'
-	mainData.selectCustomerGroup(FullName, CustomerGroup)
+	mainData.selectCustomerGroup(CustomerGroup)
 	
 	'Step 9: Input Number Of Dependents'
 	mainData.inputNumberOfDependents(NumofDependents)
@@ -80,9 +80,6 @@ if(IsEditMainData == "Y") {
 	
 	'Step 16: Check isVIP'
 	mainData.checkIsVIP(IsVip)
-	
-	'Step 17: Input Premium Note'
-	mainData.inputPremiumNote(PremiumNote)
 	
 	'Step 18: Input SID No'
 	mainData.inputSIDNo(SidNo)

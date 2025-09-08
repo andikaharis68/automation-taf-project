@@ -31,7 +31,7 @@ menu.switchIframeCustForm()
 contactInfo.inputContactData(Name, JobPosition)
 
 'Step 3: Input on contact information section'
-contactInfo.inputContactInformation(MobilePhone1, Phone1, Email1)
+contactInfo.inputContactInformation(MobilePhone1, MobilePhone2, MobilePhone3, Phone1, Phone2, Phone3, Fax, Email1, Email2)
 
 'Step 4: Click save and continue'
 contactInfo.clickSaveAndContinue()

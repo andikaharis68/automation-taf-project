@@ -23,50 +23,47 @@ import org.openqa.selenium.Keys as Keys
 FamilyCustomerPage family = new FamilyCustomerPage()
 JobDataPage job = new JobDataPage()
 
-if(IsEditFamily == "Y") {
-	sss
-	'Step 1: Add Family'
-	family.clickAdd()
+'Step 1: Add Family'
+family.clickAdd()
 	
-	'Step 2: Select Customer Model'
-	family.selectCustomerModel(CustomerModel)
+'Step 2: Select Customer Model'
+family.selectCustomerModel(FamilyCustomerModel)
 	
-	'Step 3: Input family name'
-	family.inputFamilyName(FamilyName)
+'Step 3: Input family name'
+family.inputFamilyName(FamilyName)
 	
-	'Step 4: Select id type'
-	family.selectIdType(IdType)
+'Step 4: Select id type'
+family.selectIdType(FamilyIdType)
 	
-	'Step 5: Input ID no'
-	family.inputIdNumber(IdNumber)
+'Step 5: Input ID no'
+family.inputIdNumber(FamilyIdNumber)
 	
-	'Step 6: Input ID Expired Date'
-	family.inputIdExpiredDate(IdExpiredDate)
+'Step 6: Input ID Expired Date'
+family.inputIdExpiredDate(IdExpiredDate)
 	
-	'Step 7: Select Gender'
-	family.selectGender(Gender)
+'Step 7: Select Gender'
+family.selectGender(FamilyGender)
 	
-	'Step 8: Input POB'
-	family.inputPOB(BirthPlace)
+'Step 8: Input POB'
+family.inputPOB(FamilyBirthPlace)
 	
-	'Step 9: Input DOB'
-	family.inputDOB(BirthDate)
+'Step 9: Input DOB'
+family.inputDOB(FamilyBirthDate)
 	
-	'Step 10: Input NPWP'
-	family.inputNPWP(Npwp)
+'Step 10: Input NPWP'
+family.inputNPWP(FamilyNpwp)
 	
-	'Step 11: Input Mother Name'
-	family.inputMotherMaidenName(MotherMaidenName)
+'Step 11: Input Mother Name'
+family.inputMotherMaidenName(FamilyMotherMaidenName)
 	
-	'Step 12: Select Customer Relationship'
-	family.selectCustomerRelationship(CustomerRelationship)
+'Step 12: Select Customer Relationship'
+family.selectCustomerRelationship(FamilyCustomerRelationship)
 	
-	'Step 13: Click next '
-	family.clickNext()
+'Step 13: Click next '
+family.clickNext()
 	
-	'Step 14: Click select family'
-	family.clickSelectFamily()
-}
+'Step 14: Click select family'
+family.clickSelectFamily()
 
 'Step 15: click Save and continue'
 family.clickSaveContinue()
