@@ -25,6 +25,7 @@ import internal.GlobalVariable
 public class DisbursementSelectionPage extends BaseHelper {
 	//search
 	private TestObject drpAPTypeName 			= createTestObject("drpAPTypeName", "id", "ucSearch_ddlRefAccPayableTypeId_ltlRefAccPayableTypeAccPayableTypeNameSearch_ddlReference")
+	private TestObject drpOfficeName			= createTestObject("drpOfficeName", "id", "ucSearch_ddlOfficeCode_ltlRefOfficeOfficeNameSearch_ddlReference")
 	private TestObject txfApDueDate 			= createTestObject("txfApDueDate", "id", "ucSearch_txtAccPayableDueDt_ltlAccPayableAccPayableDueDtSearch_txtDatePicker")
 	private TestObject drpBankName 				= createTestObject("drpBankName", "id", "ucSearch_ddlAPDestBankCode_ltlRefBankBankNameSearch_ddlReference")
 	private TestObject btnSearch 				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
@@ -55,9 +56,13 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private void verifyLandingPage() {
 		verifyLanding(drpAPTypeName, "Disbursement Selection")
 		WebUI.takeScreenshot()
+		WebUI.delay(1)
 	}
 
-	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination) {
+	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination, String officeName) {
+		if(!officeName) {
+			safetySelect(drpOfficeName, officeName)
+		}
 
 		safetySelect(drpAPTypeName, apTypeName)
 		WebUI.delay(0.8)
@@ -84,11 +89,13 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private void cheklistApDisbursement() {
 		safetyClick(cbSelection)
 		WebUI.takeScreenshot()
+		WebUI.delay(5)
 	}
 
 	public void clickButtonAddToTemp() {
 		safetyClick(btnAddToTemp)
-		WebUI.takeScreenshot()
+		WebUI.delay(3)
+		
 	}
 
 	public Map getDisbursementSelectionData() {
@@ -99,6 +106,9 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 
 	public void updateAppNoandBalanceToMasterData(String fileName, String scenarioId) {
+		WebUI.scrollToElement(txtAppNo, 2)
+		WebUI.takeScreenshot()
+		
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String appNo = WebUI.getText(txtAppNo)
 		String appBalance = WebUI.getText(txtAppBalanceSelected)
@@ -110,6 +120,8 @@ public class DisbursementSelectionPage extends BaseHelper {
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
 		saveDataToExcel(apDestination, rowFilter, filePath, "MasterData", "ApDestination")
+		WebUI.delay(1)
+				
 	}
 	public String getApDescription() {
 		return WebUI.getText(txtApDescription)
@@ -122,11 +134,13 @@ public class DisbursementSelectionPage extends BaseHelper {
 		} else {
 			KeywordUtil.logInfo("Way of payment is $wayOfPayment")
 		}
+		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonRequestForApproval() {
 		safetyClick(btnRequestForApproval)
+		WebUI.delay(1)
 	}
 
 	public void verifyPopupStatusTransaction() {
@@ -138,6 +152,7 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private void clickNext() {
 		safetyClick(btnNext)
 		WebUI.takeScreenshot()
+		WebUI.delay(1)
 	}
 	private void clickConfirmationOK() {
 		WebUI.delay(0.5)
@@ -160,6 +175,7 @@ public class DisbursementSelectionPage extends BaseHelper {
 
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
+		WebUI.delay(1)
 	}
 
 	private void updateMasterDataPOtoCustomerNonSameday(String fileName, String scenarioId) {
@@ -178,9 +194,11 @@ public class DisbursementSelectionPage extends BaseHelper {
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
 		saveDataToExcel(apAmount, rowFilter, filePath, "MasterData", "ApplicationBalance")
+		WebUI.delay(1)
 	}
 	public void clickRequestForApprovalandTakeScreenshot() {
 		safetyClick(btnRequestForApproval)
 		WebUI.takeScreenshot()
+		WebUI.delay(1)
 	}
 }

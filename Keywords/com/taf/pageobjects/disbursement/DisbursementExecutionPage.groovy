@@ -24,62 +24,97 @@ import internal.GlobalVariable
 
 public class DisbursementExecutionPage extends BaseHelper {
 	//search
-	private TestObject drpAPTypeName 			 = createTestObject("drpAPTypeName", "xpath","//*[contains(@id, 'ltlRefAccPayableTypeAccPayableTypeNameSearch')]") 
-	private TestObject txfApDestination 		 = createTestObject("txfApDestination", "xpath","//*[contains(@id, 'txtAccPayableDestination')]") 
-	private TestObject drpBankName 				 = createTestObject("drpBankName", "xpath", "//*[contains(@id,'ltlRefBankBankNameSearch')]") 
-	private TestObject txfPaymentVoucherDate 	 = createTestObject("txfPaymentVoucherDate", "xpath", "//*[contains(@id, 'ltlPayVoucherHPayVoucherDtLTESearch')]") 
-	private TestObject btnSearch 				 = createTestObject("btnSearch", "id", "ucSearch_btnSearch") 
-	
+	private TestObject drpAPTypeName 			 = createTestObject("drpAPTypeName", "xpath","//*[contains(@id, 'ltlRefAccPayableTypeAccPayableTypeNameSearch')]")
+	private TestObject txfApDestination 		 = createTestObject("txfApDestination", "xpath","//*[contains(@id, 'txtAccPayableDestination')]")
+	private TestObject drpBankName 				 = createTestObject("drpBankName", "xpath", "//*[contains(@id,'ltlRefBankBankNameSearch')]")
+	private TestObject txfPaymentVoucherDate 	 = createTestObject("txfPaymentVoucherDate", "xpath", "//*[contains(@id, 'ltlPayVoucherHPayVoucherDtLTESearch')]")
+	private TestObject btnSearch 				 = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+
 	//AP Disbursement Process-Grid
-	private TestObject btnExecutedSelected 		 = createTestObject("btnExecutedSelected", "id", "lb_Btn_ExecuteSelected") 
-	
+	private TestObject btnExecutedSelected 		 = createTestObject("btnExecutedSelected", "id", "lb_Btn_ExecuteSelected")
+
 	//AP Bank Disbursement
 	private TestObject txfRecipientName 		 = createTestObject("txfRecipientName", "id", "txtRecipientName")
-	private TestObject txfCurrencyRate 			 = createTestObject("txfCurrencyRate", "id", "ucInputNumber_PayVoucherH_CurrRateAmt_txtInput") 
-	private TestObject txfDisbursementNote 		 = createTestObject("txfDisbursementNote", "id", "txtNotes") 
+	private TestObject txfCurrencyRate 			 = createTestObject("txfCurrencyRate", "id", "ucInputNumber_PayVoucherH_CurrRateAmt_txtInput")
+	private TestObject txfDisbursementNote 		 = createTestObject("txfDisbursementNote", "id", "txtNotes")
 	private TestObject btnDisburse				 = createTestObject("btnDisburse", "id", "lbDisburse")
 	//Popup status
 	private TestObject lblPopupTransactionStatus = createTestObject("lblPopupTransactionStatus", "", "")
 	private TestObject txtPopupTransactionStatus = createTestObject("txtPopupTransactionStatus", "", "")
+	private TestObject cbBilyetGiro				= createTestObject("cbBilyetGiro", "id", "cbIsBilyetGiro")
+	private TestObject txfBilyetGiroNo			= createTestObject("txfBilyetGiroNo", "id", "txtBilyetGiroNo")
+	private TestObject txfBilyetGiroDate		= createTestObject("txfBilyetGiroDate", "id", "ucBilyetDt_txtDatePicker")
+
 
 	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
 		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(1)
+
 		safetyInput(txfApDestination, apDestination)
+		WebUI.delay(1)
+
 		safetySelect(drpBankName, bankName)
+		WebUI.delay(1)
 	}
 
 	public void clickButtonSearch() {
 		safetyClick(btnSearch)
+		WebUI.delay(2)
 	}
 
 	public void clickExecutedSelected() {
 		safetyClick(btnExecutedSelected)
+		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
+	
+	private void isBilyetGiroCheck(String isBilyetGiro, bilyetGiroNo, bilyetGiroDate) {
+		if(isBilyetGiro == "Y" ) {
+			if(!WebUI.verifyElementChecked(cbBilyetGiro, 2, FailureHandling.OPTIONAL)) {
+				safetyClick(cbBilyetGiro)
+				WebUI.delay(1)
+			}
+			safetyInput(txfBilyetGiroNo,bilyetGiroNo)
+			WebUI.delay(1)
+			if(bilyetGiroDate) {
+				safetyInput(txfBilyetGiroDate, bilyetGiroDate)
+				clickTABKeyboard(txfBilyetGiroDate)
+			}
+		}
+	}
 
-	public void inputApBankDisbursement(String recipientName, String currencyRate, String disbursementNote) {
+	public void inputApBankDisbursement(String recipientName, String currencyRate, String disbursementNote, String isBilyetGiro,String bilyetGiroNo, String bilyetGiroDate) {
+		isBilyetGiroCheck(isBilyetGiro, bilyetGiroNo, bilyetGiroDate)
+		
 		safetyInput(txfRecipientName, recipientName)
-		safetyInput(txfCurrencyRate, currencyRate)
+		WebUI.delay(2)
+
+		clearAndSetText(txfCurrencyRate, currencyRate)
+		WebUI.delay(1)
+
 		clearAndSetText(txfDisbursementNote, disbursementNote)
+		WebUI.delay(1)
+
 		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonDisburse() {
 		safetyClick(btnDisburse)
 		WebUI.takeScreenshot()
+		WebUI.delay(3)
 	}
 
 	public void checklistApDisbursement(String paymentVoucherNo) {
 		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//a[contains(text(),'$paymentVoucherNo')]]//input[@type='checkbox']")
 		safetyClick(cbkApDisbursement)
+		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
-	private String getPaymentVoucherNoFromContext() {
-		String paymentVoucherNo = ScenarioContext.get("PaymentVoucherNo")
-		KeywordUtil.logInfo("appBalance" + paymentVoucherNo)
-		return paymentVoucherNo
+	private void verifyLandingPage() {
+		WebUI.delay(5)
+		verifyLanding(drpAPTypeName, "Disbursement execution")
+		WebUI.takeScreenshot()
+		WebUI.delay(3)
 	}
-	
-	
 }
 

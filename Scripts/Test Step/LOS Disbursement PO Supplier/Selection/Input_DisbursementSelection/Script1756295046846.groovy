@@ -51,3 +51,6 @@ selection.clickButtonRequestForApproval()
 
 'Step 9: Click Confirmation Ok'
 selection.clickConfirmationOK()
+
+'Step 10: verify landing in disbursement selection'
+selection.verifyLandingPage()
