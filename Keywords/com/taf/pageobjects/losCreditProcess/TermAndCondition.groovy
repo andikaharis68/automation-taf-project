@@ -149,7 +149,6 @@ public class TermAndCondition extends BaseHelper {
 	private void clickConfirmationOk() {
 		if(WebUI.waitForAlert(5)) {
 			WebUI.acceptAlert()
-			WebUI.takeScreenshot()
 		} else {
 			KeywordUtil.markFailed("Pop up not found ")
 		}
@@ -168,7 +167,7 @@ public class TermAndCondition extends BaseHelper {
 	}
 
 	private void clickCheckboxByDocName(String docLabel, String checkValue) {
-		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td//span[normalize-space(text())='${docLabel}']]//input[@type='checkbox']]")
+		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td/span[text()='${docLabel}']]//input[@type='checkbox']")
 		if (WebUI.verifyElementPresent(checkbox, 5, FailureHandling.OPTIONAL) && checkValue?.equalsIgnoreCase("Y")) {
 			WebUI.waitForElementVisible(checkbox, 3) //elementnya harus visible dulu bisa verifyelementchecked
 			boolean alreadyChecked = WebUI.verifyElementChecked(checkbox, 2, FailureHandling.OPTIONAL)

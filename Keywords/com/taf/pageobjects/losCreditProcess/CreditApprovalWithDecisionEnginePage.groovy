@@ -32,8 +32,8 @@ public class CreditApprovalWithDecisionEnginePage extends BaseHelper{
 	private TestObject iframeMainpage 	= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	
 	public void verifyLandingScreen() {
-		WebUI.switchToDefaultContent()
 		WebUI.switchToFrame(iframeMainpage, 1)
+		WebUI.delay(5)
 		verifyLanding(txfApplicationNo, "Credit Approval With Decision Engine")
 		WebUI.takeScreenshot()
 	}

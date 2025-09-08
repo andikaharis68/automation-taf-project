@@ -350,6 +350,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnCreditApproval)
 		switchDefaultContent()
+		WebUI.delay(5)
 	}
 
 	private void navigateToApplicationInquiry() {

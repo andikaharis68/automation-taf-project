@@ -39,14 +39,16 @@ public class CreditApprovalPage extends BaseHelper{
 	//approval action
 	private TestObject drpAction 				= createTestObject("drpAction", "id", "ddlAction")
 	private TestObject txfNotes 				= createTestObject("txfNotes", "id", "txtNotes")
+	private TestObject lblMatchingResult		= createTestObject("lblSectionApproval", "id", "ucToggleMatchResult_subSectionID") //*[@id=""]
 
 	public void verifyLandingScreen() {
-//		verifyLanding(txfCustomerIncome, "Credit Approval")
+		WebUI.scrollToElement(lblMatchingResult, 3)
+		verifyLanding(lblMatchingResult, "Credit Approval")
 		WebUI.takeScreenshot()
 	}
 
 	public void inputApprovalRequestSection(String customerIncome, String spouseIncome, String additionalIncome) {
-		
+		WebUI.delay(3)
 		if(WebUI.verifyElementPresent(txfCustomerIncome, 3, FailureHandling.OPTIONAL)) {
 			manualClearText(txfCustomerIncome)
 			safetyInput(txfCustomerIncome, customerIncome)
@@ -87,6 +89,7 @@ public class CreditApprovalPage extends BaseHelper{
 	}
 
 	public void inputApprovalAction(String action, String notes) {
+		WebUI.scrollToElement(drpAction, 2)
 		safetySelect(drpAction, action)
 		safetyInput(txfNotes, notes)
 		WebUI.takeScreenshot()

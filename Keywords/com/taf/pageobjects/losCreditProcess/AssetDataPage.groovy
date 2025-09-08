@@ -311,13 +311,14 @@ public class AssetDataPage extends BaseHelper {
 		safetyClick(btnEdit)
 		WebUI.takeScreenshot()
 	}
-	private void searchAccName(String accName, int index) { //*[@id="gvAccessories_ucLookupAccessories_1_uclLookupAccessories_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
+	private void searchAccName(String accName, int index) {
+		//*[@id="gvAccessories_ucLookupAccessories_1_uclLookupAccessories_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
 		btnSearchAssetAccessoryName = createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${index}_imb_${index}")
 		txfOvlySearchAccName		= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_rptFixedSearch_${index}_txtSearchValue_1")
 		btnOvlySearch 				= createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
-		btnOvlySelect  				= createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0") 
+		btnOvlySelect  				= createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0")
 		btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${index}_imb_${index}")
-		
+
 		safetyClick(btnSearchAssetAccessoryName)
 		safetyInput(txfOvlySearchAccName, accName)
 		safetyClick(btnOvlySearch)
@@ -451,7 +452,7 @@ public class AssetDataPage extends BaseHelper {
 	}
 
 	private void inputAdditionalDpAmount(String dpAmount, int index) {
-		if(dpAmount) { 
+		if(dpAmount) {
 			txfAdditionalDpAmount= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_${index}_txtInput_${index}")
 			manualClearText(txfAdditionalDpAmount)
 			safetyInput(txfAdditionalDpAmount, dpAmount)
@@ -467,26 +468,26 @@ public class AssetDataPage extends BaseHelper {
 	}
 
 	private boolean inputAccessoriesGridSection(String branchName, String accessoryName, String assetPrice, String dpAmount, String notes) {
-		
 		if (branchName == null || accessoryName.trim().isEmpty()) {
 			KeywordUtil.logInfo("Supplier branch input string is empty or null. Skipping input.")
 			return false
 		}
-		WebUI.scrollToElement(btnSearchAdditionBranch, 2)
+		WebUI.scrollToElement(btnAddAdditionalBranch, 2)
 		//check duplicate
 		Map result = checkDuplicateAndGetRow(branchName, accessoryName)
 		boolean isDuplicate = result['isDuplicate']
-		int rowIndex = result['rowIndex'] 
-		if(!isDuplicate) { 
+		int rowIndex = result['rowIndex']
+		if(!isDuplicate) {
 			WebUI.delay(0.5)
 			btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${rowIndex}_uclSupplBranchSchm_${rowIndex}_imb_${rowIndex}")
 			btnSearchAssetAccessoryName = createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${rowIndex}_imb_${rowIndex}")
 			txfAdditionalAssetPrice 	= createTestObject("txfAdditionalAssetPrice", "id", "gvAccessories_ucInputNumber_${rowIndex}_txtInput_${rowIndex}")
 			txfAdditionalDpAmount		= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_${rowIndex}_txtInput_${rowIndex}")
 			txfAdditionalNotes			= createTestObject("txfAdditionalNotes", "id", "gvAccessories_txtNotes_${rowIndex}")
-			
+
 			WebUI.comment("Not found duplicate, input index $rowIndex .")
 			safetyClick(btnAddAdditionalBranch)
+
 			searchAdditionalBranchName(branchName, rowIndex)
 			searchAccName(accessoryName, rowIndex)
 			inputAdditionalAssetPrice(assetPrice, rowIndex)
@@ -496,29 +497,33 @@ public class AssetDataPage extends BaseHelper {
 			WebUI.comment("Data duplicate, Skipping input.")
 		}
 	}
-	
+
 	/**
 	 * Cek apakah ada duplikat Supplier Branch + Accessories Name
 	 * @return Map [isDuplicate: boolean, rowIndex: int] kalo tidak duplikat return rownya berapa untuk get button lookup searchnya
 	 */
 	private Map checkDuplicateAndGetRow(String supplierBranchName, String accessoriesName) {
 		TestObject grid, branchInput, accessoryInput
-		grid = createTestObject("grid", "xpath", "//span[starts-with(@id,'gvAccessories_lblNo')]") 
+		grid = createTestObject("grid", "xpath", "//span[starts-with(@id,'gvAccessories_lblNo')]")
+		if(!WebUI.verifyElementPresent(grid, 5, OPTIONAL)) {
+			KeywordUtil.logInfo("⚠️ Table is empty, rowIndex = 0")
+			return [isDuplicate: false, rowIndex: 0]  // row pertama untuk input
+		}
 		def rows = WebUiCommonHelper.findWebElements(grid, 5)
 		boolean isDuplicate = false
 		int foundRow
 		KeywordUtil.logInfo("index " + rows.size())
 
-		for (int i = 1; i <= rows.size(); i++) { 
-			branchInput 	= createTestObject("branchInput","xpath", "(//input[contains(@name,'ucLookupSupplBranchSchm2') and @type= 'text'])[$i]") 
-			accessoryInput  = createTestObject("accessoryInput","xpath", "(//input[contains(@name,'uclLookupAccessories') and @type='text'])[$i]") 
+		for (int i = 1; i <= rows.size(); i++) {
+			branchInput 	= createTestObject("branchInput","xpath", "(//input[contains(@name,'ucLookupSupplBranchSchm2') and @type= 'text'])[$i]")
+			accessoryInput  = createTestObject("accessoryInput","xpath", "(//input[contains(@name,'uclLookupAccessories') and @type='text'])[$i]")
 
 			String currentBranch = WebUI.getAttribute(branchInput, 'value').trim()
 			String currentAccessories = WebUI.getAttribute(accessoryInput, 'value').trim()
 
 			if (currentBranch.equalsIgnoreCase(supplierBranchName) && currentAccessories.equalsIgnoreCase(accessoriesName)) {
 				isDuplicate = true
-				foundRow = rows.size()
+				foundRow = i
 				break
 			}
 		}
@@ -529,10 +534,11 @@ public class AssetDataPage extends BaseHelper {
 
 		return [isDuplicate: isDuplicate, rowIndex: foundRow]
 	}
-					
-	private void searchAdditionalBranchName(String additionalBranchName, int index) { //*[@id="gvAccessories_ucLookupSupplBranchSchm2_1_uclSupplBranchSchm_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
-		txfOvlySearchName = createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'rptFixedSearch_${index}_txtSearchValue_0')]") 
-		btnOvlySearch 	  = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}") 
+
+	private void searchAdditionalBranchName(String additionalBranchName, int index) {
+		//*[@id="gvAccessories_ucLookupSupplBranchSchm2_1_uclSupplBranchSchm_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
+		txfOvlySearchName = createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'rptFixedSearch_${index}_txtSearchValue_0')]")
+		btnOvlySearch 	  = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
 		btnOvlySelect     = createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0")
 
 		safetyClick(btnSearchAdditionBranch)
