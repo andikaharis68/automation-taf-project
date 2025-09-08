@@ -32,7 +32,7 @@ selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDest
 selection.clickButtonSearch()
 
 'Step 3: Click checkbox'
-selection.checklistApDisbursement(ApDestination)
+selection.cheklistApDisbursement()
 
 'Step 4: Click Add To Temp'
 selection.clickButtonAddToTemp()

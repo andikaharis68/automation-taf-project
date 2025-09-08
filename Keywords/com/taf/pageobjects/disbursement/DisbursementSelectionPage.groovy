@@ -28,13 +28,13 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private TestObject txfApDueDate 			= createTestObject("txfApDueDate", "id", "ucSearch_txtAccPayableDueDt_ltlAccPayableAccPayableDueDtSearch_txtDatePicker")
 	private TestObject drpBankName 				= createTestObject("drpBankName", "id", "ucSearch_ddlAPDestBankCode_ltlRefBankBankNameSearch_ddlReference")
 	private TestObject btnSearch 				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
-	private TestObject txfApDestination			= createTestObject("txfApDestination", "id", "ucSearch_txtAccPayableDestination_ltlAccPayableAccPayableDestinationSearch") 
+	private TestObject txfApDestination			= createTestObject("txfApDestination", "id", "ucSearch_txtAccPayableDestination_ltlAccPayableAccPayableDestinationSearch")
 
 	//AP Disbursement Selection-Grid
 	private TestObject btnAddToTemp				= createTestObject("btnAddToTemp", "id", "lb_Form_AddToTemp")
-	private TestObject txtApDestination 		= createTestObject("txtApDestination", "id", "gvSelected_lblAccPayableDestination_0") 
+	private TestObject txtApDestination 		= createTestObject("txtApDestination", "id", "gvSelected_lblAccPayableDestination_0")
 	private TestObject txtApDescription 		= createTestObject("txtApDescription", "id", "gvSelected_lbAccPayableDescr_0")
-	private TestObject txtApAmount				= createTestObject("txtApAmount", "id", "gvSelected_lblAccPayableAmt_0") 
+	private TestObject txtApAmount				= createTestObject("txtApAmount", "id", "gvSelected_lblAccPayableAmt_0")
 	private TestObject txtAppNo				 	= createTestObject("txtAppNo", "id", "gvSelected_lblAccPayableNo_0")
 	private TestObject txtBankAccountName		= createTestObject("txtBankAccountName", "id", "rptDisb_rptDetail_0_lblBankAccountName_0")
 	private TestObject txtAppBalanceSelected	= createTestObject("txtAppBalanceSelected", "id", "gvSelected_lblAccPayableBalance_0")
@@ -49,6 +49,7 @@ public class DisbursementSelectionPage extends BaseHelper {
 	//popup status
 	private TestObject lblPopUpTransactioStatus = createTestObject("lblPopUpTransactioStatus", "", "")
 	private TestObject txtPopUpTransactioStatus = createTestObject("txtPopUpTransactioStatus", "", "")
+	private TestObject cbSelection				= createTestObject("cbSelection", "id", "gvGrid_cbCheck_0")
 
 
 	private void verifyLandingPage() {
@@ -57,22 +58,31 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 
 	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination) {
-		apDestination  = apDestination.trim()
+
 		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(0.8)
+
 		safetyInput(txfApDueDate, apDueDate)
 		clickEnter(txfApDueDate)
+		WebUI.delay(0.8)
+
 		safetySelect(drpBankName, bankName)
-		safetyInput(txfApDestination, apDestination)
+		WebUI.delay(0.8)
+
+		if(!apDestination) {
+			apDestination  = apDestination.trim()
+			safetyInput(txfApDestination, apDestination)
+		}
 	}
 
 	public void clickButtonSearch() {
 		safetyClick(btnSearch)
-		WebUI.takeScreenshot()
+		WebUI.delay(2)
 	}
 
-	public void checklistApDisbursement(String apDestination) {
-		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apDestination')]]//input[@type='checkbox']")
-		safetyClick(cbkApDisbursement)
+	//select first row
+	private void cheklistApDisbursement() {
+		safetyClick(cbSelection)
 		WebUI.takeScreenshot()
 	}
 
@@ -92,11 +102,14 @@ public class DisbursementSelectionPage extends BaseHelper {
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String appNo = WebUI.getText(txtAppNo)
 		String appBalance = WebUI.getText(txtAppBalanceSelected)
+		String apDestination = WebUI.getText(txtApDestination)
+
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
-		
+
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
+		saveDataToExcel(apDestination, rowFilter, filePath, "MasterData", "ApDestination")
 	}
 	public String getApDescription() {
 		return WebUI.getText(txtApDescription)
@@ -137,35 +150,34 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 	public void updateMasterDataPOtoCustomer(String fileName, String scenarioId) {
 		TestObject txtApDesc, txtAppNo
-		txtApDesc = createTestObject("txtApDesc", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lbAccPayableDescr_0") 
-		txtAppNo  = createTestObject("txtAppNo", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAccPayableNo_0")   
+		txtApDesc = createTestObject("txtApDesc", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lbAccPayableDescr_0")
+		txtAppNo  = createTestObject("txtAppNo", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAccPayableNo_0")
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String appNo = WebUI.getText(txtAppNo)
 		String agreementNo = getNumberFromString(txtApDesc)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
-		
+
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
 	}
-	
+
 	private void updateMasterDataPOtoCustomerNonSameday(String fileName, String scenarioId) {
 		TestObject txtApDesc, txtAppNo, txtApBalance
 		txtApDesc = createTestObject("txtApDesc", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lbAccPayableDescr_0")
 		txtAppNo  = createTestObject("txtAppNo", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAccPayableNo_0")
-		txtApBalance = createTestObject("txtApBalance", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAPBalance_0") 
-		
+		txtApBalance = createTestObject("txtApBalance", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAPBalance_0")
+
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String appNo = WebUI.getText(txtAppNo)
 		String agreementNo = getNumberFromString(txtApDesc)
 		String apAmount = WebUI.getText(txtApBalance)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
-		
+
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
 		saveDataToExcel(apAmount, rowFilter, filePath, "MasterData", "ApplicationBalance")
-		
 	}
 	public void clickRequestForApprovalandTakeScreenshot() {
 		safetyClick(btnRequestForApproval)

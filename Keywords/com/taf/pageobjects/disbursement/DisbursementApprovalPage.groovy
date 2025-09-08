@@ -42,8 +42,12 @@ public class DisbursementApprovalPage extends BaseHelper {
 
 	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
 		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(0.8)
 		safetyInput(txfApDestination, apDestination)
+		WebUI.delay(0.8)
 		safetySelect(drpBankName, bankName)
+		WebUI.delay(0.8)
+		
 	}
 
 	public void clickButtonSearch() {
@@ -52,7 +56,8 @@ public class DisbursementApprovalPage extends BaseHelper {
 	}
 
 	public void checklistApDisbursement(String apBalance) {
-		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apBalance')]//input[@type='checkbox']")
+		
+		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//span[normalize-space(text())='$apBalance']/ancestor::tr//input[@type='checkbox']")
 		safetyClick(cbkApDisbursement)
 		WebUI.takeScreenshot()
 	}
@@ -83,7 +88,7 @@ public class DisbursementApprovalPage extends BaseHelper {
 		String paymentVoucherNo = WebUI.getText(txtVoucherNo)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
-		
+
 		saveDataToExcel(paymentVoucherNo, rowFilter, filePath, "MasterData", "PaymentVoucherNo")
 	}
 }
