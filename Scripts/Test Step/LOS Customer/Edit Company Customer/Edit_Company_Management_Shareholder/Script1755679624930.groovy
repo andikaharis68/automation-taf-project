@@ -32,13 +32,13 @@ menu.switchIframeCustForm()
 if(IsEditManagementShareholder == "Y") {
 	
 	'Step 1: Click Add personal'
-	management.clickAddPersonal()
+	management.clickEditPersonal()
 	
 	'Step 3: Search Customer name'
-	management.searchCustomerName(FullName)
+	management.searchCustomerName(ShareholderFullName)
 	
 	'Step 4: Select Job Position'
-	management.selectJobPosition(JobPosition)
+	management.selectJobPosition(ShareholderJobPosition)
 	
 	'Step 5: Input share percentage personal'
 	management.inputSharePercentage(SharePersonal)
@@ -47,10 +47,10 @@ if(IsEditManagementShareholder == "Y") {
 	management.clickSavePersonal()
 	
 	'Step 7: Click add company'
-	management.clickAddCompany()
+	management.clickEditCompany()
 	
 	'Step 8: Input CompanyName'
-	management.searchCustomerNameCompany(CompanyName)
+	management.searchCustomerNameCompany(ShareholderCompanyName)
 	
 	'Step 9: input nitku'
 	management.inputNITku(NITKU)

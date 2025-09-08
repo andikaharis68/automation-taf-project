@@ -23,8 +23,19 @@ AddressPage address = new AddressPage()
 
 if(IsEditLegalAddress == "Y") {
 	
-	'Step 1: click edit address'
-	address.clickEditAddress("Legal Address")
+	'Step 0: check is address exist or not. if not it would be added new address'
+	def addressExist = address.checkAddressList("Legal Address")
+	if(addressExist) {
+		'Step 1: click edit address'
+		address.clickEditAddress("Legal Address")
+	}else {
+		'Step 1: click add address'
+		address.clickAddAddress()
+		
+		'Step 2: Select Address Type = Legal Address'
+		address.selectAddressType("Legal Address")
+		
+	}
 	
 	'Step 4: Input Address'
 	address.inputAddress(LegalAddress)

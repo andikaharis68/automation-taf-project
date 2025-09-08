@@ -50,10 +50,12 @@ address.switchIframeForm()
 
 if(IsEditLegalAddress == "Y") {
 	'Step 1: click add address'
-	address.clickAddAddress()
+	boolean isExist = address.clickEditLegalAddress()
 	
 	'Step 2: Select Address Type = Legal Address'
-	address.selectAddressType("Legal Address")
+	if(!isExist) {		
+		address.selectAddressType("Legal Address")
+	}
 	
 	'Step 4: Input Address'
 	address.inputAddress(LegalAddress)

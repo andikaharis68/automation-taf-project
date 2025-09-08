@@ -35,31 +35,31 @@ if(IsEditFamily == "Y") {
 	family.inputFamilyName(FamilyName)
 	
 	'Step 4: Select id type'
-	family.selectIdType(IdType)
+	family.selectIdType(FamilyIdType)
 	
 	'Step 5: Input ID no'
-	family.inputIdNumber(IdNumber)
+	family.inputIdNumber(FamilyIdNumber)
 	
 	'Step 6: Input ID Expired Date'
-	family.inputIdExpiredDate(IdExpiredDate)
+	family.inputIdExpiredDate(FamilyIdExpiredDate)
 	
 	'Step 7: Select Gender'
-	family.selectGender(Gender)
+	family.selectGender(FamilyGender)
 	
 	'Step 8: Input POB'
-	family.inputPOB(BirthPlace)
+	family.inputPOB(FamilyBirthPlace)
 	
 	'Step 9: Input DOB'
-	family.inputDOB(BirthDate)
+	family.inputDOB(FamilyBirthDate)
 	
 	'Step 10: Input NPWP'
-	family.inputNPWP(Npwp)
+	family.inputNPWP(FamilyNpwp)
 	
 	'Step 11: Input Mother Name'
-	family.inputMotherMaidenName(MotherMaidenName)
+	family.inputMotherMaidenName(FamilyMotherMaidenName)
 	
 	'Step 12: Select Customer Relationship'
-	family.selectCustomerRelationship(CustomerRelationship)
+	family.selectCustomerRelationship(FamilyCustomerRelationship)
 	
 	'Step 13: Click next '
 	family.clickNext()

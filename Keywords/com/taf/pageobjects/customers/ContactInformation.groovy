@@ -33,22 +33,22 @@ public class ContactInformation extends BaseHelper{
 	private TestObject txfMobilePhone1		= createTestObject("txfMobilePhone1", "id", "ucContactInfo_txt_CustEmergencyCntct_MobilePhn1")
 	private TestObject txfMobilePhone2		= createTestObject("txfMobilePhone2", "id", "ucContactInfo_txt_CustEmergencyCntct_MobilePhn2")
 	private TestObject txfMobilePhone3		= createTestObject("txfMobilePhone3", "id", "ucContactInfo_txt_CustEmergencyCntct_MobilePhn3")
-	
+
 	private TestObject txfPhoneArea1		= createTestObject("txfPhoneArea1", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnArea1")
 	private TestObject txfPhone1 			= createTestObject("txfPhone1", "id", "ucContactInfo_txt_CustEmergencyCntct_Phn1")
 	private TestObject txfPhoneExt1 		= createTestObject("txfPhoneExt1", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnExt1")
-	
+
 	private TestObject txfPhoneArea2		= createTestObject("txfPhoneArea2", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnArea2")
 	private TestObject txfPhone2 			= createTestObject("txfPhone2", "id", "ucContactInfo_txt_CustEmergencyCntct_Phn2")
 	private TestObject txfPhoneExt2 		= createTestObject("txfPhoneExt2", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnExt2")
-	
+
 	private TestObject txfPhoneArea3		= createTestObject("txfPhoneArea3", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnArea3")
 	private TestObject txfPhone3 			= createTestObject("txfPhone3", "id", "ucContactInfo_txt_CustEmergencyCntct_Phn3")
 	private TestObject txfPhoneExt3 		= createTestObject("txfPhoneExt3", "id", "ucContactInfo_txt_CustEmergencyCntct_PhnExt3")
-	
+
 	private TestObject txfFaxArea			= createTestObject("txfFaxArea", "id", "ucContactInfo_txt_CustEmergencyCntct_FaxArea")
 	private TestObject txfFax				= createTestObject("txfFax", "xpath", "//*[@id = 'ucContactInfo_txt_CustEmergencyCntct_Fax']")
-	
+
 	private TestObject txfEmail1			= createTestObject("txfEmail1", "id", "ucContactInfo_ucEMail1_txtEmail")
 	private TestObject txfEmail2			= createTestObject("txfEmail2", "id", "ucContactInfo_ucEMail2_txtEmail")
 
@@ -66,13 +66,13 @@ public class ContactInformation extends BaseHelper{
 	}
 
 	public void inputContactData(String name, String jobPosition) {
-		if(name && jobPosition) {			
+		if(name && jobPosition) {
 			if(name == "AUTO") {
 				name = generateRandomName()
 			}
 			safetyInputEdit(txfName, name)
 			safetySelectEdit(drpJobPosition, jobPosition)
-		} 
+		}
 	}
 
 	public void inputContactInformation(String mobilePhone1, String mobilePhone2, String mobilePhone3, String phone1, String phone2, String phone3, String fax, String email1, String email2) {
@@ -82,21 +82,21 @@ public class ContactInformation extends BaseHelper{
 			}
 			safetyInputEdit(txfMobilePhone1, mobilePhone1)
 		}
-		
+
 		if(mobilePhone2) {
 			if(mobilePhone2 == "AUTO") {
 				mobilePhone2 = generateRandomPhone()
 			}
 			safetyInputEdit(txfMobilePhone2, mobilePhone2)
 		}
-		
+
 		if(mobilePhone3) {
 			if(mobilePhone3 == "AUTO") {
 				mobilePhone3 = generateRandomPhone()
 			}
 			safetyInputEdit(txfMobilePhone3, mobilePhone3)
 		}
-		
+
 		if(phone1) {
 			if(phone1 == "AUTO") {
 				phone1 = generateRandomPhone(true)
@@ -106,7 +106,7 @@ public class ContactInformation extends BaseHelper{
 			safetyInputEdit(txfPhone1, splittedPhone[1])
 			safetyInputEdit(txfPhoneExt1, splittedPhone[2])
 		}
-		
+
 		if(phone2) {
 			if(phone2 == "AUTO") {
 				phone2 = generateRandomPhone(true)
@@ -116,7 +116,7 @@ public class ContactInformation extends BaseHelper{
 			safetyInputEdit(txfPhone2, splittedPhone[1])
 			safetyInputEdit(txfPhoneExt2, splittedPhone[2])
 		}
-		
+
 		if(phone3) {
 			if(phone3 == "AUTO") {
 				phone3 = generateRandomPhone(true)
@@ -126,14 +126,14 @@ public class ContactInformation extends BaseHelper{
 			safetyInputEdit(txfPhone3, splittedPhone[1])
 			safetyInputEdit(txfPhoneExt3, splittedPhone[2])
 		}
-		
+
 		if(fax) {
 			String[] splittedFax = fax.split("-")
 			safetyInputEdit(txfFaxArea, splittedFax[0])
 			WebUI.delay(1)
 			safetyInputEdit(txfFax, splittedFax[1])
 		}
-		
+
 		safetyInputEdit(txfEmail1, email1)
 		safetyInputEdit(txfEmail2, email2)
 	}

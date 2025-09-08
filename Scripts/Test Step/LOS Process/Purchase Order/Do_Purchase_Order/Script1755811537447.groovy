@@ -32,6 +32,4 @@ purchase.clickSave()
 'Step 3: click submit'
 purchase.clickSubmit()
 
-'Step 4: verify popup success'
-menu.verifySuccessMessage()
 

@@ -23,107 +23,43 @@ import org.openqa.selenium.Keys as Keys
 FinancialDataPage financial = new FinancialDataPage()
 OtherAttributePage attr = new OtherAttributePage()
 
-'Step 1: Input Gross Monthly Income'
-financial.inputGrossMonthlyIncome(GrossMonthlyIncome)
+'Step 1: input Income Section and click calculate'
+financial.inputIncomeSection(GrossMonthlyIncome, GrossProfit, OtherIncome, SourceOfOtherIncome, LivingCost, OtherMonthlyInstallment)
 
-'Step 2: Input Gross Profit'
-financial.inputGrossProfit(GrossProfit)
-
-'Step 3: Input Other Income'
-financial.inputOtherIncome(OtherIncome)
-
-'Step 4: Input Source of Income'
-financial.inputSourceOfIncome(SourceOfOtherIncome)
-
-'Step 5: Input Living Cost'
-financial.inputLivingCost(LivingCost)
-
-'Step 6: Input Other Monthly Installment'
-financial.inputOtherMonthlyInstallment(OtherMonthlyInstallment)
-
-'Step 7: Click Calculate Income'
-financial.clickCalculateIncome()
-
-'Step 8: Click Add Bank Account'
+'Step 2: Click Add Bank Account'
 financial.clickAddCustAcc()
 
-'Step 9: Input bank name'
-financial.selectBankName(BankName)
+'Step 3: Input customer bank account section'
+financial.inputCustomerBankAccount(BankName, BankBranch,BankBranchBICode, AccountName, AccountNo, CustomerBankAccountPurpose)
 
-'Step 10: Input Bank Branch Name'
-financial.inputBranchName(BankBranch)
-
-'Step 11: Input Bank BI Code'
-financial.inputBICodeBank(BankBranchBICode)
-
-'Step 12: Input Acc Name'
-financial.inputAccName(AccountName)
-
-'Step 13: Input Acc No'
-financial.inputAccountNo(AccountNo)
-
-'Step 14: Click Save account'
+'Step 4: Click Save account'
 financial.clickSaveAccount()
 
-'Step 15: Click Add Statement'
+'Step 5: Click Add Statement'
 financial.clickAddStatement()
 
-'Step 16: Select Bank Name Statement'
-financial.selectBankNameStatement(StatementBankName)
+'Step 6: Input Bank Statement'
+financial.inputBankStatement(StatementBankName, StatementBankBranch, StatementBankBranchBICode, StatementAccountName, StatementAccountNo, StatementBeginingBalance)
 
-'Step 17: Input Bank Branch Statement'
-financial.inputBankBranchStatement(StatementBankBranch)
+'Step 7: Select Statement 1'
+financial.selectStatement(StatementMonth1, StatementYear1,StatementDebit1, StatementCredit1 , 1)
 
-'Step 18: Input Bank BI Code'
-financial.inputBICodeStatement(StatementBankBranchBICode)
+'Step 8: Select Statement 2'
+financial.selectStatement(StatementMonth2, StatementYear2,StatementDebit2, StatementCredit2 , 2)
 
-'Step 19: Input Account Name Statement'
-financial.inputAccNameStatement(StatementAccountName)
+'Step 9: Select Statement 3'
+financial.selectStatement(StatementMonth3, StatementYear3,StatementDebit3, StatementCredit3 , 3)
 
-'Step 20: Input Account No Statment'
-financial.inputAccNoStatement(StatementAccountNo)
+'Step 10: Click Calculate'
+financial.clickCalculateStatement()
 
-'Step 21: Input Statement beginning balance'
-financial.inputStatementBeginingBalance(StatementBeginingBalance)
+'Step 11: Click save bank statement'
+financial.clickSaveBankStatement()
 
-'Step 22: Select Statement Month 1'
-financial.selectStatementMonth(StatementMonth1, 1)
-
-'Step 23: Input Statement year 1'
-financial.inputStatementYear(StatementYear1, 1)
-
-'Step 24: Input Statment Debit 1'
-financial.inputStatementDebit(StatementDebit1, 1)
-
-'Step 25: Input Statment Credit 1'
-financial.inputStatementCredit(StatementCredit1, 1)
-
-'Step 26: Select Statement Month 2'
-financial.selectStatementMonth(StatementMonth2, 2)
-
-'Step 27: Input Statement year 2'
-financial.inputStatementYear(StatementYear2, 2)
-
-'Step 28: Input Statment Debit 2'
-financial.inputStatementDebit(StatementDebit2, 2)
-
-'Step 29: Input Statment Credit 2'
-financial.inputStatementCredit(StatementCredit2, 2)
-
-'Step 30: Select Statement Month 3'
-financial.selectStatementMonth(StatementMonth3, 3)
-
-'Step 31: Input Statement year 3'
-financial.inputStatementYear(StatementYear3, 3)
-
-'Step 32: Input Statment Debit 3'
-financial.inputStatementDebit(StatementDebit3, 3)
-
-'Step 33: Input Statment Credit 3'
-financial.inputStatementCredit(StatementCredit3, 3)
-
-'Step 34: Click Save and continue'
+'Step 12: Click Save and continue'
 financial.clickSaveContinue()
 
-'Step 35: Verify Landing in other attribute page'
+'Step 13: Verify Landing in other attribute page'
 attr.verifyLandingInOtherAttribute()
+
+financial.takeScreenShot()

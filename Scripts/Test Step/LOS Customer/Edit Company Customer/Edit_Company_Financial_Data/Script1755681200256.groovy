@@ -30,14 +30,39 @@ menu.switchIframeCustForm()
 
 if(IsEditFinancialData == "Y") {
 
+	'Step 2: input Income Section'
+	financialData.inputIncomeSection(GrossMonthlyIncome, GrossProfit, OtherIncome, SourceOfOtherIncome, LivingCost, OtherMonthlyInstallment)
+	
 	'Step 3: Click add customer bank account'
 	financialData.clickAddCustAcc()
 	
 	'Step 4: Input customer bank account section'
-	financialData.inputCustomerBankAccount(BankName, BankBranch, AccountName, AccountNo, CustomerBankAccountPurpose)
+	financialData.inputCustomerBankAccount(BankName, BankBranch, BankBranchBICode, AccountName, AccountNo, CustomerBankAccountPurpose)
 	
 	'Step 5: Click save bank account'
 	financialData.clickSaveAccount()
+	
+	'Step 6: Click Add Statement'
+	financialData.clickEditStatement()
+	
+	'Step 7: Input Bank Statement'
+	financialData.inputBankStatementCompany(StatementBankName, StatementBankBranch, StatementBankBranchBICode, StatementAccountName, StatementAccountNo, StatementBeginingBalance)
+	
+	'Step 8: Select Statement 1'
+	financialData.selectStatement(StatementMonth1, StatementYear1,StatementDebit1, StatementCredit1 , 0)
+	
+	'Step 9: Select Statement 2'
+	financialData.selectStatement(StatementMonth2, StatementYear2,StatementDebit2, StatementCredit2 , 1)
+	
+	'Step 10: Select Statement 3'
+	financialData.selectStatement(StatementMonth3, StatementYear3,StatementDebit3, StatementCredit3 , 2)
+	
+	'Step 11: Click Calculate'
+	financialData.clickCalculateStatement()
+	
+	'Step 12: Click save bank statement'
+	financialData.clickSaveBankStatement()
+	
 	
 }
 

@@ -47,10 +47,12 @@ MenuPage menu = new MenuPage()
 if(IsEditCompanyAddress == "Y") {
 
 	'Step 1: click add address'
-	address.clickAddAddress()
+	boolean isExist = address.clickEditCompanyAddress()
 	
 	'Step 2: Select Address Type = Company Address'
-	address.selectAddressType("Company Address")
+	if(!isExist) {		
+		address.selectAddressType("Company Address")
+	}
 	
 	'Step 4: Input Address'
 	address.inputAddress(CompanyAddress)

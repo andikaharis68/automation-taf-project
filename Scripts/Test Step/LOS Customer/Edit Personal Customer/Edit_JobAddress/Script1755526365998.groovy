@@ -25,8 +25,19 @@ FamilyCustomerPage family = new FamilyCustomerPage()
 
 if(IsEditJobAddress == "Y") {
 	
-	'Step 1: click add address'
-	address.clickEditAddress("Job Address")
+	'Step 0: check is address exist or not. if not it would be added new address'
+	def addressExist = address.checkAddressList("Job Address")
+	if(addressExist) {
+		'Step 1: click add address'
+		address.clickEditAddress("Job Address")
+	}else {
+		'Step 1: click add address'
+		address.clickAddAddress()
+		
+		'Step 2: Select Address Type = Job Address'
+		address.selectAddressType("Job Address")
+		
+	}
 	
 	'Step 3: Select ZIP Code'
 	address.searchAddress(JobZipCode)

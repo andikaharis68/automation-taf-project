@@ -36,7 +36,7 @@ job.selectJobPosition(JobPosition)
 job.selectJobStatus(JobStatus)
 
 'Step 5: Input Company Name'
-job.inputCompanyName(CompanyName)
+job.inputCompanyName(JobCompanyName)
 
 'Step 6: Check is Internal Employee'
 job.chxInternalEmployee(InternalEmployee)
@@ -65,17 +65,20 @@ job.inputPrevCompanyName(PreviousCompanyName)
 'Step 14: Select Previous Employement date'
 job.selectPrevCompanyDate(PreviousEmployementDateMonth, PreviousEmployementDateYear)
 
-'Step 15: Input Other Bussiness Name'
+'Step 15: Select Other Company Establish date'
+job.selectOtherCompanyEstablishDate(OtherEmploymentEstablishmentDateMonth, OtherEmploymentEstablishmentDateYear)
+
+'Step 16: Input Other Bussiness Name'
 job.inputOtherBussinessName(OtherBusinessName)
 
-'Step 16: Input Other Bussiness Type'
+'Step 17: Input Other Bussiness Type'
 job.inputOtherBussinessType(OtherBussinessType)
 
-'Step 17: Input Other job position'
-job.inputOtherJobPosition(OtherJobPosition)
+'Step 18: Select Other industry type'
+job.selectOtherIndustryType(OtherIndustryType)
 
-'Step 18: Select Other Company Establish date'
-job.selectOtherCompanyEstablishDate(OtherEmploymentEstablishmentDateMonth, OtherEmploymentEstablishmentDateYear)
+'Step 18: Input Other job position'
+job.inputOtherJobPosition(OtherJobPosition)
 
 'Step 19: Click Save and Continue (need fix)'
 job.clickSaveContinue()

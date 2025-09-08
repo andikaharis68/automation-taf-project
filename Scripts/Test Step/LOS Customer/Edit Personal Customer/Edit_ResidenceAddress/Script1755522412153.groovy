@@ -24,25 +24,35 @@ AddressPage address = new AddressPage()
 
 if(IsEditResidenceAddress == "Y") {
 	
-	'Step 1: click add address'
-	address.clickEditAddress("Residence Address")
+	'Step 0: check is address exist or not. if not it would be added new address'
+	def addressExist = address.checkAddressList("Residence Address")
+	if(addressExist) {
+			'Step 1: click add address'
+			address.clickEditAddress("Residence Address")
+	}else {
+		'Step 1: click add address'
+		address.clickAddAddress()
+		
+		'Step 2: Select Address Type = Residence Address'
+		address.selectAddressType("Residence Address")
+	}
 	
-	'Step 4: Select ZIP Code'
+	'Step 3: Select ZIP Code'
 	address.checkAddress(ResidenceZipCode)
 	
-	'Step 5: Input Address'
+	'Step 4: Input Address'
 	address.inputAddress(ResidenceAddress)
 	
-	'Step 6: Input RT'
+	'Step 5: Input RT'
 	address.inputRT(ResidenceRT)
 	
-	'Step 7: Input RW'
+	'Step 6: Input RW'
 	address.inputRW(ResidenceRW)
 	
-	'Step 8: Check Customer Have Fixed Line'
+	'Step 7: Check Customer Have Fixed Line'
 	address.checkCustomerHaveFixedline(ResidenceCustomerDoesNotHaveFixedline)
 	
-	'Step 9: Input Phone 1'
+	'Step 8: Input Phone 1'
 	address.inputPhoneNumbers(ResidencePhone1, 1)
 	
 	'Step 10: Input Phone 2'

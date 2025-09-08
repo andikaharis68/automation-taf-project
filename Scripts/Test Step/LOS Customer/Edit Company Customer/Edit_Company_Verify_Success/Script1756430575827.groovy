@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.awt.peer.MenuPeer
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -15,32 +18,32 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.customers.ContactInformation
+import com.taf.pageobjects.customers.CustomerInformationPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-ContactInformation contactInfo = new ContactInformation()
+CustomerInformationPage custInfo = new CustomerInformationPage()
 MenuPage menu = new MenuPage()
+
+WebUI.switchToDefaultContent()
 
 menu.switchIframeMainPage()
 
-menu.switchIframeCustForm()
+'Step 2: Select Customer Type'
+custInfo.selectCustomerType("Company")
 
-'Step 1: Verify landing on tab contact information'
-contactInfo.verifyLandingScreen()
+'Step 3: Input Csutomer Number'
+custInfo.inputCustomerNo(CustomerNumber)
 
-'Step 2: Input on contact main data'
-contactInfo.inputContactData(Name, ContactJobPosition)
+'Step 3: Click button search'
+custInfo.clickSearch()
 
-'Step 3: Input on contact information section'
-contactInfo.inputContactInformation(MobilePhone1, MobilePhone2, MobilePhone3, Phone1, Phone2, Phone3, Fax, Email1, Email2)
+'Step 5: Compare Customer Number'
+custInfo.verifyTableCustomer(CustomerNumber)
 
-'Step 4: Click save and continue'
-contactInfo.clickSaveAndContinue()
+'Step 4: Verify Customer list'
+custInfo.clickCustomerHyperlink()
 
-'Step 5: Verify save success'
-contactInfo.verifySaveSuccess()
 
-'Step 6: Verify success message'
-menu.verifySuccessMessage()
+
