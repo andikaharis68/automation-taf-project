@@ -24,27 +24,27 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class GuarantorPage extends BaseHelper {
-	
+
 	private TestObject btnSaveContinue		= createTestObject("btnSaveContinue", "id", "lb_Form_SaveCont")
 	private TestObject btnAddPersonal		= createTestObject("btnAddPersonal", "id", "lb_AgrmntGuarantor_AddPersonal")
 	private TestObject btnAddCompany		= createTestObject("btnAddCompany", "id", "lb_AgrmntGuarantor_AddCompany")
 	private TestObject btnSave				= createTestObject("btnSave", "id", "lb_Form_Save")
 	private TestObject btnCancel			= createTestObject("btnCancel", "id", "lb_Form_Cancel")
 	private TestObject btnSearchCustName	= createTestObject("btnSearchCustName", "id", "ucLookupCust_uclCust_imb")
-	
-	private TestObject txfOvlyCustName		= createTestObject("txfOvlyCustName", "xpath", "//*[@id='ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']") 
-	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id,'lbSearch')]") 
-	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect_0')]") 
+
+	private TestObject txfOvlyCustName		= createTestObject("txfOvlyCustName", "xpath", "//*[@id='ucLookupCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+	private TestObject btnOvlySearch		= createTestObject("btnOvlySearch", "xpath", "//*[contains(@id,'lbSearch')]")
+	private TestObject btnOvlySelect		= createTestObject("btnOvlySelect", "xpath", "//*[contains(@id, 'hpSelect_0')]")
 	private TestObject drpCustRelationship	= createTestObject("drpCustRelationship", "id", "ddlRefMasterCustRelation")
 	private TestObject iframeApp			= createTestObject("iframeApp", "id", "appForm")
-	private TestObject txfGuarantorPersonal = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_0") 
-	
-	
+	private TestObject txfGuarantorPersonal = createTestObject("txfGuarantorPersonal", "id", "gvGuarantor_lbGuarantorName_0")
+
+
 	private void verifyLandingInGuarantorPage() {
 		verifyLanding(btnAddPersonal, "Guarantor")
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void selectCustRelationship(String relationship) {
 		safetySelect(drpCustRelationship, relationship)
 		WebUI.takeScreenshot()
@@ -58,17 +58,17 @@ public class GuarantorPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnOvlySelect)
 	}
-	
+
 	private void clickAddPersonal() {
 		safetyClick(btnAddPersonal)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void clickAddCompany() {
 		safetyClick(btnAddCompany)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void clickSave() {
 		safetyClick(btnSave)
 		WebUI.takeScreenshot()
@@ -77,7 +77,7 @@ public class GuarantorPage extends BaseHelper {
 		WebUI.delay(5)
 		safetyClick(btnSaveContinue)
 	}
-	
+
 	private void addGuantorPersonal(String guarantorPersonal, String customerRelationship) {
 		boolean isNameExist = checkGuarantorIsExist(guarantorPersonal)
 		if(guarantorPersonal && !isNameExist) {
@@ -87,7 +87,7 @@ public class GuarantorPage extends BaseHelper {
 			clickSave()
 		}
 	}
-	
+
 	private boolean checkGuarantorIsExist(String name) {
 		int maxLoop = countGuarantorExist()
 		for(int i=0; i <= maxLoop; i++) {
@@ -97,7 +97,7 @@ public class GuarantorPage extends BaseHelper {
 				return true
 			}
 		}
-		
+
 		return false
 	}
 	private int countGuarantorExist() {
@@ -107,7 +107,7 @@ public class GuarantorPage extends BaseHelper {
 		KeywordUtil.logInfo("max loop $counter")
 		return counter
 	}
-	
+
 	private void addGuantorCompany(String guarantorCompany, String customerRelationshipCompany) {
 		boolean isNameExist = checkGuarantorIsExist(guarantorCompany)
 		KeywordUtil.logInfo("exist  $isNameExist")

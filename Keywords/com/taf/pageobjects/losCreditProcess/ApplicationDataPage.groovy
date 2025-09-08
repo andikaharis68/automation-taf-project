@@ -68,9 +68,11 @@ public class ApplicationDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void inputTenor(String tenor) {
-		String strTenor = WebUI.getText(txfTenor)
-		if(!tenor.equalsIgnoreCase(strTenor)) {
+		String currentValue = WebUI.getAttribute(txfTenor, "value")
+		if(!tenor.equalsIgnoreCase(currentValue)) {
 			clearAndSetText(txfTenor, tenor)
+		} else {
+			WebUI.comment("Value already matches: $tenor, no input needed")
 		}
 	}
 

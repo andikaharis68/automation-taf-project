@@ -45,6 +45,9 @@ appData.selectCharacteristicOfCredit(CharacteristicOfCredit)
 'Step 6: Click Save and continue'
 appData.clickSaveContinue()
 
+'Step 6.1: Check error after click save and continue'
+asset.getAllErrorFields()
+
 'Step 7: verify landing Asset registration data'
 asset.verifyLandinginAssetDataPage()
 

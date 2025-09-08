@@ -63,7 +63,7 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
 class BaseHelper {
-	public TestObject createTestObject(String objName, String property, String value) {
+	static TestObject createTestObject(String objName, String property, String value) {
 		/*
 		 * property: xpath, id, text etc
 		 * value : based on what property used, if u use xpath => "//*[text() = 'Login']", if u use id just write only id
@@ -156,7 +156,7 @@ class BaseHelper {
 		}
 		return testDataName
 	}
-	
+
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
 		Workbook workbook = new XSSFWorkbook(fis)
@@ -863,5 +863,19 @@ class BaseHelper {
 		} else {
 			KeywordUtil.logInfo("Step successfully reached: '${dataRow['StepApplication']}'")
 		}
+	}
+	static List<String> getAllErrorFields() {
+		TestObject errorSpans = createTestObject("errorSpan", "xpath", "//span[contains(text(), 'This field is required') and not(contains(@style,'display:none'))]")
+		List<WebElement> errorElements = WebUI.findWebElements(errorSpans, 5)
+		List<String> errorFieldIds = []
+
+		for (WebElement errorElement : errorElements) {
+			String spanId = errorElement.getAttribute("id")
+			String fieldId = spanId.replace("rfv", "txt")
+			errorFieldIds.add(fieldId)
+			WebUI.scrollToElement(errorSpans, 0)
+			KeywordUtil.markError("❗ Error detected at field: ${fieldId}")
+		}
+		return errorFieldIds
 	}
 }

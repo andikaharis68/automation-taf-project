@@ -83,7 +83,7 @@ public class WorkflowMonitoringPage extends BaseHelper{
 	}
 
 	public void delayAndRefresh() {
-		WebUI.delay(GlobalVariable.WAIT)
+		WebUI.delay(10)
 		WebUI.refresh()
 	}
 

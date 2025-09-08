@@ -154,11 +154,6 @@ public class TermAndCondition extends BaseHelper {
 			KeywordUtil.markFailed("Pop up not found ")
 		}
 	}
-	
-	private void waitAndTakeScreenshot() {
-		WebUI.delay(10)
-		WebUI.takeScreenshot()
-	}
 
 	private void setInputIfPresent(String docLabel, String partialId, String value, String fieldName) {
 		if (!value) return
@@ -173,9 +168,11 @@ public class TermAndCondition extends BaseHelper {
 	}
 
 	private void clickCheckboxByDocName(String docLabel, String checkValue) {
-		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td/span[text()='${docLabel}']]//input[@type='checkbox']")
-		if (WebUI.verifyElementPresent(checkbox, 5, OPTIONAL) && checkValue?.equalsIgnoreCase("Y")) {
-			if (!WebUI.verifyElementChecked(checkbox, 1, OPTIONAL)) {
+		TestObject checkbox = createTestObject("checkbox", "xpath", "//tr[td//span[normalize-space(text())='${docLabel}']]//input[@type='checkbox']]")
+		if (WebUI.verifyElementPresent(checkbox, 5, FailureHandling.OPTIONAL) && checkValue?.equalsIgnoreCase("Y")) {
+			WebUI.waitForElementVisible(checkbox, 3) //elementnya harus visible dulu bisa verifyelementchecked
+			boolean alreadyChecked = WebUI.verifyElementChecked(checkbox, 2, FailureHandling.OPTIONAL)
+			if (!alreadyChecked) {
 				safetyClick(checkbox)
 				WebUI.comment("Checkbox for '${docLabel}' is now checked.")
 				WebUI.delay(2)
@@ -191,16 +188,16 @@ public class TermAndCondition extends BaseHelper {
 		setInputIfPresent(docLabel, 'ucDPExpiredDt', expiredDate, 'Expired Date')
 		setInputIfPresent(docLabel, 'txtNote', notes, 'Notes')
 	}
-	
+
 	def void clickDuplicateCheckboxesOnlySecond() {
 		def driver = DriverFactory.getWebDriver()
 		List<WebElement> docNames = driver.findElements(By.xpath("//span[starts-with(@id,'gvTermCondition_lblDocName_')]"))
 		List<WebElement> checkboxes = driver.findElements(By.xpath("//input[starts-with(@id,'gvTermCondition_cbChecked_')]"))
 		Map<String, List<Integer>> nameToIndexes = [:]
-		
+
 		for (int i = 0; i < docNames.size(); i++) {
 			String docName = docNames[i].getText().trim()
-			
+
 			if (!nameToIndexes.containsKey(docName)) {
 				nameToIndexes[docName] = []
 			}
