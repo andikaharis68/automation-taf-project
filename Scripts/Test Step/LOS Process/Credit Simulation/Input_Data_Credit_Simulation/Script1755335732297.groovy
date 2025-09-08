@@ -52,7 +52,7 @@ credsim.clickNext()
 credsim.inputInsuranceDataInitialization(SchemeName)
 
 'Step 7: input section insurance rate to customer'
-credsim.inputInsuranceRateToCustomer(MainCoverageType1, MainCoverageType1)
+credsim.inputInsuranceRateToCustomer(MainCoverageType1, MainCoverageType2)
 
 'Step 8: klik next'
 credsim.clickNext()

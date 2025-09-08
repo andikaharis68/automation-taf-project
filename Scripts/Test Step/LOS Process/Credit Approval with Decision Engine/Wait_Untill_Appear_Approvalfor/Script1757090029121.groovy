@@ -42,7 +42,7 @@ workflowMonitoring.switchToSecondTab()
 workflowMonitoring.verifyLandingScreen()
 
 'Step 3: verify is step is already on sms approve'
-IsApprovalfor = workflowMonitoring.verifyIsStepAlreadyOnApprovalfor()
+IsApprovalfor = workflowMonitoring.verifyApprovalPending()
 KeywordUtil.logInfo("exis $IsApprovalfor")
 
 int attempt = 0
@@ -51,7 +51,7 @@ while (!IsApprovalfor && GlobalVariable.COUNTER > attempt) {
 	workflowMonitoring.delayAndRefresh()
 	
 	'Step 3.2: double check is step already on approval for after wait execution time'
-	IsApprovalfor = workflowMonitoring.verifyIsStepAlreadyOnApprovalfor()
+	IsApprovalfor = workflowMonitoring.verifyApprovalPending()
 	
 	attempt++
 }

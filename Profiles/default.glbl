@@ -39,7 +39,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>5</initValue>
+      <initValue>3</initValue>
       <name>COUNTER</name>
       <protected>false</protected>
       <valueType>NUMBER</valueType>
@@ -60,7 +60,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://confins-engine-uat-two.taf.co.id/workflow/'</initValue>
+      <initValue>'https://confins-uat-one-engine2.taf.co.id/workflow/'</initValue>
       <name>WEB_WORKFLOW_URL</name>
       <protected>false</protected>
       <valueType>STRING</valueType>
