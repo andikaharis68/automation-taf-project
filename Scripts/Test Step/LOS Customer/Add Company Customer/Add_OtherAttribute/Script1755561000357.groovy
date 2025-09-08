@@ -65,7 +65,7 @@ attr.inputRatingDebitor(RatingDebitor)
 attr.selectRatingInstitute(RatingInstitute)
 
 'Step 13: Input rating date'
-attr.inputRatingDate(RatingDate)
+//attr.inputRatingDate(RatingDate)
 
 'Step 14: Select affiliate with multifinance SLIK'
 attr.selectAffiliate(AffiliateWithMultifinanceSLIK)
