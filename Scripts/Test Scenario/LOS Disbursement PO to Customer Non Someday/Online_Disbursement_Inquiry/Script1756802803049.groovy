@@ -19,7 +19,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'LOS_Disbursement_PO_to_Customer_NonSameday_TestData.xlsx', 'SheetNames': ['Inquiry', 'MasterData']]
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Disbursement_PO_to_Customer_NonSameday_TestData.xlsx', 'SheetNames': ['Inquiry', 'MasterData']]
 
 Map dataRow = [:]
 dataRow += scenarioData
