@@ -44,12 +44,12 @@ public class RemedialExpenseRequestPage extends BaseHelper{
 	private TestObject txtNotesAnalyst			= createTestObject("txtNotesAnalyst", "id", "ucAnalysis_txtAnalysisNotes")
 
 
-	private TestObject drpHandlingType			= createTestObject("drpHandlingType", "id", "ucAction_UCReRalExecutor_ddlReference")
+	private TestObject drpHandlingType			= createTestObject("drpHandlingType", "id", "ucAction_ucRefHandlingType_ddlReference")
 	private TestObject drpExecutor				= createTestObject("drpExecutor", "id", "ucAction_UCReRalExecutor_ddlReference")
 	private TestObject txtNotesAction			= createTestObject("txtNotesAction", "id", "ucAction_txtActionNotes")
 
 	private TestObject chkAdvanceSettlement		= createTestObject("chkAdvanceSettlement", "id", "cbIsAdvance")
-	private TestObject drpDisburseTo			= createTestObject("drpDisburseTo", "id", "")
+	private TestObject drpDisburseTo			= createTestObject("drpDisburseTo", "id", "ucRefDisburseTo_ddlReference")
 	private TestObject txtDisburseTo			= createTestObject("drpDisburseTo", "id", "txtDisburseTo")
 	private TestObject txtNoteRemedialExpense	= createTestObject("txtNoteRemedialExpense", "id", "txtReqNotes")
 
@@ -60,12 +60,17 @@ public class RemedialExpenseRequestPage extends BaseHelper{
 	private TestObject txtAccountNo				= createTestObject("txtAccountNo", "id", "txtAccNo")
 	private TestObject txtAccountName			= createTestObject("txtAccountName", "id", "txtAccName")
 
-	private TestObject drpReason				= createTestObject("drpReason", "id", "ucApproval_ucRefReasonExpense_ddlReference")
-	private TestObject drpApprover				= createTestObject("drpApprover", "id", "ucApproval_ddlApvBy")
+	private TestObject drpReason				= createTestObject("drpReason", "xpath", "//select[@id = 'ucApproval_ucRefReasonExpense_ddlReference']")
+	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "//select[@id = 'ucApproval_ddlApvBy']")
 	private TestObject txtNotesApproval			= createTestObject("txtNotesApproval", "id", "ucApproval_txtNotes")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
+	
+	private TestObject iframeMain				= createTestObject("iframeMain", "id", "mainPage")
 
-
+	
+	public void switchFrameMaian() {
+		WebUI.switchToFrame(iframeMain, 3)
+	}
 
 	public void searchRemedialByAgreementNo(String agreementNo, String bucketName) {
 		safetyInput(txtAgreementNo, agreementNo)
@@ -77,12 +82,13 @@ public class RemedialExpenseRequestPage extends BaseHelper{
 	public void selectRemedial(String agreementNo) {
 		TestObject btnAction = createTestObject("btnAction", "xpath", "//a[text() = '$agreementNo']/following::input[1]")
 		safetyClick(btnAction, 5)
-		WebUI.takeScreenshot()n
+		WebUI.takeScreenshot()
 	}
 	
 	public void executeRemedial(String agreementNo) {
 		TestObject btnExecute = createTestObject("btnExecute", "xpath", "//a[text() = '$agreementNo']/following::input[contains(@id, 'gvPaging_imbExecute')]")
-		safetyClick(btnExecute, 9.5)
+		safetyClick(btnExecute, 3)
+		WebUI.acceptAlert()
 		WebUI.takeScreenshot()
 	}
 
@@ -108,8 +114,8 @@ public class RemedialExpenseRequestPage extends BaseHelper{
 		manualClearText(txtDepositAMount, 1)
 		safetyInput(txtDepositAMount, depoAmount, 1.5)
 
-		manualClearText(waivedAmount, 1)
-		safetyInput(waivedAmount, waivedAmount, 1.5)
+		manualClearText(txtWaivedAmount, 1)
+		safetyInput(txtWaivedAmount, waivedAmount, 1.5)
 	}
 
 	public void clickCalculate() {

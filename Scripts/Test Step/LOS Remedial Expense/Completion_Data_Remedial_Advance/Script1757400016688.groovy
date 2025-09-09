@@ -33,11 +33,11 @@ data.inputAction(Handler, HandleType, Executor, ActionNote)
 'step 4: select advance settlement'
 data.selectRemedialAdvance(IsAdvance, Diburse, AdvanceNote)
 
-'step 5: input approval'
-data.inputApprovalRequest(Reason, Approver, ApproverNote)
-
-'step 6: click calculate'
+'step 5: click calculate'
 data.clickCalculate()
+
+'step 6: input approval'
+data.inputApprovalRequest(Reason, Approver, ApproverNote)
 
 'step 7: click submit'
 data.clickSubmit()

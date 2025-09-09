@@ -36,11 +36,11 @@ data.selectRemedialAdvance(IsAdvance, Diburse, AdvanceNote)
 'step 5: input data bank account'
 data.inputBankAccount(BankName, BankBranch, AccountNo, AccountName)
 
-'step 6: input approval'
-data.inputApprovalRequest(Reason, Approver, ApproverNote)
-
-'step 7: click calculate'
+'step 6: click calculate'
 data.clickCalculate()
+
+'step 7: input approval'
+data.inputApprovalRequest(Reason, Approver, ApproverNote)
 
 'step 8: click submit'
 data.clickSubmit()

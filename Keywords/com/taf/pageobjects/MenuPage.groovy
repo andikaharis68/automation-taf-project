@@ -87,7 +87,7 @@ public class MenuPage extends BaseHelper {
 
 
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
-
+	
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
 	}

@@ -21,6 +21,8 @@ import org.openqa.selenium.Keys as Keys
 
 RemedialExpenseRequestPage req = new RemedialExpenseRequestPage()
 
+req.switchFrameMaian()
+
 'step 1: search remedial'
 req.searchRemedialByAgreementNo(AgreementNo, BucketName)
 

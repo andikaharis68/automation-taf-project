@@ -33,6 +33,12 @@ public class RemedialExpenseInquiryPage extends BaseHelper{
 	private TestObject lblTaskOwner		= createTestObject("lblTaskOwner", "id", "//span[text() = '-' and contains(@id, 'ApprovalResult')]/preceding::span[contains(@id, 'TaskOwner')][1]")
 	private TestObject lblNode			= createTestObject("lblNode", "id", "//span[text() = '-' and contains(@id, 'ApprovalResult')]/preceding::span[contains(@id, 'gvApvHist_lblApprovalNode')][1]")
 	
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
+	
+		
+	public void switchFrameMaian() {
+		WebUI.switchToFrame(iframeMain, 3)
+	}
 	
 	public void searchRemedial(String agreemetnNo) {
 		safetyInput(txtAgreementNo, agreemetnNo)
@@ -51,6 +57,10 @@ public class RemedialExpenseInquiryPage extends BaseHelper{
 	}
 	
 	public boolean checkApproval() {
+		WebUI.switchToDefaultContent()
+		
+		WebUI.switchToWindowIndex(1)
+		
 		WebUI.focus(lblNode)
 		WebUI.scrollToElement(lblTaskOwner, 2)
 		WebUI.takeScreenshot()
@@ -61,6 +71,8 @@ public class RemedialExpenseInquiryPage extends BaseHelper{
 		Map credential = [:]
 		credential['node'] = WebUI.getText(lblNode)
 		credential['owner'] = WebUI.getText(lblTaskOwner)
+		
+		WebUI.switchToWindowIndex(0)
 		
 		return credential
 	}

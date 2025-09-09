@@ -30,6 +30,13 @@ public class RemedialExpenseApprovalPage extends BaseHelper{
 	private TestObject txtNotes				= createTestObject("txtNotes", "id", "txtNotes")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	
+	private TestObject iframeMain			= createTestObject("iframeMain", "id", "mainPage")
+	
+		
+	public void switchFrameMaian() {
+		WebUI.switchToFrame(iframeMain, 3)
+	}
+	
 	
 	public void searchRemedial(String agreementNo) {
 		safetyInput(txtAgreementNo, agreementNo)

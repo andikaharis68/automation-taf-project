@@ -19,11 +19,12 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-String testDataName = BaseHelper.getTestDataName()
+//String testDataName = BaseHelper.getTestDataName()
+String testDataName = "LOS_Remedial_Expense_NonAdvance.xlsx"
 String scenarioId = GlobalVariable.SCENARIO_ID
 Map dataRow = [:]
 
-dataRow += BaseHelper.getTestDataByScenario("Remedial", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
+dataRow += BaseHelper.getTestDataByScenario("RemedialNonAdvance", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, scenarioId)
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + testDataName, dataRow["CredentialId"])
 dataRow += ["statusRemed" : false,
 			"counter" : 0]
@@ -37,6 +38,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Selec
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Completion_Data_Remedial_NonAdvance'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //section inquiry
+dataRow["Status"] = "Request"
 WebUI.delay(60)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
@@ -46,16 +48,17 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navig
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //section check inquiry
-while(!dataRow["statusRemed"] || dataRow["counter"] < 3) {
+dataRow["Status"] = "APPROVED"
+while(!dataRow["statusRemed"] && dataRow["counter"] < 3) {
 	WebUI.delay(60)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	dataRow["counter"] += 1
 }
 
 if(!dataRow["statusRemed"]) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Get_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 }
-
 
 //need script to looping approver
 
@@ -65,6 +68,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remed
 
 
 //section inquiry
+dataRow["Status"] = "Execute"
 WebUI.delay(60)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

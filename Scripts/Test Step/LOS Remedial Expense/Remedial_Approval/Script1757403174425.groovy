@@ -21,6 +21,8 @@ import org.openqa.selenium.Keys as Keys
 
 RemedialExpenseApprovalPage approve = new RemedialExpenseApprovalPage()
 
+approve.switchFrameMaian()
+
 'step 1: search remedial'
 approve.searchRemedial(AgreementNo)
 

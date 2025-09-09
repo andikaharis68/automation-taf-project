@@ -21,6 +21,8 @@ import org.openqa.selenium.Keys as Keys
 
 RemedialExpenseInquiryPage inq = new RemedialExpenseInquiryPage()
 
+inq.switchFrameMaian()
+
 'step 1: search remedial'
 inq.searchRemedial(AgreementNo)
 
