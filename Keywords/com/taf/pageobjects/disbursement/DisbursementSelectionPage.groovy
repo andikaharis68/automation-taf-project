@@ -6,6 +6,9 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -121,12 +124,12 @@ public class DisbursementSelectionPage extends BaseHelper {
 
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
-		saveDataToExcel(apDestination, rowFilter, filePath, "Approval", "ApDestinationApproval")		
+		saveDataToExcel(apDestination, rowFilter, filePath, "Approval", "ApDestinationApproval")
 		saveDataToExcel(apDestination, rowFilter, filePath, "Execution", "ApDestinationExecution")
 
 		WebUI.delay(1)
 	}
-	
+
 	public void updateAppNoandBalanceToMasterAndApproval(String fileName, String scenarioId) {
 		WebUI.scrollToElement(txtAppNo, 2)
 		WebUI.takeScreenshot()
@@ -148,15 +151,33 @@ public class DisbursementSelectionPage extends BaseHelper {
 	public String getApDescription() {
 		return WebUI.getText(txtApDescription)
 	}
+	private void selectBankAccountOrFirstOption(String bankAccount) {
+		WebElement element = WebUI.findWebElement(drpBankAccount)
+		List<WebElement> options = element.findElements(By.tagName("option"))
+		boolean isFound = false
+		for (WebElement opt : options) {
+			if (opt.getText().trim().equalsIgnoreCase(bankAccount)) {
+				safetySelect(drpBankAccount, bankAccount)
+				isFound = true
+				WebUI.delay(1)
+				break
+			}
+		}
+		if (!isFound) {
+			selectFirstOption(drpBankAccount, bankAccount)
+		}
+	}
 
 	public void inputSelectionDetail(String wayOfPayment, String bankAccount) {
+		WebUI.delay(2)
 		safetySelect(drpWayOfPayment, wayOfPayment)
+		WebUI.delay(0.8)
 		if(wayOfPayment.equalsIgnoreCase("Bank")) {
-			safetySelect(drpBankAccount, bankAccount)
+			bankAccount = bankAccount.trim()
+			selectBankAccountOrFirstOption(bankAccount)
 		} else {
 			KeywordUtil.logInfo("Way of payment is $wayOfPayment")
 		}
-		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
 

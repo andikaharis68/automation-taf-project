@@ -31,8 +31,5 @@ inquiry.retryInquiryStatus()
 'Step 3: Click batch no'
 inquiry.clickBatchNoAndNavigateToNewTab()
 
-'Step 4: Get Status'
-PaymentStatus = inquiry.getStatus()
-
-'Step 5: Click Payment voucher no and switch new tab'
+'Step 4: Click Payment voucher no and switch new tab'
 inquiry.clickVoucherNo()

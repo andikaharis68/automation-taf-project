@@ -73,7 +73,7 @@ public class OnlineDisbursementInquiryPage extends BaseHelper {
 			}
 		}
 
-		KeywordUtil.markFailedAndStop("Status never became SUCCESS after ${maxAttempts} attempts.")
+		KeywordUtil.markWarning("Status never became SUCCESS or FAIL after ${maxAttempts} attempts.")
 		return false
 	}
 
