@@ -42,17 +42,16 @@ class ExecutionListener {
 	
 	@BeforeTestSuite
 	def beforeTestSuites(TestSuiteContext testSuiteContext) {
-		String sourceId = RunConfiguration.getReportFolder()
-		if (sourceId.contains("Set_Default_Data_Store")) {
-			GlobalVariable.SCENARIO_ID = JsonDataStore.getValue("ScenarioId")
-		} 
-	
+		String sourceId = RunConfiguration.getExecutionProfile()
+		if(sourceId == "Multiple") {			
+			GlobalVariable.SCENARIO_ID = JsonDataStore.getValue("ScenarioId").toString()
+		}
 	}
 
 	@AfterTestSuite
 	def afterTestSuites(TestSuiteContext testSuiteContext) {
-		String sourceId = RunConfiguration.getReportFolder()
-		if (sourceId.contains("Set_Default_Data_Store")) {
+		String sourceId = RunConfiguration.getExecutionProfile()
+		if(sourceId == "Multiple") {
 			JsonDataStore.setValue("ScenarioId", JsonDataStore.getValue("ScenarioId") + 1)
 		}
 	}

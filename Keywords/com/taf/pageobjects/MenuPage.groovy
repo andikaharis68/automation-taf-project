@@ -412,7 +412,6 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "DISBURSEMENT")
 		WebUI.takeScreenshot()
 		safetyClick(btnDisbursementApproval)
-		WebUI.takeScreenshot()
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToDisbursmentExecution() {
@@ -423,7 +422,6 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "DISBURSEMENT")
 		WebUI.takeScreenshot()
 		safetyClick(btnDisbursementExecution)
-		WebUI.takeScreenshot()
 		WebUI.switchToDefaultContent()
 	}
 	private void navigatePayVoucherInquiry() {

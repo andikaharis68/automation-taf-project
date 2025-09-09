@@ -14,7 +14,7 @@
    <testCaseLink>
       <guid>e6d0a18f-4b14-4659-8754-55d871606deb</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Disbursement PO to Customer Sameday/Disbursement_Selection</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

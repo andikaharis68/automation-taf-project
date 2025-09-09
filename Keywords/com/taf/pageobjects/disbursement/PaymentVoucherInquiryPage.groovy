@@ -33,24 +33,31 @@ public class PaymentVoucherInquiryPage extends BaseHelper {
 	private void verifyLandingInquiryPage() {
 		verifyLanding(drpAPTypeName, "Pay Voucher Inquiry")
 		WebUI.takeScreenshot()
+		WebUI.delay(2)
 	}
 	public void inputSearchApplication(String apTypeName, String voucherNo) {
 		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(1)
 		safetyInput(txfVoucherNo, voucherNo)
+		WebUI.delay(2)
 	}
 
 	public void clickButtonSearch() {
 		WebUI.click(btnSearch)
 		WebUI.takeScreenshot()
+		WebUI.delay(2)
 	}
 
 	public void verifyStatusPaid() {
 		WebUI.waitForElementPresent(txtStatus, 5)
 		WebUI.verifyElementText(txtStatus, "PAID", FailureHandling.CONTINUE_ON_FAILURE)
+		WebUI.delay(2)
 	}
 	private void clickVoucherNoAndNavigateToNewTab() {
 		safetyClick(btnVoucherNo)
+		WebUI.delay(2)
 		switchToNewTab()
+		WebUI.delay(2)
 		WebUI.takeScreenshot()
 	}
 }

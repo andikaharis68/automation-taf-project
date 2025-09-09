@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalVariableEntities>
    <description></description>
-   <name>default</name>
+   <name>Multiple</name>
    <tag></tag>
-   <defaultProfile>true</defaultProfile>
+   <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://confins-uat-two.taf.co.id/confins/'</initValue>
+      <initValue>'https://confins-uat-one.taf.co.id/confins/'</initValue>
       <name>WEB_URL</name>
       <protected>false</protected>
       <valueType>STRING</valueType>
@@ -39,7 +39,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>3</initValue>
+      <initValue>5</initValue>
       <name>COUNTER</name>
       <protected>false</protected>
       <valueType>NUMBER</valueType>
@@ -53,14 +53,14 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'2'</initValue>
+      <initValue>'1'</initValue>
       <name>SCENARIO_ID</name>
       <protected>false</protected>
       <valueType>STRING</valueType>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://confins-uat-one-engine2.taf.co.id/workflow/'</initValue>
+      <initValue>'https://confins-engine-uat-two.taf.co.id/workflow/'</initValue>
       <name>WEB_WORKFLOW_URL</name>
       <protected>false</protected>
       <valueType>STRING</valueType>
