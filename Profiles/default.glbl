@@ -53,7 +53,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'1'</initValue>
+      <initValue>'2'</initValue>
       <name>SCENARIO_ID</name>
       <protected>false</protected>
       <valueType>STRING</valueType>
