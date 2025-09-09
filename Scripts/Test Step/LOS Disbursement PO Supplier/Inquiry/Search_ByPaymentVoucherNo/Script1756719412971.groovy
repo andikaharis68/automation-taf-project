@@ -31,7 +31,7 @@ payment.inputSearchApplication(ApTypeName, PaymentVoucherNo)
 payment.clickButtonSearch()
 
 'Step 3: Verify Status'
-//payment.verifyStatusPaid()
+payment.verifyStatusPaid()
 
 'Step 4: Click voucher no'
 payment.clickVoucherNoAndNavigateToNewTab()

@@ -26,7 +26,7 @@ DisbursementSelectionPage selection = new DisbursementSelectionPage()
 MenuPage menu = new MenuPage()
 
 'Step 1: Search Application'
-selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination)
+selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestinationSelection, OfficeName, InvoiceDate, IsReturnOnlineDisbursement)
 
 'Step 2: Click search'
 selection.clickButtonSearch()

@@ -29,7 +29,7 @@ MenuPage menu = new MenuPage()
 selection.verifyLandingPage()
 
 'Step 1: Search Application'
-selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination, OfficeName)
+selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination, OfficeName, InvoiceDate, IsReturnOnlineDisbursement)
 
 'Step 2: Click search'
 selection.clickButtonSearch()

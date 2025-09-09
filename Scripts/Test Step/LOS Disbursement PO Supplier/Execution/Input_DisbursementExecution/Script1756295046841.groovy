@@ -25,7 +25,7 @@ DisbursementExecutionPage execution = new DisbursementExecutionPage()
 execution.verifyLandingPage()
 
 'Step 1: Input search application'
-execution.inputSearchApplication(ApTypeName, ApDestination, BankName)
+execution.inputSearchApplication(ApTypeName, ApDestinationExecution, BankName)
 
 'Step 2: Click Search'
 execution.clickButtonSearch()

@@ -30,6 +30,8 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private TestObject drpBankName 				= createTestObject("drpBankName", "id", "ucSearch_ddlAPDestBankCode_ltlRefBankBankNameSearch_ddlReference")
 	private TestObject btnSearch 				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	private TestObject txfApDestination			= createTestObject("txfApDestination", "id", "ucSearch_txtAccPayableDestination_ltlAccPayableAccPayableDestinationSearch")
+	private TestObject txfInvoiceDate			= createTestObject("txfInvoiceDate", "id", "ucSearch_txtInvoiceDt_ltlAccPayableInvoiceDtSearch_txtDatePicker")
+	private TestObject drpIsReturnOnline		= createTestObject("drpIsReturnOnline", "id", "ucSearch_ddlIsOnlDisbReturn_ltlPayVoucherHIsOnlDisbReturn_ddlReference")
 
 	//AP Disbursement Selection-Grid
 	private TestObject btnAddToTemp				= createTestObject("btnAddToTemp", "id", "lb_Form_AddToTemp")
@@ -51,33 +53,13 @@ public class DisbursementSelectionPage extends BaseHelper {
 	private TestObject lblPopUpTransactioStatus = createTestObject("lblPopUpTransactioStatus", "", "")
 	private TestObject txtPopUpTransactioStatus = createTestObject("txtPopUpTransactioStatus", "", "")
 	private TestObject cbSelection				= createTestObject("cbSelection", "id", "gvGrid_cbCheck_0")
+	private TestObject drpPage					= createTestObject("drpPage", "id", "ucGridFooter_ddlPageSize")
 
 
 	private void verifyLandingPage() {
 		verifyLanding(drpAPTypeName, "Disbursement Selection")
 		WebUI.takeScreenshot()
 		WebUI.delay(1)
-	}
-
-	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination, String officeName) {
-		if(!officeName) {
-			safetySelect(drpOfficeName, officeName)
-		}
-
-		safetySelect(drpAPTypeName, apTypeName)
-		WebUI.delay(0.8)
-
-		safetyInput(txfApDueDate, apDueDate)
-		clickEnter(txfApDueDate)
-		WebUI.delay(0.8)
-
-		safetySelect(drpBankName, bankName)
-		WebUI.delay(0.8)
-
-		if(!apDestination) {
-			apDestination  = apDestination.trim()
-			safetyInput(txfApDestination, apDestination)
-		}
 	}
 
 	public void clickButtonSearch() {
@@ -92,10 +74,30 @@ public class DisbursementSelectionPage extends BaseHelper {
 		WebUI.delay(5)
 	}
 
+	private void cheklistApDisWithEmptyOnlineDisburse() {
+		cbSelection = createTestObject("cbSelection", "xpath", "//tr[td/span[normalize-space(text())='-']]//input[@type='checkbox']")
+		if(WebUI.verifyElementPresent(cbSelection, 3, FailureHandling.OPTIONAL)) {
+			WebUI.scrollToElement(cbSelection, 2)
+			safetyClick(cbSelection)
+			WebUI.comment("✅ Checkbox with '-' span clicked successfully.")
+			WebUI.takeScreenshot()
+			WebUI.delay(5)
+		} else {
+			safetySelect(drpPage, "50")
+			WebUI.scrollToElement(cbSelection, 1)
+			boolean isCbExist =  WebUI.verifyElementPresent(cbSelection, 1, FailureHandling.OPTIONAL)
+			if(isCbExist) {
+				safetyClick(cbSelection)
+			} else {
+				KeywordUtil.markFailed("Tidak ada product yg online disbursementny kosong")
+			}
+		}
+	}
+
 	public void clickButtonAddToTemp() {
 		safetyClick(btnAddToTemp)
+		WebUI.scrollToElement(txtApDescription, 2)
 		WebUI.delay(3)
-		
 	}
 
 	public Map getDisbursementSelectionData() {
@@ -108,7 +110,7 @@ public class DisbursementSelectionPage extends BaseHelper {
 	public void updateAppNoandBalanceToMasterData(String fileName, String scenarioId) {
 		WebUI.scrollToElement(txtAppNo, 2)
 		WebUI.takeScreenshot()
-		
+
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String appNo = WebUI.getText(txtAppNo)
 		String appBalance = WebUI.getText(txtAppBalanceSelected)
@@ -119,9 +121,29 @@ public class DisbursementSelectionPage extends BaseHelper {
 
 		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
-		saveDataToExcel(apDestination, rowFilter, filePath, "MasterData", "ApDestination")
+		saveDataToExcel(apDestination, rowFilter, filePath, "Approval", "ApDestinationApproval")		
+		saveDataToExcel(apDestination, rowFilter, filePath, "Execution", "ApDestinationExecution")
+
 		WebUI.delay(1)
-				
+	}
+	
+	public void updateAppNoandBalanceToMasterAndApproval(String fileName, String scenarioId) {
+		WebUI.scrollToElement(txtAppNo, 2)
+		WebUI.takeScreenshot()
+
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		String appNo = WebUI.getText(txtAppNo)
+		String appBalance = WebUI.getText(txtAppBalanceSelected)
+		String apDestination = WebUI.getText(txtApDestination)
+
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+
+		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
+		saveDataToExcel(appBalance, rowFilter, filePath, "MasterData", "ApplicationBalance")
+		saveDataToExcel(apDestination, rowFilter, filePath, "Approval", "ApDestinationApproval")
+
+		WebUI.delay(1)
 	}
 	public String getApDescription() {
 		return WebUI.getText(txtApDescription)
@@ -156,11 +178,11 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 	private void clickConfirmationOK() {
 		WebUI.delay(0.5)
-		if(WebUI.waitForAlert(5)) {
+		if(WebUI.waitForAlert(5,FailureHandling.OPTIONAL)) {
 			WebUI.acceptAlert()
 			WebUI.takeScreenshot()
 		} else {
-			KeywordUtil.markFailed("alert not found")
+			KeywordUtil.logInfo("alert not found")
 		}
 	}
 	public void updateMasterDataPOtoCustomer(String fileName, String scenarioId) {
@@ -179,26 +201,54 @@ public class DisbursementSelectionPage extends BaseHelper {
 	}
 
 	private void updateMasterDataPOtoCustomerNonSameday(String fileName, String scenarioId) {
-		TestObject txtApDesc, txtAppNo, txtApBalance
+		TestObject txtApDesc
 		txtApDesc = createTestObject("txtApDesc", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lbAccPayableDescr_0")
-		txtAppNo  = createTestObject("txtAppNo", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAccPayableNo_0")
-		txtApBalance = createTestObject("txtApBalance", "id", "rptDisb_rptDetail_0_gvGridDetail_0_lblAPBalance_0")
 
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
-		String appNo = WebUI.getText(txtAppNo)
 		String agreementNo = getNumberFromString(txtApDesc)
-		String apAmount = WebUI.getText(txtApBalance)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
 
-		saveDataToExcel(appNo, rowFilter, filePath, "MasterData", "ApplicationNo")
 		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
-		saveDataToExcel(apAmount, rowFilter, filePath, "MasterData", "ApplicationBalance")
 		WebUI.delay(1)
 	}
 	public void clickRequestForApprovalandTakeScreenshot() {
 		safetyClick(btnRequestForApproval)
-		WebUI.takeScreenshot()
 		WebUI.delay(1)
+	}
+
+	public void inputSearchApplication(String apTypeName, String apDueDate, String bankName,String apDestination, String officeName, String invoiceDate, String isReturnOnlineDisburse) {
+		if(officeName) {
+			safetySelect(drpOfficeName, officeName)
+		}
+
+		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(0.8)
+
+		apDueDate = apDueDate.trim()
+		safetyInput(txfApDueDate, apDueDate)
+		pressEsc(txfApDueDate)
+		WebUI.delay(0.8)
+
+		safetySelect(drpBankName, bankName)
+		WebUI.delay(0.8)
+
+		if(apDestination) {
+			apDestination  = apDestination.trim()
+			safetyInput(txfApDestination, apDestination)
+			WebUI.delay(0.8)
+		}
+
+		if(invoiceDate) {
+			invoiceDate = invoiceDate.trim()
+			safetyInput(txfInvoiceDate, invoiceDate)
+			pressEsc(txfInvoiceDate)
+			WebUI.delay(0.8)
+		}
+
+		if(isReturnOnlineDisburse) {
+			safetySelect(drpIsReturnOnline, isReturnOnlineDisburse)
+			WebUI.delay(0.8)
+		}
 	}
 }

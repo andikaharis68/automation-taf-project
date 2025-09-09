@@ -50,9 +50,10 @@ public class DisbursementExecutionPage extends BaseHelper {
 		safetySelect(drpAPTypeName, apTypeName)
 		WebUI.delay(1)
 
-		safetyInput(txfApDestination, apDestination)
-		WebUI.delay(1)
-
+		if(apDestination.trim()) {
+			safetyInput(txfApDestination, apDestination)
+			WebUI.delay(1)
+		}
 		safetySelect(drpBankName, bankName)
 		WebUI.delay(1)
 	}
@@ -67,7 +68,7 @@ public class DisbursementExecutionPage extends BaseHelper {
 		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
-	
+
 	private void isBilyetGiroCheck(String isBilyetGiro, bilyetGiroNo, bilyetGiroDate) {
 		if(isBilyetGiro == "Y" ) {
 			if(!WebUI.verifyElementChecked(cbBilyetGiro, 2, FailureHandling.OPTIONAL)) {
@@ -85,7 +86,7 @@ public class DisbursementExecutionPage extends BaseHelper {
 
 	public void inputApBankDisbursement(String recipientName, String currencyRate, String disbursementNote, String isBilyetGiro,String bilyetGiroNo, String bilyetGiroDate) {
 		isBilyetGiroCheck(isBilyetGiro, bilyetGiroNo, bilyetGiroDate)
-		
+
 		safetyInput(txfRecipientName, recipientName)
 		WebUI.delay(2)
 
