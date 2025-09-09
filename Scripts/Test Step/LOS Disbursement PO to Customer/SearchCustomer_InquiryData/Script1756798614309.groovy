@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -24,11 +25,14 @@ OnlineDisbursementInquiryPage inquiry = new OnlineDisbursementInquiryPage()
 'Step 1: Search customer by agreement no'
 inquiry.searchByAgreementNo(AgreementNo)
 
-'Step 2: Click batch no'
+'Step 2:retry search customer till status became success'
+inquiry.retryInquiryStatus()
+
+'Step 3: Click batch no'
 inquiry.clickBatchNoAndNavigateToNewTab()
 
-'Step 3: Get Status'
+'Step 4: Get Status'
 PaymentStatus = inquiry.getStatus()
 
-'Step 4: Click Payment voucher no and switch new tab'
+'Step 5: Click Payment voucher no and switch new tab'
 inquiry.clickVoucherNo()

@@ -14,14 +14,14 @@
    <testCaseLink>
       <guid>737ee641-6eb6-4a04-a944-2534ec84425d</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Disbursement PO to Customer Non Someday/Disbursement_Selection</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
       <guid>0a245488-0207-4ed3-8957-50163e2d10fb</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Disbursement PO to Customer Non Someday/Disbursement_Approval</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

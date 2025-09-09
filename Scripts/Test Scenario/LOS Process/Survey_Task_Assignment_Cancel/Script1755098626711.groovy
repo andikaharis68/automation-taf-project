@@ -30,7 +30,7 @@ Map scenarioData = [
 	'SheetNames': ['Survey', 'MasterData'],
 	'StepApplication': 'PAP',
 	'StepCheck': false, 
-	'Counter': 4
+	'Counter': 3
 ] 
 
 Map dataRow = [:]

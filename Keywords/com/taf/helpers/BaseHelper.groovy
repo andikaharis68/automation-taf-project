@@ -878,4 +878,7 @@ class BaseHelper {
 		}
 		return errorFieldIds
 	}
+	def void pressEsc(TestObject to) {
+		WebUI.sendKeys(to, Keys.chord(Keys.ESCAPE))
+	}
 }
