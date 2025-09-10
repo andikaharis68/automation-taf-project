@@ -23,23 +23,44 @@ import internal.GlobalVariable
 
 public class AmendmentRequestPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']") 
+	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch") 
 	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject txfAddress		= createTestObject("txfAddress", "id", "ucSearch_txtAddress_ltlCustAddrAddrSearch") 
+	private TestObject btnPencil		= createTestObject("btnPencil","id", "gvAgrmnt_imbEdit_9") 
+	
+	
+	
+	private void verifyLandingPage() {
+		verifyLanding(drpAmendmentType, "Amendment Request")
+		WebUI.takeScreenshot()
+	}
 
+	private void selectAmendmentType(String type) {
+		safetySelect(drpAmendmentType, type, 1)
+		WebUI.delay(0.8)
+		
+	}
+	public void searchAmendment(String amendmentType, String customerName, String agreementNo, String address) {
 
-	public void searchAmendment(String amendmentType, String customerName) {
-
-		safetySelect(drpAmendmentType, amendmentType, 1)
-		safetyInput(txtCustomerName, customerName)
+		selectAmendmentType(amendmentType)
+		inputIfTextExist(txtCustomerName, customerName)
+		inputIfTextExist(txfAgreementNo, agreementNo)
+		inputIfTextExist(txfAddress, address)
+		
 		safetyClick(btnSearch, 1)
-
-
-		clickPenAction(customerName)
+		WebUI.delay(0.8)
+		WebUI.takeScreenshot()
+		
+		safetyClick(btnPencil)
 	}
 
-	private void clickPenAction(customerName) {
-
-		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "//span[text() = '$customerName']/following::input[1]")
+	private void inputIfTextExist(TestObject to, String label) {
+		if(label) {
+			safetyInput(to, label)
+			WebUI.delay(0.8)
+		}
 	}
+	
 }
