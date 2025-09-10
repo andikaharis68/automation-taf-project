@@ -80,6 +80,11 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnPayVoucherInquiry			= createTestObject("btnPayVoucherInquiry", "xpath", "//a[text() = 'Pay Voucher Inquiry']")
 	private TestObject btnOnlineDisburseInquiry		= createTestObject("btnOnlineDisburseInquiry", "xpath", "//a[text() = 'Online Disbursement Inquiry']")
 
+	//collection
+	private TestObject btnCollectionExpense			= createTestObject("btnCollectionExpense", "text", "Collection Expense")
+	private TestObject btnCollectionExpenseRequest	= createTestObject("btnCollectionExpenseRequest", "text", "Collection Expense Request")
+	
+	//remedial
 	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
 	private TestObject btnRemedialExpenseRequest	= createTestObject("btnRemedialExpenseRequest", "xpath", "//a[text() = 'Remedial Expense Request']")
 	private TestObject btnRemedialInquiry			= createTestObject("btnRemedialInquiry", "xpath", "//a[text() = 'Remedial Expense Inquiry']")
@@ -102,7 +107,6 @@ public class MenuPage extends BaseHelper {
 
 	private void clickDropdownMenu() {
 		safetyClick(drpMenu)
-		WebUI.takeScreenshot()
 	}
 
 	private void clickDropdownFavourite() {
@@ -222,7 +226,10 @@ public class MenuPage extends BaseHelper {
 
 	private void selectMenuMarketing() {
 		BaseHelper.safetySelect(drpModul, "MARKETING")
-		WebUI.takeScreenshotAsCheckpoint("Testing Description Screenshot")
+	}
+	
+	private void selectMenuCollection() {
+		BaseHelper.safetySelect(drpModul, "COLLECTION")
 	}
 
 	private void clickCreditSimulation() {
@@ -445,6 +452,15 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnOnlineDisburseInquiry)
 		WebUI.switchToDefaultContent()
+	}
+	
+	private void clickMenuCollectionExpense() {
+		safetyClick(btnCollectionExpense)
+	}
+	
+	private void clickMenuCollectionExpenseRequest() {
+		WebUI.takeScreenshot()
+		safetyClick(btnCollectionExpenseRequest)
 	}
 
 	private void navigateToRemedialExpenseRequest() {
