@@ -83,7 +83,13 @@ public class MenuPage extends BaseHelper {
 	//collection
 	private TestObject btnCollectionExpense			= createTestObject("btnCollectionExpense", "text", "Collection Expense")
 	private TestObject btnCollectionExpenseRequest	= createTestObject("btnCollectionExpenseRequest", "text", "Collection Expense Request")
-
+	//collection - repossession
+	private TestObject btnRepossession				= createTestObject("btnRepossession", "text", "Repossesssion")
+	private TestObject btnExpandRepossess			= createTestObject("btnExpandRepossess", "xpath", "//span[text() = 'Repossess']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnAssetInventoryInquiry		= createTestObject("btnAssetInventoryInquiry", "text", "Asset Inventory Inquiry")
+	private TestObject btnAssetInventoryRequest		= createTestObject("btnAssetInventoryRequest", "text", "Asset Inventory Request")
+	private TestObject btnAssetInventoryApproval	= createTestObject("btnAssetInventoryApproval", "text", "Asset Inventory Approval")
+	
 	//remedial
 	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
 	private TestObject btnRemedialExpenseRequest	= createTestObject("btnRemedialExpenseRequest", "xpath", "//a[text() = 'Remedial Expense Request']")
@@ -94,6 +100,11 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnAmendmentInquiry			= createTestObject("btnAmendmentInquiry", "xpath", "//a[text() = 'Amendment Inquiry']")
 	private TestObject btnAmendmentApproval			= createTestObject("btnAmendmentApproval", "xpath", "//a[text() = 'Amendment Approval']")
 	
+	//inventory asset management
+	private TestObject btnPoolManagement			= createTestObject("btnSendAssetToPool", "text", "Pool Management")
+	private TestObject btnExpandSendAssetToPool		= createTestObject("btnExpandSendAssetToPool", "xpath", "//span[text() = 'Send Asset To Pool']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnSendAssetToPool			= createTestObject("btnSendAssetToPool", "text", "Send Asset to Pool")
+	private TestObject btnConfirmAssetSendToPool	= createTestObject("btnConfirmAssetSendToPool", "text", "Confirm Asset Send to Pool")
 	
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
@@ -544,4 +555,70 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentApproval)
 		WebUI.switchToDefaultContent()
 	}
+	
+	private void navigateToAssetInventoryInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "COLLECTION")
+		safetyClick(btnRepossession)
+		safetyClick(btnExpandRepossess)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetInventoryInquiry)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetInventoryRequest() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "COLLECTION")
+		safetyClick(btnRepossession)
+		safetyClick(btnExpandRepossess)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetInventoryRequest)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetInventoryApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "COLLECTION")
+		safetyClick(btnRepossession)
+		safetyClick(btnExpandRepossess)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetInventoryApproval)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToSendAssetToPool() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnPoolManagement)
+		safetyClick(btnExpandSendAssetToPool)
+		WebUI.takeScreenshot()
+		safetyClick(btnSendAssetToPool)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToConfirmAssetSendToPool() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnPoolManagement)
+		safetyClick(btnExpandSendAssetToPool)
+		WebUI.takeScreenshot()
+		safetyClick(btnConfirmAssetSendToPool)
+		WebUI.switchToDefaultContent()
+	}
+	
 }

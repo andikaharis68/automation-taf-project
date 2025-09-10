@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Confirm_Send_Asset_To_Pool</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>caf48571-bf34-4557-a023-15778f320d21</testCaseGuid>
+</TestCaseEntity>

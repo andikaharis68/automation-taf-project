@@ -24,73 +24,78 @@ import internal.GlobalVariable
 
 public class AssetInventoryRequestPage extends BaseHelper {
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle				= createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo		= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
+	private TestObject btnSearch 			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//Table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblExecute = createTestObject("lblExecute", "", "")
-	private TestObject btnPencil = createTestObject("btnPencil", "", "")
+	private TestObject txtFirstAgreementNo	= createTestObject("txtFirstAgreementNo", "id", "gvPaging_lblAgrmntNo_0")
+	private TestObject lblExecute			= createTestObject("lblExecute", "", "")
+	private TestObject btnFirstPencil		= createTestObject("btnFirstPencil", "id", "gvPaging_imbExtend_0")
 
 	//Detail
 	//Asset Inventory Info
-	private TestObject drpInventoryDate = createTestObject("drpInventoryDate", "", "")
-	private TestObject txtInventoryDate = createTestObject("txtInventoryDate", "", "")
-	private TestObject txfInventoryNotes = createTestObject("txfInventoryNotes", "", "")
+	private TestObject txfInventoryDate		= createTestObject("txfInventoryDate", "id", "ucdpInventoryDt_txtDatePicker")
+	private TestObject txfInventoryNotes	= createTestObject("txfInventoryNotes", "id", "txtNotes")
 
 	//Approval Request
-	private TestObject drpReasonDesc = createTestObject("drpReasonDesc", "", "")
-	private TestObject txtReasonDesc = createTestObject("txtReasonDesc", "", "")
-	private TestObject txfApprovalNotes = createTestObject("txfApprovalNotes", "", "")
-	private TestObject drpApprovedBy = createTestObject("drpApprovedBy", "", "")
-	private TestObject txtApprovedBy = createTestObject("txtApprovedBy", "", "")
+	private TestObject drpReasonDesc		= createTestObject("drpReasonDesc", "id", "ucApproval_ddlReason")
+	private TestObject txfApprovalNotes 	= createTestObject("txfApprovalNotes", "id", "ucApproval_txtNotes")
+	private TestObject drpApprovedBy 		= createTestObject("drpApprovedBy", "id", "ucApproval_ddlApvBy")
 
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject btnSubmit 			= createTestObject("btnSubmit", "id", "lb_Form_Submit")
 
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Asset Inventory Request Page")
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
-	public void doSearch(String agreementNo) {
-		WebUI.setText(txfAgreementNo, agreementNo)
-		clickSearch()
+	public void doSearchByAgreementNo(String agreementNo) {
+		safetyInput(txfAgreementNo, agreementNo)
 	}
 
-	public void getAgreementNo() {
-		WebUI.getText(txtAgreementNoTable)
+	public String getAgreementNo() {
+		return WebUI.getText(txtFirstAgreementNo)
+	}
+	
+	public void updateAgreementNoToMasterData(String fileName, String newAgreementNo, String scenarioId) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		
+		saveDataToExcel(newAgreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
 	}
 
 	public void clickButtonPencil() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
 	}
 
-	public void inputAssetInventoryInfo(String inventoryDate, String inventorynotes) {
-		txtInventoryDate = createTestObject("txtInventoryDate", "text", "$inventoryDate")
-		
-		WebUI.click(drpInventoryDate)
-		WebUI.click(txtInventoryDate)
-		WebUI.setText(txfInventoryNotes, inventorynotes)
+	public void inputInfoNotes(String notes) {
+		WebUI.focus(txfInventoryNotes)
+		WebUI.takeScreenshot()
+		safetyInput(txfInventoryNotes, notes)
 	}
-
-	public void inputApprovalRequest(String reason, String approvalNotes, String approvedBy) {
-		txtReasonDesc = createTestObject("txtReasonDesc", "text", reason)
-		txtApprovedBy = createTestObject("txtApprovedBy", "text", approvedBy)
-
-		WebUI.click(drpReasonDesc)
-		WebUI.click(txtReasonDesc)
-		WebUI.setText(txfApprovalNotes, approvalNotes)
-		WebUI.click(drpApprovedBy)
-		WebUI.click(txtApprovedBy)
-
-		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Inventory Selling Request")
+	
+	public void selectReasonDescription(String reason) {
+		safetySelect(drpReasonDesc, reason)
+	}
+	
+	public void inputApprovalNotes(String notes) {
+		safetyInput(txfApprovalNotes, notes)
+	}
+	
+	public void selectApprovedBy(String approvedBy) {
+		safetySelect(drpApprovedBy, approvedBy)
+		WebUI.takeScreenshot()
+	}
+	
+	public void clickSubmit() {
+		safetyClick(btnSubmit)
+		WebUI.takeScreenshot()
 	}
 }

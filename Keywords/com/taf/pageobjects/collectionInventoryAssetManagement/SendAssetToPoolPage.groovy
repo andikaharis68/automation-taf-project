@@ -24,58 +24,61 @@ import internal.GlobalVariable
 
 public class SendAssetToPoolPage extends BaseHelper {
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "", "")
-	private TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject drpCollectionGroup = createTestObject("drpCollectionGroup", "id", "ucSearch_ddlCollGrpId_ltlRepoHCollectionGroupSearch_ddlReference")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//Table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject btnPencil = createTestObject("btnPencil", "", "")
+	private TestObject txtFirstAgreementNo = createTestObject("txtFirstAgreementNo", "id", "gvGrid_lblAgrmntNo_0")
+	private TestObject btnFirstPencil = createTestObject("btnFirstPencil", "id", "gvGrid_imbEdit_0")
 
 	//Detail
-	private TestObject drpPool = createTestObject("drpPool", "", "")
-	private TestObject txtPool = createTestObject("txtPool", "", "")
-	private TestObject txfSendBy = createTestObject("txfSendBy", "", "")
-	private TestObject drpSendDate = createTestObject("drpSendDate", "", "")
-	private TestObject txtSendDate = createTestObject("txtSendDate", "", "")
-	private TestObject txfNotes = createTestObject("txfNotes", "", "")
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-
-	//Popup
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject drpPool = createTestObject("drpPool", "id", "ucPool_ddlReference")
+	private TestObject txfSendBy = createTestObject("txfSendBy", "id", "txtSendBy")
+	private TestObject txfSendDate = createTestObject("txfSendDate", "id", "ucSendDate_txtDatePicker")
+	private TestObject txfNotes = createTestObject("txfNotes", "id", "txtNotes")
+	
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Send Asset To Pool Page")
+		WebUI.takeScreenshot()
 	}
 
 	public void doSearch(String agreementNo, String collectionGroup) {
-		TestObject txtCollectionGroup = createTestObject("txtCollectionGroup", "text", collectionGroup)
-
-		WebUI.click(drpCollectionGroup)
-		WebUI.click(txtCollectionGroup)
-		WebUI.setText(txfAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
+		safetySelect(drpCollectionGroup, collectionGroup)
+		safetyInput(txfAgreementNo, agreementNo)
 	}
 
+	public void clickSearch() {
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
+	}
+	
 	public void clickButtonPencil() {
-		WebUI.click(btnSearch)
+		safetyClick(btnFirstPencil)
 	}
-
-	public void inputSendAsset(String pool, String sendBy, String date, String notes) {
-		WebUI.click(drpPool)
-		WebUI.click(txtPool)
-
-		WebUI.setText(txfSendBy, sendBy)
-
-		WebUI.click(drpSendDate)
-		WebUI.click(txtSendDate)
-
-		WebUI.setText(txfNotes, notes)
-		WebUI.click(btnSubmit)
-
-		verifyPopUpSuccess(lblSuccess, "Send Asset To Pool")
+	
+	public void selectPool(String pool) {
+		WebUI.takeScreenshot()
+		safetySelect(drpPool, pool)
+	}
+	
+	public void inputSendBy(String sendBy) {
+		safetyInput(txfSendBy, sendBy)
+	}
+	
+	public void inputSendDate(String sendDate) {
+		safetyInput(txfSendDate, sendDate)
+	}
+	
+	public void inputNotes(String notes) {
+		safetyInput(txfNotes, notes)
+	}
+	
+	public void clickSubmit() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSubmit)
 	}
 }
