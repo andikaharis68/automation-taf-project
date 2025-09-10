@@ -23,39 +23,49 @@ import internal.GlobalVariable
 
 public class CollectionExpenseRequestPage extends BaseHelper {
 	//search
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	//CollectionExpenseRequest - Grid
-	private TestObject btnIconAction = createTestObject("btnIconAction", "", "")
+	private TestObject btnIconAction = createTestObject("btnIconAction", "id", "gvPaging_imbEdit_0")
 	private TestObject btnIconExecute = createTestObject("btnIconExecute", "", "")
 	//ResultOfSellingEstimation
-	private TestObject txfExternalFee = createTestObject("txfExternalFee", "", "")
-	private TestObject txfRepoFee = createTestObject("txfRepoFee", "", "")
-	private TestObject btnCalculate = createTestObject("btnCalculate", "", "")
+	private TestObject txfExternalFee = createTestObject("txfExternalFee", "id", "ucRoSEstimation_ucINCollExpenseExternalFee_txtInput")
+	private TestObject txfRepoFee = createTestObject("txfRepoFee", "id", "ucRoSEstimation_ucINCollExpenseSettlementFee_txtInput")
+	private TestObject txfMobilizationFee = createTestObject("txfMobilizationFee", "id", "ucRoSEstimation_ucINCollExpenseMobilizationFee_txtInput")
+	private TestObject txfDeliveryCharges = createTestObject("txfDeliveryCharges", "id", "ucRoSEstimation_ucINCollExpenseDeliveryCharges_txtInput")
+	private TestObject txfOtherOperationalFee = createTestObject("txfOtherOperationalFee", "id", "ucRoSEstimation_ucINCollExpenseOtherRepossessionFee_txtInput")
+	private TestObject txfTotalOperationalFee = createTestObject("txfTotalOperationalFee", "id", "ucRoSEstimation_ucINCollExpenseTotalOperasionalCollectionFee_txtInput")
+	private TestObject txfDepositAmount = createTestObject("txfDepositAmount", "id", "ucRoSEstimation_ucINCaseAnalysisFormHPaidInstallment_txtInput")
+	private TestObject txfWaivedAmount = createTestObject("txfWaivedAmount", "id", "ucRoSEstimation_ucINCaseAnalysisFormHWaivedAmt_txtInput")
+	private TestObject btnCalculate = createTestObject("btnCalculate", "id", "lbCalculate")
 	//Analysis
-	private TestObject drpProblemType = createTestObject("drpProblemType", "", "")
-	private TestObject drpUnitHolder = createTestObject("drpUnitHolder", "", "")
-	private TestObject drpUnitLocation = createTestObject("drpUnitLocation", "", "")
-	private TestObject txfAnalysisNote = createTestObject("txfAnalysisNote", "", "")
+	private TestObject drpProblemType = createTestObject("drpProblemType", "id", "ucAnalysis_ucRefProblemType_ddlReference")
+	private TestObject drpUnitHolder = createTestObject("drpUnitHolder", "id", "ucAnalysis_ucRefUnitHolder_ddlReference")
+	private TestObject drpUnitLocation = createTestObject("drpUnitLocation", "id", "ucAnalysis_ucRefUnitLocation_ddlReference")
+	private TestObject txfAnalysisNote = createTestObject("txfAnalysisNote", "id", "ucAnalysis_txtAnalysisNotes")
+	private TestObject txfIsUnitExists = createTestObject("txfIsUnitExists", "xpath", "//*[contains(@for , 'ucAnalysis_rdlIsUnitExist') and text() = 'Yes']")
+	private TestObject txfIsCustomerExists = createTestObject("txfIsCustomerExists", "xpath", "//*[contains(@for , 'ucAnalysis_rblIsCustExist') and text() = 'No']")
 	//Action
-	private TestObject drpExecutor = createTestObject("drpExecutor", "", "")
-	private TestObject drpHandlingType = createTestObject("drpHandlingType", "", "")
-	private TestObject txfActionNote = createTestObject("txfActionNote", "", "")
+	private TestObject btnHandlingBy = createTestObject("btnHandlingBy", "xpath", "//*[contains(@for , 'ucAction_rblHandlingBy') and text() = 'Internal']")
+	private TestObject drpExecutor = createTestObject("drpExecutor", "id", "ucAction_UCReRalExecutor_ddlReference")
+	private TestObject drpHandlingType = createTestObject("drpHandlingType", "id", "ucAction_ucRefHandlingType_ddlReference")
+	private TestObject txfActionNote = createTestObject("txfActionNote", "id", "ucAction_txtActionNotes")
 	//CollectionExpense
-	private TestObject cbkAdvanceSettlement = createTestObject("cbkAdvanceSettlement", "", "")
-	private TestObject txfDisburseTo = createTestObject("txfDisburseTo", "", "")
-	private TestObject txfCollectionExpenseNote = createTestObject("txfCollectionExpenseNote", "", "")
+	private TestObject cbkAdvanceSettlement = createTestObject("cbkAdvanceSettlement", "id", "cbIsAdvance")
+	private TestObject txfDisburseTo = createTestObject("txfDisburseTo", "id", "txtDisburseTo")
+	private TestObject txfCollectionExpenseNote = createTestObject("txfCollectionExpenseNote", "id", "txtReqNotes")
+	private TestObject cbkSubjectTax = createTestObject("cbkSubjectTax", "id", "cbIsSubjectToTax")
 	//bank account transfer info
 	private TestObject drpBankName = createTestObject("drpBankName", "", "")
 	private TestObject drpBankBranch = createTestObject("drpBankBranch", "", "")
 	private TestObject drpAccountNo = createTestObject("drpAccountNo", "", "")
 	private TestObject drpAccountName = createTestObject("drpAccountName", "", "")
 	//ApprovalRequest
-	private TestObject drpReason = createTestObject("drpReason", "", "")
-	private TestObject drpToBeApprobeBy = createTestObject("drpToBeApprobeBy", "", "")
-	private TestObject txfApprovalRequestNote = createTestObject("txfApprovalRequestNote", "", "")
+	private TestObject drpReason = createTestObject("drpReason", "id", "ucApproval_ucRefReasonExpense_ddlReference")
+	private TestObject drpToBeApprobeBy = createTestObject("drpToBeApprobeBy", "id", "ucApproval_ddlApvBy")
+	private TestObject txfApprovalRequestNote = createTestObject("txfApprovalRequestNote", "id", "ucApproval_txtNotes")
 	//menu
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
 
 	public void inputAgreementNo(String agreementNo) {
