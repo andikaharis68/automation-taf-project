@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Survey Task Assignment - Cancel</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>a350c790-408c-40c2-a5a9-9cf6ca3a37cc</testCaseGuid>
+</TestCaseEntity>

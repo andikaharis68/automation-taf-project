@@ -83,16 +83,20 @@ public class MenuPage extends BaseHelper {
 	//collection
 	private TestObject btnCollectionExpense			= createTestObject("btnCollectionExpense", "text", "Collection Expense")
 	private TestObject btnCollectionExpenseRequest	= createTestObject("btnCollectionExpenseRequest", "text", "Collection Expense Request")
-	
+
 	//remedial
 	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
 	private TestObject btnRemedialExpenseRequest	= createTestObject("btnRemedialExpenseRequest", "xpath", "//a[text() = 'Remedial Expense Request']")
 	private TestObject btnRemedialInquiry			= createTestObject("btnRemedialInquiry", "xpath", "//a[text() = 'Remedial Expense Inquiry']")
 	private TestObject btnRemedialApproval			= createTestObject("btnRemedialApproval", "xpath", "//a[text() = 'Remedial Expense Approval']")
-
-
-	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
+	private TestObject btnAmendmentRequest			= createTestObject("btnAmendmentRequest", "xpath", "//a[text() = 'Amendment Request']")
+	private TestObject btnAmendmentExecution		= createTestObject("btnAmendmentExecution", "xpath", "//a[text() = 'Amendment Execution']")
+	private TestObject btnAmendmentInquiry			= createTestObject("btnAmendmentInquiry", "xpath", "//a[text() = 'Amendment Inquiry']")
+	private TestObject btnAmendmentApproval			= createTestObject("btnAmendmentApproval", "xpath", "//a[text() = 'Amendment Approval']")
 	
+	
+	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
+
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
 	}
@@ -227,7 +231,7 @@ public class MenuPage extends BaseHelper {
 	private void selectMenuMarketing() {
 		BaseHelper.safetySelect(drpModul, "MARKETING")
 	}
-	
+
 	private void selectMenuCollection() {
 		BaseHelper.safetySelect(drpModul, "COLLECTION")
 	}
@@ -453,11 +457,11 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnOnlineDisburseInquiry)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void clickMenuCollectionExpense() {
 		safetyClick(btnCollectionExpense)
 	}
-	
+
 	private void clickMenuCollectionExpenseRequest() {
 		WebUI.takeScreenshot()
 		safetyClick(btnCollectionExpenseRequest)
@@ -496,6 +500,48 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnRemedialExpense)
 		WebUI.takeScreenshot()
 		safetyClick(btnRemedialApproval)
+		WebUI.switchToDefaultContent()
+	}
+	private void navigateToAmendmentRequest() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "AMENDMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnAmendmentRequest)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAmendmentExecution() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "AMENDMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnAmendmentExecution)
+		WebUI.switchToDefaultContent()
+	}
+	private void navigateToAmendmentInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "AMENDMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnAmendmentInquiry)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAmendmentApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "AMENDMENT")
+		WebUI.takeScreenshot()
+		safetyClick(btnAmendmentApproval)
 		WebUI.switchToDefaultContent()
 	}
 }

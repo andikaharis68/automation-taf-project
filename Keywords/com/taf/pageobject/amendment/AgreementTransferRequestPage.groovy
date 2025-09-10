@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -14,6 +16,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -23,9 +26,9 @@ import internal.GlobalVariable
 
 public class AgreementTransferRequestPage extends BaseHelper{
 
-	private TestObject btnNext					= createTestObject("btnNext", "id", "lb_Toolbar_Next")
+	private TestObject btnNext					= createTestObject("btnNext", "id", "lb_Toolbar_Next") 
 	private TestObject sectionAgreementTransfer	= createTestObject("sectionAgreementTransfer", "xpath", "//span[text() = 'AGREEMENT TRANSFER REQUEST']/preceding-sibling::a")
-	private TestObject icnSearch				= createTestObject("icnSearch", "xpath", "//input[@id = 'uclCust_uclCust_imb']")
+	private TestObject btnSearchAgreementNo		= createTestObject("icnSearch", "id", "uclCust_uclCust_imb")
 
 	//pop up section
 	private TestObject txtCustomerName			= createTestObject("txtCustomerName", "xpath", "//input[@id = 'uclCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
@@ -44,54 +47,91 @@ public class AgreementTransferRequestPage extends BaseHelper{
 	private TestObject sectionApprovalRequest	= createTestObject("sectionApprovalRequest", "xpath", "//span[text() = 'APPROVAL REQUEST']/preceding-sibling::a")
 	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "//select[@id = 'ucApprovalReq_ddlReason']")
 	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "//select[@id = 'ucApprovalReq_ddlApvBy']")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "//textarea[@id = 'ucApprovalReq_txtNotes']")
+	private TestObject txfNotes					= createTestObject("txfNotes", "xpath", "//textarea[@id = 'ucApprovalReq_txtNotes']")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
 
-	public void clickButtonNext() {
+	private void verifyLandingPage() {
+		verifyLanding(btnNext, "Agreement Transfer Request")
 		WebUI.takeScreenshot()
+	}
+	public void clickButtonNext() {
 		safetyClick(btnNext, 2)
+		WebUI.takeScreenshot()
 	}
 
-	public void expandAgreement(String custName, String custNo) {
-		safetyClick(sectionAgreementTransfer)
-		safetyClick(icnSearch, 1)
-		safetyInput(txtCustomerName, custName)
-		safetyClick(btnSearch, 1.5)
-		safetyClick(btnSelect, 1.5)
-		
+	private void searchAgreementNo(String customerName) {
+		TestObject txfOvlyCustName, btnOvlySearch, btnOvlySelect
+		txfOvlyCustName = createTestObject("txfOvlyCustName", "id", "uclCust_uclCust_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+		btnOvlySearch	= createTestObject("btnOvlySearch", "id", "uclCust_uclCust_umd_ctl00_ucS_lbSearch")
+		btnOvlySelect	= createTestObject("btnOvlySelect", "id", "uclCust_uclCust_umd_ctl00_gvL_hpSelect_0")
+
+		safetyClick(btnSearchAgreementNo)
+		safetyInput(txfOvlyCustName, "%")
+		WebUI.takeScreenshot()
+		if(WebUI.verifyElementPresent(btnOvlySelect, 2)) {
+			safetyClick(btnOvlySelect)
+			WebUI.takeScreenshot()
+		} else {
+			KeywordUtil.markFailed("$customerName Not found, please check again!.")
+		}
 	}
 
-	public void saveAgreement() {
-		WebUI.click(btnRequestSurvey1)
-		WebUI.click(btnRequestSurvey2)
-		
-		checkListMandatory()
-		
-		WebUI.click(btnSave)
-		WebUI.verifyElementVisible(lblNotification)
-	}
-	
-	public void checkListMandatory() {
-		def mandatory = getListElementByTestObject("//span[contains(@id, 'gvTermCondition_lblIsMandatory')]")
-		
-		mandatory.size().times { i -> 
-			TestObject chkBox = createTestObject("chkBox", "xpath", "//span[@id = 'gvTermCondition_lblIsMandatory_$i' and text() = 'Yes']/following::input[1]")
-			def isYes = WebUI.verifyElementPresent(chkBox, 1, FailureHandling.OPTIONAL)
-			
-			if(isYes) {
-				safetyClick(chkBox, 1)
+	public void clickAllMandatoryCheckboxes() {
+		List<WebElement>  checkboxes = getListElementByTestObject("//input[@type='checkbox' and contains(@id, 'cbChecked')]")
+		if (checkboxes.isEmpty()) {
+			WebUI.comment("No checkboxes found.")
+			return
+		}
+
+		WebUI.comment("Found ${checkboxes.size()} checkboxes.")
+
+		for (WebElement checkbox : checkboxes) {
+			if (!checkbox.isSelected()) {
+				checkbox.click()
+				WebUI.comment("Clicked checkbox with id: ${checkbox.getAttribute('id')}.")
+				WebUI.delay(0.5)
+			} else {
+				WebUI.comment("Checkbox with id: ${checkbox.getAttribute('id')} is already selected, skipping.")
 			}
 		}
+		WebUI.takeScreenshot()
 		
 	}
+	private void clickSaveAggreement() {
+		safetyClick(btnSave)
+		WebUI.delay(2)
+		WebUI.takeScreenshot()
+	}
 
-	public void approval(String note, String reason, String approver) {
+	public void inputApprovalRequest(String note, String reason, String approver) {
+		clickExpandSection("APPROVAL REQUEST")
+		WebUI.delay(0.5)
+		
+		safetySelect(drpReasonDescription, reason)
+		WebUI.delay(0.5)
+		
+		safetySelect(drpApprover, approver)
+		WebUI.delay(0.5)
 
-		WebUI.click(sectionApprovalRequest)
-		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
-		WebUI.selectOptionByLabel(drpApprover, approver, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.click(btnSubmit)
+		safetyInput(txfNotes, note)	
+		WebUI.delay(0.5)
+		
+		safetyClick(btnSubmit)
+		WebUI.delay(0.5)
+		
+		WebUI.takeScreenshot()
+	}
+
+	private void clickExpandSection(String sectionName) {
+		TestObject expandButton = createTestObject("expandButton", "id", "//a[contains(normalize-space(text()), '[+]') and contains(text(), '" + sectionName + "')]")
+
+		if (WebUI.verifyElementPresent(expandButton, 2, FailureHandling.OPTIONAL)) {
+			WebUI.scrollToElement(expandButton, 2)
+			WebUI.click(expandButton)
+			WebUI.comment("Expand section '${sectionName}' clicked.")
+		} else {
+			WebUI.comment("Expand section '${sectionName}' not found.")
+		}
 	}
 }

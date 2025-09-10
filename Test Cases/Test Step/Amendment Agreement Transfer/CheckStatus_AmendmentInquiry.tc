@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>CheckStatus_AmendmentInquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f45ef4c1-00d2-428a-8fe2-aa913d699186</testCaseGuid>
+</TestCaseEntity>

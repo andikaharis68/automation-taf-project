@@ -23,22 +23,52 @@ import internal.GlobalVariable
 
 public class AmendmentApprovalPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
-	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustName']")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "id", "ucrefAmendmentType_ddlReference")
+	private TestObject txfCustomerName	= createTestObject("txfCustomerName", "id", "ucSearch_txtCustName_ltlCustCustName")
+	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo") 
+	private TestObject txfTransationNo	= createTestObject("txfTransationNo", "id", "ucSearch_txtTrxNo_ltlApvReqTrxNo") 
+	private TestObject txfCurrentUser	= createTestObject("txfCurrentUser", "id", "ucSearch_txtCurrentUser_ltlApprovalCurrentUser") 
+	private TestObject txfRequestBy		= createTestObject("txfRequestBy", "id", "ucSearch_txtRequestBy_ltlApprovalRequestBy") 
+	private TestObject txfApprovalNo	= createTestObject("txfApprovalNo", "id", "ucSearch_txtApvNo_ltlApvSchemeRApvNo") 
+	private TestObject txfTaskOwner		= createTestObject("txfTaskOwner", "id", "ucSearch_txtTaskOwner_ltlApprovalTaskOwner") 
+	private TestObject txfRequestDate	= createTestObject("txfRequestDate", "id", "ucSearch_txtRequestDate_ltlApvSchemeRRequestDt_txtDatePicker")
+	
+	
+	private TestObject btnSearch		= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	private TestObject btnProcess		= createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
 
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "//input[@id = 'ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo']")
+	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
 	private TestObject list				= createTestObject("list", "xpath", "")
 
-
-	public void searchAmendmentbyCustName(String amendmentType, String customerName) {
-
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtCustomerName, customerName)
-		WebUI.click(btnSearch)
+	
+	private void verifyLandingPage() {
+		verifyLanding(drpAmendmentType, "Amendment Approval")
 	}
 
+	public void searchCustomerforApproval(String amendmentType,String agreementNo, String transactionNo, String reqBy,String currentUser,
+		String customerName, String user, String approvalNo,
+		String taskOwner, String date) {
+
+		safetySelect(drpAmendmentType, amendmentType)
+		inputIfExist(txfAgreementNo, agreementNo)
+		inputIfExist(txfTransationNo, transactionNo)
+		inputIfExist(txfRequestBy, reqBy)
+		inputIfExist(txfCurrentUser, currentUser)
+		inputIfExist(txfCustomerName, customerName)
+		inputIfExist(txfApprovalNo, approvalNo)
+		inputIfExist(txfTaskOwner, taskOwner)
+		inputIfExist(txfRequestDate, taskOwner)
+		
+		
+		safetyClick(btnSearch)
+	}
+
+	private void inputIfExist(TestObject to, String text) {
+		if(text) {
+			safetyInput(to, text)
+			WebUI.delay(0.5)
+		}
+	}
 	public void searchAmendmentbyAgreementNo(String amendmentType, String agreementNo) {
 
 		safetySelect(drpAmendmentType, amendmentType, 1)
@@ -51,7 +81,7 @@ public class AmendmentApprovalPage extends BaseHelper{
 	public void searchAmendmentbyCustName2(String amendmentType, String customerName) {
 
 		safetySelect(drpAmendmentType, amendmentType, false)
-		safetyInput(txtCustomerName, customerName)
+		safetyInput(txfCustomerName, customerName)
 		safetyClick(btnSearch)
 		WebUI.takeScreenshot()
 		safetyClick(btnProcess, 10)

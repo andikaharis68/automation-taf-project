@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Agreement_Transfer_Request_Continue</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>62d1df3f-0065-4ded-832e-0cee907db04f</testCaseGuid>
+</TestCaseEntity>
