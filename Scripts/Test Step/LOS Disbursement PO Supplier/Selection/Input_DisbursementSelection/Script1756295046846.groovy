@@ -26,13 +26,13 @@ DisbursementSelectionPage selection = new DisbursementSelectionPage()
 MenuPage menu = new MenuPage()
 
 'Step 1: Search Application'
-selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination)
+selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestinationSelection, OfficeName, InvoiceDate, IsReturnOnlineDisbursement)
 
 'Step 2: Click search'
 selection.clickButtonSearch()
 
 'Step 3: Click checkbox'
-selection.checklistApDisbursement(ApDestination)
+selection.cheklistApDisbursement()
 
 'Step 4: Click Add To Temp'
 selection.clickButtonAddToTemp()
@@ -51,3 +51,6 @@ selection.clickButtonRequestForApproval()
 
 'Step 9: Click Confirmation Ok'
 selection.clickConfirmationOK()
+
+'Step 10: verify landing in disbursement selection'
+selection.verifyLandingPage()

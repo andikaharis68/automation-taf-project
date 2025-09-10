@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>LOS Remedial Expense Non Advance</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>3b3f3487-8e33-4739-8ea1-465cd43f9266</testCaseGuid>
+</TestCaseEntity>

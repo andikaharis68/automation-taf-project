@@ -83,9 +83,16 @@ public class MenuPage extends BaseHelper {
 	//collection
 	private TestObject btnCollectionExpense			= createTestObject("btnCollectionExpense", "text", "Collection Expense")
 	private TestObject btnCollectionExpenseRequest	= createTestObject("btnCollectionExpenseRequest", "text", "Collection Expense Request")
+	
+	//remedial
+	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
+	private TestObject btnRemedialExpenseRequest	= createTestObject("btnRemedialExpenseRequest", "xpath", "//a[text() = 'Remedial Expense Request']")
+	private TestObject btnRemedialInquiry			= createTestObject("btnRemedialInquiry", "xpath", "//a[text() = 'Remedial Expense Inquiry']")
+	private TestObject btnRemedialApproval			= createTestObject("btnRemedialApproval", "xpath", "//a[text() = 'Remedial Expense Approval']")
+
 
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
-
+	
 	private void verifyLandingMenuPage() {
 		verifyLanding(drpMenu, "Menu")
 	}
@@ -412,7 +419,6 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "DISBURSEMENT")
 		WebUI.takeScreenshot()
 		safetyClick(btnDisbursementApproval)
-		WebUI.takeScreenshot()
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToDisbursmentExecution() {
@@ -423,7 +429,6 @@ public class MenuPage extends BaseHelper {
 		safetySelect(drpModul, "DISBURSEMENT")
 		WebUI.takeScreenshot()
 		safetyClick(btnDisbursementExecution)
-		WebUI.takeScreenshot()
 		WebUI.switchToDefaultContent()
 	}
 	private void navigatePayVoucherInquiry() {
@@ -456,5 +461,41 @@ public class MenuPage extends BaseHelper {
 	private void clickMenuCollectionExpenseRequest() {
 		WebUI.takeScreenshot()
 		safetyClick(btnCollectionExpenseRequest)
+	}
+
+	private void navigateToRemedialExpenseRequest() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		safetyClick(btnRemedialExpense)
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialExpenseRequest)
+		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToRemedialExpenseInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		safetyClick(btnRemedialExpense)
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialInquiry)
+		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToRemedialExpenseAppoval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		safetyClick(btnRemedialExpense)
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialApproval)
+		WebUI.switchToDefaultContent()
 	}
 }

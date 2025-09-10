@@ -23,8 +23,11 @@ import org.openqa.selenium.Keys as Keys
 DisbursementApprovalPage approval = new DisbursementApprovalPage()
 MenuPage menu = new MenuPage()
 
+'Step 0: Verify landing'
+approval.verifyLandingPage()
+
 'Step 1: Select Ap Type name '
-approval.inputSearchApplication(ApTypeName, ApDestination, BankName)
+approval.inputSearchApplication(ApTypeName, ApDestinationApproval, BankName)
 
 'Step 2: Click Search'
 approval.clickButtonSearch()
@@ -40,3 +43,6 @@ approval.updatePaymentVoucherNoToExcel(TestDataName, ScenarioId)
 
 'Step 6: Click Approve'
 approval.clickButtonApprove()
+
+'Step 7: Verify landing in disbursment approval page'
+approval.verifyLandingPage()

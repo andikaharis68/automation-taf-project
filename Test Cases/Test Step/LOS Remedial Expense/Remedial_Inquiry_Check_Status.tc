@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Remedial_Inquiry_Check_Status</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>71e8d33e-3301-48c0-8b9a-c59dc33192a7</testCaseGuid>
+</TestCaseEntity>

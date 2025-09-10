@@ -21,8 +21,11 @@ import org.openqa.selenium.Keys as Keys
 
 DisbursementExecutionPage execution = new DisbursementExecutionPage()
 
+'Step 0: Verify landing'
+execution.verifyLandingPage()
+
 'Step 1: Input search application'
-execution.inputSearchApplication(ApTypeName, ApDestination, BankName)
+execution.inputSearchApplication(ApTypeName, ApDestinationExecution, BankName)
 
 'Step 2: Click Search'
 execution.clickButtonSearch()
@@ -34,7 +37,10 @@ execution.checklistApDisbursement(PaymentVoucherNo)
 execution.clickExecutedSelected()
 
 'Step 5: Input bank disbursement'
-execution.inputApBankDisbursement(RecipientName, CurrencyRate, DisbursementNotes)
+execution.inputApBankDisbursement(RecipientName, CurrencyRate, DisbursementNotes, IsBilyetGiro, BilyetGiroNo, BilyetGiroDate)
 
 'Step 6: Click Disburse button'
 execution.clickButtonDisburse()
+
+'Step 0: Verify landing'
+execution.verifyLandingPage()

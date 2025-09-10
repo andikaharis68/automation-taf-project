@@ -25,17 +25,22 @@ import org.openqa.selenium.Keys as Keys
 DisbursementSelectionPage selection = new DisbursementSelectionPage()
 MenuPage menu = new MenuPage()
 
+'Step 0: Verify Landing page'
+selection.verifyLandingPage()
+
 'Step 1: Search Application'
-selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestination)
+selection.inputSearchApplication(ApTypeName, APDueDateLessThan, BankName, ApDestinationSelection, OfficeName, InvoiceDate, IsReturnOnlineDisbursement)
 
 'Step 2: Click search'
 selection.clickButtonSearch()
 
 'Step 3: Click checkbox'
-selection.checklistApDisbursement(ApDestination)
+selection.cheklistApDisbursement()
 
 'Step 4: Click Add To Temp'
 selection.clickButtonAddToTemp()
+
+selection.updateAppNoandBalanceToMasterAndApproval(TestDataName, ScenarioId)
 
 'Step 5: Click Next'
 selection.clickNext()
@@ -48,5 +53,11 @@ selection.updateMasterDataPOtoCustomerNonSameday(TestDataName, ScenarioId)
 
 'Step 8: Click request approval'
 selection.clickRequestForApprovalandTakeScreenshot()
+
+'Step 9: CLick confirmation OK'
+selection.clickConfirmationOK()
+
+'Step 10: Verify Landing page'
+selection.verifyLandingPage()
 
 

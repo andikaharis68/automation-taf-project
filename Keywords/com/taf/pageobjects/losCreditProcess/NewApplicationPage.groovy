@@ -115,7 +115,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject txfSupplierAddress			= createTestObject("txfSupplierAddress", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2")
 	private TestObject btnSupplierSearch			= createTestObject("btnSupplierSearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectSupplier			= createTestObject("btnSelectSupplier", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")//select first row
-	private TestObject drpSalesPerson				= createTestObject("drpSalesPerson", "id", "ucSalesPerson_ddlReference")
+	private TestObject drpSalesPerson				= createTestObject("drpSalesPerson", "id", "ucSalesPerson_ddlReference") 
 	//section top up agreement
 	private TestObject btnLookUpTopUp				= createTestObject("btnLookUpTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_imb")
 	//pop up
@@ -426,6 +426,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void selectSalesPerson(String name) {
+		WebUI.delay(0.8)
 		if(name != "-") {
 			safetySelect(drpSalesPerson, name, 1)
 		}

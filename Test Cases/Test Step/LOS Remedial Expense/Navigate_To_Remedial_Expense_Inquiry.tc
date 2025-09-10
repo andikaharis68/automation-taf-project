@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_Remedial_Expense_Inquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>08f7ae25-4adc-46a4-8d1c-9a7adc76d030</testCaseGuid>
+</TestCaseEntity>

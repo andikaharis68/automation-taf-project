@@ -42,8 +42,13 @@ public class DisbursementApprovalPage extends BaseHelper {
 
 	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
 		safetySelect(drpAPTypeName, apTypeName)
-		safetyInput(txfApDestination, apDestination)
+		WebUI.delay(0.8)
+		if(apDestination.trim()) {
+			safetyInput(txfApDestination, apDestination)
+			WebUI.delay(0.8)
+		}
 		safetySelect(drpBankName, bankName)
+		WebUI.delay(0.8)
 	}
 
 	public void clickButtonSearch() {
@@ -52,24 +57,40 @@ public class DisbursementApprovalPage extends BaseHelper {
 	}
 
 	public void checklistApDisbursement(String apBalance) {
-		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//tr[td//span[contains(text(),'$apBalance')]//input[@type='checkbox']")
+		TestObject cbkApDisbursement = createTestObject("cbkApDisbursement", "id", "gvGrid_cbCheck_0")
+		int countCb = countCheckbox()
+		if(countCb > 1 ) {
+			cbkApDisbursement = createTestObject("cbkApDisbursement", "xpath", "//span[normalize-space(text())='$apBalance']/ancestor::tr//input[@type='checkbox']")
+		}
+
 		safetyClick(cbkApDisbursement)
+		WebUI.delay(1)
 		WebUI.takeScreenshot()
+	}
+
+	private int countCheckbox() {
+		TestObject cbkApDisbursement = createTestObject("txtGuarantorName", "id", "gvGrid_cbCheck_0")
+		def elements = WebUI.findWebElements(cbkApDisbursement, 5)
+		int counter = elements.size()
+		KeywordUtil.logInfo("count $counter")
+		return counter
 	}
 
 	public void clickButtonApproveSelected() {
 		safetyClick(btnApproveSelected)
+		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonApprove() {
 		safetyClick(btnApprove)
-		WebUI.takeScreenshot()
+		WebUI.delay(1)
 	}
 
 	public void clickButtonPopupOke() {
 		WebUI.waitForElementPresent(txtPopupStatus, 10)
 		safetyClick(btnPopupOke)
+		WebUI.delay(1)
 	}
 
 	public void verifyPopupStatusTransaction() {
@@ -83,8 +104,15 @@ public class DisbursementApprovalPage extends BaseHelper {
 		String paymentVoucherNo = WebUI.getText(txtVoucherNo)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
-		
+
 		saveDataToExcel(paymentVoucherNo, rowFilter, filePath, "MasterData", "PaymentVoucherNo")
+		WebUI.delay(1)
+	}
+
+	private void verifyLandingPage() {
+		verifyLanding(drpAPTypeName, "Disbursement Approval")
+		WebUI.takeScreenshot()
+		WebUI.delay(3)
 	}
 }
 
