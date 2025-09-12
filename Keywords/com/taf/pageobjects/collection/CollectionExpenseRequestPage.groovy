@@ -23,12 +23,14 @@ import internal.GlobalVariable
 
 public class CollectionExpenseRequestPage extends BaseHelper {
 	//search
+	private TestObject ifmMainPage = createTestObject("ifmMainPage", "id", "mainPage")
 	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
 	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	//CollectionExpenseRequest - Grid
-	private TestObject btnIconAction = createTestObject("btnIconAction", "id", "gvPaging_imbEdit_0")
-	private TestObject btnIconExecute = createTestObject("btnIconExecute", "", "")
+	private TestObject btnIconAction = createTestObject("btnIconAction", "xpath", "//*[contains(@id, 'gvPaging_imbEdit')]")
+	private TestObject btnIconExecute = createTestObject("btnIconExecute", "id", "gvPaging_imbExecute_0")
 	//ResultOfSellingEstimation
+	private TestObject lblAgreementNo = createTestObject("lblAgreementNo", "id", "ucAgrmntInfo_lbAgrmntNo")
 	private TestObject txfExternalFee = createTestObject("txfExternalFee", "id", "ucRoSEstimation_ucINCollExpenseExternalFee_txtInput")
 	private TestObject txfRepoFee = createTestObject("txfRepoFee", "id", "ucRoSEstimation_ucINCollExpenseSettlementFee_txtInput")
 	private TestObject txfMobilizationFee = createTestObject("txfMobilizationFee", "id", "ucRoSEstimation_ucINCollExpenseMobilizationFee_txtInput")
@@ -53,13 +55,15 @@ public class CollectionExpenseRequestPage extends BaseHelper {
 	//CollectionExpense
 	private TestObject cbkAdvanceSettlement = createTestObject("cbkAdvanceSettlement", "id", "cbIsAdvance")
 	private TestObject txfDisburseTo = createTestObject("txfDisburseTo", "id", "txtDisburseTo")
+	private TestObject drpDisburseTo = createTestObject("drpDisburseTo", "id", "ucRefDisburseTo_ddlReference")
 	private TestObject txfCollectionExpenseNote = createTestObject("txfCollectionExpenseNote", "id", "txtReqNotes")
 	private TestObject cbkSubjectTax = createTestObject("cbkSubjectTax", "id", "cbIsSubjectToTax")
+	private TestObject txfCollExpenseNote = createTestObject("txfCollExpenseNote", "id", "txtReqNotes")
 	//bank account transfer info
-	private TestObject drpBankName = createTestObject("drpBankName", "", "")
-	private TestObject drpBankBranch = createTestObject("drpBankBranch", "", "")
-	private TestObject drpAccountNo = createTestObject("drpAccountNo", "", "")
-	private TestObject drpAccountName = createTestObject("drpAccountName", "", "")
+	private TestObject drpBankName = createTestObject("drpBankName", "id", "ucBankName_ddlReference")
+	private TestObject txfBankBranch = createTestObject("txfBankBranch", "id", "txtBankBranch")
+	private TestObject txfAccountNo = createTestObject("txfAccountNo", "id", "txtAccNo")
+	private TestObject txfAccountName = createTestObject("txfAccountName", "id", "txtAccName")
 	//ApprovalRequest
 	private TestObject drpReason = createTestObject("drpReason", "id", "ucApproval_ucRefReasonExpense_ddlReference")
 	private TestObject drpToBeApprobeBy = createTestObject("drpToBeApprobeBy", "id", "ucApproval_ddlApvBy")
@@ -67,70 +71,189 @@ public class CollectionExpenseRequestPage extends BaseHelper {
 	//menu
 	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
+	public void verifyLandingPageSearch() {
+		WebUI.waitForElementPresent(ifmMainPage, 10)
+	}
+	
+	public void getAgreementNumber(String filePath, String id) {
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = id
+		
+		WebUI.waitForElementPresent(lblAgreementNo, 10)
+		String agreementNumber = WebUI.getText(lblAgreementNo)
+		saveDataToExcel(agreementNumber, rowFilter, filePath, "MasterData", "AgreementNumber")
+	}
+	
+	public void verifyLandingCollectionExpenseRequest() {
+		WebUI.waitForElementPresent(btnSubmit, 10)
+		WebUI.takeScreenshot()
+	}
+	
+	public void switchToMainPage(String agreementNo) {
+		safetyInput(txfAgreementNo, agreementNo)
+	}
 
 	public void inputAgreementNo(String agreementNo) {
-		WebUI.setText(txfAgreementNo, agreementNo)
+		safetyInput(txfAgreementNo, agreementNo)
 	}
 
 	public void clickButtonSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
 	}
 
-	public void clickButtonIconAction(String agreementNo) {
-		btnIconAction = createTestObject("btnIconAction", "", "")
-		WebUI.click(btnIconAction)
+	public void clickButtonIconAction() {
+		WebUI.takeScreenshot()
+		safetyClick(btnIconAction)
 	}
 
-	public void clickButtonIconExecute(String agreementNo) {
-		btnIconExecute = createTestObject("btnIconExecute", "", "")
-		WebUI.click(btnIconExecute)
+	public void clickButtonIconExecute() {
+		WebUI.takeScreenshot()
+		safetyClick(btnIconExecute)
+		handlePopupAlert()
 	}
 
 	public void inputSellingEstimation(String externalFee, String repoFee) {
-		WebUI.setText(txfExternalFee, externalFee)
-		WebUI.setText(txfRepoFee, repoFee)
+		safetyInput(txfExternalFee, externalFee)
+		safetyInput(txfRepoFee, repoFee)
 	}
 
 	public void inputAnalysis(String problemType, String unitHolder, String unitLocation, String note) {
 		WebUI.selectOptionByLabel(drpProblemType, problemType, false)
 		WebUI.selectOptionByLabel(drpUnitHolder, unitHolder, false)
 		WebUI.selectOptionByLabel(drpUnitLocation, unitLocation, false)
-		WebUI.setText(txfAnalysisNote, note)
+		safetyInput(txfAnalysisNote, note)
 	}
 
 	public void inputAction(String executor, String handlingType, String note) {
 		WebUI.selectOptionByLabel(drpExecutor, executor, false)
 		WebUI.selectOptionByLabel(drpHandlingType, handlingType, false)
-		WebUI.setText(txfRepoFee, note)
+		safetyInput(txfRepoFee, note)
 	}
 
 	public void inputCollectioExpense(String disburseTo, String note) {
-		WebUI.setText(txfDisburseTo, note)
-		WebUI.setText(txfCollectionExpenseNote, note)
+		safetyInput(txfDisburseTo, note)
+		safetyInput(txfCollectionExpenseNote, note)
+	}
+	
+	public void inputExternalFee(String externalFee) {
+		manualClearText(txfExternalFee)
+		safetyInput(txfExternalFee, externalFee)
+	}
+	
+	public void inputRepoFee(String repoFee) {
+		manualClearText(txfRepoFee)
+		safetyInput(txfRepoFee, repoFee)
 	}
 
-	public void checlistAdvenceSettlement() {
-		WebUI.click(cbkAdvanceSettlement)
+	public void inputMobilizationFee(String mobilizationlFee) {
+		manualClearText(txfMobilizationFee)
+		safetyInput(txfMobilizationFee, mobilizationlFee)
 	}
-
+		
+	public void inputDeliveryCharge(String deliveryCharge) {
+		manualClearText(txfDeliveryCharges)
+		safetyInput(txfDeliveryCharges, deliveryCharge)
+	}
+	
+	public void inputOtherOperationalFee(String otherOperationalFee) {
+		manualClearText(txfOtherOperationalFee)
+		safetyInput(txfOtherOperationalFee, otherOperationalFee)
+	}
+	
+	public void inputTotalOperationalFee(String totalOperationalFee) {
+		manualClearText(txfTotalOperationalFee)
+		safetyInput(txfTotalOperationalFee, totalOperationalFee)
+		WebUI.takeScreenshot()
+	}
+	
 	public void clickButtonCalculate() {
-		WebUI.click(btnCalculate)
+		safetyClick(btnCalculate)
+		WebUI.takeScreenshot()
+	}
+	
+	public void selectProblemType(String problemType) {
+		safetySelect(drpProblemType, problemType)
+	}
+	
+	public void selectUnitHolder(String unitHolder) {
+		safetySelect(drpUnitHolder, unitHolder)
+	}
+	
+	public void selectLocation(String unitLocation) {
+		safetySelect(drpUnitLocation, unitLocation)
 	}
 
+	public void selectIsUnitExist(String isUnit) {
+		TestObject txfIsUnitExists = createTestObject("txfIsUnitExists", "xpath", "//*[contains(@for , 'ucAnalysis_rdlIsUnitExist') and contains(text(), '${isUnit}')]")
+		 safetyClick(txfIsUnitExists)
+	}
+	
+	public void selectIsCustomerExist(String isCustomer) {
+		TestObject txfIsCustomerExists = createTestObject("txfIsCustomerExists", "xpath", "//*[contains(@for , 'ucAnalysis_rblIsCustExist') and contains(text(), '${isCustomer}')]")
+		safetyClick(txfIsCustomerExists)
+	}
+
+	public void inputAnalysisNote(String note) {
+		safetyInput(txfAnalysisNote, note)
+		WebUI.takeScreenshot()
+	}
+	
+	public void selectHandlingBy(String handlingBy) {
+		TestObject btnHandlingBy = createTestObject("btnHandlingBy", "xpath", "//*[contains(@for , 'ucAction_rblHandlingBy') and text() = '${handlingBy}']")
+		safetyClick(btnHandlingBy)
+	}
+	
+	public void selectExecutor(String executor) {
+		safetySelect(drpExecutor, executor)
+	}
+	
+	public void selectHandlingType(String handlingType) {
+		safetySelect(drpHandlingType, handlingType)
+	}
+	
+	public void inputActionNote(String note) {
+		safetyInput(txfActionNote, note)
+	}
+	
+	public void inputAdvanceSettlement(String note) {
+		safetyClick(cbkAdvanceSettlement)
+		if(WebUI.waitForElementPresent(drpDisburseTo, 5)) {
+			WebUI.selectOptionByIndex(drpDisburseTo, 1)
+		}
+		safetyInput(txfCollectionExpenseNote, note)
+		WebUI.takeScreenshot()
+	}
+	
+	public void inputNonAdvanceSettlement(String disburseTo, String isSubjectToTax, String note) {
+		safetyInput(txfDisburseTo, disburseTo)
+		if(isSubjectToTax == "Y") {
+			safetyClick(cbkSubjectTax)
+		}
+		safetyInput(txfCollectionExpenseNote, note)
+		WebUI.takeScreenshot()
+	}
+	
+	
 	public void inputApprovalRequest(String reason, String approvedBy, String note) {
 		WebUI.selectOptionByLabel(drpReason, reason, false)
 		WebUI.selectOptionByLabel(drpToBeApprobeBy, approvedBy, false)
-		WebUI.setText(txfApprovalRequestNote, note)
+		safetyInput(txfApprovalRequestNote, note)
+		WebUI.takeScreenshot()
 	}
 
 	public void inputBankAccountTranferInfo(String bankName, String bankBranch, String AccountNo, String AccountName) {
-		WebUI.selectOptionByLabel(drpBankName, bankName, false)
-		WebUI.selectOptionByLabel(drpBankBranch, bankBranch, false)
-		WebUI.selectOptionByLabel(drpAccountNo, AccountNo, false)
-		WebUI.selectOptionByLabel(drpAccountName, AccountName, false)
+		safetySelect(drpBankName, bankName)
+		safetyInput(txfBankBranch, bankBranch)
+		safetyInput(txfAccountNo, AccountNo)
+		safetyInput(txfAccountName, AccountName)
 	}
 
 	public void clickButtonSubmit() {
-		WebUI.click(btnSubmit)
+		safetyClick(btnSubmit)
+	}
+	
+	public void verifySuccessSubmit() {
+		WebUI.waitForElementPresent(btnSearch, 20)
+		WebUI.takeScreenshot()
 	}
 }

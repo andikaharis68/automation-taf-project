@@ -33,5 +33,4 @@ requestPage.inputAgreementNo(AgreementNo)
 
 requestPage.clickButtonSearch()
 
-requestPage.clickButtonIconAction()
-
+requestPage.clickButtonIconExecute()
