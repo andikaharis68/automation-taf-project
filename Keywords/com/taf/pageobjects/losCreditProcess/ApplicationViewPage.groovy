@@ -53,14 +53,20 @@ public class ApplicationViewPage extends BaseHelper{
 		WebUI.focus(txtLastTaskOwner)
 		WebUI.scrollToElement(txtLastTaskOwner, 2)
 		WebUI.takeScreenshot()
+		String actualOffice = WebUI.getText(txtOriginalOffice)
+		String actualNode = WebUI.getText(txtLastNode)
+		String actualOwner = WebUI.getText(txtLastTaskOwner)
+		
+		if (actualNode.startsWith("CA")) {
+			String[] splitted = actualNode.split(" ")
+			actualNode = "Credit Analyst " + splitted[-1]
+		}
+		
 		Map credentialData = [:]
-		credentialData['office'] = WebUI.getText(txtOriginalOffice)
-		credentialData['lastNode'] = WebUI.getText(txtLastNode)
-		credentialData['lastOwner'] = WebUI.getText(txtLastTaskOwner)
+		credentialData['office'] = actualOffice
+		credentialData['lastNode'] = actualNode
+		credentialData['lastOwner'] = actualOwner
 		
 		return credentialData
 	}
-	
-	
-	
 }
