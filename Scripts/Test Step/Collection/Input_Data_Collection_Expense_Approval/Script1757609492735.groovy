@@ -14,24 +14,17 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collection.CollectionExpenseRequestPage
+import com.taf.pageobjects.collection.CollectionExpenseApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionExpenseRequestPage requestPage = new CollectionExpenseRequestPage()
-MenuPage menu = new MenuPage()
+CollectionExpenseApprovalPage approval = new CollectionExpenseApprovalPage()
 
-requestPage.verifyLandingPageSearch()
+approval.selectApprove(Action)
 
-menu.switchDefaultContent()
+approval.inputNote(ApprovalNote)
 
-menu.switchIframeMainPage()
+approval.clickButtonSubmit()
 
-requestPage.inputAgreementNo(AgreementNo)
-
-requestPage.clickButtonSearch()
-
-requestPage.clickButtonIconAction()
-
+approval.verifySuccessSubmit()

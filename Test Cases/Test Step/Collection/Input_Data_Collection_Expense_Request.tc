@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Input_Data_Collection_Expense_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c36fe8f7-bcb0-41a4-963a-f96ff915c92b</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_Collection_Expense_Inquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>bedafe32-d3d3-4431-a480-c465d39d4120</testCaseGuid>
+</TestCaseEntity>
