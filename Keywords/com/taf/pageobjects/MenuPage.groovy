@@ -83,6 +83,8 @@ public class MenuPage extends BaseHelper {
 	//collection
 	private TestObject btnCollectionExpense			= createTestObject("btnCollectionExpense", "text", "Collection Expense")
 	private TestObject btnCollectionExpenseRequest	= createTestObject("btnCollectionExpenseRequest", "text", "Collection Expense Request")
+	private TestObject btnCollectionExpenseApproval	= createTestObject("btnCollectionExpenseApproval", "text", "Collection Expense Approval")
+	private TestObject btnCollectionExpenseInquiry	= createTestObject("btnCollectionExpenseInquiry", "text", "Collection Expense Inquiry")
 	
 	//remedial
 	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
@@ -461,6 +463,16 @@ public class MenuPage extends BaseHelper {
 	private void clickMenuCollectionExpenseRequest() {
 		WebUI.takeScreenshot()
 		safetyClick(btnCollectionExpenseRequest)
+	}
+	
+	private void clickMenuCollectionExpenseApproval() {
+		WebUI.takeScreenshot()
+		safetyClick(btnCollectionExpenseApproval)
+	}
+	
+	private void clickMenuCollectionExpenseInquiry() {
+		WebUI.takeScreenshot()
+		safetyClick(btnCollectionExpenseInquiry)
 	}
 
 	private void navigateToRemedialExpenseRequest() {

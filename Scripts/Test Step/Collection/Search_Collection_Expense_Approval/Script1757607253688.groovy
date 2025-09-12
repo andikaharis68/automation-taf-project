@@ -15,23 +15,21 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collection.CollectionExpenseRequestPage
+import com.taf.pageobjects.collection.CollectionExpenseApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionExpenseRequestPage requestPage = new CollectionExpenseRequestPage()
-MenuPage menu = new MenuPage()
+CollectionExpenseApprovalPage approval = new CollectionExpenseApprovalPage()
 
-requestPage.verifyLandingPageSearch()
+MenuPage menu = new MenuPage()
 
 menu.switchDefaultContent()
 
 menu.switchIframeMainPage()
 
-requestPage.inputAgreementNo(AgreementNo)
+approval.inputAgreementNo(AgreementNumber)
 
-requestPage.clickButtonSearch()
+approval.clickButtonSearch()
 
-requestPage.clickButtonIconAction()
-
+approval.clickButtonIconProcess()
