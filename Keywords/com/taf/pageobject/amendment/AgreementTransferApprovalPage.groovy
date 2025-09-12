@@ -35,14 +35,14 @@ public class AgreementTransferApprovalPage extends BaseHelper{
 
 	public void approval(String action, String note, String person) {
 
-//		safetyClick(sectionApprovalAction)
+		//		safetyClick(sectionApprovalAction)
 		safetySelect(drpAction, action)
 		safetyInput(txtNotes, note)
-		
+
 		if(WebUI.waitForElementVisible(drpNextPerson, 3, FailureHandling.OPTIONAL)) {
 			safetySelect(drpNextPerson, person)
 		}
-		
+
 		WebUI.takeScreenshot()
 		safetyClick(btnSubmit, 4)
 		WebUI.verifyElementVisible(lblNotification)
