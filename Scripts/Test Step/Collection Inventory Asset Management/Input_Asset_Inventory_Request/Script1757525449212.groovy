@@ -15,13 +15,13 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collectionInventoryAssetManagement.AssetInventoryRequestPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryRequestPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 MenuPage menu = new MenuPage()
-AssetInventoryRequestPage inventoryReq = new AssetInventoryRequestPage()
+CollectionAssetInventoryRequestPage inventoryReq = new CollectionAssetInventoryRequestPage()
 
 'Step 1: input info notes'
 inventoryReq.inputInfoNotes(InfoNotes)
@@ -30,7 +30,7 @@ inventoryReq.inputInfoNotes(InfoNotes)
 inventoryReq.selectReasonDescription(ReasonDescription)
 
 'Step 3: input approval notes'
-inventoryReq.inputApprovalNotes(ApprovalNotes)
+inventoryReq.inputApprovalNotes(RequestNotes)
 
 'Step 4: select approved by'
 inventoryReq.selectApprovedBy(ToBeApprovedBy)

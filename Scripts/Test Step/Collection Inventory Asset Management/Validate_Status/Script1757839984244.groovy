@@ -15,25 +15,43 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryRequestPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionAssetInventoryRequestPage inventoryRequest = new CollectionAssetInventoryRequestPage()
 MenuPage menu = new MenuPage()
+CollectionAssetInventoryInquiryPage inquiry = new CollectionAssetInventoryInquiryPage()
 
-'Step 1: Switch To iframe menu'
-menu.switchToIframeMenu()
+'Step 1: switch to iframe main page'
+menu.switchToIframeMainPage()
 
-'Step 2: Verify landing in asset inventory request page'
-inventoryRequest.verifyLandingScreen()
+'Step 2: verify landing in inquiry page'
+inquiry.verifyLandingScreen()
 
-'Step 3: Click search'
-inventoryRequest.clickSearch()
+'Step 3: do search by agreement no'
+inquiry.doSearch(AgreementNo)
 
-'Step 4: Get agreement no'
-NewAgreementNo = inventoryRequest.getAgreementNo()
+'Step 4: click button search'
+inquiry.clickSearch()
 
-'Step 5: Update agreement no to master data'
-inventoryRequest.updateAgreementNoToMasterData(TestDataName, NewAgreementNo, ScenarioId)
+'Step 5: verify is status approved'
+IsStatusApprove = inquiry.verifyStatusRequest("Approve")
+
+'Step 6: additional check status'
+int maxLoop = GlobalVariable.COUNTER
+int retryCount = 0
+while(!IsStatusApprove && retryCount < maxLoop) {
+	'Step 6.1: delay and click search'
+	inquiry.delayAndClickSearch()
+	
+	'Step 6.2: double check status approved after delay'
+	IsStatusApprove = inquiry.verifyStatusRequest("Approve")
+	
+	retryCount++
+}
+
+'Step 7: switch to default content'
+menu.switchDefaultContent()
+
+

@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetInventoryRequestPage extends BaseHelper {
+public class CollectionAssetInventoryRequestPage extends BaseHelper {
 	//header
 	private TestObject lblTitle				= createTestObject("lblTitle", "id", "pageTitle")
 	private TestObject txfAgreementNo		= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
@@ -90,7 +90,8 @@ public class AssetInventoryRequestPage extends BaseHelper {
 	}
 	
 	public void selectApprovedBy(String approvedBy) {
-		safetySelect(drpApprovedBy, approvedBy)
+//		safetySelect(drpApprovedBy, approvedBy)
+		safetySelectByIndex(drpApprovedBy, approvedBy)
 		WebUI.takeScreenshot()
 	}
 	
