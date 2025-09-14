@@ -25,13 +25,30 @@ List<String> sheetNames = ['Credentials', 'MasterData', 'Approval']
 
 Map scenarioData = [
 	"TestDataPath" : "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}",
-	"ScenarioId" : GlobalVariable.SCENARIO_ID
+	"ScenarioId" : GlobalVariable.SCENARIO_ID,
+	"TaskOwner" : "",
+	"IsStatusApproved" : false
 ]
 
-scenarioData += BaseHelper.getTestDataMultipleSheet(sheetNames, scenarioData["TestDataPath"] , scenarioData["ScenarioId"])
+int maxAttemp = 1
+while(!scenarioData['IsStatusApproved'] && maxAttemp < 8 ) {	
+	scenarioData += BaseHelper.getTestDataMultipleSheet(sheetNames, scenarioData["TestDataPath"] , scenarioData["ScenarioId"])
+	WebUI.comment("get information taks owner, attemp " + maxAttemp)
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expense_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expense_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Get_Task_Owner_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
 
-BaseHelper.openBrowser()
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expanse_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expense_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Input_Data_Collection_Expense_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	if(scenarioData['IsStatusApproved'] == true) {
+		break
+	}
+	
+	WebUI.comment("tobe approve with user : " + scenarioData['Username'])
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expanse_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expense_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Input_Data_Collection_Expense_Approval'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+	maxAttemp++
+}

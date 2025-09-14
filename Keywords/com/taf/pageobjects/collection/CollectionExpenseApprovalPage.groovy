@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -42,7 +43,11 @@ public class CollectionExpenseApprovalPage extends BaseHelper {
 
 	public void clickButtonIconProcess() {
 		WebUI.takeScreenshot()
-		safetyClick(btnIconProcess)
+		if(WebUI.waitForElementPresent(btnIconProcess, 2)) {			
+			safetyClick(btnIconProcess)
+		} else {
+			KeywordUtil.logInfo("Tidak terdapat button process pada Agreement Number tersebut")
+		}
 	}
 	
 	public void selectApprove(String action) {
@@ -60,7 +65,9 @@ public class CollectionExpenseApprovalPage extends BaseHelper {
 	}
 	
 	public void verifySuccessSubmit() {
-		WebUI.waitForElementPresent(btnSearch, 20)
+		if(!WebUI.waitForElementPresent(btnSearch, 20)) {
+			KeywordUtil.markFailed("Gagal melakukan submit approval")
+		}
 		WebUI.takeScreenshot()
 	}
 }

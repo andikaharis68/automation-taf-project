@@ -14,25 +14,23 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collection.CollectionExpenseInquiryPage
+import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionExpenseInquiryPage inquiry = new CollectionExpenseInquiryPage()
+String testDataName = BaseHelper.getTestDataNameCollection()
+String scenarioId = GlobalVariable.SCENARIO_ID
+List<String> sheetNames = ['Credentials', 'MasterData']
 
-MenuPage menu = new MenuPage()
+Map scenarioData = [
+	"TestDataPath" : "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}",
+	"ScenarioId" : GlobalVariable.SCENARIO_ID,
+]
 
-menu.switchDefaultContent()
+scenarioData += BaseHelper.getTestDataMultipleSheet(sheetNames, scenarioData["TestDataPath"] , scenarioData["ScenarioId"])
 
-menu.switchIframeMainPage()
-
-inquiry.inputAgreementNo(AgreementNumber)
-
-inquiry.selectFilterStatus("Request")
-
-inquiry.clickButtonSearch()
-
-inquiry.clickRequestNumber()
-
+BaseHelper.openBrowser()
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expense_Request'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expanse_Execute'), scenarioData, FailureHandling.STOP_ON_FAILURE)

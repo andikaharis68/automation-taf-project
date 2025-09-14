@@ -29,7 +29,7 @@
       <guid>64cb66be-e504-45e2-aabe-14dc9db5bf84</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expanse_Inquiry_Action</testCaseId>
+      <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expanse_Execution</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
 </TestSuiteEntity>

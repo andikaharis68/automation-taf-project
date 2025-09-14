@@ -29,8 +29,10 @@ menu.switchDefaultContent()
 
 menu.switchIframeMainPage()
 
-requestPage.inputAgreementNo(AgreementNo)
+requestPage.inputAgreementNo(AgreementNumber)
 
 requestPage.clickButtonSearch()
 
 requestPage.clickButtonIconExecute()
+
+requestPage.verifySuccessExecute()
