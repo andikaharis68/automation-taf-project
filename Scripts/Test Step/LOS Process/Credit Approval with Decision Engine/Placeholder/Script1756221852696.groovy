@@ -21,7 +21,7 @@ import org.openqa.selenium.Keys as Keys
 Map placeholder = [:]
 
 placeholder['ApprovalUsername'] = ''
-placeholder['ApprovalPassword'] = ''
+placeholder['ApprovalPassword'] = Password
 placeholder['ApprovalOffice'] = ''
 placeholder['ApprovalPosition'] = ''
 placeholder['ApprovalRole'] = ''

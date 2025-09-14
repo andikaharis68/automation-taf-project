@@ -418,6 +418,12 @@ class BaseHelper {
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
 	}
+	
+	static void safetySelectByIndex(TestObject to, String index, double delay = 1) {
+		handlePopupAlert()
+		WebUI.selectOptionByIndex(to, index.toInteger())
+		WebUI.delay(delay)
+	}
 
 	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
 		if(text) {

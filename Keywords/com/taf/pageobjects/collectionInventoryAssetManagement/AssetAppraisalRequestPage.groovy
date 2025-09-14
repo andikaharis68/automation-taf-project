@@ -23,104 +23,100 @@ import internal.GlobalVariable
 
 public class AssetAppraisalRequestPage extends BaseHelper{
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	
 	//Table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject btnPencil = createTestObject("btnPencil", "", "")
+	private TestObject txtAgreementNo = createTestObject("txtAgreementNo", "id", "gvGrid_lblAgrmntNo_0")
+	private TestObject btnPencil = createTestObject("btnPencil", "id", "gvGrid_imbEdit_0")
 	
 	//Detail
-	private TestObject btnLookUpMarketPrice = createTestObject("btnLookUpMarketPrice", "", "")
-	private TestObject btnLookUpDeductionItem = createTestObject("btnLookUpDeductionItem", "", "")
-	private TestObject txfMinSellingAmount = createTestObject("txfMinSellingAmount", "", "")
-	private TestObject btnCalculate = createTestObject("btnCalculate", "", "")
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
+	private TestObject txfMinSellingAmount = createTestObject("txfMinSellingAmount", "id", "ucMinSellAmt_txtInput")
+	private TestObject btnCalculate = createTestObject("btnCalculate", "id", "lb_Form_Calculate")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	
 	//Approval Request
-	private TestObject drpReasonDesc = createTestObject("drpReasonDesc", "", "")
-	private TestObject txtReasonDesc = createTestObject("txtReasonDesc", "", "")
-	private TestObject txfApprovalNotes = createTestObject("txfApprovalNotes", "", "")
-	private TestObject drpApprovedBy = createTestObject("drpApprovedBy", "", "")
-	private TestObject txtApprovedBy = createTestObject("txtApprovedBy", "", "")
+	private TestObject drpReasonDesc = createTestObject("drpReasonDesc", "id", "ucApproval_ddlReason")
+	private TestObject txfApprovalNotes = createTestObject("txfApprovalNotes", "id", "ucApproval_txtNotes")
+	private TestObject drpApprovedBy = createTestObject("drpApprovedBy", "id", "ucApproval_ddlApvBy")
 	
 	//Overlay Look Up Market Price
-	private TestObject drpOfficeName = createTestObject("drpOfficeName", "", "")
-	private TestObject txtOfficeName = createTestObject("txtOfficeName", "", "")
-	private TestObject drpAssetName = createTestObject("drpAssetName", "", "")
-	private TestObject txtAssetName = createTestObject("txtAssetName", "", "")
-	private TestObject drpYear = createTestObject("drpYear", "", "")
-	private TestObject txtYear = createTestObject("txtYear", "", "")
-	private TestObject btnSearchOverlay = createTestObject("btnSearchOverlay", "", "")
-	private TestObject btnSelect = createTestObject("btnSelect", "", "")
+	private TestObject btnLookUpMarketPrice = createTestObject("btnLookUpMarketPrice", "id", "ucMarketPrice_uclMarketPrice_imb")
+	private TestObject drpOvlOfficeName = createTestObject("drpOvlOfficeName", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_ucS_rptFixedSearch_ucReference_0_ddlReference_0")
+	private TestObject drpOvlAssetName = createTestObject("drpOvlAssetName", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_ucS_rptFixedSearch_ucReference_1_ddlReference_1")
+	private TestObject drpOvlYear = createTestObject("drpOvlYear", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_ucS_rptFixedSearch_ucReference_2_ddlReference_2")
+	private TestObject btnOvlSearchMarketplace = createTestObject("btnOvlSearchMarketplace", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_ucS_lbSearch")
+	private TestObject btnOvlSelectMarketplace = createTestObject("btnOvlSelectMarketplace", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_gvL_hpSelect_0")
 	
 	//Overlay Deduction Item
-	private TestObject txfDeductionItem = createTestObject("txfDeductionItem", "", "")
-	
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject btnLookUpDeductionItem = createTestObject("btnLookUpDeductionItem", "id", "gvListDeduction_ucLookupDeduction_0_uclDeduction_0_imb_0")
+	private TestObject txfOvlDeductionItem = createTestObject("txfOvlDeductionItem", "id", "gvListDeduction_ucLookupDeduction_0_uclDeduction_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_0")
+	private TestObject btnOvlSearchDeductionItem = createTestObject("btnOvlSearchDeductionItem", "id", "gvListDeduction_ucLookupDeduction_0_uclDeduction_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+	private TestObject btnOvlSelectDeductionItem = createTestObject("btnOvlSelectDeductionItem", "id", "ucMarketPrice_uclMarketPrice_umd_ctl00_gvL_hpSelect_0")
 	
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Asset Appraisal Request Page")
+		WebUI.takeScreenshot()
 	}
 
 	public void doSearch(String agreementNo) {
-		WebUI.setText(txfAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
+		safetyInput(txfAgreementNo, agreementNo)
+	}
+	
+	public void clickSearch() {
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 	
 	public void clickButtonPencil() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
 	}
 	
-	public void inputMarketPrice(String officeName, String assetName, String year) {
-		txtOfficeName = createTestObject("txtOfficeName", "text", "$officeName")
-		txtAssetName = createTestObject("txtAssetName", "text", "$assetName")
-		txtYear = createTestObject("txtYear", "text", "$year")
+	public void selectMarketPrice(String officeName, String assetName, String year) {
+		safetyClick(btnLookUpMarketPrice)
+		WebUI.delay(1)
+		safetySelect(drpOvlOfficeName, officeName)
+		safetySelect(drpOvlAssetName, assetName)
+		safetySelect(drpOvlYear, year)
+		WebUI.delay(1)
+		safetyClick(btnOvlSearchMarketplace)
+		safetyClick(btnOvlSelectMarketplace)
 		
-		WebUI.click(btnLookUpMarketPrice)
-		WebUI.click(drpOfficeName)
-		WebUI.click(txtOfficeName)
-		
-		WebUI.click(drpAssetName)
-		WebUI.click(txtAssetName)
-		
-		WebUI.click(drpYear)
-		WebUI.click(txtYear)
-		
-		WebUI.click(btnSearchOverlay)
-		WebUI.click(btnSelect)
 	}
 	
-	public void inputDeductionItem(String deductionItem) {
-		WebUI.click(btnLookUpDeductionItem)
-		WebUI.setText(txfDeductionItem, deductionItem)
-		WebUI.click(btnSearchOverlay)
-		WebUI.click(btnSelect)
+	public void selectDeducItem(String deductionItem) {
+		safetyClick(btnLookUpDeductionItem)
+		WebUI.delay(1)
+		safetyInput(txfOvlDeductionItem, "%$deductionItem%")
+		WebUI.delay(1)
+		safetyClick(btnOvlSearchDeductionItem)
+		safetyClick(btnOvlSelectDeductionItem)
 	}
 	
 	public void inputMinSellingAmount(String minSellingAmount) {
-		WebUI.setText(txfMinSellingAmount, minSellingAmount)
+		manualClearText(txfMinSellingAmount)
+		safetyInput(txfMinSellingAmount, minSellingAmount)
 	}
 	
 	public void clickCalculate() {
-		WebUI.click(btnCalculate)
+		safetyClick(btnCalculate)
 	}
 	
-	public void inputApprovalRequest(String reason, String approvalNotes, String approvedBy) {
-		txtReasonDesc = createTestObject("txtReasonDesc", "text", reason)
-		txtApprovedBy = createTestObject("txtApprovedBy", "text", approvedBy)
-
-		WebUI.click(drpReasonDesc)
-		WebUI.click(txtReasonDesc)
-		WebUI.setText(txfApprovalNotes, approvalNotes)
-		WebUI.click(drpApprovedBy)
-		WebUI.click(txtApprovedBy)
-		
-		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Asset Appraisal Request")
+	public void selectReasonDescription(String reason) {
+		safetySelect(drpReasonDesc, reason)
+	}
+	
+	public void inputNotes(String notes) {
+		safetyInput(txfApprovalNotes, notes)
+	}
+	
+	public void selectApprovedBy(String approveBy) {
+		safetySelectByIndex(drpApprovedBy, approveBy)
+	}
+	
+	public void clickSubmit() {
+		safetyClick(btnSubmit)
 	}
 	 
 }

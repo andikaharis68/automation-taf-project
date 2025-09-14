@@ -15,25 +15,37 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryRequestPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionAssetInventoryRequestPage inventoryRequest = new CollectionAssetInventoryRequestPage()
 MenuPage menu = new MenuPage()
+CollectionAssetInventoryApprovalPage approval = new CollectionAssetInventoryApprovalPage()
 
-'Step 1: Switch To iframe menu'
-menu.switchToIframeMenu()
+'Step 1: switch to iframe main page'
+menu.switchIframeMainPage()
 
-'Step 2: Verify landing in asset inventory request page'
-inventoryRequest.verifyLandingScreen()
+'Step 2: verify landing in asset inventory approval page'
+approval.verifyLandingScreen()
 
-'Step 3: Click search'
-inventoryRequest.clickSearch()
+'Step 3: do search by agreement no'
+approval.doSearch(AgreementNo)
 
-'Step 4: Get agreement no'
-NewAgreementNo = inventoryRequest.getAgreementNo()
+'Step 4: click button search'
+approval.clickSearch()
 
-'Step 5: Update agreement no to master data'
-inventoryRequest.updateAgreementNoToMasterData(TestDataName, NewAgreementNo, ScenarioId)
+'Step 5: click process on first result of search'
+approval.clickProcess()
+
+'Step 6. select approval action'
+approval.selectAction(Action)
+
+'Step 7: input notes'
+approval.inputNotes(ApprovalNotes)
+
+'Step 8: click button submit'
+approval.clickSubmit()
+
+'Step 9: verify popup success'
+menu.verifySuccessMessage()

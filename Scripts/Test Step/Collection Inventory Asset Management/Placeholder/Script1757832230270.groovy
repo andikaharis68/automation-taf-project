@@ -10,30 +10,22 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryRequestPage
-
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionAssetInventoryRequestPage inventoryRequest = new CollectionAssetInventoryRequestPage()
-MenuPage menu = new MenuPage()
+Map placeholder = [:]
 
-'Step 1: Switch To iframe menu'
-menu.switchToIframeMenu()
+placeholder['ApprovalUsername'] = ''
+placeholder['ApprovalPassword'] = ''
+placeholder['ApprovalOffice'] = ''
+placeholder['ApprovalPosition'] = ''
+placeholder['ApprovalRole'] = ''
+placeholder['IsStatusApprove'] = false
 
-'Step 2: Verify landing in asset inventory request page'
-inventoryRequest.verifyLandingScreen()
-
-'Step 3: Click search'
-inventoryRequest.clickSearch()
-
-'Step 4: Get agreement no'
-NewAgreementNo = inventoryRequest.getAgreementNo()
-
-'Step 5: Update agreement no to master data'
-inventoryRequest.updateAgreementNoToMasterData(TestDataName, NewAgreementNo, ScenarioId)
+KeywordUtil.logInfo("Placeholder data : ${placeholder}")
+return placeholder
