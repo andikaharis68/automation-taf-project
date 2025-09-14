@@ -104,9 +104,14 @@ public class MenuPage extends BaseHelper {
 	
 	//inventory asset management
 	private TestObject btnPoolManagement			= createTestObject("btnSendAssetToPool", "text", "Pool Management")
+	private TestObject btnAssetAppraisal			= createTestObject("btnAssetAppraisal", "text", "Asset Appraisal")
 	private TestObject btnExpandSendAssetToPool		= createTestObject("btnExpandSendAssetToPool", "xpath", "//span[text() = 'Send Asset To Pool']/preceding-sibling::span[@class = 'rtPlus']")
 	private TestObject btnSendAssetToPool			= createTestObject("btnSendAssetToPool", "text", "Send Asset to Pool")
 	private TestObject btnConfirmAssetSendToPool	= createTestObject("btnConfirmAssetSendToPool", "text", "Confirm Asset Send to Pool")
+	private TestObject btnAssetAppraisalRequest		= createTestObject("btnAssetAppraisalRequest", "text", "Asset Appraisal Request")
+	private TestObject btnAssetAppraisalInquiry		= createTestObject("btnAssetAppraisalInquiry", "text", "Asset Appraisal Inquiry")
+	private TestObject btnAssetAppraisalCancelation	= createTestObject("btnAssetAppraisalCancelation", "text", "Asset Appraisal Cancelation")
+	private TestObject btnAssetAppraisalApproval	= createTestObject("btnAssetAppraisalApproval", "text", "Asset Appraisal Approval")
 	
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
@@ -630,6 +635,54 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnExpandSendAssetToPool)
 		WebUI.takeScreenshot()
 		safetyClick(btnConfirmAssetSendToPool)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetAppraisalRequest() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnAssetAppraisal)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetAppraisalRequest)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetAppraisalInquiry() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnAssetAppraisal)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetAppraisalInquiry)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetAppraisalApproval() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnAssetAppraisal)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetAppraisalApproval)
+		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToAssetAppraisalCancelation() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "INVENTORY ASSET MANAGEMENT")
+		safetyClick(btnAssetAppraisal)
+		WebUI.takeScreenshot()
+		safetyClick(btnAssetAppraisalCancelation)
 		WebUI.switchToDefaultContent()
 	}
 	

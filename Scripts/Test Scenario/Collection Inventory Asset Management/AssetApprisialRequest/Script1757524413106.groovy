@@ -14,6 +14,18 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.helpers.BaseHelper
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Collection_Inventory_Asset_Management_TestData.xlsx', 'SheetNames': ['AssetAppraisalReq', 'MasterData']]
+Map dataRow = [:]
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+BaseHelper.openBrowser()
+
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Appraisal_Request'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Input_Asset_Appraisal_Request'), dataRow)

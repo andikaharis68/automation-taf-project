@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Input_Asset_Inventory_Approval</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>29d836b0-2d4e-4a5f-b3aa-a3340067de2e</testCaseGuid>
+</TestCaseEntity>
