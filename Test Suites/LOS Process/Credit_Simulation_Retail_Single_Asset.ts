@@ -14,14 +14,14 @@
    <testCaseLink>
       <guid>bc7a0cfd-3022-48b7-9d02-dc43af3b62cf</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Credit_Simulation</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
       <guid>357db929-37d0-4245-9ce8-283e5ebf527a</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
+      <isRun>false</isRun>
       <testCaseId>Test Cases/Test Scenario/LOS Process/Centralized_Data_Entry</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>

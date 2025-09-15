@@ -40,6 +40,24 @@ public class DisbursementApprovalPage extends BaseHelper {
 	private TestObject txtPopupTransactionStatus = createTestObject("txtPopupTransactionStatus", "", "")
 	private TestObject txtVoucherNo				 = createTestObject("txtVoucherNo", "id", "rptDetail_lblPayVoucherNo_0")
 
+
+	public void inputSearchApplication(String apTypeName, String apDestination, String bankName, String paymentVoucherDate) {
+		safetySelect(drpAPTypeName, apTypeName)
+		WebUI.delay(0.3)
+
+		if(apDestination?.trim()) {
+			safetyInput(txfApDestination, apDestination)
+			WebUI.delay(0.3)
+		}
+		safetySelect(drpBankName, bankName)
+		WebUI.delay(0.3)
+
+		if(paymentVoucherDate?.trim()) {
+			safetyInput(txfPaymentVoucherDate, paymentVoucherDate)
+			pressEsc(txfPaymentVoucherDate)
+			WebUI.delay(0.3)
+		}
+	}
 	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
 		safetySelect(drpAPTypeName, apTypeName)
 		WebUI.delay(0.8)

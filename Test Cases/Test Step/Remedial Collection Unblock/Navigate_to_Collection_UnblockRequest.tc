@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_to_Collection_UnblockRequest</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>259c8a52-2a07-42cf-97b2-aa6e26c1cf7f</testCaseGuid>
+</TestCaseEntity>

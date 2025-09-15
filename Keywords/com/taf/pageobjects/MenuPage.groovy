@@ -93,8 +93,16 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnAmendmentExecution		= createTestObject("btnAmendmentExecution", "xpath", "//a[text() = 'Amendment Execution']")
 	private TestObject btnAmendmentInquiry			= createTestObject("btnAmendmentInquiry", "xpath", "//a[text() = 'Amendment Inquiry']")
 	private TestObject btnAmendmentApproval			= createTestObject("btnAmendmentApproval", "xpath", "//a[text() = 'Amendment Approval']")
+
+	private TestObject btnRemedialCollection		= createTestObject("btnRemedialCollection", "xpath", "//a[text() = 'Remedial Collection']")
+	private TestObject btnExpandRemedialDealAmount	= createTestObject("btnExpandRemedialDealAmount", "xpath", "//span[text() = 'Remedial Deal Amount']/preceding-sibling::span[@class = 'rtPlus']")
+	private TestObject btnRemedialDealAmountRequest	= createTestObject("btnRemedialDealAmountRequest", "xpath", "//a[text() = 'Remedial Deal Amount Request']")
+	private TestObject btnRemedialRepossession		= createTestObject("btnRemedialRepossession", "xpath", "//a[text() = 'Repossession']")
+	private TestObject btnRemedialDealAmountInquiry	= createTestObject("btnRemedialDealAmountInquiry", "xpath", "//a[text() = 'Remedial Deal Amount Inquiry']")
+	private TestObject btnRemedialDealAmountApproval= createTestObject("btnRemedialDealAmountApproval", "xpath", "//a[text() = 'Remedial Deal Amount Approval']")
 	
-	
+
+
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
 	private void verifyLandingMenuPage() {
@@ -137,6 +145,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickNewApplication() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.delay(1)
@@ -245,6 +254,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToCreditSimulation() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.takeScreenshot()
@@ -256,6 +266,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToCentralizedDataEntryCompletion() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.switchToFrame(iframeMenu, 1)
@@ -273,11 +284,13 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToNewApplicationDataEntry() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToFrame(iframeMenu, 1)
 		WebUI.click(btnNewApplicationDataEntry)
 		WebUI.takeScreenshot()
 	}
 	private void navigateToSurveyTask() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.delay(1)
@@ -289,6 +302,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToDeliveryOrder() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.delay(1)
@@ -300,6 +314,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToNewApplication() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.takeScreenshot()
@@ -310,11 +325,13 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void clickDocumentChecklist() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToFrame(iframeMenu, 2)
 		safetyClick(btnDocumentChecklist)
 	}
 
 	private void navigateToCustomerConfirmation() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.takeScreenshot()
@@ -325,6 +342,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToInvoice() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.delay(1)
@@ -336,6 +354,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToDocumentSigner() {
+		waitForLoadingBarNotExist()
 		WebUI.switchToDefaultContent()
 		WebUI.click(drpMenu)
 		WebUI.delay(1)
@@ -347,6 +366,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToPurchaseOrder() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		safetyClick(drpMenu)
 		switchToIframeMenu()
@@ -358,6 +378,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToCreditApproval() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		safetyClick(drpMenu)
 		switchToIframeMenu()
@@ -370,6 +391,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToApplicationInquiry() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.click(drpMenu)
 		switchToIframeMenu()
@@ -382,6 +404,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToGoLive() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.click(drpMenu)
 		switchToIframeMenu()
@@ -393,6 +416,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToDisbursmentSelection() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -416,6 +440,7 @@ public class MenuPage extends BaseHelper {
 		}
 	}
 	private void navigateToDisbursmentApproval() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -426,6 +451,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToDisbursmentExecution() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -436,6 +462,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void navigatePayVoucherInquiry() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -448,6 +475,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToOnlineDisbursementInquiry() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -468,6 +496,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToRemedialExpenseRequest() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -480,6 +509,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToRemedialExpenseInquiry() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -492,6 +522,7 @@ public class MenuPage extends BaseHelper {
 	}
 
 	private void navigateToRemedialExpenseAppoval() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -503,6 +534,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToAmendmentRequest() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -512,8 +544,9 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentRequest)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAmendmentExecution() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -524,6 +557,7 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	private void navigateToAmendmentInquiry() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -533,8 +567,9 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentInquiry)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAmendmentApproval() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
@@ -543,5 +578,66 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnAmendmentApproval)
 		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToRemedialMenu(String menuRemedial) {
+		waitForLoadingBarNotExist()
+		TestObject btnRemedialMenu	= createTestObject("btnRemedialMenu", "xpath", "//a[text() = '$menuRemedial']")
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialCollection)
+		safetyClick(btnRemedialMenu)
+		WebUI.switchToDefaultContent()
+	}
+
+	private void navigateToRemedialDealAmountRequest() {
+		waitForLoadingBarNotExist()
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialRepossession)
+		WebUI.click(btnExpandRemedialDealAmount)
+		WebUI.takeScreenshot()
+		WebUI.delay(0.5)
+		WebUI.click(btnRemedialDealAmountRequest)
+		switchDefaultContent()
+	}
+
+	private void navigateRemedialDealAmountInquiry() {
+		waitForLoadingBarNotExist()
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialRepossession)
+		WebUI.click(btnExpandRemedialDealAmount)
+		WebUI.takeScreenshot()
+		WebUI.delay(0.5)
+		WebUI.click(btnRemedialDealAmountInquiry)
+		switchDefaultContent()
+	}
+	private void navigateRemedialDealAmountApproval() {
+		waitForLoadingBarNotExist()
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialRepossession)
+		WebUI.click(btnExpandRemedialDealAmount)
+		WebUI.takeScreenshot()
+		WebUI.delay(0.5)
+		WebUI.click(btnRemedialDealAmountApproval)
+		switchDefaultContent()
 	}
 }

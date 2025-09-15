@@ -14,35 +14,21 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.disbursement.DisbursementApprovalPage
+import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-DisbursementApprovalPage approval = new DisbursementApprovalPage()
-MenuPage menu = new MenuPage()
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Remedial_Deal_Amount_TestData.xlsx', 'SheetNames': ['RemedialDealAmountReq', 'MasterData']]
 
-'Step 0: Verify landing'
-approval.verifyLandingPage()
+Map dataRow = [:]
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+	
+BaseHelper.openBrowser()
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+//WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+//WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/SearchAgremeent_and_NextToDetail'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountInquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
-'Step 1: Select Ap Type name '
-approval.inputSearchApplication(ApTypeName, ApDestinationApproval, BankName, PaymentVoucherDate)
-
-'Step 2: Click Search'
-approval.clickButtonSearch()
-
-'Step 3: Click checkbox'
-approval.checklistApDisbursement(ApplicationBalance)
-
-'Step 4: Click Approved selected'
-approval.clickButtonApproveSelected()
-
-'Step 5: Get Voucher No'
-approval.updatePaymentVoucherNoToExcel(TestDataName, ScenarioId)
-
-'Step 6: Click Approve'
-approval.clickButtonApprove()
-
-'Step 7: Verify landing in disbursment approval page'
-approval.verifyLandingPage()
