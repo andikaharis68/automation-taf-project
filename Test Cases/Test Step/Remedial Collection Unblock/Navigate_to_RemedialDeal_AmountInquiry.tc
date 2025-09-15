@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_to_RemedialDeal_AmountInquiry</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>54d0109c-00bc-44ab-8d1c-ba91c65f4326</testCaseGuid>
+</TestCaseEntity>

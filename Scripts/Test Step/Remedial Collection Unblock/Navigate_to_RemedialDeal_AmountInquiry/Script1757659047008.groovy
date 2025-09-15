@@ -15,34 +15,25 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.disbursement.DisbursementApprovalPage
+import com.taf.pageobjects.remedials.RemedialDealAmountInquiry
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-DisbursementApprovalPage approval = new DisbursementApprovalPage()
 MenuPage menu = new MenuPage()
+RemedialDealAmountInquiry inquiry = new RemedialDealAmountInquiry()
 
-'Step 0: Verify landing'
-approval.verifyLandingPage()
+'Step 1: Navigate to remedial deal amount inquiry'
+menu.navigateRemedialDealAmountInquiry()
 
-'Step 1: Select Ap Type name '
-approval.inputSearchApplication(ApTypeName, ApDestinationApproval, BankName, PaymentVoucherDate)
+menu.switchToIframeMainPage()
 
-'Step 2: Click Search'
-approval.clickButtonSearch()
+'Step 2: Verify Landing page'
+inquiry.verifyLandingPage()
 
-'Step 3: Click checkbox'
-approval.checklistApDisbursement(ApplicationBalance)
+'Step 3: Search agrement'
+inquiry.searchAgreementNo(AgreementNoRequest)
 
-'Step 4: Click Approved selected'
-approval.clickButtonApproveSelected()
+'Step 4: click remedial deal amount no '
+inquiry.clickRemedialDealAmountNo()
 
-'Step 5: Get Voucher No'
-approval.updatePaymentVoucherNoToExcel(TestDataName, ScenarioId)
-
-'Step 6: Click Approve'
-approval.clickButtonApprove()
-
-'Step 7: Verify landing in disbursment approval page'
-approval.verifyLandingPage()
