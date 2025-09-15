@@ -60,6 +60,10 @@ public class LoginPage extends BaseHelper {
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
         ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
     """
+			if(!office && !position && !role) {
+				xpath = "//*[@id='uModDRole_ctl00_gvRoles_lbSelectRole_0']"
+			}
+			
 			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
 			WebUI.click(dynamicSelectButton)
 		} else {

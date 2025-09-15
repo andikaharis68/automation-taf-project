@@ -27,7 +27,7 @@ MenuPage menu = new MenuPage()
 approval.verifyLandingPage()
 
 'Step 1: Select Ap Type name '
-approval.inputSearchApplication(ApTypeName, ApDestinationApproval, BankName)
+approval.inputSearchApplication(ApTypeName, ApDestinationApproval, BankName, PaymentVoucherDate)
 
 'Step 2: Click Search'
 approval.clickButtonSearch()

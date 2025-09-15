@@ -15,12 +15,12 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.collectionInventoryAssetManagement.AssetInventoryRequestPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.CollectionAssetInventoryRequestPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-AssetInventoryRequestPage inventoryRequest = new AssetInventoryRequestPage()
+CollectionAssetInventoryRequestPage inventoryRequest = new CollectionAssetInventoryRequestPage()
 MenuPage menu = new MenuPage()
 
 'Step 1: Switch To iframe menu'

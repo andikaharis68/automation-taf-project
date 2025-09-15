@@ -19,13 +19,20 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String testDataName = BaseHelper.getTestDataNameCollection()
 String scenarioId = GlobalVariable.SCENARIO_ID
-List<String> sheetNames = ['Credentials']
+List<String> sheetNames = ['Credentials', 'Request']
 
-Map scenarioData = [:]
-scenarioData = BaseHelper.getTestDataMultipleSheet(sheetNames, "$GlobalVariable.TEST_DATA_LOCATION/Collection_Expense_Advance.xlsx", scenarioId)
+Map scenarioData = [
+	"TestDataPath" : "${GlobalVariable.TEST_DATA_LOCATION}/${testDataName}",
+	"ScenarioId" : GlobalVariable.SCENARIO_ID
+]
+
+scenarioData += BaseHelper.getTestDataMultipleSheet(sheetNames, scenarioData["TestDataPath"] , scenarioData["ScenarioId"])
+scenarioData['AdvanceSettlement'] = "Y"
 
 BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expense_Request'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-WebUI.callTestCase(findTestCase(''), scenarioData, FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expense_Request'), scenarioData, FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Input_Data_Collection_Expense_Request'), scenarioData, FailureHandling.STOP_ON_FAILURE)

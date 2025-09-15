@@ -156,6 +156,18 @@ class BaseHelper {
 		}
 		return testDataName
 	}
+	
+	static String getTestDataNameCollection() {
+		String testDataName
+		String configName = RunConfiguration.getExecutionSourceId()
+		if(configName.contains("Non_Advance")) {
+			testDataName = "Collection_Expense_Non_Advance.xlsx"
+		} else {
+			testDataName = "Collection_Expense_Advance.xlsx"
+		}
+		WebUI.comment("Using test data : " + testDataName)
+		return testDataName
+	}
 
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
@@ -388,7 +400,7 @@ class BaseHelper {
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
-	
+
 	static void safetyClickYudho(TestObject to, double delay = 1) {
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
@@ -407,11 +419,17 @@ class BaseHelper {
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
 	}
+	
+	static void safetySelectByIndex(TestObject to, String index, double delay = 1) {
+		handlePopupAlert()
+		WebUI.selectOptionByIndex(to, index.toInteger())
+		WebUI.delay(delay)
+	}
 
 	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
 		if(text) {
 			WebUI.delay(delay)
-			WebUI.clearText(to)
+			manualClearText(to)
 			handlePopupAlert()
 			WebUI.delay(delay)
 			for (char c : text.toCharArray()) {
@@ -489,7 +507,7 @@ class BaseHelper {
 		}
 		return nik.toString()
 	}
-	
+
 	static String generateRandomNumber(int lenght) {
 		SecureRandom rnd = new SecureRandom()
 		StringBuilder num = new StringBuilder()
@@ -818,18 +836,13 @@ class BaseHelper {
 					WebUI.delay(1)
 					WebUI.comment("edit button found for customer '${name}', clicking Edit.")
 					safetyClick(btnEdit)
-					break
+					return true
 				} else {
 					WebUI.comment("Customer found but Edit button not yet present.")
 				}
-			} else {
-				KeywordUtil.markFailed("Customer '${name}' not found in current attempt.")
 			}
 			WebUI.delay(waitTime)
 		}
-
-		WebUI.comment("Failed to find customer '${name}' after ${maxAttempts} attempts.")
-		return false
 	}
 
 	static Map waitForStep(Map dataRow, Closure navigateTestCase, Closure checkTestCase) {
@@ -880,5 +893,11 @@ class BaseHelper {
 	}
 	def void pressEsc(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ESCAPE))
+	}
+
+	static void waitForLoadingBarNotExist() {
+		TestObject loadingBar = new TestObject("loadingBar")
+		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
+		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
 }
