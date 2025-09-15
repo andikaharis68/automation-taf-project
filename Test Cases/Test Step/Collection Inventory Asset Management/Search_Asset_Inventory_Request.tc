@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Asset_Inventory_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ddf3fdd1-0bb7-468f-b06b-d75d048d07a8</testCaseGuid>
+</TestCaseEntity>

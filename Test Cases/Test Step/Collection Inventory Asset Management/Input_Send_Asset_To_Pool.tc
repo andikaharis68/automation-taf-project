@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Input_Send_Asset_To_Pool</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>bfc34a97-3afa-4f93-9f7d-7e1f6e333354</testCaseGuid>
+</TestCaseEntity>

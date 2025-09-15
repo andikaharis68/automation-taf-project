@@ -24,48 +24,52 @@ import internal.GlobalVariable
 
 public class ConfirmAssetToPoolPage extends BaseHelper{
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//Table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject btnPencil = createTestObject("btnPencil", "", "")
+	private TestObject btnFirstPencil = createTestObject("btnFirstPencil", "id", "gvGrid_imbEdit_0")
 
 	//Detail
-	private TestObject txfReceiveBy = createTestObject("txfReceiveBy", "", "")
-	private TestObject drpReceiveDate = createTestObject("drpReceiveDate", "", "")
-	private TestObject txtReceiveDate = createTestObject("txtReceiveDate", "", "")
-	private TestObject txfNotes = createTestObject("txfNotes", "", "")
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-
-	//Popup
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject txfReceiveBy = createTestObject("txfReceiveBy", "id", "txtReceiveBy")
+	private TestObject txfReceiveDate = createTestObject("txtReceiveDate", "id", "ucReceiveDt_txtDatePicker")
+	private TestObject txfNotes = createTestObject("txfNotes", "id", "txtNotes")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Confirm Asset To Pool Page")
+		WebUI.takeScreenshot()
 	}
 
 	public void doSearch(String agreementNo) {
-		WebUI.setText(txfAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
+		safetySelect(txfAgreementNo, agreementNo)
+	}
+	
+	public void clickSearch() {
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickButtonPencil() {
-		WebUI.click(btnPencil)
+		safetyClick(btnFirstPencil)
 	}
-
-	public void inputReceiveAsset(String receiveBy, String receiveDate, String notes) {
-		WebUI.setText(txfReceiveBy, receiveBy)
-
-		WebUI.click(drpReceiveDate)
-		WebUI.click(txtReceiveDate)
-
-		WebUI.setText(txfNotes, notes)
-		WebUI.click(btnSubmit)
-
-		verifyPopUpSuccess(lblSuccess, "Confirm Asset To Pool")
+	
+	public void inputReceiveBy(String receiveBy) {
+		WebUI.takeScreenshot()
+		safetyInput(txfReceiveBy, receiveBy)
+	}
+	
+	public void inputReceiveDate(String receiveDate) {
+		safetyInput(txfReceiveDate, receiveDate)
+	}
+	
+	public void inputNotes(String notes) {
+		safetyInput(txfNotes, notes)
+	}
+	
+	public void clickSubmit() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSubmit)
 	}
 }

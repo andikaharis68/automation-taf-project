@@ -24,22 +24,34 @@ import internal.GlobalVariable
 
 public class CollectionExpenseInquiryPage extends BaseHelper {
 	//search
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
-	private TestObject txtRequestNo = createTestObject("txtRequestNo", "", "")
-	private TestObject txtStatus = createTestObject("txtStatus", "", "")
-	
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
+	private TestObject txtRequestNo = createTestObject("txtRequestNo", "id", "gvPaging_lblCollExpense_0")
+	private TestObject drpStatus = createTestObject("drpStatus", "id", "ucSearch_ddlStatus_ltlCollExpenseMrCollExpenseStatSearch_ddlReference")
+	private TestObject txtRequestNumber = createTestObject("txtRequestNumber", "id", "gvPaging_lblCollExpense_0")
+
 	public void inputAgreementNo(String agreementNo) {
-		WebUI.setText(txfAgreementNo, agreementNo)
+		safetyInput(txfAgreementNo, agreementNo)
+	}
+	
+	public void selectFilterStatus(String status) {
+		safetySelect(drpStatus, status)
 	}
 
 	public void clickButtonSearch() {
-		WebUI.click(btnSearch)
+		safetyClick(btnSearch)
+	}
+
+	public boolean verifyStatusRequest(String status) {
+		TestObject txtStatus = createTestObject("txtStatus", "xpath", "//*[contains(@id, 'gvPaging_lblCollExpStatus') and text() = '${status}']")
+		if(WebUI.waitForElementPresent(txtStatus, 10)) {
+			return true
+		} else {
+			return false
+		}
 	}
 	
-	public void verifyStatusRequest(String status) {
-		if(WebUI.getText(txtStatus) == status) {
-			KeywordUtil.markPassed("Success compare status with value ${status}")
-		}
+	public void clickRequestNumber() {
+		safetyClick(txtRequestNumber)
 	}
 }

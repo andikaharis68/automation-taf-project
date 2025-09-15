@@ -156,6 +156,17 @@ class BaseHelper {
 		}
 		return testDataName
 	}
+	
+	static String getTestDataNameCollection() {
+		String testDataName
+		String configName = RunConfiguration.getExecutionSourceId()
+		if(configName.contains("Non_Advance")) {
+			testDataName = "Collection_Expense_Non_Advance.xlsx"
+		} else {
+			testDataName = "Collection_Expense_Advance.xlsx"
+		}
+		return testDataName
+	}
 
 	static Map<String, String> getTestDataByScenario(String sheetName, String filePath, String scenarioID) {
 		FileInputStream fis = new FileInputStream(filePath)
@@ -405,6 +416,12 @@ class BaseHelper {
 	static void safetySelect(TestObject to, String text, double delay = 1) {
 		handlePopupAlert()
 		WebUI.selectOptionByLabel(to, text, false)
+		WebUI.delay(delay)
+	}
+	
+	static void safetySelectByIndex(TestObject to, String index, double delay = 1) {
+		handlePopupAlert()
+		WebUI.selectOptionByIndex(to, index.toInteger())
 		WebUI.delay(delay)
 	}
 
@@ -822,14 +839,9 @@ class BaseHelper {
 				} else {
 					WebUI.comment("Customer found but Edit button not yet present.")
 				}
-			} else {
-				KeywordUtil.markFailed("Customer '${name}' not found in current attempt.")
 			}
 			WebUI.delay(waitTime)
 		}
-
-		WebUI.comment("Failed to find customer '${name}' after ${maxAttempts} attempts.")
-		return false
 	}
 
 	static Map waitForStep(Map dataRow, Closure navigateTestCase, Closure checkTestCase) {

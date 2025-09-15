@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>InventorySellingApproval</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ff05556b-3ef5-4339-b4ab-5cd4ce756c6a</testCaseGuid>
+</TestCaseEntity>
