@@ -23,31 +23,33 @@ import internal.GlobalVariable
 
 public class AmendmentApprovalPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "id", "ucrefAmendmentType_ddlReference")
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
 	private TestObject txfCustomerName	= createTestObject("txfCustomerName", "id", "ucSearch_txtCustName_ltlCustCustName")
-	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo") 
-	private TestObject txfTransationNo	= createTestObject("txfTransationNo", "id", "ucSearch_txtTrxNo_ltlApvReqTrxNo") 
-	private TestObject txfCurrentUser	= createTestObject("txfCurrentUser", "id", "ucSearch_txtCurrentUser_ltlApprovalCurrentUser") 
-	private TestObject txfRequestBy		= createTestObject("txfRequestBy", "id", "ucSearch_txtRequestBy_ltlApprovalRequestBy") 
-	private TestObject txfApprovalNo	= createTestObject("txfApprovalNo", "id", "ucSearch_txtApvNo_ltlApvSchemeRApvNo") 
-	private TestObject txfTaskOwner		= createTestObject("txfTaskOwner", "id", "ucSearch_txtTaskOwner_ltlApprovalTaskOwner") 
+	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject txfTransationNo	= createTestObject("txfTransationNo", "id", "ucSearch_txtTrxNo_ltlApvReqTrxNo")
+	private TestObject txfCurrentUser	= createTestObject("txfCurrentUser", "id", "ucSearch_txtCurrentUser_ltlApprovalCurrentUser")
+	private TestObject txfRequestBy		= createTestObject("txfRequestBy", "id", "ucSearch_txtRequestBy_ltlApprovalRequestBy")
+	private TestObject txfApprovalNo	= createTestObject("txfApprovalNo", "id", "ucSearch_txtApvNo_ltlApvSchemeRApvNo")
+	private TestObject txfTaskOwner		= createTestObject("txfTaskOwner", "id", "ucSearch_txtTaskOwner_ltlApprovalTaskOwner")
 	private TestObject txfRequestDate	= createTestObject("txfRequestDate", "id", "ucSearch_txtRequestDate_ltlApvSchemeRRequestDt_txtDatePicker")
-	
-	
+
+
 	private TestObject btnSearch		= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	private TestObject btnProcess		= createTestObject("btnProcess", "id", "gvTask_lbProcess_0")
 
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
 	private TestObject list				= createTestObject("list", "xpath", "")
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
 
-	
+
 	private void verifyLandingPage() {
+		WebUI.switchToFrame(iframeMain, 2)
 		verifyLanding(drpAmendmentType, "Amendment Approval")
+		WebUI.takeScreenshot()
 	}
 
 	public void searchCustomerforApproval(String amendmentType,String agreementNo, String transactionNo, String reqBy,String currentUser,
-		String customerName, String user, String approvalNo,
-		String taskOwner, String date) {
+			String customerName,  String approvalNo,
+			String taskOwner, String date) {
 
 		safetySelect(drpAmendmentType, amendmentType)
 		inputIfExist(txfAgreementNo, agreementNo)
@@ -58,9 +60,11 @@ public class AmendmentApprovalPage extends BaseHelper{
 		inputIfExist(txfApprovalNo, approvalNo)
 		inputIfExist(txfTaskOwner, taskOwner)
 		inputIfExist(txfRequestDate, taskOwner)
-		
-		
+
+
 		safetyClick(btnSearch)
+		
+		WebUI.takeScreenshot()
 	}
 
 	private void inputIfExist(TestObject to, String text) {
@@ -69,21 +73,8 @@ public class AmendmentApprovalPage extends BaseHelper{
 			WebUI.delay(0.5)
 		}
 	}
-	public void searchAmendmentbyAgreementNo(String amendmentType, String agreementNo) {
-
-		safetySelect(drpAmendmentType, amendmentType, 1)
-		safetyInput(txtAgreementNo, agreementNo)
-		safetyClick(btnSearch, 2)
-		WebUI.takeScreenshot()
-		safetyClick(btnProcess, 10)
-	}
-
-	public void searchAmendmentbyCustName2(String amendmentType, String customerName) {
-
-		safetySelect(drpAmendmentType, amendmentType, false)
-		safetyInput(txfCustomerName, customerName)
-		safetyClick(btnSearch)
-		WebUI.takeScreenshot()
-		safetyClick(btnProcess, 10)
+	
+	public void clickProcessAmendment() {
+		safetyClick(btnProcess, 2)
 	}
 }

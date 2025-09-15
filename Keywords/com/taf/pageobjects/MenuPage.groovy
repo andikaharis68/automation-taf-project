@@ -89,23 +89,27 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnAssetInventoryInquiry		= createTestObject("btnAssetInventoryInquiry", "text", "Asset Inventory Inquiry")
 	private TestObject btnAssetInventoryRequest		= createTestObject("btnAssetInventoryRequest", "text", "Asset Inventory Request")
 	private TestObject btnAssetInventoryApproval	= createTestObject("btnAssetInventoryApproval", "text", "Asset Inventory Approval")
-	
+
 	//remedial
 	private TestObject btnRemedialExpense			= createTestObject("btnRemedialExpense", "xpath", "//a[text() = 'Remedial Expense']")
 	private TestObject btnRemedialExpenseRequest	= createTestObject("btnRemedialExpenseRequest", "xpath", "//a[text() = 'Remedial Expense Request']")
 	private TestObject btnRemedialInquiry			= createTestObject("btnRemedialInquiry", "xpath", "//a[text() = 'Remedial Expense Inquiry']")
 	private TestObject btnRemedialApproval			= createTestObject("btnRemedialApproval", "xpath", "//a[text() = 'Remedial Expense Approval']")
-	private TestObject btnAmendmentRequest			= createTestObject("btnAmendmentRequest", "xpath", "//a[text() = 'Amendment Request']")
-	private TestObject btnAmendmentExecution		= createTestObject("btnAmendmentExecution", "xpath", "//a[text() = 'Amendment Execution']")
-	private TestObject btnAmendmentInquiry			= createTestObject("btnAmendmentInquiry", "xpath", "//a[text() = 'Amendment Inquiry']")
-	private TestObject btnAmendmentApproval			= createTestObject("btnAmendmentApproval", "xpath", "//a[text() = 'Amendment Approval']")
-	
+
+
 	//inventory asset management
 	private TestObject btnPoolManagement			= createTestObject("btnSendAssetToPool", "text", "Pool Management")
 	private TestObject btnExpandSendAssetToPool		= createTestObject("btnExpandSendAssetToPool", "xpath", "//span[text() = 'Send Asset To Pool']/preceding-sibling::span[@class = 'rtPlus']")
 	private TestObject btnSendAssetToPool			= createTestObject("btnSendAssetToPool", "text", "Send Asset to Pool")
 	private TestObject btnConfirmAssetSendToPool	= createTestObject("btnConfirmAssetSendToPool", "text", "Confirm Asset Send to Pool")
 	
+	//amendment
+	private TestObject btnAmendmentRequest			= createTestObject("btnAmendmentRequest", "xpath", "//a[text() = 'Amendment Request']")
+	private TestObject btnAmendmentExecution		= createTestObject("btnAmendmentExecution", "xpath", "//a[text() = 'Amendment Execution']")
+	private TestObject btnAmendmentInquiry			= createTestObject("btnAmendmentInquiry", "xpath", "//a[text() = 'Amendment Inquiry']")
+	private TestObject btnAmendmentApproval			= createTestObject("btnAmendmentApproval", "xpath", "//a[text() = 'Amendment Approval']")
+	private TestObject btnCashireTransaction		= createTestObject("btnCashireTransaction", "xpath", "(//a[text() = 'Cashier Transactions'])[1]")
+
 	private TestObject btnLogout					= createTestObject("btnLogout", "id", "navLogout")
 
 	private void verifyLandingMenuPage() {
@@ -523,7 +527,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentRequest)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAmendmentExecution() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -544,7 +548,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentInquiry)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAmendmentApproval() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -555,7 +559,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAmendmentApproval)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAssetInventoryInquiry() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -568,7 +572,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAssetInventoryInquiry)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAssetInventoryRequest() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -581,7 +585,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAssetInventoryRequest)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToAssetInventoryApproval() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -594,7 +598,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAssetInventoryApproval)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToSendAssetToPool() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -607,7 +611,7 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnSendAssetToPool)
 		WebUI.switchToDefaultContent()
 	}
-	
+
 	private void navigateToConfirmAssetSendToPool() {
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
@@ -621,4 +625,14 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 	
+	private void navigateToCashireTransaction() {
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "ACCOUNT MAINTENANCE")
+		WebUI.takeScreenshot()
+		safetyClick(btnCashireTransaction)
+		WebUI.switchToDefaultContent()
+	}
 }

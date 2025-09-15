@@ -23,23 +23,24 @@ import internal.GlobalVariable
 
 public class PrepaymentApprovalPage extends BaseHelper{
 
-	private TestObject drpApprovalAction	= createTestObject("drpApprovalAction", "xpath", "")
+	private TestObject drpApprovalAction	= createTestObject("drpApprovalAction", "xpath", "//select[@id = 'ddlAction']")
 	private TestObject chkBox				= createTestObject("chkBox", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
-	private TestObject lblNotification		= createTestObject("lblNotification", "xpath", "")
+	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "//textarea[@id ='txtNotes']")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
+	private TestObject lblNotification		= createTestObject("lblNotification", "id", "messageContent")
 
 
 	public void inputAprrove(String approveAction, String note) {
 
-		WebUI.selectOptionByValue(drpApprovalAction, approveAction, false)
-		WebUI.check(chkBox)
-		WebUI.setText(txtNotes, note)
+		safetySelect(drpApprovalAction, approveAction, 1)
+		safetyInput(txtNotes, note)
+		WebUI.takeScreenshot()
 	}
 
 	public void clickSubmit() {
 
-		WebUI.click(btnSubmit)
+		safetyClick(btnSubmit, 1)
 		WebUI.verifyElementPresent(lblNotification, 5)
+		WebUI.takeScreenshot()
 	}
 }

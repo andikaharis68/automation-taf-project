@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Submit_Amendment_Reschedule_PaymentRecieve</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>724949e0-de66-4e51-bbe8-094fdbf802fc</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Amendment_Reschedule_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>526f4e35-12ed-4e6d-860e-dea35bb57549</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_AmendmentRequest</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>619e12e2-1e43-4ad4-b4ea-6fe9c3d5c815</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Submit_Amendment_Prepayment_PaymentRecieve</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d03d82b2-95ae-48b5-918f-ebeebfe0a1bf</testCaseGuid>
+</TestCaseEntity>

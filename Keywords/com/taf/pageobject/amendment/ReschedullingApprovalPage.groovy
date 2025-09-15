@@ -22,22 +22,24 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class ReschedullingApprovalPage extends BaseHelper{
-	
+
 	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
 	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
 	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
 	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
-	
+
 	public void approval(String reason, String approver, String note) {
-		
+
 		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
-		WebUI.selectOptionByLabel(drpApprover, approver, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.click(btnSubmit)
-		WebUI.verifyElementVisible(lblNotification)
 		
+		safetySelect(drpReasonDescription, reason, 1)
+		safetySelect(drpApprover, approver, 1)
+		safetyInput(txtNotes, note, 1)
+		WebUI.takeScreenshot()
+		safetyClick(btnSubmit, 2)
+		WebUI.verifyElementVisible(lblNotification)
+		WebUI.takeScreenshot()
 	}
 }

@@ -28,11 +28,13 @@ public class AmendmentRequestPage extends BaseHelper{
 	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
 	private TestObject txfAddress		= createTestObject("txfAddress", "id", "ucSearch_txtAddress_ltlCustAddrAddrSearch") 
-	private TestObject btnPencil		= createTestObject("btnPencil","id", "gvAgrmnt_imbEdit_9") 
+	private TestObject btnPencil		= createTestObject("btnPencil","id", "gvAgrmnt_imbEdit_0") 
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
 	
 	
 	
 	private void verifyLandingPage() {
+		WebUI.switchToFrame(iframeMain, 3)
 		verifyLanding(drpAmendmentType, "Amendment Request")
 		WebUI.takeScreenshot()
 	}

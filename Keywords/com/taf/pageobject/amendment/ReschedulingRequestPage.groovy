@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -39,6 +40,8 @@ public class ReschedulingRequestPage extends BaseHelper{
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 	private TestObject lblDocAgreement			= createTestObject("lblDocAgreement", "xpath", "")
+	private TestObject lblLastInstallment		= createTestObject("lblLastInstallment", "xpath", "")
+	private TestObject lblBalanceAmount			= createTestObject("lblBalanceAmount", "id", "")
 
 
 	public void reschedule(String efectiveDate, String dueDate, String tenor, String payFreq, String scheme) {
@@ -46,26 +49,45 @@ public class ReschedulingRequestPage extends BaseHelper{
 		WebUI.click(sectionRescheduleReq)
 		WebUI.click(sectionNewFinancial)
 
-		WebUI.setText(txtEfectiveDate, efectiveDate)
-		WebUI.selectOptionByLabel(drpDueDate, dueDate, false)
-		WebUI.setText(txtTenor, tenor)
-		WebUI.selectOptionByLabel(drpPayFrequency, payFreq, false)
-		WebUI.selectOptionByLabel(drpInstallmentScheme, scheme, false)
+		safetyInput(txtEfectiveDate, efectiveDate, 2)
+		clickTABKeyboard(txtEfectiveDate)
+		safetySelect(drpDueDate, dueDate, 2)
 
-		WebUI.click(btnNext)
-		WebUI.click(btnCalculate)
+		safetyInput(txtTenor, tenor)
+		safetySelect(drpPayFrequency, payFreq, 1)
+		safetySelect(drpInstallmentScheme, scheme, 1)
+		WebUI.takeScreenshot()
+
+		safetyClick(btnNext, 2)
+		WebUI.takeScreenshot()
+		safetyClick(btnCalculate)
 		//scroll bottom
 	}
 
 	public void approval(String reason, String approver, String note) {
 
 		WebUI.click(sectionApprovalReq)
-		WebUI.selectOptionByLabel(drpReasonDescription, reason, false)
-		WebUI.selectOptionByLabel(drpApprover, approver, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.click(btnSubmit)
+
+		safetySelect(drpReasonDescription, reason, 2)
+		safetySelect(drpApprover, approver, 2)
+		safetyInput(txtNotes, note)
+		safetyClick(btnSubmit)
 
 		WebUI.verifyElementVisible(lblNotification)
 		WebUI.verifyElementNotVisible(lblDocAgreement)
+	}
+	
+	public void writeBalance(String balance) {
+		String excelFilePath = GlobalVariable.TEST_DATA_LOCATION + "/Amendment_Reschedule_TestData.xlsx"
+		Map criteria = ["ScenarioId":GlobalVariable.SCENARIO_ID]
+		saveDataToExcel(balance, criteria, excelFilePath, "MasterData", "AmountBalance")
+	}
+	
+	public void getBalance() {
+		WebUI.focus(lblBalanceAmount)
+		String actual = WebUI.getText(lblBalanceAmount)
+		KeywordUtil.logInfo(actual)
+		String modify = actual.replaceAll("[^0-9]", "")
+		writeBalance(modify)
 	}
 }

@@ -25,21 +25,28 @@ public class AmendmentExecutionPage extends BaseHelper{
 
 	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
 	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
+	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
 
 
-	public void searchAmendment(String amendmentType, String customerName) {
+	public void switchMain() {
+		WebUI.switchToFrame(iframeMain, 3)
+	}
+	
+	public void searchAmendment(String amendmentType, String agreementNo, String customerName) {
 
-		WebUI.selectOptionByLabel(drpAmendmentType, amendmentType, false)
-		WebUI.setText(txtCustomerName, customerName)
+		safetySelect(drpAmendmentType, amendmentType, 2)
+		safetyInputEdit(txtAgreementNo, agreementNo, 1)
+		safetyInputEdit(txtCustomerName, customerName, 1)
 		WebUI.click(btnSearch)
-
+		WebUI.takeScreenshot()
 
 		clickPenAction(customerName)
 	}
 
-	private void clickPenAction(customerName) {
+	private void clickPenAction(String agreementNo) {
 
-		TestObject btnPenAction		= createTestObject("btnPenAction", "xpath", "")
+		TestObject btnPenAction		= createTestObject("btnPenAction", "id", "gvAgrmnt_imbEdit_0")
 	}
 }

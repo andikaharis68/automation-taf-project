@@ -27,12 +27,17 @@ public class CashierTransactionPage extends BaseHelper{
 	private TestObject drpAccountName	= createTestObject("drpAccountName", "xpath", "//select[@id = 'ddlBankAccount']")
 	private TestObject txtDate			= createTestObject("txtDate", "xpath", "//input[@id = 'ucDatePicker_txtDatePicker']")
 	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "id", "lbPaySingle")
+	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
+	
+	public void switchMain() {
+		WebUI.switchToFrame(iframeMain, 3)
+	}
 
 	public void inputChasier(String WOP, String accName, String date) {
 
 		safetySelect(drpWOP, WOP, 1.5)
 		safetySelect(drpAccountName, accName, 1.5)
-		safetyInput(txtDate, date, 2)
+		safetyInputEdit(txtDate, date, 2)
 	}
 
 	public void clickPaymentSingle() {

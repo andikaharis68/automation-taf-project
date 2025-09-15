@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Amendment_Prepayment_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>5e08106d-070d-439c-b85d-6b7dcd9ece23</testCaseGuid>
+</TestCaseEntity>
