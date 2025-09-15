@@ -156,7 +156,9 @@ public class RemedialExpenseRequestPage extends BaseHelper{
 
 		if(isAdvance == "Yes") {
 			WebUI.check(chkAdvanceSettlement)
-			safetySelect(drpDisburseTo, diburse, 2)
+			if(WebUI.verifyElementPresent(drpDisburseTo, 2, FailureHandling.OPTIONAL)) {
+				safetySelect(drpDisburseTo, diburse, 2)
+			}
 		}else {
 			safetyInput(txtDisburseTo, diburse)
 		}

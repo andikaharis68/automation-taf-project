@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 //String testDataName = BaseHelper.getTestDataName()
-String testDataName = "LOS_Remedial_Expense_NonAdvance.xlsx"
+String testDataName = "Remedial_Expense_NonAdvance.xlsx"
 String scenarioId = GlobalVariable.SCENARIO_ID
 Map dataRow = [:]
 
@@ -33,42 +33,42 @@ BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 WebUI.delay(10)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Request'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Select_Remedial_Request_Expense'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Completion_Data_Remedial_NonAdvance'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Request'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Select_Remedial_Request_Expense'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Completion_Data_Remedial_NonAdvance'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //section inquiry
 dataRow["Status"] = "Request"
 WebUI.delay(60)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //section approval
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 //section check inquiry
 dataRow["Status"] = "APPROVED"
 while(!dataRow["statusRemed"] && dataRow["counter"] < 3) {
 	WebUI.delay(60)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 	dataRow["counter"] += 1
 }
 
 if(!dataRow["statusRemed"]) {
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Get_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Inquiry_Get_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 //need script to looping approver
 
 //section execute
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Request'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Execute'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Request'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Execute'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 
 //section inquiry
 dataRow["Status"] = "Execute"
 WebUI.delay(60)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Navigate_To_Remedial_Expense_Inquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Expense/Remedial_Inquiry_Check_Status'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
