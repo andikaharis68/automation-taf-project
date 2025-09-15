@@ -23,28 +23,20 @@ import internal.GlobalVariable
 
 public class AssetAppraisalApprovalPage extends BaseHelper{
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNo")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	
 	//table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblProcess = createTestObject("lblProcess", "", "")
-	private TestObject btnProcess = createTestObject("btnProcess", "", "")
+	private TestObject txtAgreementNo = createTestObject("txtAgreementNoTable", "id", "gvTask_lblAgrmntNo_0")
+	private TestObject btnProcess = createTestObject("btnProcess", "id", "gvTask_ibProcess_0")
 	
 	//detail
-	private TestObject drpAction = createTestObject("drpAction", "", "")
-	private TestObject txtAction = createTestObject("txtAction", "", "")
-	private TestObject txfNotes = createTestObject("txfNotes", "", "")
-	private TestObject drpInventorytHead = createTestObject("drpInventorytHead", "", "")
-	private TestObject txtInventorytHead = createTestObject("txtInventorytHead", "", "")
+	private TestObject drpAction = createTestObject("drpAction", "id", "ddlAction")
+	private TestObject txfNotes = createTestObject("txfNotes", "id", "txtNotes")
+	private TestObject drpAreaDeptHead = createTestObject("drpAreaDeptHead", "id", "gvNextPerson_ddlNodeNextPerson_0")
 
-	private TestObject btnSubmit = createTestObject("btnSubmit", "", "")
-
-	//Popup
-	private TestObject lblSuccess = createTestObject("lblSuccess", "", "")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	
 	public void verifyLandingScreen() {
 		verifyLanding(lblTitle, "Asset Appraisal Approval Page")
@@ -52,27 +44,28 @@ public class AssetAppraisalApprovalPage extends BaseHelper{
 
 	public void doSearch(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
 	}
 
-	public void clickProcess() {
-		WebUI.click(btnProcess)
+	public void clickSearch() {
+		safetyClick(btnSearch)
 	}
 	
-	public void inputApprovalAction(String action, String notes, String deptHead, Boolean isFinal) {
-		//action
-		txtAction = createTestObject("txtAction", "text", "$action")//Approve or Reject
-		WebUI.click(drpAction)
-		WebUI.click(txtAction)
-		//notes
-		WebUI.setText(txfNotes, notes)
-		if (isFinal == false) {
-			//inven head
-			WebUI.click(drpInventorytHead)
-			WebUI.click(txtInventorytHead)
-		}
-
-		WebUI.click(btnSubmit)
-		verifyPopUpSuccess(lblSuccess, "Asset Appraisal Approval")
+	public void clickProcess() {
+		safetyClick(btnProcess)
+	}
+	
+	public void selectAction(String action) {
+		WebUI.focus(drpAction)
+		WebUI.takeScreenshot()
+		safetySelect(drpAction, action)
+	}
+	
+	public void inputNotes(String notes) {
+		safetyInput(txfNotes, notes)
+	}
+	
+	public void clickSubmit() {
+		WebUI.takeScreenshot()
+		safetyClick(btnSubmit)
 	}
 }

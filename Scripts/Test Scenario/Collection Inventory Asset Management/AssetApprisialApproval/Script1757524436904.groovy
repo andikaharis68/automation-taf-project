@@ -10,10 +10,54 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.taf.helpers.BaseHelper
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Collection_Inventory_Asset_Management_TestData.xlsx', 'SheetNames': ['AssetAppraisalApv', 'MasterData']]
+Map dataRow = [:]
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+
+dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Placeholder'), dataRow)
+
+//Get Approval Credentials
+BaseHelper.openBrowser()
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Appraisal_Inquiry'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential_Asset_Appraisal'), dataRow)
+BaseHelper.closeBrowser()
+
+
+int maxLoop = GlobalVariable.COUNTER
+int retryCount = 0
+while(!dataRow['IsStatusApprove'] && retryCount < maxLoop) {
+	KeywordUtil.logInfo("===== Approval Attempt: ${retryCount + 1} =====")
+	
+	//Do Approval
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser_For_Credit_Approval'), dataRow)// ini dapat digunakan juga untuk login approval yg lain tidak hanya credit approval
+	//setelah login ini ga pilih branch gimana ya
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Appraisal_Approval'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Input_Asset_Appraisal_Approval'), dataRow)
+	BaseHelper.closeBrowser()
+	
+	//Checking Step and Get Approval Credentials If Needed
+	BaseHelper.openBrowser()
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Appraisal_Inquiry'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Validate_Status_Asset_Appraisal'), dataRow)
+	if (!dataRow['IsStatusApprove']) {
+		WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential_Asset_Appraisal'), dataRow)
+	}
+	BaseHelper.closeBrowser()
+	
+	retryCount++
+}
