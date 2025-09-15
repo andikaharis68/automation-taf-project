@@ -14,14 +14,14 @@
    <testCaseLink>
       <guid>98fa7490-c96c-4946-ada4-c815090bc1c5</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expense_Advance_Request</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>
       <guid>8e762adf-6f9b-4dc0-9e25-d9d89799ab61</guid>
       <isReuseDriver>false</isReuseDriver>
-      <isRun>false</isRun>
+      <isRun>true</isRun>
       <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expense_Approval</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
@@ -29,7 +29,7 @@
       <guid>439df472-4228-4033-a8a5-e1ffb3fae18a</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expanse_Inquiry_Action</testCaseId>
+      <testCaseId>Test Cases/Test Scenario/Collection/Collection_Expanse_Execution</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
 </TestSuiteEntity>

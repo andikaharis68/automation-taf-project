@@ -29,6 +29,8 @@ public class CollectionExpenseInquiryPage extends BaseHelper {
 	private TestObject txtRequestNo = createTestObject("txtRequestNo", "id", "gvPaging_lblCollExpense_0")
 	private TestObject drpStatus = createTestObject("drpStatus", "id", "ucSearch_ddlStatus_ltlCollExpenseMrCollExpenseStatSearch_ddlReference")
 	private TestObject txtRequestNumber = createTestObject("txtRequestNumber", "id", "gvPaging_lblCollExpense_0")
+	private TestObject lblApprovalHistory = createTestObject("lblApprovalHistory", "id", "UCApprovalHistory_ucTogglApvHist_subSectionID")
+	private TestObject txtTaskOwner = createTestObject("txtTaskOwner", "xpath", "//*[contains(@id, 'UCApprovalHistory_gvApvHist_lblApprovalResult') and text() = '-']//preceding::*[contains(@id, 'UCApprovalHistory_gvApvHist_lblApprovalTaskOwner')][1]")
 
 	public void inputAgreementNo(String agreementNo) {
 		safetyInput(txfAgreementNo, agreementNo)
@@ -52,6 +54,27 @@ public class CollectionExpenseInquiryPage extends BaseHelper {
 	}
 	
 	public void clickRequestNumber() {
-		safetyClick(txtRequestNumber)
+		WebUI.takeScreenshot()
+		if(WebUI.waitForElementPresent(txtRequestNumber, 2)) {			
+			safetyClick(txtRequestNumber)
+		} else {
+			KeywordUtil.logInfo("Agreement number dengan status Request tidak ditemukan, perikas kembali Agreement Number pada test data")
+		}
+	}
+	
+	public void switchToSecondTab() {
+		WebUI.switchToWindowIndex(1)
+	}
+	
+	public String getTaskOwner() {
+		String taskOwner = ""
+		WebUI.waitForElementPresent(lblApprovalHistory, 10)
+		WebUI.scrollToElement(lblApprovalHistory, 1)
+		WebUI.takeScreenshot()
+		WebUI.delay(2)
+		if(WebUI.waitForElementPresent(txtTaskOwner, 1)) {
+			taskOwner = WebUI.getText(txtTaskOwner)
+		}
+		return taskOwner
 	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Collection_Expanse_Inquiry_Action</name>
+   <name>Get_Task_Owner_Inquiry</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>4deea71f-7687-478c-a9bc-880de7000903</testCaseGuid>
+   <testCaseGuid>036d9eaf-799f-4f9a-88ad-6d73ce1a734b</testCaseGuid>
 </TestCaseEntity>
