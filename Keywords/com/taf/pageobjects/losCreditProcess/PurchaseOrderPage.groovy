@@ -33,6 +33,9 @@ public class PurchaseOrderPage extends BaseHelper{
 	
 	//supplier listing
 	private TestObject btnPencilSupplier	= createTestObject("btnPencilSupplier", "xpath", "//input[contains(@id, 'gvSupplBranchList_ibEd')]")
+	//detail
+	private TestObject drpBankAccountNo		= createTestObject("drpBankAccountNo", "id", "ucCustBankAccNo_ddlReference")
+	
 	
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	
@@ -72,5 +75,11 @@ public class PurchaseOrderPage extends BaseHelper{
 		safetyClick(btnSubmit)
 		WebUI.delay(10)
 		WebUI.takeScreenshot()
+	}
+	
+	public void selectBankAccountNo(String index) {
+		if (WebUI.verifyElementPresent(drpBankAccountNo, 5)) {
+			safetySelectByIndex(drpBankAccountNo, index)	
+		}
 	}
 }

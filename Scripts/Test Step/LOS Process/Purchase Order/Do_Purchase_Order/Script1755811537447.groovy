@@ -30,6 +30,10 @@ while(true) {
 	if(!loop) {
 		break
 	}
+	
+	'Step 2: select customer bank account no if exist'
+	purchase.selectBankAccountNo("0")
+	
 	'Step 2: click save'
 	purchase.clickSave()
 }
