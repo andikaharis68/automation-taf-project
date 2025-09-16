@@ -30,6 +30,4 @@ if(TaskOwner) {
 	Office = ''
 	Position = ''
 	Role = ''
-} else {
-	IsStatusApproved = true
 }
