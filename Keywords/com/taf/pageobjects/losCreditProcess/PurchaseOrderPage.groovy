@@ -32,7 +32,7 @@ public class PurchaseOrderPage extends BaseHelper{
 	private TestObject btnPencil			= createTestObject(btnPencil, "id", "gvAgrmnt_imbEdit_0")
 	
 	//supplier listing
-	private TestObject btnPencilSupplier	= createTestObject(btnPencilSupplier, "id", "gvSupplBranchList_ibEd_0")
+	private TestObject btnPencilSupplier	= createTestObject("btnPencilSupplier", "xpath", "//input[contains(@id, 'gvSupplBranchList_ibEd')]")
 	
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
 	
@@ -50,9 +50,16 @@ public class PurchaseOrderPage extends BaseHelper{
 		safetyClick(btnPencil)
 	}
 	
-	public void clickEditOnSupplierListing() {
+	
+	public boolean clickEditOnSupplierListing() {
 		WebUI.takeScreenshot()
-		safetyClick(btnPencilSupplier)
+		if(WebUI.waitForElementPresent(btnPencilSupplier, 3, FailureHandling.OPTIONAL)) {
+			safetyClick(btnPencilSupplier)
+			return true
+		}else {
+			return false
+		}
+		
 	}
 	
 	public void clickSave() {
