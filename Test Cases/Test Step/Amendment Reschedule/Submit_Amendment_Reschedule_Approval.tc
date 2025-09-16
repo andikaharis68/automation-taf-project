@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Submit_Amendment_Reschedule_Approval</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>baae0a9d-019d-41a6-a17a-4660e9c0cb27</testCaseGuid>
+</TestCaseEntity>

@@ -34,7 +34,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	//search
 	private TestObject txfCustomerName 			= createTestObject("txfCustomerName", "id", "ucSearch_txtCustName_ltlCustCustName")
 	private TestObject btnSearch 				= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
-	
+
 	//table
 	private TestObject btnPencil 				= createTestObject("btnPencil", "id", "gvProspectList_imbAction_0")
 	private TestObject txtFirstProspectNo 		= createTestObject("txtFirstProspectNo", "id", "gvProspectList_lbProspectNo_0")
@@ -58,13 +58,13 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfNumbOfEmployee		= createTestObject("txfNumbOfEmployee", "id", "ucINNumOfEmp_txtInput")
 	private TestObject txfEstablisDate			= createTestObject("txfEstablisDate", "id", "ucDPEstablishmentDate_txtDatePicker")
 	private TestObject radAffiliation			= createTestObject("radAffiliation", "id", "cb_Cust_IsAffiliateWithMf")
-	
-	
+
+
 	//contact result
 	private TestObject txtCallSucceded 			= createTestObject("txtCallSucceded", "id", "txtMotherMaidenName")
 	private TestObject drpReason 				= createTestObject("drpReason", "id", "ucFailedReason_ddlReference")
 	private TestObject drpCPRelationdhip 		= createTestObject("drpCPRelationdhip", "xpath", "//*[@id = 'ucRefCntctedPersonRelation_ddlReference' or @id = 'ucRefContactPersonRelation_ddlReference']")
-	
+
 	private TestObject drpSurveyorCode 			= createTestObject("drpSurveyorCode", "id", "ucRefSurveyorCode_ddlReference")
 	private TestObject txfContactedName 		= createTestObject("txfContactedName", "id", "txtContactedPerson")
 	private TestObject txfNotesContactResult 	= createTestObject("txfNotesContactResult", "id", "txtCntctResultNotes")
@@ -95,7 +95,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject btnPencilJobAddress 		= createTestObject("btnPencilJobAddress", "xpath", "(//*[text() = 'Job Address']//following::*[contains(@id,'gvAddr_imbEdit')])[1]")
 	private TestObject btnAddAddress 			= createTestObject("btnAddAddress", "id", "lb_Form_Add")
 	private TestObject btnDeleteLegalAddress 	= createTestObject("btnDeleteLegalAddress", "xpath", "(//*[text() = 'Legal Address']//following::*[contains(@id,'gvCustAddress_imbDelete')])[1]")
-	
+
 	//Legal Doocument
 	private TestObject btnAddLegalDocument		= createTestObject("btnAddLegalDocument", "id", "lb_Form_Add_LegalDocument")
 	private TestObject drpDocType				= createTestObject("drpDocType", "id", "ucMrLegalDocType_ddlReference")
@@ -115,7 +115,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject drpCopyAddress			= createTestObject("drpCopyAddress", "id", "ucCopyAddr_ddlReference")
 	private TestObject btnCopy					= createTestObject("btnCopy", "xpath", "//*[@id = 'lb_Form_Copy_Addr' or @id = 'lb_Form_CopyAddr']")
 	private TestObject drpAddressType			= createTestObject("drpAddressType", "xpath", "//*[@id = 'ucAddrType_ddlReference' or @id = 'ucRefAddressType_ddlReference']")
-	
+
 	//company shareholder
 	private TestObject btnAddShareholderCompany	= createTestObject("btnAddShareholder", "id", "lb_Form_AddCompany_Management")
 	private TestObject btnSearchShareholder		= createTestObject("btnSearchShareholder", "id", "ucCustMainDataCoy_ucLookupCust_uclCust_imb")
@@ -125,7 +125,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfSharePercent			= createTestObject("txfSharePercent", "id", "ucINSharePercentageCoy_txtInput")
 	private TestObject btnSaveShareholder		= createTestObject("btnSaveShareholder", "id", "lb_Form_Save_AddCoyManShareListing")
 	private TestObject btnDeleteShareHolder		= createTestObject("btnDeleteShareHolder", "id", "gvManagement_imbDelete_0")
-	
+
 	//company contact info
 	private TestObject txfContactInfoName		= createTestObject("txfContactInfoName", "id", "txt_CustEmergencyContact_Name")
 	private TestObject drpContactInfoJobPosition= createTestObject("drpContactInfoJobPosition", "id", "ucRefPersonalJobPositionEmergency_ddlReference")
@@ -152,7 +152,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfLivingCost			= createTestObject("txfLivingCost", "id", "txt_CustFinData_LivingCostAmt_txtInput")
 	private TestObject txfOtherMonthlyInstallment = createTestObject("txfOtherMonthlyInstallment", "id", "txt_CustFinData_OthMonthlyInstAmt_txtInput")
 	private TestObject btnCalculateIncome		= createTestObject("btnCalculateIncome", "id", "btnCalculate")
-	
+
 	//attribute list
 	private TestObject drpDebitorBusinessScale	= createTestObject("drpDebitorBusinessScale", "id", "ucAddrInfoCust_txtStayLength_txtInput")
 	private TestObject txfAccountFlag			= createTestObject("txfAccountFlag", "id", "rptOtherAttribute_txtAttrContent_0")
@@ -178,7 +178,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject txfDescCounterpart		= createTestObject("txfDescCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
 	private TestObject btnSearchCounterpart		= createTestObject("btnSearchCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectCounterpart		= createTestObject("btnSelectCounterpart", "id", "UCCounterpart_ucCounterpart_umd_ctl00_gvL_hpSelect_0")
-	
+
 	//attribute list - Sustainable Financial Lookup
 	private TestObject icoSustainable			= createTestObject("icoSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_imb")
 	private TestObject txfDescSustainable		= createTestObject("txfDescSustainable", "id", "UCSustainableFinancial_ucSustainableFinancial_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_1")
@@ -223,7 +223,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	private TestObject radNoValid				= createTestObject("radNoValid", "id", "rblSpkValid_1")
 	private TestObject txfUsageAssetOnline		= createTestObject("txfUsageAssetOnline", "id", "txtUsageAssetOnl")
 	private TestObject txfSpkNo					= createTestObject("txfSpkNo", "id", "txtSpkNo")
-	
+
 	//popup success
 	private TestObject lblSuccess				= createTestObject("txfSurveyUnitUsage", "text", "Submit Success")
 
@@ -241,7 +241,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		retrySearchCustomer(customerName, txfCustomerName, btnSearch, btnPencil)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public Boolean checkIsSearchResultFound() {
 		if (WebUI.waitForElementPresent(btnPencil, 5, FailureHandling.OPTIONAL)) {
 			return true
@@ -249,18 +249,18 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			return false
 		}
 	}
-	
+
 	public void delay() {
 		WebUI.delay(GlobalVariable.WAIT)
-//		WebUI.refresh()
+		//		WebUI.refresh()
 		KeywordUtil.logInfo("Already Delay ${GlobalVariable.WAIT} seconds, and ready to search again!")
 	}
-	
+
 	public void clickActionPencil() {
 		WebUI.takeScreenshot()
 		safetyClick(btnPencil)
 	}
-	
+
 	public void clickResultByFirstProspectNo() {
 		safetyClick(txtFirstProspectNo)
 	}
@@ -269,7 +269,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyInput(txfNotesInfo, notes)
 	}
-	
+
 	public boolean getCustomerTypeIsCompany() {
 		if(WebUI.waitForElementPresent(lblCustomertype, 5)) {
 			return true
@@ -288,7 +288,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(txfMotherName)
 		safetyInput(txfMotherName, motherName)
 	}
-	
+
 	public void inputCustomerMainDataCompany(String indutryTypeName, String numberOfEmployee, String establishmentDate, String affiliationWithMultifinance) {
 		safetyClick(btnIconIndustryType)
 		safetyInput(ovlIndustryTypeName, indutryTypeName)
@@ -296,7 +296,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(ovlSelectIndustryType)
 		safetyInput(txfNumbOfEmployee, numberOfEmployee)
 		safetyInput(txfEstablisDate, establishmentDate)
-		if(affiliationWithMultifinance == "Y") {			
+		if(affiliationWithMultifinance == "Y") {
 			safetyClick(radAffiliation)
 		}
 	}
@@ -342,7 +342,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	public void clickEditResidenceAddress() {
 		safetyClick(btnPencilResidenceAddress)
 	}
-	
+
 	public void clickEditCompanyAddress() {
 		safetyClick(btnPencilCompanyAddress)
 	}
@@ -368,7 +368,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 	}
 
 	public void inputResidenceAddressInfo(String buildingType = '', String buildingOwner, String buildingStayLength) {
-		if(buildingType) {			
+		if(buildingType) {
 			safetySelect(drpBuildingType, buildingType)
 		}
 		safetySelect(drpBuildingOwner, buildingOwner)
@@ -381,7 +381,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnSaveAddress)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void inputCompnyShareHolder() {
 		if(WebUI.waitForElementPresent(btnDeleteShareHolder, 2)) {
 			safetyClick(btnDeleteShareHolder)
@@ -396,15 +396,15 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnSaveShareholder)
 	}
-	
+
 	public void inputCompanyContactInfo(String name, String jobPosition) {
 		safetyInput(txfContactInfoName, name)
 		safetySelect(drpContactInfoJobPosition, jobPosition)
 	}
-	
+
 	public void inputLegalDocument(String docNo, String dateIssue) {
 		List<String> docTypes = ["AKTA PENDIRIAN", "LAST AKTA"]
-		docTypes.forEach { docType -> 			
+		docTypes.forEach { docType ->
 			safetyClick(btnAddLegalDocument)
 			safetySelect(drpDocType, docType)
 			safetyInput(txfDocNo, docNo)
@@ -413,7 +413,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			safetyClick(btnSaveLegalDoc)
 		}
 	}
-	
+
 	public void clickEditJobAddress() {
 		safetyClick(btnPencilJobAddress)
 	}
@@ -437,32 +437,32 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetySelect(drpAddressType, "Legal Address")
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void copyFromCompanyAddress() {
 		safetySelect(drpAddressType, "Legal Address")
 		safetyClick(btnCopy)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void inputIncome(String grossMonthly, String grossProfit, String otherIncome, String sourceOfOtherIncome, String livingCost, String otherMonthly) {
 		manualClearText(txfGrossMonthlyIncome)
 		safetyInput(txfGrossMonthlyIncome, grossMonthly)
-		
+
 		manualClearText(txfGrossProfit)
 		safetyInput(txfGrossProfit, grossProfit)
-		
+
 		manualClearText(txfOtherIncome)
 		safetyInput(txfOtherIncome, otherIncome)
-		
+
 		safetyInput(txfSourceOfOtherIncome, sourceOfOtherIncome)
-		
+
 		manualClearText(txfLivingCost)
 		safetyInput(txfLivingCost, livingCost)
-		
+
 		manualClearText(txfOtherMonthlyInstallment)
 		safetyInput(txfOtherMonthlyInstallment, otherMonthly)
 	}
-	
+
 	public void clickCalculateIncome() {
 		safetyClick(btnCalculateIncome)
 		WebUI.takeScreenshot()
@@ -495,7 +495,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnSelectAffiliateSlik)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void selectSustainableFinancial(String sustainable) {
 		safetyClick(icoSustainable)
 		safetyInput(txfDescSustainable, sustainable)
@@ -503,17 +503,17 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnSelectSustainable)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void inputEAccountFlag(String flag) {
 		safetyClick(txfAccountFlag)
 		safetyInput(txfAccountFlag, flag)
 	}
-	
+
 	public void inputEAccountJoinDate(String joinDate) {
 		safetyClick(txfAccountDate)
 		safetyInput(txfAccountDate, joinDate)
 	}
-	
+
 	public void inputCustRating(String rating) {
 		Boolean isInteractable = checkElementIsInteractable(txfCustRating)
 		if (isInteractable) {
@@ -521,31 +521,31 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			safetyInput(txfCustRating, rating)
 		}
 	}
-	
+
 	public void inputGoodBadStatus(String status) {
 		Boolean isInteractable = checkElementIsInteractable(txfCustRating)
 		if (isInteractable) {
 			safetyClick(txfGoodBadStatus)
-			safetyInput(txfGoodBadStatus, status)			
+			safetyInput(txfGoodBadStatus, status)
 		}
 	}
-	
+
 	public void inputTerdugaTeroris(String dugaan) {
 		safetyClick(txfTerdugaTeroris)
 		safetyInput(txfTerdugaTeroris, dugaan)
 	}
-	
+
 	public void inputNoSIM(String noSim) {
 		safetyClick(txfNoSim)
 		safetyInput(txfNoSim, noSim)
 	}
-	
+
 	public void checkIsSplitTreasure(String isSplit) {
 		if(isSplit && isSplit == 'Y') {
 			WebUI.check(chxIsSplitTreasure)
 		}
 	}
-	
+
 	public void checkViolateBMPK(String bmpk ) {
 		if(bmpk && bmpk == "Y") {
 			WebUI.check(chxViolateBMPK)
@@ -557,7 +557,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			WebUI.check(chxExceedBMPK)
 		}
 	}
-	
+
 	public void checkSameAddress(String sameAddress, String index) {
 		if (sameAddress) {
 			String labelText = sameAddress.equalsIgnoreCase("Y") ? "Yes" : "No"
@@ -597,7 +597,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			clickYesNo(labelText, index)
 		}
 	}
-	
+
 	public void checkCDENotes(String notes, String index) {
 		if (notes) {
 			String labelText = notes.equalsIgnoreCase("Y") ? "Yes" : "No"
@@ -609,13 +609,13 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			safetyInput(txfNoATM, atmNo)
 		}
 	}
-	
+
 	public void inputRatingDebitor(String rating) {
 		if(rating) {
 			safetyInput(txfRatingDebitor, rating)
 		}
 	}
-	
+
 	public void clickYesNo(String labelText, String index) {
 		TestObject radYesNo = createTestObject("radYesNo", "xpath", "//label[normalize-space(text())='$labelText']/preceding-sibling::input[@type='radio'and contains(@id, 'rblAttrValue_$index')]")
 		safetyClick(radYesNo)
@@ -647,7 +647,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetyClick(btnCopyAddressAsset)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void selectOwnerIdType(String idType) {
 		safetySelect(drpOwnerIdType, idType)
 	}
@@ -657,7 +657,7 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 		safetySelect(txfSurveyUnitUsage, teleSurveyUnitUsage)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void checkAssetOnlineTransport(String onlineTransport) {
 		if(onlineTransport && onlineTransport == "Y") {
 			safetyClick(radYesOnline)
@@ -665,15 +665,15 @@ public class CentralizedDataEntryCompletionPage extends BaseHelper {
 			safetyClick(radNoOnline)
 		}
 	}
-	
+
 	public void inputUsageAssetForOnlineTransport(String usageTransport) {
 		safetyInput(txfUsageAssetOnline, usageTransport)
 	}
-	
+
 	public void inputSPKNo(String spkNo) {
 		safetyInput(txfSpkNo, spkNo)
 	}
-	
+
 	public void checkSpkValid(String valid) {
 		if(valid && valid == "Y") {
 			safetyClick(radYesValid)

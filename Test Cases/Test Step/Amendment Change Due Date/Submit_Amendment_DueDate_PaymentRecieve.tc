@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Submit_Amendment_DueDate_PaymentRecieve</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>7646913e-7aaf-44ae-816d-469f79417a18</testCaseGuid>
+</TestCaseEntity>

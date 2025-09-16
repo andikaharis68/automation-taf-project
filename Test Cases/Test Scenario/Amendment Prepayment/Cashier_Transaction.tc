@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Cashier_Transaction</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>61fd2bf9-9de9-46c1-ba2d-9c5c7d2670d9</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Payment_Single_CashierTransaction</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>8db3d1bf-734a-4dfb-9424-a9299b80a5a4</testCaseGuid>
+</TestCaseEntity>

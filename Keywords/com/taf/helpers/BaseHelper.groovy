@@ -400,7 +400,7 @@ class BaseHelper {
 		WebUI.delay(delay)
 		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
-	
+
 	static void safetyClickYudho(TestObject to, double delay = 1) {
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
@@ -429,7 +429,7 @@ class BaseHelper {
 	static void safetyInputEdit(TestObject to, String text, double delay = 0.1) {
 		if(text) {
 			WebUI.delay(delay)
-			WebUI.clearText(to)
+			manualClearText(to)
 			handlePopupAlert()
 			WebUI.delay(delay)
 			for (char c : text.toCharArray()) {
@@ -507,7 +507,7 @@ class BaseHelper {
 		}
 		return nik.toString()
 	}
-	
+
 	static String generateRandomNumber(int lenght) {
 		SecureRandom rnd = new SecureRandom()
 		StringBuilder num = new StringBuilder()
@@ -836,7 +836,7 @@ class BaseHelper {
 					WebUI.delay(1)
 					WebUI.comment("edit button found for customer '${name}', clicking Edit.")
 					safetyClick(btnEdit)
-					break
+					return true
 				} else {
 					WebUI.comment("Customer found but Edit button not yet present.")
 				}
@@ -893,5 +893,11 @@ class BaseHelper {
 	}
 	def void pressEsc(TestObject to) {
 		WebUI.sendKeys(to, Keys.chord(Keys.ESCAPE))
+	}
+
+	static void waitForLoadingBarNotExist() {
+		TestObject loadingBar = new TestObject("loadingBar")
+		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
+		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
 	}
 }

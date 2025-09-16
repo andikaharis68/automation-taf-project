@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Amendment_DueDate_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>2c0e2b4b-b346-4bf1-82b8-0f4ac3e7cb1a</testCaseGuid>
+</TestCaseEntity>
