@@ -1,4 +1,4 @@
-package com.taf.pageobjects.amendment
+package com.taf.pageobject.document
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,28 +21,22 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetDocumentReleaseRequestPage extends BaseHelper{
+public class AssetDocumentReleaseExecutionListPage extends BaseHelper{
 
-	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
-	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnRelease			= createTestObject("icnRelease", "xpath", "")
-	private TestObject drpReasonDescription	= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprover			= createTestObject("drpApprover", "xpath", "")
-	private TestObject txtNotes				= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+	private TestObject txtAgreementNo
+	private TestObject btnSearch
+	private TestObject btnActionPen
+	private TestObject txtReleaseDate
+	private TestObject txtReleaseTo
+	private TestObject btnSubmit
 
-	public void searchAgreement(String agreementNo) {
+	public void releaseDoc(String agreementNo, String releaseDate, String relaase) {
 
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
-		WebUI.click(icnRelease)
-	}
-
-	public void approval(String reasonDesc, String approver, String note) {
-
-		WebUI.selectOptionByLabel(drpReasonDescription, reasonDesc, false)
-		WebUI.selectOptionByLabel(drpApprover, approver, false)
-		WebUI.setText(txtNotes, note)
+		WebUI.click(btnActionPen)
+		WebUI.setText(txtReleaseDate, releaseDate)
+		WebUI.setText(txtReleaseTo, relaase)
 		WebUI.click(btnSubmit)
 	}
 }

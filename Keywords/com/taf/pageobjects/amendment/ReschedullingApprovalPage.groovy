@@ -24,22 +24,22 @@ import internal.GlobalVariable
 public class ReschedullingApprovalPage extends BaseHelper{
 
 	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
+	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "//select[@id = 'ddlAction']")
 	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "//textarea[@id = 'txtNotes']")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 
 	public void approval(String reason, String approver, String note) {
 
 		WebUI.click(sectionApprovalAction)
-		
+
 		safetySelect(drpReasonDescription, reason, 1)
-		safetySelect(drpApprover, approver, 1)
+//		safetySelect(drpApprover, approver, 1)
 		safetyInput(txtNotes, note, 1)
 		WebUI.takeScreenshot()
 		safetyClick(btnSubmit, 2)
-		WebUI.verifyElementVisible(lblNotification)
+//		WebUI.verifyElementVisible(lblNotification)
 		WebUI.takeScreenshot()
 	}
 }

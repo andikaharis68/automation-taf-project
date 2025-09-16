@@ -23,16 +23,16 @@ import internal.GlobalVariable
 
 public class AmendmentRequestPage extends BaseHelper{
 
-	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']") 
-	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch") 
+	private TestObject drpAmendmentType = createTestObject("drpAmendmentType", "xpath", "//select[@id = 'ucrefAmendmentType_ddlReference']")
+	private TestObject txfAgreementNo	= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
 	private TestObject txtCustomerName	= createTestObject("txtCustomerName", "xpath", "//input[@id = 'ucSearch_txtCustName_ltlCustCustNameSearch']")
 	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "//input[@id = 'ucSearch_btnSearch']")
-	private TestObject txfAddress		= createTestObject("txfAddress", "id", "ucSearch_txtAddress_ltlCustAddrAddrSearch") 
-	private TestObject btnPencil		= createTestObject("btnPencil","id", "gvAgrmnt_imbEdit_0") 
+	private TestObject txfAddress		= createTestObject("txfAddress", "id", "ucSearch_txtAddress_ltlCustAddrAddrSearch")
+	private TestObject btnPencil		= createTestObject("btnPencil","id", "gvAgrmnt_imbEdit_0")
 	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
-	
-	
-	
+
+
+
 	private void verifyLandingPage() {
 		WebUI.switchToFrame(iframeMain, 3)
 		verifyLanding(drpAmendmentType, "Amendment Request")
@@ -42,7 +42,6 @@ public class AmendmentRequestPage extends BaseHelper{
 	private void selectAmendmentType(String type) {
 		safetySelect(drpAmendmentType, type, 1)
 		WebUI.delay(0.8)
-		
 	}
 	public void searchAmendment(String amendmentType, String customerName, String agreementNo, String address) {
 
@@ -50,11 +49,11 @@ public class AmendmentRequestPage extends BaseHelper{
 		inputIfTextExist(txtCustomerName, customerName)
 		inputIfTextExist(txfAgreementNo, agreementNo)
 		inputIfTextExist(txfAddress, address)
-		
+
 		safetyClick(btnSearch, 1)
 		WebUI.delay(0.8)
 		WebUI.takeScreenshot()
-		
+
 		safetyClick(btnPencil)
 	}
 
@@ -64,5 +63,4 @@ public class AmendmentRequestPage extends BaseHelper{
 			WebUI.delay(0.8)
 		}
 	}
-	
 }

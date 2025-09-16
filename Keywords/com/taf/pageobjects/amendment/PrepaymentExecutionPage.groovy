@@ -27,9 +27,9 @@ public class PrepaymentExecutionPage extends BaseHelper{
 
 	public void clickSubmit() {
 		WebUI.takeScreenshot()
-		
+
 		safetyClick(btnSubmit, 2)
-		
+
 		WebUI.takeScreenshot()
 	}
 }

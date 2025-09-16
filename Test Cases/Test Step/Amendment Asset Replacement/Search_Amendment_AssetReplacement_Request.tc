@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Search_Amendment_AssetReplacement_Request</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d7a862fe-64c9-4ea0-9a0b-ccbfc2a00d2c</testCaseGuid>
+</TestCaseEntity>

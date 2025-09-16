@@ -31,14 +31,14 @@ public class ChangeDueDateApprovalPage extends BaseHelper{
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 
 	public void approval(String action, String note, String person) {
-		
+
 		WebUI.takeScreenshot()
-//		WebUI.click(sectionApprovalAction)
+		//		WebUI.click(sectionApprovalAction)
 		safetySelect(drpAction, action, 1)
 		safetyInput(txtNotes, note, 1)
-//		WebUI.selectOptionByLabel(drpNextPerson, person, false)
+		//		WebUI.selectOptionByLabel(drpNextPerson, person, false)
 		safetyInput(btnSubmit, 1)
-//		WebUI.verifyElementVisible(lblNotification)
+		//		WebUI.verifyElementVisible(lblNotification)
 		WebUI.takeScreenshot()
 	}
 }

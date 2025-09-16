@@ -1,4 +1,4 @@
-package com.taf.pageobjects.amendment
+package com.taf.pageobject.document
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,21 +22,19 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable
 
 public class DocumentCheckOutPage extends BaseHelper{
-	
+
 	private TestObject txtAgreementNo
 	private TestObject drpDocumentType
 	private TestObject btnSearch
 	private TestObject btnPenAction
 	private TestObject btnSubmit
-	
+
 	public void checkOutDoc(String agreementNo, String docType) {
-		
+
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
 		WebUI.click(btnSearch)
 		WebUI.click(btnPenAction)
 		WebUI.click(btnSubmit)
-		
 	}
-	
 }

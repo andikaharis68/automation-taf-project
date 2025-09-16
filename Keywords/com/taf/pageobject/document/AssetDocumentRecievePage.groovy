@@ -1,4 +1,4 @@
-package com.taf.pageobjects.amendment
+package com.taf.pageobject.document
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,34 +21,29 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class AssetDocumentReleaseApprovalTaskPage extends BaseHelper{
-	
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnProcess		= createTestObject("icnProcess", "xpath", "")
-	private TestObject sectionApproval	= createTestObject("sectionApproval", "xpath", "")
-	private TestObject drpAction		= createTestObject("drpAction", "xpath", "")
-	private TestObject chkFinal			= createTestObject("chkFinal", "xpath", "")
-	private TestObject txtNotes			= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
-	
-	
-	public void searchAgreement(String agreementNo) {
-		
+public class AssetDocumentRecievePage extends BaseHelper{
+
+
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject icnRecieve			= createTestObject("icnRecieve", "xpath", "")
+	private TestObject txtLicensePlate		= createTestObject("txtLicensePlate", "xpath", "")
+	private TestObject txtRecieveForm		= createTestObject("txtRecieveForm", "xpath", "")
+	private TestObject btnSubmit			= createTestObject("btnSubmit", "xpath", "")
+
+	public void searchAsset(String branch, String agreementNo) {
+
+		WebUI.selectOptionByLabel(drpBranchAgreement, branch, false)
 		WebUI.setText(txtAgreementNo, agreementNo)
 		WebUI.click(btnSearch)
-		WebUI.click(icnProcess)
-		
+		WebUI.click(icnRecieve)
 	}
-	
-	public void approval(String action, String note) {
-		
-		WebUI.click(sectionApproval)
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.check(chkFinal)
-		WebUI.setText(txtNotes, note)
+
+	public void inputAssetData(String plate, String form) {
+
+		WebUI.setText(txtLicensePlate, plate)
+		WebUI.setText(txtRecieveForm, form)
 		WebUI.click(btnSubmit)
-		
 	}
-	
 }

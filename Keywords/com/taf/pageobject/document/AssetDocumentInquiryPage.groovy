@@ -1,4 +1,4 @@
-package com.taf.pageobjects.amendment
+package com.taf.pageobject.document
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,22 +21,24 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class DocumentCheckInPage extends BaseHelper{
-	
-	private TestObject txtAgreementNo	= createTestObject("txtAgreementNo", "xpath", "")
-	private TestObject drpDocumentType	= createTestObject("drpDocumentType", "xpath", "")
-	private TestObject btnSearch		= createTestObject("btnSearch", "xpath", "")
-	private TestObject icnCheckIn		= createTestObject("icnCheckIn", "xpath", "")
-	private TestObject btnSubmit		= createTestObject("btnSubmit", "xpath", "")
-	
-	public void checkInDoc(String agreementNo, String docType) {
-		
+public class AssetDocumentInquiryPage extends BaseHelper{
+
+	private TestObject drpBranchAgreement	= createTestObject("drpBranchAgreement", "xpath", "")
+	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "xpath", "")
+	private TestObject btnSearch			= createTestObject("btnSearch", "xpath", "")
+	private TestObject list					= createTestObject("list", "xpath", "")
+	private TestObject icnView				= createTestObject("icnView", "xpath", "")
+
+	//detail
+	private TestObject docDetail			= createTestObject("docDetail", "xpath", "")
+
+	public void inquiryDocuemnt(String agreementNo) {
+
+		WebUI.selectOptionByLabel(drpBranchAgreement, agreementNo, false)
 		WebUI.setText(txtAgreementNo, agreementNo)
-		WebUI.selectOptionByLabel(drpDocumentType, docType, false)
 		WebUI.click(btnSearch)
-		WebUI.click(icnCheckIn)
-		WebUI.click(btnSubmit)
-		
+		WebUI.verifyElementVisible(list)
+		WebUI.click(icnView)
+		WebUI.verifyElementVisible(docDetail)
 	}
-	
 }

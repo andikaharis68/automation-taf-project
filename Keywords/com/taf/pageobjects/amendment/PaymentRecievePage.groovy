@@ -36,7 +36,7 @@ public class PaymentRecievePage extends BaseHelper{
 
 		safetyInput(txtAgreementNumber, agreementNo, 1)
 		safetyClick(btnSearch, 2)
-		
+
 		WebUI.takeScreenshot()
 	}
 
