@@ -28,7 +28,7 @@ public class CashierTransactionPage extends BaseHelper{
 	private TestObject txtDate			= createTestObject("txtDate", "xpath", "//input[@id = 'ucDatePicker_txtDatePicker']")
 	private TestObject btnPaymentSingle	= createTestObject("btnPaymentSingle", "id", "lbPaySingle")
 	private TestObject iframeMain		= createTestObject("iframeMain", "id", "mainPage")
-	
+
 	public void switchMain() {
 		WebUI.switchToFrame(iframeMain, 3)
 	}

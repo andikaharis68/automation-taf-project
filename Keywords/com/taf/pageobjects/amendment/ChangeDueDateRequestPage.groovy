@@ -57,13 +57,13 @@ public class ChangeDueDateRequestPage extends BaseHelper{
 		safetyClick(btnSubmit, 2)
 		WebUI.takeScreenshot()
 	}
-	
+
 	public void writeBalance(String balance) {
 		String excelFilePath = GlobalVariable.TEST_DATA_LOCATION + "/Amendment_Change_DueDate_TestData.xlsx"
 		Map criteria = ["ScenarioId":GlobalVariable.SCENARIO_ID]
 		saveDataToExcel(balance, criteria, excelFilePath, "MasterData", "AmountBalance")
 	}
-	
+
 	public void getBalance() {
 		String actual = WebUI.getText(lblAmount)
 		KeywordUtil.logInfo(actual)

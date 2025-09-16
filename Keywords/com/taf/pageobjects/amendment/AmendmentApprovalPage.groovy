@@ -63,7 +63,7 @@ public class AmendmentApprovalPage extends BaseHelper{
 
 
 		safetyClick(btnSearch)
-		
+
 		WebUI.takeScreenshot()
 	}
 
@@ -73,7 +73,7 @@ public class AmendmentApprovalPage extends BaseHelper{
 			WebUI.delay(0.5)
 		}
 	}
-	
+
 	public void clickProcessAmendment() {
 		safetyClick(btnProcess, 2)
 	}

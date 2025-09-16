@@ -24,24 +24,25 @@ import internal.GlobalVariable
 
 public class ReschedulingRequestPage extends BaseHelper{
 
-	private TestObject sectionRescheduleReq		= createTestObject("sectionRescheduleReq", "xpath", "")
-	private TestObject sectionNewFinancial		= createTestObject("sectionNewFinancial", "xpath", "")
-	private TestObject txtEfectiveDate			= createTestObject("txtEfectiveDate", "xpath", "")
-	private TestObject drpDueDate				= createTestObject("drpDueDate", "xpath", "")
-	private TestObject txtTenor					= createTestObject("txtTenor", "xpath", "")
-	private TestObject drpPayFrequency			= createTestObject("drpPayFrequency", "xpath", "")
-	private TestObject drpInstallmentScheme		= createTestObject("drpInstallmentScheme", "xpath", "")
-	private TestObject btnNext					= createTestObject("btnNext", "xpath", "")
-	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "")
+	private TestObject sectionRescheduleReq		= createTestObject("sectionRescheduleReq", "xpath", "//a[@id = 'minResRequest']")
+	private TestObject sectionNewFinancial		= createTestObject("sectionNewFinancial", "xpath", "//a[@id = 'minNewFinStruc']")
+	private TestObject txtEfectiveDate			= createTestObject("txtEfectiveDate", "xpath", "//input[@id = 'ucEffectiveDt_txtDatePicker']")
+	private TestObject drpDueDate				= createTestObject("drpDueDate", "xpath", "//select[@id = 'ucDueDateBaseOn_ddlReference']")
+	private TestObject txtTenor					= createTestObject("txtTenor", "xpath", "//input[@id = 'txtFinStrucTenor_txtInput']")
+	private TestObject drpPayFrequency			= createTestObject("drpPayFrequency", "xpath", "//select[@id = 'ucNewFinStrucPayFreq_ddlReference']")
+	private TestObject drpInstallmentScheme		= createTestObject("drpInstallmentScheme", "xpath", "//select[@id = 'ucNewFinStrucInstSchm_ddlReference']")
+	private TestObject btnNext					= createTestObject("btnNext", "id", "lb_Toolbar_Next")
+	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "//a[@id = 'lb_Form_Calculate']")
+	private TestObject btnCalculateInstallment	= createTestObject("btnCalculateInstallment", "xpath", "//a[@id = 'lb_Form_CalculateInst']")
 	private TestObject sectionApprovalReq		= createTestObject("sectionApprovalReq", "xpath", "")
-	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "")
-	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
+	private TestObject drpReasonDescription		= createTestObject("drpReasonDescription", "xpath", "//select[@id = 'ucApv_ddlReason']")
+	private TestObject drpApprover				= createTestObject("drpApprover", "xpath", "//select[@id = 'ucApv_ddlApvBy']")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "//textarea[@id = 'ucApv_txtNotes']")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 	private TestObject lblDocAgreement			= createTestObject("lblDocAgreement", "xpath", "")
 	private TestObject lblLastInstallment		= createTestObject("lblLastInstallment", "xpath", "")
-	private TestObject lblBalanceAmount			= createTestObject("lblBalanceAmount", "id", "")
+	private TestObject lblBalanceAmount			= createTestObject("lblBalanceAmount", "id", "ucSummary_lblAmtToPaid")
 
 
 	public void reschedule(String efectiveDate, String dueDate, String tenor, String payFreq, String scheme) {
@@ -76,13 +77,13 @@ public class ReschedulingRequestPage extends BaseHelper{
 		WebUI.verifyElementVisible(lblNotification)
 		WebUI.verifyElementNotVisible(lblDocAgreement)
 	}
-	
+
 	public void writeBalance(String balance) {
 		String excelFilePath = GlobalVariable.TEST_DATA_LOCATION + "/Amendment_Reschedule_TestData.xlsx"
 		Map criteria = ["ScenarioId":GlobalVariable.SCENARIO_ID]
 		saveDataToExcel(balance, criteria, excelFilePath, "MasterData", "AmountBalance")
 	}
-	
+
 	public void getBalance() {
 		WebUI.focus(lblBalanceAmount)
 		String actual = WebUI.getText(lblBalanceAmount)

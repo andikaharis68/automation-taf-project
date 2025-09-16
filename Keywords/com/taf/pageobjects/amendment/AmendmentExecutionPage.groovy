@@ -33,7 +33,7 @@ public class AmendmentExecutionPage extends BaseHelper{
 	public void switchMain() {
 		WebUI.switchToFrame(iframeMain, 3)
 	}
-	
+
 	public void searchAmendment(String amendmentType, String agreementNo, String customerName) {
 
 		safetySelect(drpAmendmentType, amendmentType, 2)
