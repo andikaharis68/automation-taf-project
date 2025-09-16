@@ -53,12 +53,14 @@ public class CollectionExpenseInquiryPage extends BaseHelper {
 		}
 	}
 	
-	public void clickRequestNumber() {
+	public boolean clickRequestNumber() {
 		WebUI.takeScreenshot()
 		if(WebUI.waitForElementPresent(txtRequestNumber, 2)) {			
 			safetyClick(txtRequestNumber)
+			return false
 		} else {
-			KeywordUtil.logInfo("Agreement number dengan status Request tidak ditemukan, perikas kembali Agreement Number pada test data")
+			KeywordUtil.logInfo("Agreement number dengan status Request tidak ditemukan")
+			return true
 		}
 	}
 	

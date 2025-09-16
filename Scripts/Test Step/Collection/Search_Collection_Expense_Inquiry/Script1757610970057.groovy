@@ -34,5 +34,6 @@ inquiry.selectFilterStatus("Request")
 
 inquiry.clickButtonSearch()
 
-inquiry.clickRequestNumber()
+IsStatusApproved = inquiry.clickRequestNumber()
+
 

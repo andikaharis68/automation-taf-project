@@ -38,11 +38,10 @@ while(!scenarioData['IsStatusApproved'] && maxAttemp < 8 ) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), scenarioData, FailureHandling.STOP_ON_FAILURE)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Navigate_To_Collection_Expense_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Search_Collection_Expense_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Get_Task_Owner_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
-
 	if(scenarioData['IsStatusApproved'] == true) {
 		break
 	}
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection/Get_Task_Owner_Inquiry'), scenarioData, FailureHandling.STOP_ON_FAILURE)
 	
 	WebUI.comment("tobe approve with user : " + scenarioData['Username'])
 	BaseHelper.openBrowser()
