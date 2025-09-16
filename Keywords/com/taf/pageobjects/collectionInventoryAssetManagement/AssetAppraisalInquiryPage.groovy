@@ -24,16 +24,20 @@ import internal.GlobalVariable
 
 public class AssetAppraisalInquiryPage extends BaseHelper {
 	//header
-	private TestObject lblTitle = createTestObject("lblTitle", "", "")
-	private TestObject lblAgreementNo = createTestObject("txtOffice", "", "")
-	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "", "")
-	private TestObject btnSearch = createTestObject("btnSearch", "", "")
+	private TestObject lblTitle = createTestObject("lblTitle", "id", "pageTitle")
+	private TestObject txfAgreementNo = createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
+	private TestObject btnSearch = createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//table
-	private TestObject lblAgreementNoTable = createTestObject("lblAgreementNoTable", "", "")
-	private TestObject txtAgreementNoTable = createTestObject("txtAgreementNoTable", "", "")
-	private TestObject lblAppraisalStatus = createTestObject("lblAppraisalStatus", "", "")
-	private TestObject txtAppraisalStatus = createTestObject("txtAppraisalStatus", "", "")
+	private TestObject txtLastAgreementNo = createTestObject("txtLastAgreementNo", "xpath", "(//*[contains(@id, 'gvGrid_lblAgrmntNo')])[last()]")
+	private TestObject txtLastAppraisalNo = createTestObject("txtLastAppraisalNo", "xpath", "(//*[contains(@id, 'gvGrid_lbAssetAppraisalNo')])[last()]")
+	private TestObject txtLastAppraisalStatus = createTestObject("txtLastAppraisalStatus", "xpath", "(//*[contains(@id, 'gvGrid_lblMrAppraisalStat')])[last()]")
+	
+	//View Asset Appraisal
+	//Asset Inventory view
+	private TestObject txtOffice = createTestObject("txtOffice", "id", "ucAgrmntInfo_lblOffice")
+	private TestObject txtLastTaskOwner = createTestObject("txtLastTaskOwner", "xpath", "(//span[text() = '-' and contains(@id, 'gvApvHist_lblApprovedBy')]/preceding::span[contains(@id, 'gvApvHist_lblApprovalTaskOwner')])[last()]")
+	private TestObject txtLastNode = createTestObject("txtLastNode", "xpath", "(//span[text() = '-' and contains(@id, 'gvApvHist_lblApprovedBy')]/preceding::span[contains(@id, 'gvApvHist_lblApprovalNode')])[last()]")
 
 	//detail
 	private TestObject lblResult = createTestObject("lblResult", "", "")
@@ -45,21 +49,64 @@ public class AssetAppraisalInquiryPage extends BaseHelper {
 
 	public void doSearch(String agreementNo) {
 		WebUI.setText(txfAgreementNo, agreementNo)
-		WebUI.click(btnSearch)
+	}
+	
+	public void clickSearch() {
+		safetyClick(btnSearch)
 	}
 
-	public void verifyStatusRequest(String expectedStatus) {
-		String actualStatus = WebUI.getText(txtAppraisalStatus)
+	public Boolean verifyStatusRequest(String expectedStatus) {
+		String actualStatus = WebUI.getText(txtLastAppraisalStatus)
 		if (actualStatus.equalsIgnoreCase(expectedStatus)) {
 			KeywordUtil.markPassed("Success : The Status is ($expectedStatus)")
+			return true
 		}else {
 			KeywordUtil.markFailed("Failed : Actual status ($actualStatus) is not Matched with Expected status ($expectedStatus)")
+			return false
 		}
 	}
 
-	public void clickAgreementNo(String agreementNo) {
-		txtAgreementNoTable = createTestObject("txtAgreementNoTable", "text", "$agreementNo")
-		WebUI.click(txtAgreementNoTable)
+	public void clickLastAgreementNo() {
+		safetyClick(txtLastAgreementNo)
+	}
+	
+	public void clickLastAppraisalNo() {
+		safetyClick(txtLastAppraisalNo)
+	}
+	
+	public void switchToSecondTab() {
+		switchToNewTab()
+	}
+	
+	public verifyLandingInViewAssetAppraisal() {
+		verifyLanding(txtOffice, "Asset Inventory View")
+	}
+	
+	public Map getApprovalCredential() {
+		// focus on owner, for ss purpose
+		WebUI.focus(txtLastTaskOwner)
+		WebUI.takeScreenshot()
+		String actualOffice = WebUI.getText(txtOffice)
+		String actualNode = WebUI.getText(txtLastNode)
+		String actualOwner = WebUI.getText(txtLastTaskOwner)
+		String role = actualNode
+
+		if (actualOffice.contains("-")) {
+			String[] splitted = actualOffice.split("-")
+			actualOffice = splitted[-1]
+			if (actualOffice.contains(" ")) {
+				String[] newSplitted = actualOffice.split(" ")
+				actualOffice = newSplitted[0]
+			}
+		}
+		
+		Map credentialData = [:]
+		credentialData['owner'] = actualOwner
+		credentialData['office'] = actualOffice
+		credentialData['position'] = actualNode
+		credentialData['role'] = role
+
+		return credentialData
 	}
 
 	public void verifyDetailStatus(String expectedStatus) {
@@ -70,5 +117,10 @@ public class AssetAppraisalInquiryPage extends BaseHelper {
 		}else {
 			KeywordUtil.markFailed("Failed : Actual detail status ($actualStatus) is not Matched with Expected detail status ($expectedStatus)")
 		}
+	}
+	
+	public void delayAndClickSearch() {
+		WebUI.delay(5)
+		clickSearch()
 	}
 }

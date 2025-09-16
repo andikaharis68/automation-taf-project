@@ -15,28 +15,41 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.PurchaseOrderPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.AssetAppraisalInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-PurchaseOrderPage purchase = new PurchaseOrderPage()
 MenuPage menu = new MenuPage()
+AssetAppraisalInquiryPage inquiry = new AssetAppraisalInquiryPage()
 
+'Step 1: switch to iframe main page'
+menu.switchToIframeMainPage()
 
-while(true) {
-	'Step 1: click button pencil on supplier listing'
-	loop = purchase.clickEditOnSupplierListing()
-	if(!loop) {
-		break
-	}
+'Step 2: verify landing in inquiry page'
+inquiry.verifyLandingScreen()
+
+'Step 3: do search by agreement no'
+inquiry.doSearch(AgreementNo)
+
+'Step 4: click button search'
+inquiry.clickSearch()
+
+'Step 5: verify is status approved'
+IsStatusApprove = inquiry.verifyStatusRequest("Approve")
+
+'Step 6: additional check status'
+int maxLoop = GlobalVariable.COUNTER
+int retryCount = 0
+while(!IsStatusApprove && retryCount < maxLoop) {
+	'Step 6.1: delay and click search'
+	inquiry.delayAndClickSearch()
 	
-	'Step 2: select customer bank account no if exist'
-	purchase.selectBankAccountNo("0")
+	'Step 6.2: double check status approved after delay'
+	IsStatusApprove = inquiry.verifyStatusRequest("Approve")
 	
-	'Step 2: click save'
-	purchase.clickSave()
+	retryCount++
 }
-	
-'Step 3: click submit'
-purchase.clickSubmit()
+
+'Step 7: switch to default content'
+menu.switchDefaultContent()

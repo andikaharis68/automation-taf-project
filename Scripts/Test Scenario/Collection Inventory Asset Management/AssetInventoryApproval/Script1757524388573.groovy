@@ -33,7 +33,7 @@ dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inve
 BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Inventory_Inquiry'), dataRow)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential'), dataRow)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential_Asset_Inventory'), dataRow)
 BaseHelper.closeBrowser()
 
 int maxLoop = GlobalVariable.COUNTER
@@ -52,12 +52,11 @@ while(!dataRow['IsStatusApprove'] && retryCount < maxLoop) {
 	BaseHelper.openBrowser()
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Navigate_To_Asset_Inventory_Inquiry'), dataRow)
-	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Validate_Status'), dataRow)
+	WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Validate_Status_Asset_Inventory'), dataRow)
 	if (!dataRow['IsStatusApprove']) {
-		WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential'), dataRow)		
+		WebUI.callTestCase(findTestCase('Test Cases/Test Step/Collection Inventory Asset Management/Get_Approval_Credential_Asset_Inventory'), dataRow)		
 	}
 	BaseHelper.closeBrowser()
 	
 	retryCount++
 }
-

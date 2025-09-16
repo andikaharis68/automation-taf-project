@@ -15,28 +15,37 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.PurchaseOrderPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.AssetAppraisalApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-PurchaseOrderPage purchase = new PurchaseOrderPage()
 MenuPage menu = new MenuPage()
+AssetAppraisalApprovalPage approval = new AssetAppraisalApprovalPage()
 
+'Step 1: switch to iframe main page'
+menu.switchIframeMainPage()
 
-while(true) {
-	'Step 1: click button pencil on supplier listing'
-	loop = purchase.clickEditOnSupplierListing()
-	if(!loop) {
-		break
-	}
-	
-	'Step 2: select customer bank account no if exist'
-	purchase.selectBankAccountNo("0")
-	
-	'Step 2: click save'
-	purchase.clickSave()
-}
-	
-'Step 3: click submit'
-purchase.clickSubmit()
+'Step 2: verify landing in asset inventory approval page'
+approval.verifyLandingScreen()
+
+'Step 3: do search by agreement no'
+approval.doSearch(AgreementNo)
+
+'Step 4: click button search'
+approval.clickSearch()
+
+'Step 5: click process on first result of search'
+approval.clickProcess()
+
+'Step 6. select approval action'
+approval.selectAction(ApraisalApvAction)
+
+'Step 7: input notes'
+approval.inputNotes(ApraisalApvNotes)
+
+'Step 8: click button submit'
+approval.clickSubmit()
+
+'Step 9: verify popup success'
+menu.verifySuccessMessage()

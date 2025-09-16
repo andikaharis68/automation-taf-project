@@ -15,28 +15,11 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.PurchaseOrderPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-PurchaseOrderPage purchase = new PurchaseOrderPage()
 MenuPage menu = new MenuPage()
 
-
-while(true) {
-	'Step 1: click button pencil on supplier listing'
-	loop = purchase.clickEditOnSupplierListing()
-	if(!loop) {
-		break
-	}
-	
-	'Step 2: select customer bank account no if exist'
-	purchase.selectBankAccountNo("0")
-	
-	'Step 2: click save'
-	purchase.clickSave()
-}
-	
-'Step 3: click submit'
-purchase.clickSubmit()
+'Step 1: navigate to appraisal inquiry'
+menu.navigateToAssetAppraisalInquiry()

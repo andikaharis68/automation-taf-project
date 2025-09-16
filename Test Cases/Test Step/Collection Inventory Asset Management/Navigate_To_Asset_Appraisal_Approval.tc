@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Navigate_To_Asset_Appraisal_Approval</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f1ee36c9-6891-4124-903c-16b3abab44df</testCaseGuid>
+</TestCaseEntity>

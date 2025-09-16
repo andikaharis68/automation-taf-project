@@ -10,33 +10,50 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.PurchaseOrderPage
+import com.taf.pageobjects.collectionInventoryAssetManagement.AssetAppraisalInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-PurchaseOrderPage purchase = new PurchaseOrderPage()
 MenuPage menu = new MenuPage()
+AssetAppraisalInquiryPage inquiry = new AssetAppraisalInquiryPage()
 
 
-while(true) {
-	'Step 1: click button pencil on supplier listing'
-	loop = purchase.clickEditOnSupplierListing()
-	if(!loop) {
-		break
-	}
-	
-	'Step 2: select customer bank account no if exist'
-	purchase.selectBankAccountNo("0")
-	
-	'Step 2: click save'
-	purchase.clickSave()
-}
-	
-'Step 3: click submit'
-purchase.clickSubmit()
+'Step 1: switch to iframe main page'
+menu.switchToIframeMainPage()
+
+'Step 2: verify landing in inquiry page'
+inquiry.verifyLandingScreen()
+
+'Step 3: do search by agreement no'
+inquiry.doSearch(AgreementNo)
+
+'Step 4: click button search'
+inquiry.clickSearch()
+
+'Step 5: click last appraisal no'
+inquiry.clickLastAppraisalNo()
+
+'Step 6: switch to second tab'
+inquiry.switchToSecondTab()
+
+'Step 7: switch to default content'
+menu.switchDefaultContent()
+
+'Step 8: verify landing in view asset appraisal'
+inquiry.verifyLandingInViewAssetAppraisal()
+
+'Step 9: get approval credential'
+Map appCreds = inquiry.getApprovalCredential()
+ApprovalUsername = appCreds['owner']
+ApprovalOffice = appCreds['office']
+ApprovalPosition = appCreds['position']
+ApprovalRole = appCreds['role']
+
+KeywordUtil.logInfo("${appCreds}")

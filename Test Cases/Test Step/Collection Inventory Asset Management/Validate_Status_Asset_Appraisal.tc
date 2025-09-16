@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Validate_Status_Asset_Appraisal</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d755eea3-fc47-4323-a771-e35d3f2a2404</testCaseGuid>
+</TestCaseEntity>
