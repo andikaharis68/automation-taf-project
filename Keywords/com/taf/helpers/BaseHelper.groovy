@@ -34,11 +34,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.WebDriver
 
-import static org.openqa.selenium.PageLoadStrategy.NONE
 
 import java.awt.Robot
 import java.awt.event.KeyEvent
 import java.security.SecureRandom
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFCell
@@ -145,7 +146,7 @@ class BaseHelper {
 			if(configName.contains("Multi_Aset")) {
 				testDataName = "LOS_New_Application_Retail_MultiAset.xlsx"
 			} else if (configName.contains("Used_Car")) {
-				testDataName = "LOS_New_Application_ExtensedUsedCar.xlsx"
+				testDataName = "LOS_New_Application_ExtendedUsedCar.xlsx"
 			} else if (configName.contains("Non_Top_Up")) {
 				testDataName = "LOS_New_Application_Siapdana_NonTopUp.xlsx"
 			} else {
@@ -156,7 +157,7 @@ class BaseHelper {
 		}
 		return testDataName
 	}
-	
+
 	static String getTestDataNameCollection() {
 		String testDataName
 		String configName = RunConfiguration.getExecutionSourceId()
@@ -419,7 +420,7 @@ class BaseHelper {
 		WebUI.selectOptionByLabel(to, text, false)
 		WebUI.delay(delay)
 	}
-	
+
 	static void safetySelectByIndex(TestObject to, String index, double delay = 1) {
 		handlePopupAlert()
 		WebUI.selectOptionByIndex(to, index.toInteger())
@@ -899,5 +900,67 @@ class BaseHelper {
 		TestObject loadingBar = new TestObject("loadingBar")
 		loadingBar.addProperty("id", ConditionType.CONTAINS, "ucLoadingPanel_upProgress")
 		WebUI.waitForElementNotVisible(loadingBar, 10, FailureHandling.OPTIONAL)
+	}
+	def scrollDown(int times = 3, int delayMs = 500) {
+		Robot robot = new Robot()
+		for (int i = 0; i < times; i++) {
+			// Tekan tombol PAGE_DOWN
+			robot.keyPress(KeyEvent.VK_PAGE_DOWN)
+			robot.keyRelease(KeyEvent.VK_PAGE_DOWN)
+
+			Thread.sleep(delayMs)
+		}
+	}
+
+	static String selectCredentialBasedOnArea(String city) {
+		String username  = ""
+		List<String> area1Cities = [
+			"BEKASI",
+			"BEKASI - REVO TOWN",
+			"BEKASI 2",
+			"DEPOK",
+			"DEPOK 2",
+			"FLEET JAKARTA",
+			"JAKARTA CENTRAL",
+			"JAKARTA NORTH",
+			"JAKARTA NORTH 2",
+			"JAKARTA SOUTH",
+			"JAKARTA SOUTH 2",
+			"KELAPA GADING",
+			"LEXUS JAKARTA"
+		]
+		List<String> area2Cities = [
+			"BANDUNG",
+			"BANDUNG 2",
+			"BOGOR",
+			"BOGOR 2",
+			"BOGOR SB",
+			"BSD CITY",
+			"BSD CITY 2",
+			"CIREBON",
+			"CIREBON 2",
+			"KARAWANG",
+			"KARAWANG 2",
+			"SERANG",
+			"TANGERANG",
+			"TANGERANG 2"
+		]
+
+		if (area1Cities.contains(city)) {
+			username = "DSU0401"
+			WebUI.comment("Handling office '${city}' belongs to Area 1 username is $username")
+		} else if (area2Cities.contains(city)) {
+			username = "AJK1196"
+			WebUI.comment("Handling office '${city}' belongs to Area 2 username is $username")
+		} else {
+			WebUI.comment("Handling office '${city}' not found in Area 1 or Area 2")
+		}
+		return username
+	}
+
+	static String getDateToday() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+		String today = LocalDate.now().format(formatter)
+		return today
 	}
 }

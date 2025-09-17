@@ -47,27 +47,27 @@ public class LoginPage extends BaseHelper {
 		WebUI.click(btnLogin)
 	}
 
-	private void selectRoles(String office, String position, String role) {
-		if(!WebUI.waitForElementVisible(btnLogout, 5, FailureHandling.OPTIONAL)) {
-			TestObject dynamicSelectButton
-			String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-			String upper = 'abcdefghijklmnopqrstuvwxyz'
+	private void selectRoles(String office, String position, String role, String username) {
+		if(!username.equalsIgnoreCase("NON1002") || !username.equalsIgnoreCase("JUD0037")) {
+			if(!WebUI.waitForElementVisible(btnLogout, 5, FailureHandling.OPTIONAL)) {
+				TestObject dynamicSelectButton
+				String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+				String upper = 'abcdefghijklmnopqrstuvwxyz'
 
-			String xpath = """
-        //tr[
+				String xpath = """
+					//tr[
             contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
-        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
-    """
-			if(!office && !position && !role) {
-				xpath = "//*[@id='uModDRole_ctl00_gvRoles_lbSelectRole_0']"
+        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')] """
+				if(!office && !position && !role) {
+					xpath = "//*[@id='uModDRole_ctl00_gvRoles_lbSelectRole_0']"
+				}
+				dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
+				WebUI.click(dynamicSelectButton)
+			} else {
+				KeywordUtil.logInfo("No need select roles")
 			}
-			
-			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
-			WebUI.click(dynamicSelectButton)
-		} else {
-			KeywordUtil.logInfo("No need select roles")
 		}
 	}
 	private void selectRolesCreditApproval(String office, String position, String role) {

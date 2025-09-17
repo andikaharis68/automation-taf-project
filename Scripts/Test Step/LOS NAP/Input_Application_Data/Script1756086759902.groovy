@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 NewApplicationPage data = new NewApplicationPage()
 
 'Step 1: input application data'
-data.inputApplicationData(Tenor, PaymentFrequent, Margin, InstallmentScheme, FirstInstallmentType)
+data.inputApplicationData(MouNo, Tenor, PaymentFrequent, MarginType, InstallmentScheme, FirstInstallmentType)
 
 'Step 2: input application information'
 data.inputApplicationInfo(ApplicationSource, WayOfPayment, PurposeOfUsage, SelfUsageData, FiduciaCovered)

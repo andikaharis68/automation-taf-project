@@ -47,7 +47,7 @@ selection.clickNext()
 selection.inputSelectionDetail(WayOfPayment, SourceBankAccount)
 
 'Step 7: Get Selection Data'
-selection.updateMasterDataPOtoCustomer(TestDataName, ScenarioId)
+selection.updateMasterDataPOtoCustomer(TestDataName,  GlobalVariable.SCENARIO_ID)
 
 'Step 8: Click request approval'
 selection.clickButtonRequestForApproval()

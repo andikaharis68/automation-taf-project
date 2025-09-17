@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialDealAmountInquiry extends BaseHelper {
+public class RemedialDealAmountInquiryPage extends BaseHelper {
 
 	private TestObject drpOfficeName			= createTestObject("drpOfficeName", "id", "ucSearch_ddlHandlingOfficeId_ltlRefOfficeOfficeNameSearch_ddlReference") 
 	private TestObject txfAgreementNo			= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch") 
@@ -60,6 +60,15 @@ public class RemedialDealAmountInquiry extends BaseHelper {
 	private void clickRemedialDealAmountNo() {
 		safetyClick(txtRemedialDealAmountNo)
 		switchToNewTab()
+		WebUI.delay(5)
 		WebUI.takeScreenshot()
+	}
+	private boolean verifyStatusAfterRemedialApproval() {
+		String actualStatus = WebUI.getText(txtRemedialStatus)
+		return  validateIsEquals(actualStatus, "Execute")
+	}
+	private boolean verifyStatusAfterRemedialRequest() {
+		String actualStatus = WebUI.getText(txtRemedialStatus)
+		return  validateIsEquals(actualStatus, "Request")
 	}
 }

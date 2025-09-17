@@ -36,11 +36,17 @@ asset.inputMainAsset(DPType, AssetPrice, DownPayment)
 'Step 5: input asset data'
 asset.inputAssetData(AssetNoMesin, AssetNoRangka, AssetLicensePlateNo, AssetCondition, AssetUsage, AssetManufacturingYear)
 
-'Step 6: calculate market price'
+'Step 6: Input asset attribute'
+asset.inputAssetAttributeSection(MadeIn, Cylinder, Transmition, Color, Region)
+
+'Step 7: Input Accessory Grid'
+asset.inputAccessoriesGridSection(AdditionalSvcSupplierBranchName, AdditionalSvcName, AdditionalSvcPrice, AdditionalDpAmount, AdditionalSvcNotes)
+
+'Step 8: calculate market price'
 asset.clickGetMarketPrice()
 
-'Step 7: add additiona; service grid'
+'Step 9: add additiona; service grid'
 asset.addGrid(AssetServiceName, SupplierBranchNameGrid, ServicePrice)
 
-'Step 8: save asset'
+'Step 10: save asset'
 asset.clickSaveAsset()

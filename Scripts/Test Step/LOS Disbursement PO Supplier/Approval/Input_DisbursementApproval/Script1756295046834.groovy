@@ -39,7 +39,7 @@ approval.checklistApDisbursement(ApplicationBalance)
 approval.clickButtonApproveSelected()
 
 'Step 5: Get Voucher No'
-approval.updatePaymentVoucherNoToExcel(TestDataName, ScenarioId)
+approval.updatePaymentVoucherNoToExcel(TestDataName, GlobalVariable.SCENARIO_ID)
 
 'Step 6: Click Approve'
 approval.clickButtonApprove()

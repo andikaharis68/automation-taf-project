@@ -30,15 +30,15 @@ public class FinancialDataPage extends BaseHelper {
 	private TestObject btnCalculate				= createTestObject("btnCalculate", "xpath", "//*[@id='lbCalculateFees']")
 	private TestObject btnCalculateInstallment	= createTestObject("btnCalculateInstallment", "id", "lbCalculateFinancialData")
 
-	private TestObject txfAdminFeeAmount		= createTestObject("txfAdminFeeAmount", "id", "ucINAdminFeeAmt_txtInput")
+	private TestObject txfAdminFeeAmount		= createTestObject("txfAdminFeeAmount", "id", "ucINAdminFeeAmt_txtInput") 
 	private TestObject txfNotaryAmount			= createTestObject("txfNotaryAmount", "id", "ucINNotaryFeeAmt_txtInput")
-	private TestObject txfAdditionalAdminFee	= createTestObject("txfAdditionalAdminFee", "id", "ucINAddAdminFeeAmt_txtInput")
+	private TestObject txfAdditionalAdminFee	= createTestObject("txfAdditionalAdminFee", "id", "ucINAddAdminFeeAmt_txtInput") 
 	private TestObject txfOtherFee				= createTestObject("txfOtherFee", "id", "ucINOtherFeeAmt_txtInput")
 	private TestObject txfProvisionPercentage	= createTestObject("txfProvisionPercentage", "id", "ucINProvisionFeePrcnt_txtInput")
 	private TestObject txfResidualValue			= createTestObject("txfResidualValue", "id", "ucINResidualValueAmt_txtInput")
 	private TestObject drpRate					= createTestObject("drpRate", "id", "ucRefRate_ddlReference")
 	private TestObject txfMargin				= createTestObject("txfMargin", "id", "ucINRate_txtInput")
-	private TestObject txfGracePeriod			= createTestObject("txfGracePeriod", "id", "ucINGracePeriod_txtInput")
+	private TestObject txfGracePeriod			= createTestObject("txfGracePeriod", "id", "ucINGracePeriod_txtInput") 
 	private TestObject drpGracePeriod			= createTestObject("drpGracePeriod", "id", "ucRefGracePeriodType_ddlReference")
 	private TestObject txfSpread				= createTestObject("txfSpread", "id", "ucINSpread_txtInput")
 	private TestObject txfTDPPaidAtCompany		= createTestObject("txfTDPPaidAtCompany", "id", "ucINTDPPaidCoyAmt_txtInput")
@@ -54,7 +54,8 @@ public class FinancialDataPage extends BaseHelper {
 
 	private void clickSaveContinue() {
 		safetyClick(btnSaveContinue)
-		if(WebUI.verifyElementPresent(btnCalculateFee, 2, OPTIONAL)) { //cek masih ada di screen financial atau ga
+		if(WebUI.verifyElementPresent(btnCalculateFee, 2, OPTIONAL)) {
+			//cek masih ada di screen financial atau ga
 			safetyClick(btnSaveContinue)
 		}
 	}

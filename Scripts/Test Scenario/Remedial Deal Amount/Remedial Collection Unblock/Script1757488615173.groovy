@@ -28,6 +28,7 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DA
 	
 BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_Collection_UnblockRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Search_Customer_toUnblockRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_Collection_UnblockRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Search_Customer_toUnblockRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_ApplicationInquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

@@ -10,7 +10,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -27,8 +28,9 @@ dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVari
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 	
 BaseHelper.openBrowser()
+dataRow['Username'] = BaseHelper.selectCredentialBasedOnArea(dataRow['HandlingOffice'])
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-//WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/SearchAgremeent_and_NextToDetail'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountInquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_RemedialDeal_AmountRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/SearchAgremeent_and_NextToDetail'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_RemedialDeal_AmountInquiry_andVerifyAfterRequest'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

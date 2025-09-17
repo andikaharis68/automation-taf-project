@@ -104,7 +104,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnRemedialRepossession		= createTestObject("btnRemedialRepossession", "xpath", "//a[text() = 'Repossession']")
 	private TestObject btnRemedialDealAmountInquiry	= createTestObject("btnRemedialDealAmountInquiry", "xpath", "//a[text() = 'Remedial Deal Amount Inquiry']")
 	private TestObject btnRemedialDealAmountApproval= createTestObject("btnRemedialDealAmountApproval", "xpath", "//a[text() = 'Remedial Deal Amount Approval']")
-
+	private TestObject btnPaymentReceiveAfterWONew	= createTestObject("btnPaymentReceiveAfterWONew", "xpath", "//a[text() = 'Payment Receive After WO New']")
+	
 	//inventory asset management
 	private TestObject btnPoolManagement			= createTestObject("btnSendAssetToPool", "text", "Pool Management")
 	private TestObject btnAssetAppraisal			= createTestObject("btnAssetAppraisal", "text", "Asset Appraisal")
@@ -755,12 +756,21 @@ public class MenuPage extends BaseHelper {
 		safetyClick(btnAssetAppraisalCancelation)
 		WebUI.switchToDefaultContent()
 	}
-
-	private void navigateToAssetInventoryInquiry() {
+	
+	private void navigateToPaymentReceiveAfterWoNew() {
+		waitForLoadingBarNotExist()
 		switchDefaultContent()
 		WebUI.waitForElementPresent(drpMenu, 5)
 		clickDropdownMenu()
 		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialRepossession)
+		WebUI.click(btnPaymentReceiveAfterWONew)
+		switchDefaultContent()
+	}
+	private void navigateToAssetInventoryInquiry() {
+		switchDefaultContent()
 		safetySelect(drpModul, "COLLECTION")
 		safetyClick(btnRepossession)
 		safetyClick(btnExpandRepossess)

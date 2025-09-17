@@ -31,7 +31,6 @@ dataRow += ["ExcelName" : testDataName,
 BaseHelper.openBrowser()
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.delay(10)
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Navigate_To_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS NAP/Add_New_Application'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
