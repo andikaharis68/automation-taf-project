@@ -23,13 +23,20 @@ import org.openqa.selenium.Keys as Keys
 PurchaseOrderPage purchase = new PurchaseOrderPage()
 MenuPage menu = new MenuPage()
 
-'Step 1: click button pencil on supplier listing'
-purchase.clickEditOnSupplierListing()
 
-'Step 2: click save'
-purchase.clickSave()
-
+while(true) {
+	'Step 1: click button pencil on supplier listing'
+	loop = purchase.clickEditOnSupplierListing()
+	if(!loop) {
+		break
+	}
+	
+	'Step 2: select customer bank account no if exist'
+	purchase.selectBankAccountNo("0")
+	
+	'Step 2: click save'
+	purchase.clickSave()
+}
+	
 'Step 3: click submit'
 purchase.clickSubmit()
-
-

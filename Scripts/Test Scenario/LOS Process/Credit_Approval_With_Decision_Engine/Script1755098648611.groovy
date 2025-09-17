@@ -35,7 +35,7 @@ dataRow += BaseHelper.getTestDataByScenario("Credential", "${GlobalVariable.TEST
 
 dataRow += WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Placeholder'), dataRow)
 
-int maxLoop = GlobalVariable.COUNTER
+int maxLoop = 10
 int retryCount = 0 
 while(!dataRow['IsSmsApprove'] && retryCount < maxLoop) {
 	KeywordUtil.logInfo("===== Credit Approval Attempt: ${retryCount + 1} =====")

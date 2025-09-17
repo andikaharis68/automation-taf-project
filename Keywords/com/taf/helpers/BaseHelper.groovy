@@ -166,6 +166,7 @@ class BaseHelper {
 		} else {
 			testDataName = "Collection_Expense_Advance.xlsx"
 		}
+		WebUI.comment("Using test data : " + testDataName)
 		return testDataName
 	}
 

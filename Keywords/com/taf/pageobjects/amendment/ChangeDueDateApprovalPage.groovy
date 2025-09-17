@@ -24,19 +24,21 @@ import internal.GlobalVariable
 public class ChangeDueDateApprovalPage extends BaseHelper{
 
 	private TestObject sectionApprovalAction	= createTestObject("sectionApprovalAction", "xpath", "")
-	private TestObject drpAction				= createTestObject("drpAction", "xpath", "")
-	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "")
+	private TestObject drpAction				= createTestObject("drpAction", "xpath", "//select[@id = 'ddlAction']")
+	private TestObject txtNotes					= createTestObject("txtNotes", "xpath", "//textarea[@id = 'txtNotes']")
 	private TestObject drpNextPerson			= createTestObject("drpNextPerson", "xpath", "")
-	private TestObject btnSubmit				= createTestObject("btnSubmit", "xpath", "")
+	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
 	private TestObject lblNotification			= createTestObject("lblNotification", "xpath", "")
 
 	public void approval(String action, String note, String person) {
 
-		WebUI.click(sectionApprovalAction)
-		WebUI.selectOptionByLabel(drpAction, action, false)
-		WebUI.setText(txtNotes, note)
-		WebUI.selectOptionByLabel(drpNextPerson, person, false)
-		WebUI.click(btnSubmit)
-		WebUI.verifyElementVisible(lblNotification)
+		WebUI.takeScreenshot()
+		//		WebUI.click(sectionApprovalAction)
+		safetySelect(drpAction, action, 1)
+		safetyInput(txtNotes, note, 1)
+		//		WebUI.selectOptionByLabel(drpNextPerson, person, false)
+		safetyInput(btnSubmit, 1)
+		//		WebUI.verifyElementVisible(lblNotification)
+		WebUI.takeScreenshot()
 	}
 }

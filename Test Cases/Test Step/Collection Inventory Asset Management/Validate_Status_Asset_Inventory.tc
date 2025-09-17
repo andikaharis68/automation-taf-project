@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Validate_Status_Asset_Inventory</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>2cd0fb9d-591d-4307-8df2-75c1b5be581c</testCaseGuid>
+</TestCaseEntity>

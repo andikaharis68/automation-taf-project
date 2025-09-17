@@ -23,9 +23,13 @@ import internal.GlobalVariable
 
 public class PrepaymentExecutionPage extends BaseHelper{
 
-	private TestObject btnSubmit = createTestObject("btnSubmit", "xpath", "")
+	private TestObject btnSubmit = createTestObject("btnSubmit", "id", "lbSubmit")
 
 	public void clickSubmit() {
-		WebUI.click(btnSubmit)
+		WebUI.takeScreenshot()
+
+		safetyClick(btnSubmit, 2)
+
+		WebUI.takeScreenshot()
 	}
 }

@@ -30,7 +30,7 @@ Map scenarioData = [
 	'SheetNames': ['Survey', 'MasterData'],
 	'StepApplication': 'PAP',
 	'StepCheck': false, 
-	'Counter': 3
+	'Counter': 1
 ] 
 
 Map dataRow = [:]
@@ -42,7 +42,7 @@ BaseHelper.openBrowser()
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow)
 
 //Checking Step
-while(GlobalVariable.COUNTER > dataRow['Counter']) {
+while(5 > dataRow['Counter']) {
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Navigate_To_Application_Inquiry'), dataRow)
 	WebUI.callTestCase(findTestCase('Test Cases/Test Step/LOS Process/Credit Approval with Decision Engine/Checking_Step_Application'), dataRow)
 	if(dataRow['StepCheck']) {

@@ -14,6 +14,7 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -85,7 +86,9 @@ public class CollectionExpenseRequestPage extends BaseHelper {
 	}
 	
 	public void verifyLandingCollectionExpenseRequest() {
-		WebUI.waitForElementPresent(btnSubmit, 10)
+		if(!WebUI.waitForElementPresent(btnSubmit, 10)) {
+			KeywordUtil.markFailed("Gagal masuk ke halaman request setelah klik icon action")
+		}
 		WebUI.takeScreenshot()
 	}
 	
@@ -110,6 +113,13 @@ public class CollectionExpenseRequestPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnIconExecute)
 		handlePopupAlert()
+	}
+	
+	public void verifySuccessExecute() {
+		if(!WebUI.waitForElementNotPresent(btnIconExecute, 20, FailureHandling.CONTINUE_ON_FAILURE)) {
+			KeywordUtil.markFailed("Failed setelah melakukan klik icon execute")
+		}
+		WebUI.takeScreenshot()
 	}
 
 	public void inputSellingEstimation(String externalFee, String repoFee) {
@@ -253,7 +263,9 @@ public class CollectionExpenseRequestPage extends BaseHelper {
 	}
 	
 	public void verifySuccessSubmit() {
-		WebUI.waitForElementPresent(btnSearch, 20)
+		if(!WebUI.waitForElementPresent(btnSearch, 20)) {
+			KeywordUtil.markFailed("Gagal melakukan submit request")
+		}
 		WebUI.takeScreenshot()
 	}
 }

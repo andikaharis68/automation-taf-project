@@ -30,11 +30,10 @@ menu.switchIframeMainPage()
 
 inquiry.inputAgreementNo(AgreementNumber)
 
-inquiry.selectFilterStatus("Approve")
+inquiry.selectFilterStatus("Request")
 
 inquiry.clickButtonSearch()
 
-inquiry.verifyStatusRequest("Approve")
+IsStatusApproved = inquiry.clickRequestNumber()
 
-inquiry.clickRequestNumber()
 

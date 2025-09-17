@@ -30,12 +30,14 @@ public class PaymentRecievePage extends BaseHelper{
 	private TestObject txtReferenceNo		= createTestObject("txtReferenceNo", "xpath", "//input[@id = 'txtReferenceNo']")
 	private TestObject txtAmount			= createTestObject("txtAmount", "xpath", "//input[@id = 'ucReceiveAmt_txtInput']")
 	private TestObject btnSubmit			= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit")
-
+	private TestObject btnEdit				= createTestObject("btnEdit", "id", "gvPaymentReceive_imbEdit_0")
 
 	public void searchAgreement(String agreementNo) {
 
 		safetyInput(txtAgreementNumber, agreementNo, 1)
 		safetyClick(btnSearch, 2)
+
+		WebUI.takeScreenshot()
 	}
 
 	public void inputDataRecieve(String recieveForm, String note, String reffNo, String amount, String agreeNo) {
@@ -48,7 +50,7 @@ public class PaymentRecievePage extends BaseHelper{
 		WebUI.takeScreenshot()
 		selectAmendment(agreeNo)
 	}
-	
+
 	public void selectAmendment(String agreeNo) {
 		TestObject btnPenAction	= createTestObject("btnPenAction", "xpath", "//a[text() = '$agreeNo']/following::input[1]")
 		safetyClick(btnPenAction, 5)

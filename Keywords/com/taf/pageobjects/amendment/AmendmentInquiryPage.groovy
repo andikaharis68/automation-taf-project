@@ -78,7 +78,7 @@ public class AmendmentInquiryPage extends BaseHelper{
 	public void clickRequestNo() {
 		safetyClick(lblReqNo, 3)
 		WebUI.delay(0.5)
-		
+
 		switchToNewTab()
 		WebUI.takeScreenshot()
 	}

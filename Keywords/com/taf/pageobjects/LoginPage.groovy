@@ -53,21 +53,22 @@ public class LoginPage extends BaseHelper {
 				TestObject dynamicSelectButton
 				String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 				String upper = 'abcdefghijklmnopqrstuvwxyz'
-	
+
 				String xpath = """
-        //tr[
+					//tr[
             contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
-        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
-    """
+        ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')] """
+				if(!office && !position && !role) {
+					xpath = "//*[@id='uModDRole_ctl00_gvRoles_lbSelectRole_0']"
+				}
 				dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
 				WebUI.click(dynamicSelectButton)
 			} else {
 				KeywordUtil.logInfo("No need select roles")
 			}
 		}
-		
 	}
 	private void selectRolesCreditApproval(String office, String position, String role) {
 		if(!WebUI.waitForElementPresent(btnLogout, 10, FailureHandling.OPTIONAL)) {
