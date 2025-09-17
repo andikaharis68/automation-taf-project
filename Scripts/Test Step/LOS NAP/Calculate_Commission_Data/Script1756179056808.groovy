@@ -21,7 +21,11 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage commission = new NewApplicationPage()
 
-'Step : calculate commission'
+'Step 1: Add Supplier Employee'
+commission.addSupplierEmployeeSection(SupplierBranchName, EmployeeName, DiffOther)
 
-'Step : click save and continue'
+'Step 2: click calculate'
+commission.clickCalculateCommission()
+
+'Step 3: click save and continue'
 commission.clickSaveAndContinue()

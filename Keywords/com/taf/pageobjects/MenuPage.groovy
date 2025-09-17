@@ -108,7 +108,8 @@ public class MenuPage extends BaseHelper {
 	private TestObject btnRemedialRepossession		= createTestObject("btnRemedialRepossession", "xpath", "//a[text() = 'Repossession']")
 	private TestObject btnRemedialDealAmountInquiry	= createTestObject("btnRemedialDealAmountInquiry", "xpath", "//a[text() = 'Remedial Deal Amount Inquiry']")
 	private TestObject btnRemedialDealAmountApproval= createTestObject("btnRemedialDealAmountApproval", "xpath", "//a[text() = 'Remedial Deal Amount Approval']")
-
+	private TestObject btnPaymentReceiveAfterWONew	= createTestObject("btnPaymentReceiveAfterWONew", "xpath", "//a[text() = 'Payment Receive After WO New']")
+	
 	//inventory asset management
 	private TestObject btnPoolManagement			= createTestObject("btnSendAssetToPool", "text", "Pool Management")
 	private TestObject btnAssetAppraisal			= createTestObject("btnAssetAppraisal", "text", "Asset Appraisal")
@@ -607,19 +608,19 @@ public class MenuPage extends BaseHelper {
 		WebUI.switchToDefaultContent()
 	}
 
-	    private void navigateToRemedialMenu(String menuRemedial) {
-        waitForLoadingBarNotExist()
-        TestObject btnRemedialMenu    = createTestObject("btnRemedialMenu", "xpath", "//a[text() = '$menuRemedial']")
-        switchDefaultContent()
-        WebUI.waitForElementPresent(drpMenu, 5)
-        clickDropdownMenu()
-        switchToIframeMenu()
-        safetySelect(drpModul, "REMEDIAL")
-        WebUI.takeScreenshot()
-        safetyClick(btnRemedialCollection)
-        safetyClick(btnRemedialMenu)
-        WebUI.switchToDefaultContent()
-    }
+	private void navigateToRemedialMenu(String menuRemedial) {
+		waitForLoadingBarNotExist()
+		TestObject btnRemedialMenu    = createTestObject("btnRemedialMenu", "xpath", "//a[text() = '$menuRemedial']")
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialCollection)
+		safetyClick(btnRemedialMenu)
+		WebUI.switchToDefaultContent()
+	}
 
 	private void navigateToRemedialDealAmountRequest() {
 		switchDefaultContent()
@@ -660,7 +661,6 @@ public class MenuPage extends BaseHelper {
 		WebUI.delay(0.5)
 		WebUI.click(btnRemedialDealAmountInquiry)
 		switchDefaultContent()
-		
 	}
 
 	private void navigateToAssetInventoryApproval() {
@@ -760,5 +760,18 @@ public class MenuPage extends BaseHelper {
 		WebUI.takeScreenshot()
 		safetyClick(btnAssetAppraisalCancelation)
 		WebUI.switchToDefaultContent()
+	}
+	
+	private void navigateToPaymentReceiveAfterWoNew() {
+		waitForLoadingBarNotExist()
+		switchDefaultContent()
+		WebUI.waitForElementPresent(drpMenu, 5)
+		clickDropdownMenu()
+		switchToIframeMenu()
+		safetySelect(drpModul, "REMEDIAL")
+		WebUI.takeScreenshot()
+		safetyClick(btnRemedialRepossession)
+		WebUI.click(btnPaymentReceiveAfterWONew)
+		switchDefaultContent()
 	}
 }

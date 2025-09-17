@@ -14,32 +14,19 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.remedials.CollectionUnblockRequest
+import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-CollectionUnblockRequest request = new CollectionUnblockRequest()
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Remedial_Deal_Amount_TestData.xlsx', 'SheetNames': ['PaymentReceiveAfterWONew', 'MasterData']]
 
-'Step 1: Verify Landing page'
-request.verifyLandingPage()
-
-'Step 2: Search name'
-request.searchCustomer(OfficeName,OverdueDaysGreaterThan , LastActionDateGreaterThan, CustomerName, TypeOfProblem, CollectorName, AgreementNo, OverdueDaysLessThan, LastActionDateLessThan
-, Attention, EWSMonitoringStatus)
-
-'Step 3: Update agreement no to  sheet master data and remedial amount request '
-request.updateAgreementNoToExcelData(TestDataName, GlobalVariable.SCENARIO_ID)
-
-'Step 4: Click edit pencil unblock'
-request.clickEditUnblock()
-
-'Step 5: Input notes'
-request.inputNotes(NotesUnblock)
-
-'Step 6: Click Submit'
-request.clickSubmit()
-
-'Step 7: Verify Landing page'
-request.verifyLandingPage()
-
+Map dataRow = [:]
+dataRow += scenarioData
+dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow['ScenarioId'])
+dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
+	
+BaseHelper.openBrowser()
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_PaymentReceive_AfterWONew'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/SearchAgreementNo_andSubmitPayment'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)

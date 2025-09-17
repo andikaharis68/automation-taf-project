@@ -52,11 +52,12 @@ public class DisbursementApprovalPage extends BaseHelper {
 		safetySelect(drpBankName, bankName)
 		WebUI.delay(0.3)
 
-		if(paymentVoucherDate?.trim()) {
-			safetyInput(txfPaymentVoucherDate, paymentVoucherDate)
-			pressEsc(txfPaymentVoucherDate)
-			WebUI.delay(0.3)
-		}
+		//input payment voucher date == today
+		String today = getDateToday()
+		WebUI.comment("set payment voucher date with $today")
+		safetyInput(txfPaymentVoucherDate, today)
+		pressEsc(txfPaymentVoucherDate)
+		WebUI.delay(0.3)
 	}
 	public void inputSearchApplication(String apTypeName, String apDestination, String bankName) {
 		safetySelect(drpAPTypeName, apTypeName)

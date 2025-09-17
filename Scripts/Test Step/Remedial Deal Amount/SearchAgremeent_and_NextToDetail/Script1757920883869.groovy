@@ -15,15 +15,48 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.LoginPage
+import com.taf.pageobjects.MenuPage
+import com.taf.pageobjects.remedials.RemedialDealAmountRequestPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-LoginPage login = new LoginPage()
+RemedialDealAmountRequestPage request = new RemedialDealAmountRequestPage()
+MenuPage menu = new MenuPage()
 
-'Step 1. Input username and password'
-login.login(Username, Password)
+'Step 1: Verify landing page'
+request.verifyLandingPage()
 
-'Step 2. Select roles'
-login.selectRoles(Office, Position, Role, Username)
+'Step 2: Search agreement'
+request.searchAgreement(HandlingOffice, AgreementNo, CustomerName)
+
+'Step 3: Switch and close current windor'
+BussinessDate = request.getBussinessDate()
+
+'Step 4: Switch iframe main page'
+menu.switchToIframeMainPage()
+
+'Step 5: Click Edit Request'
+request.clickEditRequest()
+
+'Step 6: Verify landing in request detail'
+request.verifyLandingRemedialDealAmountReqDetail()
+
+'Step 7: Input Remedial deal amount'
+request.inputRemedialDealAmount(DealAmount, Tenor, PaymentFrequency, InstallmentScheme, BussinessDate, NotesRequest)
+
+'Step 8: Click Calculate Installment'
+request.clickCalculateInstallment()
+
+'Step 9: Input Approval Request'
+request.inputApprovalRequestDetail(ReasonDescription, ToBeApprovedBy, NotesApprovalRequest)
+
+'Step 10: Get credential id for username approval'
+KeywordUtil.logInfo(ScenarioId)
+request.updateCredentialIdforApproval(TestDataName, ScenarioId)
+
+'Step 10: Click Submit'
+request.clickSubmit()
+
+'Step 11: Verify landing page'
+request.verifyLandingPage()

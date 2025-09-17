@@ -10,52 +10,24 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.remedials.RemedialDealAmountRequest
+import com.taf.pageobjects.losCreditProcess.ApplicationInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-RemedialDealAmountRequest request = new RemedialDealAmountRequest()
 MenuPage menu = new MenuPage()
+ApplicationInquiryPage inquiry = new ApplicationInquiryPage()
 
-'Step 1: Verify landing page'
-request.verifyLandingPage()
+'Step 1: Navigate to application inquiry'
+menu.navigateToApplicationInquiry()
 
 'Step 2: Search agreement'
-request.searchAgreement(HandlingOffice, AgreementNoRequest, CustomerName)
+inquiry.searchAgreementNo(AgreementNo)
 
-'Step 3: Switch and close current windor'
-BussinessDate = request.getBussinessDate()
-
-'Step 4: Switch iframe main page'
-menu.switchToIframeMainPage()
-
-'Step 5: Click Edit Request'
-request.clickEditRequest()
-
-'Step 6: Verify landing in request detail'
-request.verifyLandingRemedialDealAmountReqDetail()
-
-'Step 7: Input Remedial deal amount'
-request.inputRemedialDealAmount(DealAmount, Tenor, PaymentFrequency, InstallmentScheme, BussinessDate, NotesRequest)
-
-'Step 8: Click Calculate Installment'
-request.clickCalculateInstallment()
-
-'Step 9: Input Approval Request'
-request.inputApprovalRequestDetail(ReasonDescription, ToBeApprovedBy, NotesApprovalRequest)
-
-'Step 10: upate credential id to master  data'
-request.updateCredentialIdforApproval(TestDataName, GlobalVariable.SCENARIO_ID)
-
-'Step 11: Click Submit'
-request.clickSubmit()
-
-'Step 12: Verify landing page'
-request.verifyLandingPage()
+'Step 3: click agreement no, switch new tab and update handling office to excel data'
+inquiry.clickAgreementAndSwitchNewTab(TestDataName, GlobalVariable.SCENARIO_ID)

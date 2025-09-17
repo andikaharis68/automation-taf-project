@@ -22,7 +22,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class CollectionUnblockRequest extends BaseHelper {
+public class CollectionUnblockRequestPage extends BaseHelper {
 
 	private TestObject txtRemedialGroup			= createTestObject("txtRemedialGroup", "xpath", "//*[@id='ucSearch_tblFixedSearch']/tbody/tr[1]/td[2]")
 	private TestObject drpOfficeName			= createTestObject("drpOfficeName", "id", "ucSearch_ddlRefOfficeId_ltlRefOfficeOfficeNameSearch_ddlReference")  
@@ -42,6 +42,7 @@ public class CollectionUnblockRequest extends BaseHelper {
 	private TestObject txfNotes					= createTestObject("txfNotes", "id", "txtNotesAttention")
 	private TestObject btnSubmit				= createTestObject("btnSubmit", "id", "lb_Toolbar_Submit") 
 	private TestObject txtAgreementNo			= createTestObject("txtAgreementNo", "id", "gvPaging_lbAgrmntNo_0") 
+	private TestObject txtCustomerName			= createTestObject("txtCustomerName", "id", "gvPaging_lblCustName_0")
 
 	private void verifyLandingPage() {
 		WebUI.delay(1)
@@ -111,11 +112,13 @@ public class CollectionUnblockRequest extends BaseHelper {
 	public void updateAgreementNoToExcelData(String fileName, String scenarioId) {
 		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
 		String agreementNo = WebUI.getText(txtAgreementNo)
+		String custName = WebUI.getText(txtCustomerName)
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
 
-		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNoMaster")
-		saveDataToExcel(agreementNo, rowFilter, filePath, "RemedialDealAmountReq", "AgreementNoRequest")
+		saveDataToExcel(agreementNo, rowFilter, filePath, "MasterData", "AgreementNo")
+		saveDataToExcel(custName, rowFilter, filePath, "MasterData", "CustomerName")
+		
 		WebUI.delay(1)
 	}
 }

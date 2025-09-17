@@ -14,36 +14,32 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CustomerDataPage
-import com.taf.pageobjects.losCreditProcess.GuarantorPage
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
+import com.taf.pageobjects.remedials.CollectionUnblockRequestPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MainInformationPage mainInfo = new MainInformationPage()
-GuarantorPage guarantor = new GuarantorPage()
-CustomerDataPage customer = new CustomerDataPage()
-MenuPage menu = new MenuPage()
+CollectionUnblockRequestPage request = new CollectionUnblockRequestPage()
 
-'Step 1: Click Next'
-mainInfo.clickNext()
+'Step 1: Verify Landing page'
+request.verifyLandingPage()
 
-'Step 2: Update Application No To Excel Test Data (for next steps purpose)'
-customer.updateAppNoToMasterData(TestDataName, GlobalVariable.SCENARIO_ID)
+'Step 2: Search name'
+request.searchCustomer(OfficeName, OverdueDaysGreaterThan , LastActionDateGreaterThan, CustomerName, TypeOfProblem, CollectorName, AgreementNo, OverdueDaysLessThan, LastActionDateLessThan
+, Attention, EWSMonitoringStatus)
 
-'Step 3: Click Tab customer'
-customer.clickTabCustomer()
+'Step 3: Update agreement no to  sheet master data and remedial amount request '
+request.updateAgreementNoToExcelData(TestDataName, GlobalVariable.SCENARIO_ID)
 
-'Step 4: Switch to iframe app'
-customer.switchToIframeApp()
+'Step 4: Click edit pencil unblock'
+request.clickEditUnblock()
 
-'Step 5: Get customer type checked'
-CustomerType = customer.getCustomerTypeChecked()
+'Step 5: Input notes'
+request.inputNotes(NotesUnblock)
 
-'Step 6: Click Save and continue'
-customer.clickSaveContinue()
+'Step 6: Click Submit'
+request.clickSubmit()
 
-'Step 7: verify Landing in guarantor'
-guarantor.verifyLandingInGuarantorPage()
+'Step 7: Verify Landing page'
+request.verifyLandingPage()
+

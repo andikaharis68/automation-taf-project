@@ -312,7 +312,6 @@ public class AssetDataPage extends BaseHelper {
 		WebUI.takeScreenshot()
 	}
 	private void searchAccName(String accName, int index) {
-		//*[@id="gvAccessories_ucLookupAccessories_1_uclLookupAccessories_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
 		btnSearchAssetAccessoryName = createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${index}_imb_${index}")
 		txfOvlySearchAccName		= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_rptFixedSearch_${index}_txtSearchValue_1")
 		btnOvlySearch 				= createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
@@ -536,7 +535,6 @@ public class AssetDataPage extends BaseHelper {
 	}
 
 	private void searchAdditionalBranchName(String additionalBranchName, int index) {
-		//*[@id="gvAccessories_ucLookupSupplBranchSchm2_1_uclSupplBranchSchm_1_umd_1_ctl00_1_gvL_1_hpSelect_0"]
 		txfOvlySearchName = createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'rptFixedSearch_${index}_txtSearchValue_0')]")
 		btnOvlySearch 	  = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
 		btnOvlySelect     = createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0")

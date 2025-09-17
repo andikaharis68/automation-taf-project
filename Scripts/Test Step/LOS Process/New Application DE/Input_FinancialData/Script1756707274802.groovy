@@ -46,30 +46,30 @@ financial.inputFinancialData(ResidualValue, Rate, Margin, GraceAmount, GracePeri
 'Step 6: Click calculate installment'
 financial.clickCalculateInstallment()
 
-'Step 6: Click calculate'
+'Step 7: Click calculate'
 financial.clickCalculate()
 
-'Step 4: Click save and continue'
+'Step 8: Click save and continue'
 financial.clickSaveContinue()
 
-'Step 4.1: Check error after click save and continue'
+'Step 9: Check error after click save and continue'
 asset.checkErrorAfterClickSave()
 
-'Step 5: Verify landing in comission data page'
+'Step 10: Verify landing in comission data page'
 comission.verifyLandingInComissionData()
 
-'Step 6: Add Supplier Employee'
+'Step 11: Add Supplier Employee'
 comission.addSupplierEmployeeSection(SupplierBranchName, EmployeeName, DiffOther)
 
-'Step 7: click calculate'
+'Step 12: click calculate'
 comission.clickCalculate()
 
-'Step 8: click save and continue'
+'Step 13: click save and continue'
 comission.clickSaveContinue()
 
-'Step 8.1: Check error after click save and continue'
+'Step 14: Check error after click save and continue'
 asset.getAllErrorFields()
 
-'Step 9: Verify landing in other info'
+'Step 15: Verify landing in other info'
 otherInfo.verifyLandingInOtherInfoPage()
 

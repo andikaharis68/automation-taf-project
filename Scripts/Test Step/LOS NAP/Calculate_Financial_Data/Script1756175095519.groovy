@@ -22,8 +22,26 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage financial = new NewApplicationPage()
 
-'step 1: calculate financial data'
-financial.calculateFinancialData()
+'Step 1: Input Fees'
+financial.inputFee(AdminFeeAmount, NotaryAmount, AdditionalAdminFee, OtherFee)
 
-'step 2: cilck save and continue'
+'Step 2: Input provision fee'
+financial.inputProvisionFee(ProvisionType, ProvisionAmount)
+
+'Step 3: Input Fiduciary'
+financial.inputFiduciary(FiduciaOption, FiduciaFeeAmount)
+
+'Step 4: Click calculate fee'
+financial.clickCalculateFee()
+
+'Step 5: Input financial Data'
+financial.inputFinancialData(ResidualValue, Rate, Margin, GraceAmount, GracePeriod, Spread, TDPPaidatCompany, SubsidySupplier, SubsidyRate)
+
+'Step 6: Click calculate installment'
+financial.clickCalculateInstallment()
+
+'Step 7: Click calculate'
+financial.clickCalculate()
+
+'step 8: cilck save and continue'
 financial.clickSaveAndContinue()

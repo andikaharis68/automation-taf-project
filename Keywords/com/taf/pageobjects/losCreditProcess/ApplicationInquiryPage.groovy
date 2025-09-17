@@ -25,6 +25,7 @@ import internal.GlobalVariable
 public class ApplicationInquiryPage extends BaseHelper {
 	//search
 	private TestObject txfApplicationNo		= createTestObject("txfApplicationNo", "id", "ucSearch_txtAppNo_ltlAppAppNoSearch")
+	private TestObject txfAgreementNo		= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
 	private TestObject btnSearch			= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 
 	//table
@@ -33,6 +34,7 @@ public class ApplicationInquiryPage extends BaseHelper {
 	private TestObject txtAgreementNo		= createTestObject("txtAgreementNo", "id", "gvApp_lbAgrmntNo_0")
 
 	private TestObject iframeMainpage 		= createTestObject("iframeMainpage", "xpath", "//*[@id='mainPage']")
+	private TestObject txtHandlingOffice	= createTestObject("txtHandlingOffice", "id", "ucAgrmntInfo_lblHandlingOffice") 
 
 	public void verifyLandingScreen() {
 		WebUI.switchToDefaultContent()
@@ -73,5 +75,28 @@ public class ApplicationInquiryPage extends BaseHelper {
 	
 	public String getAgreementNo() {
 		return WebUI.getText(txtAgreementNo)
+	}
+	private void searchAgreementNo(String agreementNo){
+		safetyInput(txfAgreementNo, agreementNo)
+		safetyClick(btnSearch)
+		WebUI.takeScreenshot()
+	}
+	
+	private void clickAgreementAndSwitchNewTab(String fileName, String scenarioId) {
+		safetyClick(txtAgreementNo)
+		switchToNewTab()
+		WebUI.delay(0.5)
+		WebUI.takeScreenshot()
+		String office = WebUI.getText(txtHandlingOffice)
+		updateHandlingOfficeToExcelData(fileName, scenarioId, office)
+	}
+	
+	private void updateHandlingOfficeToExcelData(String fileName, String scenarioId, String office) {
+		String filePath = GlobalVariable.TEST_DATA_LOCATION + '/' + fileName
+		String strHandlingOffice = office
+		Map rowFilter = [:]
+		rowFilter['ScenarioId'] = scenarioId
+		saveDataToExcel(strHandlingOffice, rowFilter, filePath, "RemedialDealAmountReq", "HandlingOffice")
+		WebUI.delay(1)
 	}
 }

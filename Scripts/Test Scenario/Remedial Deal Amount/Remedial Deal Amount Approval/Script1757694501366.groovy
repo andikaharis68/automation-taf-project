@@ -19,7 +19,7 @@ import com.taf.helpers.BaseHelper
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Remedial_Deal_Amount_TestData.xlsx', 'SheetNames': ['RemedialDealAmountReq', 'MasterData']]
+Map scenarioData = [ScenarioId: GlobalVariable.SCENARIO_ID, TestDataName: 'Remedial_Deal_Amount_TestData.xlsx', 'SheetNames': ['RemedialDealAmountApv', 'MasterData']]
 
 Map dataRow = [:]
 dataRow += scenarioData
@@ -27,9 +27,8 @@ dataRow += BaseHelper.getTestDataMultipleSheet(dataRow['SheetNames'], GlobalVari
 dataRow += BaseHelper.getTestDataByScenario("Credential", GlobalVariable.TEST_DATA_LOCATION + "/" + dataRow['TestDataName'], dataRow["CredentialId"])
 	
 BaseHelper.openBrowser()
-dataRow['Username'] = dataRow['UsernameApproval'] 
 WebUI.callTestCase(findTestCase('Test Cases/Test Step/General/Login_Browser'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountApproval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/SearchAgremeent_and_NextToDetail'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
-WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Collection Unblock/Navigate_to_RemedialDeal_AmountInquiry'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_to_RemedialDeal_AmountApproval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/SearchAgreement_to_Approval'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Test Step/Remedial Deal Amount/Navigate_toRemedialInquiry_andVerify'), dataRow, FailureHandling.CONTINUE_ON_FAILURE)
 

@@ -21,5 +21,9 @@ import org.openqa.selenium.Keys as Keys
 
 NewApplicationPage other = new NewApplicationPage()
 
-'Step : click save and continue'
+'Step 1: Input Referantor'
+other.inputReferantor(ReferantorName, AddressReferantor, RTReferantor, RWReferantor, ZipCodeReferantor, PhoneReferantor1, PhoneReferantor2, PhoneReferantor3, FaxReferantor, MobilePhoneReferantor1, MobilePhoneReferantor2, 
+	MobilePhoneReferantor3, EmailReferantor1, EmailReferantor2)
+
+'Step 2: click save and continue'
 other.clickSaveAndContinue()

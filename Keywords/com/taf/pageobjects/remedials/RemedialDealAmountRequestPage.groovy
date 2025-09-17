@@ -10,7 +10,6 @@ import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
-import org.openqa.selenium.devtools.v135.security.model.SafetyTipInfo
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -30,7 +29,7 @@ import com.taf.helpers.BaseHelper
 
 import internal.GlobalVariable
 
-public class RemedialDealAmountRequest extends BaseHelper {
+public class RemedialDealAmountRequestPage extends BaseHelper {
 
 	private TestObject drpHandlingOffice		= createTestObject("drpHandlingOffice", "id", "ucSearch_ddlHandlingOfficeId_ltlRefOfficeHandlingName_ddlReference")
 	private TestObject txfAgreementNo			= createTestObject("txfAgreementNo", "id", "ucSearch_txtAgrmntNo_ltlAgrmntAgrmntNoSearch")
@@ -159,23 +158,23 @@ public class RemedialDealAmountRequest extends BaseHelper {
 		WebDriver driver = DriverFactory.getWebDriver()
 		String leftTab = driver.getWindowHandle()
 		safetyClick(txtAgreementNo)
-		WebUI.delay(3)
-		WebUI.takeScreenshot()
-		
+		WebUI.delay(1)
+
 		Set<String> handles = driver.getWindowHandles()
 		handles.remove(leftTab)
 		String rightTab = handles.iterator().next()
-		
+
 		// 1. Pindah ke tab kanan
 		driver.switchTo().window(rightTab)
+		WebUI.takeScreenshot()
 		WebUI.delay(1)
-		
+
 		String date = WebUI.getText(txtBussinessDate)
-		
+
 		KeywordUtil.logInfo(date)
 		// 2. Tutup tab kanan
 		driver.close()
-		
+
 		// 3. Balik ke tab kiri
 		driver.switchTo().window(leftTab)
 		return date
@@ -186,8 +185,7 @@ public class RemedialDealAmountRequest extends BaseHelper {
 		Map rowFilter = [:]
 		rowFilter['ScenarioId'] = scenarioId
 
-		saveDataToExcel(username, rowFilter, filePath, "MasterData", "UsernameApproval")
+		saveDataToExcel(username, rowFilter, filePath, "MasterData", "Username")
 		WebUI.delay(1)
 	}
-	
 }

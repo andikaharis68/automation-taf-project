@@ -47,24 +47,27 @@ public class LoginPage extends BaseHelper {
 		WebUI.click(btnLogin)
 	}
 
-	private void selectRoles(String office, String position, String role) {
-		if(!WebUI.waitForElementVisible(btnLogout, 5, FailureHandling.OPTIONAL)) {
-			TestObject dynamicSelectButton
-			String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-			String upper = 'abcdefghijklmnopqrstuvwxyz'
-
-			String xpath = """
+	private void selectRoles(String office, String position, String role, String username) {
+		if(!username.equalsIgnoreCase("NON1002") || !username.equalsIgnoreCase("JUD0037")) {
+			if(!WebUI.waitForElementVisible(btnLogout, 5, FailureHandling.OPTIONAL)) {
+				TestObject dynamicSelectButton
+				String lower = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+				String upper = 'abcdefghijklmnopqrstuvwxyz'
+	
+				String xpath = """
         //tr[
             contains(translate(normalize-space(.), '${lower}', '${upper}'), '${office.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${position.toLowerCase()}')
             and contains(translate(normalize-space(.), '${lower}', '${upper}'), '${role.toLowerCase()}')
         ]//a[contains(translate(normalize-space(.), '${lower}', '${upper}'), 'select')]
     """
-			dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
-			WebUI.click(dynamicSelectButton)
-		} else {
-			KeywordUtil.logInfo("No need select roles")
+				dynamicSelectButton = createTestObject("dynamicSelectButton", "xpath", xpath)
+				WebUI.click(dynamicSelectButton)
+			} else {
+				KeywordUtil.logInfo("No need select roles")
+			}
 		}
+		
 	}
 	private void selectRolesCreditApproval(String office, String position, String role) {
 		if(!WebUI.waitForElementPresent(btnLogout, 10, FailureHandling.OPTIONAL)) {

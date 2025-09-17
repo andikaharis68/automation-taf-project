@@ -40,7 +40,7 @@ selection.cheklistApDisbursement()
 'Step 4: Click Add To Temp'
 selection.clickButtonAddToTemp()
 
-selection.updateAppNoandBalanceToMasterAndApproval(TestDataName, ScenarioId)
+selection.updateAppNoandBalanceToMasterAndApproval(TestDataName,  GlobalVariable.SCENARIO_ID)
 
 'Step 5: Click Next'
 selection.clickNext()
@@ -49,7 +49,7 @@ selection.clickNext()
 selection.inputSelectionDetail(WayOfPayment, SourceBankAccount)
 
 'Step 7: Get Selection Data'
-selection.updateMasterDataPOtoCustomerNonSameday(TestDataName, ScenarioId)
+selection.updateMasterDataPOtoCustomerNonSameday(TestDataName,  GlobalVariable.SCENARIO_ID)
 
 'Step 8: Click request approval'
 selection.clickRequestForApprovalandTakeScreenshot()

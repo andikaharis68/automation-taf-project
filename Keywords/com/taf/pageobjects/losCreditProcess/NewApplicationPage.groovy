@@ -1,6 +1,7 @@
 package com.taf.pageobjects.losCreditProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.model.FailureHandling.OPTIONAL
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -9,6 +10,10 @@ import static org.assertj.core.api.InstanceOfAssertFactories.INTEGER
 
 import java.awt.Robot
 import java.awt.event.KeyEvent
+
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -20,6 +25,7 @@ import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.common.WebUiCommonHelper
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -36,6 +42,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSearch					= createTestObject("btnSearch", "id", "ucSearch_btnSearch")
 	private TestObject btnSelectApplication			= createTestObject("btnSelectApplication", "id", "gvApp_imbEdit_0")
 	private TestObject btnAdd						= createTestObject("btnAdd", "id", "lb_Toolbar_Add")
+	private TestObject btnAddSupplierEmployee		= createTestObject("btnAddSupplierEmployee", "id", "lb_Form_Add_SupplBranchEmp")
 
 	//section main information
 	private TestObject btnLookUpOfferingName		= createTestObject("btnLookUpOfferingName", "id", "ucLookupProdOffer_uclProductOffering_imb")
@@ -104,6 +111,12 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject txfEconimicSector			= createTestObject("txfEconimicSector", "id", "UCRefMasterSekEko_ucLookupRefMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
 	private TestObject btnEconimicSearc				= createTestObject("btnEconimicSearc", "id", "UCRefMasterSekEko_ucLookupRefMaster_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectEconomic			= createTestObject("btnSelectEconomic", "id", "UCRefMasterSekEko_ucLookupRefMaster_umd_ctl00_gvL_hpSelect_0")//select first row
+	private TestObject txfMouNo 					= createTestObject("txfMouNo", "id", "ucLookupMOU_uclMOU_txt")
+	private TestObject btnSearchMOUNo			= createTestObject("btnSearchMOUNo", "id", "ucLookupMOU_uclMOU_imb")
+	private TestObject txfOvlyMOUNo				= createTestObject("txfOvlyMOUNo", "id", "ucLookupMOU_uclMOU_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0")
+	private TestObject btnOvlySearchMOU			= createTestObject("btnOvlySearchMOU", "id", "ucLookupMOU_uclMOU_umd_ctl00_ucS_lbSearch")
+	private TestObject btnOvlySelectMOU			= createTestObject("btnOvlySelectMOU", "id", "ucLookupMOU_uclMOU_umd_ctl00_gvL_hpSelect_0")
+
 
 
 	//section tab asset data
@@ -115,7 +128,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject txfSupplierAddress			= createTestObject("txfSupplierAddress", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_2")
 	private TestObject btnSupplierSearch			= createTestObject("btnSupplierSearch", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_ucS_lbSearch")
 	private TestObject btnSelectSupplier			= createTestObject("btnSelectSupplier", "id", "ucLookupSupplBranchSchm_uclSupplBranchSchm_umd_ctl00_gvL_hpSelect_0")//select first row
-	private TestObject drpSalesPerson				= createTestObject("drpSalesPerson", "id", "ucSalesPerson_ddlReference") 
+	private TestObject drpSalesPerson				= createTestObject("drpSalesPerson", "id", "ucSalesPerson_ddlReference")
 	//section top up agreement
 	private TestObject btnLookUpTopUp				= createTestObject("btnLookUpTopUp", "id", "ucLookupTopUpAgrmnt_uclTopUpAgr_imb")
 	//pop up
@@ -133,7 +146,7 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject txfDownPayment				= createTestObject("txfDownPayment", "xpath", "//input[@id = 'ucDownPaymentPrcnt_txtInput' or @id = 'ucDownPayment_txtInput']")
 	private TestObject txfAssetNote					= createTestObject("txfAssetNote", "xpath", "//*[@id='txtNotesMainAss']")
 	private TestObject btnGetMarketPrice			= createTestObject("btnGetMarketPrice", "id", "lb_Form_GetMktPrcAndCalcUpPrcnt")
-	//section asset data
+	//section asset data09,.
 	private TestObject txfNoMesin					= createTestObject("txfNoMesin", "id", "txtSerialNo1")
 	private TestObject txfNoRangka					= createTestObject("txfNoRangka", "id", "txtSerialNo2")
 	private TestObject txfLicensePlate				= createTestObject("txfLicensePlate", "id", "txtLicensePlateNo")
@@ -169,7 +182,14 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnCopyAddressLocation		= createTestObject("btnCopyAddressLocation", "id", "lb_Form_Copy_Assloc")
 	private TestObject btnSaveRegis					= createTestObject("btnSaveRegis", "xpath", "//a[@id = 'lb_Form_Save_Reg']")
 	private TestObject tableDocListRegis			= createTestObject("tableDocListRegis", "id", "upAssetDoc")
-
+	private TestObject btnAddAdditionalBranch		= createTestObject("btnAddAdditionalBranch", "id", "lb_Form_Add_Acc")
+	private TestObject btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "id", "gvAccessories_ucLookupSupplBranchSchm2_0_uclSupplBranchSchm_0_imb_0")
+	private TestObject btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_0_imb_0")
+	private TestObject txfAdditionalAssetPrice		= createTestObject("txfAdditionalAssetPrice", "id", "gvAccessories_ucInputNumber_0_txtInput_0")
+	private TestObject txfAdditionalDpAmount		= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_0_txtInput_0")
+	private TestObject txfAdditionalNotes			= createTestObject("txfAdditionalNotes", "id", "gvAccessories_txtNotes_0")
+	private TestObject txfOvlySearchName			= createTestObject("txfOvlySearchName", "xpath", "//*[@id='ucLookupAssetMaster_uclMaster_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0' or @id='ucLookupAssetSchm_uclAssetSchm_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_0']")
+	private TestObject txfOvlySearchAccName			= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_0_uclLookupAccessories_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_1")
 
 
 	//section tab insurance data
@@ -201,7 +221,24 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnCalculateFee				= createTestObject("btnCalculateFee", "id", "lb_Form_CalcFee")
 	private TestObject btnCalculate					= createTestObject("btnCalculate", "id", "lbCalculateFees")
 	private TestObject btnCalculateInstallment		= createTestObject("btnCalculateInstallment", "id", "lbCalculateFinancialData")
+	private TestObject btnCalculateCommission		= createTestObject("btnCalcultaeCommission", "id", "lb_Form_Calculate")
 	private TestObject tableInstallment				= createTestObject("tableInstallment", "id", "gvAmortization")
+	private TestObject txfAdminFeeAmount			= createTestObject("txfAdminFeeAmount", "id", "ucINAdminFeeAmt_txtInput")
+	private TestObject txfNotaryAmount				= createTestObject("txfNotaryAmount", "id", "ucINNotaryFeeAmt_txtInput")
+	private TestObject txfAdditionalAdminFee		= createTestObject("txfAdditionalAdminFee", "id", "ucINAddAdminFeeAmt_txtInput")
+	private TestObject txfOtherFee					= createTestObject("txfOtherFee", "id", "ucINOtherFeeAmt_txtInput")
+	private TestObject txfProvisionPercentage		= createTestObject("txfProvisionPercentage", "id", "ucINProvisionFeePrcnt_txtInput")
+	private TestObject txfResidualValue				= createTestObject("txfResidualValue", "id", "ucINResidualValueAmt_txtInput")
+	private TestObject drpRate						= createTestObject("drpRate", "id", "ucRefRate_ddlReference")
+	private TestObject txfMargin					= createTestObject("txfMargin", "id", "ucINRate_txtInput")
+	private TestObject txfGracePeriod				= createTestObject("txfGracePeriod", "id", "ucINGracePeriod_txtInput")
+	private TestObject drpGracePeriod				= createTestObject("drpGracePeriod", "id", "ucRefGracePeriodType_ddlReference")
+	private TestObject txfSpread					= createTestObject("txfSpread", "id", "ucINSpread_txtInput")
+	private TestObject txfTDPPaidAtCompany			= createTestObject("txfTDPPaidAtCompany", "id", "ucINTDPPaidCoyAmt_txtInput")
+	private TestObject drpSubsidySupplier			= createTestObject("drpSubsidySupplier", "id", "ucRefComSub_ddlReference")
+	private TestObject txfSubsidyRate				= createTestObject("txfSubsidyRate", "id", "ucINDiffRateAmt_txtInput")
+	private TestObject txfFiduciaAmount				= createTestObject("txfFiduciaAmount", "id", "ucINFiduciaFeeAmt_txtInput")
+
 
 
 	//section tab commision data
@@ -213,7 +250,22 @@ public class NewApplicationPage extends BaseHelper{
 	private TestObject btnSelectCommission			= createTestObject("btnSelectCommission", "id", "")
 	private TestObject txfDiffOther					= createTestObject("txfDiffOther", "id", "gvSupplEmpCommission_ucinRefundFromOth2_0_txtInput_0")
 
-	//section tab other data : kosong
+	private TestObject btnSearchBranchName			= createTestObject("btnSearchBranchName", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_imb_0")
+	private TestObject txfOverlayBranchName			= createTestObject("txfOverlayBranchName", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_umd_0_ctl00_0_ucS_0_rptFixedSearch_0_txtSearchValue_0")
+	private TestObject btnOvlySearch				= createTestObject("btnOvlySearch", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_umd_0_ctl00_0_ucS_0_lbSearch_0")
+	private TestObject btnOvlySelect				= createTestObject("btnOvlySelect", "id", "gvSupplEmpCommission_uclSupplBrcBasedOnApp2_0_uclSupplBrcApp_0_umd_0_ctl00_0_gvL_0_hpSelect_0")
+	private TestObject drpEmployeeName				= createTestObject("drpEmployeeName", "id", "gvSupplEmpCommission_ucRefSupplBranchEmp_0_ddlReference_0")
+	private TestObject txfDifOther					= createTestObject("txfDifOther", "id", "gvSupplEmpCommission_ucinRefundFromOth2_0_txtInput_0")
+
+	//section tab other data :
+	private TestObject txfReferantorName			= createTestObject("txfReferantorName", "id", "txtReferantorName")
+	private TestObject txfAddressOtherData			= createTestObject("txfAddressOtherData", "id", "ucAddrReferantor_txtOfficeAddr")
+	private TestObject txfRTOtherData				= createTestObject("txfRTOtherData", "id", "ucAddrReferantor_txtRT")
+	private TestObject txfRWOtherData				= createTestObject("txfRWOtherData", "id", "ucAddrReferantor_txtRW")
+	private TestObject btnSearchZipCodeOtherData	= createTestObject("btnSearchZipCodeOtherData", "id", "ucAddrReferantor_ucLookupZipCode_uclZipCode_imb")
+	private TestObject txfOvlySearchZipCode			= createTestObject("txfOvlySearchZipCode", "id", "ucAddrReferantor_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_rptFixedSearch_txtSearchValue_3")
+	private TestObject btnOvlySearchZipCode			= createTestObject("btnOvlySearchZipCode", "id", "ucAddrReferantor_ucLookupZipCode_uclZipCode_umd_ctl00_ucS_lbSearch")
+	private TestObject btnOvlySelectZipCode			= createTestObject("btnOvlySelectZipCode", "id", "ucAddrReferantor_ucLookupZipCode_uclZipCode_umd_ctl00_gvL_hpSelect_0")
 
 	//section tab other info
 	private TestObject drpContractEmployee			= createTestObject("drpContractEmployee", "xpath", "//span[text() = 'Contract Employee Less Than Tenor']/following::select[1]")
@@ -345,6 +397,7 @@ public class NewApplicationPage extends BaseHelper{
 
 	private void inputCustomerData(String type, String custName) {
 		TestObject rdnType 	= createTestObject("rdnType", "xpath", "//label[text() = '$type']/preceding-sibling::input")
+		scrollDown()
 		safetyClick(rdnType, 1)
 		safetyClick(btnLookUpCustomerName, 1)
 		safetyInput(txfCustomerName, custName, 1)
@@ -362,7 +415,7 @@ public class NewApplicationPage extends BaseHelper{
 			safetyInput(txfGurantorName, name)
 			safetyClick(btnSearchGurantor, 1)
 			safetyClick(btnSelectGurantor, 2)
-			
+
 			safetySelect(drpGurantorRelation, relation)
 			WebUI.takeScreenshot()
 			WebUI.click(btnSaveGurantor)
@@ -385,7 +438,8 @@ public class NewApplicationPage extends BaseHelper{
 		}
 	}
 
-	private void inputApplicationData(String tenor, String payFreq, String margin, String installament, String FirstInstallmentType) {
+	private void inputApplicationData(String mouNo, String tenor, String payFreq, String margin, String installament, String FirstInstallmentType) {
+		searchMOUNo(mouNo)
 		safetyInput(txfTenor, tenor)
 		safetySelect(drpPaymentFrequent, payFreq, 1)
 		safetySelect(drpMarginType, margin, 1)
@@ -412,7 +466,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void clickAddAsset() {
-		safetyClick(btnAddAsset, 10)
+		safetyClick(btnAddAsset, 5)
 		WebUI.takeScreenshot()
 	}
 
@@ -472,18 +526,31 @@ public class NewApplicationPage extends BaseHelper{
 	private void inputAssetData(String noMesin, String noRangka, String licenseNo, String conditoin, String usage, String year) {
 		TestObject rdnAssetCondition = createTestObject("rdnAssetCondition", "xpath", "//label[text() = '$conditoin']/preceding-sibling::input")
 
-		safetyInputEdit(txfNoMesin, noMesin, 1.5)
-		safetyInputEdit(txfNoRangka, noRangka, 1.5)
-		safetyInputEdit(txfLicensePlate, licenseNo, 1.5)
+		inputEdit(txfNoMesin, noMesin)
+		inputEdit(txfNoRangka, noRangka)
+		inputEdit(txfLicensePlate, licenseNo)
 		WebUI.click(rdnAssetCondition)
 		selectAsetUsage(usage)
 		inputManufacturingYear(year)
 	}
 
+	private void inputEdit(TestObject to, String textInputted) {
+		String randomStr = generateRandom5DigitString()
+		if(textInputted) {
+			// kalo auto bakal generate random string
+			textInputted = textInputted.equalsIgnoreCase("AUTO") ? randomStr : textInputted
+			safetyInputEdit(to, textInputted, 1.5)
+		}
+	}
+	private String generateRandom5DigitString() {
+		Random rnd = new Random()
+		int number = (int) (Math.random() * 90000) + 10000
+		return String.valueOf(number)
+	}
 	private void selectAsetUsage(String usage) {
 		safetySelect(drpAssetUsage, usage, 1)
 	}
-	
+
 	private void inputManufacturingYear(String year) {
 		safetyInputEdit(txfManufacturingYear, year, 1.5)
 	}
@@ -519,7 +586,7 @@ public class NewApplicationPage extends BaseHelper{
 	}
 
 	private void selectAssetRegis() {
-		safetyClick(btnPenAssetRegistration, 5)
+		safetyClick(btnPenAssetRegistration, 2)
 		WebUI.delay(1)
 		WebUI.takeScreenshot()
 	}
@@ -537,9 +604,10 @@ public class NewApplicationPage extends BaseHelper{
 
 		TestObject mandatory = createTestObject("mandatory", "xpath", "(${getXpath(txfTaxDateRegis)}/following::span[@class = 'mandatoryStyle'])[1]")
 		if(WebUI.verifyElementPresent(mandatory, 3, FailureHandling.OPTIONAL)) {
+			WebUI.click(txfTaxDateRegis)
 			safetyInput(txfTaxDateRegis, date, 2)
-			bot.keyPress(KeyEvent.VK_ESCAPE)
-			clickTABKeyboard(txfTaxDateRegis)
+//			bot.keyPress(KeyEvent.VK_ESCAPE)
+			pressEsc(txfTaxDateRegis)
 		}
 	}
 
@@ -677,7 +745,7 @@ public class NewApplicationPage extends BaseHelper{
 		safetyInput(txfNomorSK, noSK, 1)
 		safetySelectEdit(drpSTNK, stnk, 1)
 		safetySelectEdit(drpStatusNPWP, statusNPWP, 1)
-		safetySelectEdit(drpCDENotes, cde, 1) 
+		safetySelectEdit(drpCDENotes, cde, 1)
 		safetyInputEdit(txfOdoMeter, odo)
 	}
 
@@ -714,6 +782,7 @@ public class NewApplicationPage extends BaseHelper{
 		def exist = WebUI.verifyElementPresent(btnSaveAndContinue, 3, FailureHandling.OPTIONAL)
 		if(exist) {
 			safetyClick(btnSaveAndContinue, 0.5)
+			handleAlertIfPresent()
 			WebUI.takeScreenshot()
 		}
 	}
@@ -731,5 +800,517 @@ public class NewApplicationPage extends BaseHelper{
 		WebUI.acceptAlert()
 		WebUI.delay(15)
 		WebUI.takeScreenshot()
+	}
+
+	private void inputAdminFeeAmount(String amount) {
+		if(amount) {
+			manualClearText(txfAdminFeeAmount)
+			safetyInput(txfAdminFeeAmount, amount)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputAdminNotaryAmount(String amount) {
+		if(amount) {
+			manualClearText(txfNotaryAmount)
+			safetyInput(txfNotaryAmount, amount)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputAdditionalAdminFee(String amount) {
+		if(amount) {
+			manualClearText(txfAdditionalAdminFee)
+			safetyInput(txfAdditionalAdminFee, amount)
+			WebUI.delay(1)
+		}
+	}
+	private void inputOtherFee(String amount) {
+		if(amount) {
+			manualClearText(txfOtherFee)
+			safetyInput(txfOtherFee, amount)
+			WebUI.delay(1)
+		}
+	}
+	private void inputProvisionAmount(String amount) {
+		if(amount) {
+			manualClearText(txfProvisionPercentage)
+			safetyInput(txfProvisionPercentage, amount)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputFee(String adminAmount, String notaryAmount, String additionalFee, String otherFee) {
+		inputAdminFeeAmount(adminAmount)
+		inputAdminNotaryAmount(notaryAmount)
+		inputAdditionalAdminFee(additionalFee)
+		inputOtherFee(otherFee)
+	}
+
+	private void selectProvisionType(String type) {
+		if(type) {
+			TestObject radType = createTestObject("radType","xpath","//label[normalize-space(text())='${type}']/preceding-sibling::input[@type='radio']")
+			safetyClick(radType)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputProvisionFee(String type, String provisionAmount) {
+		selectProvisionType(type)
+		inputProvisionAmount(provisionAmount)
+	}
+	private void selectFiduciaOption(String option) {
+		if(option) {
+			TestObject radType = createTestObject("radType","xpath","//label[normalize-space(text())='${option}']/preceding-sibling::input[@type='radio']")
+			safetyClick(radType)
+			WebUI.delay(1)
+		}
+	}
+
+
+	private void inputFiduciaFeeAmount(String amount) {
+		if(amount) {
+			manualClearText(txfFiduciaAmount)
+			safetyInput(txfFiduciaAmount, amount)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputFiduciary(String option, String amount) {
+		selectFiduciaOption(option)
+		inputFiduciaFeeAmount(amount)
+	}
+
+	private void inputResidualValue(String residualValue) {
+		if(residualValue) {
+			manualClearText(txfResidualValue)
+			safetyInput(txfResidualValue, residualValue)
+			WebUI.delay(1)
+		}
+	}
+	private void selectRate(String rate) {
+		if(rate) {
+			safetySelect(drpRate, rate)
+			WebUI.delay(1)
+		}
+	}
+	private void inputMargin(String margin) {
+		if(margin) {
+			manualClearText(txfMargin)
+			safetyInput(txfMargin, margin)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputGracePeriod(String period) {
+		if(period) {
+			manualClearText(txfGracePeriod)
+			safetyInput(txfGracePeriod, period)
+			WebUI.delay(1)
+		}
+	}
+	private void selectGracePeriod(String period) {
+		if(period) {
+			safetySelect(drpGracePeriod, period)
+			WebUI.delay(1)
+		}
+	}
+	private void inputSpread(String spread) {
+		if(spread) {
+			manualClearText(txfSpread)
+			safetyInput(txfSpread, spread)
+			WebUI.delay(1)
+		}
+	}
+	private void inputPaidAtCompany(String amount) {
+		if(amount) {
+			manualClearText(txfTDPPaidAtCompany)
+			safetyInput(txfTDPPaidAtCompany, amount)
+			WebUI.delay(1)
+		}
+	}
+	private void selectSubsidySupplier(String subsidy) {
+		if(subsidy) {
+			safetySelect(drpSubsidySupplier, subsidy)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputSubsidyRate(String rate) {
+		if(rate) {
+			manualClearText(txfSubsidyRate)
+			safetyInput(txfSubsidyRate, rate)
+			WebUI.delay(1)
+		}
+	}
+
+	private void inputFinancialData(String residualValue, String rate, String margin, String graceAmount, String gracePeriod, String spread,
+			String paid, String subsidySupplier, String subsidyRate) {
+		inputResidualValue(residualValue)
+		selectRate(rate)
+		inputMargin(margin)
+		inputGracePeriod(graceAmount)
+		selectGracePeriod(gracePeriod)
+		inputSpread(spread)
+		inputPaidAtCompany(paid)
+		selectSubsidySupplier(subsidySupplier)
+		inputSubsidyRate(subsidyRate)
+	}
+	private void clickCalculateFee() {
+		safetyClick(btnCalculateFee)
+	}
+
+	private void clickCalculateInstallment() {
+		safetyClick(btnCalculateInstallment)
+		handleAlertIfPresent()
+	}
+	private void clickCalculate() {
+		safetyClick(btnCalculate)
+	}
+	private void clickCalculateCommission() {
+		safetyClick(btnCalculateCommision)
+		handleAlertIfPresent()
+	}
+	private void searchSupplierBranchName(String branchName) {
+		if(branchName && WebUI.verifyElementPresent(btnSearchBranchName, 2, OPTIONAL)) {
+			safetyClick(btnSearchBranchName)
+			WebUI.delay(0.5)
+
+			safetyInput(txfOverlayBranchName, branchName)
+			WebUI.delay(0.5)
+			safetyClick(btnOvlySearch)
+			WebUI.takeScreenshot()
+
+			safetyClick(btnOvlySelect)
+		}
+	}
+
+	private void selectEmployeeName(String name) {
+		if(name && WebUI.verifyElementPresent(drpEmployeeName, 2, OPTIONAL)) {
+			WebElement element = WebUI.findWebElement(drpEmployeeName)
+			List<WebElement> options = element.findElements(By.tagName("option"))
+			boolean isFound = false
+
+			for (WebElement opt : options) {
+				if (opt.getText().trim().equalsIgnoreCase(name)) {
+					safetySelect(drpEmployeeName, name)
+					isFound = true
+					break
+				}
+			}
+			isFound ? null : selectFirstOption(drpEmployeeName, name)
+		} else {
+			KeywordUtil.markWarning("Option not clickable or disabled")
+		}
+	}
+	private void inputDifOther(String difOther) {
+		if(difOther && WebUI.verifyElementPresent(txfDifOther, 2, OPTIONAL)) {
+			manualClearText(txfDifOther)
+			safetyInput(txfDifOther, difOther)
+			WebUI.delay(0.5)
+		}
+	}
+
+	private void addSupplierEmployeeSection(String branchName, String employeeName, String difOther) {
+		if(branchName) {
+			safetyClick(btnAddSupplierEmployee)
+			WebUI.takeScreenshot()
+			searchSupplierBranchName(branchName)
+			selectEmployeeName(employeeName)
+			inputDifOther(difOther)
+			handleAlertIfPresent()
+			WebUI.takeScreenshot()
+		}
+	}
+	private void inputIfDifferent(TestObject to, String expectedValue) {
+		//get current value from text field
+		String currentValue = WebUI.getAttribute(to, "value")
+		if(currentValue == null) {
+			currentValue = ""
+		}
+		if(currentValue.equalsIgnoreCase(expectedValue)) {
+			WebUI.comment("Value already matches: $expectedValue, no input needed")
+		} else {
+			WebUI.comment(" Value is different. Current; $currentValue, expected: $expectedValue")
+			manualClearText(to)
+			safetyInput(to, expectedValue)
+			WebUI.delay(2)
+		}
+	}
+	private void inputMadeIn(String madeIn) {
+		if(madeIn) {
+			inputIfDifferent(txfMadeIn, madeIn)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputCylinder(String cylinder) {
+		if(cylinder) {
+			inputIfDifferent(txfCylinder, cylinder)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputTransmition(String transmition) {
+		if(transmition) {
+			inputIfDifferent(txfTransmition, transmition)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputColor(String color) {
+		if(color) {
+			inputIfDifferent(txfColor, color)
+			WebUI.delay(2)
+		}
+	}
+
+	private void selectRegion(String region) {
+		if(region) {
+			safetySelect(drpRegion, region)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputAssetAttributeSection(String madeIn, String cylinder, String transmition, String color, String region) {
+		inputMadeIn(madeIn)
+		inputCylinder(cylinder)
+		inputTransmition(transmition)
+		inputColor(color)
+		selectRegion(region)
+	}
+
+	private boolean inputAccessoriesGridSection(String branchName, String accessoryName, String assetPrice, String dpAmount, String notes) {
+		if (branchName == null || accessoryName.trim().isEmpty()) {
+			KeywordUtil.logInfo("Supplier branch input string is empty or null. Skipping input.")
+			return false
+		}
+		WebUI.scrollToElement(btnAddAdditionalBranch, 2)
+		//check duplicate
+		Map result = checkDuplicateAndGetRow(branchName, accessoryName)
+		boolean isDuplicate = result['isDuplicate']
+		int rowIndex = result['rowIndex']
+		if(!isDuplicate) {
+			WebUI.delay(0.5)
+			btnSearchAdditionBranch		= createTestObject("btnSearchAdditionBranch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${rowIndex}_uclSupplBranchSchm_${rowIndex}_imb_${rowIndex}")
+			btnSearchAssetAccessoryName = createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${rowIndex}_imb_${rowIndex}")
+			txfAdditionalAssetPrice 	= createTestObject("txfAdditionalAssetPrice", "id", "gvAccessories_ucInputNumber_${rowIndex}_txtInput_${rowIndex}")
+			txfAdditionalDpAmount		= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_${rowIndex}_txtInput_${rowIndex}")
+			txfAdditionalNotes			= createTestObject("txfAdditionalNotes", "id", "gvAccessories_txtNotes_${rowIndex}")
+
+			WebUI.comment("Not found duplicate, input index $rowIndex .")
+			safetyClick(btnAddAdditionalBranch)
+
+			searchAdditionalBranchName(branchName, rowIndex)
+			searchAccName(accessoryName, rowIndex)
+			inputAdditionalAssetPrice(assetPrice, rowIndex)
+			inputAdditionalDpAmount(dpAmount, rowIndex)
+			inputAdditionalNotes(notes, rowIndex)
+		} else {
+			WebUI.comment("Data duplicate, Skipping input.")
+		}
+	}
+
+	/**
+	 * Cek apakah ada duplikat Supplier Branch + Accessories Name
+	 * @return Map [isDuplicate: boolean, rowIndex: int] kalo tidak duplikat return rownya berapa untuk get button lookup searchnya
+	 */
+	private Map checkDuplicateAndGetRow(String supplierBranchName, String accessoriesName) {
+		TestObject grid, branchInput, accessoryInput
+		grid = createTestObject("grid", "xpath", "//span[starts-with(@id,'gvAccessories_lblNo')]")
+		if(!WebUI.verifyElementPresent(grid, 5, OPTIONAL)) {
+			KeywordUtil.logInfo("⚠️ Table is empty, rowIndex = 0")
+			return [isDuplicate: false, rowIndex: 0]  // row pertama untuk input
+		}
+		def rows = WebUiCommonHelper.findWebElements(grid, 5)
+		boolean isDuplicate = false
+		int foundRow
+		KeywordUtil.logInfo("index " + rows.size())
+
+		for (int i = 1; i <= rows.size(); i++) {
+			branchInput 	= createTestObject("branchInput","xpath", "(//input[contains(@name,'ucLookupSupplBranchSchm2') and @type= 'text'])[$i]")
+			accessoryInput  = createTestObject("accessoryInput","xpath", "(//input[contains(@name,'uclLookupAccessories') and @type='text'])[$i]")
+
+			String currentBranch = WebUI.getAttribute(branchInput, 'value').trim()
+			String currentAccessories = WebUI.getAttribute(accessoryInput, 'value').trim()
+
+			if (currentBranch.equalsIgnoreCase(supplierBranchName) && currentAccessories.equalsIgnoreCase(accessoriesName)) {
+				isDuplicate = true
+				foundRow = i
+				break
+			}
+		}
+
+		if (!isDuplicate) {
+			foundRow = rows.size()
+		}
+
+		return [isDuplicate: isDuplicate, rowIndex: foundRow]
+	}
+
+	private void searchAdditionalBranchName(String additionalBranchName, int index) {
+		txfOvlySearchName = createTestObject("txfOvlySearchName", "xpath", "//*[contains(@id, 'rptFixedSearch_${index}_txtSearchValue_0')]")
+		btnOvlySearch 	  = createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
+		btnOvlySelect     = createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupSupplBranchSchm2_${index}_uclSupplBranchSchm_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0")
+
+		safetyClick(btnSearchAdditionBranch)
+		WebUI.delay(1)
+		safetyInput(txfOvlySearchName, additionalBranchName)
+		safetyClick(btnOvlySearch)
+		WebUI.delay(1)
+		WebUI.takeScreenshot()
+		safetyClick(btnOvlySelect)
+		WebUI.delay(1)
+	}
+	private void searchAccName(String accName, int index) {
+		btnSearchAssetAccessoryName = createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${index}_imb_${index}")
+		txfOvlySearchAccName		= createTestObject("txfOvlySearchAccName", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_rptFixedSearch_${index}_txtSearchValue_1")
+		btnOvlySearch 				= createTestObject("btnOvlySearch", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_ucS_${index}_lbSearch_${index}")
+		btnOvlySelect  				= createTestObject("btnOvlySelect", "id", "gvAccessories_ucLookupAccessories_${index}_uclLookupAccessories_${index}_umd_${index}_ctl00_${index}_gvL_${index}_hpSelect_0")
+		btnSearchAssetAccessoryName	= createTestObject("btnSearchAssetAccessoryName", "id", "uclLookupAccessories_${index}_imb_${index}")
+
+		safetyClick(btnSearchAssetAccessoryName)
+		safetyInput(txfOvlySearchAccName, accName)
+		safetyClick(btnOvlySearch)
+		WebUI.takeScreenshot()
+		safetyClick(btnOvlySelect)
+	}
+	private void inputAdditionalAssetPrice(String assetPrice, int index) {
+		if(assetPrice) {
+			txfAdditionalAssetPrice	= createTestObject("txfAdditionalAssetPrice", "id", "gvAccessories_ucInputNumber_${index}_txtInput_${index}")
+			manualClearText(txfAdditionalAssetPrice)
+			safetyInput(txfAdditionalAssetPrice, assetPrice)
+			WebUI.delay(2)
+		}
+	}
+
+	private void inputAdditionalDpAmount(String dpAmount, int index) {
+		if(dpAmount) {
+			txfAdditionalDpAmount= createTestObject("txfAdditionalDpAmount", "id", "gvAccessories_ucInputNumber2_${index}_txtInput_${index}")
+			manualClearText(txfAdditionalDpAmount)
+			safetyInput(txfAdditionalDpAmount, dpAmount)
+			WebUI.delay(2)
+		}
+	}
+	private void inputAdditionalNotes(String notes, int index) {
+		if(notes) {
+			txfAdditionalNotes	= createTestObject("txfAdditionalNotes", "id", "gvAccessories_txtNotes_${index}")
+			safetyInput(txfAdditionalNotes, notes)
+			WebUI.delay(2)
+		}
+	}
+
+	private void searchMOUNo(String mouNo) {
+		String strMou = WebUI.getText(txfMouNo)
+		if(mouNo?.trim() && !strMou.equalsIgnoreCase(mouNo)) {
+			safetyClick(btnSearchMOUNo)
+			safetyInput(txfOvlyMOUNo, mouNo)
+			safetyClick(btnOvlySearchMOU)
+			WebUI.takeScreenshot()
+			WebUI.delay(2)
+			safetyClick(btnOvlySelectMOU)
+		}
+	}
+
+	private void inputReferantor(String name, String address, String rt, String rw, String zipCode, String phone1, String phone2, String phone3, String fax,
+			String mobilePhone1, String mobilePhone2, String mobilePhone3, String email1, String email2) {
+			
+		WebUI.delay(2)
+		inputIfPresent(txfReferantorName, name)
+		inputAddress(zipCode, rt, rw, address)
+		inputPhoneNumbers(phone1, 1)
+		inputPhoneNumbers(phone2, 2)
+		inputPhoneNumbers(phone3, 3)
+		inputFax(fax)
+		inputMobilePhone(mobilePhone1, 1)
+		inputMobilePhone(mobilePhone2, 2)
+		inputMobilePhone(mobilePhone3, 3)
+		inputEmails(email1, 1)
+		inputEmails(email2, 2)
+		WebUI.takeScreenshot()
+	}
+
+	private void inputIfPresent(TestObject to, String textInputted) {
+		if(textInputted) {
+			safetyInput(to, textInputted)
+			WebUI.comment("Input.. $textInputted")
+			WebUI.delay(0.8)
+		}
+	}
+
+	private void inputAddress(String zipCode, String rt, String rw, String address) {
+		safetyClick(btnSearchZipCodeOtherData)
+		handleAlertIfPresent()
+		if(WebUI.verifyElementPresent(btnSearchZipCodeOtherData, 2, FailureHandling.OPTIONAL)) {
+			safetyClick(btnSearchZipCodeOtherData)
+		}
+		WebUI.delay(0.2)
+
+		safetyInput(txfOvlySearchZipCode, zipCode)
+		safetyClick(btnOvlySearchZipCode)
+		WebUI.delay(0.2)
+		WebUI.takeScreenshot()
+
+		safetyClick(btnOvlySelectZipCode)
+
+		inputIfPresent(txfAddressOtherData, address)
+		inputIfPresent(txfRTOtherData, rt)
+		inputIfPresent(txfRWOtherData, rw)
+	}
+
+	private void inputPhoneNumbers(String phoneNumber, int index) {
+		if(phoneNumber) {
+			if(phoneNumber == "AUTO") {
+				phoneNumber = generateRandomPhone(true)
+			}
+			TestObject countryField, areaField, numberField
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddrReferantor_txtPhnArea${index}']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddr_txtPhn${index}' or @id='ucAddrReferantor_txtPhn${index}']")
+			numberField		= createTestObject("numberField", "xpath", "//*[@id='ucAddr_txtPhoneExt${index}'or @id='ucAddrReferantor_txtPhoneExt${index}']")
+
+			KeywordUtil.logInfo("phone " + phoneNumber)
+			String[] parts = phoneNumber.split("-")
+			if (parts.size() != 3) {
+				KeywordUtil.markWarning("Invalid phone format: ${phoneNumber}. Expected format is XXX-XXX-XXX")
+			}
+
+			safetyInput(countryField, parts[0])
+			safetyInput(areaField, parts[1])
+			safetyInput(numberField, parts[2])
+		}
+	}
+
+	private void inputFax(String fax) {
+		if(fax) {
+			TestObject countryField, areaField
+			countryField	= createTestObject("countryField", "xpath", "//*[@id='ucAddrReferantor_txtFaxArea']")
+			areaField		= createTestObject("areaField", "xpath", "//*[@id='ucAddrReferantor_txtFax']") 
+
+			String[] parts = fax.split("-")
+			if (parts.size() != 3) {
+				KeywordUtil.markWarning("Invalid phone format: ${fax}. Expected format is XXX-XXX")
+			}
+			safetyInput(countryField, parts[0])
+			WebUI.delay(2)
+			safetyInput(areaField, parts[1])
+			WebUI.delay(2)
+		}
+	}
+	private void inputMobilePhone(String phone, int index) {
+		if(phone) {
+			if(phone =="AUTO") {
+				phone = generateRandomPhone()
+			}
+			TestObject countryField    = createTestObject("countryField", "xpath", "//*[@id='txtReferantorMobilePhn${index}']")
+			safetyInput(countryField, phone)
+			WebUI.delay(0.3)
+		}
+	}
+
+	private void inputEmails(String email, Integer index) {
+		if(email) {
+			TestObject txfEmail    = createTestObject("txfEmail", "xpath", "//*[@id='txtReferantorEmail${index}']")
+			safetyInput(txfEmail, email)
+		}
 	}
 }

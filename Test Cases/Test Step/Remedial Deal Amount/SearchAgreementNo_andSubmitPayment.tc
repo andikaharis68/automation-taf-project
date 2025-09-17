@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>SearchAgreementNo_andSubmitPayment</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>9dd9ac61-211d-4aaf-bb9a-c2df97284c8e</testCaseGuid>
+</TestCaseEntity>

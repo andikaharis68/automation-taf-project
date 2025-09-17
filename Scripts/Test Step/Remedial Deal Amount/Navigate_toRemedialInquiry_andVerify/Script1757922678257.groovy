@@ -15,35 +15,28 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CustomerDataPage
-import com.taf.pageobjects.losCreditProcess.GuarantorPage
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
+import com.taf.pageobjects.remedials.RemedialDealAmountInquiryPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MainInformationPage mainInfo = new MainInformationPage()
-GuarantorPage guarantor = new GuarantorPage()
-CustomerDataPage customer = new CustomerDataPage()
+RemedialDealAmountInquiryPage inquiry = new RemedialDealAmountInquiryPage()
 MenuPage menu = new MenuPage()
 
-'Step 1: Click Next'
-mainInfo.clickNext()
+'Step 1: Navigate to remedial deal inquiry'
+menu.navigateRemedialDealAmountInquiry()
+menu.switchToIframeMainPage()
 
-'Step 2: Update Application No To Excel Test Data (for next steps purpose)'
-customer.updateAppNoToMasterData(TestDataName, GlobalVariable.SCENARIO_ID)
+'Step 2: Verify landing page'
+inquiry.verifyLandingPage()
 
-'Step 3: Click Tab customer'
-customer.clickTabCustomer()
+'Step 3: search agreement no'
+inquiry.searchAgreementNo(AgreementNo)
 
-'Step 4: Switch to iframe app'
-customer.switchToIframeApp()
+'Step 4: Verify status remedial. expected: execute'
+inquiry.verifyStatusAfterRemedialApproval()
 
-'Step 5: Get customer type checked'
-CustomerType = customer.getCustomerTypeChecked()
+'Step 5: Click remedial deal amount no'
+inquiry.clickRemedialDealAmountNo()
 
-'Step 6: Click Save and continue'
-customer.clickSaveContinue()
 
-'Step 7: verify Landing in guarantor'
-guarantor.verifyLandingInGuarantorPage()

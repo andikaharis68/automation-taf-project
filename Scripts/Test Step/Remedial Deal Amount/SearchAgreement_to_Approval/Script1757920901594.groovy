@@ -14,36 +14,28 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.taf.pageobjects.MenuPage
-import com.taf.pageobjects.losCreditProcess.CustomerDataPage
-import com.taf.pageobjects.losCreditProcess.GuarantorPage
-import com.taf.pageobjects.losCreditProcess.MainInformationPage
+import com.taf.pageobjects.remedials.RemedialDealAmountApprovalPage
 
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-MainInformationPage mainInfo = new MainInformationPage()
-GuarantorPage guarantor = new GuarantorPage()
-CustomerDataPage customer = new CustomerDataPage()
-MenuPage menu = new MenuPage()
+RemedialDealAmountApprovalPage approval = new RemedialDealAmountApprovalPage()
 
-'Step 1: Click Next'
-mainInfo.clickNext()
+'Step 1: Verify landing page'
+approval.verifyLandingPage()
 
-'Step 2: Update Application No To Excel Test Data (for next steps purpose)'
-customer.updateAppNoToMasterData(TestDataName, GlobalVariable.SCENARIO_ID)
+'Step 2: search agreement'
+approval.searchAgreement(AgreementNo, TransactionNo, RequestBy, CurrentUser, CustomerName, ApprovalNo, 
+	TaskOwner, RequestDate)
 
-'Step 3: Click Tab customer'
-customer.clickTabCustomer()
+'Step 3: Click Process'
+approval.clickProcess()
 
-'Step 4: Switch to iframe app'
-customer.switchToIframeApp()
+'Step 4: Input approval action'
+approval.inputApprovalAction(Action, NotesApproval)
 
-'Step 5: Get customer type checked'
-CustomerType = customer.getCustomerTypeChecked()
+'Step 4: click submit'
+approval.clickSubmit()
 
-'Step 6: Click Save and continue'
-customer.clickSaveContinue()
-
-'Step 7: verify Landing in guarantor'
-guarantor.verifyLandingInGuarantorPage()
+'Step 5: Verify landing page'
+approval.verifyLandingPage()

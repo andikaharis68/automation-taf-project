@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Remedial Deal Approval</name>
+   <name>SearchAgreement_to_Approval</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>0ded0846-5241-4c2a-a6bf-6bd9cea84e2f</testCaseGuid>
+   <testCaseGuid>c373e49f-7954-4cd5-a4e6-6efc5035d4e3</testCaseGuid>
 </TestCaseEntity>
